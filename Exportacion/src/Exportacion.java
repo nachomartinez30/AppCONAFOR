@@ -1520,12 +1520,109 @@ ResultSet rst;
 
 	}
 	
+	public void exportarSUELOSuelo() {
+		
+		
+		ResultSet rst;
+		
+
+		int sueloID,sitioID,usoSueloID,categoria,pendienteDominante,numeroCanalillos,numeroCarcavas,numeroMonticulos;
+		
+		String  otroUsoSuelo,observaciones;
+		
+		float espesor,profundidadPromedioCanalillos,anchoPromedioCanalillos,longitudCanalillos,volumenCanalillos;
+		float profundidadPromedioCarcavas,anchoPromedioCarcavas,longitudCarcavas,volumenCarcavas,alturaPromedioMonticulos;
+		float anchoPromedioMonticulos,longitudPromedioMonticulos,volumenMonticulos;
+		
+		/*Consulta SELECT*/
+		String selectQuery="SELECT SueloID,SitioID,UsoSueloID,OtroUsoSuelo,Espesor,Categoria,PendienteDominante,Observaciones,NumeroCanalillos,"
+		+"ProfundidadPromedioCanalillos,AnchoPromedioCanalillos,LongitudCanalillos,VolumenCanalillos,NumeroCarcavas,ProfundidadPromedioCarcavas,"
+		+"AnchoPromedioCarcavas,LongitudCarcavas,VolumenCarcavas,NumeroMonticulos,AlturaPromedioMonticulos,AnchoPromedioMonticulos,LongitudPromedioMonticulos,"
+		+"VolumenMonticulos"
+		+" FROM SUELO_Suelo";
+
+		/*Conexiones a bd local y server*/
+		bdl = LocalConnection.getConnection();
+		bds = ServerConnection.getConnection();
+		
+		
+		try {
+			
+			Statement localStatment = bdl.createStatement();
+			Statement serverStatment=bds.createStatement();
+			
+			/*manda el Query al Resulset*/
+			rst= localStatment.executeQuery(selectQuery);
+			
+			while(rst.next()){
+				
+													/*inicia recoleccion de datos*/
+				sueloID=rst.getInt("SueloID");
+				sitioID=rst.getInt("SitioID");
+				usoSueloID=rst.getInt("UsoSueloID");
+				categoria=rst.getInt("Categoria");
+				pendienteDominante=rst.getInt("PendienteDominante");
+				numeroCanalillos=rst.getInt("NumeroCanalillos");
+				numeroCarcavas=rst.getInt("NumeroCarcavas");
+				numeroMonticulos=rst.getInt("NumeroMonticulos");
+
+
+				otroUsoSuelo=rst.getString("OtroUsoSuelo");
+				observaciones=rst.getString("Observaciones");
+				
+				espesor=rst.getFloat("Espesor");
+				profundidadPromedioCanalillos=rst.getFloat("ProfundidadPromedioCanalillos");
+				anchoPromedioCanalillos=rst.getFloat("AnchoPromedioCanalillos");
+				longitudCanalillos=rst.getFloat("LongitudCanalillos");
+				volumenCanalillos=rst.getFloat("VolumenCanalillos");
+				profundidadPromedioCarcavas=rst.getFloat("ProfundidadPromedioCarcavas");
+				anchoPromedioCarcavas=rst.getFloat("AnchoPromedioCarcavas");
+				longitudCarcavas=rst.getFloat("LongitudCarcavas");
+				volumenCarcavas=rst.getFloat("VolumenCarcavas");
+				alturaPromedioMonticulos=rst.getFloat("AlturaPromedioMonticulos");
+				anchoPromedioMonticulos=rst.getFloat("AnchoPromedioMonticulos");
+				longitudPromedioMonticulos=rst.getFloat("LongitudPromedioMonticulos");
+				volumenMonticulos=rst.getFloat("VolumenMonticulos");
+
+				
+															/*termina recoleccion de datos*/
+				
+													/*inicia insercion de datos*/
+				
+				
+
+				String insertQuery="INSERT INTO Suelo.Suelo(SueloID,SitioID,UsoSueloID,OtroUsoSuelo,Espesor,Categoria,PendienteDominante,Observaciones,"
+				+"NumeroCanalillos,ProfundidadPromedioCanalillos,AnchoPromedioCanalillos,LongitudCanalillos,VolumenCanalillos,NumeroCarcavas,"
+				+"ProfundidadPromedioCarcavas,AnchoPromedioCarcavas,LongitudCarcavas,VolumenCarcavas,NumeroMonticulos,AlturaPromedioMonticulos,"
+				+"AnchoPromedioMonticulos,LongitudPromedioMonticulos,VolumenMonticulos)"
+				+" VALUES ("+sueloID+","+sitioID+","+usoSueloID+",'"+otroUsoSuelo+"',"+espesor+","+categoria+","+pendienteDominante+",'"+observaciones+"',"
+				+numeroCanalillos+","+profundidadPromedioCanalillos+","+anchoPromedioCanalillos+","+longitudCanalillos+","+volumenCanalillos+","
+				+numeroCarcavas+","+profundidadPromedioCarcavas+","+anchoPromedioCarcavas+","+longitudCarcavas+","+volumenCarcavas+","+numeroMonticulos
+				+","+alturaPromedioMonticulos+","+anchoPromedioMonticulos+","+longitudPromedioMonticulos+","+volumenMonticulos+")";		
+				
+													/*Termina insercion de datos*/
+				
+				
+				serverStatment.executeUpdate(insertQuery);
+				JOptionPane.showMessageDialog(null, "Datos insertados en el servidor Correctamente");
+				serverStatment.close();
+				
+			}
+			
+			localStatment.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			JOptionPane.showMessageDialog(null, "no se pudo hacer la consulta "+ e);
+		}
+		
+	}
+
 	
 	
 	public static void main(String[] args) {
 		Exportacion exportacion=new Exportacion();
 		
-		exportacion.exportarTAXONOMIAVegetacionMenor();
+		exportacion.exportarSUELOSuelo();
 	}
 
 }

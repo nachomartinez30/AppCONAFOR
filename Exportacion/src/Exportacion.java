@@ -1245,12 +1245,287 @@ ResultSet rst;
 		
 	}
 	
+	public void exportarTAXONOMIAVegetacionMayorGregarios() {
+		
+		ResultSet rst;
+		
+
+		int vegetacionMayorID,sitioID,consecutivo,noIndividuo,formaVidaID,condicionID,familaID,generoID,especieID,infraespecieID;
+		int esColecta,formaCrecimientoID,densidadColonia,vigorID;
+		
+		String  nombreComun,claveColecta;
+		
+		float alturaTotalMaxima,alturaTotalMedia,alturaTotalMinima,diametroCoberturaMayor,diametroCoberturaMenor;
+
+
+		/*Consulta SELECT*/
+		String selectQuery="SELECT VegetacionMayorID,SitioID,Consecutivo,NoIndividuo,FormaVidaID,CondicionID,FamiliaID,GeneroID,"
+		+"EspecieID,InfraespecieID,EsColecta,NombreComun,FormaCrecimientoID,DensidadColoniaID,AlturaTotalMaxima,AlturaTotalMedia,"
+		+"AlturaTotalMinima,DiametroCoberturaMayor,DiametroCoberturaMenor,VigorID,ClaveColecta"
+		+" FROM TAXONOMIA_VegetacionMayorGregarios";
+
+		/*Conexiones a bd local y server*/
+		bdl = LocalConnection.getConnection();
+		bds = ServerConnection.getConnection();
+		
+		
+		try {
+			
+			Statement localStatment = bdl.createStatement();
+			Statement serverStatment=bds.createStatement();
+			
+			/*manda el Query al Resulset*/
+			rst= localStatment.executeQuery(selectQuery);
+			
+			while(rst.next()){
+				
+													/*inicia recoleccion de datos*/
+
+				vegetacionMayorID=rst.getInt("VegetacionMayorID");
+				sitioID=rst.getInt("SitioID");
+				consecutivo=rst.getInt("Consecutivo");
+				noIndividuo=rst.getInt("NoIndividuo");
+				formaVidaID=rst.getInt("FormaVidaID");
+				condicionID=rst.getInt("CondicionID");
+				familaID=rst.getInt("FamiliaID");
+				generoID=rst.getInt("GeneroID");
+				especieID=rst.getInt("EspecieID");
+				infraespecieID=rst.getInt("InfraespecieID");
+				esColecta=rst.getInt("EsColecta");
+				formaCrecimientoID=rst.getInt("FormaCrecimientoID");
+				densidadColonia=rst.getInt("DensidadColoniaID");
+				vigorID=rst.getInt("VigorID");
+				
+
+				nombreComun=rst.getString("NombreComun");
+				claveColecta=rst.getString("ClaveColecta");
+				
+				alturaTotalMaxima=rst.getFloat("AlturaTotalMaxima");
+				alturaTotalMedia=rst.getFloat("AlturaTotalMedia");
+				alturaTotalMinima=rst.getFloat("AlturaTotalMinima");
+				diametroCoberturaMayor=rst.getFloat("DiametroCoberturaMayor");
+				diametroCoberturaMenor=rst.getFloat("DiametroCoberturaMenor");
+				
+
+
+				
+															/*termina recoleccion de datos*/
+				
+													/*inicia insercion de datos*/
+				
+				
+
+				String insertQuery="INSERT INTO Taxonomia.VegetacionMayorGregarios(VegetacionMayorID,SitioID,Consecutivo,NoIndividuo,FormaVidaID,CondicionID,FamiliaID,GeneroID,"
+					+"EspecieID,InfraespecieID,EsColecta,NombreComun,FormaCrecimientoID,DensidadColoniaID,AlturaTotalMaxima,AlturaTotalMedia,"
+					+"AlturaTotalMinima,DiametroCoberturaMayor,DiametroCoberturaMenor,VigorID,ClaveColecta)"
+					+" VALUES ("+vegetacionMayorID+","+sitioID+","+consecutivo+","+noIndividuo+","+formaVidaID+","+condicionID+","+familaID+","+generoID+","
+					+especieID+","+infraespecieID+","+esColecta+",'"+nombreComun+"',"+formaCrecimientoID+","+densidadColonia+","+alturaTotalMaxima+","+alturaTotalMedia+","
+					+alturaTotalMinima+","+diametroCoberturaMayor+","+diametroCoberturaMenor+","+vigorID+",'"+claveColecta+"')";		
+				
+													/*Termina insercion de datos*/
+				
+				
+				serverStatment.executeUpdate(insertQuery);
+				JOptionPane.showMessageDialog(null, "Datos insertados en el servidor Correctamente");
+				serverStatment.close();
+				
+			}
+			
+			localStatment.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			JOptionPane.showMessageDialog(null, "no se pudo hacer la consulta "+ e);
+		}
+	}
+
+	public void exportarTAXONOMIAVegetacionMayorIndividual() {
+		
+		
+		ResultSet rst;
+		
+
+		int vegetacionMayorID,sitioID,consecutivo,noIndividuo,formaVidaID,condicionID,familaID,generoID,especieID,infraespecieID;
+		int esColecta,formaGeometricaID,densidadFollajeID,vigorID;
+		
+		String  nombreComun,claveColecta;
+		
+		float diametroBase,alturaTotal,diametroCoberturaMayor,diametroCoberturaMenor;
+		
+		/*Consulta SELECT*/
+		String selectQuery="SELECT VegetacionMayorID,SitioID,Consecutivo,NoIndividuo,FormaVidaID,CondicionID,FamiliaID,GeneroID,"
+		+"EspecieID,InfraespecieID,EsColecta,NombreComun,FormaGeometricaID,DensidadFollajeID,DiametroBase,AlturaTotal,DiametroCoberturaMayor,"
+		+"DiametroCoberturaMenor,VigorID,ClaveColecta"
+		+" FROM TAXONOMIA_VegetacionMayorIndividual";
+
+		/*Conexiones a bd local y server*/
+		bdl = LocalConnection.getConnection();
+		bds = ServerConnection.getConnection();
+		
+		
+		try {
+			
+			Statement localStatment = bdl.createStatement();
+			Statement serverStatment=bds.createStatement();
+			
+			/*manda el Query al Resulset*/
+			rst= localStatment.executeQuery(selectQuery);
+			
+			while(rst.next()){
+				
+													/*inicia recoleccion de datos*/
+
+				vegetacionMayorID=rst.getInt("VegetacionMayorID");
+				sitioID=rst.getInt("SitioID");
+				consecutivo=rst.getInt("Consecutivo");
+				noIndividuo=rst.getInt("NoIndividuo");
+				formaVidaID=rst.getInt("FormaVidaID");
+				condicionID=rst.getInt("CondicionID");
+				familaID=rst.getInt("FamiliaID");
+				generoID=rst.getInt("GeneroID");
+				especieID=rst.getInt("EspecieID");
+				infraespecieID=rst.getInt("InfraespecieID");
+				esColecta=rst.getInt("EsColecta");
+				formaGeometricaID=rst.getInt("FormaGeometricaID");
+				densidadFollajeID=rst.getInt("DensidadFollajeID");
+				vigorID=rst.getInt("VigorID");
+
+				nombreComun=rst.getString("NombreComun");
+				claveColecta=rst.getString("ClaveColecta");
+				
+				diametroBase=rst.getFloat("DiametroBase");
+				alturaTotal=rst.getFloat("AlturaTotal");
+				diametroCoberturaMayor=rst.getFloat("DiametroCoberturaMayor");
+				diametroCoberturaMenor=rst.getFloat("DiametroCoberturaMenor");
+
+				
+															/*termina recoleccion de datos*/
+				
+													/*inicia insercion de datos*/
+				
+				
+
+				String insertQuery="INSERT INTO Taxonomia.VegetacionMayorIndividual(VegetacionMayorID,SitioID,Consecutivo,NoIndividuo,FormaVidaID,CondicionID,FamiliaID,GeneroID,"
+					+"EspecieID,InfraespecieID,EsColecta,NombreComun,FormaGeometricaID,DensidadFollajeID,DiametroBase,AlturaTotal,DiametroCoberturaMayor,DiametroCoberturaMenor,"
+					+"VigorID,ClaveColecta)"
+					+" VALUES ("+vegetacionMayorID+","+sitioID+","+consecutivo+","+noIndividuo+","+formaVidaID+","+condicionID+","+familaID+","+generoID+","
+					+especieID+","+infraespecieID+","+esColecta+",'"+nombreComun+"',"+formaGeometricaID+","+densidadFollajeID+","+diametroBase+","+alturaTotal+","
+					+diametroCoberturaMayor+","+diametroCoberturaMenor+","+vigorID+",'"+claveColecta+"')";		
+				
+													/*Termina insercion de datos*/
+				
+				
+				serverStatment.executeUpdate(insertQuery);
+				JOptionPane.showMessageDialog(null, "Datos insertados en el servidor Correctamente");
+				serverStatment.close();
+				
+			}
+			
+			localStatment.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			JOptionPane.showMessageDialog(null, "no se pudo hacer la consulta "+ e);
+		}
+		
+	}
+
+	public void exportarTAXONOMIAVegetacionMenor() {
+		
+		
+		ResultSet rst;
+		
+		int vegetacionMenorID,sitioID,consecutivo,familiaID,generoID,especieID,infraespecieID,esColecta,formaVidaID,condicionID;
+		int numero0110,numero1125,numero2650,numero5175,numero76100,numero101125,numero126150,numero150,porcentajeCobertura,vigorID;
+
+		String  nombreComun,claveColecta;
+		
+
+		
+		/*Consulta SELECT*/
+		String selectQuery="SELECT VegetacionMenorID,SitioID,Consecutivo,FamiliaID,GeneroID,EspecieID,InfraespecieID,NombreComun,EsColecta,"
+		+"FormaVidaID,CondicionID,Numero0110,Numero1125,Numero2650,Numero5175,Numero76100,Numero101125,Numero126150,Numero150,PorcentajeCobertura,"
+		+"VigorID,ClaveColecta"
+		+" FROM TAXONOMIA_VegetacionMenor";
+
+		/*Conexiones a bd local y server*/
+		bdl = LocalConnection.getConnection();
+		bds = ServerConnection.getConnection();
+		
+		
+		try {
+			
+			Statement localStatment = bdl.createStatement();
+			Statement serverStatment=bds.createStatement();
+			
+			/*manda el Query al Resulset*/
+			rst= localStatment.executeQuery(selectQuery);
+			
+			while(rst.next()){
+				
+													/*inicia recoleccion de datos*/
+		
+				vegetacionMenorID=rst.getInt("VegetacionMenorID");
+				sitioID=rst.getInt("SitioID");
+				consecutivo=rst.getInt("Consecutivo");
+				familiaID=rst.getInt("FamiliaID");
+				generoID=rst.getInt("GeneroID");
+				especieID=rst.getInt("EspecieID");
+				infraespecieID=rst.getInt("InfraespecieID");
+				esColecta=rst.getInt("EsColecta");
+				formaVidaID=rst.getInt("FormaVidaID");
+				condicionID=rst.getInt("CondicionID");
+				numero0110=rst.getInt("Numero0110");
+				numero1125=rst.getInt("Numero1125");
+				numero2650=rst.getInt("Numero2650");
+				numero5175=rst.getInt("Numero5175");
+				numero76100=rst.getInt("Numero76100");
+				numero101125=rst.getInt("Numero101125");
+				numero126150=rst.getInt("Numero126150");
+				numero150=rst.getInt("Numero150");
+				porcentajeCobertura=rst.getInt("PorcentajeCobertura");
+				vigorID=rst.getInt("VigorID");
+
+				nombreComun=rst.getString("NombreComun");
+				claveColecta=rst.getString("ClaveColecta");
+				
+
+
+				
+															/*termina recoleccion de datos*/
+				
+													/*inicia insercion de datos*/
+				
+				
+
+				String insertQuery="INSERT INTO Taxonomia.VegetacionMenor(VegetacionMenorID,SitioID,Consecutivo,FamiliaID,GeneroID,EspecieID,InfraespecieID,NombreComun,EsColecta,"
+							+"FormaVidaID,CondicionID,Numero0110,Numero1125,Numero2650,Numero5175,Numero76100,Numero101125,Numero126150,Numero150,PorcentajeCobertura,"
+							+"VigorID,ClaveColecta)"
+							+" VALUES ("+vegetacionMenorID+","+sitioID+","+consecutivo+","+familiaID+","+generoID+","+especieID+","+infraespecieID+",'"+nombreComun+"',"
+							+esColecta+","+formaVidaID+","+condicionID+","+numero0110+","+numero1125+","+numero2650+","+numero5175+","+numero76100+","+numero101125+","+numero126150+","
+							+numero150+","+porcentajeCobertura+","+vigorID+",'"+claveColecta+"')";		
+				
+													/*Termina insercion de datos*/
+				
+				
+				serverStatment.executeUpdate(insertQuery);
+				JOptionPane.showMessageDialog(null, "Datos insertados en el servidor Correctamente");
+				serverStatment.close();
+				
+			}
+			
+			localStatment.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			JOptionPane.showMessageDialog(null, "no se pudo hacer la consulta "+ e);
+		}
+
+	}
+	
 	
 	
 	public static void main(String[] args) {
 		Exportacion exportacion=new Exportacion();
 		
-		exportacion.exportarTAXONOMIASotobosque();
+		exportacion.exportarTAXONOMIAVegetacionMenor();
 	}
 
 }

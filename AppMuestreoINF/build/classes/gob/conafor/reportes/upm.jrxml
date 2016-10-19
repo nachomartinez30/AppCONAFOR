@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2016-07-20T17:29:56 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="upm" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2bf50c1a-486b-45b8-860b-b09a4977b080">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sqlite"/>
+	<parameter name="UPMID" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logoConafor" class="Object" isForPrompting="false">
+		<parameterDescription><![CDATA[The letterhead image]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logoSemarnat" class="Object" isForPrompting="false">
+		<parameterDescription><![CDATA[The letterhead image]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="informacionGeneral" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="informacionContacto" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="puntoControl" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="accesibilidadUPM" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+UPMID
+FROM VW_Informacion_General_UPM
+WHERE UPMID = $P{UPMID}]]>
+	</queryString>
+	<field name="UPMID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="1" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="64" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="130" height="62" uuid="c3fd47fc-8cfc-4039-9b46-9ca0a2efcf1f"/>
+				<imageExpression><![CDATA[$P{logoSemarnat}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="660" y="1" width="90" height="60" uuid="a6c29928-89ff-47e9-a140-b0b1b3dc04e0"/>
+				<imageExpression><![CDATA[$P{logoConafor}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="130" y="1" width="530" height="60" uuid="caa3b2d2-dfde-4cd2-90f3-9f1167905244"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Inventario Nacional Forestal y de  Suelos]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="297" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="0" width="760" height="1" backcolor="#080707" uuid="14c71daa-34bb-4be3-b9c1-ab3698edc0ad"/>
+			</rectangle>
+			<subreport>
+				<reportElement x="-3" y="4" width="741" height="26" uuid="3ad80ea9-f9ad-4b47-9980-6f5dfe60392b"/>
+				<subreportParameter name="UPMID">
+					<subreportParameterExpression><![CDATA[$F{UPMID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{informacionGeneral}]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="260" width="746" height="1" uuid="88d06e82-d018-4357-b915-7eb70e768fc0"/>
+			</break>
+			<subreport>
+				<reportElement x="0" y="270" width="741" height="26" uuid="7bf7bb75-7979-4716-898d-b22654c6d8b1"/>
+				<subreportParameter name="UPMID">
+					<subreportParameterExpression><![CDATA[$F{UPMID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{puntoControl}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="-4" y="230" width="742" height="30" uuid="0d284c4b-db10-478d-b692-b138b00be05a"/>
+				<subreportParameter name="UPMID">
+					<subreportParameterExpression><![CDATA[$F{UPMID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{informacionContacto}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement x="260" y="0" width="100" height="30" uuid="8fb473ef-e861-47a8-b188-75050af41066"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="360" y="0" width="100" height="30" uuid="1a29a8ec-0ca9-48de-a43a-43e57ebca401"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" de" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

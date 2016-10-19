@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2016-07-21T12:59:56 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ubicacion_punto_control" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="792" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isSummaryNewPage="true" uuid="fa607bcf-3e0a-4f60-98ba-9aa35bf39b34">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sqlite"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#0A0A0A">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#F7FAFC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="viaAccesibilidad" uuid="fbf190a1-c84b-4a79-8ce3-675c4e55bd61">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sqlite"/>
+		<parameter name="UPMID" class="java.lang.Integer">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+		</parameter>
+		<parameter name="accesibilidadUPM" class="java.lang.String" isForPrompting="false">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT 
+UPMID,
+Medio,
+Via,
+Distancia,
+Condicion
+FROM VW_ViaAccesibilidad
+WHERE UPMID = $P{UPMID}]]>
+		</queryString>
+		<field name="Medio" class="java.lang.Object"/>
+		<field name="Via" class="java.lang.Object"/>
+		<field name="Distancia" class="java.lang.Object"/>
+		<field name="Condicion" class="java.lang.Object"/>
+		<field name="UPMID" class="java.lang.Object"/>
+	</subDataset>
+	<parameter name="UPMID" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+UPMID,
+Descripcion,
+Paraje, 
+GradosLatitud,
+MinutosLatitud, 
+SegundosLatitud,
+GradosLongitud,
+MinutosLongitud,
+SegundosLongitud,
+ErrorPresicion,
+Datum,
+Azimut,
+Distancia
+FROM PC_PuntoControl
+WHERE UPMID = $P{UPMID}]]>
+	</queryString>
+	<field name="UPMID" class="java.lang.Object"/>
+	<field name="Descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Paraje" class="java.lang.String"/>
+	<field name="GradosLatitud" class="java.lang.Integer"/>
+	<field name="MinutosLatitud" class="java.lang.Integer"/>
+	<field name="SegundosLatitud" class="java.lang.Float"/>
+	<field name="GradosLongitud" class="java.lang.Integer"/>
+	<field name="MinutosLongitud" class="java.lang.Integer"/>
+	<field name="SegundosLongitud" class="java.lang.Float"/>
+	<field name="ErrorPresicion" class="java.lang.Integer"/>
+	<field name="Datum" class="java.lang.String"/>
+	<field name="Azimut" class="java.lang.Integer"/>
+	<field name="Distancia" class="java.lang.Float"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="342" splitType="Stretch">
+			<textField>
+				<reportElement x="4" y="51" width="380" height="109" uuid="c693f8e2-1d31-4a9b-aa07-2a8bd0084969"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="31" width="380" height="20" uuid="cb4cb682-1be7-4eb1-897d-8b9658ae22b5"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Descripcion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="11" width="780" height="16" forecolor="#FCFAFA" backcolor="#050505" uuid="4e90b7b7-ec50-4ae9-9a94-b0432ecbdd02"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SECCIÓN 3.3 REFERENCIA DE UBICACIÓN AL PUNTO DE CONTROL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="534" y="31" width="240" height="20" uuid="2e52eba4-1129-42e2-a7b6-bc84cdd43b02"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{UPMID}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="394" y="31" width="140" height="20" uuid="f3de3633-3ec5-4884-b927-429a52befebd"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[UPMID]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="64" y="160" width="320" height="20" uuid="ddc568dc-cbe4-482a-9abb-1a6a9fb08f36"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Paraje}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="160" width="60" height="20" uuid="9029f336-45a4-4c66-b77d-a0cb602602f5"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Paraje:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="394" y="55" width="380" height="16" forecolor="#FCFAFA" backcolor="#050505" uuid="8839a7ea-493b-4c13-8a42-495c032ddb72"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Coordenadas GPS del PC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="394" y="73" width="74" height="19" uuid="594d217f-1b1d-418f-939f-8b1807d4ac4d"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Latitud:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="394" y="92" width="74" height="19" uuid="12388862-057c-46f2-ab5a-09ead277fdc6"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Longitud:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="504" y="73" width="59" height="19" uuid="fe15bfd8-8c31-4f5f-a35c-7dc057e88f08"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{GradosLatitud}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="468" y="73" width="36" height="19" uuid="fe7e605a-dc79-4d03-87a5-5e9f5a28b54a"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Grados:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="468" y="92" width="36" height="19" uuid="3ec411e3-9f1f-44f9-9ef1-6c9795e5d369"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Grados:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="504" y="92" width="59" height="19" uuid="61d4fe4c-74b8-42ac-bcd0-eb6a337111fc"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{GradosLongitud}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="563" y="92" width="41" height="19" uuid="5c58b934-4472-4c10-afbc-e823755d852a"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Minutos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="563" y="73" width="41" height="19" uuid="a676cf99-ae78-4f0e-88d9-d2d6d83d8eb2"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Minutos:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="604" y="92" width="59" height="19" uuid="1c67148c-9f49-41a6-8150-64d6102e5067"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{MinutosLongitud}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="604" y="73" width="59" height="19" uuid="0ea18486-3cbf-4d34-b070-683426baa836"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{SegundosLatitud}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="664" y="73" width="50" height="19" uuid="1cdef3a8-4bc6-451b-85a8-753e2819dd5c"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Segundos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="664" y="92" width="50" height="19" uuid="d013a7e5-26e3-486b-af63-fee095319323"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Segundos:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="714" y="73" width="60" height="19" uuid="46412c5d-1b3d-40a2-a3fa-a08a8a9004d7"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{SegundosLatitud}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="714" y="92" width="60" height="19" uuid="f4947b74-3722-4322-9553-652d45e8dac0"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{SegundosLongitud}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="394" y="117" width="382" height="16" forecolor="#FCFAFA" backcolor="#050505" uuid="c53bbbc4-38f7-4aa1-b46f-abcfc610e827"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Información complementaria]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="494" y="133" width="90" height="14" uuid="e6d1c0d8-6b3d-43e1-8292-8f5f4451e4e8"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ErrorPresicion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="394" y="133" width="100" height="14" uuid="54546b1b-f5cd-46e3-8b97-1e2e87899687"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Error de presicion:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="584" y="133" width="36" height="14" uuid="83164ac5-3623-4ece-8212-c372d598daf8"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[m]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="620" y="133" width="44" height="14" uuid="1d653302-a07e-43bc-a1f7-0530f35faaef"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Datum:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="664" y="133" width="110" height="14" uuid="c02ad311-6bc3-4a25-973c-72cc37b06a2a"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Datum}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="395" y="152" width="381" height="16" forecolor="#FCFAFA" backcolor="#050505" uuid="95829652-f125-429a-bd1a-9d154aee5ae3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirección al conglomerado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="168" width="100" height="14" uuid="81201369-e71f-4288-a341-6cc23e369923"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Azimut:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="595" y="168" width="44" height="14" uuid="a896c3dd-59df-4b99-9f79-01558a7b761f"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Distancia:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="496" y="168" width="99" height="14" uuid="537fbddf-5de1-4ea2-9647-942e4e048397"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Azimut}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement mode="Transparent" x="20" y="204" width="340" height="61" uuid="1d7f8f32-f221-449d-ae0a-5b8f9e9fc455">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="viaAccesibilidad" uuid="187a72fa-ac70-490d-974a-39758810891f">
+						<datasetParameter name="UPMID">
+							<datasetParameterExpression><![CDATA[$F{UPMID}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="ffbcd892-8023-447e-ac25-f2af9e4f75d8">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="90" height="30" forecolor="#FCF7F7" backcolor="#080808" uuid="71ce92b8-ae97-4d69-a628-a2cf2a612360"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Medio]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30" uuid="de81d551-60a7-4629-ac56-3dd076c93ce7"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Medio}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="f3dc883c-b512-4358-823a-977770ef74d2">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FCF7F7" backcolor="#080808" uuid="fabc1224-a6e6-4f0d-a92e-a02520908f94"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Via]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="30" uuid="d7679b0d-fdc9-4fcf-826e-6866f35053cf"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Via}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="8765863d-9068-429c-9ddf-c0113d41dd18">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FCF7F7" backcolor="#080808" uuid="2a04f73b-324e-4718-8905-022115f62006"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Distancia]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="30" uuid="23155190-e57b-4b85-9396-f62d0bfb94c2"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Distancia}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="1b284e0f-1c74-4b63-ad93-a46a29cf6df2">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="90" height="30" forecolor="#FCF7F7" backcolor="#080808" uuid="5ac38d56-65f0-4c3d-a0d7-047b0d60bf7a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Condicion]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30" uuid="53e50de2-84df-441b-8403-f8193e700d4f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{Condicion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<textField>
+				<reportElement x="640" y="166" width="133" height="16" uuid="b703e52a-a30d-4883-b7ae-873c0f1b5355"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Distancia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="20" y="186" width="340" height="16" forecolor="#FCFAFA" backcolor="#050505" uuid="9df97fbd-1d5b-406a-8a58-e46e3c44f864"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Accesibilidad del punto de control al conglomerado]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="279" width="792" height="55" isRemoveLineWhenBlank="true" uuid="b9f6139c-0928-4448-a190-541efef9ccba"/>
+				<subreportParameter name="UPMID">
+					<subreportParameterExpression><![CDATA[$F{UPMID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{accesibilidadUPM}]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="271" width="792" height="1" uuid="1a7eb06a-0702-4728-bbc8-82d342abff13"/>
+			</break>
+			<line>
+				<reportElement x="0" y="1" width="791" height="5" uuid="d062f415-1e10-4bd5-ba2f-93e664d3e1ba"/>
+				<graphicElement>
+					<pen lineStyle="Solid" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

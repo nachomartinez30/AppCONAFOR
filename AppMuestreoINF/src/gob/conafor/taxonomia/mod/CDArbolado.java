@@ -843,6 +843,7 @@ public class CDArbolado {
     }
     
     public boolean validarNumeroRamatallo(int sitioID, int numeroRama){
+
         query = "SELECT SitioID, NoRama FROM TAXONOMIA_Arbolado WHERE SitioID = " + sitioID + " AND NoRama= " + numeroRama;
          boolean vacio = false;
         Connection conn = LocalConnection.getConnection();
@@ -861,6 +862,7 @@ public class CDArbolado {
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de validar la creación de submuestras", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
+
         return vacio;
     }
 

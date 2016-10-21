@@ -16,7 +16,7 @@ public class CDBrigada {
     //EmpresaID   DIAAPROY = 1, ANYDES= 2, AMAREF = 3
     public List<CEBrigadista> getJefeBrigada() {
         List<CEBrigadista> listBrigadistas = new ArrayList();
-        this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno FROM BRIGADA_Brigadistas WHERE PuestoID= 1 AND Activo= 1 AND EmpresaID= 3 ORDER BY ApellidoPaterno ASC";
+        this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno FROM BRIGADA_Brigadistas WHERE PuestoID= 1 AND Activo= 1  ORDER BY ApellidoPaterno ASC";
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();

@@ -44,12 +44,14 @@ public class CDImportacionBD {
                 }
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo revisar la importacion de la tabla UPM_UPM", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al revisar la importación de la tabla UPM_UPM", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -72,12 +74,14 @@ public class CDImportacionBD {
             }
             return hayRepetidos;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo revisar la importacion de la tabla UPM_UPM", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return false;
         } finally {
             try {
                 baseDatosLocal.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al revisar la importación de la tabla UPM_UPM", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -92,11 +96,13 @@ public class CDImportacionBD {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar la información del UPMID repetido ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al eliminar el UPMID repetido",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -160,12 +166,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla UPM_UPM", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla UPM_UPM", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -205,12 +213,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla PC_PuntoControl", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla PC_PuntoControl", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -239,12 +249,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla PC_Accesibilidad", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla PC_Accesibilidad", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -330,12 +342,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SITIOS_Sitio", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SITIOS_Sitio", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -372,12 +386,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SITIOS_CoberturaSuelo", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SITIOS_CoberturaSuelo", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -392,27 +408,31 @@ public class CDImportacionBD {
             this.sqlExterno = this.baseDatosExterna.createStatement();
             Statement ps = this.baseDatosLocal.createStatement();
             ResultSet rs = sqlExterno.executeQuery(this.querySelect);
-            while (rs.next()) {
-                Integer fotografiaHemisfericaID = rs.getInt("FotografiaHemisfericaID");
-                Integer sitioID = rs.getInt("SitioID");
-                Integer coberturaArborea = rs.getInt("CoberturaArborea");
-                Integer tomaFotografia = rs.getInt("TomaFotografia");
-                String hora = rs.getString("Hora");
-                Integer declinacionMagnetica = rs.getInt("DeclinacionMagnetica");
-                ps.executeUpdate("INSERT INTO SITIOS_FotografiaHemisferica(FotografiaHemisfericaID, SitioID, CoberturaArborea, TomaFotografia, Hora, DeclinacionMagnetica)"
-                        + "VALUES(" + fotografiaHemisfericaID + ", " + sitioID + ", " + coberturaArborea + ", " + tomaFotografia + ", '" + hora + "', " + declinacionMagnetica + ")");
-                this.baseDatosLocal.commit();
-                ps.close();
+            if (rs.wasNull()) {
+                while (rs.next()) {
+                    Integer fotografiaHemisfericaID = rs.getInt("FotografiaHemisfericaID");
+                    Integer sitioID = rs.getInt("SitioID");
+                    Integer coberturaArborea = rs.getInt("CoberturaArborea");
+                    Integer tomaFotografia = rs.getInt("TomaFotografia");
+                    String hora = rs.getString("Hora");
+                    Integer declinacionMagnetica = rs.getInt("DeclinacionMagnetica");
+                    ps.executeUpdate("INSERT INTO SITIOS_FotografiaHemisferica(FotografiaHemisfericaID, SitioID, CoberturaArborea, TomaFotografia, Hora, DeclinacionMagnetica)"
+                            + "VALUES(" + fotografiaHemisfericaID + ", " + sitioID + ", " + coberturaArborea + ", " + tomaFotografia + ", '" + hora + "', " + declinacionMagnetica + ")");
+                    this.baseDatosLocal.commit();
+                    ps.close();
+                }
+                this.sqlExterno.close();
+                rs.close();
             }
-            this.sqlExterno.close();
-            rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SITIOS_FotografiaHemisferica", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SITIOS_FotografiaHemisferica", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -442,12 +462,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SITIOS_Transponder", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SITIOS_Transponder", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -483,12 +505,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SITIOS_ParametrosFisicoQuimicos", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SITIOS_ParametrosFisicoQuimicos", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -516,12 +540,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_Canalillo", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUELO_Canalillo", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -549,12 +575,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_Carcava", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUELO_Carcava", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -581,12 +609,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_CoberturaSuelo", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUELO_CoberturaSuelo", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -613,12 +643,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_Costras", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUELO_Costras", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -649,12 +681,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_DeformacionViento", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUELO_DeformacionViento", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -685,12 +719,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_ErosionHidricaCanalillo", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUELO_ErosionHidricaCanalillo", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -721,12 +757,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_ErosionHidricaCarcava", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUELO_ErosionHidricaCarcava", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -754,12 +792,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_ErosionLaminar", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUELO_ErosionLaminar", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -787,12 +827,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_EvidenciaErosion", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUELO_EvidenciaErosion", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -837,6 +879,7 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_Hojarasca"
                     + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
@@ -844,6 +887,7 @@ public class CDImportacionBD {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUELO_Hojarasca", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -872,12 +916,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_LongitudCanalillo", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUELO_LongitudCanalillo", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -904,12 +950,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_LongitudCarcava", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUELO_LongitudCarcava", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -936,12 +984,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_LongitudMonticulo", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUELO_LongitudMonticulo", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -971,12 +1021,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_MedicionCanalillos", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SSUELO_MedicionCanalillos", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1007,12 +1059,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_MedicionCarcavas ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SSUELO_MedicionCarcavas ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1043,12 +1097,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_MedicionCarcavas ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SSUELO_MedicionCarcavas ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1096,12 +1152,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_Muestras ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUELO_Muestras ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1140,12 +1198,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_MuestrasPerfil ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUELO_MuestrasPerfil ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1173,12 +1233,14 @@ public class CDImportacionBD {
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_PavimentosErosión", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUELO_PavimentosErosión", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1205,12 +1267,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_Pedestal", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUELO_Pedestal", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1251,12 +1315,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_Profundidad ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUELO_Profundidad ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1354,12 +1420,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_Suelo", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUELO_Suelo", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1389,12 +1457,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUELO_VarillasErosion", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUELO_VarillasErosion", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1433,12 +1503,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla CARBONO_CoberturaDosel", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla CARBONO_CoberturaDosel", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1468,12 +1540,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla CARBONO_CubiertaVegetal", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla CARBONO_CubiertaVegetal", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1552,12 +1626,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla CARBONO_LongitudComponente", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla CARBONO_LongitudComponente"
                         + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -1589,12 +1665,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla CARBONO_MaterialLenioso100", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla CARBONO_MaterialLenioso100", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1622,12 +1700,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla CARBONO_MaterialLenioso1000", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla CARBONO_MaterialLenioso1000", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1720,12 +1800,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla TAXONOMIA_Arbolado", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla TAXONOMIA_Arbolado", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1757,12 +1839,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla ARBOLADO_Submuestra", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla ARBOLADO_Submuestra"
                         + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -1790,12 +1874,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla ARBOLADO_Troza", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla ARBOLADO_Troza", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1820,12 +1906,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SUBMUESTRA_Observaciones", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SUBMUESTRA_Observaciones", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1854,12 +1942,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla ARBOLADO_DanioSeveridad", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla ARBOLADO_DanioSeveridad", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1917,12 +2007,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla TAXONOMIA_ColectaBotanica", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla TAXONOMIA_ColectaBotanica", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1988,12 +2080,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla TAXONOMIA_Repoblado", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla TAXONOMIA_Repoblado", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -2054,12 +2148,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla TAXONOMIA_RepobladoVM", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla TAXONOMIA_RepobladoVM", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -2124,12 +2220,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla TAXONOMIA_SotoBosque", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla TAXONOMIA_SotoBosque", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -2190,12 +2288,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla TAXONOMIA_VegetacionMayorGregarios", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla TAXONOMIA_VegetacionMayorGregarios", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -2224,12 +2324,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla VEGETACIONMAYORG_DanioSeveridad", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla VEGETACIONMAYORG_DanioSeveridad", "Conexion BD", JOptionPane.ERROR_MESSAGE);
 
             }
@@ -2286,12 +2388,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla TAXONOMIA_VegetacionMayorIndividual", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla TAXONOMIA_VegetacionMayorIndividual", "Conexion BD", JOptionPane.ERROR_MESSAGE);
 
             }
@@ -2321,12 +2425,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla VEGETACIONMAYORI_DanioSeveridad", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla VEGETACIONMAYORI_DanioSeveridad", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -2395,12 +2501,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla TAXONOMIA_VegetacionMenor", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla TAXONOMIA_VegetacionMenor", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -2429,12 +2537,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla VEGETACIONMENOR_DanioSeveridad", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla VEGETACIONMENOR_DanioSeveridad", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -2462,12 +2572,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla REPOBLADO_AgenteDanio", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla REPOBLADO_AgenteDanio", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -2506,12 +2618,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla UPM_Contacto", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla UPM_Contacto", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -2540,12 +2654,14 @@ public class CDImportacionBD {
             this.sqlExterno.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla UPM_Epifita", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla UPM_Epifita", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -2573,12 +2689,14 @@ public class CDImportacionBD {
                 ps.close();
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SYS_SecuenciaCaptura", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SYS_SecuenciaCaptura", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -2604,12 +2722,14 @@ public class CDImportacionBD {
                 ps.close();
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SYS_UPM_Revision", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SYS_UPM_Revision", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -2636,12 +2756,14 @@ public class CDImportacionBD {
                 ps.close();
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla UPM_Brigada", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 baseDatosLocal.close();
                 baseDatosExterna.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla UPM_Brigada", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -2656,11 +2778,13 @@ public class CDImportacionBD {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar la informacion del upm seleccionado", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al eliminar los datos del upm seleccionado ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);

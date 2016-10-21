@@ -101,8 +101,9 @@ public class CDRepobladoVM {
                 + ceRepoblado.getInfraespecieID() + ", NombreComun= '" + ceRepoblado.getNombreComun() + "'"
                 + ", Frecuencia50= " + ceRepoblado.getFrecuencia50() + ", PorcentajeCobertura50= " + ceRepoblado.getPorcentajeCobertura50()
                 + ", Frecuencia51200= " + ceRepoblado.getFrecuencia51200() + ", PorcentajeCobertura51200= " + ceRepoblado.getPorcentajeCobertura51200()
-                + ", Frecuencia200= " + ceRepoblado.getPorcentajeCobertura200() + ", VigorID= " + ceRepoblado.getVigorID() + " WHERE RepobladoVMID= "
+                + ", Frecuencia200= " + ceRepoblado.getFrecuencia200()+ ", PorcentajeCobertura200="+ceRepoblado.getPorcentajeCobertura200()+", VigorID= " + ceRepoblado.getVigorID() + " WHERE RepobladoVMID= "
                 + ceRepoblado.getRepobladoVMID();
+        //System.out.println(query);
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -110,6 +111,7 @@ public class CDRepobladoVM {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+           // e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información de repoblado vegetación menor ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {

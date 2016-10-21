@@ -580,7 +580,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
             }
         });
 
-        txtAzimut.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
+        txtAzimut.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtAzimut.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtAzimutFocusGained(evt);
@@ -1327,15 +1327,10 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         try{
             this.azimut = Integer.valueOf(txtAzimut.getText());
         }catch(NumberFormatException e){
+            e.printStackTrace();
             this.azimut = null;
         }
-        
-        try{
-            this.azimut = Integer.valueOf(txtAzimut.getText());
-        }catch(NumberFormatException e){
-            this.azimut = null;
-        }
-        
+
         try{
             this.distancia = Float.valueOf(txtDistancia.getText());
         }catch(NumberFormatException e){
@@ -1709,6 +1704,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         txtNumeroIndividuo.requestFocus();
         chkEsSubmuestra.setSelected(false);
         txtClaveColecta.setText("");
+        txtNumeroRamaTallo.setEnabled(true);
     }
     
     public void evitarCapturaPorTrazo(CESitio sitio) {
@@ -1856,7 +1852,44 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         }
     }
     
+    private boolean validarCamposObligatorioModificar() {
+        ValidacionesComunes validacion = new ValidacionesComunes();
+        if (txtNumeroIndividuo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo número de individuo es obligatorio", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
+            txtNumeroIndividuo.requestFocus();
+            return false;
+        } else if(txtNumeroRamaTallo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo de rama o tallo es obligatorio", "Arbolado", JOptionPane.ERROR_MESSAGE);
+            txtNumeroRamaTallo.requestFocus();
+            return false;
+        } else if (txtAzimut.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo azimut es obligatorio", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
+            txtAzimut.requestFocus();
+            return false;
+        } else if (txtDistancia.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo distancia es obligatorio", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
+            txtDistancia.requestFocus();
+            return false;
+        } else if (txtDiametroNormal.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo diámetro normal es obligatorio", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
+            txtDiametroNormal.requestFocus();
+            return false;
+        } else if (cmbFormaVida.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un tipo de forma de vida", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
+            cmbFormaVida.requestFocus();
+            return false;
+        } else if (cmbCondicion.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un tipo de condicion", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
+            cmbCondicion.requestFocus();
+            return false;
+        } else {
+             return true;
+        }
+    }
+    
     private boolean validarMedicionesObligatorias() {
+        System.out.println(this.azimut+"linea 1861");
+        
         ValidacionesComunes validacionC = new ValidacionesComunes();
         ValidacionesArbolado validacionAR = new ValidacionesArbolado();
         if (validacionAR.esNumeracion(this.noIndividuo)) {
@@ -2542,6 +2575,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
             this.arboladoID = Integer.parseInt(strArbID);
             fijarValoresPorCampo(this.arboladoID);
             chkEsSubmuestra.setEnabled(true);
+            txtNumeroRamaTallo.setEnabled(false);
         }
     }//GEN-LAST:event_grdArboladoMouseClicked
 
@@ -2601,7 +2635,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         asignarDatosArbolado();
         CatECondicionArbolado condicion = (CatECondicionArbolado) cmbCondicion.getSelectedItem();
-        if (validarCamposObligatorio() && validarCamposOpcionales() && validarAlturaComercial() && validarMedicionesObligatorias() && validarMedicionesOpcionales()
+        if (validarCamposObligatorioModificar()&& validarCamposOpcionales() && validarAlturaComercial() && validarMedicionesObligatorias() && validarMedicionesOpcionales()
                 && validarCampoDanio()) {
             if (condicion.getCondicionID() > 1 && condicion.getCondicionID() <= 4) {
                 if (validarDanioObligatorio()) {

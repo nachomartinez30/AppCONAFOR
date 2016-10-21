@@ -1864,6 +1864,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         txtNumeroIndividuo.requestFocus();
         chkEsSubmuestra.setSelected(false);
         txtClaveColecta.setText("");
+        txtNumeroRamaTallo.setEnabled(true);
     }
     
     public void evitarCapturaPorTrazo(CESitio sitio) {
@@ -1978,6 +1979,40 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         return true;
     }
     
+    
+        private boolean validarCamposObligatorioModificar() {
+        if (txtNumeroIndividuo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo número de individuo es obligatorio", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
+            txtNumeroIndividuo.requestFocus();
+            return false;
+        } else if (txtNumeroRamaTallo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo de rama o tallo es obligatorio", "Arbolado", JOptionPane.ERROR_MESSAGE);
+            txtNumeroRamaTallo.requestFocus();
+            return false;
+        } else if (txtAzimut.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo azimut es obligatorio", "Arbolado", JOptionPane.ERROR_MESSAGE);
+            txtAzimut.requestFocus();
+            return false;
+        } else if (txtDistancia.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo distancia es obligatorio", "Arbolado", JOptionPane.ERROR_MESSAGE);
+            txtDistancia.requestFocus();
+            return false;
+        } else if (txtDiametroNormal.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo diámetro normal es obligatorio", "Arbolado", JOptionPane.ERROR_MESSAGE);
+            txtDiametroNormal.requestFocus();
+            return false;
+        } else if (cmbFormaVida.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un tipo de forma de vida", "Arbolado", JOptionPane.ERROR_MESSAGE);
+            cmbFormaVida.requestFocus();
+            return false;
+        } else if (cmbCondicion.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un tipo de condicion", "Arbolado", JOptionPane.ERROR_MESSAGE);
+            cmbCondicion.requestFocus();
+            return false;
+        }
+        return true;
+    }
+    
     private boolean validarCamposObligatorio() {
         if (txtNumeroIndividuo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo número de individuo es obligatorio", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
@@ -1987,7 +2022,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "El campo de rama o tallo es obligatorio", "Arbolado", JOptionPane.ERROR_MESSAGE);
             txtNumeroRamaTallo.requestFocus();
             return false;
-        } else if (cdArbolado.validarNumeroRamatallo(this.sitioID, this.noRama)) {
+        } else if (cdArbolado.validarNumeroRamatallo/*se encuentra en taxonomia.mod.CDArbolado*/(this.sitioID, this.noRama)) { 
             JOptionPane.showMessageDialog(null, "El número de rama o tallo no debe repetirse", "Arbolado", JOptionPane.ERROR_MESSAGE);
             txtNumeroRamaTallo.setValue(null);
             txtNumeroRamaTallo.setText("");
@@ -2063,7 +2098,8 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
     
     private boolean validarAlturaComercial() {
         ValidacionesArbolado validacionAR = new ValidacionesArbolado();
-        if (this.diametroNormal >= 10 && txtAlturaComercial.getText().isEmpty()) {
+        System.out.println(cmbCondicion.getSelectedItem());
+        if (this.diametroNormal >= 10 && txtAlturaComercial.getText().isEmpty()&&cmbCondicionMuertoPie.getSelectedIndex()<2&& cmbCondicion.getSelectedItem().equals("3-Tocon (corta autorizada)") && cmbCondicion.getSelectedItem().equals("4-Tocon (corta clandestina)")) {//si la altura <10, esta vacio Altura comercial y no son c o d en muerto en pie y si NO es tocon
             JOptionPane.showMessageDialog(null, "Error! Si el diámetro normal es mayor o igual a 10 se debe capturar altura comercial", "Arbolado D", JOptionPane.INFORMATION_MESSAGE);
             txtAlturaComercial.requestFocus();
             return false;
@@ -2751,7 +2787,20 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
     private void txtDiametroNormalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroNormalFocusLost
       if(txtDiametroNormal.getText().isEmpty()){
           txtDiametroNormal.setValue(null);
-      }    
+      } 
+      
+      
+      
+      if(cmbCondicionMuertoPie.getSelectedIndex()>2){//si condicon mierto en pie es  d o c, o si es tocon, No debe tener altura comercial
+          txtAlturaComercial.setEnabled(false);
+      }
+      else{
+          
+          if(Integer.parseInt(txtDiametroNormal.getText())>=10){
+              txtAlturaComercial.setEnabled(true);
+            }
+      }
+      
     }//GEN-LAST:event_txtDiametroNormalFocusLost
 
     private void txtAlturaTotalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaTotalFocusLost
@@ -2857,6 +2906,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
             this.arboladoID = Integer.parseInt(strArbID);
             fijarValoresPorCampo(this.arboladoID);
             chkEsSubmuestra.setEnabled(true);
+            txtNumeroRamaTallo.setEnabled(false);
         }
     }//GEN-LAST:event_grdArboladoMouseClicked
 
@@ -2916,7 +2966,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         asignarDatosArbolado();
         CatECondicionArbolado condicion = (CatECondicionArbolado) cmbCondicion.getSelectedItem();
-        if (validarCamposObligatorio() && validarCamposOpcionales() && validarAlturaComercial() && validarMedicionesObligatorias() && validarMedicionesOpcionales()
+        if (validarCamposObligatorioModificar()&& validarCamposOpcionales() && validarAlturaComercial() && validarMedicionesObligatorias() && validarMedicionesOpcionales()
                 && validarCampoDanio()) {
             if (condicion.getCondicionID() > 1 && condicion.getCondicionID() <= 4) {
                 if (validarDanioObligatorio()) {

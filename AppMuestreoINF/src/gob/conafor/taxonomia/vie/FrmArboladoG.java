@@ -1705,6 +1705,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         cmbConsecutivo.setSelectedItem(null);
         txtNumeroIndividuo.setText("");
         txtNumeroRamaTallo.setText("");
+        txtNumeroRamaTallo.setEnabled(true);
         txtAzimut.setText("");
         txtDistancia.setText("");
         cmbFamilia.setSelectedItem(null);
@@ -1747,6 +1748,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         txtNumeroIndividuo.requestFocus();
         chkEsSubmuestra.setSelected(false);
         txtClaveColecta.setText("");
+        
     }
 
     public void evitarCapturaPorTrazo(CESitio sitio) {
@@ -2600,6 +2602,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             this.arboladoID = Integer.parseInt(strArbID);
             fijarValoresPorCampo(this.arboladoID);
             chkEsSubmuestra.setEnabled(true);
+            txtNumeroRamaTallo.setEnabled(false);
         }
     }//GEN-LAST:event_grdArboladoMouseClicked
 
@@ -2652,6 +2655,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         combo.reiniciarComboModel(cmbConsecutivo);
         fillCmbConsecutivo();
         llenarTabla();
+        limpiarControles();
     }//GEN-LAST:event_btnElimnarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
@@ -2668,8 +2672,10 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
                 actualizarArbolado();
                 llenarTabla();
                 limpiarControles();
+                
             }
         }
+        modificar=0;
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void cmbConsecutivoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cmbConsecutivoPropertyChange

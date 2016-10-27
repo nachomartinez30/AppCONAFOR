@@ -23,6 +23,19 @@ public class LocalConnection {
         }
         return connect;
     }
+    
+    public static Connection getConnectionConcentrate() {
+        try {
+            Class.forName(driver);
+            connect = DriverManager.getConnection(getURLConcentracion());
+            connect.setAutoCommit(false);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error, No hay base de datos local disponible" + e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return connect;
+    }
 
     public static void closeConnection() {
         try {
@@ -40,5 +53,12 @@ public class LocalConnection {
         //return "jdbc:sqlite:" + path + "/src/db/MuestreoINF_2015.db";
         //return "jdbc:sqlite:" + path + "/MuestreoINF_2015.oct"; //Para distribuir
        return "jdbc:sqlite:" + path + "/src/db/MuestreoINF_2015.db"; //En producción.
+    }
+    public static String getURLConcentracion() {
+        Path currentPath = Paths.get("");
+        String path = currentPath.toAbsolutePath().toString();
+        //return "jdbc:sqlite:" + path + "/src/db/MuestreoINF_2015.db";
+        //return "jdbc:sqlite:" + path + "/MuestreoINF_2015.cons"; //Para distribuir
+       return "jdbc:sqlite:" + path + "/src/db/MuestreoINF_2015.cons"; //En producción.
     }
 }

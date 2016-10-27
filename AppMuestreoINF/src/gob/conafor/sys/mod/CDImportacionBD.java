@@ -114,7 +114,7 @@ public class CDImportacionBD {
     public void importarUPM_UPM(String ruta) {
         this.querySelect = "SELECT UPMID, FechaInicio, FechaFin, TipoUPMID, Altitud, PendienteRepresentativa, "
                 + "FisiografiaID, ExposicionID, Predio, Paraje, TipoTenenciaID, Accesible, GradosLatitud, MinutosLatitud, "
-                + "SegundosLatitud, GradosLongitud, MinutosLongitud, SegundosLongitud, Datum, ErrorPresicion, "
+               instanceof + "SegundosLatitud, GradosLongitud, MinutosLongitud, SegundosLongitud, Datum, ErrorPresicion, "
                 + "Azimut, Distancia, TipoInaccesibilidadID, OtroTipoInaccesibilidad, ExplicacionInaccesibilidad, "
                 + "InformacionContacto FROM UPM_UPM";
         Integer tipoInaccesibilidadID = null;
@@ -408,7 +408,7 @@ public class CDImportacionBD {
             this.sqlExterno = this.baseDatosExterna.createStatement();
             Statement ps = this.baseDatosLocal.createStatement();
             ResultSet rs = sqlExterno.executeQuery(this.querySelect);
-            if (rs.wasNull()) {
+
                 while (rs.next()) {
                     Integer fotografiaHemisfericaID = rs.getInt("FotografiaHemisfericaID");
                     Integer sitioID = rs.getInt("SitioID");
@@ -421,9 +421,10 @@ public class CDImportacionBD {
                     this.baseDatosLocal.commit();
                     ps.close();
                 }
+                
                 this.sqlExterno.close();
                 rs.close();
-            }
+            
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SITIOS_FotografiaHemisferica", "Conexion BD", JOptionPane.ERROR_MESSAGE);

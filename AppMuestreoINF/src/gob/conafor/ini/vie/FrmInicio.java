@@ -106,6 +106,7 @@ public class FrmInicio extends javax.swing.JFrame {
         mbMenuSuperiror = new javax.swing.JMenuBar();
         menGuardarArchivo = new javax.swing.JMenu();
         miImportar = new javax.swing.JMenuItem();
+        miConentrar = new javax.swing.JMenuItem();
         miEliminarPorUPM = new javax.swing.JMenuItem();
         miEliminar = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -383,6 +384,14 @@ public class FrmInicio extends javax.swing.JFrame {
         });
         menGuardarArchivo.add(miImportar);
 
+        miConentrar.setText("Concentrar");
+        miConentrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miConentrarActionPerformed(evt);
+            }
+        });
+        menGuardarArchivo.add(miConentrar);
+
         miEliminarPorUPM.setText("Eliminar por UPM ...");
         miEliminarPorUPM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -509,6 +518,11 @@ public class FrmInicio extends javax.swing.JFrame {
        UPMForms.eliminarBD.setVisible(true);
     }//GEN-LAST:event_miEliminarActionPerformed
 
+    private void miConentrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConentrarActionPerformed
+        UPMForms.importarBD.iniciar();
+        UPMForms.importarBD.setVisible(true);
+    }//GEN-LAST:event_miConentrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -579,6 +593,7 @@ public class FrmInicio extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuBar mbMenuSuperiror;
     public javax.swing.JMenu menGuardarArchivo;
+    private javax.swing.JMenuItem miConentrar;
     private javax.swing.JMenuItem miEliminar;
     private javax.swing.JMenuItem miEliminarPorUPM;
     private javax.swing.JMenuItem miImportar;

@@ -735,6 +735,11 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         lblFormaFuste.setToolTipText("Forma Fuste");
 
         cmbFormaFuste.setNextFocusableComponent(cmbGradoPutrefaccion);
+        cmbFormaFuste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbFormaFusteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -2469,7 +2474,18 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
     private void txtDiametroNormalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroNormalFocusLost
       if(txtDiametroNormal.getText().isEmpty()){
           txtDiametroNormal.setValue(null);
-      } 
+          txtAlturaComercial.setEnabled(false);
+      }
+      if(Integer.parseInt(txtDiametroNormal.getText())>=10){//si el diametro normal es mayor o igual a 10
+          if(cmbCondicionMuertoPie.getSelectedIndex()==4){//si la condicion muerto en pie es D, no hay altura comercial
+             txtAlturaComercial.setEnabled(false); 
+          }else{
+          txtAlturaComercial.setEnabled(true);
+          }
+      }
+      if(Integer.parseInt(txtDiametroNormal.getText())<10){
+          txtAlturaComercial.setEnabled(false);
+      }
     }//GEN-LAST:event_txtDiametroNormalFocusLost
 
     private void txtAlturaTotalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaTotalFocusLost
@@ -2696,11 +2712,14 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         // dcmMP.removeAllElements();
         //dcmTC.removeAllElements();
         if (condicion != null) {
-            if (condicion.getCondicionID() == 2) {
+            if (condicion.getCondicionID() == 2) {//si esta muerto en pie
                 estadoMuertoPie();
+                checar AI>30
+                txtAnguloInclinacion.setEnabled(false);
             } else if (condicion.getCondicionID() == 3 || condicion.getCondicionID() == 4) {
                 //    cmbTipoTocon.setEnabled(true);
                 // cmbCondicion.setEnabled(false);
+                txtAnguloInclinacion.setEnabled(true);
                 estadoArbolTocon();
             }
             if ((formaVida.getFormaVidaID() >= 1 && formaVida.getFormaVidaID() <= 3) && condicion.getCondicionID() == 1) {
@@ -2716,19 +2735,21 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         //DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbGradoPutrefaccion.getModel();
         //dcm.removeAllElements();
         if (condicionMuerto != null) {
-            if (condicionMuerto.getMuertoPieID() <= 4) {
+            if (condicionMuerto.getMuertoPieID() == 4) {
                 estadoMuertoPieCD(condicionMuerto.getMuertoPieID());
                 if (condicionMuerto.getMuertoPieID() == 4) {
                     cmbGradoPutrefaccion.setEnabled(true);
                     cmbGradoPutrefaccion.setSelectedItem(null);
                 }
             }
-            if (condicionMuerto.getMuertoPieID() == 3) {
+            if (condicionMuerto.getMuertoPieID()<=3) {
+                cmbGradoPutrefaccion.setEnabled(false);
                 cmbFormaFuste.setSelectedItem(null);
                 cmbFormaFuste.setEnabled(true);
             } else {
                 cmbFormaFuste.setSelectedItem(null);
                 cmbFormaFuste.setEnabled(false);
+                cmbGradoPutrefaccion.setEnabled(true);
             }
         }
     }//GEN-LAST:event_cmbCondicionMuertoPieActionPerformed
@@ -2963,6 +2984,14 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         limpiarControles();
         txtNumeroIndividuo.requestFocus();
     }//GEN-LAST:event_btnLimpiarControlesActionPerformed
+
+    private void cmbFormaFusteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFormaFusteActionPerformed
+        if(cmbFormaFuste.getSelectedIndex()==1){
+           txtAnguloInclinacion.setEnabled(false);
+       }else{
+            txtAnguloInclinacion.setEnabled(true);
+        }
+    }//GEN-LAST:event_cmbFormaFusteActionPerformed
 
     /**
      * @param args the command line arguments

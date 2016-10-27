@@ -10,6 +10,7 @@ import javax.swing.SwingWorker;
 public class HiloImportacion extends SwingWorker<Integer, String> {
 
     private CDImportacionBD bdImportar = new CDImportacionBD();
+    //private CDConentrarBD bdConcentrar =new CDConentrarBD();
     private JLabel etiqueta;
     private JProgressBar barraProgreso;
     private JButton btnEjecutar;

@@ -956,6 +956,11 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
                 txtDiametroNormalFocusLost(evt);
             }
         });
+        txtDiametroNormal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDiametroNormalActionPerformed(evt);
+            }
+        });
         txtDiametroNormal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDiametroNormalKeyTyped(evt);
@@ -2084,7 +2089,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         cmbNivelVigor.setEnabled(false);
         txtDiametroNormal.setEnabled(true);
         txtAlturaTotal.setEnabled(true);
-        txtAnguloInclinacion.setEnabled(true);
+        //txtAnguloInclinacion.setEnabled(true);
         txtAlturaFusteLimpio.setEnabled(false);
         txtAlturaFusteLimpio.setText("");
         txtAlturaFusteLimpio.setValue(null);
@@ -2477,6 +2482,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
           txtAlturaComercial.setEnabled(false);
       }
       if(Integer.parseInt(txtDiametroNormal.getText())>=10){//si el diametro normal es mayor o igual a 10
+         
           if(cmbCondicionMuertoPie.getSelectedIndex()==4){//si la condicion muerto en pie es D, no hay altura comercial
              txtAlturaComercial.setEnabled(false); 
           }else{
@@ -2486,6 +2492,13 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
       if(Integer.parseInt(txtDiametroNormal.getText())<10){
           txtAlturaComercial.setEnabled(false);
       }
+       System.out.println("Linea 2495 "+cmbCondicion.getSelectedIndex());
+      if(cmbCondicion.getSelectedIndex()>2||cmbFormaVida.getSelectedIndex()==6)//es tocon o forma de vida no determinada
+      {
+          txtAlturaComercial.setEnabled(false);
+      }
+      //System.out.println(txtAlturaComercial.isEnabled());
+      
     }//GEN-LAST:event_txtDiametroNormalFocusLost
 
     private void txtAlturaTotalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaTotalFocusLost
@@ -2714,12 +2727,11 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         if (condicion != null) {
             if (condicion.getCondicionID() == 2) {//si esta muerto en pie
                 estadoMuertoPie();
-                checar AI>30
                 txtAnguloInclinacion.setEnabled(false);
             } else if (condicion.getCondicionID() == 3 || condicion.getCondicionID() == 4) {
                 //    cmbTipoTocon.setEnabled(true);
                 // cmbCondicion.setEnabled(false);
-                txtAnguloInclinacion.setEnabled(true);
+                //txtAnguloInclinacion.setEnabled(true);
                 estadoArbolTocon();
             }
             if ((formaVida.getFormaVidaID() >= 1 && formaVida.getFormaVidaID() <= 3) && condicion.getCondicionID() == 1) {
@@ -2734,6 +2746,16 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         CatECondicionMuertoPie condicionMuerto = (CatECondicionMuertoPie) cmbCondicionMuertoPie.getSelectedItem();
         //DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbGradoPutrefaccion.getModel();
         //dcm.removeAllElements();
+        //
+            txtAnguloInclinacion.setEnabled(true);
+            if(cmbCondicionMuertoPie.getSelectedIndex()==4)//si la condicion es D
+            {
+                //System.out.println(cmbCondicionMuertoPie.getSelectedIndex());
+                txtAnguloInclinacion.setEnabled(false);
+            }else{
+                txtAnguloInclinacion.setEnabled(true);
+            }
+        
         if (condicionMuerto != null) {
             if (condicionMuerto.getMuertoPieID() == 4) {
                 estadoMuertoPieCD(condicionMuerto.getMuertoPieID());
@@ -2986,12 +3008,18 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnLimpiarControlesActionPerformed
 
     private void cmbFormaFusteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFormaFusteActionPerformed
-        if(cmbFormaFuste.getSelectedIndex()==1){
+        //System.out.println(cmbFormaFuste.getSelectedIndex());
+        if(cmbFormaFuste.getSelectedIndex()==1||cmbFormaFuste.getSelectedIndex()==-1){
            txtAnguloInclinacion.setEnabled(false);
        }else{
             txtAnguloInclinacion.setEnabled(true);
-        }
+       }
+        
     }//GEN-LAST:event_cmbFormaFusteActionPerformed
+
+    private void txtDiametroNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiametroNormalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDiametroNormalActionPerformed
 
     /**
      * @param args the command line arguments

@@ -2050,6 +2050,8 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             chkPunto6.setEnabled(true);
             chkPunto7.setEnabled(true);
             chkPunto8.setEnabled(true);
+            chkPunto9.setEnabled(true);
+            chkPunto10.setEnabled(true);
             btnAgregarDosel.setEnabled(true);
             btnModificarDosel.setEnabled(true);
             btnEliminarDosel.setEnabled(true);
@@ -2063,6 +2065,8 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             chkPunto6.setEnabled(false);
             chkPunto7.setEnabled(false);
             chkPunto8.setEnabled(false);
+            chkPunto9.setEnabled(false);
+            chkPunto10.setEnabled(false);
             btnAgregarDosel.setEnabled(false);
             btnModificarDosel.setEnabled(false);
             btnEliminarDosel.setEnabled(false);

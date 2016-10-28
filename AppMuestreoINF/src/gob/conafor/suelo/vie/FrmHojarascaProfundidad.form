@@ -1084,7 +1084,6 @@
             </Property>
             <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Hay Suelo a las profundidades de 0-30 y 30-60 "/>
-            <Property name="actionCommand" type="java.lang.String" value="Hay Suelo a las profundidades de 0-30 y 30-60 "/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkSueloProfundidadesActionPerformed"/>

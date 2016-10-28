@@ -2477,7 +2477,8 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDiametroCopaEOFocusGained
 
     private void txtDiametroNormalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroNormalFocusLost
-      if(txtDiametroNormal.getText().isEmpty()){
+        try {
+          if(txtDiametroNormal.getText().isEmpty()){
           txtDiametroNormal.setValue(null);
           txtAlturaComercial.setEnabled(false);
       }
@@ -2492,12 +2493,13 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
       if(Integer.parseInt(txtDiametroNormal.getText())<10){
           txtAlturaComercial.setEnabled(false);
       }
-       System.out.println("Linea 2495 "+cmbCondicion.getSelectedIndex());
-      if(cmbCondicion.getSelectedIndex()>2||cmbFormaVida.getSelectedIndex()==6)//es tocon o forma de vida no determinada
+      if(cmbCondicion.getSelectedIndex()>2||cmbFormaVida.getSelectedIndex()>6)//es tocon o forma de vida no determinada
       {
           txtAlturaComercial.setEnabled(false);
       }
       //System.out.println(txtAlturaComercial.isEnabled());
+        } catch (Exception e) {
+        }
       
     }//GEN-LAST:event_txtDiametroNormalFocusLost
 

@@ -829,6 +829,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         txtClaveHO.setText("");
         txtClaveF.setText("");
         cmbPuntoHojarasca.requestFocus();
+        grdHojarasca.removeAll();
     }
     
     private void limpiarControlesProfundidades(){
@@ -1978,6 +1979,8 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
             UPMForms.muestrasPerfil.revisarMuestrasPerfil(this.ceSitio);
             UPMForms.muestrasPerfil.setVisible(true);
         }
+        limpiarControlesHojarasca();
+        limpiarControlesProfundidades();
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void grdHojarascaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdHojarascaMouseClicked

@@ -169,6 +169,7 @@ public class FuncionesComunes {
     public boolean habilitarCheckBox(String tabla, Integer sitioID){
         this.query = "SELECT SitioID FROM " + tabla + " WHERE SitioID= " + sitioID;
         boolean vacio = false;
+        //System.out.println("FuncionesComunes Linea 172="+this.query);
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -176,6 +177,8 @@ public class FuncionesComunes {
             while (rs.next()) {
                 vacio = true;
             }
+            st.close();
+            rs.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al revisar el sitio 2 de levantamiento de suelo y carbono "
                     + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -195,5 +198,29 @@ public class FuncionesComunes {
         
         System.out.println(f.sitioCapturaSueloCarbono(384, 3));
     }*/
-    
+    public int buscarSecuencia(int UPMID){
+        this.query = "SELECT SecuenciaID FROM UPM_MallaPuntos WHERE UPMID=" + UPMID;
+        int secuenciaID=0;
+        Connection conn = LocalConnection.getConnection();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                secuenciaID=rs.getInt("SecuenciaID");
+            }
+            st.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error! al revisar el sitio 2 de levantamiento de suelo y carbono "
+                    + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al revisar el sitio 2 de levantamiento de suelo y carbono"
+                        + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        return secuenciaID;
+    }
 }

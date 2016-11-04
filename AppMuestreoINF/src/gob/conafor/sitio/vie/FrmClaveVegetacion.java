@@ -60,6 +60,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
     }
     
     public void revisarClaveVegetacion(CESitio sitio) {
+        limpiarControles();
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();

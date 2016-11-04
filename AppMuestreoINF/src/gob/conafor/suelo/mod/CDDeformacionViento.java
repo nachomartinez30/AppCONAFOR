@@ -31,6 +31,8 @@ public class CDDeformacionViento {
                 Integer index = rs.getInt(2);
                 listMedicionMonticulo.remove(index);
             }
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los numeros de medicion de monticulos ",
@@ -57,6 +59,8 @@ public class CDDeformacionViento {
             while (rs.next()) {
                 listMonticuloID.add(rs.getInt("DeformacionVientoID"));
             }
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los datos de deformacion por viento id ",
@@ -118,6 +122,8 @@ public class CDDeformacionViento {
                 this.ceDeformacion.setDistanciaMonticulos(rs.getFloat("Distancia"));
                 this.ceDeformacion.setAzimutMonticulos(rs.getInt("Azimut"));         
             }
+            rs.close();
+            st.close();
             return this.ceDeformacion;
         }catch(SQLException e){
           JOptionPane.showMessageDialog(null, "Error! al obtener los datos de deformacion por viento ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -271,6 +277,8 @@ public class CDDeformacionViento {
                 Integer index = rs.getInt(2);
                 listLongitudCanalillo.remove(index);
             }
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los campos de  longitud de monticulos",
@@ -297,6 +305,8 @@ public class CDDeformacionViento {
             while (rs.next()) {
                 listLongitudCanalillo.add(rs.getInt("LongitudMonticuloID"));
             }
+            rs.close();
+            st.close();
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
@@ -354,6 +364,8 @@ public class CDDeformacionViento {
             while (rs.next()) {
                 this.ceLongitudMonticulos.setLongitud(rs.getFloat("Longitud"));
             }
+            rs.close();
+            st.close();
             return this.ceLongitudMonticulos;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de longitud de monticulos ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -548,6 +560,8 @@ public class CDDeformacionViento {
             while (rs.next()) {
                 vacio = false;
             }
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al validar la presencia de datos en la tabla erosión por viento", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {

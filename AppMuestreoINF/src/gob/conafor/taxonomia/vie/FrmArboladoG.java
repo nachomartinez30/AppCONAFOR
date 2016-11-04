@@ -2093,6 +2093,8 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         txtAlturaComercial.setEnabled(true);
         txtDiametroCopaNS.setEnabled(true);
         txtDiametroCopaEO.setEnabled(true);
+        cmbVigor.setEnabled(true);
+        cmbNivelVigor.setEnabled(true);
     }
 
     private void estadoMuertoPie() {
@@ -2666,12 +2668,12 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
                 if (validarDanioObligatorio()) {
                     actualizarArbolado();
                     llenarTabla();
-                    limpiarControles();
+                    //limpiarControles();
                 }
             } else {
                 actualizarArbolado();
                 llenarTabla();
-                limpiarControles();
+                //limpiarControles();
                 
             }
         }

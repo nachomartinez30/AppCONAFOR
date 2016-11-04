@@ -126,6 +126,8 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
+        this.ceSitio=ceSitio;
+        //System.out.println("Erosion hidrica "+this.ceSitio.getSecuencia());
         llenarTablaErosionCanalillos();
         llenarTablaLongitudCanalillos();
         llenarTablaErosionCarcavas();
@@ -137,8 +139,9 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         calcularSueloCanalillos();
         calcularSueloCarcavas();
         funciones.manipularBotonesMenuPrincipal(true);
-        chkCanalillos.setEnabled(funciones.habilitarCheckBox("SUELO_Canalillo", this.sitioID));
-        chkCarcavas.setEnabled(funciones.habilitarCheckBox("SUELO_Carcava", this.sitioID));
+        //System.out.println("Linea 140 FRMEROSIONHIDRICA= "+funciones.habilitarCheckBox("SUELO_Canalillo", this.sitioID));
+        chkCanalillos.setSelected(funciones.habilitarCheckBox("SUELO_ErosionHidricaCanalillo", this.sitioID));
+        chkCarcavas.setSelected(funciones.habilitarCheckBox("SUELO_ErosionHidricaCarcava", this.sitioID));
         this.revisar = 1;
         limpiarControlesCanalillo();
         limpiarControlesCarcava();
@@ -623,7 +626,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         this.cdErosion.insertLongitudCarcava(ceLongitudCarcavas);
     }
     
-    private void enviarInformacionSuelo(){
+    /*private void enviarInformacionSuelo(){
         this.ceSuelo.setSitioID(sitioID);
         this.ceSuelo.setNumeroCanalillos(this.numeroCanalillos);
         this.ceSuelo.setProfundidadPromedioCanalillos(this.profundidadPromedioCanalillos);
@@ -638,7 +641,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         this.ceSuelo.setVolumenCarcavas(this.volumenCarcavas);
         
         this.cdSuelo.agregarErosionHidricaSuelo(ceSuelo);
-    }
+    }*/
     
     private void modificarCanalillos() {
         try {
@@ -2425,15 +2428,18 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
                     + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
             cmbMedicionCarcavas.requestFocus();
         } else if (revisar == 0) {
+            
             this.hide();
             UPMForms.deformacionTerreno.setDatosiniciales(this.ceSitio);
             UPMForms.deformacionTerreno.setVisible(true);
             this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
         } else {
             this.hide();
+            //System.out.println("entró en modo de revision LINEA 2434 FRMEROSIONHIDRICA");
             UPMForms.deformacionTerreno.revisarDeformacionViento(this.ceSitio);
             UPMForms.deformacionTerreno.setVisible(true);
         }
+        
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed

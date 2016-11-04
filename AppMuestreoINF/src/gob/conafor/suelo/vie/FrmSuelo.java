@@ -123,6 +123,7 @@ public class FrmSuelo extends JInternalFrame {
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
+        //System.out.println("Suelo "+this.ceSitio.getSecuencia());
         txtUPM.setText(String.valueOf(this.upmID));
         txtSitio.setText(String.valueOf(this.sitio));
         this.ceSitio.setSitioID(this.sitioID);
@@ -2042,7 +2043,7 @@ public class FrmSuelo extends JInternalFrame {
                 UPMForms.condicionDegradacion.setVisible(true);
                 this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
             } else {
-                 JOptionPane.showMessageDialog(null, "Actualizar");
+                 //JOptionPane.showMessageDialog(null, "Actualizar");
                 actualizarSuelo();
                 actualizarVarilla1();
                 actualizarVarilla2();

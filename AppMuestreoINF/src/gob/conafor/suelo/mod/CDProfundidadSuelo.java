@@ -113,8 +113,8 @@ public class CDProfundidadSuelo {
                 this.ceProfundidad.setEquipo030(rs.getString("Equipo030"));
                 this.ceProfundidad.setEquipo3060(rs.getString("Equipo3060"));
                 this.ceProfundidad.setObservaciones(rs.getString("Observaciones"));
-                this.ceProfundidad.setClave030("Clave030");
-                this.ceProfundidad.setClave3060("Clave3060");
+                this.ceProfundidad.setClave030(rs.getString("Clave030"));
+                this.ceProfundidad.setClave3060(rs.getString("Clave3060"));
             }
             return this.ceProfundidad;
         } catch (SQLException e) {
@@ -132,7 +132,7 @@ public class CDProfundidadSuelo {
 
     public DefaultTableModel getTablaProfundidad(int sitioID) {
         query = "SELECT ProfundidadSueloID, SitioID, Punto, Profundidad030, Profundidad3060, PesoTotal030, "
-                + "PesoTotal3060, Equipo030, Equipo3060, Observaciones, Clave030, Clave3060  FROM SUELO_Profundidad";
+                + "PesoTotal3060, Equipo030, Equipo3060, Observaciones, Clave030, Clave3060  FROM SUELO_Profundidad WHERE SitioID="+sitioID;
         String[] encabezados = {"ProfundidadID", "SitioID", "Punto", "Profundidad 0-30", "Profundidad 30-60",
             "Peso total 0-30", "Peso total 30-60", "Equipo 0-30", "Equipo 30-60", "Observaciones", "Clave 0-30", "Clave 30-60"};
         DefaultTableModel hojarascaModel = new DefaultTableModel(null, encabezados);

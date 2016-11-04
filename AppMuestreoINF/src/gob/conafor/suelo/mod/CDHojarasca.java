@@ -169,7 +169,7 @@ public class CDHojarasca {
     
     public DefaultTableModel getTablaHojarasca(int sitioID) {
         query = "SELECT HojarascaID, SitioID, Punto, TipoHojarasca, EspesorHO, EspesorF, PesoTotalHO, "
-                + "PesoTotalF, PesoMuestraHO, PesoMuestraF, Observaciones, ClaveHO, ClaveF FROM VW_Hojarasca";
+                + "PesoTotalF, PesoMuestraHO, PesoMuestraF, Observaciones, ClaveHO, ClaveF FROM VW_Hojarasca WHERE SitioID="+sitioID;
         String[] encabezados = {"HojarascaID", "SitioID", "Punto", "Tipo hojarasca", "Espesor HO", "Espesor F",
             "Peso total HO", "Peso total F", "Peso muestra HO", "Peso muestra F", "Observaciones", "Clave HO", "Clave F"};
         DefaultTableModel hojarascaModel = new DefaultTableModel(null, encabezados);
@@ -178,6 +178,7 @@ public class CDHojarasca {
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
+            //System.out.println("Linea 181 "+query);
             while (rs.next()) {
                 datosHojarasca[0] = rs.getInt("HojarascaID");
                 datosHojarasca[1] = rs.getInt("SitioID");

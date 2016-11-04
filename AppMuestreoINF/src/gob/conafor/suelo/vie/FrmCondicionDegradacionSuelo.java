@@ -122,6 +122,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
+        //System.out.println("condicion degradacion Suelo "+this.ceSitio.getSecuencia());
         llenarTablaPedestal();
         // combo.reiniciarComboModel(cmbNoPedestal);
         fillCmbNumeroPedestal();
@@ -2791,6 +2792,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbNoPavimentoActionPerformed
 
     private void btnContinuar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuar1ActionPerformed
+        
         if (chkPedestal.isSelected() && this.cdPedestal.validarTablaPedestal(this.sitioID)) {
             JOptionPane.showMessageDialog(null, "Si selecciona pedestales, se deben capturar"
                     + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
@@ -2821,6 +2823,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
             UPMForms.erosionHidrica.setVisible(true);
             this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
         } else {
+            
             this.hide();
             UPMForms.erosionHidrica.revisarErosionHidrica(this.ceSitio);
             UPMForms.erosionHidrica.setVisible(true);

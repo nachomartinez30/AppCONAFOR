@@ -165,7 +165,13 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
     public void revisarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
         Integer sitio = this.funciones.sitioCapturaSueloCarbono(this.upmID, 3);
-        if (secuenciaID != null) {
+        //System.out.println("secuencia="+secuenciaID);
+        if (secuenciaID == null) {
+            
+            secuenciaID = this.funciones.buscarSecuencia(this.upmID);
+            
+        }
+            //System.out.println("secuencia="+secuenciaID);
             switch (secuenciaID) {
                 case 1: //Módulo A
                     /* UPMForms.carbono.setDatosIniciales(ceSitio);
@@ -245,7 +251,7 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
                     UPMForms.parametrosFQ.setVisible(true);
                     break;
             }
-        }
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -383,7 +389,9 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
                 this.hide();
                 this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
             } else {
+                //System.out.println("Sitio"+this.ceSitio.getSitio()+" UPID="+this.ceSitio.getUpmID()+" Secuencia="+this.ceSitio.getSecuencia());
                 this.cdSitio.setObservacionesSitio(this.ceSitio);
+                //System.out.println("es Revision "+this.ceSitio.getSecuencia());
                 revisarSiguienteFormulario(this.ceSitio);
                 this.hide();
             }

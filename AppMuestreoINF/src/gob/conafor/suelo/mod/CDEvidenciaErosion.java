@@ -38,6 +38,8 @@ public class CDEvidenciaErosion {
             while (rs.next()) {
                 vacio = true;
             }
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al validar la captura de transecto de cobertura de suelo ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         }  finally {
@@ -63,6 +65,8 @@ public class CDEvidenciaErosion {
             while (rs.next()) {
                 pendiente = rs.getFloat("Pendiente");
             }
+            rs.close();
+            st.close();
             return pendiente;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
@@ -90,6 +94,8 @@ public class CDEvidenciaErosion {
             while (rs.next()) {
                 coberturaID = rs.getInt("CoberturaSueloID");
             }
+            rs.close();
+            st.close();
             return coberturaID;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
@@ -189,6 +195,8 @@ public class CDEvidenciaErosion {
                 Integer index = rs.getInt(2);
                 listPunto.remove(index);
             }
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los puntos de evidencia de erosion " + e.getClass().getName() + " : " + e.getMessage(),
@@ -218,6 +226,8 @@ public class CDEvidenciaErosion {
                 ceLectura.setDescripcion(rs.getString("Descripcion"));
                 listLectura.add(ceLectura);
             }
+            rs.close();
+            st.close();
             listLectura.add(0, null);
             return listLectura;
         } catch (SQLException e) {
@@ -252,8 +262,8 @@ public class CDEvidenciaErosion {
                 
                 coberturaModel.addRow(datosCobertura);
             }
-            st.close();
             rs.close();
+            st.close();
             
             return coberturaModel;
         }catch(SQLException e){
@@ -281,6 +291,8 @@ public class CDEvidenciaErosion {
                 evidencia.setDosel(rs.getInt("Dosel"));
                 evidencia.setLecturaTierraID(rs.getInt("LecturaTierraID"));
             }
+            rs.close();
+            st.close();
             return evidencia;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
@@ -391,6 +403,8 @@ public class CDEvidenciaErosion {
             while (rs.next()) {
                 vacio = false;
             }
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al validar la presencia de datos en la tabla cubierta de suelo", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
@@ -414,6 +428,8 @@ public class CDEvidenciaErosion {
             while (rs.next()) {
                 vacio = false;
             }
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al validar la presencia de datos en la tabla de evidencia de erosion", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {

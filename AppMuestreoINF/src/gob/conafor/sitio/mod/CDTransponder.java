@@ -25,10 +25,20 @@ public class CDTransponder {
                 this.ceTransponder.setEspecifique(rs.getString("Especifique"));
                 this.ceTransponder.setObservaciones(rs.getString("observaciones"));
             }
+            rs.close();
+            st.close();            
             return this.ceTransponder;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de transponder ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(
+                        null, "Error! al cerrar la base de datos al obtener datos de transponder ",
+                        "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
     
@@ -57,15 +67,17 @@ public class CDTransponder {
     
     public void updateDatosTransponder(CETransponder ceTransponder) {
         query = "UPDATE SITIOS_Transponder SET TipoColocacionID= " + ceTransponder.getTipoColocacionID() + ", Especifique= '" + ceTransponder.getEspecifique()
-                + "', Observaciones= '" + ceTransponder.getObservaciones() + "' WHERE SitioID" + ceTransponder.getSitioID();
+                + "', Observaciones= '" + ceTransponder.getObservaciones() + "' WHERE SitioID=" + ceTransponder.getSitioID();
         Connection conn = LocalConnection.getConnection();
+       // System.out.println(query);
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
             conn.commit();
             st.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información de trasnponder ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+           // e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información de transponder ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();

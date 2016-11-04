@@ -31,7 +31,7 @@ public class CDConentrarBD {
 
     public void validarRepetidos(String ruta) {
         this.querySelect = "SELECT UPMID FROM UPM_UPM";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -68,7 +68,7 @@ public class CDConentrarBD {
 
     public boolean continuarSinRepetidos(String ruta, int upmID) {
         this.querySelect = "SELECT UPMID FROM UPM_UPM";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         boolean hayRepetidos = false;
         try {
             this.sqlLocal = this.baseDatosLocal.createStatement();
@@ -98,7 +98,7 @@ public class CDConentrarBD {
 
     public void eliminarRepetido(int upmID) {
         this.queryDelete = "DELETE FROM UPM_UPM WHERE UPMID = " + upmID;
-        Connection conn = LocalConnection.getConnectionConcentrate();
+        Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(this.queryDelete);
@@ -127,7 +127,7 @@ public class CDConentrarBD {
                 + "Azimut, Distancia, TipoInaccesibilidadID, OtroTipoInaccesibilidad, ExplicacionInaccesibilidad, "
                 + "InformacionContacto FROM UPM_UPM";
         Integer tipoInaccesibilidadID = null;
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();//concentrado
+        this.baseDatosLocal = LocalConnection.getConnection();//concentrado
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -192,7 +192,7 @@ public class CDConentrarBD {
     public void importarPC(String ruta) {
         this.querySelect = "SELECT UPMID, Descripcion, Paraje, GradosLatitud, MinutosLatitud, SegundosLatitud, GradosLongitud, "
                 + "MinutosLongitud, SegundosLongitud, ErrorPresicion, Datum, Azimut, Distancia FROM PC_PuntoControl";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -238,7 +238,7 @@ public class CDConentrarBD {
 //3
     public void importarAccesibilidadPC(String ruta) {
         this.querySelect = "SELECT UPMID, MedioTransporteID, ViaAccesibilidadID, Distancia, CondicionAccesibilidadID FROM PC_Accesibilidad";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -281,7 +281,7 @@ public class CDConentrarBD {
         Integer evidenciaMuestreo = null;
         Integer condicion = null;
         Integer faseSucecional = null;
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -375,7 +375,7 @@ public class CDConentrarBD {
 //5
     public void importarSitiosCoberturaSuelo(String ruta, Integer ID) {
         this.querySelect = "SELECT CoberturaID, SitioID, Gramineas, Helechos, Musgos, Liquenes, Hierbas, Roca, SueloDesnudo, Hojarasca, Grava, Otros FROM SITIOS_CoberturaSuelo";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -419,7 +419,7 @@ public class CDConentrarBD {
 //5
     public void importarFotografiaHemisferica(String ruta, Integer ID) {
         this.querySelect = "SELECT FotografiaHemisfericaID, SitioID, CoberturaArborea, TomaFotografia, Hora, DeclinacionMagnetica FROM SITIOS_FotografiaHemisferica";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -460,7 +460,7 @@ public class CDConentrarBD {
     //6
     public void importarTransponder(String ruta, Integer ID) {
         this.querySelect = "SELECT TransponderID, SitioID, TipoColocacionID, Especifique, Observaciones FROM SITIOS_Transponder";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -498,7 +498,7 @@ public class CDConentrarBD {
     public void importarParametrosFisicoQuimicos(String ruta, Integer ID) {
         this.querySelect = "SELECT ParametrosFQID, SitioID, TipoAgua, Salinidad, Temperatura, ConductividadElectrica, Ph, PotencialRedox, Profundidad, Observaciones FROM "
                 + "SITIOS_ParametrosFisicoQuimicos";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -540,7 +540,7 @@ public class CDConentrarBD {
     //8
     public void importarSueloCanalillo(String ruta, Integer ID) {
         this.querySelect = "SELECT CanalilloID, SitioID, Numero, Ancho, Profundidad FROM SUELO_Canalillo";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -575,7 +575,7 @@ public class CDConentrarBD {
     //9
     public void importarSueloCarcava(String ruta, Integer ID) {
         this.querySelect = "SELECT CarcavaID, SitioID, Numero, Ancho, Profundidad FROM SUELO_Carcava";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -610,7 +610,7 @@ public class CDConentrarBD {
     //10
     public void importarSueloCobertura(String ruta, Integer ID) {
         this.querySelect = "SELECT CoberturaSueloID, SitioID, Transecto, Pendiente FROM SUELO_CoberturaSuelo";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -644,7 +644,7 @@ public class CDConentrarBD {
     //11
     public void importarSueloCostras(String ruta, Integer ID) {
         this.querySelect = "SELECT CostrasID, SitioID, Numero, Diametro FROM SUELO_Costras";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -678,7 +678,7 @@ public class CDConentrarBD {
     //12
     public void importarSueloDeformacionViento(String ruta, Integer ID) {
         this.querySelect = "SELECT DeformacionVientoID, SitioID, Medicion, Altura, Diametro, Longitud, Distancia, Azimut FROM SUELO_DeformacionViento";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -716,7 +716,7 @@ public class CDConentrarBD {
     //13
     public void importarSueloErosionHidricaCanalillo(String ruta, Integer ID) {
         this.querySelect = "SELECT ErosionCanalilloID, SitioID, Medicion, Profundidad, Ancho, Distancia, Azimut FROM SUELO_ErosionHidricaCanalillo";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -754,7 +754,7 @@ public class CDConentrarBD {
     //14
     public void importarSueloErosionHidricaCarcava(String ruta, Integer ID) {
         this.querySelect = "SELECT ErosionCarcavaID,SitioID, Medicion, Profundidad, Ancho, Distancia, Azimut FROM SUELO_ErosionHidricaCarcava";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -792,7 +792,7 @@ public class CDConentrarBD {
     //15
     public void importarSueloErosionLaminar(String ruta, Integer ID) {
         this.querySelect = "SELECT ErosionLaminarID, SitioID, Numero, Ancho, Largo FROM SUELO_ErosionLaminar";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -827,7 +827,7 @@ public class CDConentrarBD {
     //16
     public void importarSueloEvidenciaErosion(String ruta, Integer ID) {
         this.querySelect = "SELECT EvidenciaErosionID, CoberturaSueloID, Punto, Dosel, LecturaTierraID FROM SUELO_EvidenciaErosion";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -866,7 +866,7 @@ public class CDConentrarBD {
         Float espesorF = null;
         Float pesoTotalF = null;
         Float pesoMuestraF = null;
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -916,7 +916,7 @@ public class CDConentrarBD {
     public void importarSueloLongitudCanalillo(String ruta, Integer ID) {
         this.querySelect = "SELECT LongitudCanalilloID, SitioID, CampoLongitud, Longitud FROM SUELO_LongitudCanalillo";
         this.queryInsert = "INSERT INTO SUELO_LongitudCanalillo(LongitudCanalilloID, SitioID, CampoLongitud, Longitud)VALUES(?,?, ?, ?)";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -951,7 +951,7 @@ public class CDConentrarBD {
     //19
     public void importarSueloLongitudCarcava(String ruta, Integer ID) {
         this.querySelect = "SELECT LongitudCarcavaID, SitioID, CampoLongitud, Longitud FROM SUELO_LongitudCarcava";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -985,7 +985,7 @@ public class CDConentrarBD {
     //20
     public void importarSueloLongitudMonticulo(String ruta, Integer ID) {
         this.querySelect = "SELECT LongitudMonticuloID, SitioID, CampoLongitud, Longitud FROM SUELO_LongitudMonticulo";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1019,7 +1019,7 @@ public class CDConentrarBD {
     //21
     public void importarSueloMedicionCanalillos(String ruta, Integer ID) {
         this.querySelect = "SELECT MedicionCanalillosID, SitioID, NumeroCanalillos, ProfundidadPromedio, Longitud, Volumen FROM SUELO_MedicionCanalillos";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1056,7 +1056,7 @@ public class CDConentrarBD {
     //22
     public void importarSueloMedicionCarcavas(String ruta, Integer ID) {
         this.querySelect = "SELECT MedicionCarcavasID, SitioID, NumeroCarcavas, ProfundidadPromedio, AnchoPromedio, Longitud, Volumen FROM SUELO_MedicionCarcavas";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1094,7 +1094,7 @@ public class CDConentrarBD {
     //23
     public void importarSueloMedicionDunas(String ruta, Integer ID) {
         this.querySelect = "SELECT MedicionDunas, SitioID, NumeroDunas, AlturaPromedio, AnchoPromedio, Longitud, Volumen FROM SUELO_MedicionDunas";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1137,7 +1137,7 @@ public class CDConentrarBD {
         Float lectura2 = null;
         Float lectura3 = null;
         Float lectura4 = null;
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1188,7 +1188,7 @@ public class CDConentrarBD {
     public void importarSueloMuestrasPerfil(String ruta, Integer ID) {
         this.querySelect = "SELECT MuestrasPerfilID, SitioID, GradosLatitud, MinutosLatitud, SegundosLatitud, GradosLongitud, MinutosLongitud, SegundosLongitud, Elevacion, "
                 + "DiametroInterno, DiametroExterno, Altura, Observaciones FROM SUELO_MuestrasPerfil";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1233,7 +1233,7 @@ public class CDConentrarBD {
     //26
     public void importarSueloPavimentos(String ruta, Integer ID) {
         this.querySelect = "SELECT PavimentoErosionID, SitioID, Numero, Diametro FROM SUELO_PavimentoErosion";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1268,7 +1268,7 @@ public class CDConentrarBD {
     //27
     public void importarSueloPedestal(String ruta, Integer ID) {
         this.querySelect = "SELECT PedestalID, SitioID, Numero, Altura FROM SUELO_Pedestal";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1305,7 +1305,7 @@ public class CDConentrarBD {
                 + "Observaciones FROM SUELO_Profundidad";
         Float profundidad3060 = null;
         Float pesoTotal3060 = null;
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1367,7 +1367,7 @@ public class CDConentrarBD {
         Float anchoPromedioMoticulos = null;
         Float longitudPromedioMonticulos = null;
         Float volumenMonticulos = null;
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1455,7 +1455,7 @@ public class CDConentrarBD {
 //30
     public void importarSueloVarillasErosion(String ruta, Integer ID) {
         this.querySelect = "SELECT VarillaID, SitioID, NoVarilla, Azimut, Distancia, Profundidad FROM SUELO_VarillaErosion";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1493,7 +1493,7 @@ public class CDConentrarBD {
     public void importarCarbonoCoberturaDosel(String ruta, Integer ID) {
         this.querySelect = "SELECT CoberturaDoselID, SitioID, Transecto, Punto1, Punto2, Punto3, Punto4, Punto5, Punto6, Punto7, "
                 + "Punto8, Punto9, Punto10 FROM CARBONO_CoberturaDosel";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1538,7 +1538,7 @@ public class CDConentrarBD {
     //32
     public void importarCarbonoCubiertaVegetal(String ruta, Integer ID) {
         this.querySelect = "SELECT CubiertaVegetalID, SitioID, Transecto, ComponenteID, Altura5, Altura10 FROM CARBONO_CubiertaVegetal";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1586,7 +1586,7 @@ public class CDConentrarBD {
         Integer segmento8 = null;
         Integer segmento9 = null;
         Integer segmento10 = null;
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1662,7 +1662,7 @@ public class CDConentrarBD {
     //34
     public void importarCarbonoMaterialLenioso100(String ruta, Integer ID) {
         this.querySelect = "SELECT MaterialLenioso100ID, SitioID, Transecto, Pendiente, UnaHora, DiezHoras, CienHoras FROM CARBONO_MaterialLenioso100";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1700,7 +1700,7 @@ public class CDConentrarBD {
 //35
     public void importarCarbonoMaterialLenioso1000(String ruta, Integer ID) {
         this.querySelect = "SELECT MaterialLenioso1000ID, SitioID, Transecto, Diametro, Grado FROM CARBONO_MaterialLenioso1000";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1746,7 +1746,7 @@ public class CDConentrarBD {
         Float alturaComercial = null;
         Float diametroCopaNS = null;
         Float diametroCopaEO = null;
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1835,7 +1835,7 @@ public class CDConentrarBD {
 //37
     public void importarSubmuestra(String ruta, Integer ID) {
         this.querySelect = "SELECT SubmuestraID, SitioID, ArboladoID, DiametroBasal, Edad, NumeroAnillos25, LongitudAnillos10, GrozorCorteza FROM ARBOLADO_Submuestra";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1875,7 +1875,7 @@ public class CDConentrarBD {
 //38
     public void importarSubmuestraTroza(String ruta, Integer ID) {
         this.querySelect = "SELECT TrozaID, SubmuestraID, NoTroza, TipoTrozaID FROM ARBOLADO_Troza";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1908,7 +1908,7 @@ public class CDConentrarBD {
 
     public void importarSubmuestraObservaciones(String ruta, Integer ID) {
         this.querySelect = "SELECT SubmuestraObservacionesID, SitioID, Observaciones FROM SUBMUESTRA_Observaciones";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1941,7 +1941,7 @@ public class CDConentrarBD {
 //39
     public void importarArboladoDanioSeveridad(String ruta, Integer ID) {
         this.querySelect = "SELECT DanioSeveridadID, ArboladoID, NumeroDanio, AgenteDanioID, SeveridadID FROM ARBOLADO_DanioSeveridad";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -1978,7 +1978,7 @@ public class CDConentrarBD {
     public void importarTaxonomiaColectaBotanica(String ruta, Integer ID) {
         this.querySelect = "SELECT ColectaBotanicaID, UPMID, FamiliaID, GeneroID, EspecieID, InfraespecieID, NombreComun, Sitio, SeccionID, Consecutivo, ClaveColecta, ContraFuertes, Exudado, IndicarExudado, Color, IndicarColor, CambioColor, AceitesVolatiles, ColorFlor, IndicarColorFlor, HojasTejidoVivo, FotoFlor, FotoFruto, FotoHojasArriba, FotoHojasAbajo, FotoArbolCompleto, FotoCorteza, VirutaIncluida, "
                 + "CortezaIncluida, MaderaIncluida, Observaciones FROM TAXONOMIA_ColectaBotanica";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -2050,7 +2050,7 @@ public class CDConentrarBD {
         Integer frecuencia275 = null;
         Integer edad275 = null;
         Integer porcentajeDanio = null;
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -2122,7 +2122,7 @@ public class CDConentrarBD {
         Integer porcentajeCobertura51200 = null;
         Integer frecuencia200 = null;
         Integer porcentajeCobertura200 = null;
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -2191,7 +2191,7 @@ public class CDConentrarBD {
         Integer frecuencia275 = null;
         Integer cobertura275 = null;
         Integer porcentajeDanio = null;
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -2261,7 +2261,7 @@ public class CDConentrarBD {
         Float alturaTotalMinima = null;
         Float diametroCoberturaMayor = null;
         Float diametroCoberturaMenor = null;
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -2323,7 +2323,7 @@ public class CDConentrarBD {
 //45
     public void importarVegetacionMayorGDanioSeveridad(String ruta, Integer ID) {
         this.querySelect = "SELECT DanioSeveridadID, VegetacionMayorID, NumeroDanio, AgenteDanioID, SeveridadID FROM VEGETACIONMAYORG_DanioSeveridad";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -2364,7 +2364,7 @@ public class CDConentrarBD {
         Float alturaTotal = null;
         Float diametroCoberturaMayor = null;
         Float diametroCoberturaMenor = null;
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -2424,7 +2424,7 @@ public class CDConentrarBD {
 //47
     public void importarVegetacionMayorIDanioSeveridad(String ruta, Integer ID) {
         this.querySelect = "SELECT DanioSeveridadID, VegetacionMayorID, NumeroDanio, AgenteDanioID, SeveridadID FROM VEGETACIONMAYORI_DanioSeveridad";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -2468,7 +2468,7 @@ public class CDConentrarBD {
         Integer numero126150 = null;
         Integer numero150 = null;
         Integer porcentajeCobertura = null;
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -2536,7 +2536,7 @@ public class CDConentrarBD {
 //49
     public void importarVegetacionMenorDanioSeveridad(String ruta, Integer ID) {
         this.querySelect = "SELECT DanioSeveridadVMID, VegetacionMenorID, NumeroDanio, AgenteDanioID, SeveridadID FROM VEGETACIONMENOR_DanioSeveridad";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -2571,7 +2571,7 @@ public class CDConentrarBD {
 
     public void importarRepobladoDanioSeveridad(String ruta, Integer ID) {
         this.querySelect = "SELECT RepobladoDanioID, RepobladoVMID, NumeroDanio, AgenteDanioID, SeveridadID FROM REPOBLADO_AgenteDanio";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -2608,7 +2608,7 @@ public class CDConentrarBD {
     public void importarUPMContacto(String ruta, Integer ID) {
         this.querySelect = "SELECT ContactoID, UPMID, TipoContacto, Nombre, Direccion, TipoTelefono, NumeroTelefono, TieneCorreo, DireccionCorreo, "
                 + "TieneRadio, Canal, Frecuencia FROM UPM_Contacto";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -2653,7 +2653,7 @@ public class CDConentrarBD {
     //51
     public void importarUPMEpifitas(String ruta, Integer ID) {
         this.querySelect = "SELECT EpifitaID, UPMID, ClaseTipoID, PresenciaTroncosID, PresenciaRamasID FROM UPM_Epifita";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -2689,7 +2689,7 @@ public class CDConentrarBD {
     //53
     public void importarSecuencias(String ruta, Integer ID) {
         this.querySelect = "SELECT SecuenciaCapturaID, SecuenciaID, UPMID, Sitio, FormatoID, Estatus FROM SYS_SecuenciaCaptura";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -2723,7 +2723,7 @@ public class CDConentrarBD {
 
     public void importarUPMRevision(String ruta, Integer ID) {
         this.querySelect = "SELECT RevisionID, UPMID, SitioID, Sitio, SecuenciaID FROM SYS_UPM_Revision";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -2757,7 +2757,7 @@ public class CDConentrarBD {
     //54
     public void importarBrigadas(String ruta, Integer ID) {
         this.querySelect = "SELECT BrigadaID, UPMID, BrigadistaID, PuestoID, EmpresaID FROM UPM_Brigada";
-        this.baseDatosLocal = LocalConnection.getConnectionConcentrate();
+        this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
@@ -2790,7 +2790,7 @@ public class CDConentrarBD {
 
     public void eliminarPorUPM(int upm) {
         String query = "DELETE FROM UPM_UPM WHERE UPMID =" + upm;
-        Connection conn = LocalConnection.getConnectionConcentrate();
+        Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);

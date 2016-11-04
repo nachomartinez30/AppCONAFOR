@@ -31,6 +31,8 @@ public class CDErosionHidrica {
                 Integer index = rs.getInt(2);
                 listMedicionCanalillo.remove(index);
             }
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los numeros de medicion de canalillo" + e.getClass().getName() + " : " + e.getMessage(),
@@ -57,6 +59,8 @@ public class CDErosionHidrica {
             while (rs.next()) {
                 listCanalillos.add(rs.getInt("ErosionCanalilloID"));
             }
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los datos de erosion canalillo id ",
@@ -87,6 +91,7 @@ public class CDErosionHidrica {
                     st.executeUpdate(query);
                     conn.commit();
                     consecutivo++;
+                    st.close();
                 }
             } catch (SQLException e) {
                  JOptionPane.showMessageDialog(null,
@@ -117,6 +122,8 @@ public class CDErosionHidrica {
                 this.ceCanalillos.setDistancia(rs.getFloat("Distancia"));
                 this.ceCanalillos.setAzimut(rs.getInt("Azimut"));
             }
+            rs.close();
+            st.close();
             return this.ceCanalillos;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de erosion hidrica de canalillos ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -238,8 +245,8 @@ public class CDErosionHidrica {
 
                 erosionCanalilloModel.addRow(datosErosionCanalillo);
             }
-            st.close();
             rs.close();
+            st.close();
             return erosionCanalilloModel;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de la vista de erosion de canalillo ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -268,6 +275,8 @@ public class CDErosionHidrica {
                 Integer index = rs.getInt(2);
                 listLongitudCanalillo.remove(index);
             }
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los campos de  longitud canalillo",
@@ -293,6 +302,8 @@ public class CDErosionHidrica {
             while (rs.next()) {
                 listLongitudCanalillo.add(rs.getInt("LongitudCanalilloID"));
             }
+            rs.close();
+            st.close();
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
@@ -324,6 +335,7 @@ public class CDErosionHidrica {
                     st.executeUpdate(query);
                     conn.commit();
                     consecutivo++;
+                    st.close();
                 }
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null,
@@ -350,6 +362,8 @@ public class CDErosionHidrica {
             while (rs.next()) {
                 this.ceLongitudCanalillo.setLongitud(rs.getFloat("Longitud"));
             }
+            rs.close();
+            st.close();
             return this.ceLongitudCanalillo;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de longitud de canalillos ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -468,8 +482,8 @@ public class CDErosionHidrica {
 
                 longitudCanalilloModel.addRow(datosLongitudCanalillo);
             }
-            st.close();
             rs.close();
+            st.close();
             return longitudCanalilloModel;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de la vista de erosion de canalillo ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -498,6 +512,8 @@ public class CDErosionHidrica {
                 Integer index = rs.getInt(2);
                 listMedicionCarcava.remove(index);
             }
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los numeros de medicion de carcava ",
@@ -525,7 +541,8 @@ public class CDErosionHidrica {
             while (rs.next()) {
                 listCarcava.add(rs.getInt("ErosionCarcavaID"));
             }
-
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los datos de erosion carcava id ",
@@ -556,8 +573,10 @@ public class CDErosionHidrica {
                     query = "UPDATE SUELO_ErosionHidricaCarcava SET Medicion= " + consecutivo + "  WHERE ErosionCarcavaID= " + listErosionCarcava.get(i);
                     st.executeUpdate(query);
                     conn.commit();
+                    st.close();
                     consecutivo++;
                 }
+                
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null,
                         "Error! al reenumerar las mediciones de erosion de carcava ",
@@ -586,6 +605,8 @@ public class CDErosionHidrica {
                 this.ceCarcava.setDistancia(rs.getFloat("Distancia"));
                 this.ceCarcava.setAzimut(rs.getInt("Azimut"));
             }
+            rs.close();
+            st.close();
             return this.ceCarcava;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de erosion hidrica de carcava ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -709,8 +730,8 @@ public class CDErosionHidrica {
 
                 erosionCarcavaModel.addRow(datosErosionCarcava);
             }
-            st.close();
             rs.close();
+            st.close();
             return erosionCarcavaModel;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de la vista de erosion de carcava ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -738,6 +759,8 @@ public class CDErosionHidrica {
                 Integer index = rs.getInt(2);
                 listLongitudCarcava.remove(index);
             }
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los campos de  longitud carcava ",
@@ -764,7 +787,8 @@ public class CDErosionHidrica {
             while (rs.next()) {
                 listLongitudCarcava.add(rs.getInt("LongitudCarcavaID"));
             }
-
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los datos de longitud carcava id ",
@@ -794,6 +818,7 @@ public class CDErosionHidrica {
                     query = "UPDATE SUELO_LongitudCarcava SET CampoLongitud= " + consecutivo + "  WHERE LongitudCarcavaID= " + listCampoLongitud.get(i);
                     st.executeUpdate(query);
                     conn.commit();
+                    st.close();
                     consecutivo++;
                 }
             } catch (SQLException e) {
@@ -821,6 +846,8 @@ public class CDErosionHidrica {
             while (rs.next()) {
                 this.ceLongitudCarcava.setLongitud(rs.getFloat("Longitud"));
             }
+            rs.close();
+            st.close();
             return this.ceLongitudCarcava;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de longitud de carcava ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -861,7 +888,7 @@ public class CDErosionHidrica {
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
-            st.executeUpdate(this.query);
+            st.executeUpdate(query);
             conn.commit();
             st.close();
         } catch (SQLException e) {
@@ -935,8 +962,8 @@ public class CDErosionHidrica {
                 datosLongitudCanalillo[3] = rs.getFloat("Longitud");
                 longitudCanalilloModel.addRow(datosLongitudCanalillo);
             }
-            st.close();
             rs.close();
+            st.close();
             return longitudCanalilloModel;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de la vista de erosion de canalillo ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -961,8 +988,8 @@ public class CDErosionHidrica {
             while (rs.next()) {
                registros  = rs.getInt("Registros");
             }
-            st.close();
             rs.close();
+            st.close();
             return registros;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al obtener el numero de registros de " + tabla, "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -986,8 +1013,8 @@ public class CDErosionHidrica {
             while (rs.next()) {
                 promedio= rs.getFloat("Promedio");
             }
-            st.close();
             rs.close();
+            st.close();
             return promedio;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al obtener el promedio del campo: " + campo + " de la tabla: " + tabla, "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -1009,8 +1036,11 @@ public class CDErosionHidrica {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
+                //System.out.println("CD EROSION HIDRICA Linea 1039 "+vacio);
                 vacio = false;
             }
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al validar la presencia de datos en la tabla erosión canalillos", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
@@ -1033,6 +1063,8 @@ public class CDErosionHidrica {
             while (rs.next()) {
                 vacio = false;
             }
+            rs.close();
+            st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al validar la presencia de datos en la tabla erosión carcava", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {

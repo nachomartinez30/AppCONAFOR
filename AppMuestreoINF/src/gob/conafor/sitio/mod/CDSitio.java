@@ -914,6 +914,7 @@ public class CDSitio {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo agregar la información de observaciones del sitio ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {

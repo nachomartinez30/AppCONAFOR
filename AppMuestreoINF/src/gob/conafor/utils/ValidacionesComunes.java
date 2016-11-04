@@ -75,6 +75,15 @@ public class ValidacionesComunes {
             return true;
         }
     }
+    
+    public boolean esPorcentajeExtendido(int porcentaje) {
+        if (porcentaje >= -100 && porcentaje <= 100) {
+            return false;
+        } else {
+            JOptionPane.showMessageDialog(null, "El valor de porcentaje debe estar entre -100 y 100", null, JOptionPane.INFORMATION_MESSAGE);
+            return true;
+        }
+    }
 
     public boolean esCuadrante(Integer cuadrante) {
         if (cuadrante < -150 || cuadrante > 150) {

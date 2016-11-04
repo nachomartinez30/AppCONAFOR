@@ -676,7 +676,9 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
    
     private void revisarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
+        //System.out.println("FrmMuestrasDePerfil Linea 679 "+secuenciaID);
         if (secuenciaID != null) {
+            //System.out.println("FrmMuestrasDePerfil Linea 680 "+secuenciaID);
             switch (secuenciaID) {
                 case 1: //Módulo A
                     /* UPMForms.carbono.setDatosIniciales(ceSitio);
@@ -746,6 +748,9 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
                     UPMForms.repobladoVM.setVisible(true);*/
                     break;
             }
+        }else{
+        //this.hide();
+                    this.funciones.manipularBotonesMenuPrincipal(false);
         }
     }
 
@@ -1715,6 +1720,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
                 actualizarMuestraPerfil();
                 this.hide();
                 revisarSiguienteFormulario(this.ceSitio);
+                
             }
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
@@ -1725,7 +1731,8 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         this.hide();
-        funciones.manipularBotonesMenuPrincipal(true);
+        //System.out.print("Sigue manipular Botones");
+        funciones.manipularBotonesMenuPrincipal(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtGradosLatitudFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGradosLatitudFocusGained

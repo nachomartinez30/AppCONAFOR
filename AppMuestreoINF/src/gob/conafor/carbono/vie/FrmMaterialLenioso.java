@@ -392,7 +392,7 @@ public class FrmMaterialLenioso extends JInternalFrame {
     
     private boolean validarDatosMateriales100() {
         ValidacionesComunes validar = new ValidacionesComunes();
-        if (validar.esPorcentaje(this.pendiente)) {
+        if (validar.esPorcentajeExtendido(this.pendiente)) {
             txtPendiente100.requestFocus();
             return false;
         } else if (this.unaHora < 0 && this.unaHora > 200) {

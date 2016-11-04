@@ -78,6 +78,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     }
     
     public void setDatosiniciales(CESitio ceSitio) {
+        //System.out.println("Linea 81 "+ceSitio.getSitioID());
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
@@ -108,8 +109,20 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         llenarTablaProfundidad();
         this.modificar = 1;
         this.funciones.manipularBotonesMenuPrincipal(true);
-        chkHojarasca.setEnabled(funciones.habilitarCheckBox("SUELO_Hojarasca", this.sitioID));
-        chkSueloProfundidades.setEnabled(funciones.habilitarCheckBox("SUELO_Profundidad", this.sitioID));
+        chkHojarasca.setSelected(funciones.habilitarCheckBox("SUELO_Hojarasca", this.sitioID));
+        chkSueloProfundidades.setSelected(funciones.habilitarCheckBox("SUELO_Profundidad", this.sitioID));
+        if(chkHojarasca.isSelected()==false)//si no esta marcado
+        {
+            manipularControlesHojarasca(false);
+        }else{
+            manipularControlesHojarasca(true);
+        }
+        if(chkSueloProfundidades.isSelected()==false)//si no esta marcado
+        {
+            manipularControlesProfundidades(false);
+        }else{
+            manipularControlesProfundidades(true);
+        }
         limpiarControlesHojarasca();
         limpiarControlesProfundidades();
     }
@@ -148,6 +161,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     }
     
     public void llenarTablaHojarsaca() {
+        //System.out.println("linea 151 "+this.sitioID);
         grdHojarasca.setModel(cdHojarasca.getTablaHojarasca(this.sitioID));
         grdHojarasca.getColumnModel().getColumn(2).setPreferredWidth(50);
         grdHojarasca.getColumnModel().getColumn(3).setPreferredWidth(80);

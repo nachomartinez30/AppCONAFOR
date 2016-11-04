@@ -810,19 +810,33 @@ public class FrmTrazoSitio extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCuadrante4PropertyChange
 
     private void txtCuadrante1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuadrante1KeyTyped
-        numeros.keyTyped(evt);
+        //System.out.println(evt.getKeyChar());
+        if (evt.getKeyChar()== KeyEvent.VK_PERIOD) {
+            evt.consume();
+        } else {
+            numeros.keyTyped(evt);
+        }
     }//GEN-LAST:event_txtCuadrante1KeyTyped
 
     private void txtCuadrante2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuadrante2KeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
+        if (evt.getKeyChar() == KeyEvent.VK_PERIOD) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtCuadrante2KeyTyped
 
     private void txtCuadrante3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuadrante3KeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
+        if (evt.getKeyChar() == KeyEvent.VK_PERIOD) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtCuadrante3KeyTyped
 
     private void txtCuadrante4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuadrante4KeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
+        if (evt.getKeyChar() == KeyEvent.VK_PERIOD) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtCuadrante4KeyTyped
 
     private void doClose(int retStatus) {

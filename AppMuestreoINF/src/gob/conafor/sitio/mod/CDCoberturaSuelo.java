@@ -79,7 +79,7 @@ public class CDCoberturaSuelo {
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
-            System.out.println(query);
+            //System.out.println(query);
             st.executeUpdate(query);
             conn.commit();
             st.close();

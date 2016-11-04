@@ -27,6 +27,8 @@ public class CDSuelo {
                 usoSuelo.setUso(rs.getString("Descripcion"));
                 listUsoSuelo.add(usoSuelo);
             }
+            rs.close();
+            st.close();
             listUsoSuelo.add(0, null);
             return listUsoSuelo;
         }catch(SQLException e){
@@ -60,6 +62,8 @@ public class CDSuelo {
                 ceSuelo.setPendienteDominante(rs.getInt("PendienteDominante"));
                 ceSuelo.setObservaciones(rs.getString("Observaciones"));
             }
+            rs.close();
+            st.close();
             return ceSuelo;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de suelo ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -100,7 +104,7 @@ public class CDSuelo {
         query = "UPDATE SUELO_Suelo SET UsoSueloID= " + ceSuelo.getUsoSueloID() + ", OtroUsoSuelo= '" + ceSuelo.getOtroUsoSuelo()
                 + "', Espesor= " + ceSuelo.getEspesor() + ", PendienteDominante= " + ceSuelo.getPendienteDominante()
                 + ", Observaciones= '" + ceSuelo.getObservaciones() + "' WHERE SitioID= " + ceSuelo.getSitioID();
-        System.out.println(query);
+        //System.out.println(query);
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -146,7 +150,8 @@ public class CDSuelo {
                 + ", AnchoPromedioCanalillos= " + ceSuelo.getAnchoPromedioCanalillos() + ", LongitudCanalillos= " + ceSuelo.getLongitudCanalillos() + ", VolumenCanalillos= " + ceSuelo.getVolumenCanalillos()
                 + ", NumeroCarcavas= " + ceSuelo.getNumeroCarcavas() + ", ProfundidadPromedioCarcavas= " + ceSuelo.getProfundidadPromedioCarcavas() 
                 + ", AnchoPromedioCarcavas= " + ceSuelo.getAnchoPromedioCarcavas() + ", LongitudCarcavas= " + ceSuelo.getLongitudCarcavas() + ", VolumenCarcavas= " + ceSuelo.getVolumenCarcavas() + " WHERE SitioID= " + ceSuelo.getSitioID();
-        Connection conn = LocalConnection.getConnection();
+         
+         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
@@ -157,6 +162,7 @@ public class CDSuelo {
         } finally {
             try {
                 conn.close();
+                //System.out.println("Cerrando la conexion agregarErosionHidricaSuelo");
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la modificación de erosion hidrica del suelo ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -167,8 +173,8 @@ public class CDSuelo {
          query = "UPDATE SUELO_Suelo SET NumeroMonticulos= " + ceSuelo.getNumeroMonticulos() + ", AlturaPromedioMonticulos= " + ceSuelo.getAlturaPromedioMonticulos()
                 + ", AnchoPromedioMonticulos= " + ceSuelo.getAnchoPromedioMonticulos()+ ", LongitudPromedioMonticulos= " + ceSuelo.getLongitudPromedioMonticulos() + ", VolumenMonticulos= " + ceSuelo.getVolumenMonticulos()
                  + " WHERE SitioID= " + ceSuelo.getSitioID();
-        
         Connection conn = LocalConnection.getConnection();
+        //System.out.println(query);
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);

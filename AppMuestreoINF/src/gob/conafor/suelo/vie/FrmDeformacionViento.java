@@ -104,6 +104,7 @@ public class FrmDeformacionViento extends JInternalFrame {
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
+        //System.out.println("DeformacionViento "+this.ceSitio.getSecuencia());
         this.ceSitio.setSecuencia(ceSitio.getSecuencia());
         fillCmbMedionesMonticulos();
         fillCmbLongitudMonticulos();
@@ -321,6 +322,7 @@ public class FrmDeformacionViento extends JInternalFrame {
         this.ceSuelo.setAnchoPromedioMonticulos(this.anchoPromedio);
         this.ceSuelo.setLongitudPromedioMonticulos(this.longitudPromedio);
         this.ceSuelo.setVolumenMonticulos(this.volumenCalculado);
+        
         this.cdSuelo.agregarDeformacionTerrenoSuelo(ceSuelo);
     }
 
@@ -1703,6 +1705,7 @@ public class FrmDeformacionViento extends JInternalFrame {
         fijarDatosTransponder();
         agregarDatosSuelo();
         if (chkMonticulosDunas.isSelected() && this.cdDeformacion.validarTablaErosionViento(this.sitioID)) {
+            
             JOptionPane.showMessageDialog(null, "Si selecciona motículos o dunas, se deben capturar"
                     + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
             cmbMedicionMonticulos.requestFocus();
@@ -1718,6 +1721,7 @@ public class FrmDeformacionViento extends JInternalFrame {
                 if (validarTransponder()) {
                     modificarTransponder();
                 }
+             //System.out.println(ceSitio.getSecuencia()+"  BTN Continuar");
             this.hide();
             UPMForms.observaciones.revisarObservaciones(this.ceSitio);
             UPMForms.observaciones.setVisible(true);
@@ -1726,7 +1730,7 @@ public class FrmDeformacionViento extends JInternalFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         this.hide();
-        funciones.manipularBotonesMenuPrincipal(true);
+        funciones.manipularBotonesMenuPrincipal(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void rbtOtroLugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtOtroLugarActionPerformed

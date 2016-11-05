@@ -135,7 +135,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         this.funciones.reiniciarComboModel(cmbConsecutivo);
         fillCmbConsecutivo();
         funciones.manipularBotonesMenuPrincipal(true);
-        this.chkArbolado.setEnabled(funciones.habilitarCheckBox("TAXONOMIA_Arbolado", this.sitioID));
+        this.chkArbolado.setSelected(funciones.habilitarCheckBox("TAXONOMIA_Arbolado", this.sitioID));
         this.modificar = 1;
     }
 
@@ -172,9 +172,9 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    private void fillCmbGeneroSF(){
-         List<CatEGenero> listGenero = new ArrayList<>();
+
+    private void fillCmbGeneroSF() {
+        List<CatEGenero> listGenero = new ArrayList<>();
         CDEspecies sp = new CDEspecies();
         listGenero = sp.getGenerosSF();
         if (listGenero != null) {
@@ -196,14 +196,14 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-     private void fillCmbInfraespecie(int index){
+
+    private void fillCmbInfraespecie(int index) {
         List<CatEInfraespecie> listInfraespecie = new ArrayList<>();
         CDEspecies sp = new CDEspecies();
         listInfraespecie = sp.getInfraespecie(index);
-        if(listInfraespecie != null){
+        if (listInfraespecie != null) {
             int size = listInfraespecie.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbInfraespecie.addItem(listInfraespecie.get(i));
             }
         }
@@ -351,7 +351,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     public void fillCmbVigor() {
         List<CatEVigorArbolado> listVigor = new ArrayList<>();
         listVigor = condicion.getVigorArbolado();
@@ -363,8 +363,8 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         }
     }
 
-    public void fillCmbNivelVigor(){
-         List<CatENivelVigor> listVigor = new ArrayList<>();
+    public void fillCmbNivelVigor() {
+        List<CatENivelVigor> listVigor = new ArrayList<>();
         listVigor = condicion.getNivelVigor();
         if (listVigor != null) {
             int size = listVigor.size();
@@ -373,7 +373,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     public void llenarTabla() {
         grdArbolado.setModel(cdArbolado.getTablaArboladoG(this.sitioID));
 
@@ -748,6 +748,11 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtDiametroNormalFocusLost(evt);
+            }
+        });
+        txtDiametroNormal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDiametroNormalActionPerformed(evt);
             }
         });
         txtDiametroNormal.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1367,10 +1372,10 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         } catch (NumberFormatException e) {
             this.diametroNormal = null;
         }
-        
-        try{
+
+        try {
             this.diametroBasal = Float.valueOf(txtDiametroBasal.getText());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             this.diametroBasal = null;
         }
 
@@ -1413,7 +1418,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         } else {
             this.esSubmuestra = 0;
         }
-       
+
     }
 
     private void crearArbolado() {
@@ -1443,7 +1448,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         if (indexEspecie != null) {
             arb.setEspecieID(indexEspecie.getEspecieID());
         }
-        if(indexInfraespecie != null){
+        if (indexInfraespecie != null) {
             arb.setInfraespecieID(indexInfraespecie.getInfraespecieID());
         }
         if (indexFormaV != null) {
@@ -1467,7 +1472,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         if (indexVigor != null) {
             arb.setVigorID(indexVigor.getVigorID());
         }
-        if(indexNivelVigor != null){
+        if (indexNivelVigor != null) {
             arb.setNivelVigorID(indexNivelVigor.getNivelVigorID());
         }
         arb.setConsecutivo(this.consecutivo);
@@ -1552,7 +1557,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         try {
             int fila = grdArbolado.getSelectedRow();
             String registro = grdArbolado.getValueAt(fila, 0).toString();
-            
+
             CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
             CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
             CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
@@ -1569,13 +1574,13 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             CatEPorcentajeArbolado indexSeveridad2 = (CatEPorcentajeArbolado) cmbSeveridad2.getSelectedItem();
             CatEVigorArbolado indexVigor = (CatEVigorArbolado) cmbVigor.getSelectedItem();
             CatENivelVigor indexNivelVigor = (CatENivelVigor) cmbNivelVigor.getSelectedItem();
-            
+
             CEArbolado arb = new CEArbolado();
             this.arboladoID = Integer.parseInt(registro);
-            
+
             arb.setSitioID(this.sitioID);
             arb.setArboladoID(this.arboladoID);
-            
+
             if (indexFamilia != null) {
                 arb.setFamiliaID(indexFamilia.getFamiliaID());
             } else {
@@ -1591,7 +1596,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             } else {
                 arb.setEspecieID(null);
             }
-            if(indexInfraespecie != null){
+            if (indexInfraespecie != null) {
                 arb.setInfraespecieID(indexInfraespecie.getInfraespecieID());
             } else {
                 arb.setInfraespecieID(null);
@@ -1617,7 +1622,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             if (indexVigor != null) {
                 arb.setVigorID(indexVigor.getVigorID());
             }
-            if(indexNivelVigor != null){
+            if (indexNivelVigor != null) {
                 arb.setNivelVigorID(indexNivelVigor.getNivelVigorID());
             }
             arb.setConsecutivo(this.consecutivo);
@@ -1634,13 +1639,13 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             arb.setAlturaComercial(this.alturaComercial);
             arb.setDiametroCopaNS(this.diametroCopaNS);
             arb.setDiametroCopaEO(this.diametroCopaEO);
-            
+
             if (chkEsSubmuestra.isSelected()) {
                 arb.setEsSubmuestra(1);
             } else {
                 arb.setEsSubmuestra(0);
             }
-            
+
             CEDanioSeveridad danio1 = new CEDanioSeveridad();
             CEDanioSeveridad danio2 = new CEDanioSeveridad();
             CDDanioArbolado cdDanio = new CDDanioArbolado();
@@ -1651,22 +1656,22 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             if (indexSeveridad1 != null) {
                 danio1.setSeveridadID(indexSeveridad1.getPorcentajeArboladoID());
             }
-            
+
             cdDanio.updateDanioArbolado(danio1);
-            
+
             danio2.setSeccionID(this.arboladoID);
             danio2.setNumeroDanio(2);
             danio2.setAgenteDanioID(indexDanio2.getAgenteDanioID());
             if (indexSeveridad2 != null) {
                 danio2.setSeveridadID(indexSeveridad2.getPorcentajeArboladoID());
             }
-            
+
             cdDanio.updateDanioArbolado(danio2);
-            
+
             this.cdArbolado.updateArboladoA(arb);
-            
+
             limpiarControles();
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningún registro de la tabla de arbolado G"
                     + e.getClass().getName() + " : " + e.getMessage(), "Arbolado", JOptionPane.ERROR_MESSAGE);
@@ -1677,7 +1682,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         try {
             int fila = grdArbolado.getSelectedRow();
             String registro = grdArbolado.getValueAt(fila, 0).toString();
-           Object[] opciones = {"Si", "No"};
+            Object[] opciones = {"Si", "No"};
             int respuesta = JOptionPane.showOptionDialog(null, "Se eliminará el registro, ¿Esta seguro?",
                     "Arbolado", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
             if (respuesta == JOptionPane.YES_NO_OPTION) {
@@ -1748,7 +1753,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         txtNumeroIndividuo.requestFocus();
         chkEsSubmuestra.setSelected(false);
         txtClaveColecta.setText("");
-        
+
     }
 
     public void evitarCapturaPorTrazo(CESitio sitio) {
@@ -1852,7 +1857,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
     }
 
     private boolean validarCamposObligatorio() {
-         if (txtNumeroIndividuo.getText().isEmpty()) {
+        if (txtNumeroIndividuo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo número de individuo es obligatorio", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
             txtNumeroIndividuo.requestFocus();
             return false;
@@ -1874,9 +1879,13 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "El campo distancia es obligatorio", "Arbolado G", JOptionPane.INFORMATION_MESSAGE);
             txtDistancia.requestFocus();
             return false;
-        } else if (txtDiametroNormal.getText().isEmpty()) {
+        } else if (txtDiametroNormal.getText().isEmpty() && txtDiametroNormal.isEnabled()) {
             JOptionPane.showMessageDialog(null, "El campo diámetro normal es obligatorio", "Arbolado G", JOptionPane.INFORMATION_MESSAGE);
             txtDiametroNormal.requestFocus();
+            return false;
+        } else if (txtDiametroBasal.getText().isEmpty() && txtDiametroBasal.isEnabled()) {
+            JOptionPane.showMessageDialog(null, "El campo diámetro basal es obligatorio", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
+            txtDiametroBasal.requestFocus();
             return false;
         } else if (cmbFormaVida.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un tipo de forma de vida", "Arbolado G", JOptionPane.INFORMATION_MESSAGE);
@@ -1890,9 +1899,9 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
-        private boolean validarCamposObligatorioModificar() {
-         if (txtNumeroIndividuo.getText().isEmpty()) {
+
+    private boolean validarCamposObligatorioModificar() {
+        if (txtNumeroIndividuo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo número de individuo es obligatorio", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
             txtNumeroIndividuo.requestFocus();
             return false;
@@ -1937,17 +1946,14 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         } else if (validacionAR.esDistanciaArbolado(this.distancia)) {
             txtDistancia.requestFocus();
             return false;
-        } else if (validacionAR.esDiametroNormal(this.diametroNormal)) {
-            txtDiametroNormal.requestFocus();
-            return false;
         } else if (validacionAR.esAlturaTotal(this.alturaTotal)) {
             txtAlturaTotal.requestFocus();
             return false;
-        } else if(this.diametroBasal != null) {
-            if(this.diametroBasal < 0 || this.diametroBasal > 200){
-            JOptionPane.showMessageDialog(null, "Error! El diámetro basal debe estar entre 0 y 200", "Arbolado G", JOptionPane.INFORMATION_MESSAGE);
-            txtDiametroBasal.requestFocus();
-            return false;
+        } else if (this.diametroBasal != null) {
+            if (this.diametroBasal < 0 || this.diametroBasal > 200) {
+                JOptionPane.showMessageDialog(null, "Error! El diámetro basal debe estar entre 0 y 200", "Arbolado G", JOptionPane.INFORMATION_MESSAGE);
+                txtDiametroBasal.requestFocus();
+                return false;
             } else {
                 return true;
             }
@@ -1977,7 +1983,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private boolean validarAlturaComercial() {
         ValidacionesArbolado validacionAR = new ValidacionesArbolado();
         if (this.diametroNormal >= 10 && txtAlturaComercial.getText().isEmpty()) {
@@ -2031,7 +2037,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error! Debe capturar la altura fuste limpio", "Arbolado G", JOptionPane.ERROR_MESSAGE);
             txtAlturaFusteLimpio.requestFocus();
             return false;
-        }  else if (txtDiametroCopaNS.isEnabled() && this.diametroCopaNS == null) {
+        } else if (txtDiametroCopaNS.isEnabled() && this.diametroCopaNS == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe capturar el diametro de copa N-S", "Arbolado G", JOptionPane.ERROR_MESSAGE);
             txtDiametroCopaNS.requestFocus();
             return false;
@@ -2055,7 +2061,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         }
     }
 
-   /* private boolean validarRamaTallo() {
+    /* private boolean validarRamaTallo() {
         int registros = cdArbolado.getRamaTallo(this.sitioID, this.noIndividuo, this.noRama);
         if (registros > 0) {
             JOptionPane.showMessageDialog(null, "Error! El numero de rama o tallo no puede repetirse en el mismo individuo", "Arbolado G", JOptionPane.ERROR_MESSAGE);
@@ -2065,8 +2071,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             return true;
         }
     }*/
-    
-     private boolean validarColectasObligatorias() {
+    private boolean validarColectasObligatorias() {
         CDColectaBotanica colecta = new CDColectaBotanica();
         if (colecta.validarCapturaEspecie("TAXONOMIA_Arbolado", this.sitioID)) {
             JOptionPane.showMessageDialog(null, "Error! Faltan por asignar claves de colecta", "Arbolado G", JOptionPane.INFORMATION_MESSAGE);
@@ -2215,19 +2220,18 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         CatEGenero gen = new CatEGenero();
         gen.setGeneroID(arbol.getGeneroID());
         cmbGenero.setSelectedItem(gen);
-        
+
         /*CatEGenero gen = new CatEGenero();
         gen.setGeneroID(arbol.getGeneroID());
         cmbGenero.removeAllItems();
         fillCmbGenero(arbol.getFamiliaID());
         cmbGenero.setSelectedItem(gen);*/
-
         CatEEspecie esp = new CatEEspecie();
         esp.setEspecieID(arbol.getEspecieID());
         cmbEspecie.removeAllItems();
         fillCmbEspecie(arbol.getGeneroID());
         cmbEspecie.setSelectedItem(esp);
-        
+
         CatEInfraespecie inf = new CatEInfraespecie();
         inf.setInfraespecieID(arbol.getInfraespecieID());
         cmbInfraespecie.removeAllItems();
@@ -2237,15 +2241,15 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         CatEFormaVida fv = new CatEFormaVida();
         fv.setFormaVidaID(arbol.getFormaVidaID());
         cmbFormaVida.setSelectedItem(fv);
-        
+
         CatEVigorArbolado tv = new CatEVigorArbolado();
         tv.setVigorID(arbol.getVigorID());
         cmbVigor.setSelectedItem(tv);
-        
+
         CatENivelVigor nv = new CatENivelVigor();
         nv.setNivelVigorID(arbol.getNivelVigorID());
         cmbNivelVigor.setSelectedItem(nv);
-        
+
         txtNombreComun.setText(arbol.getNombreComun());
 
         CatECondicionArbolado ca = new CatECondicionArbolado();
@@ -2304,12 +2308,25 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
                 }
             }
         }
-        txtDiametroNormal.setText(String.valueOf(arbol.getDiametroNormal()));
+        if (arbol.getDiametroNormal() == null) {
+            txtDiametroNormal.setText("");
+            txtDiametroNormal.setEnabled(false);
+        } else {
+            txtDiametroNormal.setText(String.valueOf(arbol.getDiametroNormal()));
+        }
+        if (arbol.getDiametroBasal() == null) {
+            txtDiametroBasal.setText("");
+            txtDiametroBasal.setEnabled(false);
+        } else {
+            txtDiametroBasal.setText(String.valueOf(arbol.getDiametroBasal()));
+        }
 
-        txtDiametroBasal.setText(String.valueOf(arbol.getDiametroBasal()));
-
-        txtAlturaTotal.setText(String.valueOf(arbol.getAlturaTotal()));
-        if(arbol.getAnguloInclinacion() == null){
+        if (arbol.getAlturaTotal() == null) {
+            txtAlturaTotal.setText("");
+        } else {
+            txtAlturaTotal.setText(String.valueOf(arbol.getAlturaTotal()));
+        }
+        if (arbol.getAnguloInclinacion() == null) {
             txtAnguloInclinacion.setText("");
         } else {
             txtAnguloInclinacion.setText(String.valueOf(arbol.getAnguloInclinacion()));
@@ -2319,12 +2336,12 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         } else {
             txtAlturaFusteLimpio.setText(String.valueOf(arbol.getAlturaFusteLimpio()));
         }
-        if(arbol.getAlturaComercial() == null){
+        if (arbol.getAlturaComercial() == null) {
             txtAlturaComercial.setText("");
         } else {
             txtAlturaComercial.setText(String.valueOf(arbol.getAlturaComercial()));
         }
-        
+
         txtDiametroCopaNS.setText(String.valueOf(arbol.getDiametroCopaNS()));
         txtDiametroCopaEO.setText(String.valueOf(arbol.getDiametroCopaEO()));
 
@@ -2342,7 +2359,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         CDDanioArbolado cdDanio = new CDDanioArbolado();
         CatEPorcentajeArbolado porcentaje1 = new CatEPorcentajeArbolado();
         CatEPorcentajeArbolado porcentaje2 = new CatEPorcentajeArbolado();
-        
+
         List<CEDanioSeveridad> listDanio = new ArrayList<>();
         listDanio = cdDanio.getDanio(arbolID);
 
@@ -2366,8 +2383,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         combo.reiniciarComboModel(cmbSeveridad1);
         fillCmbSeveridad1(agente1.getAgenteDanioID());
         cmbSeveridad1.setSelectedItem(porcentaje1);
-        
-        
+
         cmbAgenteDanio2.setSelectedItem(agente2);
         combo.reiniciarComboModel(cmbSeveridad2);
         fillCmbSeveridad2(agente2.getAgenteDanioID());
@@ -2412,7 +2428,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private boolean validarCreacionSubmuestra() {
         boolean continuar = true;
         if (cdArbolado.validarCrearSubmuestra(this.sitioID)) {
@@ -2427,172 +2443,197 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         }
         return continuar;
     }
-    
+
     private void txtNombreComunFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreComunFocusGained
         txtNombreComun.selectAll();
     }//GEN-LAST:event_txtNombreComunFocusGained
 
     private void txtDiametroNormalFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroNormalFocusGained
-         SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtDiametroNormal.selectAll();
             }
         });
     }//GEN-LAST:event_txtDiametroNormalFocusGained
 
     private void txtAlturaTotalFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaTotalFocusGained
-       SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtAlturaTotal.selectAll();
             }
         });
     }//GEN-LAST:event_txtAlturaTotalFocusGained
 
     private void txtAnguloInclinacionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAnguloInclinacionFocusGained
-       SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtAnguloInclinacion.selectAll();
             }
         });
     }//GEN-LAST:event_txtAnguloInclinacionFocusGained
 
     private void txtAlturaFusteLimpioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaFusteLimpioFocusGained
-       SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtAlturaFusteLimpio.selectAll();
             }
         });
     }//GEN-LAST:event_txtAlturaFusteLimpioFocusGained
 
     private void txtAlturaComercialFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaComercialFocusGained
-       SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtAlturaComercial.selectAll();
             }
         });
     }//GEN-LAST:event_txtAlturaComercialFocusGained
 
     private void txtDiametroCopaNSFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroCopaNSFocusGained
-       SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtDiametroCopaNS.selectAll();
             }
         });
     }//GEN-LAST:event_txtDiametroCopaNSFocusGained
 
     private void txtDiametroCopaEOFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroCopaEOFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtDiametroCopaEO.selectAll();
             }
         });
     }//GEN-LAST:event_txtDiametroCopaEOFocusGained
 
     private void txtDiametroNormalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroNormalFocusLost
-      if(txtDiametroNormal.getText().isEmpty()){
-          txtDiametroNormal.setValue(null);
-      }    
+        try {
+            if (txtDiametroNormal.getText().isEmpty()) {
+                txtDiametroNormal.setValue(null);
+                txtDiametroBasal.setEnabled(true);
+                txtAlturaComercial.setEnabled(false);
+            } else {
+                txtDiametroBasal.setEnabled(false);
+            }
+
+            if (Integer.parseInt(txtDiametroNormal.getText()) >= 10 && cmbFormaVida.getSelectedIndex() < 3) {//si el diametro normal es mayor o igual a 10 y no es arborecente
+
+                if (cmbCondicion.getSelectedIndex() == 2) {//si la condicion muerto, no hay altura comercial
+                    txtAlturaComercial.setEnabled(false);
+                } else {
+                    txtAlturaComercial.setEnabled(true);
+                }
+            }
+            if (Integer.parseInt(txtDiametroNormal.getText()) < 10) {
+                txtAlturaComercial.setEnabled(false);
+            }
+            if (cmbCondicion.getSelectedIndex() > 2 || cmbFormaVida.getSelectedIndex() > 6)//es tocon o forma de vida no determinada
+            {
+                txtAlturaComercial.setEnabled(false);
+            }
+            //System.out.println(txtAlturaComercial.isEnabled());
+        } catch (Exception e) {
+        }
+
     }//GEN-LAST:event_txtDiametroNormalFocusLost
 
     private void txtAlturaTotalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaTotalFocusLost
-       if(txtAlturaTotal.getText().isEmpty()){
-           txtAlturaTotal.setValue(null);
-       }
+        if (txtAlturaTotal.getText().isEmpty()) {
+            txtAlturaTotal.setValue(null);
+        }
     }//GEN-LAST:event_txtAlturaTotalFocusLost
 
     private void txtAnguloInclinacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAnguloInclinacionFocusLost
-       if(txtAnguloInclinacion.getText().isEmpty()){
-           txtAnguloInclinacion.setValue(null);
-       }
+        if (txtAnguloInclinacion.getText().isEmpty()) {
+            txtAnguloInclinacion.setValue(null);
+        }
     }//GEN-LAST:event_txtAnguloInclinacionFocusLost
 
     private void txtAlturaFusteLimpioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaFusteLimpioFocusLost
-        if(txtAlturaFusteLimpio.getText().isEmpty()){
+        if (txtAlturaFusteLimpio.getText().isEmpty()) {
             txtAlturaFusteLimpio.setValue(null);
         }
     }//GEN-LAST:event_txtAlturaFusteLimpioFocusLost
 
     private void txtAlturaComercialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaComercialFocusLost
-        if(txtAlturaComercial.getText().isEmpty()){
+        if (txtAlturaComercial.getText().isEmpty()) {
             txtAlturaComercial.setValue(null);
         }
     }//GEN-LAST:event_txtAlturaComercialFocusLost
 
     private void txtDiametroCopaNSFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroCopaNSFocusLost
-        if(txtDiametroCopaNS.getText().isEmpty()){
+        if (txtDiametroCopaNS.getText().isEmpty()) {
             txtDiametroCopaNS.setValue(null);
         }
     }//GEN-LAST:event_txtDiametroCopaNSFocusLost
 
     private void txtDiametroCopaEOFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroCopaEOFocusLost
-       if(txtDiametroCopaEO.getText().isEmpty()){
-           txtDiametroCopaEO.setValue(null);
-       }
+        if (txtDiametroCopaEO.getText().isEmpty()) {
+            txtDiametroCopaEO.setValue(null);
+        }
     }//GEN-LAST:event_txtDiametroCopaEOFocusLost
 
     private void txtNumeroIndividuoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroIndividuoFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtNumeroIndividuo.selectAll();
             }
         });
     }//GEN-LAST:event_txtNumeroIndividuoFocusGained
 
     private void txtNumeroRamaTalloFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroRamaTalloFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtNumeroRamaTallo.selectAll();
             }
         });
     }//GEN-LAST:event_txtNumeroRamaTalloFocusGained
 
     private void txtAzimutFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAzimutFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtAzimut.selectAll();
             }
         });
     }//GEN-LAST:event_txtAzimutFocusGained
 
     private void txtDistanciaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDistanciaFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtDistancia.selectAll();
             }
         });
     }//GEN-LAST:event_txtDistanciaFocusGained
 
     private void txtNumeroIndividuoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroIndividuoFocusLost
-        if(txtNumeroIndividuo.getText().isEmpty()){
+        if (txtNumeroIndividuo.getText().isEmpty()) {
             txtNumeroIndividuo.setValue(null);
         }
     }//GEN-LAST:event_txtNumeroIndividuoFocusLost
 
     private void txtNumeroRamaTalloFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroRamaTalloFocusLost
-        if(txtNumeroRamaTallo.getText().isEmpty()){
+        if (txtNumeroRamaTallo.getText().isEmpty()) {
             txtNumeroRamaTallo.setValue(null);
         }
     }//GEN-LAST:event_txtNumeroRamaTalloFocusLost
 
     private void txtAzimutFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAzimutFocusLost
-       if(txtAzimut.getText().isEmpty()){
-           txtAzimut.setValue(null);
-       }
+        if (txtAzimut.getText().isEmpty()) {
+            txtAzimut.setValue(null);
+        }
     }//GEN-LAST:event_txtAzimutFocusLost
 
     private void txtDistanciaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDistanciaFocusLost
-        if(txtDistancia.getText().isEmpty()){
+        if (txtDistancia.getText().isEmpty()) {
             txtDistancia.setValue(null);
         }
     }//GEN-LAST:event_txtDistanciaFocusLost
@@ -2609,8 +2650,8 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_grdArboladoMouseClicked
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-      this.hide();
-      funciones.manipularBotonesMenuPrincipal(false);
+        this.hide();
+        funciones.manipularBotonesMenuPrincipal(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnTrazoSitioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrazoSitioActionPerformed
@@ -2621,14 +2662,14 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         sitio.setSitioID(this.sitioID);
         sitio.setSitio(this.sitio);
         trazo.setDatosIniciales(sitio);
-        trazo.setVisible(true);     
+        trazo.setVisible(true);
     }//GEN-LAST:event_btnTrazoSitioActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         asignarDatosArbolado();
         CatECondicionArbolado condicion = (CatECondicionArbolado) cmbCondicion.getSelectedItem();
-        if (validarCamposObligatorio() && validarCamposOpcionales() && validarAlturaComercial() && validarAlturaComercial() && validarMedicionesObligatorias() && validarMedicionesOpcionales()
-             && validarSeveridadDanio()) {
+        if (validarCamposObligatorio() && validarCamposOpcionales() && validarMedicionesObligatorias() && validarMedicionesOpcionales()
+                && validarSeveridadDanio()) {
             if (condicion.getCondicionID() > 1 && condicion.getCondicionID() <= 4) {
                 if (validarDanioObligatorio()) {
                     crearArbolado();
@@ -2663,7 +2704,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         asignarDatosArbolado();
         CatECondicionArbolado condicion = (CatECondicionArbolado) cmbCondicion.getSelectedItem();
-        if (validarCamposObligatorioModificar()&& validarCamposOpcionales() && validarAlturaComercial() && validarMedicionesObligatorias() && validarMedicionesOpcionales()) {
+        if (validarCamposObligatorioModificar() && validarCamposOpcionales() && validarAlturaComercial() && validarMedicionesObligatorias() && validarMedicionesOpcionales()) {
             if (condicion.getCondicionID() > 1 && condicion.getCondicionID() <= 4) {
                 if (validarDanioObligatorio()) {
                     actualizarArbolado();
@@ -2674,10 +2715,10 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
                 actualizarArbolado();
                 llenarTabla();
                 //limpiarControles();
-                
+
             }
         }
-        modificar=0;
+        modificar = 0;
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void cmbConsecutivoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cmbConsecutivoPropertyChange
@@ -2706,8 +2747,28 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         DefaultComboBoxModel dcmCN = (DefaultComboBoxModel) cmbCondicion.getModel();
         dcmCN.removeAllElements();
         if (formaVida != null) {
+            if (cmbFormaVida.getSelectedIndex() > 2) {
+                txtAlturaFusteLimpio.setEnabled(false);
+                txtAlturaComercial.setEnabled(false);
+                cmbVigor.setEnabled(false);
+                cmbNivelVigor.setEnabled(false);
+                cmbVigor.setSelectedItem(null);
+                cmbNivelVigor.setSelectedItem(null);
+                //System.out.println(cmbFormaVida.getSelectedIndex());
+                if (cmbFormaVida.getSelectedIndex() == 6) {//cactaceas arborecentes
+                    txtAlturaFusteLimpio.setEnabled(true);
+                }
+            } else {
+                txtAlturaFusteLimpio.setEnabled(!false);
+                txtAlturaComercial.setEnabled(!false);
+                cmbVigor.setEnabled(!false);
+                cmbNivelVigor.setEnabled(!false);
+                cmbVigor.setSelectedItem(null);
+                cmbNivelVigor.setSelectedItem(null);
+            }
             if (formaVida.getFormaVidaID() == 4 || formaVida.getFormaVidaID() == 5 || formaVida.getFormaVidaID() == 6) {
-                fillCmbCondicionLianas();
+                //fillCmbCondicionLianas();
+                fillCmbCondicionArbolado();
                 estadoLianaCactaceasCaniasVivos();
             } else if (formaVida.getFormaVidaID() == 1 || formaVida.getFormaVidaID() == 2 || formaVida.getFormaVidaID() == 3) {
                 fillCmbCondicionArbolado();
@@ -2715,6 +2776,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             if (formaVida.getFormaVidaID() == 7) {
                 fillCmbCondicionArbolado();
             }
+
         }
     }//GEN-LAST:event_cmbFormaVidaActionPerformed
 
@@ -2723,20 +2785,62 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         CatEFormaVida formaVida = (CatEFormaVida) cmbFormaVida.getSelectedItem();
         DefaultComboBoxModel dcmMP = (DefaultComboBoxModel) cmbCondicionMuertoPie.getModel();
         DefaultComboBoxModel dcmTC = (DefaultComboBoxModel) cmbTipoTocon.getModel();
-       // dcmMP.removeAllElements();
+        // dcmMP.removeAllElements();
         //dcmTC.removeAllElements();
         if (condicion != null) {
-            if (condicion.getCondicionID() == 2) {
+            if (condicion.getCondicionID() == 4) {//si esta muerto 
                 estadoMuertoPie();
-            } else if (condicion.getCondicionID() == 3 || condicion.getCondicionID() == 4) {
-           //    cmbTipoTocon.setEnabled(true);
-                // cmbCondicion.setEnabled(false);
+                txtAnguloInclinacion.setEnabled(false);
+                txtAlturaComercial.setEnabled(false);
+            } else if (condicion.getCondicionID() == 3 || condicion.getCondicionID() == 4) {//
+                //cmbTipoTocon.setEnabled(true);
+                //cmbCondicion.setEnabled(false);
+                //txtAnguloInclinacion.setEnabled(true);
                 estadoArbolTocon();
             }
-            
-            if((formaVida.getFormaVidaID() >= 1 && formaVida.getFormaVidaID() <= 3) && condicion.getCondicionID() == 1){
+            if ((formaVida.getFormaVidaID() >= 1 && formaVida.getFormaVidaID() <= 3) && condicion.getCondicionID() == 1) {
                 estadoArbolVivo();
-            }else if((formaVida.getFormaVidaID() >= 1 && formaVida.getFormaVidaID() <= 3) && (condicion.getCondicionID() >= 3 && condicion.getCondicionID() <= 4)){
+            } else if ((formaVida.getFormaVidaID() >= 1 && formaVida.getFormaVidaID() <= 3) && (condicion.getCondicionID() >= 3 && condicion.getCondicionID() <= 4)) {
+                estadoArbolTocon();
+            }
+            if (cmbCondicion.getSelectedIndex() == 1) {//solo para arboles Vivos
+                cmbVigor.setEnabled(true);
+                cmbNivelVigor.setEnabled(true);
+            } else {
+                cmbVigor.setEnabled(false);
+                cmbNivelVigor.setEnabled(false);
+                cmbVigor.setSelectedItem(null);
+                cmbNivelVigor.setSelectedItem(null);
+            }
+            if (cmbCondicion.getSelectedIndex() == 2) {//es marbol muerto en pie
+                cmbCondicionMuertoPie.setEnabled(true);
+                cmbGradoPutrefaccion.setEnabled(false);
+                cmbTipoTocon.setEnabled(false);
+                txtAlturaFusteLimpio.setEnabled(false);
+                txtAlturaComercial.setEnabled(false);
+                txtDiametroCopaNS.setEnabled(false);
+                txtDiametroCopaEO.setEnabled(false);
+            }
+            if (cmbCondicion.getSelectedIndex() == 1 && cmbFormaVida.getSelectedIndex() > 2) {//es arborecente vivo
+                txtAlturaFusteLimpio.setEnabled(true);
+                txtAlturaComercial.setEnabled(false);
+                txtDiametroCopaNS.setEnabled(true);
+                txtDiametroCopaEO.setEnabled(true);
+                cmbVigor.setEnabled(false);
+                cmbNivelVigor.setEnabled(false);
+            }
+            if (cmbCondicion.getSelectedIndex() == 1 && cmbFormaVida.getSelectedIndex() == 3) {//es arborecente 
+                txtAlturaFusteLimpio.setEnabled(false);
+                txtAlturaComercial.setEnabled(false);
+                txtDiametroCopaNS.setEnabled(true);
+                txtDiametroCopaEO.setEnabled(true);
+                cmbVigor.setEnabled(false);
+                cmbNivelVigor.setEnabled(false);
+            }
+            if (cmbCondicion.getSelectedIndex() >= 1 && cmbFormaVida.getSelectedIndex() == 7) {//es tocon no determinado
+                estadoArbolTocon();
+            }
+            if (cmbCondicion.getSelectedIndex() >= 3) {//es tocon
                 estadoArbolTocon();
             }
         }
@@ -2744,22 +2848,32 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
 
     private void cmbCondicionMuertoPieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCondicionMuertoPieActionPerformed
         CatECondicionMuertoPie condicionMuerto = (CatECondicionMuertoPie) cmbCondicionMuertoPie.getSelectedItem();
-        //DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbGradoPutrefaccion.getModel();
-        //dcm.removeAllElements();
+        //System.out.println("ACTION PERFORMED"+cmbCondicionMuertoPie.getSelectedIndex());
+        txtAnguloInclinacion.setEnabled(true);
+        if (cmbCondicionMuertoPie.getSelectedIndex() == 4)//si la condicion es D
+        {
+
+            txtAnguloInclinacion.setEnabled(false);
+        } else {
+            txtAnguloInclinacion.setEnabled(true);
+        }
+
         if (condicionMuerto != null) {
-            if (condicionMuerto.getMuertoPieID() <= 4) {
+            if (condicionMuerto.getMuertoPieID() == 4) {
                 estadoMuertoPieCD(condicionMuerto.getMuertoPieID());
                 if (condicionMuerto.getMuertoPieID() == 4) {
                     cmbGradoPutrefaccion.setEnabled(true);
                     cmbGradoPutrefaccion.setSelectedItem(null);
                 }
             }
-            if (condicionMuerto.getMuertoPieID() == 3) {
-                cmbFormaFuste.setSelectedItem(null);
+            if (condicionMuerto.getMuertoPieID() < 4) {//si es CMP=D
+                cmbGradoPutrefaccion.setEnabled(false);
+                //cmbFormaFuste.setSelectedItem(null);
                 cmbFormaFuste.setEnabled(true);
             } else {
                 cmbFormaFuste.setSelectedItem(null);
                 cmbFormaFuste.setEnabled(false);
+                cmbGradoPutrefaccion.setEnabled(true);
             }
         }
     }//GEN-LAST:event_cmbCondicionMuertoPieActionPerformed
@@ -2872,28 +2986,31 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
                 UPMForms.submuestra.setVisible(true);
                 this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, -1);
             }
-            
+
             //funciones.manipularBotonesMenuPrincipal(false);
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void txtDiametroBasalFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroBasalFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtDiametroBasal.selectAll();
             }
         });
     }//GEN-LAST:event_txtDiametroBasalFocusGained
 
     private void txtDiametroBasalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroBasalFocusLost
-        if(txtDiametroBasal.getText().isEmpty()){
+        if (txtDiametroBasal.getText().isEmpty()) {
             txtDiametroBasal.setValue(null);
+            txtDiametroNormal.setEnabled(true);
+        } else {
+            txtDiametroNormal.setEnabled(false);
         }
     }//GEN-LAST:event_txtDiametroBasalFocusLost
 
     private void txtNumeroIndividuoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroIndividuoKeyTyped
-       numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtNumeroIndividuoKeyTyped
 
     private void txtNumeroRamaTalloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroRamaTalloKeyTyped
@@ -2901,7 +3018,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNumeroRamaTalloKeyTyped
 
     private void txtAzimutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAzimutKeyTyped
-       numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtAzimutKeyTyped
 
     private void txtDistanciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDistanciaKeyTyped
@@ -2909,7 +3026,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDistanciaKeyTyped
 
     private void txtDiametroNormalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiametroNormalKeyTyped
-       numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtDiametroNormalKeyTyped
 
     private void txtDiametroBasalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiametroBasalKeyTyped
@@ -2925,7 +3042,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtAnguloInclinacionKeyTyped
 
     private void txtAlturaFusteLimpioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAlturaFusteLimpioKeyPressed
-       numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtAlturaFusteLimpioKeyPressed
 
     private void txtAlturaComercialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAlturaComercialKeyTyped
@@ -2937,14 +3054,14 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDiametroCopaNSKeyTyped
 
     private void txtDiametroCopaEOKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiametroCopaEOKeyTyped
-       numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtDiametroCopaEOKeyTyped
 
     private void chkArboladoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkArboladoActionPerformed
         if (chkArbolado.isSelected()) {
             estadoArbolVivo();
         } else {
-             Object[] opciones = {"Si", "No"};
+            Object[] opciones = {"Si", "No"};
             int respuesta = JOptionPane.showOptionDialog(null, "Si capturó Se eliminará la información del arbolado G, ¿Esta seguro?",
                     "Arbolado G", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
             if (respuesta == JOptionPane.YES_OPTION) {
@@ -2971,13 +3088,13 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
             CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
             CEColectaBotanica ceColecta = new CEColectaBotanica();
-            if(indexFamilia != null){
+            if (indexFamilia != null) {
                 ceColecta.setFamiliaID(indexFamilia.getFamiliaID());
             }
-            if(indexGenero != null){
+            if (indexGenero != null) {
                 ceColecta.setGeneroID(indexGenero.getGeneroID());
             }
-            if(indexEspecie != null){
+            if (indexEspecie != null) {
                 ceColecta.setEspecieID(indexEspecie.getEspecieID());
             }
             ceColecta.setUPMID(this.upmID);
@@ -3005,6 +3122,10 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         limpiarControles();
         txtNumeroIndividuo.requestFocus();
     }//GEN-LAST:event_btnLimpiarControlesActionPerformed
+
+    private void txtDiametroNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiametroNormalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDiametroNormalActionPerformed
 
     /**
      * @param args the command line arguments

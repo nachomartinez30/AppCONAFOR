@@ -487,6 +487,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         btnTrazoSitio = new javax.swing.JButton();
         lblUPM = new javax.swing.JLabel();
@@ -829,6 +830,11 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         });
 
         cmbFormaFuste.setNextFocusableComponent(cmbGradoPutrefaccion);
+        cmbFormaFuste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbFormaFusteActionPerformed(evt);
+            }
+        });
 
         lblFormaFuste.setText("FF:");
         lblFormaFuste.setToolTipText("Forma Fuste");
@@ -1029,7 +1035,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         lblPosicionCopa.setToolTipText("Posición de copa");
 
         lblExposicionLuzCopa1.setText("DC:");
-        lblExposicionLuzCopa1.setToolTipText("Dencidad de copa");
+        lblExposicionLuzCopa1.setToolTipText("Densidad de copa");
 
         lblMuerteRegresiva.setText("MR:");
         lblMuerteRegresiva.setToolTipText("Muerte regresiva");
@@ -2324,6 +2330,22 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         }
     }
     
+    private void quitarVariablesArboladoD() {
+        cmbProporcionCopaViva.setEnabled(false);
+        cmbExposicionLuzCopa.setEnabled(false);
+        cmbPosicionCopa.setEnabled(false);
+        cmbDencidadCopa.setEnabled(false);
+        cmbMuerteRegresiva.setEnabled(false);
+        cmbTransparenciaFollaje.setEnabled(false);
+
+        cmbProporcionCopaViva.setSelectedItem(null);
+        cmbExposicionLuzCopa.setSelectedItem(null);
+        cmbPosicionCopa.setSelectedItem(null);
+        cmbDencidadCopa.setSelectedItem(null);
+        cmbMuerteRegresiva.setSelectedItem(null);
+        cmbTransparenciaFollaje.setSelectedItem(null);
+    }
+    
     private void estadoArbolTocon(){
         cmbCondicionMuertoPie.setEnabled(false);
         cmbCondicionMuertoPie.setSelectedItem(null);
@@ -2786,21 +2808,29 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDiametroCopaEOFocusGained
 
     private void txtDiametroNormalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroNormalFocusLost
-      if(txtDiametroNormal.getText().isEmpty()){
+      try {
+          if(txtDiametroNormal.getText().isEmpty()){
           txtDiametroNormal.setValue(null);
-      } 
-      
-      
-      
-      if(cmbCondicionMuertoPie.getSelectedIndex()>2){//si condicon mierto en pie es  d o c, o si es tocon, No debe tener altura comercial
           txtAlturaComercial.setEnabled(false);
       }
-      else{
-          
-          if(Integer.parseInt(txtDiametroNormal.getText())>=10){
-              txtAlturaComercial.setEnabled(true);
-            }
+      if(Integer.parseInt(txtDiametroNormal.getText())>=10&&cmbFormaVida.getSelectedIndex()<3){//si el diametro normal es mayor o igual a 10 y no es arborecente
+         
+          if(cmbCondicion.getSelectedIndex()==2){//si la condicion muerto, no hay altura comercial
+             txtAlturaComercial.setEnabled(false); 
+          }else{
+          txtAlturaComercial.setEnabled(true);
+          }
       }
+      if(Integer.parseInt(txtDiametroNormal.getText())<10){
+          txtAlturaComercial.setEnabled(false);
+      }
+      if(cmbCondicion.getSelectedIndex()>2||cmbFormaVida.getSelectedIndex()>6)//es tocon o forma de vida no determinada
+      {
+          txtAlturaComercial.setEnabled(false);
+      }
+      //System.out.println(txtAlturaComercial.isEnabled());
+        } catch (Exception e) {
+        }
       
     }//GEN-LAST:event_txtDiametroNormalFocusLost
 
@@ -3005,70 +3035,126 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbGeneroActionPerformed
 
     private void cmbFormaVidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFormaVidaActionPerformed
-        CatEFormaVida formaVida = (CatEFormaVida) cmbFormaVida.getSelectedItem();
+ CatEFormaVida formaVida = (CatEFormaVida) cmbFormaVida.getSelectedItem();
         DefaultComboBoxModel dcmCN = (DefaultComboBoxModel) cmbCondicion.getModel();
         dcmCN.removeAllElements();
         if (formaVida != null) {
+            if(cmbFormaVida.getSelectedIndex()>2){
+                txtAlturaFusteLimpio.setEnabled(false);
+                txtAlturaComercial.setEnabled(false);
+                if(cmbFormaVida.getSelectedIndex()==6){//cactaceas arborecentes
+                    txtAlturaFusteLimpio.setEnabled(true);
+                }
+            }else{
+                txtAlturaFusteLimpio.setEnabled(!false);
+                txtAlturaComercial.setEnabled(!false);
+            }
             if (formaVida.getFormaVidaID() == 4 || formaVida.getFormaVidaID() == 5 || formaVida.getFormaVidaID() == 6) {
-                fillCmbCondicionLianas();
+                //fillCmbCondicionLianas();
+                 fillCmbCondicionArbolado();
                 estadoLianaCactaceasCaniasVivos();
             } else if (formaVida.getFormaVidaID() == 1 || formaVida.getFormaVidaID() == 2 || formaVida.getFormaVidaID() == 3) {
                 fillCmbCondicionArbolado();
-                if (formaVida.getFormaVidaID() == 3) {
-                    estadoArborescenteVivo(true);
-                }
-            }
-            if (formaVida.getFormaVidaID() == 7) {
+            } if(formaVida.getFormaVidaID() == 7){
                 fillCmbCondicionArbolado();
             }
+            
+            if(cmbFormaVida.getSelectedIndex()>2)//son arborecentes, bejucos, lianas, cañas y no especificados
+            {
+                quitarVariablesArboladoD();
+            }
+            
         }
     }//GEN-LAST:event_cmbFormaVidaActionPerformed
 
     private void cmbCondicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCondicionActionPerformed
-        CatECondicionArbolado condicion = (CatECondicionArbolado) cmbCondicion.getSelectedItem();
+       CatECondicionArbolado condicion = (CatECondicionArbolado) cmbCondicion.getSelectedItem();
         CatEFormaVida formaVida = (CatEFormaVida) cmbFormaVida.getSelectedItem();
         DefaultComboBoxModel dcmMP = (DefaultComboBoxModel) cmbCondicionMuertoPie.getModel();
         DefaultComboBoxModel dcmTC = (DefaultComboBoxModel) cmbTipoTocon.getModel();
-       // dcmMP.removeAllElements();
+        // dcmMP.removeAllElements();
         //dcmTC.removeAllElements();
         if (condicion != null) {
-            if (condicion.getCondicionID() == 2) {
+            if (condicion.getCondicionID() == 4) {//si esta muerto 
                 estadoMuertoPie();
-            } else if (condicion.getCondicionID() == 3 || condicion.getCondicionID() == 4) {
-           //    cmbTipoTocon.setEnabled(true);
-                // cmbCondicion.setEnabled(false);
+                txtAnguloInclinacion.setEnabled(false);
+                txtAlturaComercial.setEnabled(false);
+            } else if (condicion.getCondicionID() == 3 || condicion.getCondicionID() == 4) {//
+                //cmbTipoTocon.setEnabled(true);
+                //cmbCondicion.setEnabled(false);
+                //txtAnguloInclinacion.setEnabled(true);
+                estadoArbolTocon();
+            }
+            if ((formaVida.getFormaVidaID() >= 1 && formaVida.getFormaVidaID() <= 3) && condicion.getCondicionID() == 1) {
+                estadoArbolVivo();
+            } else if ((formaVida.getFormaVidaID() >= 1 && formaVida.getFormaVidaID() <= 3) && (condicion.getCondicionID() >= 3 && condicion.getCondicionID() <= 4)) {
                 estadoArbolTocon();
             }
             
-            if((formaVida.getFormaVidaID() >= 1 && formaVida.getFormaVidaID() <= 3) && condicion.getCondicionID() == 1){
-                estadoArbolVivo();
-                if(formaVida.getFormaVidaID() == 3){
-                     estadoArborescenteVivo(true);
-                }
-            }else if((formaVida.getFormaVidaID() >= 1 && formaVida.getFormaVidaID() <= 3) && (condicion.getCondicionID() >= 3 && condicion.getCondicionID() <= 4)){
+            if(cmbCondicion.getSelectedIndex()==2){//es marbol muerto en pie
+                cmbCondicionMuertoPie.setEnabled(true);
+                cmbGradoPutrefaccion.setEnabled(false);
+                cmbTipoTocon.setEnabled(false);
+                txtAlturaFusteLimpio.setEnabled(false);
+                txtAlturaComercial.setEnabled(false);
+                txtDiametroCopaNS.setEnabled(false);
+                txtDiametroCopaEO.setEnabled(false);
+                quitarVariablesArboladoD();
+                
+            }
+             if(cmbCondicion.getSelectedIndex()==1&&cmbFormaVida.getSelectedIndex()>2){//es arborecente vivo
+                txtAlturaFusteLimpio.setEnabled(true);
+                txtAlturaComercial.setEnabled(false);
+                txtDiametroCopaNS.setEnabled(true);
+                txtDiametroCopaEO.setEnabled(true);
+               
+            }
+             if(cmbCondicion.getSelectedIndex()==1&&cmbFormaVida.getSelectedIndex()==3){//es arborecente 
+                txtAlturaFusteLimpio.setEnabled(false);
+                txtAlturaComercial.setEnabled(false);
+                txtDiametroCopaNS.setEnabled(true);
+                txtDiametroCopaEO.setEnabled(true);
+            }
+              if(cmbCondicion.getSelectedIndex()>=1&&cmbFormaVida.getSelectedIndex()==7){//es tocon no determinado
                 estadoArbolTocon();
             }
+             if(cmbCondicion.getSelectedIndex()>=3){//es tocon
+                estadoArbolTocon();
+            }
+             if(cmbFormaVida.getSelectedIndex()>2&&cmbCondicion.getSelectedIndex()==1){//si son arborecentes, lianas, bejucos, cañas, cactaceas vivos, no hay variables arbolado D
+                 quitarVariablesArboladoD();
+             }
         }
     }//GEN-LAST:event_cmbCondicionActionPerformed
 
     private void cmbCondicionMuertoPieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCondicionMuertoPieActionPerformed
         CatECondicionMuertoPie condicionMuerto = (CatECondicionMuertoPie) cmbCondicionMuertoPie.getSelectedItem();
-        //DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbGradoPutrefaccion.getModel();
-        //dcm.removeAllElements();
+         //System.out.println("ACTION PERFORMED"+cmbCondicionMuertoPie.getSelectedIndex());
+            txtAnguloInclinacion.setEnabled(true);
+            if(cmbCondicionMuertoPie.getSelectedIndex()==4)//si la condicion es D
+            {
+               
+                txtAnguloInclinacion.setEnabled(false);
+            }else{
+                txtAnguloInclinacion.setEnabled(true);
+            }
+        
         if (condicionMuerto != null) {
-            if (condicionMuerto.getMuertoPieID() <= 4) {
+            if (condicionMuerto.getMuertoPieID() == 4) {
                 estadoMuertoPieCD(condicionMuerto.getMuertoPieID());
                 if (condicionMuerto.getMuertoPieID() == 4) {
                     cmbGradoPutrefaccion.setEnabled(true);
                     cmbGradoPutrefaccion.setSelectedItem(null);
                 }
             }
-            if (condicionMuerto.getMuertoPieID() == 3) {
-                cmbFormaFuste.setSelectedItem(null);
+            if (condicionMuerto.getMuertoPieID()<4) {//si es CMP=D
+                cmbGradoPutrefaccion.setEnabled(false);
+                //cmbFormaFuste.setSelectedItem(null);
                 cmbFormaFuste.setEnabled(true);
             } else {
                 cmbFormaFuste.setSelectedItem(null);
                 cmbFormaFuste.setEnabled(false);
+                cmbGradoPutrefaccion.setEnabled(true);
             }
         }
     }//GEN-LAST:event_cmbCondicionMuertoPieActionPerformed
@@ -3297,6 +3383,14 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         txtNumeroIndividuo.requestFocus();
     }//GEN-LAST:event_btnLimparControlesActionPerformed
 
+    private void cmbFormaFusteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFormaFusteActionPerformed
+          if(cmbFormaFuste.getSelectedIndex()==-1){
+           txtAnguloInclinacion.setEnabled(false);
+       }else{
+            txtAnguloInclinacion.setEnabled(true);
+       }
+    }//GEN-LAST:event_cmbFormaFusteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3343,6 +3437,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblAlturaComercial;
     private javax.swing.JLabel lblAlturaFusteLimpio;
     private javax.swing.JLabel lblAlturaTotal;

@@ -724,6 +724,11 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         lblGradoPutrefaccion.setToolTipText("Grado de putrefacción");
 
         cmbGradoPutrefaccion.setToolTipText("");
+        cmbGradoPutrefaccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbGradoPutrefaccionActionPerformed(evt);
+            }
+        });
 
         cmbFormaVida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2744,6 +2749,10 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
                 cmbNivelVigor.setEnabled(false);
                 cmbVigor.setSelectedItem(null);
                 cmbNivelVigor.setSelectedItem(null);
+                //System.out.println(cmbFormaVida.getSelectedIndex());
+                if(cmbFormaVida.getSelectedIndex()==6){//cactaceas arborecentes
+                    txtAlturaFusteLimpio.setEnabled(true);
+                }
             }else{
                 txtAlturaFusteLimpio.setEnabled(!false);
                 txtAlturaComercial.setEnabled(!false);
@@ -2753,13 +2762,15 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
                 cmbNivelVigor.setSelectedItem(null);
             }
             if (formaVida.getFormaVidaID() == 4 || formaVida.getFormaVidaID() == 5 || formaVida.getFormaVidaID() == 6) {
-                fillCmbCondicionLianas();
+                //fillCmbCondicionLianas();
+                 fillCmbCondicionArbolado();
                 estadoLianaCactaceasCaniasVivos();
             } else if (formaVida.getFormaVidaID() == 1 || formaVida.getFormaVidaID() == 2 || formaVida.getFormaVidaID() == 3) {
                 fillCmbCondicionArbolado();
             } if(formaVida.getFormaVidaID() == 7){
                 fillCmbCondicionArbolado();
             }
+            
         }
     }//GEN-LAST:event_cmbFormaVidaActionPerformed
 
@@ -2776,8 +2787,8 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
                 txtAnguloInclinacion.setEnabled(false);
                 txtAlturaComercial.setEnabled(false);
             } else if (condicion.getCondicionID() == 3 || condicion.getCondicionID() == 4) {//
-                //    cmbTipoTocon.setEnabled(true);
-                // cmbCondicion.setEnabled(false);
+                //cmbTipoTocon.setEnabled(true);
+                //cmbCondicion.setEnabled(false);
                 //txtAnguloInclinacion.setEnabled(true);
                 estadoArbolTocon();
             }
@@ -2805,12 +2816,26 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
                 txtDiametroCopaEO.setEnabled(false);
             }
              if(cmbCondicion.getSelectedIndex()==1&&cmbFormaVida.getSelectedIndex()>2){//es arborecente vivo
+                txtAlturaFusteLimpio.setEnabled(true);
+                txtAlturaComercial.setEnabled(false);
+                txtDiametroCopaNS.setEnabled(true);
+                txtDiametroCopaEO.setEnabled(true);
+                cmbVigor.setEnabled(false);
+                cmbNivelVigor.setEnabled(false);
+            }
+             if(cmbCondicion.getSelectedIndex()==1&&cmbFormaVida.getSelectedIndex()==3){//es arborecente 
                 txtAlturaFusteLimpio.setEnabled(false);
                 txtAlturaComercial.setEnabled(false);
                 txtDiametroCopaNS.setEnabled(true);
                 txtDiametroCopaEO.setEnabled(true);
                 cmbVigor.setEnabled(false);
                 cmbNivelVigor.setEnabled(false);
+            }
+              if(cmbCondicion.getSelectedIndex()>=1&&cmbFormaVida.getSelectedIndex()==7){//es tocon no determinado
+                estadoArbolTocon();
+            }
+             if(cmbCondicion.getSelectedIndex()>=3){//es tocon
+                estadoArbolTocon();
             }
         }
     }//GEN-LAST:event_cmbCondicionActionPerformed
@@ -3092,6 +3117,10 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
     private void txtDiametroNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiametroNormalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDiametroNormalActionPerformed
+
+    private void cmbGradoPutrefaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGradoPutrefaccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbGradoPutrefaccionActionPerformed
 
     /**
      * @param args the command line arguments

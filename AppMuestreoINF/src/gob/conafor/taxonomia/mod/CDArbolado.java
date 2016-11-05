@@ -755,13 +755,15 @@ public class CDArbolado {
                 arb.setMuertoPieID(rs.getInt("MuertoPieID"));
                 arb.setGradoPutrefaccionID(rs.getInt("GradoPutrefaccionID"));
                 arb.setTipoToconID(rs.getInt("TipoToconID"));
-                arb.setDiametroNormal(rs.getFloat("DiametroNormal"));
-                if (rs.getObject("DiametroBasal") == null) {
-                    arb.setDiametroBasal(rs.getFloat("DiametroBasal"));
-                } else {
+                if (rs.getObject("DiametroNormal") != null) {
+                    arb.setDiametroBasal(rs.getFloat("DiametroNormal"));
+                }
+                if (rs.getObject("DiametroBasal") != null) {
                     arb.setDiametroBasal(rs.getFloat("DiametroBasal"));
                 }
-                arb.setAlturaTotal((Float)rs.getFloat("AlturaTotal"));
+                if (rs.getObject("AlturaTotal") != null) {
+                    arb.setDiametroBasal(rs.getFloat("AlturaTotal"));
+                }
                 if(rs.getObject("AnguloInclinacion") != null){
                      arb.setAnguloInclinacion(rs.getInt("AnguloInclinacion"));
                 }

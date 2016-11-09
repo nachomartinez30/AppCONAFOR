@@ -100,10 +100,11 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         txtSitio.setText(String.valueOf(this.sitio));
         llenarTabla();
         llenarTablaCoberturaDosel();
-        funciones.reiniciarComboModel(cmbTransectoComponente);
+        //funciones.reiniciarComboModel(cmbTransectoComponente);
+        //cmbTransectoComponente.removeAllItems();
         funciones.reiniciarComboModel(cmbTransectoDosel);
         fillCmbTransectos();
-        fillCmbTransectoComponente();
+        //fillCmbTransectoComponente();
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setSitio(this.sitio);
@@ -130,6 +131,8 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         this.ceSitio.setSecuencia(sitio.getSecuencia());
         funciones.manipularBotonesMenuPrincipal(true);
         this.modificar = 1;
+        limpiarControlesCobertura();
+        limpiarControlesComponentes();
         chkLongitudComponentes.setSelected(funciones.habilitarCheckBox("CARBONO_LongitudComponente", this.sitioID));
     }
     
@@ -620,6 +623,12 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         lblComponente11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblComponente11.setText("Transecto");
 
+        cmbTransectoComponente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTransectoComponenteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -913,7 +922,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(chkPunto4)
                 .addContainerGap())
         );
@@ -1315,7 +1324,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                             .addComponent(lblCarbonoIncendios, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(chkLongitudComponentes))))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1350,7 +1359,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnContinuar)
                     .addComponent(btnSalir))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -2518,7 +2527,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
 
     private void btnAgregarComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarComponenteActionPerformed
         asignarDatosLongitudComponente();
-        if (validarComponentes() && validarLongitudComponente()) {
+        if (validarComponentes() /*&& validarLongitudComponente()*/) {
             crearComponente();
             this.cdLongitud.enumerarConsecutivo(this.sitioID);
             funciones.reiniciarTabla(this.grdComponentes);
@@ -2978,6 +2987,10 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             fillCmbInfraespecie(indexEspecie.getEspecieID());
         }
     }//GEN-LAST:event_cmbEspecieActionPerformed
+
+    private void cmbTransectoComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTransectoComponenteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbTransectoComponenteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarComponente;

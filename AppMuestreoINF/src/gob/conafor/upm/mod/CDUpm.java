@@ -45,7 +45,11 @@ public class CDUpm {
     //UPM_MallaMuestreo DIAAPROY = 1, INYDES = 2, AMAREF = 3 
     public List<Integer> getUPMID() {
         List<Integer> listUPMID = new ArrayList();
-        this.query = "SELECT UPMID, SecuenciaID, ProveedorID FROM UPM_MallaPuntos WHERE UPMID NOT IN (SELECT UPMID FROM UPM_UPM) AND SecuenciaID <> 0 ";
+        ///*PRODUCCION*/this.query = "SELECT UPMID, SecuenciaID, ProveedorID FROM UPM_MallaPuntos WHERE UPMID NOT IN (SELECT UPMID FROM UPM_UPM) AND SecuenciaID <> 0";
+        ///*DIAAPROY*/this.query = "SELECT UPMID, SecuenciaID, ProveedorID FROM UPM_MallaPuntos WHERE UPMID NOT IN (SELECT UPMID FROM UPM_UPM) AND SecuenciaID <> 0 AND ProveedorID=1";
+        ///*INYDES*/this.query = "SELECT UPMID, SecuenciaID, ProveedorID FROM UPM_MallaPuntos WHERE UPMID NOT IN (SELECT UPMID FROM UPM_UPM) AND SecuenciaID <> 0 AND ProveedorID=2";
+        /*AMAREF*/this.query = "SELECT UPMID, SecuenciaID, ProveedorID FROM UPM_MallaPuntos WHERE UPMID NOT IN (SELECT UPMID FROM UPM_UPM) AND SecuenciaID <> 0 AND ProveedorID=3";
+        
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();

@@ -103,6 +103,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         llenarTabla();
         cmbFormaVida.requestFocus();
         fillCmbConsecutivo();
+        txtNumeroIndividuo.setEnabled(true);
         funciones.manipularBotonesMenuPrincipal(true);
         chkVegetacionMayorMCG.setEnabled(funciones.habilitarCheckBox("TAXONOMIA_VegetacionMayorGregarios", this.sitioID));
     }

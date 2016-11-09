@@ -21,6 +21,7 @@ import gob.conafor.taxonomia.mod.CatEFormaVidaZA;
 import gob.conafor.taxonomia.mod.CatEGenero;
 import gob.conafor.taxonomia.mod.CatEInfraespecie;
 import gob.conafor.taxonomia.mod.CatEPorcentajeArbolado;
+import gob.conafor.taxonomia.mod.CatESeveridadZA;
 import gob.conafor.taxonomia.mod.CatETipoVigor;
 import gob.conafor.upm.vie.UPMForms;
 import gob.conafor.utils.Datos;
@@ -77,6 +78,8 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
         fillCmbAgenteDanio2();
         fillCmbVigor();
         fillCondicion();
+        fillCmbSeveridad1();
+        fillCmbSeveridad2();
     }
     
     public void setDatosIniciales(CESitio ceSitio) {
@@ -107,6 +110,10 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
         this.ceSitio.setSitio(this.sitio);
         llenarTabla();
         this.actualizar = 1;
+        cmbSeveridad1.setEnabled(true);
+        cmbSeveridad2.setEnabled(true);
+        fillCmbSeveridad1();
+        fillCmbSeveridad2();
         funciones.manipularBotonesMenuPrincipal(true);
         chkVegetacionMenor.setEnabled(funciones.habilitarCheckBox("TAXONOMIA_VegetacionMenor", this.sitioID));
     }
@@ -215,40 +222,28 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
         }
     }
 
-    public void fillCmbSeveridad1(int agente) {
-        List<CatEPorcentajeArbolado> listSeveridad = new ArrayList<>();
-        if (agente == 21 || agente == 33) {
-            combo.reiniciarComboModel(cmbSeveridad1);
-            listSeveridad = condicion.getPorcentajeArboladoCopa();
-        } else if (agente == 22) {
-            combo.reiniciarComboModel(cmbSeveridad1);
-            listSeveridad = condicion.getPorcentajeArboladoCopa6();
-        }
-
-        if (listSeveridad != null) {
-            int size = listSeveridad.size();
-            for (int i = 0; i < size; i++) {
-                cmbSeveridad1.addItem(listSeveridad.get(i));
-            }
-        }
+    public void fillCmbSeveridad1() {
+        cmbSeveridad1.removeAllItems();
+       List<CatESeveridadZA> listSeveridad = new ArrayList<>();
+       listSeveridad = condicion.getSeveridadZA();
+       if(listSeveridad != null){
+           int size = listSeveridad.size();
+           for(int i =0; i < size; i ++){
+               cmbSeveridad1.addItem(listSeveridad.get(i));
+           }
+       }
     }
 
-    public void fillCmbSeveridad2(int agente) {
-        List<CatEPorcentajeArbolado> listSeveridad = new ArrayList<>();
-        if (agente == 21 || agente == 33) {
-            combo.reiniciarComboModel(cmbSeveridad2);
-            listSeveridad = condicion.getPorcentajeArboladoCopa();
-        } else if (agente == 22) {
-            combo.reiniciarComboModel(cmbSeveridad2);
-            listSeveridad = condicion.getPorcentajeArboladoCopa6();
-        }
-
-        if (listSeveridad != null) {
-            int size = listSeveridad.size();
-            for (int i = 0; i < size; i++) {
-                cmbSeveridad2.addItem(listSeveridad.get(i));
-            }
-        }
+    public void fillCmbSeveridad2() {
+        cmbSeveridad2.removeAllItems();
+       List<CatESeveridadZA> listSeveridad = new ArrayList<>();
+       listSeveridad = condicion.getSeveridadZA();
+       if(listSeveridad != null){
+           int size = listSeveridad.size();
+           for(int i =0; i < size; i ++){
+               cmbSeveridad2.addItem(listSeveridad.get(i));
+           }
+       }
     }
 
     public void fillCmbVigor() {
@@ -419,7 +414,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
         CatEPorcentajeArbolado indexSeveridad1 = (CatEPorcentajeArbolado) cmbSeveridad1.getSelectedItem();
         CatEPorcentajeArbolado indexSeveridad2 = (CatEPorcentajeArbolado) cmbSeveridad2.getSelectedItem();
         Integer danio1;
-        Integer danio2;
+        Integer danio2;//ERROR
         Integer severidad1;
         Integer severidad2;
 
@@ -1442,13 +1437,13 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
             CatEPorcentajeArbolado severidad1 = new CatEPorcentajeArbolado();
             severidad1.setPorcentajeArboladoID(ceVegetacionMenor.getSeveridad1ID());
             combo.reiniciarComboModel(cmbSeveridad1);
-            fillCmbSeveridad1(ceVegetacionMenor.getAgenteDanio1ID());
+            fillCmbSeveridad1();
             cmbSeveridad1.setSelectedItem(severidad1);
 
             CatEPorcentajeArbolado severidad2 = new CatEPorcentajeArbolado();
             severidad2.setPorcentajeArboladoID(ceVegetacionMenor.getSeveridad2ID());
             combo.reiniciarComboModel(cmbSeveridad2);
-            fillCmbSeveridad2(ceVegetacionMenor.getAgenteDanio2ID());
+            fillCmbSeveridad2();
             cmbSeveridad2.setSelectedItem(severidad2);
 
             CatETipoVigor vig = new CatETipoVigor();
@@ -1473,17 +1468,17 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNombreComunFocusGained
 
     private void cmbAgenteDanio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAgenteDanio1ActionPerformed
-        CatEAgenteDanio agenteDanio = (CatEAgenteDanio) cmbAgenteDanio1.getSelectedItem();
+        /*CatEAgenteDanio agenteDanio = (CatEAgenteDanio) cmbAgenteDanio1.getSelectedItem();
         if (agenteDanio != null) {
             if (agenteDanio.getAgenteDanioID() == 21 || agenteDanio.getAgenteDanioID() == 34 || agenteDanio.getAgenteDanioID() == 22) {
                 cmbSeveridad1.setEnabled(true);
-                fillCmbSeveridad1(agenteDanio.getAgenteDanioID());
+                fillCmbSeveridad1();
             } else {
                 combo.reiniciarComboModel(cmbSeveridad1);
                 cmbSeveridad1.setSelectedItem(null);
-                cmbSeveridad1.setEnabled(false);
+                //cmbSeveridad1.setEnabled(false);
             }
-        }
+        }*/
     }//GEN-LAST:event_cmbAgenteDanio1ActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -1516,17 +1511,17 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void cmbAgenteDanio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAgenteDanio2ActionPerformed
-        CatEAgenteDanio agenteDanio = (CatEAgenteDanio) cmbAgenteDanio2.getSelectedItem();
+       /* CatEAgenteDanio agenteDanio = (CatEAgenteDanio) cmbAgenteDanio2.getSelectedItem();
         if (agenteDanio != null) {
             if (agenteDanio.getAgenteDanioID() == 21 || agenteDanio.getAgenteDanioID() == 34 || agenteDanio.getAgenteDanioID() == 22) {
                 cmbSeveridad2.setEnabled(true);
-                fillCmbSeveridad2(agenteDanio.getAgenteDanioID());
+                fillCmbSeveridad2();
             } else {
                 combo.reiniciarComboModel(cmbSeveridad2);
                 cmbSeveridad2.setSelectedItem(null);
                 cmbSeveridad2.setEnabled(false);
             }
-        }
+        }*/
     }//GEN-LAST:event_cmbAgenteDanio2ActionPerformed
 
     private void txtPorcentajeCoberturaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPorcentajeCoberturaFocusGained
@@ -1756,9 +1751,9 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
                 txtNumero150.setEnabled(false);
                 txtPorcentajeCobertura.setEnabled(false);
                 cmbAgenteDanio1.setEnabled(false);
-                cmbSeveridad1.setEnabled(false);
+                //cmbSeveridad1.setEnabled(false);
                 cmbAgenteDanio2.setEnabled(false);
-                cmbSeveridad2.setEnabled(false);
+                //cmbSeveridad2.setEnabled(false);
                 cmbVigor.setEnabled(false);
             } else {
                 cmbFamilia.setEnabled(true);

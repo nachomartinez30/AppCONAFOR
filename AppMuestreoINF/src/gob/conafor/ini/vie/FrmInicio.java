@@ -147,7 +147,7 @@ public class FrmInicio extends javax.swing.JFrame {
         jLabel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel6.setOpaque(true);
 
-        jLabel7.setText("Versión 1.2");
+        jLabel7.setText("Versión 1.3.1");
 
         dpPrincipal.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dpPrincipal.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);

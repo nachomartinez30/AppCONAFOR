@@ -387,28 +387,28 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         grdArbolado.getColumnModel().getColumn(9).setPreferredWidth(120);//especie
         grdArbolado.getColumnModel().getColumn(10).setPreferredWidth(120);//infraespecie
         grdArbolado.getColumnModel().getColumn(11).setPreferredWidth(120);//Nombre comun
-        grdArbolado.getColumnModel().getColumn(12).setPreferredWidth(50);//Colecta
-        grdArbolado.getColumnModel().getColumn(13).setPreferredWidth(70);//submuestra
-        grdArbolado.getColumnModel().getColumn(14).setPreferredWidth(140);//forma vida
-        grdArbolado.getColumnModel().getColumn(15).setPreferredWidth(140);//condicion
-        grdArbolado.getColumnModel().getColumn(16).setPreferredWidth(120);//forma fuste
-        grdArbolado.getColumnModel().getColumn(17).setPreferredWidth(120);
-        grdArbolado.getColumnModel().getColumn(18).setPreferredWidth(120);
-        grdArbolado.getColumnModel().getColumn(19).setPreferredWidth(130);//Diametro basal
-        grdArbolado.getColumnModel().getColumn(20).setPreferredWidth(130);
-        grdArbolado.getColumnModel().getColumn(21).setPreferredWidth(120);//Altura de fuste limpio
-        grdArbolado.getColumnModel().getColumn(22).setPreferredWidth(180); //Altura comercial
-        grdArbolado.getColumnModel().getColumn(23).setPreferredWidth(120); //Diametro de copa NS
-        grdArbolado.getColumnModel().getColumn(24).setPreferredWidth(180); //Diametro de copa EO
-        grdArbolado.getColumnModel().getColumn(25).setPreferredWidth(80); //Danio 1
-        grdArbolado.getColumnModel().getColumn(26).setPreferredWidth(100); //Porcentaje danio 1
-        grdArbolado.getColumnModel().getColumn(27).setPreferredWidth(80); //Danio 2
-        grdArbolado.getColumnModel().getColumn(28).setPreferredWidth(100);//Porcentaje danio 2
-        grdArbolado.getColumnModel().getColumn(29).setPreferredWidth(100);
+        grdArbolado.getColumnModel().getColumn(12).setPreferredWidth(50);//EsSubmuestra
+        grdArbolado.getColumnModel().getColumn(13).setPreferredWidth(70);//FormaVida
+        grdArbolado.getColumnModel().getColumn(14).setPreferredWidth(140);//Condicion
+        grdArbolado.getColumnModel().getColumn(15).setPreferredWidth(140);//FormaFuste
+        grdArbolado.getColumnModel().getColumn(16).setPreferredWidth(120);//TipoMuertoPie
+        grdArbolado.getColumnModel().getColumn(17).setPreferredWidth(120);//GradoPutrefaccion
+        grdArbolado.getColumnModel().getColumn(18).setPreferredWidth(120);//tipo tocon
+        grdArbolado.getColumnModel().getColumn(19).setPreferredWidth(130);//diametro normal
+        grdArbolado.getColumnModel().getColumn(20).setPreferredWidth(130);//Diametro basal
+        grdArbolado.getColumnModel().getColumn(21).setPreferredWidth(120);//Altura Total
+        grdArbolado.getColumnModel().getColumn(22).setPreferredWidth(180); //Angulo Inclinacion
+        grdArbolado.getColumnModel().getColumn(23).setPreferredWidth(120); //AlturaFusteLimpio
+        grdArbolado.getColumnModel().getColumn(24).setPreferredWidth(180); //AlturaComercial
+        grdArbolado.getColumnModel().getColumn(25).setPreferredWidth(80); //DiametroCopaNS
+        grdArbolado.getColumnModel().getColumn(26).setPreferredWidth(100); //DiametroCopaEO
+        grdArbolado.getColumnModel().getColumn(27).setPreferredWidth(80); //Agente 1
+        grdArbolado.getColumnModel().getColumn(28).setPreferredWidth(100);//Severidad1
+        grdArbolado.getColumnModel().getColumn(29).setPreferredWidth(100);//agente 2
         grdArbolado.getColumnModel().getColumn(30).setPreferredWidth(100);//Severidad 2
         grdArbolado.getColumnModel().getColumn(31).setPreferredWidth(50);//Vigor
         grdArbolado.getColumnModel().getColumn(32).setPreferredWidth(100);//Nivel vigor
-        grdArbolado.getColumnModel().getColumn(33).setPreferredWidth(180);
+        grdArbolado.getColumnModel().getColumn(33).setPreferredWidth(180);//clave colecta
 
         Tablas tabla = new Tablas();
         int[] columna_0 = {0};
@@ -1901,7 +1901,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
     }
 
     private boolean validarCamposObligatorioModificar() {
-        if (txtNumeroIndividuo.getText().isEmpty()) {
+       if (txtNumeroIndividuo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo número de individuo es obligatorio", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
             txtNumeroIndividuo.requestFocus();
             return false;
@@ -1917,9 +1917,13 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "El campo distancia es obligatorio", "Arbolado G", JOptionPane.INFORMATION_MESSAGE);
             txtDistancia.requestFocus();
             return false;
-        } else if (txtDiametroNormal.getText().isEmpty()) {
+        } else if (txtDiametroNormal.getText().isEmpty() && txtDiametroNormal.isEnabled()) {
             JOptionPane.showMessageDialog(null, "El campo diámetro normal es obligatorio", "Arbolado G", JOptionPane.INFORMATION_MESSAGE);
             txtDiametroNormal.requestFocus();
+            return false;
+        } else if (txtDiametroBasal.getText().isEmpty() && txtDiametroBasal.isEnabled()) {
+            JOptionPane.showMessageDialog(null, "El campo diámetro basal es obligatorio", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
+            txtDiametroBasal.requestFocus();
             return false;
         } else if (cmbFormaVida.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un tipo de forma de vida", "Arbolado G", JOptionPane.INFORMATION_MESSAGE);
@@ -2207,7 +2211,9 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
     private void fijarValoresPorCampo(int arbolID) {
         CEArbolado arbol;
         arbol = cdArbolado.getRegistroArboladoG(arbolID);
-
+        
+        //System.out.println(arbol.getAlturaTotal());
+        
         txtNumeroIndividuo.setText(String.valueOf(arbol.getNumeroIndividuo()));
         txtNumeroRamaTallo.setText(String.valueOf(arbol.getNumeroRama()));
         txtAzimut.setText(String.valueOf(arbol.getAzimut()));
@@ -2313,12 +2319,14 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             txtDiametroNormal.setEnabled(false);
         } else {
             txtDiametroNormal.setText(String.valueOf(arbol.getDiametroNormal()));
+            txtDiametroNormal.setEnabled(true);
         }
         if (arbol.getDiametroBasal() == null) {
             txtDiametroBasal.setText("");
             txtDiametroBasal.setEnabled(false);
         } else {
             txtDiametroBasal.setText(String.valueOf(arbol.getDiametroBasal()));
+            txtDiametroBasal.setEnabled(true);
         }
 
         if (arbol.getAlturaTotal() == null) {
@@ -2704,7 +2712,8 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         asignarDatosArbolado();
         CatECondicionArbolado condicion = (CatECondicionArbolado) cmbCondicion.getSelectedItem();
-        if (validarCamposObligatorioModificar() && validarCamposOpcionales() && validarAlturaComercial() && validarMedicionesObligatorias() && validarMedicionesOpcionales()) {
+        if (validarCamposObligatorioModificar()&& validarCamposOpcionales() && validarMedicionesObligatorias() && validarMedicionesOpcionales()
+                && validarSeveridadDanio()){
             if (condicion.getCondicionID() > 1 && condicion.getCondicionID() <= 4) {
                 if (validarDanioObligatorio()) {
                     actualizarArbolado();
@@ -2718,6 +2727,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
 
             }
         }
+    
         modificar = 0;
     }//GEN-LAST:event_btnModificarActionPerformed
 

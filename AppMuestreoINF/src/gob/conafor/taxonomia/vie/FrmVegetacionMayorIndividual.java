@@ -118,7 +118,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
     }
 
     private void fillCmbConsecutivo() {
-        cmbConsecutivo.removeAll();
+        cmbConsecutivo.removeAllItems();
         List<Integer> listConsecutivo = new ArrayList<>();
         listConsecutivo = cdVegetacionMayor.getConsecutivo(this.sitioID);
         if (listConsecutivo != null) {
@@ -389,7 +389,6 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vegetación mayor, mofotipos creciendo de manera individual, módulo H");
-        setEnabled(false);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 
@@ -420,6 +419,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
 
         lblConsecutivo.setText("Consecutivo:");
 
+        cmbConsecutivo.setNextFocusableComponent(txtNumeroIndividuo);
         cmbConsecutivo.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 cmbConsecutivoPropertyChange(evt);
@@ -427,6 +427,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         });
 
         txtNumeroIndividuo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0"))));
+        txtNumeroIndividuo.setNextFocusableComponent(cmbFormaVida);
         txtNumeroIndividuo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtNumeroIndividuoFocusGained(evt);
@@ -439,11 +440,16 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         lblFormaVida.setText("FV:");
         lblFormaVida.setToolTipText("Forma de vida");
 
+        cmbFormaVida.setNextFocusableComponent(cmbCondicion);
+
+        cmbCondicion.setNextFocusableComponent(cmbFamilia);
+
         lblCondicion.setText("Condición:");
 
         lblFamilia.setText("Familia:");
 
         cmbFamilia.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cmbFamilia.setNextFocusableComponent(cmbGenero);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -502,6 +508,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
 
         lblGenero.setText("Género:");
 
+        cmbGenero.setNextFocusableComponent(cmbEspecie);
         cmbGenero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbGeneroActionPerformed(evt);
@@ -510,6 +517,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
 
         lblEspecie.setText("Especie:");
 
+        cmbEspecie.setNextFocusableComponent(cmbInfraespecie);
         cmbEspecie.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbEspecieActionPerformed(evt);
@@ -524,6 +532,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         lblDencidadFuste.setToolTipText("Densidad de follaje");
 
         cmbDensidadFollaje.setToolTipText("");
+        cmbDensidadFollaje.setNextFocusableComponent(txtDiametroBase);
 
         lblDiametroCoberturaMayor.setText("DCMA:");
         lblDiametroCoberturaMayor.setToolTipText("Diámetro de cobertura mayor");
@@ -567,6 +576,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         lblAlturaTotal.setToolTipText("Altura Total");
 
         txtAlturaTotal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtAlturaTotal.setNextFocusableComponent(txtDiametroCoberturaMayor);
         txtAlturaTotal.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtAlturaTotalFocusGained(evt);
@@ -585,6 +595,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         lblDiametroCoberturaMenor.setToolTipText("Diamétro de cobertura menor");
 
         txtDiametroCoberturaMenor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtDiametroCoberturaMenor.setNextFocusableComponent(cmbAgenteDanio1);
         txtDiametroCoberturaMenor.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtDiametroCoberturaMenorFocusGained(evt);
@@ -602,6 +613,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         lblDanio1.setText("ADN1:");
         lblDanio1.setToolTipText("Ajente daño 1");
 
+        cmbAgenteDanio1.setNextFocusableComponent(cmbSeveridad1);
         cmbAgenteDanio1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbAgenteDanio1ActionPerformed(evt);
@@ -613,9 +625,12 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         lblSeveridad1.setToolTipText("Severidad 1");
         lblSeveridad1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        cmbSeveridad1.setNextFocusableComponent(cmbAgenteDanio2);
+
         lblDanio2.setText("AD2:");
         lblDanio2.setToolTipText("Ajente daño 2");
 
+        cmbAgenteDanio2.setNextFocusableComponent(cmbSeveridad2);
         cmbAgenteDanio2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbAgenteDanio2ActionPerformed(evt);
@@ -627,7 +642,11 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         lblSeveridad2.setToolTipText("Severidad 2");
         lblSeveridad2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        cmbSeveridad2.setNextFocusableComponent(cmbVigor);
+
         jLabel1.setText("Vigor:");
+
+        cmbVigor.setNextFocusableComponent(btnAgregar);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -673,7 +692,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbVigor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cmbVigor, 0, 1, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -710,6 +729,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
 
         lblNombreComun.setText("Nombre común:");
 
+        txtNombreComun.setNextFocusableComponent(cmbFormaGeometrica);
         txtNombreComun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtNombreComunFocusGained(evt);
@@ -718,6 +738,10 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
 
         lblFormaGeometrica.setText("FG");
         lblFormaGeometrica.setToolTipText("Forma Geométrica");
+
+        cmbFormaGeometrica.setNextFocusableComponent(cmbDensidadFollaje);
+
+        cmbInfraespecie.setNextFocusableComponent(txtNombreComun);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);

@@ -15,6 +15,7 @@ public class LocalConnection {
         try {
             Class.forName(driver);
             connect = DriverManager.getConnection(getURL());
+            //System.out.println(getURL());
             connect.setAutoCommit(false);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,
@@ -40,8 +41,9 @@ public class LocalConnection {
         Path currentPath = Paths.get("");
         String path = currentPath.toAbsolutePath().toString();
         //return "jdbc:sqlite:" + path + "/src/db/MuestreoINF_2015.db";
-        //return "jdbc:sqlite:" + path + "/MuestreoINF_2015.oct"; //Para distribuir
-       return "jdbc:sqlite:" + path + "/src/db/MuestreoINF_2015.db"; //En producción.
+        return "jdbc:sqlite:" + path + "/MuestreoINF_2015.oct"; //Para distribuir
+        
+       //return "jdbc:sqlite:" + path + "/src/db/MuestreoINF_2015.db"; //En producción.
     }
    
 }

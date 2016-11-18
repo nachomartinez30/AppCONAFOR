@@ -121,7 +121,7 @@ public class CDMuestrasPerfil {
     }
     
     public CEMuestras getDatosMuestras(int muestrasID) {
-        query = "SELECT MuestrasID, ProfundidadID, PesoMuestra, "
+        query = "SELECT MuestrasID, ProfundidadID, PesoMuestra, Muestras,"
                 + "Lectura1, Lectura2, Lectura3, Lectura4, Promedio, ClaveColecta "
                 + "FROM SUELO_Muestras"
                 + " WHERE MuestrasID= " + muestrasID;
@@ -136,6 +136,7 @@ public class CDMuestrasPerfil {
             while (rs.next()) {
                 muestras.setProfundidadID(rs.getInt("ProfundidadID"));
                 muestras.setPesoMuestra(rs.getFloat("PesoMuestra"));
+                muestras.setMuestra(rs.getInt("Muestras"));
                 muestras.setLectura1(rs.getFloat("Lectura1"));
                 muestras.setLectura2(rs.getFloat("Lectura2"));
                 if (rs.getFloat("Lectura3") == 0.0) {
@@ -244,13 +245,13 @@ public class CDMuestrasPerfil {
     }
     
     public DefaultTableModel getTablaMuestras(int sitioID) {
-        query = "SELECT MuestrasID, SitioID, Profundidad, PesoMuestra, "
+        query = "SELECT MuestrasID, SitioID, Profundidad, Muestras, PesoMuestra, "
                 + "Lectura1, Lectura2, Lectura3, Lectura4, Promedio, ClaveColecta FROM VW_Muestras"
                 + " WHERE SitioID= " + sitioID;
-        String[] encabezados = {"MuestrasID", "SitioID", "Profundidad", "Muestra", "Peso Muestra",
+        String[] encabezados = {"MuestrasID", "SitioID", "Profundidad", "Muestras", "Peso Muestra",
             "Lectura 1", "Lectura 2", "Lectura 3", "Lectura 4", "Promedio", "Clave de colecta"};
         DefaultTableModel muestraModel = new DefaultTableModel(null, encabezados);
-        Object[] datosMuestras = new Object[10];
+        Object[] datosMuestras = new Object[11];
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -259,13 +260,14 @@ public class CDMuestrasPerfil {
                 datosMuestras[0] = rs.getInt("MuestrasID");
                 datosMuestras[1] = rs.getInt("SitioID");
                 datosMuestras[2] = rs.getString("Profundidad");
-                datosMuestras[3] = rs.getString("PesoMuestra");
-                datosMuestras[4] = rs.getString("Lectura1");
-                datosMuestras[5] = rs.getString("Lectura2");
-                datosMuestras[6] = rs.getString("Lectura3");
-                datosMuestras[7] = rs.getString("Lectura4");
-                datosMuestras[8] = rs.getString("Promedio");
-                datosMuestras[9] = rs.getString("ClaveColecta");
+                datosMuestras[3] = rs.getInt("Muestras");
+                datosMuestras[4] = rs.getString("PesoMuestra");
+                datosMuestras[5] = rs.getString("Lectura1");
+                datosMuestras[6] = rs.getString("Lectura2");
+                datosMuestras[7] = rs.getString("Lectura3");
+                datosMuestras[8] = rs.getString("Lectura4");
+                datosMuestras[9] = rs.getString("Promedio");
+                datosMuestras[10] = rs.getString("ClaveColecta");
                 muestraModel.addRow(datosMuestras);
             }
             st.close();
@@ -273,6 +275,7 @@ public class CDMuestrasPerfil {
             return muestraModel;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de la vista de muestras de perfil ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
             return null;
         } finally {
             try {
@@ -284,12 +287,13 @@ public class CDMuestrasPerfil {
     }
     
     public void insertMuestras(CEMuestras ceMuestras) {
-        query = "INSERT INTO SUELO_Muestras(SitioID, ProfundidadID, PesoMuestra, Lectura1, Lectura2, "
+        query = "INSERT INTO SUELO_Muestras(SitioID, ProfundidadID, PesoMuestra,Muestras, Lectura1, Lectura2, "
                 + "Lectura3, Lectura4, Promedio, ClaveColecta)VALUES(" + ceMuestras.getSitioID() + ", " + ceMuestras.getProfundidadID()
-                +  ", " + ceMuestras.getPesoMuestra() + ", " + ceMuestras.getLectura1()
+                +  ", " + ceMuestras.getMuestra() +  ", " + ceMuestras.getPesoMuestra() + ", " + ceMuestras.getLectura1()
                 + ", " + ceMuestras.getLectura2() + ", " + ceMuestras.getLectura3() + ", " + ceMuestras.getLectura4()
                 + ", " + ceMuestras.getPromedio() +  ", '" + ceMuestras.getClaveColecta() + "')";
         Connection conn = LocalConnection.getConnection();
+        System.out.println(query);
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
@@ -309,7 +313,7 @@ public class CDMuestrasPerfil {
     }
     
     public void updateMuestras(CEMuestras ceMuestras) {
-        query = "UPDATE SUELO_Muestras SET PesoMuestra= " + ceMuestras.getPesoMuestra() + ", Lectura1= " + ceMuestras.getLectura1() + ", Lectura2= " + ceMuestras.getLectura2()
+        query = "UPDATE SUELO_Muestras SET PesoMuestra= " + ceMuestras.getPesoMuestra() +",Muestras="+ceMuestras.getMuestra()+ ", Lectura1= " + ceMuestras.getLectura1() + ", Lectura2= " + ceMuestras.getLectura2()
                 + ", Lectura3= " + ceMuestras.getLectura3() + ", Lectura4= " + ceMuestras.getLectura4() + ", Promedio= " + ceMuestras.getPromedio()
                 + " WHERE MuestrasID= " + ceMuestras.getMuestrasID();
         Connection conn = LocalConnection.getConnection();
@@ -320,6 +324,7 @@ public class CDMuestrasPerfil {
             st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información de muestras", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         } finally {
             try {
                 conn.close();

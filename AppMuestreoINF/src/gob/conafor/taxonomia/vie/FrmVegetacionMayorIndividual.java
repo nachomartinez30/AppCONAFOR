@@ -1,5 +1,6 @@
 package gob.conafor.taxonomia.vie;
 
+import gob.conafor.conn.dat.LocalConnection;
 import gob.conafor.ini.vie.Main;
 import gob.conafor.sitio.mod.CESitio;
 import gob.conafor.sys.mod.CDSecuencia;
@@ -31,6 +32,10 @@ import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Tablas;
 import gob.conafor.utils.ValidacionesComunes;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -45,7 +50,8 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
     private static final int FORMATO_ID = 22;
     private CDEspecies especie = new CDEspecies();
     private CDCondicionTaxonomica condicion = new CDCondicionTaxonomica();
-    private int consecutivo;
+    private Integer consecutivo;
+    private Integer noIndividuo;
     private String infraespecie;
     private String nombreComun;
     private Float diametroBase;
@@ -386,6 +392,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         lblClaveColecta = new javax.swing.JLabel();
         txtClaveColecta = new javax.swing.JTextField();
         chkVegetacionMayorMCI = new javax.swing.JCheckBox();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vegetación mayor, mofotipos creciendo de manera individual, módulo H");
@@ -879,6 +886,13 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setText("Limpiar Controles");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -886,40 +900,44 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblArbolado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(chkVegetacionMayorMCI)
-                        .addGap(198, 198, 198)
-                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnModificar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnElimnar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnColecta)
-                        .addGap(36, 36, 36)
-                        .addComponent(lblClaveColecta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtClaveColecta, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
+                        .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(310, 310, 310))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblUPM)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblSitio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(310, 310, 310))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblArbolado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(chkVegetacionMayorMCI)
+                                .addGap(198, 198, 198)
+                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnModificar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnElimnar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnColecta)
+                                .addGap(36, 36, 36)
+                                .addComponent(lblClaveColecta)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtClaveColecta, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblUPM)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblSitio)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -952,7 +970,8 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnContinuar)
-                    .addComponent(btnSalir))
+                    .addComponent(btnSalir)
+                    .addComponent(jButton1))
                 .addGap(22, 22, 22))
         );
 
@@ -971,6 +990,17 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void asignarDatosVegetacionMayor() {
+         try{
+            this.consecutivo = Integer.valueOf(txtNumeroIndividuo.getText());
+            //System.out.println("Consecutivo="+this.consecutivo);
+        }catch(NumberFormatException e){
+            this.consecutivo = null;
+        }
+        try{
+            this.noIndividuo = Integer.valueOf(txtNumeroIndividuo.getText());
+        }catch(NumberFormatException e){
+            this.noIndividuo = null;
+        }
         try {
             this.diametroBase = Float.valueOf(txtDiametroBase.getText());
         } catch (NumberFormatException e) {
@@ -1021,6 +1051,9 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         if(indexInfraespecie != null){
             vegetacionMayor.setInfraespecieID(indexInfraespecie.getInfraespecieID());
         }
+        vegetacionMayor.setConsecutivo(this.consecutivo);
+        //System.out.println("Consecutivo="+this.consecutivo);
+        vegetacionMayor.setNumeroIndividuo(this.noIndividuo);
         vegetacionMayor.setNombreComun(txtNombreComun.getText());
         vegetacionMayor.setFormaGeometricaID(indexFormaGeometrica.getFormaGeometricaID());
         vegetacionMayor.setDencidadFollajeID(indexDensidadFollaje.getDensidadFollajeID());
@@ -1505,6 +1538,33 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
        }
     }//GEN-LAST:event_txtDiametroCoberturaMenorFocusLost
 
+    private int consultarSitioID(int vegetacionMayorID){
+        int sitioID=0;
+        String query= "SELECT SitioID FROM TAXONOMIA_VegetacionMayorIndividual WHERE VegetacionMayorID="+vegetacionMayorID;
+        //System.out.println("Consultar sitioID="+query);
+        Connection conn = LocalConnection.getConnection();
+       try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                sitioID= rs.getInt("SitioID");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error! al obtener los datos de Sitio ID ",
+                    "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            //return null;
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en lista de Arbolado id", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        return sitioID;
+    }
+    
     private void txtNumeroIndividuoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroIndividuoFocusGained
         SwingUtilities.invokeLater(new Runnable(){
             @Override
@@ -1526,6 +1586,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
             String strArbID = grdVegetacionvMayor.getValueAt(fila, 0).toString();
             this.vegetacionMayorID= Integer.parseInt(strArbID);
             fijarValoresPorCampo(this.vegetacionMayorID);
+            txtNumeroIndividuo.setEnabled(false);
         }
     }//GEN-LAST:event_grdVegetacionvMayorMouseClicked
 
@@ -1545,8 +1606,8 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         } else if (validarCamposObligatorio() && validarMedicionesObligatorias() && validarSeveridadDanio()) {
             if (validarDanioObligatorio()) {
                 crearVegetacionMayor();
-                this.cdVegetacionMayor.enumerarConsecutivo(this.sitioID);
-                this.cdVegetacionMayor.enumerarIndividuo(this.sitioID);
+                //this.cdVegetacionMayor.enumerarConsecutivo(this.sitioID);
+                //this.cdVegetacionMayor.enumerarIndividuo(this.sitioID);
                 combo.reiniciarComboModel(cmbConsecutivo);
                 fillCmbConsecutivo();
                 llenarTabla();
@@ -1557,8 +1618,8 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
 
     private void btnElimnarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimnarActionPerformed
         eliminarVegetacionMayor();
-        this.cdVegetacionMayor.enumerarConsecutivo(this.sitioID);
-        this.cdVegetacionMayor.enumerarIndividuo(this.sitioID);
+        //this.cdVegetacionMayor.enumerarConsecutivo(this.sitioID);
+        //this.cdVegetacionMayor.enumerarIndividuo(this.sitioID);
         combo.reiniciarComboModel(cmbConsecutivo);
         fillCmbConsecutivo();
         llenarTabla();
@@ -1575,8 +1636,8 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         } else if (validarCamposObligatorio() && validarMedicionesObligatorias() && validarSeveridadDanio()) {
             if (validarDanioObligatorio()) {
                 actualizarVegetacionMayor();
-                this.cdVegetacionMayor.enumerarConsecutivo(this.sitioID);
-                this.cdVegetacionMayor.enumerarIndividuo(this.sitioID);
+                //this.cdVegetacionMayor.enumerarConsecutivo(this.sitioID);
+                //this.cdVegetacionMayor.enumerarIndividuo(this.sitioID);
                 combo.reiniciarComboModel(cmbConsecutivo);
                 fillCmbConsecutivo();
                 llenarTabla();
@@ -1703,7 +1764,10 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
             int respuesta = JOptionPane.showOptionDialog(null, "Si capturó, se eliminará la información de vegetación mayor individual del sitio " + this.sitio + ", ¿Esta seguro?",
                     "Vegetación mayor individual", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
             if (respuesta == JOptionPane.YES_OPTION) {
-                this.cdVegetacionMayor.deleteVegetacionMayor(this.sitioID);
+                //System.out.println("VEGETACIONMAYORID "+this.vegetacionMayorID);
+                String registro = grdVegetacionvMayor.getValueAt(0, 0).toString();
+                this.vegetacionMayorID = Integer.parseInt(registro);
+                this.cdVegetacionMayor.deleteAllVegetacionMayor(consultarSitioID(this.vegetacionMayorID));
                 llenarTabla();
                 limpiarControles();
                 funciones.reiniciarTabla(this.grdVegetacionvMayor);
@@ -1725,7 +1789,8 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
                 cmbSeveridad1.setEnabled(false);
                 cmbAgenteDanio2.setEnabled(false);
                 cmbSeveridad2.setEnabled(false);
-            } else {
+            } 
+        }else {
                 cmbConsecutivo.setEnabled(true);
                 //txtNumeroIndividuo.setEnabled(true);
                 cmbCondicion.setEnabled(true);
@@ -1745,7 +1810,6 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
                 cmbAgenteDanio2.setEnabled(true);
                 cmbSeveridad2.setEnabled(true);
             }
-        }
     }//GEN-LAST:event_chkVegetacionMayorMCIActionPerformed
 
     private void cmbEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEspecieActionPerformed
@@ -1764,6 +1828,10 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
     private void cmbAgenteDanio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAgenteDanio2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbAgenteDanio2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        limpiarControles();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1792,6 +1860,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cmbSeveridad2;
     private javax.swing.JComboBox cmbVigor;
     private javax.swing.JTable grdVegetacionvMayor;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;

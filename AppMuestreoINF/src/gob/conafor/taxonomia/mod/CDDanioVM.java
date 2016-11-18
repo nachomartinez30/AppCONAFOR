@@ -47,6 +47,7 @@ public class CDDanioVM {
     public void insertDanio(CEDanioSeveridad ceDanio) {
         query = "INSERT INTO VEGETACIONMENOR_DanioSeveridad(VegetacionMenorID, NumeroDanio, AgenteDanioID, SeveridadID)VALUES(" + ceDanio.getSeccionID()
                 + " ," + ceDanio.getNumeroDanio() + " ," + ceDanio.getAgenteDanioID() + " ," + ceDanio.getSeveridadID() + ")";
+       
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();

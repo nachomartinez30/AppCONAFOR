@@ -455,7 +455,7 @@ public class CDImportacionBD {
                 Integer tipoColocacionID = rs.getInt("TipoColocacionID");
                 String especifique = rs.getString("Especifique");
                 String observaciones = rs.getString("Observaciones");
-                ps.executeUpdate("INSERT INTO SITIOS_Transponder(SitioID, TipoColocacionID, Especifique, Observaciones)"
+                ps.executeUpdate("INSERT INTO SITIOS_Transponder(TransponderID,SitioID, TipoColocacionID, Especifique, Observaciones)"
                         + "VALUES(" + transponderID + ", " + sitioID + ", " + tipoColocacionID + ", '" + especifique + "', '" + observaciones + "')");
                 this.baseDatosLocal.commit();
                 ps.close();

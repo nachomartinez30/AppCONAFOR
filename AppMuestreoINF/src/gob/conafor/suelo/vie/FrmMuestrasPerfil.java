@@ -30,6 +30,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private int modificar;
     private FuncionesComunes funciones = new FuncionesComunes();
+    private Integer muestra;
     private Integer gradosLatitud;
     private Integer minutosLatitud;
     private Float segundosLatitud;
@@ -124,15 +125,16 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
     
     public void llenarTablaMuestras() {
         this.grdMuestras.setModel(this.cdPerfil.getTablaMuestras(this.sitioID));
-        this.grdMuestras.getColumnModel().getColumn(2).setPreferredWidth(80);
-        this.grdMuestras.getColumnModel().getColumn(3).setPreferredWidth(90);
-        this.grdMuestras.getColumnModel().getColumn(4).setPreferredWidth(100);
-        this.grdMuestras.getColumnModel().getColumn(5).setPreferredWidth(90);
-        this.grdMuestras.getColumnModel().getColumn(6).setPreferredWidth(90);
-        this.grdMuestras.getColumnModel().getColumn(7).setPreferredWidth(90);
-        this.grdMuestras.getColumnModel().getColumn(8).setPreferredWidth(90);
-        this.grdMuestras.getColumnModel().getColumn(9).setPreferredWidth(90);
+        this.grdMuestras.getColumnModel().getColumn(2).setPreferredWidth(80);//Profundidad
+        this.grdMuestras.getColumnModel().getColumn(3).setPreferredWidth(90);//PesoMuestra
+        this.grdMuestras.getColumnModel().getColumn(4).setPreferredWidth(100);//Lectura1
+        this.grdMuestras.getColumnModel().getColumn(5).setPreferredWidth(90);//Lectura2
+        this.grdMuestras.getColumnModel().getColumn(6).setPreferredWidth(90);//Lectura3
+        this.grdMuestras.getColumnModel().getColumn(7).setPreferredWidth(90);//Lectura4
+        this.grdMuestras.getColumnModel().getColumn(8).setPreferredWidth(90);//Promedio
+        this.grdMuestras.getColumnModel().getColumn(9).setPreferredWidth(100);//ClaveColecta
         this.grdMuestras.getColumnModel().getColumn(10).setPreferredWidth(100);
+         //this.grdMuestras.getColumnModel().getColumn(11).setPreferredWidth(100);
         Tablas tabla = new Tablas();
         int[] column_0 = {0};
         int[] column_1 = {1};
@@ -199,6 +201,11 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             this.pesoMuestra = Float.valueOf(txtPesoMuestra.getText());
         } catch (Exception e) {
             this.pesoMuestra = null;
+        }
+        try {
+            this.muestra = Integer.valueOf(txtMuestra.getText());
+        } catch (Exception e) {
+            this.muestra = null;
         }
         try {
             this.lectura1 = Float.valueOf(txtLectura1.getText());
@@ -394,6 +401,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         CatEProfundidadMuestras profundidad = (CatEProfundidadMuestras) cmbProfundidad.getSelectedItem();
         this.ceMuestras.setProfundidadID(profundidad.getProfundidadMuestraID());
         this.ceMuestras.setPesoMuestra(this.pesoMuestra);
+        this.ceMuestras.setMuestra(this.muestra);
         this.ceMuestras.setLectura1(this.lectura1);
         this.ceMuestras.setLectura2(this.lectura2);
         this.ceMuestras.setLectura3(this.lectura3);
@@ -486,6 +494,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         txtAltura.setValue(null);
         txtAltura.setText("");
         txtObservaciones.setText("");
+        txtMuestra.setText("");
     }
     
     private void actualizarMuestras() {
@@ -494,6 +503,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             String registro = grdMuestras.getValueAt(fila, 0).toString();
             this.ceMuestras.setMuestrasID(Integer.parseInt(registro));
             this.ceMuestras.setPesoMuestra(this.pesoMuestra);
+            this.ceMuestras.setMuestra(this.muestra);
             this.ceMuestras.setLectura1(this.lectura1);
             this.ceMuestras.setLectura2(this.lectura2);
             this.ceMuestras.setLectura3(this.lectura3);
@@ -758,6 +768,9 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         this.cmbProfundidad.setSelectedItem(null);
         this.txtPesoMuestra.setText("");
         this.txtPesoMuestra.setValue(null);
+        this.txtMuestra.setText("");
+        this.txtMuestra.setValue(null);
+        this.txtMuestra.setEnabled(false);
         this.txtLectura1.setText("");
         this.txtLectura1.setValue(null);
         this.txtLectura2.setText("");
@@ -844,10 +857,13 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         grdMuestras = new javax.swing.JTable();
         txtClaveColecta = new javax.swing.JTextField();
         lblClaveColecta = new javax.swing.JLabel();
+        txtMuestra = new javax.swing.JFormattedTextField();
+        lblPesoMuestra1 = new javax.swing.JLabel();
         lblLecturaVernier = new javax.swing.JLabel();
         btnGuardarMuestra = new javax.swing.JButton();
         btnModificarMuestra = new javax.swing.JButton();
         btnEliminarMuestra = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Muestras del perfil, módulo E");
@@ -1357,11 +1373,11 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtDiametroInterno)
                     .addComponent(lblDiametroInterno, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 251, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtDiametroExterno)
                     .addComponent(lblDiametroExterno, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(207, 207, 207)
+                .addGap(216, 216, 216)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtAltura)
                     .addComponent(lblAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1543,83 +1559,113 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         lblClaveColecta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblClaveColecta.setOpaque(true);
 
+        txtMuestra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtMuestra.setNextFocusableComponent(txtLectura1);
+        txtMuestra.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtMuestraFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtMuestraFocusLost(evt);
+            }
+        });
+        txtMuestra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMuestraKeyTyped(evt);
+            }
+        });
+
+        lblPesoMuestra1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPesoMuestra1.setText("Muestra");
+        lblPesoMuestra1.setToolTipText("");
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblProfundidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbProfundidad, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblPesoMuestra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPesoMuestra, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblLectura1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtLectura1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblLectura2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtLectura2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(lblLectura3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblProfundidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmbProfundidad, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblLectura4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(txtLectura3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblPesoMuestra1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMuestra))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblPesoMuestra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtPesoMuestra, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtLectura4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblPromedio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPromedio, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblClaveColecta, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
-                    .addComponent(txtClaveColecta)))
-            .addComponent(jScrollPane2)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblLectura1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtLectura1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblLectura2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtLectura2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(lblLectura3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblLectura4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(txtLectura3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtLectura4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtPromedio)
+                            .addComponent(lblPromedio, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblClaveColecta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtClaveColecta))
+                        .addGap(16, 16, 16))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 887, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(lblProfundidad)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbProfundidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                                .addComponent(lblPesoMuestra)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPesoMuestra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblLectura1)
-                                .addComponent(lblLectura2))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtLectura1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtLectura2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblLectura4)
-                                .addComponent(lblLectura3))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtLectura3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtLectura4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                            .addComponent(lblPromedio)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtPromedio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addComponent(lblProfundidad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbProfundidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addComponent(lblPesoMuestra1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMuestra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addComponent(lblPesoMuestra)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPesoMuestra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblLectura1)
+                            .addComponent(lblLectura2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtLectura1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtLectura2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblLectura4)
+                            .addComponent(lblLectura3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtLectura3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtLectura4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addComponent(lblPromedio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPromedio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                         .addComponent(lblClaveColecta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtClaveColecta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1654,6 +1700,13 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setText("Limpiar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -1661,7 +1714,9 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(333, 333, 333)
+                        .addContainerGap()
+                        .addComponent(jButton1)
+                        .addGap(250, 250, 250)
                         .addComponent(btnGuardarMuestra)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnModificarMuestra)
@@ -1671,7 +1726,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(186, 186, 186)
+                        .addGap(286, 286, 286)
                         .addComponent(lblLecturaVernier, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1682,12 +1737,13 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
                 .addComponent(lblLecturaVernier)
                 .addGap(1, 1, 1)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
                     .addComponent(btnGuardarMuestra)
                     .addComponent(btnModificarMuestra)
                     .addComponent(btnEliminarMuestra))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 900, 200));
@@ -1963,11 +2019,16 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
 
             muestras.setProfundidadMuestraID(this.ceMuestras.getProfundidadID());
             cmbProfundidad.setSelectedItem(muestras);
+            //System.out.println(this.ceMuestras.getMuestra());
             if (this.ceMuestras.getPesoMuestra() != null) {
                 txtPesoMuestra.setEnabled(true);
                 txtPesoMuestra.setText(String.valueOf(this.ceMuestras.getPesoMuestra()));
             }
-
+            if (this.ceMuestras.getMuestra()!= null) {
+                txtMuestra.setEnabled(true);
+                
+                txtMuestra.setText(String.valueOf(this.ceMuestras.getMuestra()));
+            }
             if (this.ceMuestras.getLectura1() != null) {
                 txtLectura1.setEnabled(true);
                 txtLectura1.setText(String.valueOf(this.ceMuestras.getLectura1()));
@@ -2143,6 +2204,9 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             txtPesoMuestra.setText("");
             txtPesoMuestra.setValue(null);
             txtPesoMuestra.setEnabled(false);
+            txtMuestra.setText("");
+            txtMuestra.setValue(null);
+            txtMuestra.setEnabled(false);
             txtLectura1.setText("");
             txtLectura1.setValue(null);
             txtLectura1.setEnabled(false);
@@ -2158,26 +2222,23 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             txtPromedio.setText("");
             txtPromedio.setValue(null);
             txtPromedio.setEnabled(false);
+            txtClaveColecta.setText("");
+            txtClaveColecta.setEnabled(false);
         } else if (profundidad.getProfundidadMuestraID() > 3) {
             txtPesoMuestra.setEnabled(true);
+            txtMuestra.setEnabled(true);
             txtLectura1.setEnabled(true);
             txtLectura2.setEnabled(true);
             txtLectura3.setText("");
             txtLectura3.setValue(null);
-            txtLectura3.setEnabled(false);
+            txtLectura3.setEnabled(true);
             txtLectura4.setText("");
             txtLectura4.setValue(null);
-            txtLectura4.setEnabled(false);
+            txtLectura4.setEnabled(true);
             txtPromedio.setText("");
             txtPromedio.setValue(null);
-            txtPromedio.setEnabled(false);
-        } else {
-            txtPesoMuestra.setEnabled(true);
-            txtLectura1.setEnabled(true);
-            txtLectura2.setEnabled(true);
-            txtLectura3.setEnabled(true);
-            txtLectura4.setEnabled(true);
             txtPromedio.setEnabled(true);
+
         }
     }//GEN-LAST:event_cmbProfundidadActionPerformed
 
@@ -2186,6 +2247,27 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtObservacionesKeyPressed
+
+    private void txtMuestraFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMuestraFocusGained
+         SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                txtMuestra.selectAll();
+            }
+        });
+    }//GEN-LAST:event_txtMuestraFocusGained
+
+    private void txtMuestraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMuestraFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMuestraFocusLost
+
+    private void txtMuestraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMuestraKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMuestraKeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        reiniciarControlesMuestras();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LblGradosLatitud;
@@ -2204,6 +2286,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox cmbProfundidad;
     private javax.swing.JTable grdMuestras;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -2230,6 +2313,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblMuestrasPerfil;
     private javax.swing.JLabel lblObservaciones;
     private javax.swing.JLabel lblPesoMuestra;
+    private javax.swing.JLabel lblPesoMuestra1;
     private javax.swing.JLabel lblProfundidad;
     private javax.swing.JLabel lblPromedio;
     private javax.swing.JLabel lblSitio;
@@ -2247,6 +2331,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txtLectura4;
     private javax.swing.JFormattedTextField txtMinutosLatitud;
     private javax.swing.JFormattedTextField txtMinutosLongitud;
+    private javax.swing.JFormattedTextField txtMuestra;
     private javax.swing.JTextArea txtObservaciones;
     private javax.swing.JFormattedTextField txtPesoMuestra;
     private javax.swing.JFormattedTextField txtPromedio;

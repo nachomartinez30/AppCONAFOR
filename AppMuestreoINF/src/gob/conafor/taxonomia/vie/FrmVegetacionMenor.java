@@ -96,6 +96,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
         this.actualizar = 0;
         funciones.manipularBotonesMenuPrincipal(true);
         limpiarControles();
+        
     }
 
     public void revisarVegetacionMenor(CESitio ceSitio) {
@@ -411,10 +412,10 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
         CDDanioVM cdDanio = new CDDanioVM();
         CatEAgenteDanio indexAgenteDanio1 = (CatEAgenteDanio) cmbAgenteDanio1.getSelectedItem();
         CatEAgenteDanio indexAgenteDanio2 = (CatEAgenteDanio) cmbAgenteDanio2.getSelectedItem();
-        CatEPorcentajeArbolado indexSeveridad1 = (CatEPorcentajeArbolado) cmbSeveridad1.getSelectedItem();
-        CatEPorcentajeArbolado indexSeveridad2 = (CatEPorcentajeArbolado) cmbSeveridad2.getSelectedItem();
+        CatESeveridadZA indexSeveridad1 = (CatESeveridadZA) cmbSeveridad1.getSelectedItem();
+        CatESeveridadZA indexSeveridad2 = (CatESeveridadZA) cmbSeveridad2.getSelectedItem();
         Integer danio1;
-        Integer danio2;//ERROR
+        Integer danio2;
         Integer severidad1;
         Integer severidad2;
 
@@ -431,13 +432,13 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
         }
 
         try {
-            severidad1 = indexSeveridad1.getPorcentajeArboladoID();
+            severidad1 = indexSeveridad1.getSeveridadID();
         } catch (NullPointerException e) {
             severidad1 = null;
         }
 
         try {
-            severidad2 = indexSeveridad2.getPorcentajeArboladoID();
+            severidad2 = indexSeveridad2.getSeveridadID();
         } catch (NullPointerException e) {
             severidad2 = null;
         }
@@ -473,8 +474,8 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
             CDDanioVM cdDanio = new CDDanioVM();
             CatEAgenteDanio indexAgenteDanio1 = (CatEAgenteDanio) cmbAgenteDanio1.getSelectedItem();
             CatEAgenteDanio indexAgenteDanio2 = (CatEAgenteDanio) cmbAgenteDanio2.getSelectedItem();
-            CatEPorcentajeArbolado indexSeveridad1 = (CatEPorcentajeArbolado) cmbSeveridad1.getSelectedItem();
-            CatEPorcentajeArbolado indexSeveridad2 = (CatEPorcentajeArbolado) cmbSeveridad2.getSelectedItem();
+            CatESeveridadZA indexSeveridad1 = (CatESeveridadZA) cmbSeveridad1.getSelectedItem();
+            CatESeveridadZA indexSeveridad2 = (CatESeveridadZA) cmbSeveridad2.getSelectedItem();
             CatETipoVigor indexVigor = (CatETipoVigor) cmbVigor.getSelectedItem();
             CEVegetacionMenor ceVegetacionMenor = new CEVegetacionMenor();
             ceVegetacionMenor.setVegetacionMenorID(this.vegetacionMenorID);
@@ -514,14 +515,14 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
             ceDanio1.setNumeroDanio(1);
             ceDanio1.setAgenteDanioID(indexAgenteDanio1.getAgenteDanioID());
             if (indexSeveridad1 != null) {
-                ceDanio1.setSeveridadID(indexSeveridad1.getPorcentajeArboladoID());
+                ceDanio1.setSeveridadID(indexSeveridad1.getSeveridadID());
             }
 
             ceDanio2.setSeccionID(this.vegetacionMenorID);
             ceDanio2.setNumeroDanio(2);
             ceDanio2.setAgenteDanioID(indexAgenteDanio2.getAgenteDanioID());
             if (indexSeveridad2 != null) {
-                ceDanio2.setSeveridadID(indexSeveridad2.getPorcentajeArboladoID());
+                ceDanio2.setSeveridadID(indexSeveridad2.getSeveridadID());
             }
 
             cdDanio.updateDanio(ceDanio1);
@@ -633,11 +634,11 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
     }
     
     private boolean validarSeveridadDanio(){
-        if(cmbSeveridad1.isEnabled() && cmbSeveridad1.getSelectedItem() == null){
+        if(cmbAgenteDanio1.getSelectedIndex()!=0 && cmbSeveridad1.getSelectedItem() == null){
             JOptionPane.showMessageDialog(null, "Error! Debe de seleccionar un nivel de severidad 1 ", "Vegetacion menor", JOptionPane.INFORMATION_MESSAGE);
             cmbSeveridad1.requestFocus();
             return false;
-        } else if(cmbSeveridad2.isEnabled() && cmbSeveridad2.getSelectedItem() == null){
+        } else if(cmbAgenteDanio2.getSelectedIndex()!=0 && cmbSeveridad2.getSelectedItem() == null){
             JOptionPane.showMessageDialog(null, "Error! Debe de seleccionar un nivel de severidad 2 ", "Vegetacion menor", JOptionPane.INFORMATION_MESSAGE);
             cmbSeveridad2.requestFocus();
             return false;
@@ -761,7 +762,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
         lblVegetacionMenorCobertura.setBackground(new java.awt.Color(153, 153, 153));
         lblVegetacionMenorCobertura.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblVegetacionMenorCobertura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblVegetacionMenorCobertura.setText("Regisro de vegetación menor");
+        lblVegetacionMenorCobertura.setText("Registro de vegetación menor");
         lblVegetacionMenorCobertura.setOpaque(true);
         pnlPrincipal.add(lblVegetacionMenorCobertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 37, 900, -1));
 
@@ -832,6 +833,11 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
         lblAgenteDanio1.setToolTipText("Agente daño 1");
         lblAgenteDanio1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        cmbAgenteDanio1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbAgenteDanio1ItemStateChanged(evt);
+            }
+        });
         cmbAgenteDanio1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbAgenteDanio1ActionPerformed(evt);
@@ -841,8 +847,6 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
         lblSeveridad1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSeveridad1.setText("Severidad 1");
         lblSeveridad1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        cmbSeveridad1.setEnabled(false);
 
         cmbAgenteDanio2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -858,8 +862,6 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
         lblSeveridad2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSeveridad2.setText("Severidad 2");
         lblSeveridad2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        cmbSeveridad2.setEnabled(false);
 
         lblVigor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblVigor.setText("Vigor");
@@ -1194,7 +1196,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
                                 .addComponent(lblNombreComun, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtNombreComun, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(18, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         PnlCoordenadas4Layout.setVerticalGroup(
             PnlCoordenadas4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1242,7 +1244,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
                         .addComponent(lblSeveridad2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmbSeveridad2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlPrincipal.add(PnlCoordenadas4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, 170));
@@ -1434,14 +1436,14 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
             agente2.setAgenteDanioID(ceVegetacionMenor.getAgenteDanio2ID());
             cmbAgenteDanio2.setSelectedItem(agente2);
 
-            CatEPorcentajeArbolado severidad1 = new CatEPorcentajeArbolado();
-            severidad1.setPorcentajeArboladoID(ceVegetacionMenor.getSeveridad1ID());
+            CatESeveridadZA severidad1 = new CatESeveridadZA();
+            severidad1.setSeveridadID(ceVegetacionMenor.getSeveridad1ID());
             combo.reiniciarComboModel(cmbSeveridad1);
             fillCmbSeveridad1();
             cmbSeveridad1.setSelectedItem(severidad1);
 
-            CatEPorcentajeArbolado severidad2 = new CatEPorcentajeArbolado();
-            severidad2.setPorcentajeArboladoID(ceVegetacionMenor.getSeveridad2ID());
+            CatESeveridadZA severidad2 = new CatESeveridadZA();
+            severidad2.setSeveridadID(ceVegetacionMenor.getSeveridad2ID());
             combo.reiniciarComboModel(cmbSeveridad2);
             fillCmbSeveridad2();
             cmbSeveridad2.setSelectedItem(severidad2);
@@ -1468,17 +1470,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNombreComunFocusGained
 
     private void cmbAgenteDanio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAgenteDanio1ActionPerformed
-        /*CatEAgenteDanio agenteDanio = (CatEAgenteDanio) cmbAgenteDanio1.getSelectedItem();
-        if (agenteDanio != null) {
-            if (agenteDanio.getAgenteDanioID() == 21 || agenteDanio.getAgenteDanioID() == 34 || agenteDanio.getAgenteDanioID() == 22) {
-                cmbSeveridad1.setEnabled(true);
-                fillCmbSeveridad1();
-            } else {
-                combo.reiniciarComboModel(cmbSeveridad1);
-                cmbSeveridad1.setSelectedItem(null);
-                //cmbSeveridad1.setEnabled(false);
-            }
-        }*/
+
     }//GEN-LAST:event_cmbAgenteDanio1ActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -1755,8 +1747,9 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
                 cmbAgenteDanio2.setEnabled(false);
                 //cmbSeveridad2.setEnabled(false);
                 cmbVigor.setEnabled(false);
-            } else {
-                cmbFamilia.setEnabled(true);
+            } 
+        }else{
+            cmbFamilia.setEnabled(true);
                 cmbGenero.setEnabled(true);
                 cmbEspecie.setEnabled(true);
                 cmbInfraespecie.setEnabled(true);
@@ -1774,10 +1767,9 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
                 txtPorcentajeCobertura.setEnabled(true);
                 cmbAgenteDanio1.setEnabled(true);
                 cmbSeveridad1.setEnabled(true);
-                cmbAgenteDanio2.setEnabled(false);
+                cmbAgenteDanio2.setEnabled(true);
                 cmbSeveridad2.setEnabled(true);
                 cmbVigor.setEnabled(true);
-            }
         }
     }//GEN-LAST:event_chkVegetacionMenorActionPerformed
 
@@ -1789,6 +1781,10 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
             fillCmbInfraespecie(indexEspecie.getEspecieID());
         }
     }//GEN-LAST:event_cmbEspecieActionPerformed
+
+    private void cmbAgenteDanio1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAgenteDanio1ItemStateChanged
+     
+    }//GEN-LAST:event_cmbAgenteDanio1ItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PnlCoordenadas4;

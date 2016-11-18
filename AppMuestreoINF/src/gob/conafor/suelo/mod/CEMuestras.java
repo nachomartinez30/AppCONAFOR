@@ -6,7 +6,7 @@ public class CEMuestras {
     private Integer muestrasID;
     private Integer sitioID;
     private Integer profundidadID;
-    private Float muestra = null;
+    private Integer muestra = null;
     private Float pesoMuestra = null;
     private Float lectura1 = null;
     private Float lectura2 = null;
@@ -39,6 +39,14 @@ public class CEMuestras {
         this.profundidadID = profundidadID;
     }
 
+    public Integer getMuestra() {
+        return muestra;
+    }
+
+    public void setMuestra(Integer muestra) {
+        this.muestra = muestra;
+    }
+    
     public Float getPesoMuestra() {
         return pesoMuestra;
     }

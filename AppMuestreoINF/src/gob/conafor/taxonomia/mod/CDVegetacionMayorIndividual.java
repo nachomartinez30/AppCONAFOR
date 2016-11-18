@@ -15,6 +15,7 @@ public class CDVegetacionMayorIndividual {
     private String query;
     private int vegetacionMayorID;
     
+    
     public CEVegetacionMayorIndividual getRegistroVM(int vegetacionMayorID) {
         query = "SELECT vm.VegetacionMayorID, vm.Consecutivo, vm.NoIndividuo, vm.FormaVidaID, vm.CondicionID, vm.FamiliaID, vm.GeneroID, vm.EspecieID, vm.InfraespecieID, "
                 + "vm.NombreComun, vm.FormaGeometricaID, vm.DensidadFollajeID, vm.DiametroBase, vm.AlturaTotal, vm.DiametroCoberturaMayor, "
@@ -68,9 +69,9 @@ public class CDVegetacionMayorIndividual {
     }
     
     public void insertVegetacionMayor(CEVegetacionMayorIndividual vegetacionMayor){
-        query = "INSERT INTO TAXONOMIA_VegetacionMayorIndividual(SitioID, NoIndividuo, FormaVidaID, CondicionID, FamiliaID, GeneroID, "
+        query = "INSERT INTO TAXONOMIA_VegetacionMayorIndividual(SitioID,Consecutivo, NoIndividuo, FormaVidaID, CondicionID, FamiliaID, GeneroID, "
                 + "EspecieID, InfraespecieID, NombreComun, FormaGeometricaID, DensidadFollajeID, DiametroBase, AlturaTotal, "
-                + "DiametroCoberturaMayor, DiametroCoberturaMenor, VigorID)VALUES(" + vegetacionMayor.getSitioID() + ", " + vegetacionMayor.getNumeroIndividuo() 
+                + "DiametroCoberturaMayor, DiametroCoberturaMenor, VigorID)VALUES(" + vegetacionMayor.getSitioID() + ", " +vegetacionMayor.getConsecutivo() + ", " + vegetacionMayor.getNumeroIndividuo() 
                 + ", " + vegetacionMayor.getFormaVidaID() + ", " + vegetacionMayor.getCondicionID() + ", " + vegetacionMayor.getFamiliaID() + ", " + vegetacionMayor.getGeneroID() 
                 + ", " + vegetacionMayor.getEspecieID() + ", " + vegetacionMayor.getInfraespecieID() + ", '" + vegetacionMayor.getNombreComun() 
                 + "', " + vegetacionMayor.getFormaGeometricaID() + ", " + vegetacionMayor.getDencidadFollajeID() + ", " + vegetacionMayor.getDiametroBase() 
@@ -127,6 +128,33 @@ public class CDVegetacionMayorIndividual {
     
     public void deleteVegetacionMayor(int vegetacionMayorID) {
         query = "DELETE FROM TAXONOMIA_VegetacionMayorIndividual WHERE VegetacionMayorID= " + vegetacionMayorID;
+        System.out.println(query);
+        Connection conn = LocalConnection.getConnection();
+        String query2 = "SELECT last_insert_rowid()";
+
+        try {
+            Statement st = conn.createStatement();
+            st.executeUpdate(query);
+            ResultSet rs = st.executeQuery(query2);
+            this.vegetacionMayorID = rs.getInt(1);
+            conn.commit();
+            st.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar la información de vegetación mayor individual ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(
+                        null, "Error! al cerrar la base de datos  al eliminar vegetación mayor individual ",
+                        "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    public void deleteAllVegetacionMayor(int sitioID) {
+        query = "DELETE FROM TAXONOMIA_VegetacionMayorIndividual WHERE SitioID= " + sitioID;
+        System.out.println("CDVEGMayor"+query);
         Connection conn = LocalConnection.getConnection();
         String query2 = "SELECT last_insert_rowid()";
 
@@ -210,7 +238,7 @@ public class CDVegetacionMayorIndividual {
     public DefaultTableModel getTablaVegetacionMayor(int sitioID) {
         query = "SELECT VegetacionMayorID, SitioID, Consecutivo, NoIndividuo, FormaVida, Condicion, Familia, Genero, Especie, Infraespecie, "
                 + "NombreComun, FormaGeometrica, DensidadFollaje, DiametroBase, AlturaTotal, DiametroCoberturaMayor, DiametroCoberturaMenor, "
-                + "Agente1, Severidad1, Agente2, Severidad2, Vigor, ClaveColecta FROM VW_VegetacionMayorIndividual WHERE SitioID= " + sitioID;
+                + "Agente1, Severidad1, Agente2, Severidad2, Vigor, ClaveColecta FROM VW_VegetacionMayorIndividual WHERE SitioID= " + sitioID+" ORDER BY Consecutivo";
         String[] encabezados = {"VegetacionMayorID", "SitioID", "Consecutivo", "Individuo", "Forma de vida", "Condicion", "Familia", "Genero", "Especie", "Infraespecie",
             "Nombre comun", "Forma geometrica", "Densidad follaje", "Diametro de base", "Altura total", "Diametro de cobertura mayor",
             "Diametro de cobertura menor", "Agente danio 1", "Severdiad 1", "Agente danio 2", "Severidad 2", "Vigor", "Clave de colecta"};

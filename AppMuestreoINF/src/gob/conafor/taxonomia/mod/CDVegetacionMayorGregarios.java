@@ -69,15 +69,16 @@ public class CDVegetacionMayorGregarios {
     }
     
     public void insertVegetacionMayor(CEVegetacionMayorGregarios vegetacionMayor) {
-        query = "INSERT INTO TAXONOMIA_VegetacionMayorGregarios(SitioID, NoIndividuo, FormaVidaID, CondicionID, FamiliaID, GeneroID, "
+        query = "INSERT INTO TAXONOMIA_VegetacionMayorGregarios(SitioID,Consecutivo, NoIndividuo, FormaVidaID, CondicionID, FamiliaID, GeneroID, "
                 + "EspecieID, InfraespecieID, NombreComun, FormaCrecimientoID, DensidadColoniaID, AlturaTotalMaxima, AlturaTotalMedia, AlturaTotalMinima, "
-                + "DiametroCoberturaMayor, DiametroCoberturaMenor, VigorID)VALUES(" + vegetacionMayor.getSitioID() + ", " + vegetacionMayor.getNumeroIndividuo()
+                + "DiametroCoberturaMayor, DiametroCoberturaMenor, VigorID)VALUES(" + vegetacionMayor.getSitioID() + ", " +vegetacionMayor.getConsecutivo() + ", " + vegetacionMayor.getNumeroIndividuo()
                 + ", " + vegetacionMayor.getFormaVidaID() + ", " + vegetacionMayor.getCondicionID() + ", " + vegetacionMayor.getFamiliaID() + ", " + vegetacionMayor.getGeneroID()
                 + ", " + vegetacionMayor.getEspecieID() + ", " + vegetacionMayor.getInfraespecieID() + ", '" + vegetacionMayor.getNombreComun()
                 + "', " + vegetacionMayor.getFormaCrecimientoID() + ", " + vegetacionMayor.getDensidadColoniaID() + ", " + vegetacionMayor.getAlturaTotalMaxima() + ", " + vegetacionMayor.getAlturaTotalMedia()
                 + ", " + vegetacionMayor.getAlturaTotalMinima() + ", " + vegetacionMayor.getDiametroCoberturaMayor() + ", " + vegetacionMayor.getDiametroCoberturaMenor() + ", " + vegetacionMayor.getVigorID() + ")";
         String query2 = "SELECT last_insert_rowid()";
         Connection conn = LocalConnection.getConnection();
+        //System.out.println(query);
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
@@ -87,6 +88,7 @@ public class CDVegetacionMayorGregarios {
             st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la informacion en vegetacion mayor gregarios ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         } finally {
             try {
                 conn.close();
@@ -106,6 +108,7 @@ public class CDVegetacionMayorGregarios {
                 + ", AlturaTotalMinima= " + vegetacionMayor.getAlturaTotalMinima() + ", DiametroCoberturaMayor= " + vegetacionMayor.getDiametroCoberturaMayor() + ", DiametroCoberturaMenor= " + vegetacionMayor.getDiametroCoberturaMenor()
                 + ", VigorID= " + vegetacionMayor.getVigorID() + " WHERE VegetacionMayorID= " + vegetacionMayor.getVegetacionMayorID();
         Connection conn = LocalConnection.getConnection();
+        //System.out.println(query);        
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
@@ -141,6 +144,32 @@ public class CDVegetacionMayorGregarios {
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al eliminar vegetación mayor gregarios ",
+                        "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    public void deleteAllVegetacionMayor(int sitioID) {
+        query = "DELETE FROM TAXONOMIA_VegetacionMayorGregarios WHERE SitioID= " + sitioID;
+        System.out.println("CDVEGMayor"+query);
+        Connection conn = LocalConnection.getConnection();
+        String query2 = "SELECT last_insert_rowid()";
+
+        try {
+            Statement st = conn.createStatement();
+            st.executeUpdate(query);
+            ResultSet rs = st.executeQuery(query2);
+            this.vegetacionMayorID = rs.getInt(1);
+            conn.commit();
+            st.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar la información de vegetación mayor individual ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(
+                        null, "Error! al cerrar la base de datos  al eliminar vegetación mayor individual ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -206,7 +235,7 @@ public class CDVegetacionMayorGregarios {
     public DefaultTableModel getTablaVegetacionMayor(int sitioID) {
         query = "SELECT VegetacionMayorID, SitioID, Consecutivo, NoIndividuo, FormaVida, Condicion, Familia, Genero, Especie, Infraespecie, "
                 + "NombreComun, FormaCrecimiento, DensidadColonia, AlturaTotalMaxima, AlturaTotalMedia, AlturaTotalMinima, DiametroCoberturaMayor, DiametroCoberturaMenor, "
-                + "Agente1, Severidad1, Agente2, Severidad2, Vigor, ClaveColecta FROM VW_VegetacionMayorGregarios WHERE SitioID= " + sitioID;
+                + "Agente1, Severidad1, Agente2, Severidad2, Vigor, ClaveColecta FROM VW_VegetacionMayorGregarios WHERE SitioID= " + sitioID+" ORDER BY Consecutivo";
         String[] encabezados = {"VegetacionMayorID", "SitioID", "Consecutivo", "Individuo", "Forma de vida", "Condicion", "Familia", "Genero", "Especie", "Infraespecie",
             "Nombre comun", "Forma de crecimiento", "Densidad de colonia", "Altura total máxima", "Altura total media", "Altura total mínima", "Diametro de cobertura mayor",
             "Diametro de cobertura menor", "Agente danio 1", "Severdiad 1", "Agente danio 2", "Severidad 2", "Vigor", "Clave de colecta"};

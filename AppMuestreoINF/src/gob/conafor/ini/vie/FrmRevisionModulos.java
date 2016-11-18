@@ -46,6 +46,7 @@ public class FrmRevisionModulos extends javax.swing.JInternalFrame {
     }
 
     private void fillUPMID() {
+       cmbUPMID.removeAllItems();
         List<Integer> listCapturado = new ArrayList<>();
         listCapturado = this.cdSecuencia.getUPMRevision();
         if (listCapturado != null) {
@@ -57,6 +58,7 @@ public class FrmRevisionModulos extends javax.swing.JInternalFrame {
     }
 
     private void fillCmbSitio(int upmID) {
+        cmbSitios.removeAllItems();
         List<Integer> listSitios = new ArrayList<>();
         listSitios = this.cdSecuencia.getSitiosRevision(upmID);
         if (listSitios != null) {

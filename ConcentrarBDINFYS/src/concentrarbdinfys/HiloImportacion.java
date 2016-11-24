@@ -65,6 +65,7 @@ public class HiloImportacion extends SwingWorker<Integer, String> {
         
         getEtiqueta().setText("Importando Cobertura de suelo de sitio..."); 
         bdImportar.importarSitiosCoberturaSuelo(this.ruta); //7
+        //System.err.println("Entro a Cobertura Suelo");
         getBarraProgreso().setValue(20);
         getBarraProgreso().repaint();
         
@@ -208,8 +209,8 @@ public class HiloImportacion extends SwingWorker<Integer, String> {
         getBarraProgreso().repaint();
         
         getEtiqueta().setText("Finalizando importacion...");
-        bdImportar.importarSecuencias(this.ruta); //54
-        bdImportar.importarUPMRevision(this.ruta);
+        //bdImportar.importarSecuencias(this.ruta); //54
+        //bdImportar.importarUPMRevision(this.ruta);
         getBarraProgreso().setValue(100);
         getBarraProgreso().repaint();
         return null;

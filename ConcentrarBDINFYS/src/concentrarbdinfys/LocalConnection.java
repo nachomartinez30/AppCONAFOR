@@ -19,6 +19,7 @@ public class LocalConnection {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,
                     "Error, No hay base de datos local disponible" + e.getClass().getName() + ": " + e.getMessage());
+            e.printStackTrace();
             System.exit(0);
         }
         return connect;
@@ -40,6 +41,7 @@ public class LocalConnection {
         String path = currentPath.toAbsolutePath().toString();
         //return "jdbc:sqlite:" + path + "/src/db/MuestreoINF_2015.db";
          //return "jdbc:sqlite:" + path + "/MuestreoINF_2015.cons"; //Para distribuir
+         //System.out.println("******* jdbc:sqlite:" + path + "/src/db/MuestreoINF_2015.cons");
        return "jdbc:sqlite:" + path + "/src/db/MuestreoINF_2015.cons"; //En producción.
     }
 

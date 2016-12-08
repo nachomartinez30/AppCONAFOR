@@ -3,9 +3,11 @@ package gob.conafor.ini.vie;
 import gob.conafor.sys.mod.CDSecuencia;
 import gob.conafor.sys.mod.CDSeguimientoUPM;
 import gob.conafor.upm.vie.UPMForms;
+import gob.conafor.utils.Version;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+
 
 public class FrmInicio extends javax.swing.JFrame {
 
@@ -13,6 +15,8 @@ public class FrmInicio extends javax.swing.JFrame {
     public static FrmInicio principal;
     private CDSeguimientoUPM seguimiento = new CDSeguimientoUPM();
     private CDSecuencia navegacion = new CDSecuencia();
+    private Version ver=new Version();
+    private String version=ver.getVersion();
 
     public FrmInicio() {
         initComponents();
@@ -119,7 +123,7 @@ public class FrmInicio extends javax.swing.JFrame {
         jMenuItem4.setText("jMenuItem4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cliente de captura INFyS ");
+        setTitle("Cliente de captura INFyS "+version);
         setIconImage(getIconImage());
         setIconImages(getIconImages());
         setName("Index"); // NOI18N
@@ -147,7 +151,7 @@ public class FrmInicio extends javax.swing.JFrame {
         jLabel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel6.setOpaque(true);
 
-        jLabel7.setText("Versión 1.4");
+        jLabel7.setText("Versión 1.5");
 
         dpPrincipal.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dpPrincipal.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);

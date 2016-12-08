@@ -158,7 +158,7 @@ public class CETrazoSitio {
             return (float) 12.61;
         } else if ((cuadrante >= 61 && cuadrante <= 70) || (cuadrante <= -61 && cuadrante >= -70)) {
             return (float) 13.15;
-        } else if ((cuadrante >= 71 && cuadrante <= 80) || (cuadrante >= -71 && cuadrante <= -80)) {
+        } else if ((cuadrante >= 71 && cuadrante <= 80) || (cuadrante <= -71 && cuadrante >= -80)) {
             return (float) 13.77;
         } else if ((cuadrante >= 81 && cuadrante <= 90) || (cuadrante <= -81 && cuadrante >= -90)) {
             return (float) 14.45;
@@ -166,7 +166,8 @@ public class CETrazoSitio {
             return (float) 15.18;
         } else if ((cuadrante >= 101 && cuadrante <= 150) || (cuadrante <= -101 && cuadrante >= -150)) {
             return (float) 15.95;
-        }
+        }else{
         return (float) 0.0;
+        }
     }
 }

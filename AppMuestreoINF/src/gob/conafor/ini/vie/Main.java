@@ -10,9 +10,8 @@ public class Main {
 
     public static void main(String args[]) {
         try {
-             //UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
-           UIManager.setLookAndFeel(
-                    UIManager.getSystemLookAndFeelClassName());
+             //UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+           UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             java.util.logging.Logger.getLogger(Layout.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
         }

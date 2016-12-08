@@ -373,6 +373,11 @@ public class FrmTrazoSitio extends javax.swing.JDialog {
                 txtCuadrante2FocusLost(evt);
             }
         });
+        txtCuadrante2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCuadrante2ActionPerformed(evt);
+            }
+        });
         txtCuadrante2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 txtCuadrante2PropertyChange(evt);
@@ -667,7 +672,7 @@ public class FrmTrazoSitio extends javax.swing.JDialog {
                     .addComponent(btnGuardar)
                     .addComponent(btnEliminar)
                     .addComponent(btnSalir))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -838,6 +843,10 @@ public class FrmTrazoSitio extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtCuadrante4KeyTyped
+
+    private void txtCuadrante2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCuadrante2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCuadrante2ActionPerformed
 
     private void doClose(int retStatus) {
         returnStatus = retStatus;

@@ -2638,6 +2638,10 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
             fijarValoresPorCampo(this.arboladoID);
             chkEsSubmuestra.setEnabled(true);
             txtNumeroRamaTallo.setEnabled(false);
+            if(cmbFormaVida.getSelectedIndex()==3){
+                cmbNivelVigor.setEnabled(false);
+                cmbVigor.setEnabled(false);
+            }
         }
     }//GEN-LAST:event_grdArboladoMouseClicked
 
@@ -2663,7 +2667,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         if (validarCamposObligatorio()  && validarCamposOpcionales()&& validarMedicionesObligatorias() && validarMedicionesOpcionales()
                 && validarCampoDanio()) {
             if (condicion.getCondicionID() > 1 && condicion.getCondicionID() <= 4) {
-                if (validarDanioObligatorio() && validarCreacionSubmuestra()) {
+                if (validarDanioObligatorio()) {
                     crearArbolado();
                     //this.cdArbolado.enumerarConsecutivo(this.sitioID);
                     //this.cdArbolado.enumerarRama(this.sitioID);
@@ -2954,7 +2958,8 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Si selecciona Arbolado, se debe capturar o falta capturar trazo del sitio", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
             chkArbolado.requestFocus();
         } else if (funciones.validarSeccionCapturada("TAXONOMIA_Arbolado", this.ceSitio) == false && chkArbolado.isSelected()) {
-            if (validarColectasObligatorias()) {
+            System.out.println("Entro");
+            if (validarColectasObligatorias() && validarCreacionSubmuestra()) {
                 this.hide();
                 if (modificar == 0) {
                     UPMForms.submuestra.setDatosIniciales(this.ceSitio);

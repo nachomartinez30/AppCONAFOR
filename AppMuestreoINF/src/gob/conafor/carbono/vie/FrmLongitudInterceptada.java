@@ -1378,13 +1378,13 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
 
     private void cmbGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGeneroActionPerformed
         CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
-        CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
+        CatEEspecie indexFamilia = (CatEEspecie) cmbFamilia.getSelectedItem();
         DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbEspecie.getModel();
         dcm.removeAllElements();
         CatEFamiliaEspecie familia;
        if (indexFamilia == null && indexGenero != null) {
             familia = this.cdEspecies.getFamilia(indexGenero.getGeneroID());
-            cmbFamilia.setSelectedItem(familia);
+            cmbEspecie.setSelectedItem(familia);
         }
         if (indexGenero != null) {
             fillCmbEspecie(indexGenero.getGeneroID());

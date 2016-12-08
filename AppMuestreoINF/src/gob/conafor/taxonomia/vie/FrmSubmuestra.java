@@ -261,6 +261,7 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
         txtLongitud10.setValue(null);
         txtGrozorCorteza.setText("");
         txtGrozorCorteza.setValue(null);
+        txtObservaciones.setText("");
     }
 
     private void asignarDatosSubmuestra() {

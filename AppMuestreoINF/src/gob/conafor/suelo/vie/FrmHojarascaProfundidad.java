@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import org.xhtmlrenderer.layout.Breaker;
 
 public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     private int upmID;
@@ -608,14 +609,21 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     }
     
     private boolean validarProfundidad3060() {
+        System.out.println(txtProfundidad3060.getText());
+        if(txtProfundidad3060.getText().equals("0.00")){
+            return true;
+          
+        }
         if (this.profundidad3060 != null) {
             if (this.profundidad3060 < 301 || this.profundidad3060 > 600) {
+               
                 JOptionPane.showMessageDialog(null, "Debe proporcionar un valor entre 301 y 600  para profundidad real 30-60 "
                         + "", "Profundidades suelo", JOptionPane.INFORMATION_MESSAGE);
                 txtProfundidad3060.requestFocus();
                 return false;
-            }
-        } 
+                }
+            } 
+        
         return true;
     }
     

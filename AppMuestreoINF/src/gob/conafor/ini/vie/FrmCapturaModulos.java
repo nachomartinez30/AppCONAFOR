@@ -7,6 +7,7 @@ import gob.conafor.upm.mod.CDUpm;
 import gob.conafor.upm.mod.CEUPM;
 import gob.conafor.upm.vie.UPMForms;
 import gob.conafor.utils.FuncionesComunes;
+import gob.conafor.utils.Version;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,8 @@ public class FrmCapturaModulos extends javax.swing.JInternalFrame {
     private FuncionesComunes combo = new FuncionesComunes();
     private Integer secuenciaID;
     private Integer sitioID;
+    private Version ver=new Version();
+    private String version=ver.getVersion();
     
     public FrmCapturaModulos() {
         initComponents();
@@ -142,7 +145,7 @@ public class FrmCapturaModulos extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-        setTitle("Captura de formatos por sitio");
+        setTitle("Captura de formatos por sitio "+version);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(335, 317));

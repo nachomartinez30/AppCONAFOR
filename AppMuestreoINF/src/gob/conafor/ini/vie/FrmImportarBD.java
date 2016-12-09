@@ -1,6 +1,7 @@
 package gob.conafor.ini.vie;
 
 import gob.conafor.utils.FuncionesComunes;
+import gob.conafor.utils.Version;
 import java.awt.Cursor;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -14,6 +15,8 @@ public class FrmImportarBD extends javax.swing.JInternalFrame {
 
     private FuncionesComunes funciones = new FuncionesComunes();
     private String ruta;
+    private Version ver=new Version();
+    private String version=ver.getVersion();
 
     public FrmImportarBD() {
         initComponents();
@@ -42,7 +45,7 @@ public class FrmImportarBD extends javax.swing.JInternalFrame {
         lblEstatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-        setTitle("Importación de datos del INFYS");
+        setTitle("Importación de datos del INFYS "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));

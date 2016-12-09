@@ -1,5 +1,6 @@
 package gob.conafor.taxonomia.vie;
 
+import gob.conafor.ini.vie.FrmRevisionModulos;
 import gob.conafor.ini.vie.Main;
 import gob.conafor.sitio.mod.CDCoberturaSuelo;
 import gob.conafor.sitio.mod.CDSitio;
@@ -23,6 +24,7 @@ import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Tablas;
 import gob.conafor.utils.ValidacionesComunes;
+import gob.conafor.utils.Version;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -32,6 +34,7 @@ import javax.swing.SwingUtilities;
 public class FrmSotoBosque extends javax.swing.JInternalFrame {
 
     private CESitio ceSitio;
+    private boolean revision;
     private int sitio;
     private int sotoBosqueID;
     private static final int FORMATO_ID = 1;
@@ -73,6 +76,9 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
     private int actualizar;
     private FuncionesComunes funciones = new FuncionesComunes();
     private int secuenciaID;
+    private Version ver=new Version();
+    private String version=ver.getVersion();
+    FrmRevisionModulos revisionModulos=new FrmRevisionModulos();
    
     public FrmSotoBosque() {
         initComponents();
@@ -103,6 +109,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
     }
 
     public void revisarSotoBosque(CESitio sitio) {
+        revision=true;
         CatEAgenteDanio danio = (CatEAgenteDanio) cmbDanio.getSelectedItem();
         CESitio sitioSotobosqueFuera;
         this.actualizar = 1;
@@ -949,7 +956,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         txtPorcentajeSotobosqueFuera = new javax.swing.JFormattedTextField();
 
-        setTitle("Regitro de vegetación menor, cubierta de suelo y sotobosque módulo A\n");
+        setTitle("Regitro de vegetación menor, cubierta de suelo y sotobosque módulo A "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 
@@ -1152,7 +1159,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
                 .addGroup(PnlDescripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(PnlCoordenadas2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCoberturaVegetacionMenor, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
         PnlDescripcionLayout.setVerticalGroup(
             PnlDescripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1754,7 +1761,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane2)
                         .addContainerGap())
                     .addGroup(pnlSotobosqueLayout.createSequentialGroup()
-                        .addComponent(lblRegistroSotobosque, javax.swing.GroupLayout.DEFAULT_SIZE, 908, Short.MAX_VALUE)
+                        .addComponent(lblRegistroSotobosque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(6, 6, 6))
                     .addGroup(pnlSotobosqueLayout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1862,17 +1869,17 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(chkSotobosque)
                         .addGap(58, 58, 58)
-                        .addComponent(PnlDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PnlDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(79, 79, 79)
                         .addComponent(PnlDescripcion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 141, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(356, 356, 356)
                 .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(370, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(pnlSotobosque, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -2054,8 +2061,20 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtOtrosFocusGained
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.hide();
-        funciones.manipularBotonesMenuPrincipal(false);
+        
+        if(revision==false){//esta en modo de captura
+            this.hide();
+             //System.out.println("Modo Captura");
+            funciones.manipularBotonesMenuPrincipal(false);
+        }
+        if(revision==true){//entro a modo de revision
+            //System.err.println("Modo Revision");
+            this.hide();
+            //UPMForms.revisionModulos.iniciarRevision();
+            UPMForms.revisionModulos.setVisible(true);
+            UPMForms.revisionModulos.manipularBonesMenuprincipal();
+            revision=false;
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtGramineasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGramineasKeyTyped

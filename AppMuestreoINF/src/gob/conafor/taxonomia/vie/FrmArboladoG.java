@@ -36,6 +36,7 @@ import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Tablas;
 import gob.conafor.utils.ValidacionesComunes;
+import gob.conafor.utils.Version;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -43,7 +44,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmArboladoG extends javax.swing.JInternalFrame {
-
+    private boolean revision;
     private final int arbolado;
     private final int submuestra;
     private int upmID;
@@ -82,6 +83,8 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private FuncionesComunes funciones = new FuncionesComunes();
     private int modificar;
+    private Version ver=new Version();
+    private String version=ver.getVersion();
 
     public FrmArboladoG() {
         initComponents();
@@ -122,6 +125,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
     }
 
     public void revisarArboladoG(CESitio sitio) {
+        revision=true;
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
@@ -507,7 +511,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         btnLimpiarControles = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Arbolado módulo G");
+        setTitle("Arbolado módulo G "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 
@@ -1039,7 +1043,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblNombreComun)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNombreComun, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                                .addComponent(txtNombreComun)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblFormaVida)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2658,8 +2662,18 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_grdArboladoMouseClicked
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.hide();
-        funciones.manipularBotonesMenuPrincipal(false);
+        if(revision==false){//esta en modo de captura
+            this.hide();
+            funciones.manipularBotonesMenuPrincipal(false);
+        }
+        if(revision==true){//entro a modo de revision
+             //System.err.println("Modo Revision");
+            this.hide();
+           // UPMForms.revisionModulos.iniciarRevision();
+            UPMForms.revisionModulos.setVisible(true);
+            UPMForms.revisionModulos.manipularBonesMenuprincipal();
+            revision=false;
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnTrazoSitioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrazoSitioActionPerformed

@@ -13,6 +13,7 @@ import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Tablas;
 import gob.conafor.utils.ValidacionesComunes;
+import gob.conafor.utils.Version;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,8 @@ public class FrmPuntoControl extends javax.swing.JInternalFrame {
     private CDPuntoControl cdPC = new CDPuntoControl();
     private int modificar;
     private FuncionesComunes funciones = new FuncionesComunes();
+    private Version ver=new Version();
+    private String version=ver.getVersion();
 
     public FrmPuntoControl() {
         initComponents();
@@ -472,7 +475,7 @@ public class FrmPuntoControl extends javax.swing.JInternalFrame {
         btnActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
 
-        setTitle("Punto de control");
+        setTitle("Punto de control "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 
@@ -667,7 +670,7 @@ public class FrmPuntoControl extends javax.swing.JInternalFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblLongitud, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLatitud, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -838,7 +841,7 @@ public class FrmPuntoControl extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlCoordenadasLayout.createSequentialGroup()
                 .addGroup(PnlCoordenadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PnlCoordenadasLayout.createSequentialGroup()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PnlCoordenadasLayout.createSequentialGroup()

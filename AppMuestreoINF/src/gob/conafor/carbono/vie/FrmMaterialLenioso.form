@@ -2,7 +2,9 @@
 
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
-    <Property name="title" type="java.lang.String" value="Material le&#xf1;oso ca&#xed;do de 100 y 1000, altura por forma biol&#xf3;gica, m&#xf3;dulo C"/>
+    <Property name="title" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+      <Connection code="&quot;Material le&#xf1;oso ca&#xed;do de 100 y 1000, altura por forma biol&#xf3;gica, m&#xf3;dulo C &quot;+version" type="code"/>
+    </Property>
     <Property name="frameIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
       <Image iconType="3" name="/gob/conafor/utils/logo_conafor.png"/>
     </Property>
@@ -784,7 +786,7 @@
                               <Component id="chkAlturaArbustosHierbasPastos" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jPanel9" pref="250" max="32767" attributes="0"/>
+                          <Component id="jPanel9" pref="258" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="cmbNoCubiertaVegetal" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>

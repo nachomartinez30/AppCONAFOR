@@ -5,6 +5,7 @@ import gob.conafor.upm.mod.CDUpm;
 import gob.conafor.upm.mod.CEUPM;
 import gob.conafor.upm.vie.UPMForms;
 import gob.conafor.utils.FuncionesComunes;
+import gob.conafor.utils.Version;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -15,6 +16,8 @@ public class FrmRevisionSitio extends javax.swing.JInternalFrame {
     private CEUPM ceUpm = new CEUPM();
     private CDSitio cdSitio = new CDSitio();
     private FuncionesComunes funciones = new FuncionesComunes();
+    private Version ver=new Version();
+    private String version=ver.getVersion();
     
     public FrmRevisionSitio() {
         initComponents();
@@ -58,7 +61,7 @@ public class FrmRevisionSitio extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-        setTitle("Revisión de Sitios");
+        setTitle("Revisión de Sitios "+version);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(335, 317));
@@ -197,7 +200,7 @@ public class FrmRevisionSitio extends javax.swing.JInternalFrame {
        this.hide();
        UPMForms.sitioRevisio.revisarSitio(upmID);
        UPMForms.sitioRevisio.setVisible(true);
-       funciones.manipularBotonesMenuPrincipal(false);
+       funciones.manipularBotonesMenuPrincipal(true);//deshabilita
     }//GEN-LAST:event_btnComenzarRevisionActionPerformed
 
     private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed

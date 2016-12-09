@@ -8,6 +8,7 @@ import gob.conafor.taxonomia.mod.CEColectaBotanica;
 import gob.conafor.upm.vie.UPMForms;
 import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
+import gob.conafor.utils.Version;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -46,6 +47,8 @@ public class FrmClaveColecta extends javax.swing.JDialog {
     private String preclave;
     private String nombreCampo;
     private int formatoID;
+    private Version ver=new Version();
+    private String version=ver.getVersion();
     
     public FrmClaveColecta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

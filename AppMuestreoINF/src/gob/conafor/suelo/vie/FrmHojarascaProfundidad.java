@@ -15,6 +15,7 @@ import gob.conafor.upm.vie.UPMForms;
 import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Tablas;
+import gob.conafor.utils.Version;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -22,6 +23,7 @@ import javax.swing.SwingUtilities;
 import org.xhtmlrenderer.layout.Breaker;
 
 public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
+    private boolean revision;
     private int upmID;
     private int sitioID;
     private int sitio;
@@ -70,6 +72,8 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private FuncionesComunes funciones = new FuncionesComunes();
     private int modificar;
+    private Version ver=new Version();
+    private String version=ver.getVersion();
 
     public FrmHojarascaProfundidad() {
         initComponents();
@@ -98,6 +102,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     }
 
     public void revisarHojarascaProfundidad(CESitio ceSitio) {
+        revision=true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
@@ -1030,7 +1035,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         btnEliminarHojarasca = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Suelos capas de hojarasca y profundidades, módulo E");
+        setTitle("Suelos capas de hojarasca y profundidades, módulo E "+version);
         setToolTipText("");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 675));
@@ -1622,7 +1627,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         chkSueloProfundidades.setBackground(new java.awt.Color(204, 204, 204));
         chkSueloProfundidades.setSelected(true);
         chkSueloProfundidades.setText("Hay Suelo a las profundidades de 0-30 y 30-60 ");
-        chkSueloProfundidades.setActionCommand("Hay Suelo a las profundidades de 0-30 y 30-60 ");
         chkSueloProfundidades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkSueloProfundidadesActionPerformed(evt);
@@ -2093,8 +2097,18 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPesoTotal3060KeyTyped
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-       this.hide();
-       funciones.manipularBotonesMenuPrincipal(false);
+       if(revision==false){//esta en modo de captura
+            this.hide();
+            funciones.manipularBotonesMenuPrincipal(false);
+        }
+        if(revision==true){//entro a modo de revision
+             //System.err.println("Modo Revision");
+            this.hide();
+            //UPMForms.revisionModulos.iniciarRevision();
+            UPMForms.revisionModulos.setVisible(true);
+            UPMForms.revisionModulos.manipularBonesMenuprincipal();
+            revision=false;
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void chkHojarascaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkHojarascaActionPerformed

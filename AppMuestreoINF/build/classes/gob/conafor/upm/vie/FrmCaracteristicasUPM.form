@@ -2,8 +2,9 @@
 
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
-    <Property name="resizable" type="boolean" value="true"/>
-    <Property name="title" type="java.lang.String" value="Caracter&#xed;sticas del conglomerado y diversidad de ep&#xed;fitas en el arbolado, m&#xf3;dulo 0"/>
+    <Property name="title" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+      <Connection code="&quot;Caracter&#xed;sticas del conglomerado y diversidad de ep&#xed;fitas en el arbolado, m&#xf3;dulo &quot;+version" type="code"/>
+    </Property>
     <Property name="frameIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
       <Image iconType="3" name="/gob/conafor/utils/logo_conafor.png"/>
     </Property>
@@ -294,7 +295,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lblPresenciaTroncos" pref="122" max="32767" attributes="0"/>
+                          <Component id="lblPresenciaTroncos" max="32767" attributes="0"/>
                           <Component id="cmbPresenciaTroncos" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>

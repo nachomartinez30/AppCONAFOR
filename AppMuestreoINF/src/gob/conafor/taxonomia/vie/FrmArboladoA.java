@@ -36,6 +36,7 @@ import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Tablas;
 import gob.conafor.utils.ValidacionesComunes;
+import gob.conafor.utils.Version;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -43,7 +44,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmArboladoA extends javax.swing.JInternalFrame {
-    
+    private boolean revision;
     private final int arbolado;
     private final int submuestra;
     private static final int FORMATO_ID = 3;
@@ -81,6 +82,8 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private FuncionesComunes funciones = new FuncionesComunes();
     private int modificar;
+    private Version ver=new Version();
+    private String version=ver.getVersion();
             
     public FrmArboladoA() {
         initComponents();
@@ -121,6 +124,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
     }
 
     public void revisarArbolado(CESitio sitio) {
+        revision=true;
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
@@ -500,7 +504,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         btnLimpiarControles = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Arbolado módulo A");
+        setTitle("Arbolado módulo A "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 
@@ -2646,8 +2650,18 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_grdArboladoMouseClicked
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.hide();
-        funciones.manipularBotonesMenuPrincipal(false);
+        if(revision==false){//esta en modo de captura
+            this.hide();
+            funciones.manipularBotonesMenuPrincipal(false);
+        }
+        if(revision==true){//entro a modo de revision
+             //System.err.println("Modo Revision");
+            this.hide();
+           // UPMForms.revisionModulos.iniciarRevision();
+            UPMForms.revisionModulos.setVisible(true);
+            UPMForms.revisionModulos.manipularBonesMenuprincipal();
+            revision=false;
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnTrazoSitioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrazoSitioActionPerformed
@@ -2690,8 +2704,8 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
 
     private void btnElimnarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimnarActionPerformed
         eliminarArbolado();
-        this.cdArbolado.enumerarConsecutivo(this.sitioID);
-        this.cdArbolado.enumerarRama(this.sitioID);
+        //this.cdArbolado.enumerarConsecutivo(this.sitioID);
+        //this.cdArbolado.enumerarRama(this.sitioID);
         this.funciones.reiniciarComboModel(cmbConsecutivo);
         fillCmbConsecutivo();
         estadoArbolVivo();

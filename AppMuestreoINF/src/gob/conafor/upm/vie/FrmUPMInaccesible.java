@@ -8,6 +8,7 @@ import gob.conafor.upm.mod.CatETipoInaccesibilidad;
 import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.ValidacionesComunes;
+import gob.conafor.utils.Version;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,8 @@ public class FrmUPMInaccesible extends javax.swing.JInternalFrame {
     private Datos numeros = new Datos();
     private int modificar;
     private FuncionesComunes funciones = new FuncionesComunes();
+    private Version ver=new Version();
+    private String version=ver.getVersion();
    
     public FrmUPMInaccesible() {
         initComponents();
@@ -347,7 +350,7 @@ public class FrmUPMInaccesible extends javax.swing.JInternalFrame {
         btnTerminar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
-        setTitle("Características de inaccesibilidad del conglomerado, módulo 0");
+        setTitle("Características de inaccesibilidad del conglomerado, módulo 0 "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 

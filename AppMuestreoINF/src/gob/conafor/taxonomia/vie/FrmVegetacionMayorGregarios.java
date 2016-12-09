@@ -25,6 +25,7 @@ import gob.conafor.taxonomia.mod.CatEGenero;
 import gob.conafor.taxonomia.mod.CatEInfraespecie;
 import gob.conafor.taxonomia.mod.CatESeveridadZA;
 import gob.conafor.taxonomia.mod.CatEVigorArbolado;
+import gob.conafor.upm.vie.UPMForms;
 import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Tablas;
@@ -40,7 +41,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
-
+    private boolean revision;
     private int upmID;
     private int sitioID;
     private int sitio;
@@ -100,6 +101,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
     }
 
     public void revisarVegetacionMayorGregarios(CESitio sitio) {
+        revision=true;
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
@@ -1581,8 +1583,18 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_grdVegetacionvMayorMouseClicked
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.hide();
-        funciones.manipularBotonesMenuPrincipal(false);
+        if(revision==false){//esta en modo de captura
+            this.hide();
+            funciones.manipularBotonesMenuPrincipal(false);
+        }
+        if(revision==true){//entro a modo de revision
+             //System.err.println("Modo Revision");
+            this.hide();
+            //UPMForms.revisionModulos.iniciarRevision();
+            UPMForms.revisionModulos.setVisible(true);
+            UPMForms.revisionModulos.manipularBonesMenuprincipal();
+            revision=false;
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed

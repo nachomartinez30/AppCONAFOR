@@ -10,6 +10,7 @@ import gob.conafor.taxonomia.mod.CatEGenero;
 import gob.conafor.taxonomia.mod.CatEInfraespecie;
 import gob.conafor.taxonomia.mod.CatESeccionTaxonomica;
 import gob.conafor.utils.FuncionesComunes;
+import gob.conafor.utils.Version;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,8 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
     private Integer cortezaIncluida;
     private Integer maderaIncluida;
     private String observaciones;
+    private Version ver=new Version();
+    private String version=ver.getVersion();
   
     public FrmColectaBotanica() {
         initComponents();
@@ -582,7 +585,7 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
         lbSitio1 = new javax.swing.JLabel();
         txtConsecutivo = new javax.swing.JFormattedTextField();
 
-        setTitle("Registro de colecta botánica");
+        setTitle("Registro de colecta botánica "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 
@@ -1098,7 +1101,7 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
                     .addComponent(lblNombreComun)
                     .addComponent(txtNombreComun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbInfraespecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbSitio)

@@ -14,13 +14,14 @@ import gob.conafor.taxonomia.mod.CDEspecies;
 import gob.conafor.taxonomia.mod.CEColectaBotanica;
 import gob.conafor.taxonomia.mod.CatEEspecie;
 import gob.conafor.taxonomia.mod.CatEFamiliaEspecie;
-import gob.conafor.taxonomia.mod.CatEGenero;
+    import gob.conafor.taxonomia.mod.CatEGenero;
 import gob.conafor.taxonomia.mod.CatEInfraespecie;
 import gob.conafor.taxonomia.vie.FrmClaveColecta;
 import gob.conafor.upm.vie.UPMForms;
 import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Tablas;
+import gob.conafor.utils.Version;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
+    private boolean revision;
     private int upmID;
     private int sitioID;
     private int sitio;
@@ -80,6 +82,8 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private FuncionesComunes funciones = new FuncionesComunes();
     private int modificar;
+    private Version ver=new Version();
+    private String version=ver.getVersion();
     
     public FrmLongitudInterceptada() {
         initComponents();
@@ -114,6 +118,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     }
     
     public void revisarLongitud(CESitio sitio){
+        revision=true;
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
@@ -329,7 +334,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         chkCoberturaDosel = new javax.swing.JCheckBox();
         chkLongitudComponentes = new javax.swing.JCheckBox();
 
-        setTitle("Longitud interceptada por componente, cobertura dosel, módulo A o C");
+        setTitle("Longitud interceptada por componente, cobertura dosel, módulo A o C "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 
@@ -902,6 +907,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         jLabel14.setText("4");
 
         chkPunto4.setBackground(new java.awt.Color(204, 204, 204));
+        chkPunto4.setToolTipText("");
         chkPunto4.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 chkPunto4KeyPressed(evt);
@@ -922,9 +928,9 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkPunto4)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel10.setBackground(new java.awt.Color(204, 204, 204));
@@ -1378,7 +1384,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
 
     private void cmbGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGeneroActionPerformed
         CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
-        CatEEspecie indexFamilia = (CatEEspecie) cmbFamilia.getSelectedItem();
+        CatEEspecie indexFamilia = (CatEEspecie) cmbEspecie.getSelectedItem();
         DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbEspecie.getModel();
         dcm.removeAllElements();
         CatEFamiliaEspecie familia;
@@ -2763,8 +2769,18 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.hide();
-        funciones.manipularBotonesMenuPrincipal(false);
+       if(revision==false){//esta en modo de captura
+            this.hide();
+            funciones.manipularBotonesMenuPrincipal(false);
+        }
+        if(revision==true){//entro a modo de revision
+             //System.err.println("Modo Revision");
+            this.hide();
+            //UPMForms.revisionModulos.iniciarRevision();
+            UPMForms.revisionModulos.setVisible(true);
+            UPMForms.revisionModulos.manipularBonesMenuprincipal();
+            revision=false;
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtSegmento1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento1KeyTyped

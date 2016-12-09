@@ -22,6 +22,7 @@ import gob.conafor.upm.vie.UPMForms;
 import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Tablas;
+import gob.conafor.utils.Version;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -29,7 +30,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmRepoblado extends javax.swing.JInternalFrame {
-
+    private boolean revision;
     private final int repoblado;
     private final int arbolado;
     private int repobladoID;
@@ -60,6 +61,8 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private int actulizar;
     private FuncionesComunes funciones = new FuncionesComunes();
+    private Version ver=new Version();
+    private String version=ver.getVersion();
 
     public FrmRepoblado() {
         initComponents();
@@ -89,6 +92,7 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
     }
 
     public void revisarRepoblado(CESitio sitio) {
+        revision=true;
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
@@ -706,7 +710,7 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
         txtClaveColecta = new javax.swing.JTextField();
         btnColecta = new javax.swing.JButton();
 
-        setTitle("Repoblado (Sitio de 12.56m) módulo A");
+        setTitle("Repoblado (Sitio de 12.56m) módulo A "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 
@@ -1256,7 +1260,7 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
                         .addComponent(lblClaveColecta)
                         .addComponent(txtClaveColecta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnColecta)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1498,8 +1502,18 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_grdRepobladoMouseClicked
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.hide();
-        funciones.manipularBotonesMenuPrincipal(false);
+        if(revision==false){//esta en modo de captura
+            this.hide();
+            funciones.manipularBotonesMenuPrincipal(false);
+        }
+        if(revision==true){//entro a modo de revision
+             //System.err.println("Modo Revision");
+            this.hide();
+            //UPMForms.revisionModulos.iniciarRevision();
+            UPMForms.revisionModulos.setVisible(true);
+            UPMForms.revisionModulos.manipularBonesMenuprincipal();
+            revision=false;
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtPorcentajeRepobladoFueraFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPorcentajeRepobladoFueraFocusGained

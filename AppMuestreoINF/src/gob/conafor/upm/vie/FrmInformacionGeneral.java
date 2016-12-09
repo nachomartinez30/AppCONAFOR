@@ -11,6 +11,7 @@ import gob.conafor.upm.mod.CEContacto;
 import gob.conafor.upm.mod.CEUPM;
 import gob.conafor.upm.mod.CatETipoTenencia;
 import gob.conafor.utils.FuncionesComunes;
+import gob.conafor.utils.Version;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -42,6 +43,8 @@ public class FrmInformacionGeneral extends JInternalFrame {
     private FuncionesComunes combo = new FuncionesComunes();
     private CDBrigada cdBrigada = new CDBrigada();
     private CEBrigada ceBrigada = new CEBrigada();
+    private Version ver=new Version();
+    private String version=ver.getVersion();
     
     public FrmInformacionGeneral() {
         initComponents();
@@ -931,7 +934,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
 
         setBorder(null);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-        setTitle("Información general del conglomerado, módulo 0");
+        setTitle("Información general del conglomerado, módulo 0 "+version);
         setAlignmentX(0.0F);
         setAlignmentY(-1.0F);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
@@ -1760,7 +1763,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 216, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 226, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(chkInformacionContacto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

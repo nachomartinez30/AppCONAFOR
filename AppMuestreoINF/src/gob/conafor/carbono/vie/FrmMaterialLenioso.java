@@ -14,6 +14,7 @@ import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Tablas;
 import gob.conafor.utils.ValidacionesComunes;
+import gob.conafor.utils.Version;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -53,6 +54,9 @@ public class FrmMaterialLenioso extends JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private FuncionesComunes funciones = new FuncionesComunes();
     private int modificar; 
+    private Version ver=new Version();
+    private String version=ver.getVersion();
+    private boolean  revision;
     
     public FrmMaterialLenioso() {
         initComponents();
@@ -86,6 +90,7 @@ public class FrmMaterialLenioso extends JInternalFrame {
     }
     
     public void revisarCarbono(CESitio sitio){
+        revision=true;
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
@@ -760,7 +765,7 @@ public class FrmMaterialLenioso extends JInternalFrame {
         btnContinuar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
-        setTitle("Material leñoso caído de 100 y 1000, altura por forma biológica, módulo C");
+        setTitle("Material leñoso caído de 100 y 1000, altura por forma biológica, módulo C "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 
@@ -1320,7 +1325,7 @@ public class FrmMaterialLenioso extends JInternalFrame {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(chkAlturaArbustosHierbasPastos)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 250, Short.MAX_VALUE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 258, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cmbNoCubiertaVegetal, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1745,8 +1750,18 @@ public class FrmMaterialLenioso extends JInternalFrame {
     }//GEN-LAST:event_grdCubiertaVegetalMouseClicked
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.hide();
-        this.funciones.manipularBotonesMenuPrincipal(false);
+        if(revision==false){//esta en modo de captura
+            this.hide();
+            funciones.manipularBotonesMenuPrincipal(false);
+        }
+        if(revision==true){//entro a modo de revision
+             //System.err.println("Modo Revision");
+            this.hide();
+            //UPMForms.revisionModulos.iniciarRevision();
+            UPMForms.revisionModulos.setVisible(true);
+            UPMForms.revisionModulos.manipularBonesMenuprincipal();
+            revision=false;
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtPendiente100KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPendiente100KeyTyped

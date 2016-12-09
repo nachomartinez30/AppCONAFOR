@@ -18,6 +18,7 @@ import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Tablas;
 import gob.conafor.utils.ValidacionesComunes;
+import gob.conafor.utils.Version;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,6 +89,8 @@ public class FrmSuelo extends JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private int actualizar;
     private FuncionesComunes funciones = new FuncionesComunes();
+    private Version ver=new Version();
+    private String version=ver.getVersion();
     
     public FrmSuelo() {
         this.suelo = 19;
@@ -880,7 +883,7 @@ public class FrmSuelo extends JInternalFrame {
         lblVarilla5 = new javax.swing.JLabel();
         lblUsoSuelo = new javax.swing.JLabel();
 
-        setTitle("Suelo, cobertura y evidencia de erosión");
+        setTitle("Suelo, cobertura y evidencia de erosión "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 

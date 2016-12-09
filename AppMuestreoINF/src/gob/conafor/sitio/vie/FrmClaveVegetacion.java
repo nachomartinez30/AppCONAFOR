@@ -9,6 +9,7 @@ import gob.conafor.sys.mod.CDSeguimientoUPM;
 import gob.conafor.sys.mod.CESeccionesCapturadas;
 import gob.conafor.upm.vie.UPMForms;
 import gob.conafor.utils.FuncionesComunes;
+import gob.conafor.utils.Version;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,10 @@ public class FrmClaveVegetacion extends JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private int modificar;
     private FuncionesComunes funciones = new FuncionesComunes();
-           
+    private Version ver=new Version();
+    private String version=ver.getVersion();
+    private boolean revision;
+    
     public FrmClaveVegetacion() {
         initComponents();
         fillCmbClaveSerieV();
@@ -60,6 +64,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
     }
     
     public void revisarClaveVegetacion(CESitio sitio) {
+        revision=true;
         limpiarControles();
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
@@ -531,7 +536,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
         btnContinuar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
-        setTitle("Clave de vegetacion");
+        setTitle("Clave de vegetacion "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 
@@ -760,7 +765,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
                             .addComponent(lblCondicionPresente2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblCondicionPresente1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 7, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(lblUPM)
@@ -770,7 +775,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
                         .addComponent(lblSitio)
                         .addGap(8, 8, 8)
                         .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(lblClaveVegetacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -932,8 +937,18 @@ public class FrmClaveVegetacion extends JInternalFrame {
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.hide();
-        funciones.manipularBotonesMenuPrincipal(false);
+        if(revision==false){//esta en modo de captura
+            this.hide();
+            funciones.manipularBotonesMenuPrincipal(false);
+        }
+        if(revision==true){//entro a modo de revision
+             //System.err.println("Modo Revision");
+            this.hide();
+            //UPMForms.revisionModulos.iniciarRevision();
+            UPMForms.revisionModulos.setVisible(true);
+            UPMForms.revisionModulos.manipularBonesMenuprincipal();
+            revision=false;
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtCondicionPresenteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCondicionPresenteKeyPressed

@@ -17,6 +17,7 @@ public class FrmInicio extends javax.swing.JFrame {
     private CDSecuencia navegacion = new CDSecuencia();
     private Version ver=new Version();
     private String version=ver.getVersion();
+    private String versionLayout=version.substring(6, 9);
 
     public FrmInicio() {
         initComponents();
@@ -144,14 +145,14 @@ public class FrmInicio extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/Titulo_Gerencia.png"))); // NOI18N
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/Arbol.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/arboles.png"))); // NOI18N
 
         jLabel6.setBackground(new java.awt.Color(90, 90, 90));
         jLabel6.setForeground(new java.awt.Color(10, 9, 9));
         jLabel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel6.setOpaque(true);
 
-        jLabel7.setText("Versión 1.5");
+        jLabel7.setText("Versión "+versionLayout);
 
         dpPrincipal.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dpPrincipal.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);

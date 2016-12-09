@@ -7,9 +7,11 @@ import gob.conafor.sys.mod.CDSeguimientoUPM;
 import gob.conafor.sys.mod.CESeccionesCapturadas;
 import gob.conafor.upm.mod.CEUPM;
 import gob.conafor.upm.mod.CatETipoInaccesibilidad;
+import gob.conafor.upm.vie.UPMForms;
 import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.ValidacionesComunes;
+import gob.conafor.utils.Version;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,7 @@ import javax.swing.SwingUtilities;
 public class FrmSitioRevision extends javax.swing.JInternalFrame {
 
     private CEUPM upm;
-   // private Integer upmID;
+    // private Integer upmID;
     private boolean accesible;
     private boolean senial;
     private CDSitio cdSitio = new CDSitio();
@@ -47,12 +49,16 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
     private Integer sitioID;
     private CDSecuencia navegacion = new CDSecuencia();
     private FuncionesComunes funciones = new FuncionesComunes();
-    
+    private Version ver = new Version();
+    private String version = ver.getVersion();
+    private boolean revision;
+
     public FrmSitioRevision() {
         initComponents();
     }
-    
+
     public void revisarSitio(Integer upmID) {
+        revision = true;
         combo.reiniciarComboModel(cmbUPM);
         fillCmbUPMS();
         cmbUPM.setSelectedItem(upmID);
@@ -64,57 +70,57 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
         fillCmbInaccesible();
         btnGuardar.setEnabled(false);
     }
-    
-     public void manipularBotonesMenu(){
+
+    public void manipularBotonesMenu() {
         combo.manipularBotonesMenuPrincipal(true);
     }
-    
-    private void fillCmbUPMS(){
+
+    private void fillCmbUPMS() {
         List<Integer> listUPMS = new ArrayList<>();
         listUPMS = cdSitio.getUPMCreado();
-        if(listUPMS != null){
+        if (listUPMS != null) {
             int size = listUPMS.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbUPM.addItem(listUPMS.get(i));
             }
         }
     }
-    
-    private void fillSitios(int upmID){
-       List<Integer> listSitios = new ArrayList();
+
+    private void fillSitios(int upmID) {
+        List<Integer> listSitios = new ArrayList();
         listSitios = cdSitio.getSitios(upmID);
-        if(listSitios != null){
+        if (listSitios != null) {
             int size = listSitios.size();
-            for(int i = 1; i < size; i++){
+            for (int i = 1; i < size; i++) {
                 cmbSitio.addItem(listSitios.get(i));
             }
         }
     }
-    
-    private void fillSitiosRevision(){
+
+    private void fillSitiosRevision() {
         List<Integer> listSitios = new ArrayList();
         listSitios = cdSitio.getSitiosRevision();
         listSitios.add(0, null);
         //cmbSitio.addItem(listSitios.get(0));
-        if(listSitios != null){
+        if (listSitios != null) {
             int size = listSitios.size();
-            for(int i = 1; i < size; i++){
+            for (int i = 1; i < size; i++) {
                 cmbSitio.addItem(listSitios.get(i));
             }
         }
     }
-    
-    private void fillCmbInaccesible(){
+
+    private void fillCmbInaccesible() {
         List<CatETipoInaccesibilidad> listInaccesibilidad = new ArrayList<>();
         listInaccesibilidad = cdSitio.getTipoInaccesibilidad();
-        if(listInaccesibilidad != null){
+        if (listInaccesibilidad != null) {
             int size = listInaccesibilidad.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbInaccesibilidad.addItem(listInaccesibilidad.get(i));
             }
         }
     }
-    
+
     private void llenarControlesSitio(CESitio ceSitio) {
         if (ceSitio.getSitioAccesible() == 1) {
             chkAccesible.setSelected(true);
@@ -205,7 +211,7 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
             txtExplicacion.setEnabled(true);
         }
     }
-    
+
     private void habilitarControlesIniciales(boolean habilitar) {
         if (habilitar == true) {
             chkAccesible.setEnabled(true);
@@ -243,7 +249,7 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
             txtExplicacion.setEnabled(false);
         }
     }
-   
+
     private void habilitarControlesPorSitio(int tipo) {
         switch (tipo) {
             case 1:
@@ -305,7 +311,7 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
                 break;
         }
     }
-    
+
     private boolean esAccesible() {
         if (chkAccesible.isSelected()) {
             chkSenial.setEnabled(true);
@@ -361,7 +367,7 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
             return false;
         }
     }
-    
+
     private boolean haySenial() {
         if (chkSenial.isSelected()) {
             txtAzimut.setEnabled(false);
@@ -376,7 +382,7 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
         }
         return false;
     }
-    
+
     private boolean validarCamposObligatoriosSitioAccesible() {
         if (cmbUPM.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null,
@@ -473,7 +479,7 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
         }
     }
 
-     private boolean validarDatosCoordenadas() {
+    private boolean validarDatosCoordenadas() {
         ValidacionesComunes vc = new ValidacionesComunes();
         int gradosLatitud = Integer.parseInt(txtGradosLatitud.getText());
         int minutosLatitud = Integer.parseInt(txtMinutosLatitud.getText());
@@ -515,7 +521,7 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
             return true;
         }
     }
-     
+
     private boolean validarAzimutDistancia() {
         ValidacionesComunes vc = new ValidacionesComunes();
         int azimut = Integer.parseInt(txtAzimut.getText());
@@ -533,7 +539,7 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private CESitio crearSitioAccesible() {
         int upmID = (Integer) cmbUPM.getSelectedItem();
         int numeroSitio = (Integer) cmbSitio.getSelectedItem();
@@ -560,7 +566,7 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
 
         return ceSitio;
     }
-    
+
     private CESitio crearSitioSenial() {
         int upmID = (Integer) cmbUPM.getSelectedItem();
         int numeroSitio = (Integer) cmbSitio.getSelectedItem();
@@ -588,21 +594,21 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
         }
         return ceSitio;
     }
-    
-    private CESitio crearSitioInaccesible(){
-         int upmID = (Integer) cmbUPM.getSelectedItem();
-         int numeroSitio = (Integer) cmbSitio.getSelectedItem();
-         int esAccesible = chkAccesible.isSelected() ? 1 : 0;
-         CatETipoInaccesibilidad inaccesibilidad = (CatETipoInaccesibilidad) cmbInaccesibilidad.getSelectedItem();
-         this.ceSitio.setUpmID(upmID);
-         this.ceSitio.setSitio(numeroSitio);
-         this.ceSitio.setSitioAccesible(esAccesible);
-         this.ceSitio.setTipoInaccesibilidadID(inaccesibilidad.getTipoInaccesibilidadID());
-         this.ceSitio.setExplicacionInaccesibilidad(txtExplicacion.getText());
-         
-         return ceSitio;
+
+    private CESitio crearSitioInaccesible() {
+        int upmID = (Integer) cmbUPM.getSelectedItem();
+        int numeroSitio = (Integer) cmbSitio.getSelectedItem();
+        int esAccesible = chkAccesible.isSelected() ? 1 : 0;
+        CatETipoInaccesibilidad inaccesibilidad = (CatETipoInaccesibilidad) cmbInaccesibilidad.getSelectedItem();
+        this.ceSitio.setUpmID(upmID);
+        this.ceSitio.setSitio(numeroSitio);
+        this.ceSitio.setSitioAccesible(esAccesible);
+        this.ceSitio.setTipoInaccesibilidadID(inaccesibilidad.getTipoInaccesibilidadID());
+        this.ceSitio.setExplicacionInaccesibilidad(txtExplicacion.getText());
+
+        return ceSitio;
     }
-    
+
     private void fijarDatosSitio() {
         if (chkAccesible.isSelected()) {
             this.esAccesible = 1;
@@ -675,8 +681,8 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
         }
         this.explicacionaInaccesibilidad = txtExplicacion.getText();
     }
-    
-    private void actualizarSitio(){
+
+    private void actualizarSitio() {
         fijarDatosSitio();
         Integer sitio = (Integer) cmbSitio.getSelectedItem();
         Integer upm = (Integer) cmbUPM.getSelectedItem();
@@ -1480,9 +1486,19 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        funciones.manipularBotonesMenuPrincipal(false);
-        this.hide();
-        
+        if (revision == false) {//esta en modo de captura
+            this.hide();
+            funciones.manipularBotonesMenuPrincipal(false);
+        }
+        if (revision == true) {//entro a modo de revision
+            //System.err.println("Modo Revision");
+
+            this.hide();
+            UPMForms.revisionSitio.setVisible(true);
+            UPMForms.revisionSitio.manipularBotonesMenu();
+            revision = false;
+        }
+
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtGradosLatitudFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGradosLatitudFocusGained
@@ -1513,7 +1529,7 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSegundosLatitudFocusGained
 
     private void txtGradosLongitudFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGradosLongitudFocusGained
-       SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 txtGradosLongitud.selectAll();
@@ -1522,7 +1538,7 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtGradosLongitudFocusGained
 
     private void txtMinutosLongitudFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMinutosLongitudFocusGained
-       SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 txtMinutosLongitud.selectAll();
@@ -1540,7 +1556,7 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSegundosLongitudFocusGained
 
     private void txtEPEFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEPEFocusGained
-         SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 txtEPE.selectAll();
@@ -1553,7 +1569,7 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtExplicacionFocusGained
 
     private void txtExplicacionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtExplicacionKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB) {
             evt.consume();
         }
     }//GEN-LAST:event_txtExplicacionKeyPressed
@@ -1587,7 +1603,7 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtEPEKeyTyped
 
     private void txtAzimutFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAzimutFocusGained
-         SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 txtAzimut.selectAll();
@@ -1596,7 +1612,7 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtAzimutFocusGained
 
     private void txtDistanciaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDistanciaFocusGained
-         SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 txtDistancia.selectAll();
@@ -1605,13 +1621,13 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDistanciaFocusGained
 
     private void txtAzimutFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAzimutFocusLost
-         if (txtAzimut.getText().isEmpty()) {
+        if (txtAzimut.getText().isEmpty()) {
             txtAzimut.setValue(null);
         }
     }//GEN-LAST:event_txtAzimutFocusLost
 
     private void txtDistanciaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDistanciaFocusLost
-         if (txtDistancia.getText().isEmpty()) {
+        if (txtDistancia.getText().isEmpty()) {
             txtDistancia.setValue(null);
         }
     }//GEN-LAST:event_txtDistanciaFocusLost
@@ -1647,27 +1663,27 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtMinutosLongitudFocusLost
 
     private void txtSegundosLongitudFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegundosLongitudFocusLost
-       if (txtSegundosLongitud.getText().isEmpty()) {
+        if (txtSegundosLongitud.getText().isEmpty()) {
             txtSegundosLongitud.setValue(null);
         }
     }//GEN-LAST:event_txtSegundosLongitudFocusLost
 
     private void txtEPEFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEPEFocusLost
-       if (txtEPE.getText().isEmpty()) {
+        if (txtEPE.getText().isEmpty()) {
             txtEPE.setValue(null);
         }
     }//GEN-LAST:event_txtEPEFocusLost
 
     private void txtAzimutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAzimutKeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtAzimutKeyTyped
 
     private void txtDistanciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDistanciaKeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtDistanciaKeyTyped
 
     private void cmbUPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMActionPerformed
-    
+
     }//GEN-LAST:event_cmbUPMActionPerformed
 
     private void chkAccesibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAccesibleActionPerformed

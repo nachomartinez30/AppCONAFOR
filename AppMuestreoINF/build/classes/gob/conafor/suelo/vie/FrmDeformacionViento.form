@@ -6,7 +6,9 @@
     </Component>
   </NonVisualComponents>
   <Properties>
-    <Property name="title" type="java.lang.String" value="Deformaci&#xf3;n del terreno por acci&#xf3;n del viento, colocaci&#xf3;n del TAG"/>
+    <Property name="title" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+      <Connection code="&quot;Deformaci&#xf3;n del terreno por acci&#xf3;n del viento, colocaci&#xf3;n del TAG &quot;+version" type="code"/>
+    </Property>
     <Property name="frameIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
       <Image iconType="3" name="/gob/conafor/utils/logo_conafor.png"/>
     </Property>

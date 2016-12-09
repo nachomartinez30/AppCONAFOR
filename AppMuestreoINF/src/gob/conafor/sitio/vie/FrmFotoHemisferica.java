@@ -4,13 +4,15 @@ import gob.conafor.sitio.mod.CDFotografiaHemisferica;
 import gob.conafor.sitio.mod.CEFotografiaHemisferica;
 import gob.conafor.sitio.mod.CESitio;
 import gob.conafor.sys.mod.CDSecuencia;
+import gob.conafor.upm.vie.UPMForms;
 import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
+import gob.conafor.utils.Version;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
-    
+    private boolean revision;
     private int upmID;
     private int sitioID;
     private int sitio;
@@ -26,6 +28,8 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private int modificar;
     private FuncionesComunes funciones = new FuncionesComunes();
+    private Version ver=new Version();
+    private String version=ver.getVersion();
     
     public FrmFotoHemisferica() {
         initComponents();
@@ -48,6 +52,7 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
     }
 
     public void revisarFotoHemisferica(CESitio ceSitio) {
+        revision=true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
@@ -255,7 +260,7 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
         txtDeclinacionMagnetica = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Fotografía hemisférica, módulo F");
+        setTitle("Fotografía hemisférica, módulo F "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 660));
 
@@ -521,8 +526,18 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.hide();
-        this.funciones.manipularBotonesMenuPrincipal(false);
+        if(revision==false){//esta en modo de captura
+            this.hide();
+            funciones.manipularBotonesMenuPrincipal(false);
+        }
+        if(revision==true){//entro a modo de revision
+             //System.err.println("Modo Revision");
+            this.hide();
+            //UPMForms.revisionModulos.iniciarRevision();
+            UPMForms.revisionModulos.setVisible(true);
+            UPMForms.revisionModulos.manipularBonesMenuprincipal();
+            revision=false;
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtDeclinacionMagneticaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDeclinacionMagneticaKeyTyped

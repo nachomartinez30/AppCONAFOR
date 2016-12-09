@@ -36,6 +36,7 @@ import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Tablas;
 import gob.conafor.utils.ValidacionesComunes;
+import gob.conafor.utils.Version;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -43,7 +44,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmArboladoD extends javax.swing.JInternalFrame {
-    
+    private boolean revision;
     private final int arbolado;
     private final int submuestra;
     private static final int FORMATO_ID = 14;
@@ -87,6 +88,8 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private FuncionesComunes funciones = new FuncionesComunes();
     private int modificar;
+    private Version ver=new Version();
+    private String version=ver.getVersion();
 
     public FrmArboladoD() {
         initComponents();
@@ -131,6 +134,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
     }
 
     public void revisarArboladoD(CESitio sitio) {
+        revision=true;
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
@@ -580,7 +584,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         btnLimparControles = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Arbolado módulo D");
+        setTitle("Arbolado módulo D "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 
@@ -1391,7 +1395,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(chkEsSubmuestra)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -2104,7 +2108,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
     
     private boolean validarAlturaComercial() {
         ValidacionesArbolado validacionAR = new ValidacionesArbolado();
-        System.out.println(cmbCondicion.getSelectedItem());
+        //System.out.println(cmbCondicion.getSelectedItem());
         if (this.diametroNormal >= 10 && txtAlturaComercial.getText().isEmpty()&&cmbCondicionMuertoPie.getSelectedIndex()<2&& cmbCondicion.getSelectedItem().equals("3-Tocon (corta autorizada)") && cmbCondicion.getSelectedItem().equals("4-Tocon (corta clandestina)")) {//si la altura <10, esta vacio Altura comercial y no son c o d en muerto en pie y si NO es tocon
             JOptionPane.showMessageDialog(null, "Error! Si el diámetro normal es mayor o igual a 10 se debe capturar altura comercial", "Arbolado D", JOptionPane.INFORMATION_MESSAGE);
             txtAlturaComercial.requestFocus();
@@ -2942,8 +2946,18 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_grdArboladoMouseClicked
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.hide();
-        funciones.manipularBotonesMenuPrincipal(false);
+        if(revision==false){//esta en modo de captura
+            this.hide();
+            funciones.manipularBotonesMenuPrincipal(false);
+        }
+        if(revision==true){//entro a modo de revision
+             //System.err.println("Modo Revision");
+            this.hide();
+            //UPMForms.revisionModulos.iniciarRevision();
+            UPMForms.revisionModulos.setVisible(true);
+            UPMForms.revisionModulos.manipularBonesMenuprincipal();
+            revision=false;
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnTrazoSitioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrazoSitioActionPerformed

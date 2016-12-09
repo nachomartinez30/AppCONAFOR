@@ -9,12 +9,13 @@ import gob.conafor.sys.mod.CESeccionesCapturadas;
 import gob.conafor.upm.vie.UPMForms;
 import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
+import gob.conafor.utils.Version;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
-    
+    private boolean revision;
     private int upmID;
     private int sitioID;
     private int sitio;
@@ -39,6 +40,8 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private int actualizar;
     private FuncionesComunes funciones = new FuncionesComunes();
+    private Version ver=new Version();
+    private String version=ver.getVersion();
     
     public FrmParametrosFisicoQuimicos() {
         initComponents();
@@ -63,6 +66,7 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
     }
     
     public void continuarParametrosFQ(CESitio ceSitio) {
+        revision=true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
@@ -353,7 +357,7 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         txtObservaciones = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Parametros fisico quimicos");
+        setTitle("Parametros fisico quimicos "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 
@@ -890,11 +894,11 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 938, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
         );
 
         pack();
@@ -1175,8 +1179,18 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtObservacionesKeyPressed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.hide();
-        funciones.manipularBotonesMenuPrincipal(false);
+        if(revision==false){//esta en modo de captura
+            this.hide();
+            funciones.manipularBotonesMenuPrincipal(false);
+        }
+        if(revision==true){//entro a modo de revision
+             //System.err.println("Modo Revision");
+            this.hide();
+            //UPMForms.revisionModulos.iniciarRevision();
+            UPMForms.revisionModulos.setVisible(true);
+            UPMForms.revisionModulos.manipularBonesMenuprincipal();
+            revision=false;
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtSalinidadAguaSuperficialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSalinidadAguaSuperficialKeyTyped

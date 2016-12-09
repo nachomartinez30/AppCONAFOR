@@ -4,6 +4,7 @@ import gob.conafor.upm.mod.CDUpm;
 import gob.conafor.upm.mod.CEUPM;
 import gob.conafor.upm.vie.UPMForms;
 import gob.conafor.utils.FuncionesComunes;
+import gob.conafor.utils.Version;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,8 @@ public class FrmRevisionUPM extends javax.swing.JInternalFrame {
     private CDUpm cdUpm = new CDUpm();
     private CEUPM ceUpm = new CEUPM();
     private FuncionesComunes funciones = new FuncionesComunes();
+    private Version ver=new Version();
+    private String version=ver.getVersion();
     
     public FrmRevisionUPM() {
         initComponents();
@@ -54,7 +57,7 @@ public class FrmRevisionUPM extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-        setTitle("Revisión de UPM'S capturados");
+        setTitle("Revisión de UPM'S capturados "+version);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(335, 317));

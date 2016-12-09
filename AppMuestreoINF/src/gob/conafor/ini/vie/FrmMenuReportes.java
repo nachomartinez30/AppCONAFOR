@@ -4,6 +4,7 @@ import gob.conafor.sitio.mod.CDSitio;
 import gob.conafor.taxonomia.mod.CDColectaBotanica;
 import gob.conafor.upm.vie.UPMForms;
 import gob.conafor.utils.FuncionesComunes;
+import gob.conafor.utils.Version;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -14,6 +15,9 @@ public class FrmMenuReportes extends javax.swing.JInternalFrame {
     private FuncionesComunes funcionesComunes = new FuncionesComunes();
     private CDSitio cdSitio = new CDSitio();
     private CDColectaBotanica cdColecta = new CDColectaBotanica();
+    private Version ver=new Version();
+    private String version=ver.getVersion();
+    
     public FrmMenuReportes() {
         initComponents();
         this.setLocation(300, 110);
@@ -57,7 +61,7 @@ public class FrmMenuReportes extends javax.swing.JInternalFrame {
         btnColectaSuelo = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
-        setTitle("Reportes impresos");
+        setTitle("Reportes impresos "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));

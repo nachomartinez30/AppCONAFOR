@@ -15,6 +15,7 @@ import gob.conafor.upm.mod.CatETipoFisiografia;
 import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Tablas;
+import gob.conafor.utils.Version;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -40,6 +41,8 @@ public class FrmCaracteristicasUPM extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private int modificar;
     private FuncionesComunes funciones = new FuncionesComunes();
+    private Version ver=new Version();
+    private String version=ver.getVersion();
 
     public FrmCaracteristicasUPM() {
         initComponents();
@@ -654,8 +657,7 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
         btnSalir = new javax.swing.JButton();
         chkEpifitas = new javax.swing.JCheckBox();
 
-        setResizable(true);
-        setTitle("Características del conglomerado y diversidad de epífitas en el arbolado, módulo 0");
+        setTitle("Características del conglomerado y diversidad de epífitas en el arbolado, módulo "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 
@@ -777,7 +779,7 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
                     .addComponent(lblClaseTipo, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
                 .addGap(37, 37, 37)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblPresenciaTroncos, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                    .addComponent(lblPresenciaTroncos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cmbPresenciaTroncos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)

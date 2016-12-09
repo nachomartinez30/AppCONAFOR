@@ -16,6 +16,7 @@ import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Tablas;
 import gob.conafor.utils.ValidacionesComunes;
+import gob.conafor.utils.Version;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmDeformacionViento extends JInternalFrame {
-
+private boolean revision;
     private int upmID;
     private int sitioID;
     private int sitio;
@@ -62,6 +63,8 @@ public class FrmDeformacionViento extends JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private int actualizar;
     private FuncionesComunes funciones = new FuncionesComunes();
+    private Version ver=new Version();
+    private String version=ver.getVersion();
 
     public FrmDeformacionViento() {
         initComponents();
@@ -96,6 +99,7 @@ public class FrmDeformacionViento extends JInternalFrame {
     }
 
     public void revisarDeformacionViento(CESitio ceSitio) {
+        revision=true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
@@ -661,7 +665,7 @@ public class FrmDeformacionViento extends JInternalFrame {
         btnContinuar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
-        setTitle("Deformación del terreno por acción del viento, colocación del TAG");
+        setTitle("Deformación del terreno por acción del viento, colocación del TAG "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 
@@ -1113,7 +1117,7 @@ public class FrmDeformacionViento extends JInternalFrame {
                     .addComponent(lblAlturaPromedioMonticulos1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtAlturaPromedioMonticulos, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblAlturaPromedioMonticulos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblNoMonticulos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                    .addComponent(lblNoMonticulos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, Short.MAX_VALUE)
                     .addComponent(txtNoMonticulos, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtVolumenMonticulos))
                 .addContainerGap())
@@ -1729,8 +1733,18 @@ public class FrmDeformacionViento extends JInternalFrame {
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.hide();
-        funciones.manipularBotonesMenuPrincipal(false);
+        if(revision==false){//esta en modo de captura
+            this.hide();
+            funciones.manipularBotonesMenuPrincipal(false);
+        }
+        if(revision==true){//entro a modo de revision
+             //System.err.println("Modo Revision");
+            this.hide();
+            //UPMForms.revisionModulos.iniciarRevision();
+            UPMForms.revisionModulos.setVisible(true);
+            UPMForms.revisionModulos.manipularBonesMenuprincipal();
+            revision=false;
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void rbtOtroLugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtOtroLugarActionPerformed

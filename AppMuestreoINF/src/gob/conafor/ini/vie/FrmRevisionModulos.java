@@ -9,6 +9,7 @@ import gob.conafor.upm.mod.CEUPM;
 import gob.conafor.upm.vie.UPMForms;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Tablas;
+import gob.conafor.utils.Version;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -23,6 +24,8 @@ public class FrmRevisionModulos extends javax.swing.JInternalFrame {
     private FuncionesComunes combo = new FuncionesComunes();
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private CESitio ceSitio = new CESitio();
+    private Version ver=new Version();
+    private String version=ver.getVersion();
 
     public FrmRevisionModulos() {
         initComponents();
@@ -201,7 +204,7 @@ public class FrmRevisionModulos extends javax.swing.JInternalFrame {
         cmbSitios = new javax.swing.JComboBox();
         lblLogoConafor = new javax.swing.JLabel();
 
-        setTitle("Lista de formatos capturados por Sitio");
+        setTitle("Lista de formatos capturados por Sitio "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(770, 650));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {

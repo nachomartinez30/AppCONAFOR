@@ -280,7 +280,7 @@
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gob/conafor/utils/Arbol.png"/>
+              <Image iconType="3" name="/gob/conafor/utils/arboles.png"/>
             </Property>
           </Properties>
         </Component>
@@ -302,7 +302,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Versi&#xf3;n 1.5"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;Versi&#xf3;n &quot;+versionLayout" type="code"/>
+            </Property>
           </Properties>
         </Component>
       </SubComponents>

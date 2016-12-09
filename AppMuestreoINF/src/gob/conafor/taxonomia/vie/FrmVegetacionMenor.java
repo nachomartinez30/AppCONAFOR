@@ -28,6 +28,7 @@ import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Tablas;
 import gob.conafor.utils.ValidacionesComunes;
+import gob.conafor.utils.Version;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -35,7 +36,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
-
+    private boolean revision;
     private int sitio;
     private int vegetacionMenorID;
     private int sitioID;
@@ -66,6 +67,8 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private FuncionesComunes funciones = new FuncionesComunes();
     private int actualizar;
+    private Version ver=new Version();
+    private String version=ver.getVersion();
 
     public FrmVegetacionMenor() {
         initComponents();
@@ -100,6 +103,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
     }
 
     public void revisarVegetacionMenor(CESitio ceSitio) {
+        revision=true;
         CatEAgenteDanio agenteDanio1 = (CatEAgenteDanio) cmbAgenteDanio1.getSelectedItem();
         this.sitio = ceSitio.getSitio();
         this.sitioID = ceSitio.getSitioID();
@@ -736,7 +740,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
         txtClaveColecta = new javax.swing.JTextField();
         chkVegetacionMenor = new javax.swing.JCheckBox();
 
-        setTitle("Vegetación menor, módulo H");
+        setTitle("Vegetación menor, módulo H "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 
@@ -1342,8 +1346,18 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.hide();
-        funciones.manipularBotonesMenuPrincipal(false);
+        if(revision==false){//esta en modo de captura
+            this.hide();
+            funciones.manipularBotonesMenuPrincipal(false);
+        }
+        if(revision==true){//entro a modo de revision
+             //System.err.println("Modo Revision");
+            this.hide();
+            //UPMForms.revisionModulos.iniciarRevision();
+            UPMForms.revisionModulos.setVisible(true);
+            UPMForms.revisionModulos.manipularBonesMenuprincipal();
+            revision=false;
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void grdVegetacionMenorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdVegetacionMenorMouseClicked

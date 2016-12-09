@@ -10,6 +10,7 @@ import gob.conafor.upm.mod.CatETipoInaccesibilidad;
 import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.ValidacionesComunes;
+import gob.conafor.utils.Version;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,8 @@ public class FrmSitio extends javax.swing.JInternalFrame {
     private int actualizacion;
     private Integer sitioID;
     private CDSecuencia navegacion = new CDSecuencia();
+    private Version ver=new Version();
+    private String version=ver.getVersion();
     
     public FrmSitio() {
         initComponents();
@@ -847,7 +850,7 @@ public class FrmSitio extends javax.swing.JInternalFrame {
 
         setBorder(null);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-        setTitle("Información del sitio de muestreo");
+        setTitle("Información del sitio de muestreo "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 

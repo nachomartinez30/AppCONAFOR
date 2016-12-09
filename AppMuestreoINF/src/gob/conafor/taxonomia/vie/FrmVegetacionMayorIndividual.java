@@ -32,6 +32,7 @@ import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Tablas;
 import gob.conafor.utils.ValidacionesComunes;
+import gob.conafor.utils.Version;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,7 +44,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
-
+    private boolean revision;
     private int upmID;
     private int sitioID;
     private int sitio;
@@ -72,6 +73,8 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private FuncionesComunes funciones = new FuncionesComunes();
     private int actualizar;
+    private Version ver=new Version();
+    private String version=ver.getVersion();
 
     public FrmVegetacionMayorIndividual() {
         initComponents();
@@ -109,6 +112,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
     
 
     public void continuarVegetacionMayorIndividual(CESitio sitio) {
+        revision=true;
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
@@ -395,7 +399,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Vegetación mayor, mofotipos creciendo de manera individual, módulo H");
+        setTitle("Vegetación mayor, mofotipos creciendo de manera individual, módulo H "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 
@@ -1591,8 +1595,18 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_grdVegetacionvMayorMouseClicked
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.hide();
-        funciones.manipularBotonesMenuPrincipal(false);
+        if(revision==false){//esta en modo de captura
+            this.hide();
+            funciones.manipularBotonesMenuPrincipal(false);
+        }
+        if(revision==true){//entro a modo de revision
+             //System.err.println("Modo Revision");
+            this.hide();
+            //UPMForms.revisionModulos.iniciarRevision();
+            UPMForms.revisionModulos.setVisible(true);
+            UPMForms.revisionModulos.manipularBonesMenuprincipal();
+            revision=false;
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed

@@ -20,13 +20,14 @@ import gob.conafor.upm.vie.UPMForms;
 import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Tablas;
+import gob.conafor.utils.Version;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
-
+    private boolean revision;
     private int upmID;
     private int sitioID;
     private int sitio;
@@ -69,6 +70,8 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private FuncionesComunes funciones = new FuncionesComunes();
     private int modificar;
+    private Version ver=new Version();
+    private String version=ver.getVersion();
 
     public FrmCondicionDegradacionSuelo() {
         initComponents();
@@ -112,6 +115,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
     }
 
     public void revisarCondicionDegradacion(CESitio ceSitio) {
+        revision=true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
@@ -906,7 +910,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
         btnContinuar2 = new javax.swing.JButton();
         btnSalir2 = new javax.swing.JButton();
 
-        setTitle("Evaluación de las condiciones de degradación del suelo");
+        setTitle("Evaluación de las condiciones de degradación del suelo "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 
@@ -1417,7 +1421,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
                     .addComponent(btnEliminarPedestal))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 65, -1, 460));
@@ -1586,7 +1590,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
                     .addComponent(btnEliminarErosion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, 270, 450));
@@ -1724,7 +1728,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
                     .addComponent(btnEliminarCostra))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, -1, 450));
@@ -1935,7 +1939,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
                     .addComponent(btnEliminarCanalillo))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 270, 460));
@@ -2065,7 +2069,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
                         .addGap(10, 10, 10)
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtProfundidadCarcavas)
-                            .addComponent(lblProfundidadCarcava, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
+                            .addComponent(lblProfundidadCarcava, javax.swing.GroupLayout.PREFERRED_SIZE, 68, Short.MAX_VALUE))
                         .addGap(10, 10, 10))
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2076,7 +2080,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
                                 .addComponent(btnModificarCarcava)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnEliminarCarcava)))
-                        .addContainerGap(11, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2103,7 +2107,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
                     .addComponent(btnEliminarCarcava))
                 .addGap(13, 13, 13)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, 260, 460));
@@ -2241,7 +2245,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
                     .addComponent(btnEliminarPavimento))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, -1, 460));
@@ -2867,8 +2871,18 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDiametroPavimentoKeyTyped
 
     private void btnSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir1ActionPerformed
-        this.hide();
-        funciones.manipularBotonesMenuPrincipal(false);
+        if(revision==false){//esta en modo de captura
+            this.hide();
+            funciones.manipularBotonesMenuPrincipal(false);
+        }
+        if(revision==true){//entro a modo de revision
+             //System.err.println("Modo Revision");
+            this.hide();
+            //UPMForms.revisionModulos.iniciarRevision();
+            UPMForms.revisionModulos.setVisible(true);
+            UPMForms.revisionModulos.manipularBonesMenuprincipal();
+            revision=false;
+        }
     }//GEN-LAST:event_btnSalir1ActionPerformed
 
     private void btnContinuar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuar2ActionPerformed

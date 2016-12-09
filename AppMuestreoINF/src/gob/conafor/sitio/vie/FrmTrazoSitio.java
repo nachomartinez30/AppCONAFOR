@@ -7,6 +7,7 @@ import gob.conafor.upm.vie.UPMForms;
 import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.ValidacionesComunes;
+import gob.conafor.utils.Version;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
@@ -40,6 +41,9 @@ public class FrmTrazoSitio extends javax.swing.JDialog {
     private CESitio ceSitio = new CESitio();
     private Datos numeros = new Datos();
     private FuncionesComunes funciones = new FuncionesComunes();
+    private Version ver=new Version();
+    private String version=ver.getVersion();
+    
     
     public FrmTrazoSitio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

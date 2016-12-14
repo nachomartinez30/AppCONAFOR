@@ -159,7 +159,7 @@ public class CDVegetacionMenor {
         String[] encabezados = {"VegetacionMenorID", "SitioID", "Consecutivo", "Familia", "Genero", "Especie", "Infraespecie", "Nombre comun",
             "Forma de vida", "Condicion", "01-10", "11-25", "26-50", "51-75", "76-100", "101-125", "126-150", ">150", "Cobertura %", "Agente daño 1",
             "Severidad 1", "Agente daño 2", "Severidad 2", "Vigor", "Clave de colecta"};
-         System.out.println(query);
+         //System.out.println(query);
         DefaultTableModel vegetacionMenorModel = new DefaultTableModel(null, encabezados);
         Object[] datosVegetacionMenor = new Object[25];
         Connection conn = LocalConnection.getConnection();

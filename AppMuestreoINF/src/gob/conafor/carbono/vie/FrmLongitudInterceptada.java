@@ -14,7 +14,7 @@ import gob.conafor.taxonomia.mod.CDEspecies;
 import gob.conafor.taxonomia.mod.CEColectaBotanica;
 import gob.conafor.taxonomia.mod.CatEEspecie;
 import gob.conafor.taxonomia.mod.CatEFamiliaEspecie;
-    import gob.conafor.taxonomia.mod.CatEGenero;
+import gob.conafor.taxonomia.mod.CatEGenero;
 import gob.conafor.taxonomia.mod.CatEInfraespecie;
 import gob.conafor.taxonomia.vie.FrmClaveColecta;
 import gob.conafor.upm.vie.UPMForms;
@@ -334,6 +334,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         chkCoberturaDosel = new javax.swing.JCheckBox();
         chkLongitudComponentes = new javax.swing.JCheckBox();
 
+        setMaximizable(true);
         setTitle("Longitud interceptada por componente, cobertura dosel, módulo A o C "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
@@ -639,7 +640,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 868, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -673,7 +674,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtNombreComun)
                             .addComponent(lblNombreComun, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -684,34 +685,25 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblFamilia)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
-                                        .addComponent(cmbComponente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(lblComponente))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblComponente11)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
-                                        .addComponent(cmbTransectoComponente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(lblComponente)
+                                .addComponent(lblComponente11))
                             .addComponent(lblInfraespecie)
                             .addComponent(lblNombreComun)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(txtNombreComun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lblEspecie)
-                            .addComponent(lblGenero)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(cmbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lblGenero)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmbEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbInfraespecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cmbInfraespecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombreComun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(cmbFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbComponente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbTransectoComponente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(20, 20, 20)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -751,6 +743,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
 
         lblClaveColecta.setText("Clave:");
 
+        txtClaveColecta.setEditable(false);
         txtClaveColecta.setEnabled(false);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -758,7 +751,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(311, Short.MAX_VALUE)
+                .addContainerGap(135, Short.MAX_VALUE)
                 .addComponent(btnAgregarComponente)
                 .addGap(18, 18, 18)
                 .addComponent(btnModificarComponente)
@@ -770,7 +763,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                 .addComponent(lblClaveColecta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtClaveColecta, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1203,7 +1196,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cmbTransectoDosel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblTransecto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64)
                 .addComponent(btnAgregarDosel)
@@ -1298,38 +1291,32 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(chkCoberturaDosel)
+                    .addComponent(lblCoberturaDosel, javax.swing.GroupLayout.DEFAULT_SIZE, 892, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 892, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(chkLongitudComponentes)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
+                    .addComponent(lblCarbonoIncendios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblUPM)
+                        .addGap(10, 10, 10)
+                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblSitio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnContinuar)
                 .addGap(18, 18, 18)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(363, 363, 363))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chkCoberturaDosel)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(lblCoberturaDosel, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblUPM)
-                                .addGap(10, 10, 10)
-                                .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(600, 600, 600)
-                                .addComponent(lblSitio)
-                                .addGap(8, 8, 8)
-                                .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblCarbonoIncendios, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(chkLongitudComponentes))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -1341,28 +1328,29 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                         .addGap(2, 2, 2)
                         .addComponent(lblUPM))
                     .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSitio)
-                    .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblSitio)
+                        .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(lblCarbonoIncendios)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(chkLongitudComponentes)
                 .addGap(1, 1, 1)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(chkCoberturaDosel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblCoberturaDosel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnContinuar)
                     .addComponent(btnSalir))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1382,13 +1370,654 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void chkLongitudComponentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkLongitudComponentesActionPerformed
+        if (chkLongitudComponentes.isSelected()) {
+            manipularControleslongitud(true);
+        } else {
+            Object[] opciones = {"Si", "No"};
+            int respuesta = JOptionPane.showOptionDialog(null, "Si capturo, se borrarán los datos de longitud interceptada por componente, ¿Esta seguro?",
+                "Carbono e incendios", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
+            if (respuesta == JOptionPane.YES_OPTION) {
+                cdLongitud.deleteLongitudComponentesSitio(this.sitioID);
+                this.funciones.reiniciarTabla(this.grdComponentes);
+                llenarTabla();
+                manipularControleslongitud(false);
+                limpiarControlesComponentes();
+            } else {
+                chkLongitudComponentes.setSelected(true);
+                chkLongitudComponentes.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_chkLongitudComponentesActionPerformed
+
+    private void chkCoberturaDoselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkCoberturaDoselActionPerformed
+        if (chkCoberturaDosel.isSelected()) {
+            manipularControlesCobertura(true);
+        } else {
+            Object[] opciones = {"Si", "No"};
+            int respuesta = JOptionPane.showOptionDialog(null, "Si capturo, se borrarán los datos de cobertura dosel, ¿Esta seguro?",
+                "Carbono e incendios", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
+            if (respuesta == JOptionPane.YES_OPTION) {
+                cdLongitud.deleteCoberturaDoselSitio(this.sitioID);
+                this.funciones.reiniciarTabla(this.grdCoberturaDosel);
+                llenarTablaCoberturaDosel();
+                manipularControlesCobertura(false);
+                limpiarControlesCobertura();
+                this.funciones.reiniciarComboModel(cmbTransectoDosel);
+                fillCmbTransectos();
+            } else {
+                chkCoberturaDosel.setSelected(true);
+                chkCoberturaDosel.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_chkCoberturaDoselActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        if(revision==false){//esta en modo de captura
+            this.hide();
+            funciones.manipularBotonesMenuPrincipal(false);
+        }
+        if(revision==true){//entro a modo de revision
+            //System.err.println("Modo Revision");
+            this.hide();
+            //UPMForms.revisionModulos.iniciarRevision();
+            UPMForms.revisionModulos.setVisible(true);
+            UPMForms.revisionModulos.manipularBonesMenuprincipal();
+            revision=false;
+        }
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
+        if (validarColectasObligatorias()) {
+            if (chkLongitudComponentes.isSelected() && this.cdLongitud.validarTablaComponente(this.sitioID)) {
+                JOptionPane.showMessageDialog(null, "Si selecciona longitud por componentes se debe capturar", "Carbono e incendios", JOptionPane.INFORMATION_MESSAGE);
+                chkLongitudComponentes.requestFocus();
+            } else if (chkCoberturaDosel.isSelected() && this.cdLongitud.validarCoberturaDosel(this.sitioID)) {
+                JOptionPane.showMessageDialog(null, "Si selecciona cobertura dosel se debe capturar", "Carbono e incendios", JOptionPane.INFORMATION_MESSAGE);
+                chkCoberturaDosel.requestFocus();
+            } else if (this.funciones.validarSeccionCapturada("CARBONO_LongitudComponente", ceSitio) == false && chkLongitudComponentes.isSelected()) {
+                if (validarColectasObligatorias()) {
+                    this.hide();
+                    funciones.manipularBotonesMenuPrincipal(true);
+                    if (this.modificar == 0) {
+                        seleccionarSiguienteFormulario(this.ceSitio);
+                    } else {
+                        revisarSiguienteFormulario(this.ceSitio);
+                    }
+                    this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
+                }
+            } else if (this.funciones.validarSeccionCapturada("CARBONO_LongitudComponente", ceSitio) == true && !chkLongitudComponentes.isSelected()) {
+                this.hide();
+                funciones.manipularBotonesMenuPrincipal(true);
+                if (this.modificar == 0) {
+                    seleccionarSiguienteFormulario(this.ceSitio);
+                } else {
+                    revisarSiguienteFormulario(this.ceSitio);
+                }
+                this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, -1);
+            }
+        }
+    }//GEN-LAST:event_btnContinuarActionPerformed
+
+    private void grdCoberturaDoselMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdCoberturaDoselMouseClicked
+        if (evt.getButton() == 1) {
+            int fila = grdCoberturaDosel.getSelectedRow();
+            String coberID = grdCoberturaDosel.getValueAt(fila, 0).toString();
+            this.coberturaID = Integer.parseInt(coberID);
+            CECoberturaDosel ceDosel = new CECoberturaDosel();
+            ceDosel = this.cdLongitud.getRegistroCoberturaDosel(this.coberturaID);
+            Integer trans = ceDosel.getTransecto();
+            cmbTransectoDosel.setSelectedItem(trans);
+
+            if (ceDosel.getPunto1() == 1) {
+                chkPunto1.setSelected(true);
+            } else {
+                chkPunto1.setSelected(false);
+            }
+            if (ceDosel.getPunto2() == 1) {
+                chkPunto2.setSelected(true);
+            } else {
+                chkPunto2.setSelected(false);
+            }
+            if (ceDosel.getPunto3() == 1) {
+                chkPunto3.setSelected(true);
+            } else {
+                chkPunto3.setSelected(false);
+            }
+            if (ceDosel.getPunto4() == 1) {
+                chkPunto4.setSelected(true);
+            } else {
+                chkPunto4.setSelected(false);
+            }
+            if (ceDosel.getPunto5() == 1) {
+                chkPunto5.setSelected(true);
+            } else {
+                chkPunto5.setSelected(false);
+            }
+            if (ceDosel.getPunto6() == 1) {
+                chkPunto6.setSelected(true);
+            } else {
+                chkPunto6.setSelected(false);
+            }
+            if (ceDosel.getPunto7() == 1) {
+                chkPunto7.setSelected(true);
+            } else {
+                chkPunto7.setSelected(false);
+            }
+            if (ceDosel.getPunto8() == 1) {
+                chkPunto8.setSelected(true);
+            } else {
+                chkPunto8.setSelected(false);
+            }
+            if (ceDosel.getPunto9() == 1) {
+                chkPunto9.setSelected(true);
+            } else {
+                chkPunto9.setSelected(false);
+            }
+            if (ceDosel.getPunto10() == 1) {
+                chkPunto10.setSelected(true);
+            } else {
+                chkPunto10.setSelected(false);
+            }
+        }
+    }//GEN-LAST:event_grdCoberturaDoselMouseClicked
+
+    private void chkPunto10KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPunto10KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (chkPunto10.isSelected()) {
+                chkPunto10.setSelected(false);
+            } else {
+                chkPunto10.setSelected(true);
+            }
+        }
+    }//GEN-LAST:event_chkPunto10KeyPressed
+
+    private void chkPunto9KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPunto9KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (chkPunto9.isSelected()) {
+                chkPunto9.setSelected(false);
+            } else {
+                chkPunto9.setSelected(true);
+            }
+        }
+    }//GEN-LAST:event_chkPunto9KeyPressed
+
+    private void chkPunto8KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPunto8KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (chkPunto8.isSelected()) {
+                chkPunto8.setSelected(false);
+            } else {
+                chkPunto8.setSelected(true);
+            }
+        }
+    }//GEN-LAST:event_chkPunto8KeyPressed
+
+    private void chkPunto7KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPunto7KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (chkPunto7.isSelected()) {
+                chkPunto7.setSelected(false);
+            } else {
+                chkPunto7.setSelected(true);
+            }
+        }
+    }//GEN-LAST:event_chkPunto7KeyPressed
+
+    private void chkPunto6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPunto6KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (chkPunto6.isSelected()) {
+                chkPunto6.setSelected(false);
+            } else {
+                chkPunto6.setSelected(true);
+            }
+        }
+    }//GEN-LAST:event_chkPunto6KeyPressed
+
+    private void chkPunto2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPunto2KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (chkPunto2.isSelected()) {
+                chkPunto2.setSelected(false);
+            } else {
+                chkPunto2.setSelected(true);
+            }
+        }
+    }//GEN-LAST:event_chkPunto2KeyPressed
+
+    private void chkPunto5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPunto5KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (chkPunto5.isSelected()) {
+                chkPunto5.setSelected(false);
+            } else {
+                chkPunto5.setSelected(true);
+            }
+        }
+    }//GEN-LAST:event_chkPunto5KeyPressed
+
+    private void chkPunto4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPunto4KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (chkPunto4.isSelected()) {
+                chkPunto4.setSelected(false);
+            } else {
+                chkPunto4.setSelected(true);
+            }
+        }
+    }//GEN-LAST:event_chkPunto4KeyPressed
+
+    private void chkPunto3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPunto3KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (chkPunto3.isSelected()) {
+                chkPunto3.setSelected(false);
+            } else {
+                chkPunto3.setSelected(true);
+            }
+        }
+    }//GEN-LAST:event_chkPunto3KeyPressed
+
+    private void chkPunto1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPunto1KeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (chkPunto1.isSelected()) {
+                chkPunto1.setSelected(false);
+            } else {
+                chkPunto1.setSelected(true);
+            }
+        }
+    }//GEN-LAST:event_chkPunto1KeyPressed
+
+    private void btnEliminarDoselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarDoselActionPerformed
+        DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbTransectoDosel.getModel();
+        eliminarCoberturaDosel();
+        funciones.reiniciarTabla(this.grdCoberturaDosel);
+        llenarTablaCoberturaDosel();
+        limpiarControlesCobertura();
+        dcm.removeAllElements();
+        fillCmbTransectos();
+        btnAgregarDosel.setEnabled(true);
+    }//GEN-LAST:event_btnEliminarDoselActionPerformed
+
+    private void btnModificarDoselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarDoselActionPerformed
+        asignarDatosDosel();
+        actualizarCoberturaDosel();
+        llenarTablaCoberturaDosel();
+        limpiarControlesCobertura();
+        btnAgregarDosel.setEnabled(true);
+    }//GEN-LAST:event_btnModificarDoselActionPerformed
+
+    private void btnAgregarDoselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDoselActionPerformed
+        DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbTransectoDosel.getModel();
+        asignarDatosDosel();
+        if (validarCoberturaDosel()) {
+            crearCoberturaDosel();
+            llenarTablaCoberturaDosel();
+            limpiarControlesCobertura();
+            dcm.removeAllElements();
+            fillCmbTransectos();
+        }
+    }//GEN-LAST:event_btnAgregarDoselActionPerformed
+
+    private void grdComponentesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdComponentesMouseClicked
+        if (evt.getButton() == 1) {
+            int fila = grdComponentes.getSelectedRow();
+            String compID = grdComponentes.getValueAt(fila, 0).toString();
+            this.componenteID = Integer.parseInt(compID);
+            CELongitudComponente ceLongitud = new CELongitudComponente();
+            ceLongitud = this.cdLongitud.getRegistroSegementoComponente(this.componenteID);
+            Integer trans = ceLongitud.getTransecto();
+            cmbTransectoComponente.setSelectedItem(trans);
+            CatECarbonoComponente comp = new CatECarbonoComponente();
+            comp.setComponenteID(ceLongitud.getComponenteID());
+            cmbComponente.setSelectedItem(comp);
+            CatEFamiliaEspecie fami = new CatEFamiliaEspecie();
+            fami.setFamiliaID(ceLongitud.getFamiliaID());
+            cmbFamilia.setSelectedItem(fami);
+
+            CatEGenero gen = new CatEGenero();
+            gen.setGeneroID(ceLongitud.getGeneroID());
+            cmbGenero.setSelectedItem(gen);
+
+            CatEEspecie esp = new CatEEspecie();
+            esp.setEspecieID(ceLongitud.getEspecieID());
+            cmbEspecie.removeAllItems();
+            cmbEspecie.setSelectedItem(esp);
+
+            CatEInfraespecie inf = new CatEInfraespecie();
+            inf.setInfraespecieID(ceLongitud.getInfraespecieID());
+            cmbInfraespecie.removeAllItems();
+            fillCmbInfraespecie(ceLongitud.getEspecieID());
+            cmbInfraespecie.setSelectedItem(inf);
+
+            txtNombreComun.setText(ceLongitud.getNombreComun());
+            txtSegmento1.setText(String.valueOf(ceLongitud.getSegmento1()));
+            if ((txtSegmento1.getText()).equals("0.0")) {
+                txtSegmento1.setText("");
+            }
+            txtSegmento2.setText(String.valueOf(ceLongitud.getSegmento2()));
+            if ((txtSegmento2.getText()).equals("0.0")) {
+                txtSegmento2.setText("");
+            }
+            txtSegmento3.setText(String.valueOf(ceLongitud.getSegmento3()));
+            if ((txtSegmento3.getText()).equals("0.0")) {
+                txtSegmento3.setText("");
+            }
+            txtSegmento4.setText(String.valueOf(ceLongitud.getSegmento4()));
+            if ((txtSegmento4.getText()).equals("0.0")) {
+                txtSegmento4.setText("");
+            }
+            txtSegmento5.setText(String.valueOf(ceLongitud.getSegmento5()));
+            if ((txtSegmento5.getText()).equals("0.0")) {
+                txtSegmento5.setText("");
+            }
+            txtSegmento6.setText(String.valueOf(ceLongitud.getSegmento6()));
+            if ((txtSegmento6.getText()).equals("0.0")) {
+                txtSegmento6.setText("");
+            }
+            txtSegmento7.setText(String.valueOf(ceLongitud.getSegmento7()));
+            if ((txtSegmento7.getText()).equals("0.0")) {
+                txtSegmento7.setText("");
+            }
+            txtSegmento8.setText(String.valueOf(ceLongitud.getSegmento8()));
+            if ((txtSegmento8.getText()).equals("0.0")) {
+                txtSegmento8.setText("");
+            }
+            txtSegmento9.setText(String.valueOf(ceLongitud.getSegmento9()));
+            if ((txtSegmento9.getText()).equals("0.0")) {
+                txtSegmento9.setText("");
+            }
+            txtSegmento10.setText(String.valueOf(ceLongitud.getSegmento10()));
+            if ((txtSegmento10.getText()).equals("0.0")) {
+                txtSegmento10.setText("");
+            }
+            txtTotal.setText(String.valueOf(ceLongitud.getTotal()));
+            if ((txtTotal.getText()).equals("0.0")) {
+                txtTotal.setText("");
+            }
+            txtClaveColecta.setText(ceLongitud.getColectaBotanica());
+        }
+    }//GEN-LAST:event_grdComponentesMouseClicked
+
+    private void btnColectaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColectaActionPerformed
+        try {
+            int fila = grdComponentes.getSelectedRow();
+            String consecutivo = grdComponentes.getValueAt(fila, 2).toString();
+            FrmClaveColecta claveColecta = new FrmClaveColecta(Main.main, true);
+            claveColecta.setLocationRelativeTo(Main.main);
+            CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
+            CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
+            CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
+            CEColectaBotanica ceColecta = new CEColectaBotanica();
+            if (indexFamilia != null) {
+                ceColecta.setFamiliaID(indexFamilia.getFamiliaID());
+            }
+            if (indexGenero != null) {
+                ceColecta.setGeneroID(indexGenero.getGeneroID());
+            }
+            if (indexEspecie != null) {
+                ceColecta.setEspecieID(indexEspecie.getEspecieID());
+            }
+            ceColecta.setUPMID(this.upmID);
+            //ceColecta.setInfraespecie(txtInfraespecie.getText());
+            ceColecta.setNombreComun(txtNombreComun.getText());
+            claveColecta.setDatosIniciales(ceColecta, FORMATO_ID, "CARBONO_LongitudComponente", "Consecutivo", this.sitioID, Integer.parseInt(consecutivo));
+            claveColecta.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un registro para asignar la clave de colecta"
+                + e.getClass().getName() + " : " + e.getMessage(), "Clave de colecta", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnColectaActionPerformed
+
+    private void btnEliminarComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarComponenteActionPerformed
+        eliminarComponente();
+        this.cdLongitud.enumerarConsecutivo(this.sitioID);
+        funciones.reiniciarTabla(this.grdComponentes);
+        llenarTabla();
+        limpiarControlesComponentes();
+    }//GEN-LAST:event_btnEliminarComponenteActionPerformed
+
+    private void btnModificarComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarComponenteActionPerformed
+        asignarDatosLongitudComponente();
+        if (validarComponentes()) {
+            actualizarComponente();
+            funciones.reiniciarTabla(this.grdComponentes);
+            llenarTabla();
+            reiniciarValoresComponentes();
+            limpiarControlesComponentes();
+        }
+    }//GEN-LAST:event_btnModificarComponenteActionPerformed
+
+    private void btnAgregarComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarComponenteActionPerformed
+        asignarDatosLongitudComponente();
+        if (validarComponentes() /*&& validarLongitudComponente()*/) {
+            crearComponente();
+            this.cdLongitud.enumerarConsecutivo(this.sitioID);
+            funciones.reiniciarTabla(this.grdComponentes);
+            llenarTabla();
+            reiniciarValoresComponentes();
+            limpiarControlesComponentes();
+        }
+    }//GEN-LAST:event_btnAgregarComponenteActionPerformed
+
+    private void cmbTransectoComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTransectoComponenteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbTransectoComponenteActionPerformed
+
+    private void txtSegmento10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento10KeyTyped
+        numeros.keyTyped(evt);
+    }//GEN-LAST:event_txtSegmento10KeyTyped
+
+    private void txtSegmento10FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento10FocusLost
+        if (txtSegmento10.getText().isEmpty()) {
+            txtSegmento10.setValue(null);
+        }
+        asignarDatosLongitudComponente();
+    }//GEN-LAST:event_txtSegmento10FocusLost
+
+    private void txtSegmento10FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento10FocusGained
+        SwingUtilities.invokeLater(new Runnable(){
+            @Override
+            public void run(){
+                txtSegmento10.selectAll();
+            }
+        });
+    }//GEN-LAST:event_txtSegmento10FocusGained
+
+    private void txtSegmento9KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento9KeyTyped
+        numeros.keyTyped(evt);
+    }//GEN-LAST:event_txtSegmento9KeyTyped
+
+    private void txtSegmento9FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento9FocusLost
+        if (txtSegmento9.getText().isEmpty()) {
+            txtSegmento9.setValue(null);
+        }
+        asignarDatosLongitudComponente();
+    }//GEN-LAST:event_txtSegmento9FocusLost
+
+    private void txtSegmento9FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento9FocusGained
+        SwingUtilities.invokeLater(new Runnable(){
+            @Override
+            public void run(){
+                txtSegmento9.selectAll();
+            }
+        });
+    }//GEN-LAST:event_txtSegmento9FocusGained
+
+    private void txtSegmento8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento8KeyTyped
+        numeros.keyTyped(evt);
+    }//GEN-LAST:event_txtSegmento8KeyTyped
+
+    private void txtSegmento8FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento8FocusLost
+        if (txtSegmento8.getText().isEmpty()) {
+            txtSegmento8.setValue(null);
+        }
+        asignarDatosLongitudComponente();
+    }//GEN-LAST:event_txtSegmento8FocusLost
+
+    private void txtSegmento8FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento8FocusGained
+        SwingUtilities.invokeLater(new Runnable(){
+            @Override
+            public void run(){
+                txtSegmento8.selectAll();
+            }
+        });
+    }//GEN-LAST:event_txtSegmento8FocusGained
+
+    private void txtSegmento7KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento7KeyTyped
+        numeros.keyTyped(evt);
+    }//GEN-LAST:event_txtSegmento7KeyTyped
+
+    private void txtSegmento7FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento7FocusLost
+        if (txtSegmento7.getText().isEmpty()) {
+            txtSegmento7.setValue(null);
+        }
+        asignarDatosLongitudComponente();
+    }//GEN-LAST:event_txtSegmento7FocusLost
+
+    private void txtSegmento7FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento7FocusGained
+        SwingUtilities.invokeLater(new Runnable(){
+            @Override
+            public void run(){
+                txtSegmento7.selectAll();
+            }
+        });
+    }//GEN-LAST:event_txtSegmento7FocusGained
+
+    private void txtSegmento6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento6KeyTyped
+        numeros.keyTyped(evt);
+    }//GEN-LAST:event_txtSegmento6KeyTyped
+
+    private void txtSegmento6FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento6FocusLost
+        if (txtSegmento6.getText().isEmpty()) {
+            txtSegmento6.setValue(null);
+        }
+        asignarDatosLongitudComponente();
+    }//GEN-LAST:event_txtSegmento6FocusLost
+
+    private void txtSegmento6FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento6FocusGained
+        SwingUtilities.invokeLater(new Runnable(){
+            @Override
+            public void run(){
+                txtSegmento6.selectAll();
+            }
+        });
+    }//GEN-LAST:event_txtSegmento6FocusGained
+
+    private void txtSegmento5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento5KeyTyped
+        numeros.keyTyped(evt);
+    }//GEN-LAST:event_txtSegmento5KeyTyped
+
+    private void txtSegmento5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento5FocusLost
+        if (txtSegmento5.getText().isEmpty()) {
+            txtSegmento5.setValue(null);
+        }
+        asignarDatosLongitudComponente();
+    }//GEN-LAST:event_txtSegmento5FocusLost
+
+    private void txtSegmento5FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento5FocusGained
+        SwingUtilities.invokeLater(new Runnable(){
+            @Override
+            public void run(){
+                txtSegmento5.selectAll();
+            }
+        });
+    }//GEN-LAST:event_txtSegmento5FocusGained
+
+    private void txtSegmento4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento4KeyTyped
+        numeros.keyTyped(evt);
+    }//GEN-LAST:event_txtSegmento4KeyTyped
+
+    private void txtSegmento4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento4FocusLost
+        if (txtSegmento4.getText().isEmpty()) {
+            txtSegmento4.setValue(null);
+        }
+        asignarDatosLongitudComponente();
+    }//GEN-LAST:event_txtSegmento4FocusLost
+
+    private void txtSegmento4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento4FocusGained
+        SwingUtilities.invokeLater(new Runnable(){
+            @Override
+            public void run(){
+                txtSegmento4.selectAll();
+            }
+        });
+    }//GEN-LAST:event_txtSegmento4FocusGained
+
+    private void txtSegmento3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento3KeyTyped
+        numeros.keyTyped(evt);
+    }//GEN-LAST:event_txtSegmento3KeyTyped
+
+    private void txtSegmento3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento3FocusLost
+        if (txtSegmento3.getText().isEmpty()) {
+            txtSegmento3.setValue(null);
+        }
+        asignarDatosLongitudComponente();
+    }//GEN-LAST:event_txtSegmento3FocusLost
+
+    private void txtSegmento3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento3FocusGained
+        SwingUtilities.invokeLater(new Runnable(){
+            @Override
+            public void run(){
+                txtSegmento3.selectAll();
+            }
+        });
+    }//GEN-LAST:event_txtSegmento3FocusGained
+
+    private void txtSegmento2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento2KeyTyped
+        numeros.keyTyped(evt);
+    }//GEN-LAST:event_txtSegmento2KeyTyped
+
+    private void txtSegmento2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento2FocusLost
+        if (txtSegmento2.getText().isEmpty()) {
+            txtSegmento2.setValue(null);
+        }
+        asignarDatosLongitudComponente();
+    }//GEN-LAST:event_txtSegmento2FocusLost
+
+    private void txtSegmento2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento2FocusGained
+        SwingUtilities.invokeLater(new Runnable(){
+            @Override
+            public void run(){
+                txtSegmento2.selectAll();
+            }
+        });
+    }//GEN-LAST:event_txtSegmento2FocusGained
+
+    private void txtSegmento1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento1KeyTyped
+        numeros.keyTyped(evt);
+    }//GEN-LAST:event_txtSegmento1KeyTyped
+
+    private void txtSegmento1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento1FocusLost
+        if (txtSegmento1.getText().isEmpty()) {
+            txtSegmento1.setValue(null);
+        }
+        asignarDatosLongitudComponente();
+    }//GEN-LAST:event_txtSegmento1FocusLost
+
+    private void txtSegmento1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento1FocusGained
+        SwingUtilities.invokeLater(new Runnable(){
+            @Override
+            public void run(){
+                txtSegmento1.selectAll();
+            }
+        });
+    }//GEN-LAST:event_txtSegmento1FocusGained
+
+    private void txtNombreComunFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreComunFocusGained
+        txtNombreComun.selectAll();
+    }//GEN-LAST:event_txtNombreComunFocusGained
+
+    private void cmbEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEspecieActionPerformed
+        CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
+        DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbInfraespecie.getModel();
+        dcm.removeAllElements();
+        if (indexEspecie != null) {
+            fillCmbInfraespecie(indexEspecie.getEspecieID());
+        }
+    }//GEN-LAST:event_cmbEspecieActionPerformed
+
     private void cmbGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGeneroActionPerformed
         CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
         CatEEspecie indexFamilia = (CatEEspecie) cmbEspecie.getSelectedItem();
         DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbEspecie.getModel();
         dcm.removeAllElements();
         CatEFamiliaEspecie familia;
-       if (indexFamilia == null && indexGenero != null) {
+        if (indexFamilia == null && indexGenero != null) {
             familia = this.cdEspecies.getFamilia(indexGenero.getGeneroID());
             cmbEspecie.setSelectedItem(familia);
         }
@@ -1411,14 +2040,14 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                 cmbInfraespecie.setEnabled(false);
                 txtNombreComun.setText("");
                 txtNombreComun.setEnabled(false);
-                
+
             } else {
                 cmbFamilia.setEnabled(true);
                 cmbGenero.setEnabled(true);
                 cmbEspecie.setEnabled(true);
                 cmbInfraespecie.setEnabled(true);
                 txtNombreComun.setEnabled(true);
-                
+
             }
         }
     }//GEN-LAST:event_cmbComponenteActionPerformed
@@ -2367,647 +2996,6 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         }
     }
     
-    private void txtSegmento1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento1FocusGained
-       SwingUtilities.invokeLater(new Runnable(){
-            @Override
-            public void run(){
-                txtSegmento1.selectAll();
-            }
-        });
-    }//GEN-LAST:event_txtSegmento1FocusGained
-
-    private void txtSegmento2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento2FocusGained
-       SwingUtilities.invokeLater(new Runnable(){
-            @Override
-            public void run(){
-                txtSegmento2.selectAll();
-            }
-        });
-    }//GEN-LAST:event_txtSegmento2FocusGained
-
-    private void txtSegmento3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento3FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
-            @Override
-            public void run(){
-                txtSegmento3.selectAll();
-            }
-        });
-    }//GEN-LAST:event_txtSegmento3FocusGained
-
-    private void txtSegmento4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento4FocusGained
-       SwingUtilities.invokeLater(new Runnable(){
-            @Override
-            public void run(){
-                txtSegmento4.selectAll();
-            }
-        });
-    }//GEN-LAST:event_txtSegmento4FocusGained
-
-    private void txtSegmento5FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento5FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
-            @Override
-            public void run(){
-                txtSegmento5.selectAll();
-            }
-        });
-    }//GEN-LAST:event_txtSegmento5FocusGained
-
-    private void txtSegmento6FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento6FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
-            @Override
-            public void run(){
-                txtSegmento6.selectAll();
-            }
-        });
-    }//GEN-LAST:event_txtSegmento6FocusGained
-
-    private void txtSegmento7FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento7FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
-            @Override
-            public void run(){
-                txtSegmento7.selectAll();
-            }
-        });
-    }//GEN-LAST:event_txtSegmento7FocusGained
-
-    private void txtSegmento8FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento8FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
-            @Override
-            public void run(){
-                txtSegmento8.selectAll();
-            }
-        });
-    }//GEN-LAST:event_txtSegmento8FocusGained
-
-    private void txtSegmento9FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento9FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
-            @Override
-            public void run(){
-                txtSegmento9.selectAll();
-            }
-        });
-    }//GEN-LAST:event_txtSegmento9FocusGained
-
-    private void txtSegmento10FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento10FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
-            @Override
-            public void run(){
-                txtSegmento10.selectAll();
-            }
-        });
-    }//GEN-LAST:event_txtSegmento10FocusGained
-
-    private void txtNombreComunFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreComunFocusGained
-       txtNombreComun.selectAll();
-    }//GEN-LAST:event_txtNombreComunFocusGained
-
-    private void txtSegmento1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento1FocusLost
-        if (txtSegmento1.getText().isEmpty()) {
-            txtSegmento1.setValue(null);
-        }
-        asignarDatosLongitudComponente();
-    }//GEN-LAST:event_txtSegmento1FocusLost
-
-    private void txtSegmento2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento2FocusLost
-        if (txtSegmento2.getText().isEmpty()) {
-            txtSegmento2.setValue(null);
-        }
-        asignarDatosLongitudComponente();
-    }//GEN-LAST:event_txtSegmento2FocusLost
-
-    private void txtSegmento3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento3FocusLost
-        if (txtSegmento3.getText().isEmpty()) {
-            txtSegmento3.setValue(null);
-        }
-        asignarDatosLongitudComponente();
-    }//GEN-LAST:event_txtSegmento3FocusLost
-
-    private void txtSegmento4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento4FocusLost
-        if (txtSegmento4.getText().isEmpty()) {
-            txtSegmento4.setValue(null);
-        }
-        asignarDatosLongitudComponente();
-    }//GEN-LAST:event_txtSegmento4FocusLost
-
-    private void txtSegmento5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento5FocusLost
-        if (txtSegmento5.getText().isEmpty()) {
-            txtSegmento5.setValue(null);
-        }
-        asignarDatosLongitudComponente();
-    }//GEN-LAST:event_txtSegmento5FocusLost
-
-    private void txtSegmento6FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento6FocusLost
-        if (txtSegmento6.getText().isEmpty()) {
-            txtSegmento6.setValue(null);
-        }
-        asignarDatosLongitudComponente();
-    }//GEN-LAST:event_txtSegmento6FocusLost
-
-    private void txtSegmento7FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento7FocusLost
-        if (txtSegmento7.getText().isEmpty()) {
-            txtSegmento7.setValue(null);
-        }
-        asignarDatosLongitudComponente();
-    }//GEN-LAST:event_txtSegmento7FocusLost
-
-    private void txtSegmento8FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento8FocusLost
-        if (txtSegmento8.getText().isEmpty()) {
-            txtSegmento8.setValue(null);
-        }
-        asignarDatosLongitudComponente();
-    }//GEN-LAST:event_txtSegmento8FocusLost
-
-    private void txtSegmento9FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento9FocusLost
-        if (txtSegmento9.getText().isEmpty()) {
-            txtSegmento9.setValue(null);
-        }
-        asignarDatosLongitudComponente();
-    }//GEN-LAST:event_txtSegmento9FocusLost
-
-    private void txtSegmento10FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento10FocusLost
-        if (txtSegmento10.getText().isEmpty()) {
-            txtSegmento10.setValue(null);
-        }
-        asignarDatosLongitudComponente();
-    }//GEN-LAST:event_txtSegmento10FocusLost
-
-    private void btnAgregarComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarComponenteActionPerformed
-        asignarDatosLongitudComponente();
-        if (validarComponentes() /*&& validarLongitudComponente()*/) {
-            crearComponente();
-            this.cdLongitud.enumerarConsecutivo(this.sitioID);
-            funciones.reiniciarTabla(this.grdComponentes);
-            llenarTabla();
-            reiniciarValoresComponentes();
-            limpiarControlesComponentes();
-        }
-    }//GEN-LAST:event_btnAgregarComponenteActionPerformed
-
-    private void btnModificarComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarComponenteActionPerformed
-        asignarDatosLongitudComponente();
-        if (validarComponentes()) {
-            actualizarComponente();
-            funciones.reiniciarTabla(this.grdComponentes);
-            llenarTabla();
-            reiniciarValoresComponentes();
-            limpiarControlesComponentes();
-        }
-    }//GEN-LAST:event_btnModificarComponenteActionPerformed
-
-    private void btnEliminarComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarComponenteActionPerformed
-        eliminarComponente();
-        this.cdLongitud.enumerarConsecutivo(this.sitioID);
-        funciones.reiniciarTabla(this.grdComponentes);
-        llenarTabla();
-        limpiarControlesComponentes();
-    }//GEN-LAST:event_btnEliminarComponenteActionPerformed
-
-    private void btnAgregarDoselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDoselActionPerformed
-        DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbTransectoDosel.getModel();
-        asignarDatosDosel();
-        if (validarCoberturaDosel()) {
-            crearCoberturaDosel();
-            llenarTablaCoberturaDosel();
-            limpiarControlesCobertura();
-            dcm.removeAllElements();
-            fillCmbTransectos();
-        }
-    }//GEN-LAST:event_btnAgregarDoselActionPerformed
-
-    private void btnModificarDoselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarDoselActionPerformed
-        asignarDatosDosel();
-        actualizarCoberturaDosel();
-        llenarTablaCoberturaDosel();
-        limpiarControlesCobertura();
-        btnAgregarDosel.setEnabled(true);
-    }//GEN-LAST:event_btnModificarDoselActionPerformed
-
-    private void btnEliminarDoselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarDoselActionPerformed
-        DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbTransectoDosel.getModel();
-        eliminarCoberturaDosel();
-        funciones.reiniciarTabla(this.grdCoberturaDosel);
-        llenarTablaCoberturaDosel();
-        limpiarControlesCobertura();
-        dcm.removeAllElements();
-        fillCmbTransectos();
-        btnAgregarDosel.setEnabled(true);
-    }//GEN-LAST:event_btnEliminarDoselActionPerformed
-
-    private void grdComponentesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdComponentesMouseClicked
-        if (evt.getButton() == 1) {
-            int fila = grdComponentes.getSelectedRow();
-            String compID = grdComponentes.getValueAt(fila, 0).toString();
-            this.componenteID = Integer.parseInt(compID);
-            CELongitudComponente ceLongitud = new CELongitudComponente();
-            ceLongitud = this.cdLongitud.getRegistroSegementoComponente(this.componenteID);
-            Integer trans = ceLongitud.getTransecto();
-            cmbTransectoComponente.setSelectedItem(trans);
-            CatECarbonoComponente comp = new CatECarbonoComponente();
-            comp.setComponenteID(ceLongitud.getComponenteID());
-            cmbComponente.setSelectedItem(comp);
-            CatEFamiliaEspecie fami = new CatEFamiliaEspecie();
-            fami.setFamiliaID(ceLongitud.getFamiliaID());
-            cmbFamilia.setSelectedItem(fami);
-
-            CatEGenero gen = new CatEGenero();
-            gen.setGeneroID(ceLongitud.getGeneroID());
-            cmbGenero.setSelectedItem(gen);
-
-            CatEEspecie esp = new CatEEspecie();
-            esp.setEspecieID(ceLongitud.getEspecieID());
-            cmbEspecie.removeAllItems();
-            cmbEspecie.setSelectedItem(esp);
-
-            CatEInfraespecie inf = new CatEInfraespecie();
-            inf.setInfraespecieID(ceLongitud.getInfraespecieID());
-            cmbInfraespecie.removeAllItems();
-            fillCmbInfraespecie(ceLongitud.getEspecieID());
-            cmbInfraespecie.setSelectedItem(inf);
-
-            txtNombreComun.setText(ceLongitud.getNombreComun());
-            txtSegmento1.setText(String.valueOf(ceLongitud.getSegmento1()));
-            if ((txtSegmento1.getText()).equals("0.0")) {
-                txtSegmento1.setText("");
-            }
-            txtSegmento2.setText(String.valueOf(ceLongitud.getSegmento2()));
-            if ((txtSegmento2.getText()).equals("0.0")) {
-                txtSegmento2.setText("");
-            }
-            txtSegmento3.setText(String.valueOf(ceLongitud.getSegmento3()));
-            if ((txtSegmento3.getText()).equals("0.0")) {
-                txtSegmento3.setText("");
-            }
-            txtSegmento4.setText(String.valueOf(ceLongitud.getSegmento4()));
-            if ((txtSegmento4.getText()).equals("0.0")) {
-                txtSegmento4.setText("");
-            }
-            txtSegmento5.setText(String.valueOf(ceLongitud.getSegmento5()));
-            if ((txtSegmento5.getText()).equals("0.0")) {
-                txtSegmento5.setText("");
-            }
-            txtSegmento6.setText(String.valueOf(ceLongitud.getSegmento6()));
-            if ((txtSegmento6.getText()).equals("0.0")) {
-                txtSegmento6.setText("");
-            }
-            txtSegmento7.setText(String.valueOf(ceLongitud.getSegmento7()));
-            if ((txtSegmento7.getText()).equals("0.0")) {
-                txtSegmento7.setText("");
-            }
-            txtSegmento8.setText(String.valueOf(ceLongitud.getSegmento8()));
-            if ((txtSegmento8.getText()).equals("0.0")) {
-                txtSegmento8.setText("");
-            }
-            txtSegmento9.setText(String.valueOf(ceLongitud.getSegmento9()));
-            if ((txtSegmento9.getText()).equals("0.0")) {
-                txtSegmento9.setText("");
-            }
-            txtSegmento10.setText(String.valueOf(ceLongitud.getSegmento10()));
-            if ((txtSegmento10.getText()).equals("0.0")) {
-                txtSegmento10.setText("");
-            }
-            txtTotal.setText(String.valueOf(ceLongitud.getTotal()));
-            if ((txtTotal.getText()).equals("0.0")) {
-                txtTotal.setText("");
-            }
-            txtClaveColecta.setText(ceLongitud.getColectaBotanica());
-        }
-    }//GEN-LAST:event_grdComponentesMouseClicked
-
-    private void grdCoberturaDoselMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdCoberturaDoselMouseClicked
-        if (evt.getButton() == 1) {
-            int fila = grdCoberturaDosel.getSelectedRow();
-            String coberID = grdCoberturaDosel.getValueAt(fila, 0).toString();
-            this.coberturaID = Integer.parseInt(coberID);
-            CECoberturaDosel ceDosel = new CECoberturaDosel();
-            ceDosel = this.cdLongitud.getRegistroCoberturaDosel(this.coberturaID);
-            Integer trans = ceDosel.getTransecto();
-            cmbTransectoDosel.setSelectedItem(trans);
-
-            if (ceDosel.getPunto1() == 1) {
-                chkPunto1.setSelected(true);
-            } else {
-                chkPunto1.setSelected(false);
-            }
-            if (ceDosel.getPunto2() == 1) {
-                chkPunto2.setSelected(true);
-            } else {
-                chkPunto2.setSelected(false);
-            }
-            if (ceDosel.getPunto3() == 1) {
-                chkPunto3.setSelected(true);
-            } else {
-                chkPunto3.setSelected(false);
-            }
-            if (ceDosel.getPunto4() == 1) {
-                chkPunto4.setSelected(true);
-            } else {
-                chkPunto4.setSelected(false);
-            }
-            if (ceDosel.getPunto5() == 1) {
-                chkPunto5.setSelected(true);
-            } else {
-                chkPunto5.setSelected(false);
-            }
-            if (ceDosel.getPunto6() == 1) {
-                chkPunto6.setSelected(true);
-            } else {
-                chkPunto6.setSelected(false);
-            }
-            if (ceDosel.getPunto7() == 1) {
-                chkPunto7.setSelected(true);
-            } else {
-                chkPunto7.setSelected(false);
-            }
-            if (ceDosel.getPunto8() == 1) {
-                chkPunto8.setSelected(true);
-            } else {
-                chkPunto8.setSelected(false);
-            }
-            if (ceDosel.getPunto9() == 1) {
-                chkPunto9.setSelected(true);
-            } else {
-                chkPunto9.setSelected(false);
-            }
-            if (ceDosel.getPunto10() == 1) {
-                chkPunto10.setSelected(true);
-            } else {
-                chkPunto10.setSelected(false);
-            }
-        }
-    }//GEN-LAST:event_grdCoberturaDoselMouseClicked
-
-    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        if (validarColectasObligatorias()) {
-            if (chkLongitudComponentes.isSelected() && this.cdLongitud.validarTablaComponente(this.sitioID)) {
-                JOptionPane.showMessageDialog(null, "Si selecciona longitud por componentes se debe capturar", "Carbono e incendios", JOptionPane.INFORMATION_MESSAGE);
-                chkLongitudComponentes.requestFocus();
-            } else if (chkCoberturaDosel.isSelected() && this.cdLongitud.validarCoberturaDosel(this.sitioID)) {
-                JOptionPane.showMessageDialog(null, "Si selecciona cobertura dosel se debe capturar", "Carbono e incendios", JOptionPane.INFORMATION_MESSAGE);
-                chkCoberturaDosel.requestFocus();
-            } else if (this.funciones.validarSeccionCapturada("CARBONO_LongitudComponente", ceSitio) == false && chkLongitudComponentes.isSelected()) {
-                if (validarColectasObligatorias()) {
-                    this.hide();
-                    funciones.manipularBotonesMenuPrincipal(true);
-                    if (this.modificar == 0) {
-                        seleccionarSiguienteFormulario(this.ceSitio);
-                    } else {
-                        revisarSiguienteFormulario(this.ceSitio);
-                    }
-                    this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-                }
-            } else if (this.funciones.validarSeccionCapturada("CARBONO_LongitudComponente", ceSitio) == true && !chkLongitudComponentes.isSelected()) {
-                this.hide();
-                funciones.manipularBotonesMenuPrincipal(true);
-                if (this.modificar == 0) {
-                    seleccionarSiguienteFormulario(this.ceSitio);
-                } else {
-                    revisarSiguienteFormulario(this.ceSitio);
-                }
-                this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, -1);
-            }
-        }
-    }//GEN-LAST:event_btnContinuarActionPerformed
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-       if(revision==false){//esta en modo de captura
-            this.hide();
-            funciones.manipularBotonesMenuPrincipal(false);
-        }
-        if(revision==true){//entro a modo de revision
-             //System.err.println("Modo Revision");
-            this.hide();
-            //UPMForms.revisionModulos.iniciarRevision();
-            UPMForms.revisionModulos.setVisible(true);
-            UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision=false;
-        }
-    }//GEN-LAST:event_btnSalirActionPerformed
-
-    private void txtSegmento1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento1KeyTyped
-       numeros.keyTyped(evt);
-    }//GEN-LAST:event_txtSegmento1KeyTyped
-
-    private void txtSegmento2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento2KeyTyped
-        numeros.keyTyped(evt);
-    }//GEN-LAST:event_txtSegmento2KeyTyped
-
-    private void txtSegmento3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento3KeyTyped
-        numeros.keyTyped(evt);
-    }//GEN-LAST:event_txtSegmento3KeyTyped
-
-    private void txtSegmento4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento4KeyTyped
-        numeros.keyTyped(evt);
-    }//GEN-LAST:event_txtSegmento4KeyTyped
-
-    private void txtSegmento5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento5KeyTyped
-        numeros.keyTyped(evt);
-    }//GEN-LAST:event_txtSegmento5KeyTyped
-
-    private void txtSegmento6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento6KeyTyped
-        numeros.keyTyped(evt);
-    }//GEN-LAST:event_txtSegmento6KeyTyped
-
-    private void txtSegmento7KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento7KeyTyped
-        numeros.keyTyped(evt);
-    }//GEN-LAST:event_txtSegmento7KeyTyped
-
-    private void txtSegmento8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento8KeyTyped
-        numeros.keyTyped(evt);
-    }//GEN-LAST:event_txtSegmento8KeyTyped
-
-    private void txtSegmento9KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento9KeyTyped
-       numeros.keyTyped(evt);
-    }//GEN-LAST:event_txtSegmento9KeyTyped
-
-    private void txtSegmento10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSegmento10KeyTyped
-        numeros.keyTyped(evt);
-    }//GEN-LAST:event_txtSegmento10KeyTyped
-
-    private void chkLongitudComponentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkLongitudComponentesActionPerformed
-        if (chkLongitudComponentes.isSelected()) {
-            manipularControleslongitud(true);
-        } else {
-            Object[] opciones = {"Si", "No"};
-            int respuesta = JOptionPane.showOptionDialog(null, "Si capturo, se borrarán los datos de longitud interceptada por componente, ¿Esta seguro?",
-                    "Carbono e incendios", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
-            if (respuesta == JOptionPane.YES_OPTION) {
-                cdLongitud.deleteLongitudComponentesSitio(this.sitioID);
-                this.funciones.reiniciarTabla(this.grdComponentes);
-                llenarTabla();
-                manipularControleslongitud(false);
-                limpiarControlesComponentes();
-            } else {
-                chkLongitudComponentes.setSelected(true);
-                chkLongitudComponentes.requestFocus();
-            }
-        }
-    }//GEN-LAST:event_chkLongitudComponentesActionPerformed
-
-    private void chkCoberturaDoselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkCoberturaDoselActionPerformed
-        if (chkCoberturaDosel.isSelected()) {
-            manipularControlesCobertura(true);
-        } else {
-            Object[] opciones = {"Si", "No"};
-            int respuesta = JOptionPane.showOptionDialog(null, "Si capturo, se borrarán los datos de cobertura dosel, ¿Esta seguro?",
-                    "Carbono e incendios", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
-            if (respuesta == JOptionPane.YES_OPTION) {
-                cdLongitud.deleteCoberturaDoselSitio(this.sitioID);
-                this.funciones.reiniciarTabla(this.grdCoberturaDosel);
-                llenarTablaCoberturaDosel();
-                manipularControlesCobertura(false);
-                limpiarControlesCobertura();
-                this.funciones.reiniciarComboModel(cmbTransectoDosel);
-                fillCmbTransectos();
-            } else {
-                chkCoberturaDosel.setSelected(true);
-                chkCoberturaDosel.requestFocus();
-            }
-        }
-    }//GEN-LAST:event_chkCoberturaDoselActionPerformed
-
-    private void chkPunto1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPunto1KeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (chkPunto1.isSelected()) {
-                chkPunto1.setSelected(false);
-            } else {
-                chkPunto1.setSelected(true);
-            }
-        }
-    }//GEN-LAST:event_chkPunto1KeyPressed
-
-    private void chkPunto2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPunto2KeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (chkPunto2.isSelected()) {
-                chkPunto2.setSelected(false);
-            } else {
-                chkPunto2.setSelected(true);
-            }
-        }
-    }//GEN-LAST:event_chkPunto2KeyPressed
-
-    private void chkPunto3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPunto3KeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (chkPunto3.isSelected()) {
-                chkPunto3.setSelected(false);
-            } else {
-                chkPunto3.setSelected(true);
-            }
-        }
-    }//GEN-LAST:event_chkPunto3KeyPressed
-
-    private void chkPunto4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPunto4KeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (chkPunto4.isSelected()) {
-                chkPunto4.setSelected(false);
-            } else {
-                chkPunto4.setSelected(true);
-            }
-        }
-    }//GEN-LAST:event_chkPunto4KeyPressed
-
-    private void chkPunto5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPunto5KeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (chkPunto5.isSelected()) {
-                chkPunto5.setSelected(false);
-            } else {
-                chkPunto5.setSelected(true);
-            }
-        }
-    }//GEN-LAST:event_chkPunto5KeyPressed
-
-    private void chkPunto6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPunto6KeyPressed
-       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (chkPunto6.isSelected()) {
-                chkPunto6.setSelected(false);
-            } else {
-                chkPunto6.setSelected(true);
-            }
-        }
-    }//GEN-LAST:event_chkPunto6KeyPressed
-
-    private void chkPunto7KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPunto7KeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (chkPunto7.isSelected()) {
-                chkPunto7.setSelected(false);
-            } else {
-                chkPunto7.setSelected(true);
-            }
-        }
-    }//GEN-LAST:event_chkPunto7KeyPressed
-
-    private void chkPunto8KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPunto8KeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (chkPunto8.isSelected()) {
-                chkPunto8.setSelected(false);
-            } else {
-                chkPunto8.setSelected(true);
-            }
-        }
-    }//GEN-LAST:event_chkPunto8KeyPressed
-
-    private void chkPunto9KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPunto9KeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (chkPunto9.isSelected()) {
-                chkPunto9.setSelected(false);
-            } else {
-                chkPunto9.setSelected(true);
-            }
-        }
-    }//GEN-LAST:event_chkPunto9KeyPressed
-
-    private void chkPunto10KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkPunto10KeyPressed
-         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (chkPunto10.isSelected()) {
-                chkPunto10.setSelected(false);
-            } else {
-                chkPunto10.setSelected(true);
-            }
-        }
-    }//GEN-LAST:event_chkPunto10KeyPressed
-
-    private void btnColectaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColectaActionPerformed
-        try {
-            int fila = grdComponentes.getSelectedRow();
-            String consecutivo = grdComponentes.getValueAt(fila, 2).toString();
-            FrmClaveColecta claveColecta = new FrmClaveColecta(Main.main, true);
-            claveColecta.setLocationRelativeTo(Main.main);
-            CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
-            CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
-            CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
-            CEColectaBotanica ceColecta = new CEColectaBotanica();
-            if (indexFamilia != null) {
-                ceColecta.setFamiliaID(indexFamilia.getFamiliaID());
-            }
-            if (indexGenero != null) {
-                ceColecta.setGeneroID(indexGenero.getGeneroID());
-            }
-            if (indexEspecie != null) {
-                ceColecta.setEspecieID(indexEspecie.getEspecieID());
-            }
-            ceColecta.setUPMID(this.upmID);
-            //ceColecta.setInfraespecie(txtInfraespecie.getText());
-            ceColecta.setNombreComun(txtNombreComun.getText());
-            claveColecta.setDatosIniciales(ceColecta, FORMATO_ID, "CARBONO_LongitudComponente", "Consecutivo", this.sitioID, Integer.parseInt(consecutivo));
-            claveColecta.setVisible(true);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un registro para asignar la clave de colecta"
-                    + e.getClass().getName() + " : " + e.getMessage(), "Clave de colecta", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_btnColectaActionPerformed
-
-    private void cmbEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEspecieActionPerformed
-        CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
-        DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbInfraespecie.getModel();
-        dcm.removeAllElements();
-        if (indexEspecie != null) {
-            fillCmbInfraespecie(indexEspecie.getEspecieID());
-        }
-    }//GEN-LAST:event_cmbEspecieActionPerformed
-
-    private void cmbTransectoComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTransectoComponenteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbTransectoComponenteActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarComponente;
     private javax.swing.JButton btnAgregarDosel;

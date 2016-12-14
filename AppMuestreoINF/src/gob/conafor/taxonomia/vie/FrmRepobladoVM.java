@@ -942,35 +942,30 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
         txtClaveColecta = new javax.swing.JTextField();
         cmbInfraespecie = new javax.swing.JComboBox();
 
+        setMaximizable(true);
         setTitle("Registro de repoblado y vegetación menor módulo G "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 
         pnlPrincipal.setBackground(new java.awt.Color(204, 204, 204));
-        pnlPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblUPM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUPM.setText("UPMID:");
-        pnlPrincipal.add(lblUPM, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 13, -1, -1));
 
         txtUPM.setEditable(false);
         txtUPM.setEnabled(false);
-        pnlPrincipal.add(txtUPM, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 11, 97, -1));
 
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-        pnlPrincipal.add(lblSitio, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 10, -1, -1));
 
         txtSitio.setEditable(false);
         txtSitio.setEnabled(false);
-        pnlPrincipal.add(txtSitio, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, 100, -1));
 
         lblVegetacionMenorCobertura.setBackground(new java.awt.Color(153, 153, 153));
         lblVegetacionMenorCobertura.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblVegetacionMenorCobertura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblVegetacionMenorCobertura.setText("Regisro de vegetación menor y cobertura del suelo (sitios de 1m2)");
         lblVegetacionMenorCobertura.setOpaque(true);
-        pnlPrincipal.add(lblVegetacionMenorCobertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 37, 900, -1));
 
         PnlDescripcion.setBackground(new java.awt.Color(204, 204, 204));
         PnlDescripcion.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1018,7 +1013,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                 .addComponent(lblLiquenes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblHierbas)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         lblVegetacionMenor.setBackground(new java.awt.Color(153, 153, 153));
@@ -1120,7 +1115,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                 .addComponent(txtLiquenes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtHierbas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 8, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout PnlDescripcionLayout = new javax.swing.GroupLayout(PnlDescripcion);
@@ -1136,7 +1131,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                 .addGroup(PnlDescripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(PnlCoordenadas2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCoberturaVegetacionMenor, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
         PnlDescripcionLayout.setVerticalGroup(
             PnlDescripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1151,8 +1146,6 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                     .addComponent(PnlCoordenadas2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(11, 11, 11))
         );
-
-        pnlPrincipal.add(PnlDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 58, 270, 170));
 
         PnlDescripcion1.setBackground(new java.awt.Color(204, 204, 204));
         PnlDescripcion1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1321,14 +1314,11 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        pnlPrincipal.add(PnlDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(493, 58, -1, 170));
-
         lblRegistroRepobladoVegetacionMenor.setBackground(new java.awt.Color(153, 153, 153));
         lblRegistroRepobladoVegetacionMenor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblRegistroRepobladoVegetacionMenor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRegistroRepobladoVegetacionMenor.setText("Registro de repoblado y vegetación menor");
         lblRegistroRepobladoVegetacionMenor.setOpaque(true);
-        pnlPrincipal.add(lblRegistroRepobladoVegetacionMenor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 234, 900, -1));
 
         btnContinuar.setText("Continuar");
         btnContinuar.setNextFocusableComponent(btnSalir);
@@ -1337,7 +1327,6 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                 btnContinuarActionPerformed(evt);
             }
         });
-        pnlPrincipal.add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 580, 95, -1));
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -1345,7 +1334,6 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        pnlPrincipal.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 580, 93, -1));
 
         chkRepobladoVM.setBackground(new java.awt.Color(204, 204, 204));
         chkRepobladoVM.setSelected(true);
@@ -1357,7 +1345,6 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                 chkRepobladoVMActionPerformed(evt);
             }
         });
-        pnlPrincipal.add(chkRepobladoVM, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 205, -1, -1));
 
         grdRepobladoVM.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         grdRepobladoVM.setToolTipText("");
@@ -1369,10 +1356,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(grdRepobladoVM);
 
-        pnlPrincipal.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 900, 110));
-
         jLabel1.setText("Porcentaje de repoblado fuera del sito de 12.56 m: ");
-        pnlPrincipal.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 540, -1, -1));
 
         chkRepobladoFuera.setBackground(new java.awt.Color(204, 204, 204));
         chkRepobladoFuera.setSelected(true);
@@ -1383,7 +1367,6 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                 chkRepobladoFueraActionPerformed(evt);
             }
         });
-        pnlPrincipal.add(chkRepobladoFuera, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 540, -1, -1));
 
         txtPorcentajeRepobladoFuera.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtPorcentajeRepobladoFuera.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1396,7 +1379,6 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                 txtPorcentajeRepobladoFueraKeyTyped(evt);
             }
         });
-        pnlPrincipal.add(txtPorcentajeRepobladoFuera, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 540, 80, 20));
 
         PnlCoordenadas4.setBackground(new java.awt.Color(204, 204, 204));
         PnlCoordenadas4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1658,7 +1640,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                                     .addComponent(lblCobertura275)
                                     .addComponent(txtPorcentajeCobertura200, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(lblFrecuenciaIndividuos, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(PnlCoordenadas4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cmbAgenteDanio1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblAgenteDanio1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -1710,7 +1692,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                 .addComponent(lblEspecie)
                 .addGap(0, 0, 0)
                 .addComponent(cmbEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblInfraespecie)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cmbInfraespecie, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1732,7 +1714,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                     .addGroup(PnlCoordenadas4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblInfraespecie)
                         .addComponent(cmbInfraespecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(PnlCoordenadas4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PnlCoordenadas4Layout.createSequentialGroup()
                         .addGap(44, 44, 44)
@@ -1787,7 +1769,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                                     .addGroup(PnlCoordenadas4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(cmbSeveridad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(cmbAgenteDanio2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(PnlCoordenadas4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PnlCoordenadas4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblClaveColecta)
@@ -1800,7 +1782,101 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        pnlPrincipal.add(PnlCoordenadas4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, 160));
+        javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
+        pnlPrincipal.setLayout(pnlPrincipalLayout);
+        pnlPrincipalLayout.setHorizontalGroup(
+            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(lblUPM)
+                        .addGap(10, 10, 10)
+                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(608, 608, 608)
+                        .addComponent(lblSitio)
+                        .addGap(8, 8, 8)
+                        .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(chkRepobladoFuera)
+                        .addGap(11, 11, 11)
+                        .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                                .addGap(260, 260, 260)
+                                .addComponent(txtPorcentajeRepobladoFuera, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblVegetacionMenorCobertura, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblRegistroRepobladoVegetacionMenor, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(chkRepobladoVM)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(PnlDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(PnlDescripcion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(31, 50, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
+                .addComponent(PnlCoordenadas4, javax.swing.GroupLayout.DEFAULT_SIZE, 954, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlPrincipalLayout.setVerticalGroup(
+            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(lblUPM))
+                    .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblSitio)
+                    .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
+                .addComponent(lblVegetacionMenorCobertura)
+                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PnlDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PnlDescripcion1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chkRepobladoVM)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblRegistroRepobladoVegetacionMenor)
+                .addGap(1, 1, 1)
+                .addComponent(PnlCoordenadas4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chkRepobladoFuera)
+                    .addComponent(jLabel1)
+                    .addComponent(txtPorcentajeRepobladoFuera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnContinuar)
+                    .addComponent(btnSalir))
+                .addGap(4, 4, 4))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -357,6 +357,7 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         txtObservaciones = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximizable(true);
         setTitle("Parametros fisico quimicos "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
@@ -381,6 +382,11 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
 
         txtSitio.setEditable(false);
         txtSitio.setEnabled(false);
+        txtSitio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSitioActionPerformed(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -404,7 +410,7 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(347, 347, 347)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnContinuar)
                 .addGap(18, 18, 18)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -413,7 +419,7 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir)
                     .addComponent(btnContinuar))
@@ -472,7 +478,8 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(lblSalinidadSuperficial, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblSalinidadSuperficial)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTemperaturaSuperficial, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -482,11 +489,12 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblPotencialSuperficial, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblProfundidadSuperficial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblProfundidadSuperficial, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblTemperaturaSuperficial, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(lblTemperaturaSuperficial, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
             .addComponent(lblConductividadSuperficial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lblPHSuperficial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lblPotencialSuperficial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -574,6 +582,11 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
                 txtProfundidadAguaSuperficialFocusLost(evt);
             }
         });
+        txtProfundidadAguaSuperficial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtProfundidadAguaSuperficialActionPerformed(evt);
+            }
+        });
         txtProfundidadAguaSuperficial.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtProfundidadAguaSuperficialKeyTyped(evt);
@@ -585,7 +598,8 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(txtSalinidadAguaSuperficial, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtSalinidadAguaSuperficial, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTemperaturaAguaSuperficial, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -595,7 +609,8 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPotencialAguaSuperficial, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtProfundidadAguaSuperficial))
+                .addComponent(txtProfundidadAguaSuperficial, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -642,7 +657,8 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(lblSalinidadIntersticial, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblSalinidadIntersticial, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTemperaturaIntersticial, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -652,11 +668,12 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblPotencialIntersticial, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblProfundidadIntersticial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblProfundidadIntersticial, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblTemperaturaIntersticial, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(lblTemperaturaIntersticial, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
             .addComponent(lblConductividadIntersticial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lblPHIntersticial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lblPotencialIntersticial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -761,17 +778,19 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(txtSalinidadAguaIntersticial, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtSalinidadAguaIntersticial, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTemperaturaAguaIntersticial, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTemperaturaAguaIntersticial, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtConductividadAguaIntersticial, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPHAguaIntersticial, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtPotencialAguaIntersticial, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtProfundidadAguaIntersticial))
+                .addComponent(txtProfundidadAguaIntersticial, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -808,17 +827,14 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -826,35 +842,37 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(8, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblHojarascaFermentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 902, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblUPM)
                                 .addGap(4, 4, 4)
                                 .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(614, 614, 614)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblSitio)
                                 .addGap(8, 8, 8)
                                 .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblHojarascaFermentacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
                                 .addComponent(rbtAguasuperficial)
                                 .addGap(19, 19, 19)
-                                .addComponent(rbtAguaIntersticial))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(14, 14, 14))
+                                .addComponent(rbtAguaIntersticial)))
+                        .addGap(2, 2, 2)))
+                .addContainerGap(28, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -876,25 +894,25 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
                     .addComponent(rbtAguasuperficial)
                     .addComponent(rbtAguaIntersticial))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 938, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 938, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -987,42 +1005,6 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
-    private void txtSalinidadAguaSuperficialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalinidadAguaSuperficialFocusLost
-        if (txtSalinidadAguaSuperficial.getText().isEmpty()) {
-            txtSalinidadAguaSuperficial.setValue(null);
-        }
-    }//GEN-LAST:event_txtSalinidadAguaSuperficialFocusLost
-
-    private void txtTemperaturaAguaSuperficialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTemperaturaAguaSuperficialFocusLost
-        if (txtTemperaturaAguaSuperficial.getText().isEmpty()) {
-            txtTemperaturaAguaSuperficial.setValue(null);
-        }
-    }//GEN-LAST:event_txtTemperaturaAguaSuperficialFocusLost
-
-    private void txtConductividadAguaSuperficialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtConductividadAguaSuperficialFocusLost
-        if (txtConductividadAguaSuperficial.getText().isEmpty()) {
-            txtConductividadAguaSuperficial.setValue(null);
-        }
-    }//GEN-LAST:event_txtConductividadAguaSuperficialFocusLost
-
-    private void txtPHAguaSuperficialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPHAguaSuperficialFocusLost
-        if (txtPHAguaSuperficial.getText().isEmpty()) {
-            txtPHAguaSuperficial.setValue(null);
-        }
-    }//GEN-LAST:event_txtPHAguaSuperficialFocusLost
-
-    private void txtPotencialAguaSuperficialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPotencialAguaSuperficialFocusLost
-        if (txtPotencialAguaSuperficial.getText().isEmpty()) {
-            txtPotencialAguaSuperficial.setValue(null);
-        }
-    }//GEN-LAST:event_txtPotencialAguaSuperficialFocusLost
-
-    private void txtProfundidadAguaSuperficialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtProfundidadAguaSuperficialFocusLost
-        if (txtProfundidadAguaSuperficial.getText().isEmpty()) {
-            txtProfundidadAguaSuperficial.setValue(null);
-        }
-    }//GEN-LAST:event_txtProfundidadAguaSuperficialFocusLost
-
     private void txtSalinidadAguaIntersticialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalinidadAguaIntersticialFocusLost
         if (txtSalinidadAguaIntersticial.getText().isEmpty()) {
             txtSalinidadAguaIntersticial.setValue(null);
@@ -1058,60 +1040,6 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
             txtProfundidadAguaIntersticial.setValue(null);
         }
     }//GEN-LAST:event_txtProfundidadAguaIntersticialFocusLost
-
-    private void txtSalinidadAguaSuperficialFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalinidadAguaSuperficialFocusGained
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                txtSalinidadAguaSuperficial.selectAll();
-            }
-        });
-    }//GEN-LAST:event_txtSalinidadAguaSuperficialFocusGained
-
-    private void txtTemperaturaAguaSuperficialFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTemperaturaAguaSuperficialFocusGained
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                txtTemperaturaAguaSuperficial.selectAll();
-            }
-        });
-    }//GEN-LAST:event_txtTemperaturaAguaSuperficialFocusGained
-
-    private void txtConductividadAguaSuperficialFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtConductividadAguaSuperficialFocusGained
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                txtConductividadAguaSuperficial.selectAll();
-            }
-        });
-    }//GEN-LAST:event_txtConductividadAguaSuperficialFocusGained
-
-    private void txtPHAguaSuperficialFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPHAguaSuperficialFocusGained
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                txtPHAguaSuperficial.selectAll();
-            }
-        });
-    }//GEN-LAST:event_txtPHAguaSuperficialFocusGained
-
-    private void txtPotencialAguaSuperficialFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPotencialAguaSuperficialFocusGained
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                txtPotencialAguaSuperficial.selectAll();
-            }
-        });
-    }//GEN-LAST:event_txtPotencialAguaSuperficialFocusGained
-
-    private void txtProfundidadAguaSuperficialFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtProfundidadAguaSuperficialFocusGained
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                txtProfundidadAguaSuperficial.selectAll();
-            }
-        });
-    }//GEN-LAST:event_txtProfundidadAguaSuperficialFocusGained
 
     private void txtSalinidadAguaIntersticialFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalinidadAguaIntersticialFocusGained
         SwingUtilities.invokeLater(new Runnable() {
@@ -1193,30 +1121,6 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void txtSalinidadAguaSuperficialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSalinidadAguaSuperficialKeyTyped
-        numeros.keyTyped(evt);
-    }//GEN-LAST:event_txtSalinidadAguaSuperficialKeyTyped
-
-    private void txtTemperaturaAguaSuperficialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTemperaturaAguaSuperficialKeyTyped
-        numeros.keyTyped(evt);
-    }//GEN-LAST:event_txtTemperaturaAguaSuperficialKeyTyped
-
-    private void txtConductividadAguaSuperficialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConductividadAguaSuperficialKeyTyped
-        numeros.keyTyped(evt);
-    }//GEN-LAST:event_txtConductividadAguaSuperficialKeyTyped
-
-    private void txtPHAguaSuperficialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPHAguaSuperficialKeyTyped
-        numeros.keyTyped(evt);
-    }//GEN-LAST:event_txtPHAguaSuperficialKeyTyped
-
-    private void txtPotencialAguaSuperficialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPotencialAguaSuperficialKeyTyped
-        numeros.keyTyped(evt);
-    }//GEN-LAST:event_txtPotencialAguaSuperficialKeyTyped
-
-    private void txtProfundidadAguaSuperficialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProfundidadAguaSuperficialKeyTyped
-        numeros.keyTyped(evt);
-    }//GEN-LAST:event_txtProfundidadAguaSuperficialKeyTyped
-
     private void txtSalinidadAguaIntersticialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSalinidadAguaIntersticialKeyTyped
         numeros.keyTyped(evt);
     }//GEN-LAST:event_txtSalinidadAguaIntersticialKeyTyped
@@ -1240,6 +1144,128 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
     private void txtProfundidadAguaIntersticialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProfundidadAguaIntersticialKeyTyped
         numeros.keyTyped(evt);
     }//GEN-LAST:event_txtProfundidadAguaIntersticialKeyTyped
+
+    private void txtProfundidadAguaSuperficialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProfundidadAguaSuperficialKeyTyped
+        numeros.keyTyped(evt);
+    }//GEN-LAST:event_txtProfundidadAguaSuperficialKeyTyped
+
+    private void txtProfundidadAguaSuperficialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtProfundidadAguaSuperficialFocusLost
+        if (txtProfundidadAguaSuperficial.getText().isEmpty()) {
+            txtProfundidadAguaSuperficial.setValue(null);
+        }
+    }//GEN-LAST:event_txtProfundidadAguaSuperficialFocusLost
+
+    private void txtProfundidadAguaSuperficialFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtProfundidadAguaSuperficialFocusGained
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                txtProfundidadAguaSuperficial.selectAll();
+            }
+        });
+    }//GEN-LAST:event_txtProfundidadAguaSuperficialFocusGained
+
+    private void txtPotencialAguaSuperficialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPotencialAguaSuperficialKeyTyped
+        numeros.keyTyped(evt);
+    }//GEN-LAST:event_txtPotencialAguaSuperficialKeyTyped
+
+    private void txtPotencialAguaSuperficialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPotencialAguaSuperficialFocusLost
+        if (txtPotencialAguaSuperficial.getText().isEmpty()) {
+            txtPotencialAguaSuperficial.setValue(null);
+        }
+    }//GEN-LAST:event_txtPotencialAguaSuperficialFocusLost
+
+    private void txtPotencialAguaSuperficialFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPotencialAguaSuperficialFocusGained
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                txtPotencialAguaSuperficial.selectAll();
+            }
+        });
+    }//GEN-LAST:event_txtPotencialAguaSuperficialFocusGained
+
+    private void txtPHAguaSuperficialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPHAguaSuperficialKeyTyped
+        numeros.keyTyped(evt);
+    }//GEN-LAST:event_txtPHAguaSuperficialKeyTyped
+
+    private void txtPHAguaSuperficialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPHAguaSuperficialFocusLost
+        if (txtPHAguaSuperficial.getText().isEmpty()) {
+            txtPHAguaSuperficial.setValue(null);
+        }
+    }//GEN-LAST:event_txtPHAguaSuperficialFocusLost
+
+    private void txtPHAguaSuperficialFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPHAguaSuperficialFocusGained
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                txtPHAguaSuperficial.selectAll();
+            }
+        });
+    }//GEN-LAST:event_txtPHAguaSuperficialFocusGained
+
+    private void txtConductividadAguaSuperficialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConductividadAguaSuperficialKeyTyped
+        numeros.keyTyped(evt);
+    }//GEN-LAST:event_txtConductividadAguaSuperficialKeyTyped
+
+    private void txtConductividadAguaSuperficialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtConductividadAguaSuperficialFocusLost
+        if (txtConductividadAguaSuperficial.getText().isEmpty()) {
+            txtConductividadAguaSuperficial.setValue(null);
+        }
+    }//GEN-LAST:event_txtConductividadAguaSuperficialFocusLost
+
+    private void txtConductividadAguaSuperficialFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtConductividadAguaSuperficialFocusGained
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                txtConductividadAguaSuperficial.selectAll();
+            }
+        });
+    }//GEN-LAST:event_txtConductividadAguaSuperficialFocusGained
+
+    private void txtTemperaturaAguaSuperficialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTemperaturaAguaSuperficialKeyTyped
+        numeros.keyTyped(evt);
+    }//GEN-LAST:event_txtTemperaturaAguaSuperficialKeyTyped
+
+    private void txtTemperaturaAguaSuperficialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTemperaturaAguaSuperficialFocusLost
+        if (txtTemperaturaAguaSuperficial.getText().isEmpty()) {
+            txtTemperaturaAguaSuperficial.setValue(null);
+        }
+    }//GEN-LAST:event_txtTemperaturaAguaSuperficialFocusLost
+
+    private void txtTemperaturaAguaSuperficialFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTemperaturaAguaSuperficialFocusGained
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                txtTemperaturaAguaSuperficial.selectAll();
+            }
+        });
+    }//GEN-LAST:event_txtTemperaturaAguaSuperficialFocusGained
+
+    private void txtSalinidadAguaSuperficialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSalinidadAguaSuperficialKeyTyped
+        numeros.keyTyped(evt);
+    }//GEN-LAST:event_txtSalinidadAguaSuperficialKeyTyped
+
+    private void txtSalinidadAguaSuperficialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalinidadAguaSuperficialFocusLost
+        if (txtSalinidadAguaSuperficial.getText().isEmpty()) {
+            txtSalinidadAguaSuperficial.setValue(null);
+        }
+    }//GEN-LAST:event_txtSalinidadAguaSuperficialFocusLost
+
+    private void txtSalinidadAguaSuperficialFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalinidadAguaSuperficialFocusGained
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                txtSalinidadAguaSuperficial.selectAll();
+            }
+        });
+    }//GEN-LAST:event_txtSalinidadAguaSuperficialFocusGained
+
+    private void txtProfundidadAguaSuperficialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProfundidadAguaSuperficialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProfundidadAguaSuperficialActionPerformed
+
+    private void txtSitioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSitioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSitioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

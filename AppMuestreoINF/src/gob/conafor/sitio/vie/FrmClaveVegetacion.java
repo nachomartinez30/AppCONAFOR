@@ -536,6 +536,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
         btnContinuar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
+        setMaximizable(true);
         setTitle("Clave de vegetacion "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
@@ -658,7 +659,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblCoberturaVegetal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblEcosistema, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -754,35 +755,33 @@ public class FrmClaveVegetacion extends JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblEcotono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblCondicionPresente2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblCondicionPresente1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
                         .addComponent(lblUPM)
                         .addGap(10, 10, 10)
                         .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(588, 588, 588)
                         .addComponent(lblSitio)
-                        .addGap(8, 8, 8)
-                        .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(lblCondicionPresente2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblCondicionPresente1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEcotono, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblClaveVegetacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 920, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(46, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(lblClaveVegetacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(353, 353, 353)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnContinuar)
-                .addGap(11, 11, 11)
+                .addGap(28, 28, 28)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -794,11 +793,12 @@ public class FrmClaveVegetacion extends JInternalFrame {
                         .addGap(13, 13, 13)
                         .addComponent(lblUPM))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSitio)
-                            .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblSitio)
+                                .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(6, 6, 6)
                 .addComponent(lblClaveVegetacion)
                 .addGap(6, 6, 6)
@@ -815,8 +815,8 @@ public class FrmClaveVegetacion extends JInternalFrame {
                         .addComponent(lblEcotono)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnContinuar)
                     .addComponent(btnSalir))
                 .addContainerGap())
@@ -835,6 +835,68 @@ public class FrmClaveVegetacion extends JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        if(revision==false){//esta en modo de captura
+            this.hide();
+            funciones.manipularBotonesMenuPrincipal(false);
+        }
+        if(revision==true){//entro a modo de revision
+            //System.err.println("Modo Revision");
+            this.hide();
+            //UPMForms.revisionModulos.iniciarRevision();
+            UPMForms.revisionModulos.setVisible(true);
+            UPMForms.revisionModulos.manipularBonesMenuprincipal();
+            revision=false;
+        }
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
+        asignarDatosClaveVegetacion();
+        if (validarClaveVegetacion()) {
+            if (this.modificar == 0) {
+                crearClaveVegetacion();
+                this.hide();
+                if (this.ceSitio.getSitio() == 1) {
+                    UPMForms.caracteristicasUPM.setDatosIniciales(ceSitio);
+                    UPMForms.caracteristicasUPM.setVisible(true);
+                } else {
+                    seleccionarSiguienteFormulario(this.ceSitio);
+                }
+                this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
+            } else {
+                crearClaveVegetacion();
+                this.hide();
+                if (this.ceSitio.getSitio() == 1) {
+                    UPMForms.caracteristicasUPM.revisarCaracteristicasUPM(ceSitio);
+                    UPMForms.caracteristicasUPM.setVisible(true);
+                } else {
+                    revisarSiguienteFormulario(this.ceSitio);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnContinuarActionPerformed
+
+    private void txtCondicionPresenteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCondicionPresenteKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCondicionPresenteKeyPressed
+
+    private void txtDescripcionEcotonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionEcotonoKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDescripcionEcotonoKeyPressed
+
+    private void chkEcotonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkEcotonoActionPerformed
+        if (chkEcotono.isSelected()) {
+            txtDescripcionEcotono.setEnabled(true);
+        } else {
+            txtDescripcionEcotono.setEnabled(false);
+            txtDescripcionEcotono.setText("");
+        }
+    }//GEN-LAST:event_chkEcotonoActionPerformed
 
     private void cmbClaveSerieVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClaveSerieVActionPerformed
         try {
@@ -892,76 +954,14 @@ public class FrmClaveVegetacion extends JInternalFrame {
         }
     }//GEN-LAST:event_cmbClaveSerieVActionPerformed
 
-    private void rbtPrimarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtPrimarioActionPerformed
-        cmbFaseSucecional.setEnabled(false);
-        cmbFaseSucecional.setSelectedItem(null);
-    }//GEN-LAST:event_rbtPrimarioActionPerformed
-
     private void rbtSecundarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtSecundarioActionPerformed
         cmbFaseSucecional.setEnabled(true);
     }//GEN-LAST:event_rbtSecundarioActionPerformed
 
-    private void chkEcotonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkEcotonoActionPerformed
-        if (chkEcotono.isSelected()) {
-            txtDescripcionEcotono.setEnabled(true);
-        } else {
-            txtDescripcionEcotono.setEnabled(false);
-            txtDescripcionEcotono.setText("");
-        }
-    }//GEN-LAST:event_chkEcotonoActionPerformed
-
-    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        asignarDatosClaveVegetacion();
-        if (validarClaveVegetacion()) {
-            if (this.modificar == 0) {
-                crearClaveVegetacion();
-                this.hide();
-                if (this.ceSitio.getSitio() == 1) {
-                    UPMForms.caracteristicasUPM.setDatosIniciales(ceSitio);
-                    UPMForms.caracteristicasUPM.setVisible(true);
-                } else {
-                    seleccionarSiguienteFormulario(this.ceSitio);
-                }
-                this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-            } else {
-                crearClaveVegetacion();
-                this.hide();
-                if (this.ceSitio.getSitio() == 1) {
-                    UPMForms.caracteristicasUPM.revisarCaracteristicasUPM(ceSitio);
-                    UPMForms.caracteristicasUPM.setVisible(true);
-                } else {
-                    revisarSiguienteFormulario(this.ceSitio);
-                }
-            }
-        }
-    }//GEN-LAST:event_btnContinuarActionPerformed
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        if(revision==false){//esta en modo de captura
-            this.hide();
-            funciones.manipularBotonesMenuPrincipal(false);
-        }
-        if(revision==true){//entro a modo de revision
-             //System.err.println("Modo Revision");
-            this.hide();
-            //UPMForms.revisionModulos.iniciarRevision();
-            UPMForms.revisionModulos.setVisible(true);
-            UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision=false;
-        }
-    }//GEN-LAST:event_btnSalirActionPerformed
-
-    private void txtCondicionPresenteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCondicionPresenteKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB){
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtCondicionPresenteKeyPressed
-
-    private void txtDescripcionEcotonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionEcotonoKeyPressed
-       if(evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB){
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtDescripcionEcotonoKeyPressed
+    private void rbtPrimarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtPrimarioActionPerformed
+        cmbFaseSucecional.setEnabled(false);
+        cmbFaseSucecional.setSelectedItem(null);
+    }//GEN-LAST:event_rbtPrimarioActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnContinuar;

@@ -18,9 +18,11 @@ public class FrmInicio extends javax.swing.JFrame {
     private Version ver=new Version();
     private String version=ver.getVersion();
     private String versionLayout=version.substring(6, 9);
+    public boolean panelOculto=false;//No esta oculto
 
     public FrmInicio() {
         initComponents();
+        menuChkBoxPanelLateral.setSelected(false);
         Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension ventana = this.getSize();
         this.setLocation((pantalla.width - ventana.width) / 2, (pantalla.height - ventana.height) / 2);
@@ -89,6 +91,8 @@ public class FrmInicio extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         dpPrincipal = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -97,6 +101,8 @@ public class FrmInicio extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        btnOcultarPanel = new javax.swing.JButton();
         dpMenuLateral = new javax.swing.JDesktopPane();
         btnCrearUPM = new javax.swing.JButton();
         btnCapturarModulos = new javax.swing.JButton();
@@ -111,11 +117,12 @@ public class FrmInicio extends javax.swing.JFrame {
         mbMenuSuperiror = new javax.swing.JMenuBar();
         menGuardarArchivo = new javax.swing.JMenu();
         miImportar = new javax.swing.JMenuItem();
-        miConentrar = new javax.swing.JMenuItem();
         miEliminarPorUPM = new javax.swing.JMenuItem();
         miEliminar = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         miSalir = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        menuChkBoxPanelLateral = new javax.swing.JCheckBoxMenuItem();
 
         jMenuItem2.setText("jMenuItem2");
 
@@ -123,15 +130,21 @@ public class FrmInicio extends javax.swing.JFrame {
 
         jMenuItem4.setText("jMenuItem4");
 
+        jMenuItem1.setText("jMenuItem1");
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cliente de captura INFyS "+version);
         setIconImage(getIconImage());
         setIconImages(getIconImages());
+        setLocation(new java.awt.Point(0, 0));
         setName("Index"); // NOI18N
-        setResizable(false);
 
         dpPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         dpPrincipal.setAutoscrolls(true);
+        dpPrincipal.setMaximumSize(new java.awt.Dimension(939, 838));
         dpPrincipal.setPreferredSize(new java.awt.Dimension(939, 838));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/CONAFOR.png"))); // NOI18N
@@ -143,7 +156,7 @@ public class FrmInicio extends javax.swing.JFrame {
         jLabel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel3.setOpaque(true);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/Titulo_Gerencia.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/gsnmf.png"))); // NOI18N
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/arboles.png"))); // NOI18N
 
@@ -152,7 +165,28 @@ public class FrmInicio extends javax.swing.JFrame {
         jLabel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel6.setOpaque(true);
 
-        jLabel7.setText("Versión "+versionLayout);
+        jLabel7.setText("Versión "+version);
+
+        btnOcultarPanel.setText("<");
+        btnOcultarPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOcultarPanelActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnOcultarPanel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnOcultarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, Short.MAX_VALUE)
+        );
 
         dpPrincipal.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dpPrincipal.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -161,67 +195,74 @@ public class FrmInicio extends javax.swing.JFrame {
         dpPrincipal.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dpPrincipal.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dpPrincipal.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dpPrincipal.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout dpPrincipalLayout = new javax.swing.GroupLayout(dpPrincipal);
         dpPrincipal.setLayout(dpPrincipalLayout);
         dpPrincipalLayout.setHorizontalGroup(
             dpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(dpPrincipalLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(50, 50, 50))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dpPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dpPrincipalLayout.createSequentialGroup()
-                .addContainerGap(139, Short.MAX_VALUE)
                 .addGroup(dpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dpPrincipalLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(70, 70, 70))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dpPrincipalLayout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(98, 98, 98))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dpPrincipalLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(295, 295, 295)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dpPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addGroup(dpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dpPrincipalLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
+            .addGroup(dpPrincipalLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(dpPrincipalLayout.createSequentialGroup()
+                .addContainerGap(155, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(156, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dpPrincipalLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         dpPrincipalLayout.setVerticalGroup(
             dpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dpPrincipalLayout.createSequentialGroup()
                 .addGroup(dpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dpPrincipalLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dpPrincipalLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(dpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(8, 8, 8))
         );
 
         dpMenuLateral.setBackground(new java.awt.Color(204, 204, 204));
         dpMenuLateral.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnCrearUPM.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnCrearUPM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/UPMIcon.png"))); // NOI18N
         btnCrearUPM.setText("Crear UPM");
         btnCrearUPM.setToolTipText("");
+        btnCrearUPM.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnCrearUPM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearUPMActionPerformed(evt);
@@ -229,8 +270,10 @@ public class FrmInicio extends javax.swing.JFrame {
         });
 
         btnCapturarModulos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnCapturarModulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/ModulosIcon.png"))); // NOI18N
         btnCapturarModulos.setText("Capturar Módulos");
         btnCapturarModulos.setEnabled(false);
+        btnCapturarModulos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnCapturarModulos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCapturarModulosActionPerformed(evt);
@@ -238,7 +281,9 @@ public class FrmInicio extends javax.swing.JFrame {
         });
 
         btnSalir.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/log-out.png"))); // NOI18N
         btnSalir.setText("Salir");
+        btnSalir.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -246,8 +291,10 @@ public class FrmInicio extends javax.swing.JFrame {
         });
 
         btnCrearSitio.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnCrearSitio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/SitioIcon.png"))); // NOI18N
         btnCrearSitio.setText("Crear Sitios");
         btnCrearSitio.setEnabled(false);
+        btnCrearSitio.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnCrearSitio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearSitioActionPerformed(evt);
@@ -255,9 +302,11 @@ public class FrmInicio extends javax.swing.JFrame {
         });
 
         btnRevisarUPM.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnRevisarUPM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/UPMRevisarIcon.png"))); // NOI18N
         btnRevisarUPM.setText("Revisar UPM");
         btnRevisarUPM.setToolTipText("");
         btnRevisarUPM.setEnabled(false);
+        btnRevisarUPM.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnRevisarUPM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRevisarUPMActionPerformed(evt);
@@ -265,8 +314,10 @@ public class FrmInicio extends javax.swing.JFrame {
         });
 
         btnRevisionSitios.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnRevisionSitios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/SitiosRevisarIcon.png"))); // NOI18N
         btnRevisionSitios.setText("Revisar Sitios");
         btnRevisionSitios.setEnabled(false);
+        btnRevisionSitios.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnRevisionSitios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRevisionSitiosActionPerformed(evt);
@@ -274,8 +325,10 @@ public class FrmInicio extends javax.swing.JFrame {
         });
 
         btnRevisarModulos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnRevisarModulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/RevisarModulosIcon.png"))); // NOI18N
         btnRevisarModulos.setText("Revisar Módulos");
         btnRevisarModulos.setEnabled(false);
+        btnRevisarModulos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnRevisarModulos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRevisarModulosActionPerformed(evt);
@@ -283,8 +336,10 @@ public class FrmInicio extends javax.swing.JFrame {
         });
 
         btnColectaBotanica.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnColectaBotanica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/tree-leaf.png"))); // NOI18N
         btnColectaBotanica.setText("Colecta Botánica");
         btnColectaBotanica.setEnabled(false);
+        btnColectaBotanica.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnColectaBotanica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnColectaBotanicaActionPerformed(evt);
@@ -292,7 +347,9 @@ public class FrmInicio extends javax.swing.JFrame {
         });
 
         btnVerReportes.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnVerReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/check.png"))); // NOI18N
         btnVerReportes.setText("Ver Reportes");
+        btnVerReportes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnVerReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVerReportesActionPerformed(evt);
@@ -300,8 +357,10 @@ public class FrmInicio extends javax.swing.JFrame {
         });
 
         btnContinuarModulos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnContinuarModulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/ContinuarModulosIcon.png"))); // NOI18N
         btnContinuarModulos.setText("Continuar Módulos");
         btnContinuarModulos.setEnabled(false);
+        btnContinuarModulos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnContinuarModulos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarModulosActionPerformed(evt);
@@ -327,16 +386,16 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(dpMenuLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCrearUPM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCapturarModulos, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                    .addComponent(btnCapturarModulos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCrearSitio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRevisarUPM, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRevisionSitios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRevisarModulos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                    .addComponent(btnColectaBotanica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                    .addComponent(btnVerReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                    .addComponent(btnContinuarModulos, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(btnRevisarModulos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnColectaBotanica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVerReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnContinuarModulos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         dpMenuLateralLayout.setVerticalGroup(
             dpMenuLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,9 +408,9 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addComponent(btnCapturarModulos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnContinuarModulos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(60, 60, 60)
                 .addComponent(btnColectaBotanica, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(60, 60, 60)
                 .addComponent(btnRevisarUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRevisionSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -359,7 +418,7 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addComponent(btnRevisarModulos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnVerReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -388,14 +447,6 @@ public class FrmInicio extends javax.swing.JFrame {
             }
         });
         menGuardarArchivo.add(miImportar);
-
-        miConentrar.setText("Concentrar");
-        miConentrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miConentrarActionPerformed(evt);
-            }
-        });
-        menGuardarArchivo.add(miConentrar);
 
         miEliminarPorUPM.setText("Eliminar por UPM ...");
         miEliminarPorUPM.addActionListener(new java.awt.event.ActionListener() {
@@ -426,6 +477,19 @@ public class FrmInicio extends javax.swing.JFrame {
 
         mbMenuSuperiror.add(menGuardarArchivo);
 
+        jMenu1.setText("Ventana");
+
+        menuChkBoxPanelLateral.setSelected(true);
+        menuChkBoxPanelLateral.setText("Ocultar panel lateral");
+        menuChkBoxPanelLateral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuChkBoxPanelLateralActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuChkBoxPanelLateral);
+
+        mbMenuSuperiror.add(jMenu1);
+
         setJMenuBar(mbMenuSuperiror);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -435,13 +499,13 @@ public class FrmInicio extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(dpMenuLateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 945, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(dpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 1019, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(dpMenuLateral)
-            .addComponent(dpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
+            .addComponent(dpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
         );
 
         pack();
@@ -523,10 +587,31 @@ public class FrmInicio extends javax.swing.JFrame {
        UPMForms.eliminarBD.setVisible(true);
     }//GEN-LAST:event_miEliminarActionPerformed
 
-    private void miConentrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConentrarActionPerformed
-        UPMForms.importarBD.iniciar();
-        UPMForms.importarBD.setVisible(true);
-    }//GEN-LAST:event_miConentrarActionPerformed
+    private void menuChkBoxPanelLateralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuChkBoxPanelLateralActionPerformed
+      panelOculto=!panelOculto;
+        if(menuChkBoxPanelLateral.getState()==true){
+          dpMenuLateral.setVisible(false);
+          this.btnOcultarPanel.setText(">");
+      }
+      if(menuChkBoxPanelLateral.getState()==false){
+          dpMenuLateral.setVisible(true);
+          this.btnOcultarPanel.setText("<");
+      }
+    }//GEN-LAST:event_menuChkBoxPanelLateralActionPerformed
+
+    private void btnOcultarPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOcultarPanelActionPerformed
+       panelOculto=!panelOculto;
+       if(panelOculto==true){
+           menuChkBoxPanelLateral.setState(true);
+          dpMenuLateral.setVisible(false);
+         this.btnOcultarPanel.setText(">");
+      }
+      if(panelOculto==false){
+          dpMenuLateral.setVisible(true);
+          menuChkBoxPanelLateral.setState(false);
+          this.btnOcultarPanel.setText("<");
+      }
+    }//GEN-LAST:event_btnOcultarPanelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -578,6 +663,7 @@ public class FrmInicio extends javax.swing.JFrame {
     public javax.swing.JButton btnContinuarModulos;
     public javax.swing.JButton btnCrearSitio;
     public javax.swing.JButton btnCrearUPM;
+    private javax.swing.JButton btnOcultarPanel;
     public javax.swing.JButton btnRevisarModulos;
     public javax.swing.JButton btnRevisarUPM;
     public javax.swing.JButton btnRevisionSitios;
@@ -585,6 +671,7 @@ public class FrmInicio extends javax.swing.JFrame {
     public javax.swing.JButton btnVerReportes;
     private javax.swing.JDesktopPane dpMenuLateral;
     public javax.swing.JDesktopPane dpPrincipal;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -592,13 +679,16 @@ public class FrmInicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuBar mbMenuSuperiror;
     public javax.swing.JMenu menGuardarArchivo;
-    private javax.swing.JMenuItem miConentrar;
+    private javax.swing.JCheckBoxMenuItem menuChkBoxPanelLateral;
     private javax.swing.JMenuItem miEliminar;
     private javax.swing.JMenuItem miEliminarPorUPM;
     private javax.swing.JMenuItem miImportar;

@@ -91,6 +91,7 @@ public class FrmSuelo extends JInternalFrame {
     private FuncionesComunes funciones = new FuncionesComunes();
     private Version ver=new Version();
     private String version=ver.getVersion();
+    private boolean revision;
     
     public FrmSuelo() {
         this.suelo = 19;
@@ -123,6 +124,7 @@ public class FrmSuelo extends JInternalFrame {
     }
 
     public void revisarSuelo(CESitio ceSitio) {
+        revision=true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
@@ -883,35 +885,30 @@ public class FrmSuelo extends JInternalFrame {
         lblVarilla5 = new javax.swing.JLabel();
         lblUsoSuelo = new javax.swing.JLabel();
 
+        setMaximizable(true);
         setTitle("Suelo, cobertura y evidencia de erosión "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblUPM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUPM.setText("UPMID:");
-        jPanel1.add(lblUPM, new org.netbeans.lib.awtextra.AbsoluteConstraints(78, 13, -1, -1));
 
         txtUPM.setEditable(false);
         txtUPM.setEnabled(false);
-        jPanel1.add(txtUPM, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 11, 97, -1));
 
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-        jPanel1.add(lblSitio, new org.netbeans.lib.awtextra.AbsoluteConstraints(709, 13, -1, -1));
 
         txtSitio.setEditable(false);
         txtSitio.setEnabled(false);
-        jPanel1.add(txtSitio, new org.netbeans.lib.awtextra.AbsoluteConstraints(745, 11, 100, -1));
 
         lblSuelo.setBackground(new java.awt.Color(153, 153, 153));
         lblSuelo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSuelo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSuelo.setText("Suelos");
         lblSuelo.setOpaque(true);
-        jPanel1.add(lblSuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 39, 899, -1));
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1020,8 +1017,6 @@ public class FrmSuelo extends JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 900, -1));
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1258,24 +1253,19 @@ public class FrmSuelo extends JInternalFrame {
                 .addGap(73, 73, 73))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, 380));
-
         lblCoberturaSuelo.setBackground(new java.awt.Color(153, 153, 153));
         lblCoberturaSuelo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCoberturaSuelo.setText("Cobertura del suelo y evidencia de erosión del suelo");
         lblCoberturaSuelo.setOpaque(true);
-        jPanel1.add(lblCoberturaSuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 334, -1));
 
         lblVarillaErosion.setBackground(new java.awt.Color(153, 153, 153));
         lblVarillaErosion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblVarillaErosion.setText("Varillas de erosión");
         lblVarillaErosion.setOpaque(true);
-        jPanel1.add(lblVarillaErosion, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 555, -1));
 
         lblObservaciones.setBackground(new java.awt.Color(153, 153, 153));
         lblObservaciones.setText("Observaciones:");
         lblObservaciones.setOpaque(true);
-        jPanel1.add(lblObservaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 380, 555, -1));
 
         txtObservaciones.setColumns(20);
         txtObservaciones.setRows(5);
@@ -1291,15 +1281,12 @@ public class FrmSuelo extends JInternalFrame {
         });
         jScrollPane2.setViewportView(txtObservaciones);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 400, 555, 150));
-
         btnContinuar.setText("Continuar");
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(351, 576, -1, -1));
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -1307,7 +1294,6 @@ public class FrmSuelo extends JInternalFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 576, 80, -1));
 
         jPanel6.setBackground(new java.awt.Color(204, 204, 204));
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1619,18 +1605,105 @@ public class FrmSuelo extends JInternalFrame {
 
         jPanel6.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 50, 180));
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 555, 195));
-
         lblUsoSuelo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblUsoSuelo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUsoSuelo.setToolTipText("Descricpcion del uso actual del suelo");
-        jPanel1.add(lblUsoSuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 900, 20));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblCoberturaSuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblObservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblVarillaErosion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblUsoSuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 894, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSuelo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblUPM)
+                        .addGap(4, 4, 4)
+                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblSitio)
+                        .addGap(4, 4, 4)
+                        .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnContinuar)
+                .addGap(12, 12, 12)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblUPM)
+                            .addComponent(lblSitio))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblSuelo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(lblUsoSuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblVarillaErosion)
+                    .addComponent(lblCoberturaSuelo))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(lblObservaciones)
+                        .addGap(4, 4, 4)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnContinuar)
+                    .addComponent(btnSalir))
+                .addGap(15, 15, 15))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2061,8 +2134,20 @@ public class FrmSuelo extends JInternalFrame {
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-       this.hide();
-       this.funciones.manipularBotonesMenuPrincipal(false);
+           
+        if(revision==false){//esta en modo de captura
+            this.hide();
+             //System.out.println("Modo Captura");
+            funciones.manipularBotonesMenuPrincipal(false);
+        }
+        if(revision==true){//entro a modo de revision
+            //System.err.println("Modo Revision");
+            this.hide();
+            //UPMForms.revisionModulos.iniciarRevision();
+            UPMForms.revisionModulos.setVisible(true);
+            UPMForms.revisionModulos.manipularBonesMenuprincipal();
+            revision=false;
+        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnCrearTransectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearTransectoActionPerformed

@@ -1035,36 +1035,33 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         btnEliminarHojarasca = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximizable(true);
         setTitle("Suelos capas de hojarasca y profundidades, módulo E "+version);
         setToolTipText("");
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 675));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setMinimumSize(new java.awt.Dimension(0, 0));
+        jPanel1.setPreferredSize(new java.awt.Dimension(927, 630));
 
         lblUPM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUPM.setText("UPMID:");
-        jPanel1.add(lblUPM, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 15, -1, -1));
 
         txtUPM.setEditable(false);
         txtUPM.setEnabled(false);
-        jPanel1.add(txtUPM, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 13, 97, -1));
 
         lblHojarascaFermentacion.setBackground(new java.awt.Color(153, 153, 153));
         lblHojarascaFermentacion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblHojarascaFermentacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHojarascaFermentacion.setText("Capas de Hojarasca (HO) y Fermentación (F)");
         lblHojarascaFermentacion.setOpaque(true);
-        jPanel1.add(lblHojarascaFermentacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 900, -1));
 
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-        jPanel1.add(lblSitio, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 10, -1, -1));
 
         txtSitio.setEditable(false);
         txtSitio.setEnabled(false);
-        jPanel1.add(txtSitio, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 10, 100, -1));
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1095,7 +1092,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         lblPesoCapa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPesoCapa.setText("Peso total de la capa (gr)");
         lblPesoCapa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel3.add(lblPesoCapa, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 0, -1, -1));
+        jPanel3.add(lblPesoCapa, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 0, 130, -1));
 
         lblPesoHO.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPesoHO.setText("HO");
@@ -1110,7 +1107,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         lblPesoMuestra.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPesoMuestra.setText("Peso de la muestra (gr)");
         lblPesoMuestra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel3.add(lblPesoMuestra, new org.netbeans.lib.awtextra.AbsoluteConstraints(381, 0, 128, -1));
+        jPanel3.add(lblPesoMuestra, new org.netbeans.lib.awtextra.AbsoluteConstraints(379, 0, 130, -1));
 
         lblPesoMuestraHO.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPesoMuestraHO.setText("HO");
@@ -1279,7 +1276,8 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtClaveHO, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtClaveF, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(txtClaveF, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1303,8 +1301,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                 .addGap(2, 2, 2))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 900, 90));
-
         grdProfundidad.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1320,8 +1316,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(grdProfundidad);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 900, 80));
 
         jPanel5.setBackground(new java.awt.Color(204, 204, 204));
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1532,7 +1526,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                     .addComponent(txtObservacionesProfundidades))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblClaveProfundidad, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtClave030, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
@@ -1540,8 +1533,13 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtClave3060)
-                            .addComponent(lblClave3060, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(652, 652, 652))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(lblClave3060, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(652, 652, 652))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(lblClaveProfundidad, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1587,8 +1585,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
 
         jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 11, 880, -1));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 900, 80));
-
         grdHojarasca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1605,14 +1601,11 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(grdHojarasca);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 900, 80));
-
         lblHojarascaFermentacion2.setBackground(new java.awt.Color(153, 153, 153));
         lblHojarascaFermentacion2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblHojarascaFermentacion2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHojarascaFermentacion2.setText("Suelo a las profundidades de 0-30 CM y 30-60 CM");
         lblHojarascaFermentacion2.setOpaque(true);
-        jPanel1.add(lblHojarascaFermentacion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 900, -1));
 
         chkHojarasca.setBackground(new java.awt.Color(204, 204, 204));
         chkHojarasca.setSelected(true);
@@ -1622,7 +1615,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                 chkHojarascaActionPerformed(evt);
             }
         });
-        jPanel1.add(chkHojarasca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         chkSueloProfundidades.setBackground(new java.awt.Color(204, 204, 204));
         chkSueloProfundidades.setSelected(true);
@@ -1632,7 +1624,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                 chkSueloProfundidadesActionPerformed(evt);
             }
         });
-        jPanel1.add(chkSueloProfundidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, -1));
 
         btnAgregarProfundidad.setText("Agregar");
         btnAgregarProfundidad.addActionListener(new java.awt.event.ActionListener() {
@@ -1640,7 +1631,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                 btnAgregarProfundidadActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregarProfundidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 540, 75, -1));
 
         btnModificarProfundidad.setText("Modificar");
         btnModificarProfundidad.addActionListener(new java.awt.event.ActionListener() {
@@ -1648,7 +1638,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                 btnModificarProfundidadActionPerformed(evt);
             }
         });
-        jPanel1.add(btnModificarProfundidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 540, -1, -1));
 
         btnEliminarProfundidad.setText("Eliminar");
         btnEliminarProfundidad.setNextFocusableComponent(cmbPuntoProfundidad);
@@ -1657,7 +1646,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                 btnEliminarProfundidadActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminarProfundidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 540, 75, -1));
 
         jPanel7.setBackground(new java.awt.Color(204, 204, 204));
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1685,19 +1673,17 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                 .addComponent(btnContinuar)
                 .addGap(21, 21, 21)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(371, Short.MAX_VALUE))
+                .addContainerGap(365, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnContinuar)
                     .addComponent(btnSalir))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
-
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 900, 50));
 
         btnAgregarHojarasca.setText("Agregar");
         btnAgregarHojarasca.addActionListener(new java.awt.event.ActionListener() {
@@ -1705,7 +1691,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                 btnAgregarHojarascaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregarHojarasca, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, 75, -1));
 
         btnModificarHojarsca.setText("Modificar");
         btnModificarHojarsca.addActionListener(new java.awt.event.ActionListener() {
@@ -1713,7 +1698,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                 btnModificarHojarscaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnModificarHojarsca, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, -1, -1));
 
         btnEliminarHojarasca.setText("Eliminar");
         btnEliminarHojarasca.setNextFocusableComponent(cmbPuntoHojarasca);
@@ -1722,17 +1706,113 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                 btnEliminarHojarascaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminarHojarasca, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, 75, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAgregarHojarasca, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnModificarHojarsca)
+                        .addGap(16, 16, 16)
+                        .addComponent(btnEliminarHojarasca, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(chkSueloProfundidades))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 910, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(320, 320, 320)
+                                .addComponent(btnAgregarProfundidad, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(15, 15, 15)
+                                .addComponent(btnModificarProfundidad)
+                                .addGap(7, 7, 7)
+                                .addComponent(btnEliminarProfundidad, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(chkHojarasca)
+                            .addComponent(lblHojarascaFermentacion2, javax.swing.GroupLayout.PREFERRED_SIZE, 920, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblHojarascaFermentacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblUPM)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblSitio)
+                                .addGap(8, 8, 8)
+                                .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSitio)
+                    .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblUPM)
+                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(9, 9, 9)
+                .addComponent(lblHojarascaFermentacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkHojarasca)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAgregarHojarasca)
+                        .addComponent(btnModificarHojarsca))
+                    .addComponent(btnEliminarHojarasca))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblHojarascaFermentacion2)
+                .addGap(5, 5, 5)
+                .addComponent(chkSueloProfundidades)
+                .addGap(6, 6, 6)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAgregarProfundidad)
+                    .addComponent(btnModificarProfundidad)
+                    .addComponent(btnEliminarProfundidad))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 938, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
         );
 
         pack();

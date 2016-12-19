@@ -689,6 +689,7 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
         btnSalir1 = new javax.swing.JButton();
         chkEpifitas1 = new javax.swing.JCheckBox();
 
+        setMaximizable(true);
         setTitle("Características del conglomerado y diversidad de epífitas en el arbolado, módulo "+version);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/logo_conafor.png"))); // NOI18N
         setPreferredSize(new java.awt.Dimension(940, 650));

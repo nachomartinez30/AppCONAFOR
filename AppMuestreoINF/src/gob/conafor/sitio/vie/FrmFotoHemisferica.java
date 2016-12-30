@@ -363,7 +363,11 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
         rbgTomaFotografia.add(rbtTomaFotografiaNo);
         rbtTomaFotografiaNo.setText("No");
 
-        txtHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("hh:mm"))));
+        try {
+            txtHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtHora.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtHoraFocusGained(evt);

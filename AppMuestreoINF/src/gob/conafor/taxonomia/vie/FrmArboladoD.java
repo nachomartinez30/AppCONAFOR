@@ -2992,16 +2992,16 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
                 //this.cdArbolado.enumerarRama(this.sitioID);
                 llenarTabla();
                 limpiarControles();
-                combo.reiniciarComboModel(cmbConsecutivo);
-                fillCmbConsecutivo();
+                //combo.reiniciarComboModel(cmbConsecutivo);
+                //fillCmbConsecutivo();
             }
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnElimnarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimnarActionPerformed
         eliminarArbolado();
-        this.cdArbolado.enumerarConsecutivo(this.sitioID);
-        this.cdArbolado.enumerarRama(this.sitioID);
+        //this.cdArbolado.enumerarConsecutivo(this.sitioID);
+        //this.cdArbolado.enumerarRama(this.sitioID);
         estadoArbolVivo();
         llenarTabla();
         combo.reiniciarComboModel(cmbConsecutivo);

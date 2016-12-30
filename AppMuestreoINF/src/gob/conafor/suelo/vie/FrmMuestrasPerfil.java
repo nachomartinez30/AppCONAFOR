@@ -188,7 +188,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             this.diametroInterno = null;
         }
         try {
-            this.diametroExterno = Float.valueOf(txtDiametroInterno.getText());
+            this.diametroExterno = Float.valueOf(txtDiametroExterno.getText());
         } catch (Exception e) {
             this.diametroExterno = null;
         }
@@ -2272,7 +2272,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             txtPromedio.setEnabled(false);
             txtClaveColecta.setText("");
             txtClaveColecta.setEnabled(false);
-        } else if (profundidad.getProfundidadMuestraID() > 3) {
+        } else{ if (profundidad.getProfundidadMuestraID() <= 3) {
             txtPesoMuestra.setEnabled(true);
             txtMuestra.setEnabled(true);
             txtLectura1.setEnabled(true);
@@ -2287,6 +2287,16 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             txtPromedio.setValue(null);
             txtPromedio.setEnabled(true);
 
+        }else{
+            if(profundidad.getProfundidadMuestraID()>3){
+            txtLectura3.setText("");
+            txtLectura3.setEnabled(false);
+            txtLectura4.setText("");
+            txtLectura4.setEnabled(false);
+            txtPromedio.setText("");
+            txtPromedio.setEnabled(false);
+        }
+        }
         }
     }//GEN-LAST:event_cmbProfundidadActionPerformed
 

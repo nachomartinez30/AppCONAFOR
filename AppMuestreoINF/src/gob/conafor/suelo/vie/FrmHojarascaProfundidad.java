@@ -23,6 +23,7 @@ import javax.swing.SwingUtilities;
 import org.xhtmlrenderer.layout.Breaker;
 
 public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
+
     private boolean revision;
     private int upmID;
     private int sitioID;
@@ -72,8 +73,8 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private FuncionesComunes funciones = new FuncionesComunes();
     private int modificar;
-    private Version ver=new Version();
-    private String version=ver.getVersion();
+    private Version ver = new Version();
+    private String version = ver.getVersion();
 
     public FrmHojarascaProfundidad() {
         initComponents();
@@ -81,7 +82,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         fillCmbTiposHojarasca();
         fillCmbPuntosProfundidad();
     }
-    
+
     public void setDatosiniciales(CESitio ceSitio) {
         //System.out.println("Linea 81 "+ceSitio.getSitioID());
         this.upmID = ceSitio.getUpmID();
@@ -102,7 +103,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     }
 
     public void revisarHojarascaProfundidad(CESitio ceSitio) {
-        revision=true;
+        revision = true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
@@ -117,55 +118,55 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         this.funciones.manipularBotonesMenuPrincipal(true);
         chkHojarasca.setSelected(funciones.habilitarCheckBox("SUELO_Hojarasca", this.sitioID));
         chkSueloProfundidades.setSelected(funciones.habilitarCheckBox("SUELO_Profundidad", this.sitioID));
-        if(chkHojarasca.isSelected()==false)//si no esta marcado
+        if (chkHojarasca.isSelected() == false)//si no esta marcado
         {
             manipularControlesHojarasca(false);
-        }else{
+        } else {
             manipularControlesHojarasca(true);
         }
-        if(chkSueloProfundidades.isSelected()==false)//si no esta marcado
+        if (chkSueloProfundidades.isSelected() == false)//si no esta marcado
         {
             manipularControlesProfundidades(false);
-        }else{
+        } else {
             manipularControlesProfundidades(true);
         }
         limpiarControlesHojarasca();
         limpiarControlesProfundidades();
     }
-    
-    private void fillCmbPuntosHojarasca(){
+
+    private void fillCmbPuntosHojarasca() {
         List<Integer> listPuntos = new ArrayList<>();
         listPuntos = this.cdHojarasca.getPuntosHojarasca(this.sitioID);
-        if(listPuntos != null){
+        if (listPuntos != null) {
             int size = listPuntos.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbPuntoHojarasca.addItem(listPuntos.get(i));
             }
         }
     }
-    
-    private void fillCmbTiposHojarasca(){
+
+    private void fillCmbTiposHojarasca() {
         List<CatETipoHojarasca> listTipoHojarasca = new ArrayList<>();
         listTipoHojarasca = this.cdHojarasca.getTipohojarasca(this.sitioID);
-        if(listTipoHojarasca != null){
+        if (listTipoHojarasca != null) {
             int size = listTipoHojarasca.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbTipoHojarasca.addItem(listTipoHojarasca.get(i));
             }
         }
     }
-    
-    private void fillCmbPuntosProfundidad(){
+
+    private void fillCmbPuntosProfundidad() {
         List<Integer> listPuntos = new ArrayList<>();
         listPuntos = this.cdProfundidad.getPuntosProfundidad(this.sitioID);
-        if(listPuntos != null){
+        if (listPuntos != null) {
             int size = listPuntos.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbPuntoProfundidad.addItem(listPuntos.get(i));
             }
         }
     }
-    
+
     public void llenarTablaHojarsaca() {
         //System.out.println("linea 151 "+this.sitioID);
         grdHojarasca.setModel(cdHojarasca.getTablaHojarasca(this.sitioID));
@@ -186,7 +187,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         tabla.hideColumnTable(grdHojarasca, column_0);
         tabla.hideColumnTable(grdHojarasca, column_1);
     }
-    
+
     public void llenarTablaProfundidad() {
         grdProfundidad.setModel(cdProfundidad.getTablaProfundidad(this.sitioID));
         grdProfundidad.getColumnModel().getColumn(2).setPreferredWidth(50);
@@ -205,7 +206,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         tabla.hideColumnTable(grdProfundidad, column_0);
         tabla.hideColumnTable(grdProfundidad, column_1);
     }
-    
+
     private void fijarDatosHojarasca() {
         try {
             this.espesorHO = Float.valueOf(txtEspesorHO.getText());
@@ -280,11 +281,11 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         this.ceHojarasca.setPesoMuestraHO(this.pesoMuestraHO);
         this.ceHojarasca.setPesoMuestraF(this.pesoMuestraF);
         this.ceHojarasca.setObservaciones(this.observacionesHojarasca);
-        if(!txtEspesorHO.getText().isEmpty()){
+        if (!txtEspesorHO.getText().isEmpty()) {
             this.claveHO = crearClave(this.upmID, this.sitio, indexPunto, "HO");
             this.ceHojarasca.setClaveHO(this.claveHO);
         }
-        if(!txtEspesorF.getText().isEmpty()){
+        if (!txtEspesorF.getText().isEmpty()) {
             this.claveF = crearClave(this.upmID, this.sitio, indexPunto, "F");
             this.ceHojarasca.setClaveF(this.claveF);
         }
@@ -313,7 +314,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         this.cdProfundidad.insertProfundidad(this.ceProfundidad);
     }
 
-    
     private void actualizarHojarasca() {
         try {
             int fila = grdHojarasca.getSelectedRow();
@@ -394,9 +394,9 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     private void eliminarDensidad() {
         this.cdDensidad.deleteDensidadAparente(this.sitioID);
     }
-    
+
     private boolean validarCamposObligatoriosHojarasca() {
-       if (cmbPuntoHojarasca.getSelectedItem() == null) {
+        if (cmbPuntoHojarasca.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un punto de hojarasca "
                     + "", "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             cmbPuntoHojarasca.requestFocus();
@@ -440,21 +440,21 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private boolean validarCapturaHojarasca() {
         if (cmbPuntoHojarasca.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un punto de hojarasca "
-                    , "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un punto de hojarasca ",
+                     "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             cmbPuntoHojarasca.requestFocus();
             return false;
         } else if (cmbTipoHojarasca.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de hojarasca "
-                    , "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de hojarasca ",
+                     "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             cmbTipoHojarasca.requestFocus();
             return false;
         } else if (!txtEspesorHO.getText().isEmpty() && txtPesoTotalHO.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Si capturó espesor de hojarasca debe capturar peso total de hojarasca"
-                    , "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Si capturó espesor de hojarasca debe capturar peso total de hojarasca",
+                     "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             txtPesoTotalHO.requestFocus();
             return false;
         } else if (!txtEspesorHO.getText().isEmpty() && txtPesoMuestraHO.getText().isEmpty()) {
@@ -483,19 +483,19 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     }
 
     private boolean validarCapturaFermentacion() {
-       /* if (cmbPuntoHojarasca.getSelectedItem() == null) {
+        /* if (cmbPuntoHojarasca.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un punto de hojarasca "
                     , "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             cmbPuntoHojarasca.requestFocus();
             return false;
         } else*/ if (cmbTipoHojarasca.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de hojarasca "
-                    , "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de hojarasca ",
+                     "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             cmbTipoHojarasca.requestFocus();
             return false;
         } else if (!txtEspesorF.getText().isEmpty() && txtPesoTotalF.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Si capturó espesor de fermentación debe capturar peso total de fermentación"
-                    , "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Si capturó espesor de fermentación debe capturar peso total de fermentación",
+                     "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             txtPesoTotalF.requestFocus();
             return false;
         } else if (!txtEspesorF.getText().isEmpty() && txtPesoMuestraF.getText().isEmpty()) {
@@ -522,17 +522,16 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
 
     private boolean validarDatosHojarasca() {
         if (this.espesorHO < 0.0) {
-            JOptionPane.showMessageDialog(null, "Debe proporcionar un valor mayor o igual a cero para espesor HO "
-                    , "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe proporcionar un valor mayor o igual a cero para espesor HO ",
+                     "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             txtEspesorHO.requestFocus();
             return false;
         } else if (this.espesorF < 0.0) {
-            JOptionPane.showMessageDialog(null, "Debe proporcionar un valor mayor o igual a cero para espesor F "
-                    , "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe proporcionar un valor mayor o igual a cero para espesor F ",
+                     "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             txtEspesorF.requestFocus();
             return false;
         } else if (this.pesoTotalHO < 0.0) {
@@ -541,18 +540,18 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
             txtPesoTotalHO.requestFocus();
             return false;
         } else if (this.pesoTotalF < 0.0) {
-            JOptionPane.showMessageDialog(null, "Debe proporcionar un valor mayor o igual cero para peso total F "
-                    , "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe proporcionar un valor mayor o igual cero para peso total F ",
+                     "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             txtPesoTotalF.requestFocus();
             return false;
         } else if (this.pesoMuestraHO < 0.0) {
-            JOptionPane.showMessageDialog(null, "Debe proporcionar un valor mayor o igual a cero para peso muestra HO "
-                    , "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe proporcionar un valor mayor o igual a cero para peso muestra HO ",
+                     "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             txtPesoMuestraHO.requestFocus();
             return false;
         } else if (this.pesoMuestraF < 0.0) {
-            JOptionPane.showMessageDialog(null, "Debe proporcionar un valor mayor o igual a cero para peso muestra F "
-                    , "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe proporcionar un valor mayor o igual a cero para peso muestra F ",
+                     "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             txtPesoMuestraF.requestFocus();
             return false;
         } else {
@@ -560,7 +559,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         }
     }
 
-  /*  private boolean validarCamposObligatoriosProfundidad030() {
+    /*  private boolean validarCamposObligatoriosProfundidad030() {
         if (cmbPuntoProfundidad.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Debe proporcionar un punto para profundidad "
                     + "", "Profundidades suelo", JOptionPane.INFORMATION_MESSAGE);
@@ -586,7 +585,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         }
     }*/
 
-    /*private boolean validarDatosProfundidad030() {
+ /*private boolean validarDatosProfundidad030() {
         if (this.profundidad030 < 0 || this.profundidad030 > 30) {
             JOptionPane.showMessageDialog(null, "Debe proporcionar un valor entre 0 y 30 para profundidad real 0-30 "
                     + "", "Profundidades suelo", JOptionPane.INFORMATION_MESSAGE);
@@ -601,7 +600,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
             return true;
         }
     }*/
-
     private boolean validarProfundidad030() {
         if (this.profundidad030 < 0 || this.profundidad030 > 300) {
             JOptionPane.showMessageDialog(null, "Debe proporcionar un valor entre 0 y 300 para profundidad real 0-30 "
@@ -612,26 +610,26 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private boolean validarProfundidad3060() {
         System.out.println(txtProfundidad3060.getText());
-        if(txtProfundidad3060.getText().equals("0.00")){
+        if (txtProfundidad3060.getText().equals("0.00")) {
             return true;
-          
+
         }
         if (this.profundidad3060 != null) {
             if (this.profundidad3060 < 301 || this.profundidad3060 > 600) {
-               
+
                 JOptionPane.showMessageDialog(null, "Debe proporcionar un valor entre 301 y 600  para profundidad real 30-60 "
                         + "", "Profundidades suelo", JOptionPane.INFORMATION_MESSAGE);
                 txtProfundidad3060.requestFocus();
                 return false;
-                }
-            } 
-        
+            }
+        }
+
         return true;
     }
-    
+
     private boolean validarPesoTotal030() {
         if (this.pesoTotal030 < 0 || this.pesoTotal030 > 1000) {
             JOptionPane.showMessageDialog(null, "Debe proporcionar un valor entre 0 y 1000 para peso total 0-30 ", "Profundidades suelo", JOptionPane.INFORMATION_MESSAGE);
@@ -641,7 +639,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private boolean validarPesoTotal3060() {
         if (this.pesoTotal3060 != null) {
             if (this.pesoTotal3060 < 0 || this.pesoTotal3060 > 1000) {
@@ -652,7 +650,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         }
         return true;
     }
-    
+
     private boolean validarPuntoHojarasca() {
         Integer punto = (Integer) cmbPuntoHojarasca.getSelectedItem();
         CDHojarasca cdHojarasca = new CDHojarasca();
@@ -686,7 +684,8 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         }
         return existePunto;
     }
-  /*  private boolean validarCamposObligatoriosProfundidad3060() {
+
+    /*  private boolean validarCamposObligatoriosProfundidad3060() {
         if (!txtProfundidad3060.getText().isEmpty() || !txtPesoTotal3060.getText().isEmpty() || !txtEquipo3060.getText().isEmpty()) {
             if (cmbPuntoProfundidad.getSelectedItem() == null) {
                 JOptionPane.showMessageDialog(null, "Debe proporcionar un punto para profundidad "
@@ -715,7 +714,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         return true;
     }*/
 
-    /*private boolean validarDatosProfundidad3060() {
+ /*private boolean validarDatosProfundidad3060() {
         if (this.profundidad3060 < 31 || this.profundidad3060 > 60) {
             JOptionPane.showMessageDialog(null, "Debe proporcionar un valor entre 31 y 60 para profundidad real 30-60 "
                     + "", "Profundidades suelo", JOptionPane.INFORMATION_MESSAGE);
@@ -730,8 +729,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
             return true;
         }
     }*/
-    
-    
     private boolean validarDatosProfundidad36() {
         if (!txtProfundidad3060.getText().isEmpty() || !txtPesoTotal3060.getText().isEmpty() || !txtEquipo3060.getText().isEmpty()) {
             if (this.profundidad3060 < 301 || this.profundidad3060 > 600) {
@@ -748,7 +745,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         }
         return true;
     }
-    
+
     private boolean validarCapturaProfundidad030() {
         if (cmbPuntoProfundidad.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Debe proporcionar un punto para profundidad "
@@ -782,7 +779,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         }
         return true;
     }
-    
+
     private boolean validarCapturaProfundidad3060() {
         /* if (cmbPuntoProfundidad.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Debe proporcionar un punto para profundidad "
@@ -836,8 +833,8 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
-    private void limpiarControlesHojarasca(){
+
+    private void limpiarControlesHojarasca() {
         cmbPuntoHojarasca.setSelectedItem(null);
         cmbTipoHojarasca.setSelectedItem(null);
         txtEspesorHO.setText("");
@@ -858,8 +855,8 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         cmbPuntoHojarasca.requestFocus();
         grdHojarasca.removeAll();
     }
-    
-    private void limpiarControlesProfundidades(){
+
+    private void limpiarControlesProfundidades() {
         cmbPuntoProfundidad.setSelectedItem(null);
         txtProfundidad030.setText("");
         txtProfundidad030.setValue(null);
@@ -876,9 +873,9 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         txtClave3060.setText("");
         cmbPuntoProfundidad.requestFocus();
     }
-    
-    private void manipularControlesHojarasca(boolean actualizar){
-        if(actualizar == true){
+
+    private void manipularControlesHojarasca(boolean actualizar) {
+        if (actualizar == true) {
             this.cmbPuntoHojarasca.setEnabled(true);
             this.cmbTipoHojarasca.setEnabled(true);
             this.txtEspesorHO.setEnabled(true);
@@ -900,9 +897,9 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
             this.txtObservacionesHF.setEnabled(false);
         }
     }
-    
-    private void manipularControlesProfundidades(boolean activar){
-        if(activar == true){
+
+    private void manipularControlesProfundidades(boolean activar) {
+        if (activar == true) {
             this.cmbPuntoProfundidad.setEnabled(true);
             this.txtProfundidad030.setEnabled(true);
             this.txtProfundidad3060.setEnabled(true);
@@ -922,15 +919,15 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
             this.txtObservacionesProfundidades.setEnabled(false);
         }
     }
-    
-    private String crearClave(int upmID, int sitio, int punto, String seccion){
+
+    private String crearClave(int upmID, int sitio, int punto, String seccion) {
         String clave = null;
         String upm = crearUPM(upmID);
         String noSitio = crearSitio(sitio);
         clave = upm + "-" + noSitio + "-" + punto + "-" + seccion;
         return clave;
     }
-    
+
     private String crearUPM(int upmID) {
         String upm = null;
         if (upmID < 10) {
@@ -948,11 +945,11 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         }
         return upm;
     }
-    
-    private String crearSitio(int sitio){
+
+    private String crearSitio(int sitio) {
         return "S" + sitio;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1066,6 +1063,12 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        cmbTipoHojarasca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTipoHojarascaActionPerformed(evt);
+            }
+        });
+
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1173,6 +1176,11 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtEspesorFFocusLost(evt);
+            }
+        });
+        txtEspesorF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEspesorFActionPerformed(evt);
             }
         });
         txtEspesorF.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1917,61 +1925,66 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtObservacionesProfundidadesFocusGained
 
     private void txtEspesorHOFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEspesorHOFocusLost
-       if(txtEspesorHO.getText().isEmpty()){
-           txtEspesorHO.setValue(null);
-       }
+        if (txtEspesorHO.getText().isEmpty()) {
+            txtEspesorHO.setValue(null);
+        }
     }//GEN-LAST:event_txtEspesorHOFocusLost
 
     private void txtEspesorFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEspesorFFocusLost
-       if(txtEspesorF.getText().isEmpty()){
-           txtEspesorF.setValue(null);
-       }
+        if (txtEspesorF.getText().isEmpty()) {
+            txtEspesorF.setValue(null);
+        }else{
+            if(txtEspesorF.getText().equals("0")){
+                txtPesoTotalF.setText("0.0");
+                txtPesoMuestraF.setText("0.0");
+            }
+        }
     }//GEN-LAST:event_txtEspesorFFocusLost
 
     private void txtPesoTotalHOFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPesoTotalHOFocusLost
-       if(txtPesoTotalHO.getText().isEmpty()){
-           txtPesoTotalHO.setValue(null);
-       }
+        if (txtPesoTotalHO.getText().isEmpty()) {
+            txtPesoTotalHO.setValue(null);
+        }
     }//GEN-LAST:event_txtPesoTotalHOFocusLost
 
     private void txtPesoTotalFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPesoTotalFFocusLost
-        if(txtPesoTotalF.getText().isEmpty()){
+        if (txtPesoTotalF.getText().isEmpty()) {
             txtPesoTotalF.setValue(null);
         }
     }//GEN-LAST:event_txtPesoTotalFFocusLost
 
     private void txtPesoMuestraHOFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPesoMuestraHOFocusLost
-        if(txtPesoMuestraHO.getText().isEmpty()){
+        if (txtPesoMuestraHO.getText().isEmpty()) {
             txtPesoMuestraHO.setValue(null);
         }
     }//GEN-LAST:event_txtPesoMuestraHOFocusLost
 
     private void txtPesoMuestraFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPesoMuestraFFocusLost
-        if(txtPesoMuestraF.getText().isEmpty()){
+        if (txtPesoMuestraF.getText().isEmpty()) {
             txtPesoMuestraF.setValue(null);
         }
     }//GEN-LAST:event_txtPesoMuestraFFocusLost
 
     private void txtProfundidad030FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtProfundidad030FocusLost
-       if(txtProfundidad030.getText().isEmpty()){
-           txtProfundidad030.setValue(null);
-       }
+        if (txtProfundidad030.getText().isEmpty()) {
+            txtProfundidad030.setValue(null);
+        }
     }//GEN-LAST:event_txtProfundidad030FocusLost
 
     private void txtProfundidad3060FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtProfundidad3060FocusLost
-        if(txtProfundidad3060.getText().isEmpty()){
+        if (txtProfundidad3060.getText().isEmpty()) {
             txtProfundidad3060.setValue(null);
         }
     }//GEN-LAST:event_txtProfundidad3060FocusLost
 
     private void txtPesoTotal030FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPesoTotal030FocusLost
-        if(txtPesoTotal030.getText().isEmpty()){
+        if (txtPesoTotal030.getText().isEmpty()) {
             txtPesoTotal030.setValue(null);
         }
     }//GEN-LAST:event_txtPesoTotal030FocusLost
 
     private void txtPesoTotal3060FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPesoTotal3060FocusLost
-        if(txtPesoTotal3060.getText().isEmpty()){
+        if (txtPesoTotal3060.getText().isEmpty()) {
             txtPesoTotal3060.setValue(null);
         }
     }//GEN-LAST:event_txtPesoTotal3060FocusLost
@@ -2013,7 +2026,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                     "Hojarasca", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (respuesta == JOptionPane.YES_OPTION) {
                 this.cdHojarasca.deleteHojarasca(Integer.parseInt(registro));
-                this.cdHojarasca.reenumerarHojarasca(this.sitioID);
+                //this.cdHojarasca.reenumerarHojarasca(this.sitioID);
                 llenarTablaHojarsaca();
                 //this.combo.reiniciarComboModel(cmbPuntoHojarasca);
                 //fillCmbPuntosHojarasca();
@@ -2029,10 +2042,10 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         fijarDatosProfundidad();
         if (validarCapturaProfundidad030() && validarCapturaProfundidad3060() && validarPesoTotal030() && validarPesoTotal3060() && validarProfundidad030() && validarProfundidad3060() && validarPuntoProfundidad()) {
             crearProfundidad();
-           // this.cdProfundidad.reenumerarProfundidad(this.sitioID);
+            // this.cdProfundidad.reenumerarProfundidad(this.sitioID);
             llenarTablaProfundidad();
             //this.combo.reiniciarComboModel(cmbPuntoProfundidad);
-           // fillCmbPuntosProfundidad();
+            // fillCmbPuntosProfundidad();
             limpiarControlesProfundidades();
         }
     }//GEN-LAST:event_btnAgregarProfundidadActionPerformed
@@ -2054,10 +2067,10 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                     "Profundidad de suelo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (respuesta == JOptionPane.YES_OPTION) {
                 this.cdProfundidad.deleteProfundidad(Integer.parseInt(registro));
-                this.cdProfundidad.reenumerarProfundidad(this.sitioID);
+                //this.cdProfundidad.reenumerarProfundidad(this.sitioID);
                 llenarTablaProfundidad();
                 //this.combo.reiniciarComboModel(cmbPuntoProfundidad);
-               // fillCmbPuntosProfundidad();
+                // fillCmbPuntosProfundidad();
                 limpiarControlesProfundidades();
             }
         } catch (Exception e) {
@@ -2090,25 +2103,25 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void grdHojarascaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdHojarascaMouseClicked
-       if(evt.getButton() == 1){
-           int fila = grdHojarasca.getSelectedRow();
-           String id = grdHojarasca.getValueAt(fila, 0).toString();
-           this.ceHojarasca = this.cdHojarasca.getDatosHojarasca(Integer.parseInt(id));
-           Integer indexPunto = this.ceHojarasca.getPunto();
-           cmbPuntoHojarasca.setSelectedItem(indexPunto);
-           CatETipoHojarasca tipoHojarasca = new CatETipoHojarasca();
-           tipoHojarasca.setTipoHojarascaID(this.ceHojarasca.getTipoID());
-           cmbTipoHojarasca.setSelectedItem(tipoHojarasca);
-           txtEspesorHO.setText(String.valueOf(this.ceHojarasca.getEspesorHO()));
-           txtEspesorF.setText(String.valueOf(this.ceHojarasca.getEspesorF()));
-           txtPesoTotalHO.setText(String.valueOf(this.ceHojarasca.getPesoTotalHO()));
-           txtPesoTotalF.setText(String.valueOf(this.ceHojarasca.getPesoTotalF()));
-           txtPesoMuestraHO.setText(String.valueOf(this.ceHojarasca.getPesoMuestraHO()));
-           txtPesoMuestraF.setText(String.valueOf(this.ceHojarasca.getPesoMuestraF()));
-           txtObservacionesHF.setText(this.ceHojarasca.getObservaciones());
-           txtClaveHO.setText(this.ceHojarasca.getClaveHO());
-           txtClaveF.setText(this.ceHojarasca.getClaveF());
-       }
+        if (evt.getButton() == 1) {
+            int fila = grdHojarasca.getSelectedRow();
+            String id = grdHojarasca.getValueAt(fila, 0).toString();
+            this.ceHojarasca = this.cdHojarasca.getDatosHojarasca(Integer.parseInt(id));
+            Integer indexPunto = this.ceHojarasca.getPunto();
+            cmbPuntoHojarasca.setSelectedItem(indexPunto);
+            CatETipoHojarasca tipoHojarasca = new CatETipoHojarasca();
+            tipoHojarasca.setTipoHojarascaID(this.ceHojarasca.getTipoID());
+            cmbTipoHojarasca.setSelectedItem(tipoHojarasca);
+            txtEspesorHO.setText(String.valueOf(this.ceHojarasca.getEspesorHO()));
+            txtEspesorF.setText(String.valueOf(this.ceHojarasca.getEspesorF()));
+            txtPesoTotalHO.setText(String.valueOf(this.ceHojarasca.getPesoTotalHO()));
+            txtPesoTotalF.setText(String.valueOf(this.ceHojarasca.getPesoTotalF()));
+            txtPesoMuestraHO.setText(String.valueOf(this.ceHojarasca.getPesoMuestraHO()));
+            txtPesoMuestraF.setText(String.valueOf(this.ceHojarasca.getPesoMuestraF()));
+            txtObservacionesHF.setText(this.ceHojarasca.getObservaciones());
+            txtClaveHO.setText(this.ceHojarasca.getClaveHO());
+            txtClaveF.setText(this.ceHojarasca.getClaveF());
+        }
     }//GEN-LAST:event_grdHojarascaMouseClicked
 
     private void grdProfundidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdProfundidadMouseClicked
@@ -2137,39 +2150,39 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_grdProfundidadMouseClicked
 
     private void txtEspesorHOKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEspesorHOKeyTyped
-       numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtEspesorHOKeyTyped
 
     private void txtEspesorFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEspesorFKeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtEspesorFKeyTyped
 
     private void txtPesoTotalHOKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesoTotalHOKeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtPesoTotalHOKeyTyped
 
     private void txtPesoTotalFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesoTotalFKeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtPesoTotalFKeyTyped
 
     private void txtPesoMuestraHOKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesoMuestraHOKeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtPesoMuestraHOKeyTyped
 
     private void txtPesoMuestraFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesoMuestraFKeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtPesoMuestraFKeyTyped
 
     private void txtProfundidad030KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProfundidad030KeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtProfundidad030KeyTyped
 
     private void txtProfundidad3060KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProfundidad3060KeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtProfundidad3060KeyTyped
 
     private void txtPesoTotal030KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesoTotal030KeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtPesoTotal030KeyTyped
 
     private void txtPesoTotal3060KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesoTotal3060KeyTyped
@@ -2177,17 +2190,17 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPesoTotal3060KeyTyped
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-       if(revision==false){//esta en modo de captura
+        if (revision == false) {//esta en modo de captura
             this.hide();
             funciones.manipularBotonesMenuPrincipal(false);
         }
-        if(revision==true){//entro a modo de revision
-             //System.err.println("Modo Revision");
+        if (revision == true) {//entro a modo de revision
+            //System.err.println("Modo Revision");
             this.hide();
             //UPMForms.revisionModulos.iniciarRevision();
             UPMForms.revisionModulos.setVisible(true);
             UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision=false;
+            revision = false;
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
@@ -2225,7 +2238,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                 this.funciones.reiniciarTabla(this.grdProfundidad);
                 llenarTablaProfundidad();
                 //this.funciones.reiniciarComboModel(cmbPuntoProfundidad);
-               // fillCmbPuntosProfundidad();
+                // fillCmbPuntosProfundidad();
                 limpiarControlesProfundidades();
                 manipularControlesProfundidades(false);
             } else {
@@ -2239,9 +2252,24 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbPuntoProfundidadActionPerformed
 
+    private void txtEspesorFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEspesorFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEspesorFActionPerformed
+
+    private void cmbTipoHojarascaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoHojarascaActionPerformed
+       if(cmbTipoHojarasca.getSelectedIndex()==9){
+           txtPesoTotalHO.setText("0.0");
+           txtPesoTotalF.setText("0.0");
+           txtEspesorF.setText("0.0");
+           txtEspesorHO.setText("0.0");
+           txtPesoMuestraF.setText("0.0");
+           txtPesoMuestraHO.setText("0.0");
+       }
+    }//GEN-LAST:event_cmbTipoHojarascaActionPerformed
+
     /**
-     * @param args the command line arguments
-     */
+         * @param args the command line arguments
+         */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarHojarasca;
     private javax.swing.JButton btnAgregarProfundidad;

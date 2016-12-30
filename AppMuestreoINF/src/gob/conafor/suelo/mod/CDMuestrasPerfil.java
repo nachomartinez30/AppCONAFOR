@@ -287,13 +287,13 @@ public class CDMuestrasPerfil {
     }
     
     public void insertMuestras(CEMuestras ceMuestras) {
-        query = "INSERT INTO SUELO_Muestras(SitioID, ProfundidadID, PesoMuestra,Muestras, Lectura1, Lectura2, "
+        query = "INSERT INTO SUELO_Muestras(SitioID, ProfundidadID,Muestras,PesoMuestra, Lectura1, Lectura2, "
                 + "Lectura3, Lectura4, Promedio, ClaveColecta)VALUES(" + ceMuestras.getSitioID() + ", " + ceMuestras.getProfundidadID()
                 +  ", " + ceMuestras.getMuestra() +  ", " + ceMuestras.getPesoMuestra() + ", " + ceMuestras.getLectura1()
                 + ", " + ceMuestras.getLectura2() + ", " + ceMuestras.getLectura3() + ", " + ceMuestras.getLectura4()
                 + ", " + ceMuestras.getPromedio() +  ", '" + ceMuestras.getClaveColecta() + "')";
         Connection conn = LocalConnection.getConnection();
-        System.out.println(query);
+        //System.out.println(query);
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);

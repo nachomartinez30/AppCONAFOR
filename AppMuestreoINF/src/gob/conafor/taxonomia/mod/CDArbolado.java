@@ -172,7 +172,7 @@ public class CDArbolado {
         String[] encabezados = {"ArboladoID", "SitioID", "Consecutivo", "Individuo", "Rama", "Azimut", "Distancia", "Familia", "Genero",
             "Especie", "Infraespecie", "Nombre comun", "Submuestra", "Forma vida", "Condicion", "Forma Fuste", " Tipo muerto en pie", "Grado putrefaccion", "Tipo tocon",
             "Diametro normal", "Altura total", "Angulo inclinacion", "Altura fuste limpio", "Altura comercial", "Diametro copa NS", "Diametro copa EO", "Proporcion Copa",
-            "Exposicion luz", "Posicion copa", "Dencidad copa", "Muerte regresiva", "Transparencia follage", "Agente daño 1", "Severidad 1", "Agente daño 2", "Severidad 2", "Clave de colecta"};
+            "Exposicion luz", "Posicion copa", "Densidad copa", "Muerte regresiva", "Transparencia follage", "Agente daño 1", "Severidad 1", "Agente daño 2", "Severidad 2", "Clave de colecta"};
         DefaultTableModel arboladoModel = new DefaultTableModel(null, encabezados);
         Object[] datosArbolado = new Object[37];
         Connection conn = LocalConnection.getConnection();

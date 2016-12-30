@@ -156,7 +156,7 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
             txtEPE.setText(String.valueOf(ceSitio.getErrorPrecision()));
             rbtEvidenciaSi.setEnabled(true);
             rbtEvidenciaNo.setEnabled(true);
-            if (ceSitio.getErrorPrecision() == 1) {
+            if (ceSitio.getEvidenciaMuestreo() == 1) {
                 rbtEvidenciaSi.setSelected(true);
                 rbtEvidenciaNo.setSelected(false);
             } else {
@@ -682,6 +682,21 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
         this.explicacionaInaccesibilidad = txtExplicacion.getText();
     }
 
+    private void actualizarSitioInaccesible() {
+        fijarDatosSitio();
+        int upmID = (Integer) cmbUPM.getSelectedItem();
+         int numeroSitio = (Integer) cmbSitio.getSelectedItem();
+         int esAccesible = chkAccesible.isSelected() ? 1 : 0;
+         CatETipoInaccesibilidad inaccesibilidad = (CatETipoInaccesibilidad) cmbInaccesibilidad.getSelectedItem();
+         this.ceSitio.setUpmID(upmID);
+         this.ceSitio.setSitioID(this.sitioID);
+         this.ceSitio.setSitio(numeroSitio);
+         this.ceSitio.setSitioAccesible(esAccesible);
+         this.ceSitio.setTipoInaccesibilidadID(inaccesibilidad.getTipoInaccesibilidadID());
+         this.ceSitio.setExplicacionInaccesibilidad(txtExplicacion.getText());
+         cdSitio.updateSitioInaccesible(this.ceSitio);
+    }
+    
     private void actualizarSitio() {
         fijarDatosSitio();
         Integer sitio = (Integer) cmbSitio.getSelectedItem();
@@ -1458,7 +1473,7 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
                     "Error! debe seleccionar un número de sitio ",
                     "Datos de ubicación del Sitio", JOptionPane.ERROR_MESSAGE);
             cmbSitio.requestFocus();
-        } else if (chkAccesible.isSelected() && chkSenial.isSelected()) {
+        } else if (chkAccesible.isSelected() && chkSenial.isSelected()) {//ES ACCESIBLE Y SE TUVO SEÑAL GPS
             if (validarCamposObligatoriosSitioAccesible() && validarDatosCoordenadas()) {
                 actualizarSitio();
                 JOptionPane.showMessageDialog(null, "Ha modificado un Sitio", "Datos de ubicación del sitio", JOptionPane.INFORMATION_MESSAGE);
@@ -1466,7 +1481,7 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
                 habilitarControlesIniciales(false);
                 cmbUPM.requestFocus();
             }
-        } else if (chkAccesible.isSelected() && !chkSenial.isSelected()) {
+        } else if (chkAccesible.isSelected() && !chkSenial.isSelected()) {//ES ACCESIBLE Y NO SE TUVO SEÑAL GPS
             if ((validarCamposObligatoriosSitioAccesible() && validarDatosCoordenadas()) && (validarCamposAuxiliaresObligatorios() && validarAzimutDistancia())) {
                 actualizarSitio();
                 JOptionPane.showMessageDialog(null, "Ha modificado un Sitio", "Datos de ubicación del sitio", JOptionPane.INFORMATION_MESSAGE);
@@ -1474,9 +1489,10 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
                 habilitarControlesIniciales(false);
                 cmbUPM.requestFocus();
             }
-        } else if (!chkAccesible.isSelected()) {
+        } else if (!chkAccesible.isSelected()) { // NO ES ACCESIBLE
             if (validarCamposObligatoriosSitioInaccesible()) {
-                actualizarSitio();
+                
+                actualizarSitioInaccesible();
                 JOptionPane.showMessageDialog(null, "Ha modificado un Sitio como inaccesible", "Captura de la UPM", JOptionPane.INFORMATION_MESSAGE);
                 reiniciarForma();
                 habilitarControlesIniciales(false);

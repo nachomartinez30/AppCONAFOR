@@ -108,6 +108,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
         }
         txtCondicionPresente.setText(ceVegetacion.getCondicionPresenteCampo());
         this.modificar = 1;
+        validarComboBoxClaveVegetacion();
         funciones.manipularBotonesMenuPrincipal(true);
     }
     
@@ -777,7 +778,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblEcotono, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(lblClaveVegetacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 920, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnContinuar)
@@ -794,11 +795,11 @@ public class FrmClaveVegetacion extends JInternalFrame {
                         .addComponent(lblUPM))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblSitio)
-                                .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(6, 6, 6)
                 .addComponent(lblClaveVegetacion)
                 .addGap(6, 6, 6)
@@ -899,6 +900,63 @@ public class FrmClaveVegetacion extends JInternalFrame {
     }//GEN-LAST:event_chkEcotonoActionPerformed
 
     private void cmbClaveSerieVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClaveSerieVActionPerformed
+       validarComboBoxClaveVegetacion();
+        /* try {
+            CatEClaveSerieV claveV = (CatEClaveSerieV) cmbClaveSerieV.getSelectedItem();
+            if (claveV.getEsForestal() == 1) {
+                lblCoberturaVegetal.setText("Forestal");
+                rbtPrimario.setEnabled(true);
+                rbtSecundario.setEnabled(true);
+                rbtPrimario.setSelected(true);
+                chkArbolFueraBosque.setEnabled(false);
+                chkArbolFueraBosque.setSelected(false);
+                chkEcotono.setEnabled(true);
+                txtDescripcionEcotono.setText("");
+            } else if (claveV.getEsForestal() == 0 && claveV.getClaveSerievID() != 255) {
+                lblCoberturaVegetal.setText("No Forestal");
+                rbtPrimario.setEnabled(false);
+                rbtSecundario.setEnabled(false);
+                grbTipoVegetacion.clearSelection();
+                chkArbolFueraBosque.setEnabled(true);
+                cmbFaseSucecional.setSelectedItem(null);
+                cmbFaseSucecional.setEnabled(false);
+                chkEcotono.setEnabled(false);
+                chkEcotono.setSelected(false);
+                txtDescripcionEcotono.setText("");
+                txtDescripcionEcotono.setEnabled(false);
+            } else if (claveV.getEsForestal() == 0 && claveV.getClaveSerievID() == 255) {
+                lblCoberturaVegetal.setText("No aplica");
+                rbtPrimario.setEnabled(false);
+                rbtSecundario.setEnabled(false);
+                grbTipoVegetacion.clearSelection();
+                chkArbolFueraBosque.setEnabled(false);
+                cmbFaseSucecional.setSelectedItem(null);
+                cmbFaseSucecional.setEnabled(false);
+                chkEcotono.setSelected(false);
+                chkEcotono.setEnabled(false);
+                txtDescripcionEcotono.setText("");
+                txtDescripcionEcotono.setEnabled(false);
+            }
+
+            lblEcosistema.setText(claveV.getTipoVegetacion());
+        } catch (NullPointerException e) {
+            lblCoberturaVegetal.setText("Cobertura vegetal");
+            lblEcosistema.setText("Ecosistema");
+            rbtPrimario.setSelected(false);
+            rbtSecundario.setSelected(false);
+            grbTipoVegetacion.clearSelection();
+            cmbFaseSucecional.setSelectedItem(null);
+            cmbFaseSucecional.setEnabled(false);
+            chkArbolFueraBosque.setEnabled(false);
+            chkArbolFueraBosque.setSelected(false);
+            chkEcotono.setSelected(false);
+            chkEcotono.setEnabled(false);
+            txtDescripcionEcotono.setText("");
+            txtDescripcionEcotono.setEnabled(false);
+        }*/
+    }//GEN-LAST:event_cmbClaveSerieVActionPerformed
+    
+    public void validarComboBoxClaveVegetacion(){
         try {
             CatEClaveSerieV claveV = (CatEClaveSerieV) cmbClaveSerieV.getSelectedItem();
             if (claveV.getEsForestal() == 1) {
@@ -952,8 +1010,8 @@ public class FrmClaveVegetacion extends JInternalFrame {
             txtDescripcionEcotono.setText("");
             txtDescripcionEcotono.setEnabled(false);
         }
-    }//GEN-LAST:event_cmbClaveSerieVActionPerformed
-
+    }
+    
     private void rbtSecundarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtSecundarioActionPerformed
         cmbFaseSucecional.setEnabled(true);
     }//GEN-LAST:event_rbtSecundarioActionPerformed

@@ -177,11 +177,12 @@ public class FrmSitio extends javax.swing.JInternalFrame {
             txtEPE.setText(String.valueOf(ceSitio.getErrorPrecision()));
             rbtEvidenciaSi.setEnabled(true);
             rbtEvidenciaNo.setEnabled(true);
-            if (ceSitio.getErrorPrecision() == 1) {
+            if (ceSitio.getEvidenciaMuestreo() == 1) {
                 rbtEvidenciaSi.setSelected(true);
                 rbtEvidenciaNo.setSelected(false);
             } else {
                 rbtEvidenciaSi.setSelected(false);
+                 
                 rbtEvidenciaNo.setSelected(true);
             }
             cmbInaccesibilidad.setSelectedItem(null);
@@ -1551,7 +1552,7 @@ public class FrmSitio extends javax.swing.JInternalFrame {
                         "Error! debe seleccionar un número de sitio ",
                         "Datos de ubicación del Sitio", JOptionPane.INFORMATION_MESSAGE);
                 cmbSitio.requestFocus();
-            } else if (chkAccesible.isSelected() && chkSenial.isSelected()) {
+            } else if (chkAccesible.isSelected() && chkSenial.isSelected()) {//ES ACCESIBLE Y SE TUVO SEÑAL GPS
                 if (validarCamposObligatoriosSitioAccesible() && validarDatosCoordenadas()) {
                     cdSitio.insertSitioAccesible(crearSitioAccesible());
                     combo.reiniciarComboModel(cmbSitio);
@@ -1571,7 +1572,7 @@ public class FrmSitio extends javax.swing.JInternalFrame {
                     }
                     habilitarControlesIniciales(false);
                 }
-            } else if (chkAccesible.isSelected() && !chkSenial.isSelected()) {
+            } else if (chkAccesible.isSelected() && !chkSenial.isSelected()) {//ES ACCESIBLE Y NO SE TUVO SEÑAL GPS
                 if ((validarCamposObligatoriosSitioAccesible() && validarDatosCoordenadas()) && (validarCamposAuxiliaresObligatorios() && validarAzimutDistancia())) {
                     cdSitio.insertSitioAccesibleSenial(crearSitioSenial());
                     combo.reiniciarComboModel(cmbSitio);
@@ -1592,7 +1593,7 @@ public class FrmSitio extends javax.swing.JInternalFrame {
                         combo.reiniciarComboModel(cmbUPM);
                     }
                 }
-            } else if (!chkAccesible.isSelected()) {
+            } else if (!chkAccesible.isSelected()) {//NO ES ACCESIBLE
                 if (validarCamposObligatoriosSitioInaccesible()) {
                     cdSitio.insertSitioInaccesible(crearSitioInaccesible());
                     JOptionPane.showMessageDialog(null, "Ha creado un nuevo Sitio inaccesible", "Captura de la UPM", JOptionPane.INFORMATION_MESSAGE);
@@ -1912,8 +1913,10 @@ public class FrmSitio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_chkSenialActionPerformed
 
     private void cmbSitioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitioActionPerformed
+        
         if (this.actualizacion == 0) {
             if (cmbSitio.getSelectedItem() != null) {
+                
                 habilitarControlesIniciales(true);
             } else {
                reiniciarForma();

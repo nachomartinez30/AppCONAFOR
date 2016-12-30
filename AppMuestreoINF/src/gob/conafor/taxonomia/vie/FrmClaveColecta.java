@@ -185,6 +185,7 @@ public class FrmClaveColecta extends javax.swing.JDialog {
         cmbClaveColecta = new javax.swing.JComboBox<>();
         lblClaveNueva = new javax.swing.JLabel();
         btnDesasignar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
 
         setTitle("Generación de la clave de colecta botánica");
         setBackground(new java.awt.Color(204, 204, 204));
@@ -279,7 +280,7 @@ public class FrmClaveColecta extends javax.swing.JDialog {
                     .addComponent(txtConsecutivo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPreClave)
                     .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,6 +349,13 @@ public class FrmClaveColecta extends javax.swing.JDialog {
             }
         });
 
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -359,8 +367,10 @@ public class FrmClaveColecta extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnAsignar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(47, 47, 47)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnDesasignar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnModificar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lblClaveNueva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -371,7 +381,7 @@ public class FrmClaveColecta extends javax.swing.JDialog {
                         .addComponent(lblClavesExistentes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmbClaveColecta, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -390,7 +400,8 @@ public class FrmClaveColecta extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir)
                     .addComponent(btnAsignar)
-                    .addComponent(btnDesasignar))
+                    .addComponent(btnDesasignar)
+                    .addComponent(btnModificar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -398,11 +409,13 @@ public class FrmClaveColecta extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -528,13 +541,13 @@ public class FrmClaveColecta extends javax.swing.JDialog {
     }//GEN-LAST:event_rbtDigitalActionPerformed
 
     private void cmbClaveColectaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClaveColectaActionPerformed
-        if (cmbClaveColecta.getSelectedItem() == null) {
+        if (cmbClaveColecta.getSelectedItem() != null) {
             txtIniciales.setEnabled(true);
             txtConsecutivo.setEnabled(true);
             rbtDigital.setEnabled(true);
             rbtFisica.setEnabled(true);
             txtPreClave.setText(this.preclave);
-        } else {
+        } /*else {
             txtPreClave.setText("");
             txtIniciales.setEnabled(false);
             txtIniciales.setText("");
@@ -544,7 +557,7 @@ public class FrmClaveColecta extends javax.swing.JDialog {
             rbtDigital.setSelected(false);
             rbtFisica.setEnabled(false);
             rbtFisica.setSelected(false);
-        }
+        }*/
     }//GEN-LAST:event_cmbClaveColectaActionPerformed
 
     private void txtInicialesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInicialesKeyReleased
@@ -566,6 +579,20 @@ public class FrmClaveColecta extends javax.swing.JDialog {
             actualizarDatosFormato(this.formatoID, "");
             doClose(returnStatus);
     }//GEN-LAST:event_btnDesasignarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        try {
+            String Clave=cmbClaveColecta.getSelectedItem().toString(),ClaveNueva=txtClave.getText().toString();
+            this.UPMID = ceColecta.getUPMID();
+            this.cdColecta.modificarClaveColecta(Clave, this.UPMID,ClaveNueva);
+            cmbClaveColecta.removeAllItems();
+            limpiarControles();
+            fillCmbClaveColecta(this.UPMID);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Debe Seleccionar una clave de colecta "
+                , "Conexion BD", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
 
     private void doClose(int retStatus) {
         returnStatus = retStatus;
@@ -610,6 +637,7 @@ public class FrmClaveColecta extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsignar;
     private javax.swing.JButton btnDesasignar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cmbClaveColecta;
     private javax.swing.JPanel jPanel1;

@@ -69,8 +69,8 @@ public class ValidacionesArbolado {
     }
 
     public boolean esDiametroCopaNS(Float ns) { // 
-        if (ns < 0.1 || ns > 20) {
-            JOptionPane.showMessageDialog(null, "Error! el diametro de copa norte-sur debe estar entre 0.1 y 20", "Arbolado", JOptionPane.ERROR_MESSAGE);
+        if (ns < 0.0 || ns > 30) {
+            JOptionPane.showMessageDialog(null, "Error! el diametro de copa norte-sur debe estar entre 0.0 y 30", "Arbolado", JOptionPane.ERROR_MESSAGE);
             return true;
         } else {
             return false;
@@ -78,8 +78,8 @@ public class ValidacionesArbolado {
     }
 
     public boolean esDiametroCopaEO(Float ns) {
-        if (ns < 0.1 || ns > 30) {
-            JOptionPane.showMessageDialog(null, "Error! el diametro de copa este-oeste debe estar entre 0.1 y 30", "Arbolado", JOptionPane.ERROR_MESSAGE);
+        if (ns < 0.0 || ns > 30) {
+            JOptionPane.showMessageDialog(null, "Error! el diametro de copa este-oeste debe estar entre 0.0 y 30", "Arbolado", JOptionPane.ERROR_MESSAGE);
             return true;
         } else {
             return false;

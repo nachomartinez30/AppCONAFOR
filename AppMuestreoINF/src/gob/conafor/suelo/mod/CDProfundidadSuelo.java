@@ -176,6 +176,7 @@ public class CDProfundidadSuelo {
                 + "Equipo030, Equipo3060, Observaciones, Clave030, Clave3060)VALUES(" + ceProfundidad.getSitioID() + ", " + ceProfundidad.getPunto() + ", " + ceProfundidad.getProfundidad030() + ", " + ceProfundidad.getProfundidad3060()
                 + ", " + ceProfundidad.getPeso030() + ", " + ceProfundidad.getPeso3060() + ", '" + ceProfundidad.getEquipo030() + "', '" + ceProfundidad.getEquipo3060() + "', '" + ceProfundidad.getObservaciones() + "', '" + ceProfundidad.getClave030()
                 + "', '" + ceProfundidad.getClave3060() + "')";
+        //System.out.println(query);
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();

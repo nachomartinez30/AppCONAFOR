@@ -1554,7 +1554,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         lblClaveColecta.setOpaque(true);
 
         txtMuestra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-        txtMuestra.setNextFocusableComponent(txtLectura1);
+        txtMuestra.setNextFocusableComponent(txtPesoMuestra);
         txtMuestra.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtMuestraFocusGained(evt);

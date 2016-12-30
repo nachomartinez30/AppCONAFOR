@@ -304,7 +304,7 @@ public class CDSitio {
     
     public CESitio getSitioRevision(int sitioID) {
         this.query = "SELECT UPMID, SitioID, SenialGPS, GradosLatitud, MinutosLatitud, SegundosLatitud, "
-                + "GradosLongitud, MinutosLongitud, SegundosLongitud, ErrorPresicion, Datum, SitioAccesible, "
+                + "GradosLongitud, MinutosLongitud, SegundosLongitud, ErrorPresicion, EvidenciaMuestreo , Datum, SitioAccesible, "
                 + "Azimut, Distancia, TipoInaccesibilidad, ExplicacionInaccesibilidad "
                 + "FROM SITIOS_Sitio WHERE SitioID= " + sitioID;
         Connection conn = LocalConnection.getConnection();
@@ -322,6 +322,8 @@ public class CDSitio {
                 ceSitio.setMinutosLongitud(rs.getInt("MinutosLongitud"));
                 ceSitio.setSegundosLongitud(rs.getFloat("SegundosLongitud"));
                 ceSitio.setErrorPrecision(rs.getInt("ErrorPresicion"));
+                //System.err.println("Linea 325 CDSitio= "+ rs.getInt("EvidenciaMuestreo"));
+                ceSitio.setEvidenciaMuestreo(rs.getInt("EvidenciaMuestreo"));
                 ceSitio.setDatum(rs.getString("Datum"));
                 ceSitio.setSitioAccesible(rs.getInt("SitioAccesible"));
                 ceSitio.setAzimut(rs.getInt("Azimut"));
@@ -642,9 +644,10 @@ public class CDSitio {
 
     public void updateSitioInaccesible(CESitio sitio) {
         query = "UPDATE SITIOS_Sitio SET SitioAccesible= " + sitio.getSitioAccesible() + ", TipoInaccesibilidad= "
-                + sitio.getTipoInaccesibilidadID() + ", ExplicacionInaccesibilidad= " + sitio.getExplicacionInaccesibilidad()
-                + " WHERE SitioID= " + sitio.getSitioID();
+                + sitio.getTipoInaccesibilidadID() + ", ExplicacionInaccesibilidad= '" + sitio.getExplicacionInaccesibilidad()
+                + "' WHERE SitioID= " + sitio.getSitioID();
         Connection conn = LocalConnection.getConnection();
+        //System.out.println(query);
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
@@ -652,6 +655,7 @@ public class CDSitio {
             st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información del sitio inaccesible", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         } finally {
             try {
                 conn.close();

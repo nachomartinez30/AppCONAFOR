@@ -209,6 +209,30 @@ public class CDColectaBotanica {
         }
     }
 
+    public void modificarClaveColecta(String Clave,int UPMID,String ClaveNueva){
+      String query="UPDATE TAXONOMIA_ColectaBotanica SET ClaveColecta = '" + ClaveNueva + "' WHERE ClaveColecta='"+Clave+"' AND UPMID="+UPMID;
+      Connection conn = LocalConnection.getConnection();
+        try {
+            Statement st = conn.createStatement();
+            //System.out.println(query);
+            st.executeUpdate(query);
+            conn.commit();
+            st.close();
+            JOptionPane.showMessageDialog(null, "Clave Actualizada"
+                , "Conexion BD", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la Clave de Colecta"
+            , "Conexion BD", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la actualizacion de Clave"
+                , "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+  }
+    
     public void actualizarColectaBotanica(CEColectaBotanica ceColecta) {
         this.query = "UPDATE TAXONOMIA_ColectaBotanica SET ContraFuertes= " + ceColecta.getContraFuertes() + ", Sitio= " + ceColecta.getSitio() + ", SeccionID= " + ceColecta.getSeccionID() + ", Consecutivo= " + ceColecta.getConsecutivo()
                 + ", Exudado= " + ceColecta.getExudado() + ", IndicarExudado= '" + ceColecta.getIndicarExudado() + "', Color= " + ceColecta.getColor() + ", IndicarColor= '"

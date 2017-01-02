@@ -27,7 +27,6 @@ import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
-
 public class FrmInformacionGeneral extends JInternalFrame {
 
     private int upm;
@@ -43,12 +42,14 @@ public class FrmInformacionGeneral extends JInternalFrame {
     private FuncionesComunes combo = new FuncionesComunes();
     private CDBrigada cdBrigada = new CDBrigada();
     private CEBrigada ceBrigada = new CEBrigada();
-    private Version ver=new Version();
-    private String version=ver.getVersion();
-    
+    private Version ver = new Version();
+    private String version = ver.getVersion();
+    private boolean existeContacto = false;
+    private  CDContacto cdContacto=new CDContacto();
+
     public FrmInformacionGeneral() {
         initComponents();
-       /* this.combo.reiniciarComboModel(this.cmbUPM);
+        /* this.combo.reiniciarComboModel(this.cmbUPM);
         fillCmbUPM();*/
         fillCmbTipoUPM();
         fillCmbTenencia();
@@ -59,11 +60,11 @@ public class FrmInformacionGeneral extends JInternalFrame {
         this.informacionGeneral = 1;
         this.contacto = 2;
         //this.modificar = 0;
-       /* BasicInternalFrameTitlePane titlePane =(BasicInternalFrameTitlePane)((BasicInternalFrameUI)this.getUI()).getNorthPane();
+        /* BasicInternalFrameTitlePane titlePane =(BasicInternalFrameTitlePane)((BasicInternalFrameUI)this.getUI()).getNorthPane();
         this.remove(titlePane);*/
     }
-    
-    public void iniciarCaptura(){
+
+    public void iniciarCaptura() {
         this.modificar = 0;
         this.combo.reiniciarComboModel(this.cmbUPM);
         fillCmbUPM();
@@ -75,8 +76,9 @@ public class FrmInformacionGeneral extends JInternalFrame {
         hayContacto(false);
         hayContacto(true);
     }
-    
+
     public void revisarUPM(int upmID) {
+        //CDContacto cdContacto = new CDContacto();
         this.modificar = 1;
         setInformacionGeneral(upmID);
         this.combo.reiniciarComboModel(this.cmbUPM);
@@ -101,7 +103,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
             dpFechaInicio.setDate(fecIn);
             dpFechaFin.setDate(fecFi);
         } catch (Exception e) {
-            System.out.println(e);
+            //System.out.println(e);
         }
         dpFechaInicio.setEnabled(true);
         dpFechaFin.setEnabled(true);
@@ -116,10 +118,10 @@ public class FrmInformacionGeneral extends JInternalFrame {
         int contacto = ceUPM.getInformacionContacto();
         //Llenar los controles correspondientes al contacto si lo hubo
         chkInformacionContacto.setEnabled(true);
-        
-        if (contacto == 1) {
+
+        if (cdContacto.getExistenciaContacto(this.upm) == true) {
             chkInformacionContacto.setSelected(true);
-            CDContacto cdContacto = new CDContacto();
+
             CEContacto ceContacto = cdContacto.getDatosContacto(upmID);
             Integer tipoContacto = ceContacto.getTipoContacto();
             Integer tipoTelefono = ceContacto.getTipoTelefono();
@@ -163,7 +165,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
         } else {
             chkInformacionContacto.setSelected(false);
             hayContacto(false);
-            
+
         }
         seleccionarBrigadaUPM(upmID);
         cmbJefeBrigada.setEnabled(true);
@@ -171,8 +173,8 @@ public class FrmInformacionGeneral extends JInternalFrame {
         cmbAuxiliar2.setEnabled(true);
         combo.manipularBotonesMenuPrincipal(true);
     }
-    
-/*    public void revisarUPM(){
+
+    /*    public void revisarUPM(){
         this.combo.reiniciarComboModel(this.cmbUPM);
         fillCmbUPM();
         this.cmbUPM.setSelectedItem(null);
@@ -184,7 +186,6 @@ public class FrmInformacionGeneral extends JInternalFrame {
         //deshabiliatarControles()
         this.modificar = 1;
     }*/
-
     private void fillCmbUPM() {
         List<Integer> listUPMID = new ArrayList();
         listUPMID = this.datosUpm.getUPMID();
@@ -195,8 +196,8 @@ public class FrmInformacionGeneral extends JInternalFrame {
             }
         }
     }
-    
-    private void fillCmbUPMCapturados(){
+
+    private void fillCmbUPMCapturados() {
         List<Integer> listUPMID = new ArrayList<>();
         listUPMID = this.datosUpm.getUPMCapturados();
         if (listUPMID != null) {
@@ -206,7 +207,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
             }
         }
     }
-   
+
     private void fillCmbTipoUPM() {
         List<CatETipoUPM> listTipoUPM = new ArrayList<>();
         listTipoUPM = this.datosUpm.getTiposUPM();
@@ -228,18 +229,18 @@ public class FrmInformacionGeneral extends JInternalFrame {
             }
         }
     }
-    
+
     private void fillCmbJefeBrigada() {
         List<CEBrigadista> listBrigadistas = new ArrayList<>();
         listBrigadistas = cdBrigada.getJefeBrigada();
-        if(listBrigadistas != null){
+        if (listBrigadistas != null) {
             int size = listBrigadistas.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbJefeBrigada.addItem(listBrigadistas.get(i));
             }
         }
     }
-    
+
     private void fillCmbAuxiliar1() {
         List<CEBrigadista> listBrigadistas = new ArrayList<>();
         listBrigadistas = cdBrigada.getBrigadistas();
@@ -250,8 +251,8 @@ public class FrmInformacionGeneral extends JInternalFrame {
             }
         }
     }
-    
-    private void fillCmbAuxiliar2(){
+
+    private void fillCmbAuxiliar2() {
         List<CEBrigadista> listBrigadistas = new ArrayList<>();
         listBrigadistas = cdBrigada.getBrigadistas();
         if (listBrigadistas != null) {
@@ -261,8 +262,8 @@ public class FrmInformacionGeneral extends JInternalFrame {
             }
         }
     }
-    
-     public Image getIconImage() {
+
+    public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
                 getImage(ClassLoader.getSystemResource("gob/conafor/utils/logo_conafor.png"));
         return retValue;
@@ -355,16 +356,16 @@ public class FrmInformacionGeneral extends JInternalFrame {
             lblTModuloH.setFont(letraNormal);
             LblModuloH.setFont(letraNormal);
             lblTModuloH.setOpaque(false);
-        }  
+        }
     }
-    
-    public void iniciarUPM(){
+
+    public void iniciarUPM() {
         this.combo.reiniciarComboModel(cmbUPM);
         fillCmbUPM();
         cmbUPM.setSelectedItem(null);
         this.combo.manipularBotonesMenuPrincipal(true);
     }
-    
+
     private void seleccionarBrigadaUPM(int upmID) {
         List<CEBrigadista> listBrigada = new ArrayList<>();
         listBrigada = cdBrigada.getBrigada(upmID);
@@ -386,11 +387,11 @@ public class FrmInformacionGeneral extends JInternalFrame {
             }
         }
     }
-    
-    public void manipularBotonesMenu(){
+
+    public void manipularBotonesMenu() {
         combo.manipularBotonesMenuPrincipal(true);
     }
-    
+
     private boolean validarBrigadaObligatoria() {
         if (cmbJefeBrigada.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe seleccionar al jefe de brigada", "Información UPM", JOptionPane.INFORMATION_MESSAGE);
@@ -408,20 +409,20 @@ public class FrmInformacionGeneral extends JInternalFrame {
             return true;
         }
     }
-    
+
     private boolean validarBrigadistaDiferente() {
         CEBrigadista ceAuxiliar1 = (CEBrigadista) cmbAuxiliar1.getSelectedItem();
         CEBrigadista ceAuxiliar2 = (CEBrigadista) cmbAuxiliar2.getSelectedItem();
-        if(Objects.equals(ceAuxiliar1.getBrigadistaID(), ceAuxiliar2.getBrigadistaID())){
+        if (Objects.equals(ceAuxiliar1.getBrigadistaID(), ceAuxiliar2.getBrigadistaID())) {
             JOptionPane.showMessageDialog(null, "Error! Está repitiendo al auxiliar de brigada, verifique", "Información UPM", JOptionPane.INFORMATION_MESSAGE);
             cmbAuxiliar1.requestFocus();
             return false;
         } else {
             return true;
         }
-        
+
     }
-    
+
     private void crearBrigada() {
         CEBrigadista jefeBrigada = (CEBrigadista) cmbJefeBrigada.getSelectedItem();
         CEBrigadista auxiliar1 = (CEBrigadista) cmbAuxiliar1.getSelectedItem();
@@ -439,7 +440,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
         this.ceBrigada.setUpmID(this.upm);
         this.cdBrigada.insertBrigada(this.ceBrigada);
     }
-    
+
     private void modificarBrigada() {
         CEBrigadista jefeBrigada = (CEBrigadista) cmbJefeBrigada.getSelectedItem();
         CEBrigadista auxiliar1 = (CEBrigadista) cmbAuxiliar1.getSelectedItem();
@@ -479,7 +480,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
         this.ceUpm.setParaje(txtParaje.getText());
         this.ceUpm.setTenenciaID(tenencia.getTipoTenenciaID());
         this.ceUpm.setTipoUpmID(this.tipoUpm);
-         if (tipoUpmID.getTipoUPMID() > 2 && tipoUpmID.getTipoUPMID() < 6) {
+        if (tipoUpmID.getTipoUPMID() > 2 && tipoUpmID.getTipoUPMID() < 6) {
             this.ceUpm.setAccesible(inaccesible);
         } else {
             this.ceUpm.setAccesible(accesible);
@@ -524,7 +525,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
 
     private void crearContacto() {
         CEContacto contacto = new CEContacto();
-        CDContacto datosContacto = new CDContacto();
+        //CDContacto datosContacto = new CDContacto();
         Integer tipoContacto;
         Integer seleccionado = 1;
         Integer noSeleccionado = 0;
@@ -555,24 +556,24 @@ public class FrmInformacionGeneral extends JInternalFrame {
             contacto.setFrecuencia(txtFrecuencia.getText());
         }
         contacto.setObservaciones(txtObservaciones.getText());
-        datosContacto.insertContacto(contacto);
+        cdContacto.insertContacto(contacto);
     }
 
     private void modificarContacto() {
         CEContacto contacto = new CEContacto();
-        CDContacto datosContacto = new CDContacto();
+        //CDContacto datosContacto = new CDContacto();
         Integer tipoContacto;
         Integer seleccionado = 1;
         Integer noSeleccionado = 0;
         Integer medioComunicacion = 0;
         Integer correoElectronico = 0;
         Integer radio = 0;
-        
+
         tipoContacto = rbtPresencial.isSelected() ? seleccionado : noSeleccionado;
         medioComunicacion = rbtTelefonoFijo.isSelected() ? seleccionado : noSeleccionado;
         correoElectronico = chkCorreoElectronico.isSelected() ? seleccionado : noSeleccionado;
         radio = chkRadio.isSelected() ? seleccionado : noSeleccionado;
-        
+
         contacto.setUpmID(this.upm);
         contacto.setTipoContacto(tipoContacto);
         contacto.setNombre(txtNombreContacto.getText());
@@ -591,7 +592,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
             contacto.setFrecuencia(txtFrecuencia.getText());
         }
         contacto.setObservaciones(txtObservaciones.getText());
-        datosContacto.updateDatosContacto(contacto);
+        cdContacto.updateDatosContacto(contacto);
     }
 
     private boolean validarFecha() {
@@ -684,10 +685,10 @@ public class FrmInformacionGeneral extends JInternalFrame {
             return true;
         }
     }
-    
+
     private boolean validarModificarTipoUPM(Integer tipoUpmID) {
         boolean cambioTipo = true;
-        if (this.tipoUpm != tipoUpmID && this.tipoUpm > 2 && this.tipoUpm < 6  ) {
+        if (this.tipoUpm != tipoUpmID && this.tipoUpm > 2 && this.tipoUpm < 6) {
             int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro de cambiar el tipo de conglomerado?, esto borrará la información de inaccesibilidad",
                     "Información general del UPM", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (respuesta == JOptionPane.YES_OPTION) {
@@ -700,7 +701,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
         }
         return cambioTipo;
     }
-  
+
     private void reiniciarControles() {
         if (cmbUPM.getSelectedItem() == null) {
             if (this.modificar == 0) {
@@ -742,7 +743,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
         cmbAuxiliar1.setEnabled(true);
         cmbAuxiliar2.setEnabled(true);
     }
-    
+
     private void hayContacto(boolean hayContacto) {
         if (hayContacto == true) {
             //gbTipoContacto.clearSelection();
@@ -753,19 +754,19 @@ public class FrmInformacionGeneral extends JInternalFrame {
             rbtTelefonoMovil.setEnabled(true);
             //txtNumeroTelefonico.setText("");
             txtNumeroTelefonico.setEnabled(true);
-           // txtNombreContacto.setText("");
+            // txtNombreContacto.setText("");
             txtNombreContacto.setEnabled(true);
             //txtDireccionContacto.setText("");
             txtDireccionContacto.setEnabled(true);
             //chkCorreoElectronico.setSelected(false);
             chkCorreoElectronico.setEnabled(true);
-           // txtCorreoElectronico.setText("");
+            // txtCorreoElectronico.setText("");
             txtCorreoElectronico.setEnabled(true);
             //txtObservaciones.setText("");
             txtObservaciones.setEnabled(true);
             //chkRadio.setSelected(false);
             chkRadio.setEnabled(true);
-           // txtCanal.setText("");
+            // txtCanal.setText("");
             txtCanal.setEnabled(true);
             //txtFrecuencia.setText("");
             txtFrecuencia.setEnabled(true);
@@ -797,6 +798,30 @@ public class FrmInformacionGeneral extends JInternalFrame {
             txtFrecuencia.setEnabled(false);
         }
     }
+public void limpiarControles(){
+       txtPredio.setText("");
+       txtParaje.setText("");
+       cmbTenencia.setSelectedIndex(0);
+       /*----------------------------------------*/
+       rbtRemoto.setSelected(false);
+       rbtPresencial.setSelected(false);
+       rbtTelefonoFijo.setSelected(false);
+       rbtTelefonoMovil.setSelected(false);
+
+       txtNombreContacto.setText("");
+       txtDireccionContacto.setText("");
+       txtNumeroTelefonico.setText("");
+       txtCorreoElectronico.setText("");
+       txtObservaciones.setText("");
+       
+       chkRadio.setSelected(false);
+       chkCorreoElectronico.setSelected(false);
+
+       cmbJefeBrigada.setSelectedIndex(0);
+       cmbAuxiliar1.setSelectedIndex(0);
+       cmbAuxiliar2.setSelectedIndex(0);
+
+      }                                            
 
     private void reetablecerControles() {
         txtProyecto.setText("");
@@ -1185,7 +1210,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(lblTModuloG, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(LblModuloG, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)))
+                                .addComponent(LblModuloG, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)))
                         .addGap(10, 10, 10)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblLModuloA, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1523,8 +1548,8 @@ public class FrmInformacionGeneral extends JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(txtNumeroTelefonico, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 176, Short.MAX_VALUE))
+                        .addComponent(txtNumeroTelefonico, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                        .addGap(176, 176, 176))
                     .addComponent(txtNombreContacto)
                     .addComponent(txtDireccionContacto)
                     .addComponent(txtCorreoElectronico))
@@ -1574,20 +1599,20 @@ public class FrmInformacionGeneral extends JInternalFrame {
                 .addGroup(pnlContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(pnlContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlContactoLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(54, 54, 54)
                         .addComponent(lblObservaciones)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtObservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtObservaciones))
                     .addGroup(pnlContactoLayout.createSequentialGroup()
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnlContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(chkRadio))))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlContactoLayout.setVerticalGroup(
             pnlContactoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1744,24 +1769,27 @@ public class FrmInformacionGeneral extends JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(chkInformacionContacto)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, Short.MAX_VALUE)
-                                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(chkInformacionContacto)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(27, 27, 27)
+                                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addGap(15, 15, 15)
+                                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1799,7 +1827,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void chkInformacionContactoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_chkInformacionContactoPropertyChange
-     /*   if (chkInformacionContacto.isSelected()) {
+        /*   if (chkInformacionContacto.isSelected()) {
             txtNombreContacto.setEnabled(true);
             txtNumeroTelefonico.setEnabled(true);
             txtDireccionContacto.setEnabled(true);
@@ -1862,7 +1890,8 @@ public class FrmInformacionGeneral extends JInternalFrame {
     }//GEN-LAST:event_chkCorreoElectronicoPropertyChange
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-       CatETipoUPM tipoUpmID = (CatETipoUPM) cmbTipoUPM.getSelectedItem();
+       // CDContacto cdContacto = new CDContacto();
+        CatETipoUPM tipoUpmID = (CatETipoUPM) cmbTipoUPM.getSelectedItem();
         if (validarUPM() && validarFecha()) {
             if (validarContacto() && validarBrigadaObligatoria() && validarBrigadistaDiferente()) {
                 if (this.modificar == 0) {
@@ -1871,6 +1900,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
                     if (chkInformacionContacto.isSelected()) {
                         crearContacto();
                     }
+                    limpiarControles();
                     this.hide();
                     this.cmbUPM.setSelectedItem(null);
                     this.cmbUPM.setEnabled(true);
@@ -1882,9 +1912,28 @@ public class FrmInformacionGeneral extends JInternalFrame {
                         modificarBrigada();
                     }
                     if (chkInformacionContacto.isSelected()) {
-                        modificarContacto();
+                        //System.err.println("Entro modificaicon de contacto");
+
+                        if (cdContacto.getExistenciaContacto(this.upm) == true) {
+                            System.out.println("Hubo contacto en BD");
+                            modificarContacto();
+                        } else {
+                            System.out.println("NO contacto en BD");
+                            crearContacto();
+                        }
+
                     }
+
+                    txtNombreContacto.setText("");
+                    txtNumeroTelefonico.setText("");
+                    txtDireccionContacto.setText("");
+                    gbTipoContacto.clearSelection();
+                    gbMedioComunicacion.clearSelection();
+                    chkCorreoElectronico.setSelected(false);
+                    chkRadio.setSelected(false);
+                    limpiarControles();
                     this.hide();
+
                     UPMForms.puntoControlUPM.revisarPuntoControl(this.ceUpm);
                     UPMForms.puntoControlUPM.setVisible(true);
                 }
@@ -1893,6 +1942,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        limpiarControles();
         this.hide();
         combo.manipularBotonesMenuPrincipal(false);
     }//GEN-LAST:event_btnSalirActionPerformed
@@ -1947,7 +1997,8 @@ public class FrmInformacionGeneral extends JInternalFrame {
                 this.tipoUpm = indexTipoUpm.getTipoUPMID();
                 habilitarControles();
             }
-        } /*else {
+        }
+        /*else {
             int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro de cambiar el tipo de conglomerado?, esto borrará la información relacionada",
                     "Información general del UPM", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (respuesta == JOptionPane.YES_OPTION) {
@@ -2011,7 +2062,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
 
     private void chkInformacionContactoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkInformacionContactoKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if(chkInformacionContacto.isSelected()){
+            if (chkInformacionContacto.isSelected()) {
                 chkInformacionContacto.setSelected(false);
             } else {
                 chkInformacionContacto.setSelected(true);
@@ -2058,6 +2109,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
             txtCanal.setEnabled(false);
             txtFrecuencia.setEnabled(false);
             txtObservaciones.setEnabled(false);
+           cdContacto.deleteContacto(this.upm);
         }
     }//GEN-LAST:event_chkInformacionContactoActionPerformed
 

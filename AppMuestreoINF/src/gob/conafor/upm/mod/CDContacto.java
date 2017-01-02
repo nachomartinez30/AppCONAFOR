@@ -16,6 +16,7 @@ public class CDContacto {
                 + "DireccionCorreo, TieneRadio, Canal, Frecuencia, Observaciones  FROM UPM_Contacto WHERE UPMID= " + upm;
         CEContacto contacto = new CEContacto();
         Connection conn = LocalConnection.getConnection();
+        
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -51,6 +52,41 @@ public class CDContacto {
             }
         }
     }
+    
+     public boolean getExistenciaContacto(int upm) {
+        String nombre="";
+        boolean existe=false;
+         query = "SELECT Nombre FROM UPM_Contacto WHERE UPMID= " + upm;
+         //System.out.println(query);
+        Connection conn = LocalConnection.getConnection();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+               nombre=rs.getString("Nombre");
+            }
+            if(nombre.equals("")){
+                existe= false;       //NO Existe CONTACTO
+            }else{
+                existe= true;        //SI existe Contacto
+            }
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error! al obtener existencia del contacto ",
+                    "Conexion BD", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos del contacto ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        return existe;
+    }
+
+    public CDContacto() {
+    }
 
     public void insertContacto(CEContacto contacto) {
         query = "INSERT INTO UPM_Contacto (UPMID, TipoContacto, Nombre, Direccion, TipoTelefono, NumeroTelefono, "
@@ -83,6 +119,7 @@ public class CDContacto {
                 + ", DireccionCorreo= '" + contacto.getCorreoElectronico() + "', TieneRadio= " + contacto.getTieneRadio() + ", Canal= '" + contacto.getCanal() + "', Frecuencia= '" + contacto.getFrecuencia()
                 + "', Observaciones= '" + contacto.getObservaciones() + "' WHERE UPMID= " + contacto.getUpmID();
         Connection conn = LocalConnection.getConnection();
+        System.err.println("");
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
@@ -101,6 +138,28 @@ public class CDContacto {
 
     public void eliminarContacto(CEContacto contacto) {
         query = "DELETE FROM UPM_Contacto WHERE UPMID= " + contacto.getUpmID();
+        Connection conn = LocalConnection.getConnection();
+        try {
+            Statement st = conn.createStatement();
+            st.executeUpdate(query);
+            conn.commit();
+            st.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar la información del contacto ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(
+                        null, "Error! al cerrar la base de datos  al eliminar al contacto ",
+                        "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+     public void deleteContacto(int upm) {
+        query = "DELETE FROM UPM_Contacto WHERE UPMID= " + upm;
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();

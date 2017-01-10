@@ -118,6 +118,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
 
     public void revisarRepobladoVM(CESitio ceSitio) {
         revision=true;
+        limpiarControles();
         CatEAgenteDanio agenteDanio1 = (CatEAgenteDanio) cmbAgenteDanio1.getSelectedItem();
         this.sitio = ceSitio.getSitio();
         this.sitioID = ceSitio.getSitioID();
@@ -150,7 +151,11 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
         }
         this.modificar = 1;
         funciones.manipularBotonesMenuPrincipal(true);
-        this.chkRepobladoVM.setEnabled(funciones.habilitarCheckBox("TAXONOMIA_RepobladoVM", this.sitioID));
+        this.chkRepobladoVM.setSelected(funciones.habilitarCheckBox("TAXONOMIA_RepobladoVM", this.sitioID));
+        
+        boolean selecc=chkRepobladoVM.isSelected();
+        //System.out.println(selecc);
+        habilitarControles(selecc);
     }
     
     public void fillCmbFormaVida() {
@@ -2369,6 +2374,54 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_chkRepobladoVMActionPerformed
 
+    public void habilitarControles(boolean seleccionado){
+        
+        if(seleccionado==false){
+            cmbFormaVida.setEnabled(false);
+                cmbFamilia.setEnabled(false);
+                cmbGenero.setEnabled(false);
+                cmbEspecie.setEnabled(false);
+                cmbInfraespecie.setEnabled(false);
+                txtNombreComun.setEnabled(false);
+                txtFrecuencia50.setEnabled(false);
+                txtPorcentajeCobertura50.setEnabled(false);
+                txtFrecuencia51200.setEnabled(false);
+                txtPorcentajeCobertura51200.setEnabled(false);
+                txtFrecuencia200.setEnabled(false);
+                txtPorcentajeCobertura200.setEnabled(false);
+                cmbAgenteDanio1.setEnabled(false);
+                cmbSeveridad1.setEnabled(false);
+                cmbAgenteDanio2.setEnabled(false);
+                cmbSeveridad2.setEnabled(false);
+                cmbVigor.setEnabled(false);
+                btnGuardar.setEnabled(false);
+                btnModificar.setEnabled(false);
+                btnEliminar.setEnabled(false);
+        }else{
+            cmbFormaVida.setEnabled(true);
+            cmbFamilia.setEnabled(true);
+            cmbGenero.setEnabled(true);
+            cmbEspecie.setEnabled(true);
+            cmbInfraespecie.setEnabled(true);
+            txtNombreComun.setEnabled(true);
+            txtFrecuencia50.setEnabled(true);
+            txtPorcentajeCobertura50.setEnabled(true);
+            txtFrecuencia51200.setEnabled(true);
+            txtPorcentajeCobertura51200.setEnabled(true);
+            txtFrecuencia200.setEnabled(true);
+            txtPorcentajeCobertura200.setEnabled(true);
+            cmbAgenteDanio1.setEnabled(true);
+            cmbSeveridad1.setEnabled(true);
+            cmbAgenteDanio2.setEnabled(true);
+            cmbSeveridad2.setEnabled(true);
+            cmbVigor.setEnabled(true);
+            btnGuardar.setEnabled(true);
+            btnModificar.setEnabled(true);
+            btnEliminar.setEnabled(true);
+        }
+        
+    }
+    
     private void cmbAgenteDanio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAgenteDanio2ActionPerformed
         CatEAgenteDanio agenteDanio = (CatEAgenteDanio) cmbAgenteDanio2.getSelectedItem();
         if (agenteDanio != null) {

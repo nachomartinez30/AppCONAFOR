@@ -2772,6 +2772,7 @@ public class CDImportacionBD {
 
     public void eliminarPorUPM(int upm) {
         String query = "DELETE FROM UPM_UPM WHERE UPMID =" + upm;
+        System.out.println(query);
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();

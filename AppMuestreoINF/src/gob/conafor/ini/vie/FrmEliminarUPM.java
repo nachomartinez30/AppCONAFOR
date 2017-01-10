@@ -21,6 +21,7 @@ public class FrmEliminarUPM extends javax.swing.JInternalFrame {
     }
     
     private void fillUPMID() {
+        cmbUPM.removeAll();
         List<Integer> listCapturado = new ArrayList<>();
         listCapturado = this.cdUpm.getUPMCapturados();
         if (listCapturado != null) {
@@ -185,6 +186,7 @@ public class FrmEliminarUPM extends javax.swing.JInternalFrame {
                         switch ((SwingWorker.StateValue) evt.getNewValue()) {
                             case DONE:
                                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                                cmbUPM.removeAllItems();
                                 break;
                             case STARTED:
                                 setCursor(new Cursor(Cursor.WAIT_CURSOR));
@@ -196,6 +198,7 @@ public class FrmEliminarUPM extends javax.swing.JInternalFrame {
                 }
             });
             hiloEliminacion.execute();
+            
         } else {
             JOptionPane.showMessageDialog(null, "No se afecto la información de la base de datos");
         }

@@ -126,6 +126,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
 
     public void revisarArboladoG(CESitio sitio) {
         revision=true;
+        limpiarControles();
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
@@ -2351,6 +2352,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         }
         if (arbol.getAlturaComercial() == null) {
             txtAlturaComercial.setText("");
+            txtAlturaComercial.setEnabled(false);
         } else {
             txtAlturaComercial.setText(String.valueOf(arbol.getAlturaComercial()));
         }
@@ -2657,6 +2659,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             String strArbID = grdArbolado.getValueAt(fila, 0).toString();
             this.arboladoID = Integer.parseInt(strArbID);
             fijarValoresPorCampo(this.arboladoID);
+            
             chkEsSubmuestra.setEnabled(true);
             txtNumeroRamaTallo.setEnabled(false);
         }

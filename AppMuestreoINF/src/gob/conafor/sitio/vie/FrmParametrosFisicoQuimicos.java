@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
+
     private boolean revision;
     private int upmID;
     private int sitioID;
@@ -40,13 +41,13 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private int actualizar;
     private FuncionesComunes funciones = new FuncionesComunes();
-    private Version ver=new Version();
-    private String version=ver.getVersion();
-    
+    private Version ver = new Version();
+    private String version = ver.getVersion();
+
     public FrmParametrosFisicoQuimicos() {
         initComponents();
     }
-    
+
     public void setDatosiniciales(CESitio ceSitio) {
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
@@ -64,25 +65,52 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         funciones.manipularBotonesMenuPrincipal(true);
         limpiarControles();
     }
-    
+
     public void continuarParametrosFQ(CESitio ceSitio) {
-        revision=true;
+        limpiarControles();
+
+        revision = true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
+        //System.out.println(this.upmID + " Sitio=" + this.sitio);
         this.txtUPM.setText(String.valueOf(this.upmID));
         this.txtSitio.setText(String.valueOf(this.sitio));
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
+
         this.parametrosFQ = 28;
         this.repobladoVM = 29;
         this.actualizar = 1;
+        ceParametro = this.cdParametro.getDatosParametrosFQ(this.sitioID);
+        if (ceParametro.getTipoAgua() == 0) {//Superficial
+            rbtAguaIntersticial.setSelected(true);
+            txtSalinidadAguaIntersticial.setText(ceParametro.getSalinidad().toString());
+            txtTemperaturaAguaIntersticial.setText(ceParametro.getTemperaturaAgua().toString());
+            txtConductividadAguaIntersticial.setText(ceParametro.getConductividadElectrica().toString());
+            txtPHAguaIntersticial.setText(ceParametro.getPh().toString());
+            txtPotencialAguaIntersticial.setText(ceParametro.getPotencialRedox().toString());
+            txtProfundidadAguaIntersticial.setText(ceParametro.getProfundidad().toString());
+            controlesAguaIntersticial();
+        }
+        if (ceParametro.getTipoAgua() == 1) {//intersitical
+            rbtAguasuperficial.setSelected(true);
+            txtSalinidadAguaSuperficial.setText(ceParametro.getSalinidad().toString());
+            txtTemperaturaAguaSuperficial.setText(ceParametro.getTemperaturaAgua().toString());
+            txtConductividadAguaSuperficial.setText(ceParametro.getConductividadElectrica().toString());
+            txtPHAguaSuperficial.setText(ceParametro.getPh().toString());
+            txtPotencialAguaSuperficial.setText(ceParametro.getPotencialRedox().toString());
+            txtProfundidadAguaSuperficial.setText(ceParametro.getProfundidad().toString());
+            controlesAguaSuperficial();
+        }
+        txtObservaciones.setText(ceParametro.getObservaciones().toString());
+
         txtSalinidadAguaSuperficial.requestFocus();
         funciones.manipularBotonesMenuPrincipal(true);
     }
-    
-    private void limpiarControles(){
+
+    private void limpiarControles() {
         rbtAguasuperficial.setSelected(true);
         rbtAguaIntersticial.setSelected(false);
         txtSalinidadAguaSuperficial.setValue(null);
@@ -97,7 +125,7 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         txtPotencialAguaSuperficial.setText("");
         txtProfundidadAguaSuperficial.setValue(null);
         txtProfundidadAguaSuperficial.setText("");
-        
+
         txtSalinidadAguaIntersticial.setValue(null);
         txtSalinidadAguaIntersticial.setText("");
         txtSalinidadAguaIntersticial.setEnabled(false);
@@ -118,7 +146,7 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         txtProfundidadAguaIntersticial.setEnabled(false);
         txtObservaciones.setText("");
     }
-    
+
     private boolean validarCamposParametrosFQ() {
         if (rbtAguasuperficial.isSelected()) {
             if (txtSalinidadAguaSuperficial.getText().isEmpty()) {
@@ -191,7 +219,7 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         }
         return false;
     }
-    
+
     private void fijarDatosParametros() {
         if (rbtAguasuperficial.isSelected()) {
             this.tipoAgua = 1;
@@ -275,7 +303,7 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         }
         this.observaciones = txtObservaciones.getText();
     }
-    
+
     private void crearParametro() {
         this.ceParametro.setSitioID(this.sitioID);
         this.ceParametro.setTipoAgua(this.tipoAgua);
@@ -286,10 +314,10 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         this.ceParametro.setPotencialRedox(this.potencialRedox);
         this.ceParametro.setProfundidad(this.profundidad);
         this.ceParametro.setObservaciones(this.observaciones);
-        
+
         this.cdParametro.inserParametrosFQ(ceParametro);
     }
-    
+
     private void actualizarParametro() {
         this.ceParametro.setSitioID(this.sitioID);
         this.ceParametro.setTipoAgua(this.tipoAgua);
@@ -300,10 +328,10 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         this.ceParametro.setPotencialRedox(this.potencialRedox);
         this.ceParametro.setProfundidad(this.profundidad);
         this.ceParametro.setObservaciones(this.observaciones);
-        
+
         this.cdParametro.updateParametrosFQ(ceParametro);
     }
-    
+
     private void eliminarParametro() {
         this.cdParametro.deleteParametrosFQ(this.sitioID);
     }
@@ -924,68 +952,75 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
 
     private void rbtAguasuperficialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtAguasuperficialActionPerformed
         if (rbtAguasuperficial.isSelected()) {
-            txtSalinidadAguaSuperficial.setEnabled(true);
-            txtTemperaturaAguaSuperficial.setEnabled(true);
-            txtConductividadAguaSuperficial.setEnabled(true);
-            txtPHAguaSuperficial.setEnabled(true);
-            txtPotencialAguaSuperficial.setEnabled(true);
-            txtProfundidadAguaSuperficial.setEnabled(true);
-            
-            txtSalinidadAguaIntersticial.setEnabled(false);
-            txtSalinidadAguaIntersticial.setText("");
-            txtSalinidadAguaIntersticial.setValue(null);
-            txtTemperaturaAguaIntersticial.setEnabled(false);
-            txtTemperaturaAguaIntersticial.setText("");
-            txtTemperaturaAguaIntersticial.setValue(null);
-            txtConductividadAguaIntersticial.setEnabled(false);
-            txtConductividadAguaIntersticial.setText("");
-            txtConductividadAguaIntersticial.setValue("");
-            txtPHAguaIntersticial.setEnabled(false);
-            txtPHAguaIntersticial.setText("");
-            txtPHAguaIntersticial.setValue(null);
-            txtPotencialAguaIntersticial.setEnabled(false);
-            txtPotencialAguaIntersticial.setText("");
-            txtPotencialAguaIntersticial.setValue(null);
-            txtProfundidadAguaIntersticial.setEnabled(false);
-            txtProfundidadAguaIntersticial.setText("");
-            txtProfundidadAguaIntersticial.setValue(null);
-            
-            txtSalinidadAguaSuperficial.requestFocus();
-        }        
-        
+            controlesAguaSuperficial();
+        }
+
     }//GEN-LAST:event_rbtAguasuperficialActionPerformed
 
     private void rbtAguaIntersticialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtAguaIntersticialActionPerformed
         if (rbtAguaIntersticial.isSelected()) {
-            txtSalinidadAguaSuperficial.setEnabled(false);
-            txtSalinidadAguaSuperficial.setText("");
-            txtSalinidadAguaSuperficial.setValue(null);
-            txtTemperaturaAguaSuperficial.setEnabled(false);
-            txtTemperaturaAguaSuperficial.setText("");
-            txtTemperaturaAguaSuperficial.setValue(null);
-            txtConductividadAguaSuperficial.setEnabled(false);
-            txtConductividadAguaSuperficial.setText("");
-            txtConductividadAguaSuperficial.setValue(null);
-            txtPHAguaSuperficial.setEnabled(false);
-            txtPHAguaSuperficial.setText("");
-            txtPHAguaSuperficial.setValue(null);
-            txtPotencialAguaSuperficial.setEnabled(false);
-            txtPotencialAguaSuperficial.setText("");
-            txtPotencialAguaSuperficial.setValue(null);
-            txtProfundidadAguaSuperficial.setEnabled(false);
-            txtProfundidadAguaSuperficial.setText("");
-            txtProfundidadAguaSuperficial.setValue(null);
-            
-            txtSalinidadAguaIntersticial.setEnabled(true);
-            txtTemperaturaAguaIntersticial.setEnabled(true);
-            txtConductividadAguaIntersticial.setEnabled(true);
-            txtPHAguaIntersticial.setEnabled(true);
-            txtPotencialAguaIntersticial.setEnabled(true);
-            txtProfundidadAguaIntersticial.setEnabled(true);
-            
-            txtSalinidadAguaIntersticial.requestFocus();
+            controlesAguaIntersticial();
         }
     }//GEN-LAST:event_rbtAguaIntersticialActionPerformed
+    public void controlesAguaSuperficial() {
+        txtSalinidadAguaSuperficial.setEnabled(true);
+        txtTemperaturaAguaSuperficial.setEnabled(true);
+        txtConductividadAguaSuperficial.setEnabled(true);
+        txtPHAguaSuperficial.setEnabled(true);
+        txtPotencialAguaSuperficial.setEnabled(true);
+        txtProfundidadAguaSuperficial.setEnabled(true);
+
+        txtSalinidadAguaIntersticial.setEnabled(false);
+        txtSalinidadAguaIntersticial.setText("");
+        txtSalinidadAguaIntersticial.setValue(null);
+        txtTemperaturaAguaIntersticial.setEnabled(false);
+        txtTemperaturaAguaIntersticial.setText("");
+        txtTemperaturaAguaIntersticial.setValue(null);
+        txtConductividadAguaIntersticial.setEnabled(false);
+        txtConductividadAguaIntersticial.setText("");
+        txtConductividadAguaIntersticial.setValue("");
+        txtPHAguaIntersticial.setEnabled(false);
+        txtPHAguaIntersticial.setText("");
+        txtPHAguaIntersticial.setValue(null);
+        txtPotencialAguaIntersticial.setEnabled(false);
+        txtPotencialAguaIntersticial.setText("");
+        txtPotencialAguaIntersticial.setValue(null);
+        txtProfundidadAguaIntersticial.setEnabled(false);
+        txtProfundidadAguaIntersticial.setText("");
+        txtProfundidadAguaIntersticial.setValue(null);
+
+        txtSalinidadAguaSuperficial.requestFocus();
+    }
+
+    public void controlesAguaIntersticial() {
+        txtSalinidadAguaSuperficial.setEnabled(false);
+        txtSalinidadAguaSuperficial.setText("");
+        txtSalinidadAguaSuperficial.setValue(null);
+        txtTemperaturaAguaSuperficial.setEnabled(false);
+        txtTemperaturaAguaSuperficial.setText("");
+        txtTemperaturaAguaSuperficial.setValue(null);
+        txtConductividadAguaSuperficial.setEnabled(false);
+        txtConductividadAguaSuperficial.setText("");
+        txtConductividadAguaSuperficial.setValue(null);
+        txtPHAguaSuperficial.setEnabled(false);
+        txtPHAguaSuperficial.setText("");
+        txtPHAguaSuperficial.setValue(null);
+        txtPotencialAguaSuperficial.setEnabled(false);
+        txtPotencialAguaSuperficial.setText("");
+        txtPotencialAguaSuperficial.setValue(null);
+        txtProfundidadAguaSuperficial.setEnabled(false);
+        txtProfundidadAguaSuperficial.setText("");
+        txtProfundidadAguaSuperficial.setValue(null);
+
+        txtSalinidadAguaIntersticial.setEnabled(true);
+        txtTemperaturaAguaIntersticial.setEnabled(true);
+        txtConductividadAguaIntersticial.setEnabled(true);
+        txtPHAguaIntersticial.setEnabled(true);
+        txtPotencialAguaIntersticial.setEnabled(true);
+        txtProfundidadAguaIntersticial.setEnabled(true);
+
+        txtSalinidadAguaIntersticial.requestFocus();
+    }
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         fijarDatosParametros();
@@ -1093,7 +1128,7 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
                 txtProfundidadAguaIntersticial.selectAll();
             }
         });
-        
+
     }//GEN-LAST:event_txtProfundidadAguaIntersticialFocusGained
 
     private void txtObservacionesFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObservacionesFocusGained
@@ -1101,23 +1136,23 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtObservacionesFocusGained
 
     private void txtObservacionesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObservacionesKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB) {
             evt.consume();
         }
     }//GEN-LAST:event_txtObservacionesKeyPressed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        if(revision==false){//esta en modo de captura
+        if (revision == false) {//esta en modo de captura
             this.hide();
             funciones.manipularBotonesMenuPrincipal(false);
         }
-        if(revision==true){//entro a modo de revision
-             //System.err.println("Modo Revision");
+        if (revision == true) {//entro a modo de revision
+            //System.err.println("Modo Revision");
             this.hide();
             //UPMForms.revisionModulos.iniciarRevision();
             UPMForms.revisionModulos.setVisible(true);
             UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision=false;
+            revision = false;
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
@@ -1313,5 +1348,5 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txtTemperaturaAguaSuperficial;
     private javax.swing.JTextField txtUPM;
     // End of variables declaration//GEN-END:variables
-   
+
 }

@@ -39,7 +39,7 @@ public class HiloEliminacionUPM extends SwingWorker<Integer, String> {
         }
         getBarraProgreso().setValue(50);
         getBarraProgreso().repaint();
-        bdEliminar.eliminarPorUPM(0);
+        bdEliminar.eliminarPorUPM(Integer.parseInt(combo.getSelectedItem().toString()));
         try {
             Thread.sleep(1000);
         } catch (Exception e) {

@@ -115,7 +115,7 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
         }
         this.actulizar = 1;
         funciones.manipularBotonesMenuPrincipal(true);
-        this.chkRepoblado.setEnabled(funciones.habilitarCheckBox("TAXONOMIA_Repoblado", this.sitioID));
+        this.chkRepoblado.setSelected(funciones.habilitarCheckBox("TAXONOMIA_Repoblado", this.sitioID));
     }
     
     public void fillCmbFamilia() {

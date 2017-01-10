@@ -76,16 +76,6 @@
                               </Group>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="lblVegetacionMenorCobertura" min="-2" pref="900" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="lblRegistroRepobladoVegetacionMenor" min="-2" pref="900" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="chkRepobladoVM" min="-2" max="-2" attributes="0"/>
@@ -94,11 +84,19 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="PnlDescripcion1" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblVegetacionMenorCobertura" alignment="0" min="-2" pref="900" max="-2" attributes="0"/>
+                              <Component id="lblRegistroRepobladoVegetacionMenor" alignment="0" min="-2" pref="900" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="31" pref="50" max="32767" attributes="0"/>
+                  <EmptySpace min="31" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <Component id="PnlCoordenadas4" pref="954" max="32767" attributes="0"/>
+                  <Component id="PnlCoordenadas4" pref="935" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
@@ -807,127 +805,131 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="btnGuardar" min="-2" pref="94" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnModificar" min="-2" pref="94" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="btnGuardar" min="-2" pref="94" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnModificar" min="-2" pref="94" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnEliminar" min="-2" pref="94" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="txtNombreComun" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="lblNombreComun" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="lblFrecuencia025" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
+                                                  <Component id="txtFrecuencia50" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Component id="txtPorcentajeCobertura50" alignment="1" min="-2" pref="60" max="-2" attributes="0"/>
+                                                  <Component id="lblCobertura025" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Component id="txtFrecuencia51200" alignment="1" min="-2" pref="60" max="-2" attributes="0"/>
+                                                  <Component id="lblFrecuencia151" alignment="1" min="-2" pref="64" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="lblCobertura151" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="txtPorcentajeCobertura51200" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="txtFrecuencia200" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
+                                                  <Component id="lblFrecuencia275" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="lblCobertura275" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="txtPorcentajeCobertura200" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Component id="lblFrecuenciaIndividuos" alignment="0" min="-2" pref="394" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="cmbAgenteDanio1" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="lblAgenteDanio1" alignment="0" min="-2" pref="59" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnEliminar" min="-2" pref="94" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="cmbSeveridad1" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="lblSeveridad1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                                              <Component id="lblAgenteDanio2" min="-2" pref="53" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="cmbAgenteDanio2" min="-2" pref="56" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="lblSeveridad2" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="cmbSeveridad2" alignment="0" min="-2" pref="57" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="cmbVigor" min="-2" pref="122" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                              <Component id="lblVigor" min="-2" pref="114" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="btnColecta" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="lblClaveColecta" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtClaveColecta" min="-2" pref="152" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtNombreComun" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lblNombreComun" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblFrecuencia025" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
-                                          <Component id="txtFrecuencia50" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="txtPorcentajeCobertura50" alignment="1" min="-2" pref="60" max="-2" attributes="0"/>
-                                          <Component id="lblCobertura025" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="txtFrecuencia51200" alignment="1" min="-2" pref="60" max="-2" attributes="0"/>
-                                          <Component id="lblFrecuencia151" alignment="1" min="-2" pref="64" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblCobertura151" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtPorcentajeCobertura51200" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txtFrecuencia200" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
-                                          <Component id="lblFrecuencia275" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblCobertura275" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtPorcentajeCobertura200" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Component id="lblFrecuenciaIndividuos" alignment="0" min="-2" pref="394" max="-2" attributes="0"/>
-                              </Group>
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="lblFormaVida" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                              <Component id="cmbFormaVida" min="-2" pref="150" max="-2" attributes="0"/>
+                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                              <Component id="lblFamilia" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                              <Component id="cmbFamilia" min="-2" pref="122" max="-2" attributes="0"/>
+                              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                              <Component id="lblGenero" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                              <Component id="cmbGenero" min="-2" pref="128" max="-2" attributes="0"/>
+                              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                              <Component id="lblEspecie" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                              <Component id="cmbEspecie" min="-2" pref="105" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="cmbAgenteDanio1" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lblAgenteDanio1" alignment="0" min="-2" pref="59" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="lblInfraespecie" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cmbInfraespecie" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="cmbSeveridad1" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lblSeveridad1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                                      <Component id="lblAgenteDanio2" min="-2" pref="53" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="cmbAgenteDanio2" min="-2" pref="56" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="lblSeveridad2" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="cmbSeveridad2" alignment="0" min="-2" pref="57" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="cmbVigor" min="-2" pref="122" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                      <Component id="lblVigor" min="-2" pref="114" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="btnColecta" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="lblClaveColecta" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtClaveColecta" min="-2" pref="152" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="lblFormaVida" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                      <Component id="cmbFormaVida" min="-2" pref="150" max="-2" attributes="0"/>
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="lblFamilia" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                      <Component id="cmbFamilia" min="-2" pref="122" max="-2" attributes="0"/>
-                      <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                      <Component id="lblGenero" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                      <Component id="cmbGenero" min="-2" pref="128" max="-2" attributes="0"/>
-                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                      <Component id="lblEspecie" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                      <Component id="cmbEspecie" min="-2" pref="105" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="lblInfraespecie" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cmbInfraespecie" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>

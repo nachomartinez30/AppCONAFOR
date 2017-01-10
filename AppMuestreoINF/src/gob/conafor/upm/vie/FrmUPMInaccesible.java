@@ -222,7 +222,8 @@ public class FrmUPMInaccesible extends javax.swing.JInternalFrame {
         CatETipoInaccesibilidad ceTipoInaccesibilidad = (CatETipoInaccesibilidad) cmbTipoInaccesibilidad.getSelectedItem();
         int tipoInaccesibilidadID = ceTipoInaccesibilidad.getTipoInaccesibilidadID();
         int tipoUpmID = this.ceUpm.getTipoUpmID();
-        if (tipoUpmID == 3) {
+        if (tipoUpmID == 3) {//Inaccesible problema físico
+            System.out.println("TipoUPM=" + tipoUpmID + "\tTipo Inaccesibilidad=" + tipoInaccesibilidadID);
             if (tipoInaccesibilidadID < 3 || tipoInaccesibilidadID > 8) {
                 JOptionPane.showMessageDialog(null, "El tipo de inaccesibilidad seleccionado no corresponde a la inaccesibilidad por problema físico "
                         + "", "Captura de la UPM", JOptionPane.INFORMATION_MESSAGE);
@@ -231,18 +232,10 @@ public class FrmUPMInaccesible extends javax.swing.JInternalFrame {
             } else {
                 return true;
             }
-        } else if (tipoUpmID == 4) {
-            if (tipoInaccesibilidadID < 10 || tipoInaccesibilidadID > 16 || tipoInaccesibilidadID != 1 || tipoInaccesibilidadID != 2) {
+        } else if (tipoUpmID == 4) {//Inaccesible problema social
+            //System.out.println("TipoUPM=" + tipoUpmID + "\tTipo Inaccesibilidad=" + tipoInaccesibilidadID);
+            if (tipoInaccesibilidadID < 10 && tipoInaccesibilidadID > 2) {
                 JOptionPane.showMessageDialog(null, "El tipo de inaccesibilidad seleccionado no corresponde a la inaccesibilidad por problema social "
-                        + "", "Captura de la UPM", JOptionPane.INFORMATION_MESSAGE);
-                cmbTipoInaccesibilidad.requestFocus();
-                return false;
-            } else {
-                return true;
-            }
-        } else if (tipoUpmID == 5) {
-            if (tipoInaccesibilidadID != 17) {
-                JOptionPane.showMessageDialog(null, "El tipo de inaccesibilidad seleccionado no corresponde a la inaccesibilidad de gabinete "
                         + "", "Captura de la UPM", JOptionPane.INFORMATION_MESSAGE);
                 cmbTipoInaccesibilidad.requestFocus();
                 return false;

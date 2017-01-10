@@ -599,7 +599,8 @@ public class FrmInformacionGeneral extends JInternalFrame {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
         String fecIni = null;
         String fecFin = null;
-        String anio = "2016";
+        String anio = "2016";//Checar ciclo
+        String anio2= "2017";
         if (dpFechaInicio.getDate() != null) {
             fecIni = sdf.format(dpFechaInicio.getDate());
         }
@@ -618,12 +619,12 @@ public class FrmInformacionGeneral extends JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error! La fecha de inicio no puede ser mayor a la fecha de final de muestreo", "Información UPM", JOptionPane.INFORMATION_MESSAGE);
             dpFechaFin.requestFocus();
             return false;
-        } else if (!fecIni.equals(anio)) {
+        } else if (!fecIni.equals(anio)&&!fecIni.equals(anio2)) {
             JOptionPane.showMessageDialog(null, "Error! La fecha de inicio debe estar dentro del periodo de " + anio, "Información UPM", JOptionPane.INFORMATION_MESSAGE);
             dpFechaInicio.requestFocus();
             return false;
-        } else if (!fecFin.equals(anio)) {
-            JOptionPane.showMessageDialog(null, "Error! La fecha de fin debe estar dentro del periodo de " + anio, "Información UPM", JOptionPane.INFORMATION_MESSAGE);
+        } else if (!fecFin.equals(anio)&&!fecFin.equals(anio2)) {
+            JOptionPane.showMessageDialog(null, "Error! La fecha de fin debe estar dentro del periodo de " + anio2, "Información UPM", JOptionPane.INFORMATION_MESSAGE);
             dpFechaFin.requestFocus();
             return false;
         } else {
@@ -1915,11 +1916,11 @@ public void limpiarControles(){
                         //System.err.println("Entro modificaicon de contacto");
 
                         if (cdContacto.getExistenciaContacto(this.upm) == true) {
-                            System.out.println("Hubo contacto en BD");
+                            //System.out.println("Hubo contacto en BD");
                             modificarContacto();
                         } else {
                             System.out.println("NO contacto en BD");
-                            crearContacto();
+                            //crearContacto();
                         }
 
                     }

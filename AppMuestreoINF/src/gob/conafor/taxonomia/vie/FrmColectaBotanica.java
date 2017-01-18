@@ -53,23 +53,23 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
     private Integer cortezaIncluida;
     private Integer maderaIncluida;
     private String observaciones;
-    private Version ver=new Version();
-    private String version=ver.getVersion();
-  
+    private Version ver = new Version();
+    private String version = ver.getVersion();
+
     public FrmColectaBotanica() {
         initComponents();
     }
-    
-    public void procesarColecta(){
-         limpiarControles(false);
-         funciones.reiniciarComboModel(cmbUPMID);
-         funciones.manipularBotonesMenuPrincipal(true);
-         fillCmbUPM();
-         fillCmbFamilia();
-         fillCmbGenero();
-         fillCmbSeccionesTaxonomicas();
+
+    public void procesarColecta() {
+        limpiarControles(false);
+        funciones.reiniciarComboModel(cmbUPMID);
+        funciones.manipularBotonesMenuPrincipal(true);
+        fillCmbUPM();
+        fillCmbFamilia();
+        fillCmbGenero();
+        fillCmbSeccionesTaxonomicas();
     }
-    
+
     private void fillCmbUPM() {
         List<Integer> listUPMID = new ArrayList<>();
         listUPMID = this.cdColecta.getUPMID();
@@ -80,25 +80,25 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    private void fillCmbSeccionesTaxonomicas(){
-         List<CatESeccionTaxonomica> listSeccion = new ArrayList<>();
-         listSeccion = this.cdColecta.getSecciones();
-         if(listSeccion != null){
-             int size = listSeccion.size();
-             for(int i = 0; i < size; i++){
-                 cmbSeccion.addItem(listSeccion.get(i));
-             }
-         }
-     }
-    
-    private void fillCmbSitio(int upmID){
+
+    private void fillCmbSeccionesTaxonomicas() {
+        List<CatESeccionTaxonomica> listSeccion = new ArrayList<>();
+        listSeccion = this.cdColecta.getSecciones();
+        if (listSeccion != null) {
+            int size = listSeccion.size();
+            for (int i = 0; i < size; i++) {
+                cmbSeccion.addItem(listSeccion.get(i));
+            }
+        }
+    }
+
+    private void fillCmbSitio(int upmID) {
         List<Integer> listSitio = new ArrayList<>();
         CDSitio cdSitio = new CDSitio();
         listSitio = cdSitio.getSitiosAccesibles(upmID);
-        if(listSitio != null){
+        if (listSitio != null) {
             int size = listSitio.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbSitio.addItem(listSitio.get(i));
             }
         }
@@ -137,9 +137,9 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    private void fillCmbGeneroSF(){
-         List<CatEGenero> listGenero = new ArrayList<>();
+
+    private void fillCmbGeneroSF() {
+        List<CatEGenero> listGenero = new ArrayList<>();
         CDEspecies sp = new CDEspecies();
         listGenero = sp.getGenerosSF();
         if (listGenero != null) {
@@ -161,19 +161,19 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-     private void fillCmbInfraespecie(int index){
+
+    private void fillCmbInfraespecie(int index) {
         List<CatEInfraespecie> listInfraespecie = new ArrayList<>();
         CDEspecies sp = new CDEspecies();
         listInfraespecie = sp.getInfraespecie(index);
-        if(listInfraespecie != null){
+        if (listInfraespecie != null) {
             int size = listInfraespecie.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbInfraespecie.addItem(listInfraespecie.get(i));
             }
         }
     }
-    
+
     private void fijarValoresColecta() {
         if (chkContraFuertes.isSelected()) {
             this.contraFuertes = 1;
@@ -182,7 +182,7 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
         }
         if (chkExudado.isSelected()) {
             this.exudado = 1;
-             this.indicarExudado = txtExudado.getText();
+            this.indicarExudado = txtExudado.getText();
         } else {
             this.exudado = 0;
         }
@@ -260,14 +260,25 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
         }
         this.observaciones = txtObservacionesColecta.getText();
     }
-    
+
     private void guardarDatosColecta() {
         String claveColecta = (String) cmbClaveColecta.getSelectedItem();
         Integer sitio = (Integer) cmbSitio.getSelectedItem();
-        CatESeccionTaxonomica seccionID = (CatESeccionTaxonomica) cmbSeccion.getSelectedItem();
+        if(cmbSitio.getSelectedItem()==null){
+            sitio=999;
+        }
+        
+        
+        Integer seccion=999;
+        if(cmbSeccion.getSelectedItem()==null){
+            seccion=999;
+        }else{
+            CatESeccionTaxonomica seccionID = (CatESeccionTaxonomica) cmbSeccion.getSelectedItem();
+            seccion=(Integer) seccionID.getSeccionTaxonomicaID();
+        }
         Integer consecutivo = Integer.valueOf(txtConsecutivo.getText());
         this.ceColecta.setSitio(sitio);
-        this.ceColecta.setSeccionID(seccionID.getSeccionTaxonomicaID());
+        this.ceColecta.setSeccionID(seccion);
         this.ceColecta.setConsecutivo(consecutivo);
         this.ceColecta.setClaveColecta(claveColecta);
         this.ceColecta.setContraFuertes(this.contraFuertes);
@@ -300,13 +311,22 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
         CatEEspecie ceEspecie = new CatEEspecie();
         CatEInfraespecie ceInfraespecie = new CatEInfraespecie();
         CatESeccionTaxonomica ceSeccion = new CatESeccionTaxonomica();
-        
+
         ceFamilia.setFamiliaID(this.ceColecta.getFamiliaID());
         ceGenero.setGeneroID(this.ceColecta.getGeneroID());
         ceEspecie.setEspecieID(this.ceColecta.getEspecieID());
         ceInfraespecie.setEspecieID(this.ceColecta.getInfraespecie());
         ceSeccion.setSeccionTaxonomicaID(this.ceColecta.getSeccionID());
         Integer sitio = this.ceColecta.getSitio();
+        if(sitio==999){
+            chkExterna.setSelected(true);
+            cmbSitio.setEnabled(false);
+            cmbSitio.setSelectedItem(null);
+            cmbSeccion.setEnabled(false);
+            cmbSeccion.setSelectedItem(null);
+            txtConsecutivo.setEnabled(false);
+            txtConsecutivo.setText("0");
+        }
         Integer consecutivo = this.ceColecta.getConsecutivo();
         cmbFamilia.setSelectedItem(ceFamilia);
         cmbGenero.setSelectedItem(ceGenero);
@@ -316,8 +336,7 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
         cmbSitio.setSelectedItem(sitio);
         txtConsecutivo.setText(String.valueOf(consecutivo));
         txtNombreComun.setText(this.ceColecta.getNombreComun());
-        
-         
+
         if (this.cdColecta.hayDatosColecta(claveColecta)) {
             if (this.ceColecta.getContraFuertes() == 1) {
                 chkContraFuertes.setSelected(true);
@@ -414,9 +433,11 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
             txtObservacionesColecta.setText(ceColecta.getObservaciones());
         }
     }
-    
+
     private void limpiarControles(boolean habilitado) {
         if (habilitado == false) {
+            chkExterna.setEnabled(false);
+            chkExterna.setSelected(false);
             //System.out.println("Limpíar Falso");
             cmbFamilia.setSelectedItem(null);
             cmbGenero.setSelectedItem(null);
@@ -472,7 +493,9 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
             txtObservacionesColecta.setEnabled(false);
             btnAgregar.setEnabled(false);
         } else {
-             //System.out.println("Limpíar verdaro");
+            chkExterna.setEnabled(true);
+            chkExterna.setSelected(false);
+            //System.out.println("Limpíar verdaro");
             cmbSitio.setEnabled(true);
             cmbSitio.setSelectedIndex(0);
             cmbSeccion.setEnabled(true);
@@ -501,37 +524,46 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
             btnAgregar.setEnabled(true);
         }
     }
-    
+
     private boolean validarCamposObligatorios() {
-        if (cmbSitio.getSelectedItem() == null) {
+        boolean validacion=true;
+        if(chkExterna.isSelected()==false){
+            if (cmbSitio.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe seleccionar el número de sitio de origen", "Colecta botánica", JOptionPane.INFORMATION_MESSAGE);
             cmbSitio.requestFocus();
-            return false;
-        } else if (cmbSeccion.getSelectedItem() == null) {
+            validacion=false;
+        } 
+        if (cmbSeccion.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe seleccionar la sección de origen", "Colecta botánica", JOptionPane.INFORMATION_MESSAGE);
             cmbSeccion.requestFocus();
-            return false;
-        } else if (txtConsecutivo.getText().isEmpty()) {
+            validacion=false;
+        } 
+         if (txtConsecutivo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Error! Debe proporcionar el consecutivo de origen", "Colecta botánica", JOptionPane.INFORMATION_MESSAGE);
             txtConsecutivo.requestFocus();
-            return false;
-        } else if (chkExudado.isSelected() && txtExudado.getText().isEmpty()) {
+            validacion=false;
+        } 
+        }
+         
+         if (chkExudado.isSelected() && txtExudado.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Error! Si selecciona presencia de exudado, debe proporcionar caracteristicas", "Colecta botánica", JOptionPane.INFORMATION_MESSAGE);
             txtExudado.requestFocus();
-            return false;
-        } else if (chkColor.isSelected() && txtColor.getText().isEmpty()) {
+            validacion=false;
+        } 
+         if (chkColor.isSelected() && txtColor.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Error! Si selecciona presencia de color, debe proporcionar caracteristicas", "Colecta botánica", JOptionPane.INFORMATION_MESSAGE);
             txtColor.requestFocus();
-            return false;
-        } else if (chkColoresFlores.isSelected() && txtColoresFlores.getText().isEmpty()) {
+            validacion=false;
+        }
+         if (chkColoresFlores.isSelected() && txtColoresFlores.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Error! Si selecciona presencia de colores de flores o frutos, los debe proporcionar", "Colecta botánica", JOptionPane.INFORMATION_MESSAGE);
             txtColoresFlores.requestFocus();
-            return false;
-        } else {
-            return true;
+            validacion=false;
         }
+        
+         return validacion;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -588,6 +620,7 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
         cmbSeccion = new javax.swing.JComboBox();
         lbSitio1 = new javax.swing.JLabel();
         txtConsecutivo = new javax.swing.JFormattedTextField();
+        chkExterna = new javax.swing.JCheckBox();
 
         setMaximizable(true);
         setTitle("Registro de colecta botánica "+version);
@@ -997,6 +1030,11 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
 
         cmbSitio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         cmbSitio.setEnabled(false);
+        cmbSitio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSitioActionPerformed(evt);
+            }
+        });
 
         lbSitio.setText("Sitio:");
 
@@ -1009,6 +1047,14 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
 
         txtConsecutivo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtConsecutivo.setEnabled(false);
+
+        chkExterna.setBackground(new java.awt.Color(204, 204, 204));
+        chkExterna.setText("Externa?");
+        chkExterna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkExternaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1064,7 +1110,9 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(lblNombreComun))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(cmbSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cmbSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(chkExterna)
                                         .addGap(18, 18, 18)
                                         .addComponent(lblSeccion)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1087,7 +1135,7 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
                     .addComponent(cmbClaveColecta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUPM)
                     .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSuelo1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1108,7 +1156,8 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
                     .addComponent(cmbSeccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSeccion)
                     .addComponent(lbSitio1)
-                    .addComponent(txtConsecutivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtConsecutivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chkExterna))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1116,7 +1165,7 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblObservacionesColecta, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir)
@@ -1139,14 +1188,14 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtObservacionesColectaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObservacionesColectaKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB) {
             evt.consume();
         }
     }//GEN-LAST:event_txtObservacionesColectaKeyPressed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         this.hide();
-         funciones.manipularBotonesMenuPrincipal(false);
+        funciones.manipularBotonesMenuPrincipal(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtNombreComunFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreComunFocusGained
@@ -1154,17 +1203,18 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNombreComunFocusGained
 
     private void cmbClaveColectaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClaveColectaActionPerformed
-       if(cmbClaveColecta.getSelectedItem() == null){
-           limpiarControles(false);
-       } else {
-           String claveColecta = (String) cmbClaveColecta.getSelectedItem();
-           limpiarControles(true);
-           fijarValoresCampos(claveColecta);
-       }
+        if (cmbClaveColecta.getSelectedItem() == null) {
+            limpiarControles(false);
+        } else {
+            String claveColecta = (String) cmbClaveColecta.getSelectedItem();
+            limpiarControles(true);
+            fijarValoresCampos(claveColecta);
+        }
     }//GEN-LAST:event_cmbClaveColectaActionPerformed
 
     private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
-        if(cmbUPMID.getSelectedItem() == null){
+        cmbSitio.removeAllItems();
+        if (cmbUPMID.getSelectedItem() == null) {
             cmbClaveColecta.setSelectedItem(null);
             cmbClaveColecta.setEnabled(false);
             funciones.reiniciarComboModel(cmbSitio);
@@ -1178,7 +1228,7 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbUPMIDActionPerformed
 
     private void chkExudadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkExudadoActionPerformed
-        if(chkExudado.isSelected()){
+        if (chkExudado.isSelected()) {
             txtExudado.setEnabled(true);
         } else {
             txtExudado.setText("");
@@ -1187,7 +1237,7 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_chkExudadoActionPerformed
 
     private void chkColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkColorActionPerformed
-        if(chkColor.isSelected()){
+        if (chkColor.isSelected()) {
             txtColor.setEnabled(true);
         } else {
             txtColor.setText("");
@@ -1221,7 +1271,7 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         fijarValoresColecta();
-        if(validarCamposObligatorios()){
+        if (validarCamposObligatorios()) {
             guardarDatosColecta();
             limpiarControles(false);
             cmbUPMID.requestFocus();
@@ -1409,6 +1459,35 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cmbEspecieActionPerformed
 
+    private void chkExternaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkExternaActionPerformed
+        if (chkExterna.isSelected()) {//SI ES EXTERNA
+            cmbSitio.setEnabled(false);
+            cmbSitio.setSelectedItem(null);
+            cmbSeccion.setEnabled(false);
+            cmbSeccion.setSelectedItem(null);
+            txtConsecutivo.setEnabled(false);
+            txtConsecutivo.setText("0");
+        } else {
+            cmbSitio.setEnabled(true);
+            //cmbSitio.setSelectedItem(null);
+            cmbSeccion.setEnabled(true);
+            //cmbSeccion.setSelectedItem(null);
+            txtConsecutivo.setEnabled(true);
+        }
+    }//GEN-LAST:event_chkExternaActionPerformed
+
+    private void cmbSitioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitioActionPerformed
+
+        if (cmbSitio.getSelectedItem() != null) {
+            chkExterna.setEnabled(false);
+        } else {
+            chkExterna.setEnabled(true);
+        }
+        if (cmbClaveColecta.getSelectedItem() == null) {
+            chkExterna.setEnabled(false);
+        }
+    }//GEN-LAST:event_cmbSitioActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnSalir;
@@ -1418,6 +1497,7 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox chkColoresFlores;
     private javax.swing.JCheckBox chkContraFuertes;
     private javax.swing.JCheckBox chkCortezaIncluida;
+    private javax.swing.JCheckBox chkExterna;
     private javax.swing.JCheckBox chkExudado;
     private javax.swing.JCheckBox chkFotoArbolCompleto;
     private javax.swing.JCheckBox chkFotoCorteza;

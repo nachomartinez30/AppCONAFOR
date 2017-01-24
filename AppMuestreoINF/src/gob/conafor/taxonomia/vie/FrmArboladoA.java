@@ -2642,6 +2642,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
             int fila = grdArbolado.getSelectedRow();
             String strArbID = grdArbolado.getValueAt(fila, 0).toString();
             this.arboladoID = Integer.parseInt(strArbID);
+            limpiarControles();
             fijarValoresPorCampo(this.arboladoID);
             chkEsSubmuestra.setEnabled(true);
             txtNumeroRamaTallo.setEnabled(false);

@@ -53,6 +53,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
     private int hojarasca;
     private int gravaPiedra;
     private int otros;
+    private boolean sotobosqueHabilitado=true;//No esta Habilitado
     private CDEspecies especie = new CDEspecies();
     private CDCondicionTaxonomica condicion = new CDCondicionTaxonomica();
     private ValidacionesComunes validacion = new ValidacionesComunes();
@@ -110,6 +111,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
 
     public void revisarSotoBosque(CESitio sitio) {
         revision=true;
+        
         CatEAgenteDanio danio = (CatEAgenteDanio) cmbDanio.getSelectedItem();
         CESitio sitioSotobosqueFuera;
         this.actualizar = 1;
@@ -151,10 +153,12 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
     }
     
     public void desabilitarSotobosque(){
+        System.err.println("Sotobosque deshabilitado");
         chkSotobosque.setSelected(false);
         chkSotobosque.setVisible(false);
         chkSotoBosqueFuera.setSelected(false);
         pnlSotobosque.setVisible(false);
+        sotobosqueHabilitado=false;
     }
     
     public void habilitarSotobosque(){
@@ -446,13 +450,19 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
     }
 
     public boolean validarSotobosqueFuera() {
-        if (chkSotoBosqueFuera.isSelected() && txtPorcentajeSotobosqueFuera.getText().isEmpty()) {
+        if(sotobosqueHabilitado==true){//Si hay sotobosque
+        if (chkSotoBosqueFuera.isSelected()==true && txtPorcentajeSotobosqueFuera.getText().isEmpty()==true) {
             JOptionPane.showMessageDialog(null, "Si selecciona Sotobosque fuera, debe introducir un porcentaje", "Sotobosque fuera", JOptionPane.ERROR_MESSAGE);
             txtPorcentajeSotobosqueFuera.requestFocus();
             return false;
         } else {
             return true;
         }
+        }else{
+            return true;
+        }
+        
+        
     }
     
     public void asignarDatosSotobosque() {

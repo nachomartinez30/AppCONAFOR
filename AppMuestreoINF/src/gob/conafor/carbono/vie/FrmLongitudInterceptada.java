@@ -1331,25 +1331,25 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblSitio)
                         .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblCarbonoIncendios)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(chkLongitudComponentes)
                 .addGap(1, 1, 1)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(chkCoberturaDosel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblCoberturaDosel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnContinuar)
                     .addComponent(btnSalir))
@@ -1439,7 +1439,8 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                 if (validarColectasObligatorias()) {
                     this.hide();
                     funciones.manipularBotonesMenuPrincipal(true);
-                    if (this.modificar == 0) {
+                    if (this.modificar == 0) {//Esta en modo de captura
+                        
                         seleccionarSiguienteFormulario(this.ceSitio);
                     } else {
                         revisarSiguienteFormulario(this.ceSitio);
@@ -1450,8 +1451,10 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                 this.hide();
                 funciones.manipularBotonesMenuPrincipal(true);
                 if (this.modificar == 0) {
+                    //System.out.println("Modificar=1 "+this.ceSitio);
                     seleccionarSiguienteFormulario(this.ceSitio);
                 } else {
+                     //System.out.println("Modificar=0 "+this.ceSitio);
                     revisarSiguienteFormulario(this.ceSitio);
                 }
                 this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, -1);
@@ -2719,6 +2722,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     
     private void seleccionarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
+        Integer sitio = this.funciones.sitioCapturaSueloCarbono(this.upmID, 3);
         if (secuenciaID != null) {
             switch (secuenciaID) {
                 case 1: //Módulo A
@@ -2734,8 +2738,13 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                     this.hide();
                     break;
                 case 3: //Modulos A, C, E y G
-                    UPMForms.hojarascaProfundidad.setDatosiniciales(ceSitio);
-                    UPMForms.hojarascaProfundidad.setVisible(true);
+                    if (sitio == ceSitio.getSitio()) {//si el sitio!= del sitio 3
+                        UPMForms.hojarascaProfundidad.setDatosiniciales(ceSitio);
+                        UPMForms.hojarascaProfundidad.setVisible(true);
+                    } else {
+                        UPMForms.parametrosFQ.setDatosiniciales(ceSitio);
+                        UPMForms.parametrosFQ.setVisible(true);
+                    }
                     //funciones.manipularBotonesMenuPrincipal(true);
                     break;
                 case 4: //Modulos A y E        
@@ -2759,6 +2768,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                     //funciones.manipularBotonesMenuPrincipal(true);
                     break;
                 case 8://Modulos A, C, D, E y F
+                    
                     UPMForms.arboladoD.setDatosIniciales(ceSitio);
                     UPMForms.arboladoD.setVisible(true);
                     //funciones.manipularBotonesMenuPrincipal(true);
@@ -2779,13 +2789,19 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                     break;
                 case 12://Modulos A, E y H
                     //funciones.manipularBotonesMenuPrincipal(true);
+                    
                     UPMForms.suelo.setDatosiniciales(ceSitio);
                     UPMForms.suelo.setVisible(true);
                     break;
                 case 13://Modulos A, C, E y H
                     //funciones.manipularBotonesMenuPrincipal(true);
+                     if (sitio == ceSitio.getSitio()) {
                     UPMForms.hojarascaProfundidad.setDatosiniciales(ceSitio);
                     UPMForms.hojarascaProfundidad.setVisible(true);
+                     }else{
+                         UPMForms.vegetacionMenor.setDatosIniciales(ceSitio);
+                         UPMForms.vegetacionMenor.setVisible(true);
+                     }
                     break;
                 case 14://Modulos A, E y G
                     //funciones.manipularBotonesMenuPrincipal(true);
@@ -2856,7 +2872,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         return modulo;
     }
     
-    private void seleccionarSiguienteFormularioRevision(CESitio ceSitio) {
+    /*private void seleccionarSiguienteFormularioRevision(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
         if (secuenciaID != null) {
             switch (secuenciaID) {
@@ -2866,7 +2882,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                     break;
                 case 2: //Módulos A y C
                     /*UPMForms.carbono.setDatosIniciales(ceSitio);
-                    UPMForms.carbono.setVisible(true);*/
+                    UPMForms.carbono.setVisible(true);
                     funciones.manipularBotonesMenuPrincipal(false);
                     this.hide();
                     break;
@@ -2924,7 +2940,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                     break;
             }
         }
-    }
+    }*/
     
     private void revisarSiguienteFormulario(CESitio ceSitio){
         Integer secuenciaID = ceSitio.getSecuencia();

@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
+
     private boolean revision;
     private int upmID;
     private int sitioID;
@@ -53,13 +54,13 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
     private String claveColecta;
     private ValidacionesComunes validacion = new ValidacionesComunes();
     private CEMuestras ceMuestras = new CEMuestras();
-    private Version ver=new Version();
-    private String version=ver.getVersion();
-    
+    private Version ver = new Version();
+    private String version = ver.getVersion();
+
     public FrmMuestrasPerfil() {
         initComponents();
     }
-    
+
     public void setDatosiniciales(CESitio ceSitio) {
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
@@ -83,10 +84,10 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
     }
 
     public void revisarMuestrasPerfil(CESitio ceSitio) {
-        revision=true;
+        revision = true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
-        
+
         this.sitio = ceSitio.getSitio();
         this.txtUPM.setText(String.valueOf(this.upmID));
         this.txtSitio.setText(String.valueOf(this.sitio));
@@ -115,7 +116,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         reiniciarControlesMuestras();
         txtGradosLatitud.requestFocus();
     }
-    
+
     private void fillCmbProfundidad() {
         List<CatEProfundidadMuestras> listProfundidad = new ArrayList<>();
         listProfundidad = this.cdPerfil.getProfundidadMuestrasCapturadas(this.sitioID);
@@ -126,7 +127,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     public void llenarTablaMuestras() {
         this.grdMuestras.setModel(this.cdPerfil.getTablaMuestras(this.sitioID));
         this.grdMuestras.getColumnModel().getColumn(2).setPreferredWidth(80);//Profundidad
@@ -138,14 +139,14 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         this.grdMuestras.getColumnModel().getColumn(8).setPreferredWidth(90);//Promedio
         this.grdMuestras.getColumnModel().getColumn(9).setPreferredWidth(100);//ClaveColecta
         this.grdMuestras.getColumnModel().getColumn(10).setPreferredWidth(100);
-         //this.grdMuestras.getColumnModel().getColumn(11).setPreferredWidth(100);
+        //this.grdMuestras.getColumnModel().getColumn(11).setPreferredWidth(100);
         Tablas tabla = new Tablas();
         int[] column_0 = {0};
         int[] column_1 = {1};
         tabla.hideColumnTable(this.grdMuestras, column_0);
         tabla.hideColumnTable(this.grdMuestras, column_1);
     }
-    
+
     private void fijarDatosMuestraPerfil() {
         try {
             this.gradosLatitud = Integer.valueOf(txtGradosLatitud.getText());
@@ -362,7 +363,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private void crearMuestrasPerfil() {
         this.cePerfil.setSitioID(this.sitioID);
         this.cePerfil.setGradosLatitud(this.gradosLatitud);
@@ -378,7 +379,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         this.cePerfil.setObservaciones(this.observaciones);
         this.cdPerfil.insertMuestrasPerfil(this.cePerfil);
     }
-    
+
     private void actualizarMuestraPerfil() {
         this.cePerfil.setSitioID(this.sitioID);
         this.cePerfil.setGradosLatitud(this.gradosLatitud);
@@ -399,7 +400,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         this.cdPerfil.deleteMuetrasPerfil(sitioID);
         this.cdPerfil.deleteMuestrasSitio(sitioID);
     }
-    
+
     private void crearMuestras() {
         this.ceMuestras.setSitioID(this.sitioID);
         CatEProfundidadMuestras profundidad = (CatEProfundidadMuestras) cmbProfundidad.getSelectedItem();
@@ -445,15 +446,15 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         }
         this.cdPerfil.insertMuestras(this.ceMuestras);
     }
-    
-     private String crearClave(int upmID, int sitio, String seccion){
+
+    private String crearClave(int upmID, int sitio, String seccion) {
         String clave = null;
         String upm = crearUPM(upmID);
         String noSitio = crearSitio(sitio);
         clave = upm + "-" + noSitio + "-9-" + seccion;
         return clave;
     }
-    
+
     private String crearUPM(int upmID) {
         String upm = null;
         if (upmID < 10) {
@@ -471,12 +472,12 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         }
         return upm;
     }
-    
-    private String crearSitio(int sitio){
+
+    private String crearSitio(int sitio) {
         return "S" + sitio;
     }
-    
-    private void limpiarMuestrasPerfil(){
+
+    private void limpiarMuestrasPerfil() {
         txtGradosLatitud.setValue(null);
         txtGradosLatitud.setText("");
         txtMinutosLatitud.setValue(null);
@@ -500,7 +501,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         txtObservaciones.setText("");
         txtMuestra.setText("");
     }
-    
+
     private void actualizarMuestras() {
         try {
             int fila = grdMuestras.getSelectedRow();
@@ -519,7 +520,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
                     + e.getClass().getName() + " : " + e.getMessage(), "Muestras de perfil", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
+
     private boolean validarCamposObligatoriosMuestras() {
         if (cmbProfundidad.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null,
@@ -567,7 +568,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private boolean validarCamposMuestras() {
         if (this.pesoMuestra < 0) {
             JOptionPane.showMessageDialog(null,
@@ -609,7 +610,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private void seleccionarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
         if (secuenciaID != null) {
@@ -687,7 +688,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             }
         }
     }
-   
+
     private void revisarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
         //System.out.println("FrmMuestrasDePerfil Linea 679 "+secuenciaID);
@@ -762,9 +763,9 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
                     UPMForms.repobladoVM.setVisible(true);*/
                     break;
             }
-        }else{
-        //this.hide();
-                    this.funciones.manipularBotonesMenuPrincipal(false);
+        } else {
+            //this.hide();
+            this.funciones.manipularBotonesMenuPrincipal(false);
         }
     }
 
@@ -794,7 +795,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         this.promedio = null;
         this.txtClaveColecta.setText("");
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1815,7 +1816,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
                 actualizarMuestraPerfil();
                 this.hide();
                 revisarSiguienteFormulario(this.ceSitio);
-                
+
             }
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
@@ -1825,17 +1826,17 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtObservacionesFocusGained
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        if(revision==false){//esta en modo de captura
+        if (revision == false) {//esta en modo de captura
             this.hide();
             funciones.manipularBotonesMenuPrincipal(false);
         }
-        if(revision==true){//entro a modo de revision
-             //System.err.println("Modo Revision");
+        if (revision == true) {//entro a modo de revision
+            //System.err.println("Modo Revision");
             this.hide();
             //UPMForms.revisionModulos.iniciarRevision();
             UPMForms.revisionModulos.setVisible(true);
             UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision=false;
+            revision = false;
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
@@ -1979,7 +1980,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
 
     private void btnGuardarMuestraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarMuestraActionPerformed
         fijarDatosMuestras();
-        if(validarCamposObligatoriosMuestras() && validarCamposMuestras()){
+        if (validarCamposObligatoriosMuestras() && validarCamposMuestras()) {
             crearMuestras();
             funciones.reiniciarTabla(this.grdMuestras);
             llenarTablaMuestras();
@@ -2072,9 +2073,9 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
                 txtPesoMuestra.setEnabled(true);
                 txtPesoMuestra.setText(String.valueOf(this.ceMuestras.getPesoMuestra()));
             }
-            if (this.ceMuestras.getMuestra()!= null) {
+            if (this.ceMuestras.getMuestra() != null) {
                 txtMuestra.setEnabled(true);
-                
+
                 txtMuestra.setText(String.valueOf(this.ceMuestras.getMuestra()));
             }
             if (this.ceMuestras.getLectura1() != null) {
@@ -2130,7 +2131,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDiametroExternoFocusGained
 
     private void txtAlturaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaFocusGained
-       SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 txtAltura.selectAll();
@@ -2205,7 +2206,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDiametroExternoFocusLost
 
     private void txtAlturaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaFocusLost
-         if (txtAltura.getText().isEmpty()) {
+        if (txtAltura.getText().isEmpty()) {
             txtAltura.setValue(null);
         }
     }//GEN-LAST:event_txtAlturaFocusLost
@@ -2217,7 +2218,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPesoMuestraFocusLost
 
     private void txtLectura1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLectura1FocusLost
-         if (txtLectura1.getText().isEmpty()) {
+        if (txtLectura1.getText().isEmpty()) {
             txtLectura1.setValue(null);
         }
     }//GEN-LAST:event_txtLectura1FocusLost
@@ -2229,13 +2230,13 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtLectura2FocusLost
 
     private void txtLectura3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLectura3FocusLost
-         if (txtLectura3.getText().isEmpty()) {
+        if (txtLectura3.getText().isEmpty()) {
             txtLectura3.setValue(null);
         }
     }//GEN-LAST:event_txtLectura3FocusLost
 
     private void txtLectura4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLectura4FocusLost
-         if (txtLectura4.getText().isEmpty()) {
+        if (txtLectura4.getText().isEmpty()) {
             txtLectura4.setValue(null);
         }
     }//GEN-LAST:event_txtLectura4FocusLost
@@ -2272,42 +2273,53 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             txtPromedio.setEnabled(false);
             txtClaveColecta.setText("");
             txtClaveColecta.setEnabled(false);
-        } else{ if (profundidad.getProfundidadMuestraID() <= 3) {
-            txtPesoMuestra.setEnabled(true);
-            txtMuestra.setEnabled(true);
-            txtLectura1.setEnabled(true);
-            txtLectura2.setEnabled(true);
-            txtLectura3.setText("");
-            txtLectura3.setValue(null);
-            txtLectura3.setEnabled(true);
-            txtLectura4.setText("");
-            txtLectura4.setValue(null);
-            txtLectura4.setEnabled(true);
-            txtPromedio.setText("");
-            txtPromedio.setValue(null);
-            txtPromedio.setEnabled(true);
+        } else {
+            if (profundidad.getProfundidadMuestraID() <= 3) {
+                txtPesoMuestra.setEnabled(true);
+                txtMuestra.setEnabled(true);
+                txtLectura1.setEnabled(true);
+                txtLectura2.setEnabled(true);
+                txtLectura3.setText("");
+                txtLectura3.setValue(null);
+                txtLectura3.setEnabled(true);
+                txtLectura4.setText("");
+                txtLectura4.setValue(null);
+                txtLectura4.setEnabled(true);
+                txtPromedio.setText("");
+                txtPromedio.setValue(null);
+                txtPromedio.setEnabled(true);
 
-        }else{
-            if(profundidad.getProfundidadMuestraID()>3){
-            txtLectura3.setText("");
-            txtLectura3.setEnabled(false);
-            txtLectura4.setText("");
-            txtLectura4.setEnabled(false);
-            txtPromedio.setText("");
-            txtPromedio.setEnabled(false);
-        }
-        }
+            } else {
+                if (profundidad.getProfundidadMuestraID() > 3) {
+                    txtPesoMuestra.setEnabled(true);
+                    txtMuestra.setEnabled(true);
+                    txtLectura1.setEnabled(true);
+                    txtLectura2.setEnabled(true);
+
+                    txtPesoMuestra.setText("");
+                    txtMuestra.setText("");
+                    txtLectura1.setText("");
+                    txtLectura2.setText("");
+
+                    txtLectura3.setText("");
+                    txtLectura3.setEnabled(false);
+                    txtLectura4.setText("");
+                    txtLectura4.setEnabled(false);
+                    txtPromedio.setText("");
+                    txtPromedio.setEnabled(false);
+                }
+            }
         }
     }//GEN-LAST:event_cmbProfundidadActionPerformed
 
     private void txtObservacionesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObservacionesKeyPressed
-         if(evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB) {
             evt.consume();
         }
     }//GEN-LAST:event_txtObservacionesKeyPressed
 
     private void txtMuestraFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMuestraFocusGained
-         SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 txtMuestra.selectAll();
@@ -2398,6 +2410,5 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtSitio;
     private javax.swing.JTextField txtUPM;
     // End of variables declaration//GEN-END:variables
-   
 
 }

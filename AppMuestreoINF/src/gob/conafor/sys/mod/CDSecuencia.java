@@ -1092,6 +1092,7 @@ public class CDSecuencia {
         //Módulo A, E y H
         List<Integer> listFormatosID = new ArrayList<>();
         Integer noSitio = funciones.sitioCapturaSueloCarbono(upmID, 3);
+        System.err.println("Sitiodonde se tomará Suelos    "+noSitio);
         if (noSitio == sitio) {
             listFormatosID.add(0, 1);//Solo vegetación menor y cobertura
             listFormatosID.add(1, 2);//Módulo A

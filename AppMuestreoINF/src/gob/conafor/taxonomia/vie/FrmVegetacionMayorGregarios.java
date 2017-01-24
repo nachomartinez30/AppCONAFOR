@@ -117,6 +117,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
     }
 
     private void fillCmbConsecutivo() {
+        cmbConsecutivo.removeAllItems();
         List<Integer> listConsecutivo = new ArrayList<>();
         listConsecutivo = cdVegetacionMayor.getConsecutivo(this.sitioID);
         if (listConsecutivo != null) {
@@ -1673,13 +1674,16 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         if (validarColectasObligatorias()) {
             if (funciones.validarSeccionCapturada("TAXONOMIA_VegetacionMayorGregarios", this.ceSitio) && chkVegetacionMayorMCG.isSelected()) {
-                JOptionPane.showMessageDialog(null, "Si seleccionó vegetación mayor gregarios, se debe capturar ", "Vegetacion mayor gregarios", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Si sel eccionó vegetación mayor gregarios, se debe capturar ", "Vegetacion mayor gregarios", JOptionPane.INFORMATION_MESSAGE);
                 chkVegetacionMayorMCG.requestFocus();
             } else if (funciones.validarSeccionCapturada("TAXONOMIA_VegetacionMayorGregarios", this.ceSitio) == false && chkVegetacionMayorMCG.isSelected()) {
                 this.hide();
                 this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
                 funciones.manipularBotonesMenuPrincipal(false);
-                this.cdSecuencia.insertSecuenciaTerminada(this.ceSitio);
+                if(revision==false){
+                    this.cdSecuencia.insertSecuenciaTerminada(this.ceSitio);
+                }
+                
             } else if (funciones.validarSeccionCapturada("TAXONOMIA_VegetacionMayorGregarios", this.ceSitio) == true && !chkVegetacionMayorMCG.isSelected()) {
                 this.hide();
                 this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, -1);

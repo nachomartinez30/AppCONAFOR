@@ -82,11 +82,12 @@ public class FrmClaveVegetacion extends JInternalFrame {
         rbtSecundario.setEnabled(true);
         chkArbolFueraBosque.setEnabled(true);
         chkEcotono.setEnabled(true);
-        if (ceVegetacion.getCondicion() == 1) {
+        //System.out.println(ceVegetacion.getCondicion());
+        if (ceVegetacion.getCondicion() == 1) {         //1=Primario
             rbtPrimario.setSelected(true);
             rbtSecundario.setSelected(false);
             cmbFaseSucecional.setEnabled(false);
-        } else {
+        } else {                                        //2=Secundario
             rbtPrimario.setSelected(false);
             rbtSecundario.setSelected(true);
             CatEFaseSucecional ceFase = new CatEFaseSucecional();
@@ -102,6 +103,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
         if (ceVegetacion.getEcotono() == 1) {
             chkEcotono.setSelected(true);
             txtDescripcionEcotono.setEnabled(true);
+            
             txtDescripcionEcotono.setText(ceVegetacion.getCondicionEcotono());
         } else {
             chkEcotono.setSelected(false);
@@ -109,6 +111,8 @@ public class FrmClaveVegetacion extends JInternalFrame {
         txtCondicionPresente.setText(ceVegetacion.getCondicionPresenteCampo());
         this.modificar = 1;
         validarComboBoxClaveVegetacion();
+        
+        
         funciones.manipularBotonesMenuPrincipal(true);
     }
     
@@ -163,11 +167,12 @@ public class FrmClaveVegetacion extends JInternalFrame {
         } catch (NullPointerException e) {
             this.faseSucecional = null;
         }
-        if (rbtPrimario.isSelected()) {
+        if (rbtPrimario.isSelected()==true) {
             this.condicion = 1;
         } else {
             this.condicion = 0;
         }
+        //System.out.println("Condicion Continuar"+this.condicion);
         if (chkArbolFueraBosque.isSelected()) {
             this.arbolFuera = 1;
         } else {
@@ -891,7 +896,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
     }//GEN-LAST:event_txtDescripcionEcotonoKeyPressed
 
     private void chkEcotonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkEcotonoActionPerformed
-        if (chkEcotono.isSelected()) {
+        if (chkEcotono.isSelected()==true) {
             txtDescripcionEcotono.setEnabled(true);
         } else {
             txtDescripcionEcotono.setEnabled(false);
@@ -963,11 +968,12 @@ public class FrmClaveVegetacion extends JInternalFrame {
                 lblCoberturaVegetal.setText("Forestal");
                 rbtPrimario.setEnabled(true);
                 rbtSecundario.setEnabled(true);
-                rbtPrimario.setSelected(true);
+                //rbtPrimario.setSelected(true);
                 chkArbolFueraBosque.setEnabled(false);
                 chkArbolFueraBosque.setSelected(false);
                 chkEcotono.setEnabled(true);
-                txtDescripcionEcotono.setText("");
+                System.err.println(txtDescripcionEcotono.getText());
+                //txtDescripcionEcotono.setText("");
             } else if (claveV.getEsForestal() == 0 && claveV.getClaveSerievID() != 255) {
                 lblCoberturaVegetal.setText("No Forestal");
                 rbtPrimario.setEnabled(false);
@@ -978,6 +984,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
                 cmbFaseSucecional.setEnabled(false);
                 chkEcotono.setEnabled(false);
                 chkEcotono.setSelected(false);
+               
                 txtDescripcionEcotono.setText("");
                 txtDescripcionEcotono.setEnabled(false);
             } else if (claveV.getEsForestal() == 0 && claveV.getClaveSerievID() == 255) {
@@ -990,6 +997,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
                 cmbFaseSucecional.setEnabled(false);
                 chkEcotono.setSelected(false);
                 chkEcotono.setEnabled(false);
+                 
                 txtDescripcionEcotono.setText("");
                 txtDescripcionEcotono.setEnabled(false);
             }

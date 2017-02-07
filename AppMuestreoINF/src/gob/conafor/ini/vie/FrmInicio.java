@@ -153,7 +153,7 @@ public class FrmInicio extends javax.swing.JFrame {
 
         jLabel3.setBackground(new java.awt.Color(90, 90, 90));
         jLabel3.setForeground(new java.awt.Color(10, 9, 9));
-        jLabel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel3.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         jLabel3.setOpaque(true);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/gsnmf.png"))); // NOI18N
@@ -162,7 +162,7 @@ public class FrmInicio extends javax.swing.JFrame {
 
         jLabel6.setBackground(new java.awt.Color(90, 90, 90));
         jLabel6.setForeground(new java.awt.Color(10, 9, 9));
-        jLabel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel6.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         jLabel6.setOpaque(true);
 
         jLabel7.setText("Versión "+version);
@@ -246,7 +246,7 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jLabel7)
@@ -427,7 +427,7 @@ public class FrmInicio extends javax.swing.JFrame {
         mbMenuSuperiror.setPreferredSize(new java.awt.Dimension(89, 39));
 
         menGuardarArchivo.setBackground(new java.awt.Color(153, 153, 153));
-        menGuardarArchivo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        menGuardarArchivo.setBorder(new javax.swing.border.SoftBevelBorder(0));
         menGuardarArchivo.setMnemonic('f');
         menGuardarArchivo.setText("Datos");
         menGuardarArchivo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N

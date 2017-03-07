@@ -37,11 +37,14 @@ import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Tablas;
 import gob.conafor.utils.ValidacionesComunes;
 import gob.conafor.utils.Version;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
 public class FrmArboladoD extends javax.swing.JInternalFrame {
     private boolean revision;
@@ -90,6 +93,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
     private int modificar;
     private Version ver=new Version();
     private String version=ver.getVersion();
+    public int[] indexs;
 
     public FrmArboladoD() {
         initComponents();
@@ -486,6 +490,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         int[] columna_1 = {1};
         tabla.hideColumnTable(grdArbolado, columna_0);
         tabla.hideColumnTable(grdArbolado, columna_1);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -1396,7 +1401,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(chkEsSubmuestra)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1407,8 +1412,8 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
                         .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnElimnar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnModificar)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnContinuar)
@@ -2149,11 +2154,11 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error! Debe capturar la altura total", "Arbolado", JOptionPane.INFORMATION_MESSAGE);
             txtAlturaTotal.requestFocus();
             return false;
-        } else if (txtAnguloInclinacion.isEnabled() && this.anguloInclinacion == null) {
+        } else/* if (txtAnguloInclinacion.isEnabled() && this.anguloInclinacion == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe capturar el angulo de inclinacion", "Arbolado", JOptionPane.INFORMATION_MESSAGE);
             txtAnguloInclinacion.requestFocus();
             return false;
-        } else if (txtAlturaFusteLimpio.isEnabled() && formaVida.getFormaVidaID() == 1 && this.alturaFusteLimpio == null) {
+        } else */if (txtAlturaFusteLimpio.isEnabled() && formaVida.getFormaVidaID() == 1 && this.alturaFusteLimpio == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe capturar la altura fuste limpio", "Arbolado", JOptionPane.INFORMATION_MESSAGE);
             txtAlturaFusteLimpio.requestFocus();
             return false;
@@ -2575,7 +2580,11 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         
         txtDiametroNormal.setText(String.valueOf(arbol.getDiametroNormal()));
         txtAlturaTotal.setText(String.valueOf(arbol.getAlturaTotal()));
-        txtAnguloInclinacion.setText(String.valueOf(arbol.getAnguloInclinacion()));
+        if (arbol.getAnguloInclinacion() == null) {
+            txtAnguloInclinacion.setText("");
+        } else {
+            txtAnguloInclinacion.setText(String.valueOf(arbol.getAnguloInclinacion()));
+        }
         if (arbol.getAlturaFusteLimpio() == null) {
             txtAlturaFusteLimpio.setText("");
         } else {
@@ -2937,9 +2946,20 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDistanciaFocusLost
 
     private void grdArboladoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdArboladoMouseClicked
+         /*indexs =grdArbolado.getSelectedRows();
+        System.out.println("indices ");
+       for(int i=0;i<=indexs.length;i++){
+           try {
+               System.out.println( grdArbolado.getValueAt(indexs[i], 0).toString());
+           } catch (Exception e) {
+           }
+           
+       }*/
+
         if (evt.getButton() == 1) {
             int fila = grdArbolado.getSelectedRow();
             String strArbID = grdArbolado.getValueAt(fila, 0).toString();
+            //System.out.println(strArbID);
             this.arboladoID = Integer.parseInt(strArbID);
             fijarValoresPorCampo(this.arboladoID);
             

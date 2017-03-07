@@ -223,8 +223,8 @@ public class FrmUPMInaccesible extends javax.swing.JInternalFrame {
         int tipoInaccesibilidadID = ceTipoInaccesibilidad.getTipoInaccesibilidadID();
         int tipoUpmID = this.ceUpm.getTipoUpmID();
         if (tipoUpmID == 3) {//Inaccesible problema físico
-            System.out.println("TipoUPM=" + tipoUpmID + "\tTipo Inaccesibilidad=" + tipoInaccesibilidadID);
-            if (tipoInaccesibilidadID < 3 || tipoInaccesibilidadID > 8) {
+            //System.out.println("TipoUPM=" + tipoUpmID + "\tTipo Inaccesibilidad=" + tipoInaccesibilidadID);
+            if (tipoInaccesibilidadID < 3 || tipoInaccesibilidadID > 9) {
                 JOptionPane.showMessageDialog(null, "El tipo de inaccesibilidad seleccionado no corresponde a la inaccesibilidad por problema físico "
                         + "", "Captura de la UPM", JOptionPane.INFORMATION_MESSAGE);
                 cmbTipoInaccesibilidad.requestFocus();
@@ -234,7 +234,7 @@ public class FrmUPMInaccesible extends javax.swing.JInternalFrame {
             }
         } else if (tipoUpmID == 4) {//Inaccesible problema social
             //System.out.println("TipoUPM=" + tipoUpmID + "\tTipo Inaccesibilidad=" + tipoInaccesibilidadID);
-            if (tipoInaccesibilidadID < 10 && tipoInaccesibilidadID > 2) {
+            if (tipoInaccesibilidadID < 9 && tipoInaccesibilidadID > 2) {
                 JOptionPane.showMessageDialog(null, "El tipo de inaccesibilidad seleccionado no corresponde a la inaccesibilidad por problema social "
                         + "", "Captura de la UPM", JOptionPane.INFORMATION_MESSAGE);
                 cmbTipoInaccesibilidad.requestFocus();
@@ -259,7 +259,7 @@ public class FrmUPMInaccesible extends javax.swing.JInternalFrame {
         ceUpm.setSegundosLongitud(Float.parseFloat(txtSegundosLongitud.getText()));
         ceUpm.setDatum(txtDatum.getText());
         ceUpm.setErrorPresicion(Integer.parseInt(txtEPE.getText()));
-        ceUpm.setAzimut(Integer.parseInt(txtEPE.getText()));
+        ceUpm.setAzimut(Integer.parseInt(txtAzimut.getText()));
         ceUpm.setDistancia(Float.parseFloat(txtDistancia.getText()));
         ceUpm.setTipoInaccesibilidadID(inaccesibilidad.getTipoInaccesibilidadID());
         ceUpm.setOtroTipoInaccesibilidad(txtOtroTipo.getText());
@@ -898,6 +898,7 @@ public class FrmUPMInaccesible extends javax.swing.JInternalFrame {
 
     private void txtGradosLongitudFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGradosLongitudFocusGained
        txtGradosLongitud.selectAll();
+        System.out.println("Foco Ganado");
     }//GEN-LAST:event_txtGradosLongitudFocusGained
 
     private void txtMinutosLongitudFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMinutosLongitudFocusGained
@@ -952,12 +953,18 @@ public class FrmUPMInaccesible extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSegundosLatitudFocusLost
 
     private void txtGradosLongitudFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGradosLongitudFocusLost
-        String gradosLongitud;
+        String gradosLongitud,regex="[-][0-9]+";
         if (txtGradosLongitud.getText().isEmpty()) {
             txtGradosLongitud.setValue(null);
         } else {
             gradosLongitud = txtGradosLongitud.getText();
-            gradosLongitud = "-" + gradosLongitud;
+            if(gradosLongitud.matches(regex)){
+                
+            }else{
+                gradosLongitud = "-" + gradosLongitud;
+            }
+            
+            //System.err.println(gradosLongitud);
             txtGradosLongitud.setText(gradosLongitud);
         }
     }//GEN-LAST:event_txtGradosLongitudFocusLost

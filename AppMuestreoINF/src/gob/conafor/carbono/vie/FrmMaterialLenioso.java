@@ -830,7 +830,7 @@ public class FrmMaterialLenioso extends JInternalFrame {
         });
 
         btnEliminar100.setText("Eliminar");
-        btnEliminar100.setNextFocusableComponent(cmbTransecto100);
+        btnEliminar100.setNextFocusableComponent(chkMaterialLenioso1000);
         btnEliminar100.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminar100ActionPerformed(evt);
@@ -1070,7 +1070,7 @@ public class FrmMaterialLenioso extends JInternalFrame {
         });
 
         btnEliminar1000.setText("Eliminar");
-        btnEliminar1000.setNextFocusableComponent(cmbTransecto1000);
+        btnEliminar1000.setNextFocusableComponent(chkAlturaArbustosHierbasPastos);
         btnEliminar1000.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminar1000ActionPerformed(evt);
@@ -1213,7 +1213,7 @@ public class FrmMaterialLenioso extends JInternalFrame {
         });
 
         btnEliminarComponentes.setText("Eliminar");
-        btnEliminarComponentes.setNextFocusableComponent(cmbNoCubiertaVegetal);
+        btnEliminarComponentes.setNextFocusableComponent(btnContinuar);
         btnEliminarComponentes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarComponentesActionPerformed(evt);
@@ -1312,7 +1312,7 @@ public class FrmMaterialLenioso extends JInternalFrame {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(chkAlturaArbustosHierbasPastos)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 258, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cmbNoCubiertaVegetal, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1366,6 +1366,7 @@ public class FrmMaterialLenioso extends JInternalFrame {
         );
 
         btnContinuar.setText("Continuar");
+        btnContinuar.setNextFocusableComponent(btnSalir);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarActionPerformed(evt);

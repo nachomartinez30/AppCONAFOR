@@ -631,7 +631,10 @@ public class CDArbolado {
                 arb.setTipoToconID(rs.getInt("TipoToconID"));
                 arb.setDiametroNormal(rs.getFloat("DiametroNormal"));
                 arb.setAlturaTotal(rs.getFloat("AlturaTotal"));
-                arb.setAnguloInclinacion(rs.getInt("AnguloInclinacion"));
+                if(rs.getObject("AnguloInclinacion") != null){
+                     arb.setAnguloInclinacion(rs.getInt("AnguloInclinacion"));
+                }
+                
                 if(rs.getObject("AlturaFusteLimpio") != null){
                      arb.setAlturaFusteLimpio(rs.getFloat("AlturaFusteLimpio"));
                 }
@@ -692,7 +695,9 @@ public class CDArbolado {
                 arb.setDiametroNormal(rs.getFloat("DiametroNormal"));
                 arb.setDiametroBasal(rs.getFloat("DiametroBasal"));
                 arb.setAlturaTotal(rs.getFloat("AlturaTotal"));
-                arb.setAnguloInclinacion(rs.getInt("AnguloInclinacion"));
+                if(rs.getObject("AnguloInclinacion") != null){
+                     arb.setAnguloInclinacion(rs.getInt("AnguloInclinacion"));
+                }
                 if(rs.getObject("AlturaFusteLimpio") != null){
                      arb.setAlturaFusteLimpio(rs.getFloat("AlturaFusteLimpio"));
                 }

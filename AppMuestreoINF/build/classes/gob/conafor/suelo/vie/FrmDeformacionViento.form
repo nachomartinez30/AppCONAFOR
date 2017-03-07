@@ -55,35 +55,39 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btnContinuar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                  <Component id="btnSalir" min="-2" pref="78" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
+              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblDeformacionTerreno" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="btnContinuar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                          <Component id="btnSalir" min="-2" pref="78" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="lblUPM" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                          <Component id="txtUPM" min="-2" pref="97" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="596" max="-2" attributes="0"/>
-                          <Component id="lblSitio" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txtSitio" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
-                              <Component id="lblColocacionTAG" alignment="0" max="32767" attributes="0"/>
-                              <Component id="lblRegistroMonticulos" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
-                              <Component id="pnlColocacionTag" alignment="0" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblDeformacionTerreno" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="lblUPM" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                                  <Component id="txtUPM" min="-2" pref="97" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="596" max="-2" attributes="0"/>
+                                  <Component id="lblSitio" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="txtSitio" min="-2" pref="100" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lblColocacionTAG" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lblRegistroMonticulos" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
+                                      <Component id="pnlColocacionTag" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -552,7 +556,7 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="cmbMedicionMonticulos"/>
+                  <ComponentRef name="cmbLongitudMonticulos"/>
                 </Property>
               </Properties>
               <Events>
@@ -685,7 +689,7 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="cmbLongitudMonticulos"/>
+                  <ComponentRef name="rbtUnidosVarilla"/>
                 </Property>
               </Properties>
               <Events>
@@ -970,7 +974,7 @@
                     <Property name="text" type="java.lang.String" value="Unidos a la varilla del centro del sitio 1  "/>
                     <Property name="horizontalTextPosition" type="int" value="2"/>
                     <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="txtEspecifiqueTransponder"/>
+                      <ComponentRef name="rbtUnidosPegamento"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -987,6 +991,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Unidos con pegamento al centro del sitio 1 "/>
                     <Property name="horizontalTextPosition" type="int" value="2"/>
+                    <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="rbtClavadoArbol"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtUnidosPegamentoActionPerformed"/>
@@ -1002,6 +1009,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Clavado al arbol mas cercano al centro del sitio 1"/>
                     <Property name="horizontalTextPosition" type="int" value="2"/>
+                    <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="rbtOtroLugar"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtClavadoArbolActionPerformed"/>
@@ -1017,6 +1027,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Otro lugar"/>
                     <Property name="horizontalTextPosition" type="int" value="2"/>
+                    <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="rbtNoSepudo"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtOtroLugarActionPerformed"/>
@@ -1033,6 +1046,9 @@
                     <Property name="text" type="java.lang.String" value="No se pudo colocar el TAG"/>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="horizontalTextPosition" type="int" value="2"/>
+                    <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="txtEspecifiqueTransponder"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtNoSepudoActionPerformed"/>
@@ -1083,6 +1099,9 @@
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
                     <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="txtObservacionesTransponder"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtEspecifiqueTransponderFocusGained"/>
@@ -1109,6 +1128,9 @@
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
+                    <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="btnContinuar"/>
+                    </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtObservacionesTransponderFocusGained"/>
@@ -1123,6 +1145,9 @@
         <Component class="javax.swing.JButton" name="btnContinuar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Continuar"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="btnSalir"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnContinuarActionPerformed"/>

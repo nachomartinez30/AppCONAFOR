@@ -93,7 +93,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         txtSitio.setText(String.valueOf(this.sitio));
         this.ceSitio = sitio;
         llenarTabla();
-        cmbFormaVida.requestFocus();
+        txtNumeroIndividuo.requestFocus();
         this.ceSitio = sitio;
         fillCmbConsecutivo();
         funciones.manipularBotonesMenuPrincipal(true);
@@ -109,7 +109,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         txtSitio.setText(String.valueOf(this.sitio));
         this.ceSitio = sitio;
         llenarTabla();
-        cmbFormaVida.requestFocus();
+        txtNumeroIndividuo.requestFocus();
         fillCmbConsecutivo();
         txtNumeroIndividuo.setEnabled(true);
         funciones.manipularBotonesMenuPrincipal(true);
@@ -393,7 +393,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         lblClaveColecta = new javax.swing.JLabel();
         txtClaveColecta = new javax.swing.JTextField();
         chkVegetacionMayorMCG = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximizable(true);
@@ -853,6 +853,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(grdVegetacionvMayor);
 
         btnContinuar.setText("Continuar");
+        btnContinuar.setNextFocusableComponent(btnSalir);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarActionPerformed(evt);
@@ -860,6 +861,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         });
 
         btnSalir.setText("Salir");
+        btnSalir.setNextFocusableComponent(cmbConsecutivo);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -867,6 +869,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         });
 
         btnColecta.setText("Colecta");
+        btnColecta.setNextFocusableComponent(btnLimpiar);
         btnColecta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnColectaActionPerformed(evt);
@@ -886,10 +889,11 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("Limpiar Controles");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnLimpiar.setText("Limpiar Controles");
+        btnLimpiar.setNextFocusableComponent(btnContinuar);
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnLimpiarActionPerformed(evt);
             }
         });
 
@@ -902,7 +906,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jButton1)
+                        .addComponent(btnLimpiar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -970,7 +974,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnContinuar)
                     .addComponent(btnSalir)
-                    .addComponent(jButton1))
+                    .addComponent(btnLimpiar))
                 .addGap(22, 22, 22))
         );
 
@@ -1872,9 +1876,9 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbAgenteDanio1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
        limpiarControles();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1885,6 +1889,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnColecta;
     private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnElimnar;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JCheckBox chkVegetacionMayorMCG;
@@ -1903,7 +1908,6 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cmbSeveridad2;
     private javax.swing.JComboBox cmbVigor;
     private javax.swing.JTable grdVegetacionvMayor;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;

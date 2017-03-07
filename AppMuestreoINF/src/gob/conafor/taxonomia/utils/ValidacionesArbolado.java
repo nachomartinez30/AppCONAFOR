@@ -24,8 +24,8 @@ public class ValidacionesArbolado {
 
     public boolean esAlturaTotal(Float at) {
         if (at != null) {
-            if (at < 0.1 || at > 50) { //Condicion sujeta a advertencia
-                JOptionPane.showMessageDialog(null, "Error! la altura total debe estar entre 0.1 y 50 metros", "Arbolado", JOptionPane.ERROR_MESSAGE);
+            if (at < 0.1) { //Condicion sujeta a advertencia
+                JOptionPane.showMessageDialog(null, "Error! la altura total debe ser mayor a 0.1", "Arbolado", JOptionPane.ERROR_MESSAGE);
                 return true;
             } else {
                 return false;
@@ -37,8 +37,8 @@ public class ValidacionesArbolado {
 
     public boolean esAnguloInclinacion(Integer ai) {
         if (ai != null) {
-            if (ai < 0 || ai > 90) {
-                JOptionPane.showMessageDialog(null, "Error! el ángulo de inclinación debe estar entre 0 y 90 grados", "Arbolado", JOptionPane.ERROR_MESSAGE);
+            if (ai < 0 || ai > 360) {// Solititó cambio Sergio Villela Gaytan dia 27/02/2017
+                JOptionPane.showMessageDialog(null, "Error! el ángulo de inclinación debe estar entre 0 y 360 grados", "Arbolado", JOptionPane.ERROR_MESSAGE);
                 return true;
             } else {
                 return false;

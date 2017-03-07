@@ -580,6 +580,11 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
                 txtNumeroRamaTalloFocusLost(evt);
             }
         });
+        txtNumeroRamaTallo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumeroRamaTalloActionPerformed(evt);
+            }
+        });
         txtNumeroRamaTallo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNumeroRamaTalloKeyTyped(evt);
@@ -986,6 +991,8 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Nivel:");
 
+        cmbNivelVigor.setNextFocusableComponent(chkEsSubmuestra);
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -1045,8 +1052,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
                         .addGap(18, 18, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbNivelVigor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(cmbNivelVigor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(54, Short.MAX_VALUE))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(2, 2, 2)
@@ -1145,7 +1151,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         });
 
         btnElimnar.setText("Eliminar");
-        btnElimnar.setNextFocusableComponent(txtNumeroIndividuo);
+        btnElimnar.setNextFocusableComponent(btnColecta);
         btnElimnar.setPreferredSize(new java.awt.Dimension(79, 23));
         btnElimnar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1178,6 +1184,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(grdArbolado);
 
         btnContinuar.setText("Continuar");
+        btnContinuar.setNextFocusableComponent(btnSalir);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarActionPerformed(evt);
@@ -1204,6 +1211,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         chkEsSubmuestra.setText("Es submuestra:");
         chkEsSubmuestra.setEnabled(false);
         chkEsSubmuestra.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        chkEsSubmuestra.setNextFocusableComponent(btnAgregar);
         chkEsSubmuestra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkEsSubmuestraActionPerformed(evt);
@@ -1215,6 +1223,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         txtClaveColecta.setEnabled(false);
 
         btnColecta.setText("Colecta");
+        btnColecta.setNextFocusableComponent(btnLimpiarControles);
         btnColecta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnColectaActionPerformed(evt);
@@ -1222,6 +1231,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         });
 
         btnLimpiarControles.setText("Limpiar controles");
+        btnLimpiarControles.setNextFocusableComponent(btnContinuar);
         btnLimpiarControles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarControlesActionPerformed(evt);
@@ -2345,7 +2355,11 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
      
         txtDiametroNormal.setText(String.valueOf(arbol.getDiametroNormal()));
         txtAlturaTotal.setText(String.valueOf(arbol.getAlturaTotal()));
-        txtAnguloInclinacion.setText(String.valueOf(arbol.getAnguloInclinacion()));
+        if (arbol.getAnguloInclinacion() == null) {
+            txtAnguloInclinacion.setText("");
+        } else {
+            txtAnguloInclinacion.setText(String.valueOf(arbol.getAnguloInclinacion()));
+        }
         if (arbol.getAlturaFusteLimpio() == null) {
             txtAlturaFusteLimpio.setText("");
         } else {
@@ -3144,6 +3158,10 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
     private void cmbGradoPutrefaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGradoPutrefaccionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbGradoPutrefaccionActionPerformed
+
+    private void txtNumeroRamaTalloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroRamaTalloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumeroRamaTalloActionPerformed
 
     /**
      * @param args the command line arguments

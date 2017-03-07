@@ -1188,7 +1188,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         jPanel2.add(btnModificarCanalillos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, -1, -1));
 
         btnEliminarCanalillos.setText("Eliminar");
-        btnEliminarCanalillos.setNextFocusableComponent(cmbMedicionCanalillos);
+        btnEliminarCanalillos.setNextFocusableComponent(cmbLongitudCanalillos);
         btnEliminarCanalillos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarCanalillosActionPerformed(evt);
@@ -1284,7 +1284,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         jPanel2.add(btnModificarLongitudCanalillos, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 120, -1, -1));
 
         btnEliminarLongitudCanalillos.setText("Eliminar");
-        btnEliminarLongitudCanalillos.setNextFocusableComponent(cmbLongitudCanalillos);
+        btnEliminarLongitudCanalillos.setNextFocusableComponent(chkCarcavas);
         btnEliminarLongitudCanalillos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarLongitudCanalillosActionPerformed(evt);
@@ -1435,6 +1435,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         lblMedicionCarcavas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMedicionCarcavas.setText("Medición");
 
+        cmbMedicionCarcavas.setNextFocusableComponent(txtProfundidadCarcavas);
         cmbMedicionCarcavas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbMedicionCarcavasActionPerformed(evt);
@@ -1454,6 +1455,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         lblAzimut.setText("Azimut");
 
         txtProfundidadCarcavas.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtProfundidadCarcavas.setNextFocusableComponent(txtAnchoCarcavas);
         txtProfundidadCarcavas.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtProfundidadCarcavasFocusGained(evt);
@@ -1469,6 +1471,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         });
 
         txtAnchoCarcavas.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtAnchoCarcavas.setNextFocusableComponent(txtDistanciaCarcavas);
         txtAnchoCarcavas.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtAnchoCarcavasFocusGained(evt);
@@ -1484,6 +1487,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         });
 
         txtDistanciaCarcavas.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtDistanciaCarcavas.setNextFocusableComponent(txtAzimutCarcavas);
         txtDistanciaCarcavas.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtDistanciaCarcavasFocusGained(evt);
@@ -1597,7 +1601,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         });
 
         btnEliminarCarcava.setText("Eliminar");
-        btnEliminarCarcava.setNextFocusableComponent(cmbMedicionCarcavas);
+        btnEliminarCarcava.setNextFocusableComponent(cmbLongitudCarcava);
         btnEliminarCarcava.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarCarcavaActionPerformed(evt);
@@ -1608,6 +1612,8 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel14.setText("Campo longitud");
+
+        cmbLongitudCarcava.setNextFocusableComponent(txtLongitudCarcavas);
 
         jLabel15.setText("Longitud (cm)");
 
@@ -1686,7 +1692,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         });
 
         btnEliminarLongitudCarcava.setText("Eliminar");
-        btnEliminarLongitudCarcava.setNextFocusableComponent(cmbLongitudCarcava);
+        btnEliminarLongitudCarcava.setNextFocusableComponent(btnContinuar);
         btnEliminarLongitudCarcava.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarLongitudCarcavaActionPerformed(evt);
@@ -1816,6 +1822,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         chkCarcavas.setBackground(new java.awt.Color(204, 204, 204));
         chkCarcavas.setSelected(true);
         chkCarcavas.setText("Registro de cárcavas");
+        chkCarcavas.setNextFocusableComponent(cmbMedicionCarcavas);
         chkCarcavas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkCarcavasActionPerformed(evt);
@@ -1851,24 +1858,18 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
                                 .addComponent(btnEliminarLongitudCarcava)
                                 .addGap(2, 2, 2))))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, Short.MAX_VALUE)
-                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(chkCarcavas))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(chkCarcavas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(txtNoCarcavas))
-                            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblNoCarcava, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addGap(6, 6, 6)
+                            .addComponent(txtNoCarcavas))
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblNoCarcava, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -1906,6 +1907,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         );
 
         btnContinuar.setText("Continuar");
+        btnContinuar.setNextFocusableComponent(btnSalir);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarActionPerformed(evt);

@@ -102,7 +102,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         txtSitio.setText(String.valueOf(this.sitio));
         this.ceSitio = sitio;
         llenarTabla();
-        cmbFormaVida.requestFocus();
+        txtNumeroIndividuo.requestFocus();
         this.ceSitio = sitio;
         fillCmbConsecutivo();
         this.actualizar = 0;
@@ -120,7 +120,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         txtSitio.setText(String.valueOf(this.sitio));
         this.ceSitio = sitio;
         llenarTabla();
-        cmbFormaVida.requestFocus();
+        txtNumeroIndividuo.requestFocus();
         fillCmbConsecutivo();
         this.actualizar = 1;
         funciones.manipularBotonesMenuPrincipal(true);
@@ -396,7 +396,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         lblClaveColecta = new javax.swing.JLabel();
         txtClaveColecta = new javax.swing.JTextField();
         chkVegetacionMayorMCI = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximizable(true);
@@ -825,7 +825,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         });
 
         btnElimnar.setText("Eliminar");
-        btnElimnar.setNextFocusableComponent(txtNumeroIndividuo);
+        btnElimnar.setNextFocusableComponent(btnColecta);
         btnElimnar.setPreferredSize(new java.awt.Dimension(79, 23));
         btnElimnar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -858,6 +858,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(grdVegetacionvMayor);
 
         btnContinuar.setText("Continuar");
+        btnContinuar.setNextFocusableComponent(btnSalir);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarActionPerformed(evt);
@@ -865,6 +866,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         });
 
         btnSalir.setText("Salir");
+        btnSalir.setNextFocusableComponent(cmbConsecutivo);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -872,6 +874,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         });
 
         btnColecta.setText("Colecta");
+        btnColecta.setNextFocusableComponent(btnLimpiar);
         btnColecta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnColectaActionPerformed(evt);
@@ -891,10 +894,11 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("Limpiar Controles");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnLimpiar.setText("Limpiar Controles");
+        btnLimpiar.setNextFocusableComponent(btnContinuar);
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnLimpiarActionPerformed(evt);
             }
         });
 
@@ -907,7 +911,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jButton1)
+                        .addComponent(btnLimpiar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -921,7 +925,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
                             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(chkVegetacionMayorMCI)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnModificar)
@@ -929,7 +933,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
                                 .addComponent(btnElimnar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnColecta)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblClaveColecta)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtClaveColecta, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -976,7 +980,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnContinuar)
                     .addComponent(btnSalir)
-                    .addComponent(jButton1))
+                    .addComponent(btnLimpiar))
                 .addGap(22, 22, 22))
         );
 
@@ -1844,9 +1848,9 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbAgenteDanio2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         limpiarControles();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1857,6 +1861,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnColecta;
     private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnElimnar;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JCheckBox chkVegetacionMayorMCI;
@@ -1875,7 +1880,6 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cmbSeveridad2;
     private javax.swing.JComboBox cmbVigor;
     private javax.swing.JTable grdVegetacionvMayor;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;

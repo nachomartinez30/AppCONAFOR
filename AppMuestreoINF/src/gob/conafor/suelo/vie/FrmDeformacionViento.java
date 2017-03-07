@@ -889,7 +889,7 @@ private boolean revision;
         });
 
         btnEliminarMonticulos.setText("Eliminar");
-        btnEliminarMonticulos.setNextFocusableComponent(cmbMedicionMonticulos);
+        btnEliminarMonticulos.setNextFocusableComponent(cmbLongitudMonticulos);
         btnEliminarMonticulos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarMonticulosActionPerformed(evt);
@@ -981,7 +981,7 @@ private boolean revision;
         });
 
         btnEliminarLongitudMonticulos.setText("Eliminar");
-        btnEliminarLongitudMonticulos.setNextFocusableComponent(cmbLongitudMonticulos);
+        btnEliminarLongitudMonticulos.setNextFocusableComponent(rbtUnidosVarilla);
         btnEliminarLongitudMonticulos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarLongitudMonticulosActionPerformed(evt);
@@ -1189,7 +1189,7 @@ private boolean revision;
         btgColocacionTAG.add(rbtUnidosVarilla);
         rbtUnidosVarilla.setText("Unidos a la varilla del centro del sitio 1  ");
         rbtUnidosVarilla.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        rbtUnidosVarilla.setNextFocusableComponent(txtEspecifiqueTransponder);
+        rbtUnidosVarilla.setNextFocusableComponent(rbtUnidosPegamento);
         rbtUnidosVarilla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbtUnidosVarillaActionPerformed(evt);
@@ -1200,6 +1200,7 @@ private boolean revision;
         btgColocacionTAG.add(rbtUnidosPegamento);
         rbtUnidosPegamento.setText("Unidos con pegamento al centro del sitio 1 ");
         rbtUnidosPegamento.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        rbtUnidosPegamento.setNextFocusableComponent(rbtClavadoArbol);
         rbtUnidosPegamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbtUnidosPegamentoActionPerformed(evt);
@@ -1210,6 +1211,7 @@ private boolean revision;
         btgColocacionTAG.add(rbtClavadoArbol);
         rbtClavadoArbol.setText("Clavado al arbol mas cercano al centro del sitio 1");
         rbtClavadoArbol.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        rbtClavadoArbol.setNextFocusableComponent(rbtOtroLugar);
         rbtClavadoArbol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbtClavadoArbolActionPerformed(evt);
@@ -1220,6 +1222,7 @@ private boolean revision;
         btgColocacionTAG.add(rbtOtroLugar);
         rbtOtroLugar.setText("Otro lugar");
         rbtOtroLugar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        rbtOtroLugar.setNextFocusableComponent(rbtNoSepudo);
         rbtOtroLugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbtOtroLugarActionPerformed(evt);
@@ -1231,6 +1234,7 @@ private boolean revision;
         rbtNoSepudo.setText("No se pudo colocar el TAG");
         rbtNoSepudo.setToolTipText("");
         rbtNoSepudo.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        rbtNoSepudo.setNextFocusableComponent(txtEspecifiqueTransponder);
         rbtNoSepudo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbtNoSepudoActionPerformed(evt);
@@ -1300,6 +1304,7 @@ private boolean revision;
         txtEspecifiqueTransponder.setColumns(20);
         txtEspecifiqueTransponder.setRows(5);
         txtEspecifiqueTransponder.setEnabled(false);
+        txtEspecifiqueTransponder.setNextFocusableComponent(txtObservacionesTransponder);
         txtEspecifiqueTransponder.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtEspecifiqueTransponderFocusGained(evt);
@@ -1320,6 +1325,7 @@ private boolean revision;
 
         txtObservacionesTransponder.setColumns(20);
         txtObservacionesTransponder.setRows(5);
+        txtObservacionesTransponder.setNextFocusableComponent(btnContinuar);
         txtObservacionesTransponder.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtObservacionesTransponderFocusGained(evt);
@@ -1371,6 +1377,7 @@ private boolean revision;
         );
 
         btnContinuar.setText("Continuar");
+        btnContinuar.setNextFocusableComponent(btnSalir);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarActionPerformed(evt);
@@ -1388,32 +1395,34 @@ private boolean revision;
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnContinuar)
-                .addGap(29, 29, 29)
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDeformacionTerreno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblUPM)
-                        .addGap(10, 10, 10)
-                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(596, 596, 596)
-                        .addComponent(lblSitio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnContinuar)
+                        .addGap(29, 29, 29)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblColocacionTAG, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblRegistroMonticulos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnlColocacionTag, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDeformacionTerreno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(lblUPM)
+                                .addGap(10, 10, 10)
+                                .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(596, 596, 596)
+                                .addComponent(lblSitio)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblColocacionTAG, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblRegistroMonticulos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(pnlColocacionTag, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(

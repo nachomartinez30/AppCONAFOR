@@ -727,7 +727,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         });
 
         btnEliminarComponente.setText("Eliminar");
-        btnEliminarComponente.setNextFocusableComponent(cmbTransectoComponente);
+        btnEliminarComponente.setNextFocusableComponent(btnColecta);
         btnEliminarComponente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarComponenteActionPerformed(evt);
@@ -735,6 +735,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         });
 
         btnColecta.setText("Colecta");
+        btnColecta.setNextFocusableComponent(chkCoberturaDosel);
         btnColecta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnColectaActionPerformed(evt);
@@ -809,7 +810,10 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         lblTransecto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTransecto.setText("Transecto");
 
+        cmbTransectoDosel.setNextFocusableComponent(chkPunto1);
+
         btnAgregarDosel.setText("Agregar");
+        btnAgregarDosel.setNextFocusableComponent(btnModificarDosel);
         btnAgregarDosel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarDoselActionPerformed(evt);
@@ -817,6 +821,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         });
 
         btnModificarDosel.setText("Modificar");
+        btnModificarDosel.setNextFocusableComponent(btnEliminarDosel);
         btnModificarDosel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarDoselActionPerformed(evt);
@@ -824,6 +829,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         });
 
         btnEliminarDosel.setText("Eliminar");
+        btnEliminarDosel.setNextFocusableComponent(btnContinuar);
         btnEliminarDosel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarDoselActionPerformed(evt);
@@ -838,6 +844,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         jLabel11.setText("1");
 
         chkPunto1.setBackground(new java.awt.Color(204, 204, 204));
+        chkPunto1.setNextFocusableComponent(chkPunto2);
         chkPunto1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 chkPunto1KeyPressed(evt);
@@ -869,6 +876,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         jLabel13.setText("3");
 
         chkPunto3.setBackground(new java.awt.Color(204, 204, 204));
+        chkPunto3.setNextFocusableComponent(chkPunto4);
         chkPunto3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 chkPunto3KeyPressed(evt);
@@ -901,6 +909,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
 
         chkPunto4.setBackground(new java.awt.Color(204, 204, 204));
         chkPunto4.setToolTipText("");
+        chkPunto4.setNextFocusableComponent(chkPunto5);
         chkPunto4.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 chkPunto4KeyPressed(evt);
@@ -932,6 +941,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         jLabel15.setText("5");
 
         chkPunto5.setBackground(new java.awt.Color(204, 204, 204));
+        chkPunto5.setNextFocusableComponent(chkPunto6);
         chkPunto5.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 chkPunto5KeyPressed(evt);
@@ -963,6 +973,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         jLabel12.setText("2");
 
         chkPunto2.setBackground(new java.awt.Color(204, 204, 204));
+        chkPunto2.setNextFocusableComponent(chkPunto3);
         chkPunto2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 chkPunto2KeyPressed(evt);
@@ -994,6 +1005,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         jLabel16.setText("6");
 
         chkPunto6.setBackground(new java.awt.Color(204, 204, 204));
+        chkPunto6.setNextFocusableComponent(chkPunto7);
         chkPunto6.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 chkPunto6KeyPressed(evt);
@@ -1025,6 +1037,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         jLabel17.setText("7");
 
         chkPunto7.setBackground(new java.awt.Color(204, 204, 204));
+        chkPunto7.setNextFocusableComponent(chkPunto8);
         chkPunto7.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 chkPunto7KeyPressed(evt);
@@ -1056,6 +1069,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         jLabel18.setText("8");
 
         chkPunto8.setBackground(new java.awt.Color(204, 204, 204));
+        chkPunto8.setNextFocusableComponent(chkPunto9);
         chkPunto8.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 chkPunto8KeyPressed(evt);
@@ -1087,6 +1101,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         jLabel19.setText("9");
 
         chkPunto9.setBackground(new java.awt.Color(204, 204, 204));
+        chkPunto9.setNextFocusableComponent(chkPunto10);
         chkPunto9.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 chkPunto9KeyPressed(evt);
@@ -1118,6 +1133,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         jLabel20.setText("10");
 
         chkPunto10.setBackground(new java.awt.Color(204, 204, 204));
+        chkPunto10.setNextFocusableComponent(btnAgregarDosel);
         chkPunto10.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 chkPunto10KeyPressed(evt);
@@ -1244,6 +1260,8 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         jScrollPane4.setViewportView(grdCoberturaDosel);
 
         btnContinuar.setText("Continuar");
+        btnContinuar.setName(""); // NOI18N
+        btnContinuar.setNextFocusableComponent(btnSalir);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarActionPerformed(evt);
@@ -1272,6 +1290,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         chkCoberturaDosel.setBackground(new java.awt.Color(204, 204, 204));
         chkCoberturaDosel.setSelected(true);
         chkCoberturaDosel.setText("Cobertura DOSEL");
+        chkCoberturaDosel.setNextFocusableComponent(cmbTransectoDosel);
         chkCoberturaDosel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkCoberturaDoselActionPerformed(evt);
@@ -1292,31 +1311,30 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(chkCoberturaDosel)
-                    .addComponent(lblCoberturaDosel, javax.swing.GroupLayout.DEFAULT_SIZE, 892, Short.MAX_VALUE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 892, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(chkLongitudComponentes)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
-                    .addComponent(lblCarbonoIncendios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblUPM)
-                        .addGap(10, 10, 10)
-                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblSitio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnContinuar)
-                .addGap(18, 18, 18)
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(chkCoberturaDosel)
+                        .addComponent(lblCoberturaDosel, javax.swing.GroupLayout.DEFAULT_SIZE, 892, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 892, Short.MAX_VALUE)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(chkLongitudComponentes)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1)
+                        .addComponent(lblCarbonoIncendios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(lblUPM)
+                            .addGap(10, 10, 10)
+                            .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblSitio)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnContinuar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(

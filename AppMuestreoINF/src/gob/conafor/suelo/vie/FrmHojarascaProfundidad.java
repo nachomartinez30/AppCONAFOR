@@ -1376,6 +1376,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         lblObservacionesProfundidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         txtProfundidad3060.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtProfundidad3060.setNextFocusableComponent(txtPesoTotal030);
         txtProfundidad3060.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtProfundidad3060FocusGained(evt);
@@ -1391,6 +1392,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         });
 
         txtProfundidad030.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtProfundidad030.setNextFocusableComponent(txtProfundidad3060);
         txtProfundidad030.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtProfundidad030FocusGained(evt);
@@ -1406,6 +1408,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         });
 
         txtPesoTotal030.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtPesoTotal030.setNextFocusableComponent(txtPesoTotal3060);
         txtPesoTotal030.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtPesoTotal030FocusGained(evt);
@@ -1421,6 +1424,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         });
 
         txtPesoTotal3060.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtPesoTotal3060.setNextFocusableComponent(txtEquipo030);
         txtPesoTotal3060.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtPesoTotal3060FocusGained(evt);
@@ -1442,6 +1446,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
             }
         });
 
+        cmbPuntoProfundidad.setNextFocusableComponent(txtProfundidad030);
         cmbPuntoProfundidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbPuntoProfundidadActionPerformed(evt);
@@ -1452,12 +1457,14 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         lblPuntoProfundidad.setText("Punto");
         lblPuntoProfundidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        txtEquipo030.setNextFocusableComponent(txtEquipo3060);
         txtEquipo030.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtEquipo030FocusGained(evt);
             }
         });
 
+        txtEquipo3060.setNextFocusableComponent(txtObservacionesProfundidades);
         txtEquipo3060.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtEquipo3060FocusGained(evt);
@@ -1488,13 +1495,10 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cmbPuntoProfundidad, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblPuntoProfundidad, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cmbPuntoProfundidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPuntoProfundidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
@@ -1645,6 +1649,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         chkSueloProfundidades.setBackground(new java.awt.Color(204, 204, 204));
         chkSueloProfundidades.setSelected(true);
         chkSueloProfundidades.setText("Hay Suelo a las profundidades de 0-30 y 30-60 ");
+        chkSueloProfundidades.setNextFocusableComponent(cmbPuntoProfundidad);
         chkSueloProfundidades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkSueloProfundidadesActionPerformed(evt);
@@ -1652,6 +1657,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         });
 
         btnAgregarProfundidad.setText("Agregar");
+        btnAgregarProfundidad.setNextFocusableComponent(btnModificarProfundidad);
         btnAgregarProfundidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarProfundidadActionPerformed(evt);
@@ -1659,6 +1665,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         });
 
         btnModificarProfundidad.setText("Modificar");
+        btnModificarProfundidad.setNextFocusableComponent(btnEliminarProfundidad);
         btnModificarProfundidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarProfundidadActionPerformed(evt);
@@ -1666,7 +1673,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         });
 
         btnEliminarProfundidad.setText("Eliminar");
-        btnEliminarProfundidad.setNextFocusableComponent(cmbPuntoProfundidad);
+        btnEliminarProfundidad.setNextFocusableComponent(btnContinuar);
         btnEliminarProfundidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarProfundidadActionPerformed(evt);
@@ -1677,6 +1684,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnContinuar.setText("Continuar");
+        btnContinuar.setNextFocusableComponent(btnSalir);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarActionPerformed(evt);
@@ -1726,7 +1734,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         });
 
         btnEliminarHojarasca.setText("Eliminar");
-        btnEliminarHojarasca.setNextFocusableComponent(cmbPuntoHojarasca);
+        btnEliminarHojarasca.setNextFocusableComponent(chkSueloProfundidades);
         btnEliminarHojarasca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarHojarascaActionPerformed(evt);
@@ -1779,15 +1787,14 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                         .addGap(10, 10, 10))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAgregarProfundidad, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addComponent(btnModificarProfundidad)
-                .addGap(7, 7, 7)
-                .addComponent(btnEliminarProfundidad, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnAgregarProfundidad, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(btnModificarProfundidad)
+                        .addGap(7, 7, 7)
+                        .addComponent(btnEliminarProfundidad, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(

@@ -1718,6 +1718,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
         });
 
         btnColecta.setText("Colecta");
+        btnColecta.setNextFocusableComponent(chkSotoBosqueFuera);
         btnColecta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnColectaActionPerformed(evt);
@@ -1742,6 +1743,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
         chkSotoBosqueFuera.setSelected(true);
         chkSotoBosqueFuera.setText("¿Existe sotobosque fuera del sitio de 12.56 m?");
         chkSotoBosqueFuera.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        chkSotoBosqueFuera.setNextFocusableComponent(txtPorcentajeSotobosqueFuera);
         chkSotoBosqueFuera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkSotoBosqueFueraActionPerformed(evt);
@@ -1756,6 +1758,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
         jLabel1.setText("Porcentaje de sotobosque fuera del sito de 12.56 m:\n");
 
         txtPorcentajeSotobosqueFuera.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtPorcentajeSotobosqueFuera.setNextFocusableComponent(btnContinuar);
         txtPorcentajeSotobosqueFuera.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtPorcentajeSotobosqueFueraFocusGained(evt);
@@ -1918,7 +1921,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnContinuar)
                     .addComponent(btnSalir))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

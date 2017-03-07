@@ -394,7 +394,7 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Eliminar"/>
                     <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="cmbTransecto100"/>
+                      <ComponentRef name="chkMaterialLenioso1000"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -682,7 +682,7 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Eliminar"/>
                     <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="cmbTransecto1000"/>
+                      <ComponentRef name="chkAlturaArbustosHierbasPastos"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -759,7 +759,7 @@
                               <Component id="chkAlturaArbustosHierbasPastos" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jPanel9" pref="0" max="32767" attributes="0"/>
+                          <Component id="jPanel9" pref="258" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="cmbNoCubiertaVegetal" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
@@ -917,7 +917,7 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Eliminar"/>
                     <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="cmbNoCubiertaVegetal"/>
+                      <ComponentRef name="btnContinuar"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -1000,6 +1000,9 @@
         <Component class="javax.swing.JButton" name="btnContinuar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Continuar"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="btnSalir"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnContinuarActionPerformed"/>

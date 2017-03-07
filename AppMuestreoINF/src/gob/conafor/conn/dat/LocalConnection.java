@@ -40,7 +40,6 @@ public class LocalConnection {
     public static String getURL() {
         Path currentPath = Paths.get("");
         String path = currentPath.toAbsolutePath().toString();
-        //return "jdbc:sqlite:" + path + "/src/db/MuestreoINF_2015.db";
         
         //return "jdbc:sqlite:" + path + "/MuestreoINF_2015.oct"; //Para distribuir
   

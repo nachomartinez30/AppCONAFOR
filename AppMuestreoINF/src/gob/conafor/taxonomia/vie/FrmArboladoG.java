@@ -1160,7 +1160,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         });
 
         btnElimnar.setText("Eliminar");
-        btnElimnar.setNextFocusableComponent(txtNumeroIndividuo);
+        btnElimnar.setNextFocusableComponent(btnClave);
         btnElimnar.setPreferredSize(new java.awt.Dimension(79, 23));
         btnElimnar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1193,6 +1193,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(grdArbolado);
 
         btnContinuar.setText("Continuar");
+        btnContinuar.setNextFocusableComponent(btnSalir);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarActionPerformed(evt);
@@ -1200,6 +1201,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         });
 
         btnSalir.setText("Salir");
+        btnSalir.setNextFocusableComponent(btnTrazoSitio);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -1230,6 +1232,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         txtClaveColecta.setEnabled(false);
 
         btnClave.setText("Colecta");
+        btnClave.setNextFocusableComponent(btnLimpiarControles);
         btnClave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClaveActionPerformed(evt);
@@ -1237,6 +1240,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         });
 
         btnLimpiarControles.setText("Limpiar controles");
+        btnLimpiarControles.setNextFocusableComponent(btnContinuar);
         btnLimpiarControles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarControlesActionPerformed(evt);

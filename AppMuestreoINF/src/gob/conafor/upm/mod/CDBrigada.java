@@ -14,6 +14,8 @@ public class CDBrigada {
     private String query;
 
     //EmpresaID   DIAAPROY = 1, INYDES= 2, AMAREF = 3
+    
+    
     public List<CEBrigadista> getJefeBrigada() {
         List<CEBrigadista> listBrigadistas = new ArrayList();
         /*PRODUCCION*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno FROM BRIGADA_Brigadistas WHERE PuestoID= 1 AND Activo= 1  ORDER BY ApellidoPaterno ASC";

@@ -49,6 +49,7 @@ public class FrmClaveColecta extends javax.swing.JDialog {
     private int formatoID;
     private Version ver=new Version();
     private String version=ver.getVersion();
+    public static FrmArboladoD arboladoD=new FrmArboladoD();
     
     public FrmClaveColecta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -431,7 +432,7 @@ public class FrmClaveColecta extends javax.swing.JDialog {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         doClose(returnStatus);
     }//GEN-LAST:event_btnSalirActionPerformed
-
+    
     private void btnAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarActionPerformed
         if (cmbClaveColecta.getSelectedItem() != null) {
             String clave = (String) cmbClaveColecta.getSelectedItem();
@@ -447,6 +448,7 @@ public class FrmClaveColecta extends javax.swing.JDialog {
             actualizarDatosFormato(this.formatoID, this.claveColecta);
             doClose(returnStatus);
         }
+
     }//GEN-LAST:event_btnAsignarActionPerformed
 
     private void actualizarDatosFormato(int formID, String clave) {

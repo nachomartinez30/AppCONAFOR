@@ -1616,13 +1616,14 @@ public class FrmMaterialLenioso extends JInternalFrame {
         } else if (chkAlturaArbustosHierbasPastos.isSelected() && this.cdCarbono.hayCubiertaVegetal(this.ceSitio.getSitioID())) {
             JOptionPane.showMessageDialog(null, "Si selecciona cubierta vegetal, se debe de capturar"
                     + "", "Carbono e incendios", JOptionPane.INFORMATION_MESSAGE);
-        } else if (this.modificar == 0) {
+        } else if (this.modificar == 0) {//modo Captura
             this.hide();
             UPMForms.longitud.setDatosIniciales(this.ceSitio);
             UPMForms.longitud.setVisible(true);
             this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
             funciones.manipularBotonesMenuPrincipal(true);
-        } else {
+        } else {//modo revision
+            System.out.println("Secuencia material lenioso = "+this.ceSitio.getSecuencia());
             this.hide();
             UPMForms.longitud.revisarLongitud(this.ceSitio);
             UPMForms.longitud.setVisible(true);

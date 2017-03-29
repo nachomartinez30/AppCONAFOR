@@ -2,16 +2,29 @@
 package concentrarbdinfys;
 
 //import gob.conafor.utils.FuncionesComunes;
+import com.sun.media.sound.AudioFloatInputStream;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 public class Concentrar extends javax.swing.JFrame {
 
@@ -81,32 +94,34 @@ public class Concentrar extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pbExportacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(189, 189, 189)
                         .addComponent(btnEjecutar)
                         .addGap(18, 18, 18)
                         .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(144, 144, 144))
-                    .addComponent(lblEstatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pbExportacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblEstatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(txtUbicacion))))
+                                .addComponent(btnBuscar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtUbicacion)))))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addContainerGap(51, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
@@ -125,6 +140,7 @@ public class Concentrar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        
         JFileChooser fcBaseDatos = new JFileChooser();
         fcBaseDatos.setDialogTitle("Base de datos a importar");
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.oct", "oct");
@@ -146,12 +162,13 @@ public class Concentrar extends javax.swing.JFrame {
                 txtUbicacion.setText(ruta);
                 this.ruta = ruta;
                 btnEjecutar.setEnabled(true);
+                
             }
         } catch (Exception e) {
             //JOptionPane.showMessageDialog(null, "El archivo que intenta importar no es una base de datos balida" + e);
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
-
+    
     private void btnEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarActionPerformed
         //System.out.println(this.ruta);
         HiloImportacion hiloImportacion = new HiloImportacion(this.lblEstatus, this.pbExportacion, this.btnEjecutar, this.btnSalir, this.ruta);
@@ -163,6 +180,7 @@ public class Concentrar extends javax.swing.JFrame {
                 } else if (evt.getPropertyName().equalsIgnoreCase("state")) {
                     switch ((SwingWorker.StateValue) evt.getNewValue()) {
                         case DONE:
+                        txtUbicacion.setText("");
                         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                         break;
                         case STARTED:
@@ -175,7 +193,7 @@ public class Concentrar extends javax.swing.JFrame {
             }
         });
         hiloImportacion.execute();
-        txtUbicacion.setText("");
+        
     }//GEN-LAST:event_btnEjecutarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -184,6 +202,7 @@ public class Concentrar extends javax.swing.JFrame {
         this.btnEjecutar.setEnabled(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */

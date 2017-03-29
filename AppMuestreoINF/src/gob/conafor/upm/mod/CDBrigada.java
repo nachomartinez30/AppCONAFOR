@@ -55,7 +55,7 @@ public class CDBrigada {
 
     public List<CEBrigadista> getBrigadistas() {
         List<CEBrigadista> listBrigadistas = new ArrayList();
-        /*PRODUCCION*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno FROM BRIGADA_Brigadistas WHERE PuestoID= 0 AND Activo= 1 ORDER BY ApellidoPaterno ASC";
+        /*PRODUCCION*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno,EmpresaID FROM BRIGADA_Brigadistas WHERE PuestoID= 0 AND Activo= 1 ORDER BY ApellidoPaterno ASC";
         ///*DIAAPROY*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno FROM BRIGADA_Brigadistas WHERE PuestoID= 0 AND Activo= 1 AND EmpresaID= 1 ORDER BY ApellidoPaterno ASC";
         ///*INYDES*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno FROM BRIGADA_Brigadistas WHERE PuestoID= 0 AND Activo= 1 AND EmpresaID= 2 ORDER BY ApellidoPaterno ASC";
         ///*AMAREF*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno FROM BRIGADA_Brigadistas WHERE PuestoID= 0 AND Activo= 1 AND EmpresaID= 3 ORDER BY ApellidoPaterno ASC";
@@ -70,6 +70,7 @@ public class CDBrigada {
                 brigadista.setNombre(rs.getString("Nombre"));
                 brigadista.setApellidoPaterno(rs.getString("ApellidoPaterno"));
                 brigadista.setApellidoMaterno(rs.getString("ApellidoMaterno"));
+                brigadista.setEmpresaID(rs.getInt("EmpresaID"));
                 listBrigadistas.add(brigadista);
             }
             st.close();
@@ -104,6 +105,7 @@ public class CDBrigada {
                 brigadista.setApellidoPaterno(rs.getString("ApellidoPaterno"));
                 brigadista.setApellidoMaterno(rs.getString("ApellidoMaterno"));
                 brigadista.setPuestoID(rs.getInt("PuestoID"));
+                
                 listBrigada.add(brigadista);
             }
             st.close();
@@ -125,8 +127,9 @@ public class CDBrigada {
 
     public void insertBrigada(CEBrigada ceBrigada) {
         this.query = "INSERT INTO UPM_Brigada(UPMID, BrigadistaID, PuestoID, EmpresaID)VALUES(" + ceBrigada.getUpmID() + "," + ceBrigada.getBrigadistaID()
-                + ", " + ceBrigada.getPuestoID() + ", 1)";
+                + ", " + ceBrigada.getPuestoID() + ","+ceBrigada.getEmpresaID()+")";
         Connection conn = LocalConnection.getConnection();
+        //System.out.println(query);
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
@@ -146,6 +149,7 @@ public class CDBrigada {
     public void updateBrigada(CEBrigada ceBrigada) {
         this.query = "UPDATE UPM_Brigada SET BrigadistaID= " + ceBrigada.getBrigadistaID() + ", PuestoID= " + ceBrigada.getPuestoID()
                 + " WHERE UPMID= " + ceBrigada.getUpmID() + " AND PuestoID= " + ceBrigada.getPuestoID();
+        //System.out.println(query);
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();

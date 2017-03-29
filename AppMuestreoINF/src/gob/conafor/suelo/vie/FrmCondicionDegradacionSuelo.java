@@ -115,6 +115,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
     }
 
     public void revisarCondicionDegradacion(CESitio ceSitio) {
+        System.out.println("Degradacion de suelo= "+this.ceSitio.getSecuencia());
         revision=true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
@@ -126,6 +127,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
+        this.ceSitio.setSecuencia(ceSitio.getSecuencia());
         //System.out.println("condicion degradacion Suelo "+this.ceSitio.getSecuencia());
         llenarTablaPedestal();
         // combo.reiniciarComboModel(cmbNoPedestal);
@@ -2886,12 +2888,12 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Si selecciona pavimentos, se deben capturar"
                     + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
             //cmbNoPavimento.requestFocus();
-        } else if (modificar == 0) {
+        } else if (modificar == 0) {//modo captura
             this.hide();
             UPMForms.erosionHidrica.setDatosiniciales(this.ceSitio);
             UPMForms.erosionHidrica.setVisible(true);
             this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-        } else {
+        } else {//modo revision
             
             this.hide();
             UPMForms.erosionHidrica.revisarErosionHidrica(this.ceSitio);

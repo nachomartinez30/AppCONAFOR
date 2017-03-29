@@ -349,7 +349,7 @@ public class CDUpm {
     public void actualizarDatosGeneralesUPM(CEUPM upm) {
         query = "UPDATE UPM_UPM SET FechaInicio= " + upm.getFechaInicio() + ", FechaFin= " + upm.getFechaFin() + ", "
                 + "TipoUPMID= " + upm.getTipoUpmID() + ", Altitud= " + upm.getAltitud() + ", PendienteRepresentativa= " + upm.getPendienteRepresentativa() + ", "
-                + "FisiografiaID= " + upm.getPendienteRepresentativa() + ", ExposicionID= " + upm.getExposicionID() + ", Predio=" + upm.getPredio() + ", "
+                + "FisiografiaID= " + upm.getFisiografiaID()+ ", ExposicionID= " + upm.getExposicionID() + ", Predio=" + upm.getPredio() + ", "
                 + "Paraje= " + upm.getParaje() + ", TipoTenenciaID=" + upm.getTenenciaID() + ", Accesible=" + upm.getAccesible() + ", GradosLatitud= " + upm.getGradosLatitud() + ", "
                 + "MinutosLatitud=" + upm.getMinutosLatitud() + ", SegundosLatitud= " + upm.getSegundosLatitud() + ", GradosLongitud= " + upm.getGradosLongitud() + ", "
                 + "MinutosLongitud= " + upm.getMinutosLongitud() + " ," + upm.getSegundosLongitud() + ",Datum=" + upm.getDatum() + "ErrorPresicion= " + upm.getErrorPresicion() + ", "

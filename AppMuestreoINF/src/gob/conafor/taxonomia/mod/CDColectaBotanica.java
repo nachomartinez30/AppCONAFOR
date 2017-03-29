@@ -269,7 +269,7 @@ public class CDColectaBotanica {
         query = "UPDATE " + nombreTabla + " SET ClaveColecta= '" + claveColecta + "' WHERE " + nombreCampo + "= " + noIndividuo + " AND SitioID= "
                 + sitioID;
         Connection conn = LocalConnection.getConnection();
-        System.out.println(query);
+        //System.out.println(query);
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);

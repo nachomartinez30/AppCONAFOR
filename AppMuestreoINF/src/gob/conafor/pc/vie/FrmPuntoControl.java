@@ -1101,6 +1101,7 @@ public class FrmPuntoControl extends javax.swing.JInternalFrame {
         jPanel3.add(btnActualizar);
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.setNextFocusableComponent(btnContinuar);
         btnEliminar.setPreferredSize(new java.awt.Dimension(100, 23));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1185,8 +1186,13 @@ public class FrmPuntoControl extends javax.swing.JInternalFrame {
                     funciones.manipularBotonesMenuPrincipal(false);
                 }
             } else {
-                System.out.println(this.tipoUpm);
-                modificarPC();
+                System.out.println("Modificación");
+                if(cdPC.existPuntoControl(Integer.parseInt(txtUPM.getText()))==false){
+                  crearPC();  
+                }else{
+                    modificarPC();
+                }
+                
                 this.hide();
                 if (this.tipoUpm > 2 && this.tipoUpm < 6) {
                     UPMForms.inaccesibleUPM.revisarUPMInaccesible(this.ceUpm);

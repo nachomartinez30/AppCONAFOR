@@ -73,6 +73,8 @@ public class FrmRevisionModulos extends javax.swing.JInternalFrame {
     }
 
     private void mostrarFormato(int formatoID, int secuenciaID) {
+        System.out.println("secuencia frmRevisionModulos "+this.ceSitio.getSecuencia());
+        
         switch (formatoID) {
             case 1:
                 if (secuenciaID == 3 || secuenciaID > 9) {
@@ -108,6 +110,7 @@ public class FrmRevisionModulos extends javax.swing.JInternalFrame {
                 UPMForms.carbono.revisarCarbono(this.ceSitio);
                 break;
             case 8:
+                System.out.println("Formato ID frmRevisionModulos "+formatoID+" secuencia id="+this.ceSitio.getSecuencia());
                 UPMForms.longitud.setVisible(true);
                 UPMForms.longitud.revisarLongitud(this.ceSitio);
                 break;
@@ -116,6 +119,7 @@ public class FrmRevisionModulos extends javax.swing.JInternalFrame {
                 UPMForms.suelo.revisarSuelo(this.ceSitio);
                 break;
             case 10:
+                System.out.println("Formato ID frmRevisionModulos "+formatoID+" secuencia id="+this.ceSitio.getSecuencia());
                 UPMForms.condicionDegradacion.setVisible(true);
                 UPMForms.condicionDegradacion.revisarCondicionDegradacion(this.ceSitio);
                 break;
@@ -172,6 +176,7 @@ public class FrmRevisionModulos extends javax.swing.JInternalFrame {
                 UPMForms.vegetacionMayorG.revisarVegetacionMayorGregarios(this.ceSitio);
                 break;
         }
+        
     }
 
     private void llenarTablaSeguimiento(int upm, int sitio){
@@ -417,6 +422,7 @@ public class FrmRevisionModulos extends javax.swing.JInternalFrame {
             this.ceSitio.setSitio(sitio);
             this.ceSitio.setSitioID(sitioID);
             this.ceSitio.setSecuencia(cdSecuencia.getSecuencia(upm));
+            
             int fila = grdSecuencia.getSelectedRow();
             String formatoID = grdSecuencia.getValueAt(fila, 1).toString();
             this.hide();

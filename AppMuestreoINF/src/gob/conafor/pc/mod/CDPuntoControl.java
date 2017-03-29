@@ -55,6 +55,47 @@ public class CDPuntoControl {
         }
     }
 
+    public boolean existPuntoControl(int UPMID){
+        boolean exist=false;
+        int result=0;
+        String query="Select EXISTS (SELECT UPMID From PC_PuntoControl WHERE UPMID="+ UPMID+")";
+        Connection conn = LocalConnection.getConnection();
+        CEPuntoControl cePuntoControl = new CEPuntoControl();
+        
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            
+            while(rs.next()){
+                result=rs.getInt(1);
+                if(result==0){
+                    exist=false;
+                }else{
+                    exist=true;
+                }
+            }
+        }  catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error! al obtener existencia del punto de control "
+                    + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane
+                        .showMessageDialog(null,
+                                "Error! al cerrar la base de datos en datos del punto de control"
+                                + e.getClass().getName() + " : " + e.getMessage(),
+                                "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        //System.out.println("Exist\t"+exist);
+        //System.out.println("result\t"+result);
+        return exist;
+    }
+    
     public void insertPuntoControl(CEPuntoControl puntoControl) {
         query = "INSERT INTO PC_PuntoControl(UPMID, Descripcion, Paraje, GradosLatitud, MinutosLatitud, SegundosLatitud, "
                 + "GradosLongitud, MinutosLongitud, SegundosLongitud, ErrorPresicion, Datum, Azimut, Distancia"
@@ -94,6 +135,7 @@ public class CDPuntoControl {
                 + puntoControl.getSegundosLongitud() + ", " + "ErrorPresicion= " + puntoControl.getErrorPrecision()
                 + ", Datum= '" + puntoControl.getDatum() + "', Azimut= " + puntoControl.getAzimut() + ", " + "Distancia= "
                 + puntoControl.getDistancia() + " WHERE UPMID= " + puntoControl.getUpmID();
+        System.out.println(query);
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();

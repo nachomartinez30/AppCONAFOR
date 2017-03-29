@@ -502,6 +502,7 @@ public class CDSitio {
                 + sitio.getSitio() + ", " + sitio.getSenialGPS() + ", " + sitio.getGradosLatitud() + ", " + sitio.getMinutosLatitud() + ", "
                 + sitio.getSegundosLatitud() + ", " + sitio.getGradosLongitud() + ", " + sitio.getMinutosLongitud() + ", " + sitio.getSegundosLongitud() + ", "
                 + sitio.getErrorPrecision() + ", " + sitio.getEvidenciaMuestreo() + ", '" + sitio.getDatum() + "' ," + sitio.getSitioAccesible() + ")";
+        System.out.println(query);
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -514,6 +515,7 @@ public class CDSitio {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en guardar sitio accesible", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -522,6 +524,7 @@ public class CDSitio {
     public void insertSitioInaccesible(CESitio sitio) {
         query = "INSERT INTO SITIOS_Sitio (UPMID, Sitio, SitioAccesible, TipoInaccesibilidad, ExplicacionInaccesibilidad) VALUES(" + sitio.getUpmID() + ", "
                 + sitio.getSitio() + ", " + sitio.getSitioAccesible() + ", " + sitio.getTipoInaccesibilidadID() + ", '" + sitio.getExplicacionInaccesibilidad() + "')";
+        System.out.println(query);
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -529,12 +532,13 @@ public class CDSitio {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información del sitio inaccesible", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en guardar sitio accesible", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en guardar sitio inaaccesible", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

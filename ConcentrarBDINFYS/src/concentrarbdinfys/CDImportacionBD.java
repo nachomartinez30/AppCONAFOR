@@ -40,6 +40,9 @@ public class CDImportacionBD {
                         if (respuesta == JOptionPane.YES_OPTION) {
                             eliminarRepetido(upmIDLocal);
                         }
+                        if(respuesta == JOptionPane.NO_OPTION) {
+                            System.out.println("opcion no");
+                        }
                     }
                 }
             }
@@ -822,8 +825,28 @@ public class CDImportacionBD {
         }
     }
 
+    public int extraerSitioIDEvidenciaErosion(int coberturaSuelioID,String ruta){
+        int sitioID=0;
+        String query = "SELECT SitioID FROM SUELO_CoberturaSuelo WHERE CoberturaSueloID=" + coberturaSuelioID;
+        //System.out.println(query);
+        this.baseDatosExterna = ExternalConnection.getConnection(ruta);
+        try {
+            this.sqlExterno = this.baseDatosExterna.createStatement();
+            ResultSet rs = sqlExterno.executeQuery(query);
+            while (rs.next()) {
+                sitioID = rs.getInt("SitioID");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error! no se encontó sitioID en SUELO_CoberturaSuelo", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+        return sitioID;
+    }
+    
     //16
     public void importarSueloEvidenciaErosion(String ruta) {
+        
         this.querySelect = "SELECT EvidenciaErosionID, CoberturaSueloID, Punto, Dosel, LecturaTierraID FROM SUELO_EvidenciaErosion";
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
@@ -834,10 +857,15 @@ public class CDImportacionBD {
             while (rs.next()) {
                 Integer evidenciaErosionID = rs.getInt("EvidenciaErosionID");
                 Integer coberturaSueloID = rs.getInt("CoberturaSueloID");
+                
+                Integer sitioID= extraerSitioIDEvidenciaErosion(coberturaSueloID,ruta);
+                Integer upmid = extraerUPM(sitioID, ruta);
+                
                 Integer punto = rs.getInt("Punto");
                 Integer dosel = rs.getInt("Dosel");
                 Integer lecturaTierraID = rs.getInt("LecturaTierraID");
-                ps.executeUpdate("INSERT INTO SUELO_EvidenciaErosion(EvidenciaErosionID, CoberturaSueloID, Punto, Dosel, LecturaTierraID)VALUES(" + evidenciaErosionID + ", " + coberturaSueloID + ", " + punto + ", " + dosel + ", " + lecturaTierraID + ")");
+             
+                ps.executeUpdate("INSERT INTO SUELO_EvidenciaErosion(UPMID,SitioID,EvidenciaErosionID, CoberturaSueloID, Punto, Dosel, LecturaTierraID)VALUES(" +upmid +", "+sitioID+", "+ evidenciaErosionID + ", " + coberturaSueloID + ", " + punto + ", " + dosel + ", " + lecturaTierraID + ")");
                 this.baseDatosLocal.commit();
                 ps.close();
             }

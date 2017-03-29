@@ -134,6 +134,7 @@ public class FrmSuelo extends JInternalFrame {
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
+        this.ceSitio.setSecuencia(ceSitio.getSecuencia());
         llenarTablaEvidenciaErosion();
         combo.reiniciarComboModel(cmbTransecto);
         combo.reiniciarComboModel(cmbUsoSuelo);

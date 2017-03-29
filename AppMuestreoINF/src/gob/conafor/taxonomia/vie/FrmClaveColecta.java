@@ -22,6 +22,7 @@ import javax.swing.KeyStroke;
 
 public class FrmClaveColecta extends javax.swing.JDialog {
     
+    public int[] idArbolado;
     protected static final int RET_CANCEL = 0;
     protected static final int RET_OK = 1;
     protected boolean iniciar = false;
@@ -91,6 +92,7 @@ public class FrmClaveColecta extends javax.swing.JDialog {
     }
     
     private void limpiarControles() {
+        cmbClaveColecta.removeAllItems();
         txtPreClave.setText("");
         txtIniciales.setText("");
         txtConsecutivo.setText("");
@@ -582,6 +584,16 @@ public class FrmClaveColecta extends javax.swing.JDialog {
             doClose(returnStatus);
     }//GEN-LAST:event_btnDesasignarActionPerformed
 
+    public void setIndexArbolado(int[] index)
+    {
+        
+        for(int i=0;i<=index.length;i++){
+            System.out.println(index[i]);
+            idArbolado[i]=index[i];
+        }
+        
+    }
+    
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         try {
             String Clave=cmbClaveColecta.getSelectedItem().toString(),ClaveNueva=txtClave.getText().toString();

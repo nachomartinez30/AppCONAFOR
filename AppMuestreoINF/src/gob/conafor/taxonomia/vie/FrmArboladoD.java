@@ -4,6 +4,7 @@ import gob.conafor.ini.vie.Main;
 import gob.conafor.sitio.mod.CDTrazoSitio;
 import gob.conafor.sitio.mod.CESitio;
 import gob.conafor.sitio.vie.FrmTrazoSitio;
+import gob.conafor.suelo.mod.CDClaveColecta;
 import gob.conafor.sys.mod.CDSecuencia;
 import gob.conafor.sys.mod.CDSeguimientoUPM;
 import gob.conafor.sys.mod.CESeccionesCapturadas;
@@ -94,6 +95,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
     private Version ver=new Version();
     private String version=ver.getVersion();
     public int[] indexs;
+    FrmClaveColecta claveColecta = new FrmClaveColecta(Main.main, true);;
 
     public FrmArboladoD() {
         initComponents();
@@ -2946,16 +2948,15 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDistanciaFocusLost
 
     private void grdArboladoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdArboladoMouseClicked
-         /*indexs =grdArbolado.getSelectedRows();
-        System.out.println("indices ");
+       indexs =grdArbolado.getSelectedRows();
+       System.out.println("indices ");
        for(int i=0;i<=indexs.length;i++){
            try {
                System.out.println( grdArbolado.getValueAt(indexs[i], 0).toString());
            } catch (Exception e) {
            }
-           
-       }*/
-
+       }
+        
         if (evt.getButton() == 1) {
             int fila = grdArbolado.getSelectedRow();
             String strArbID = grdArbolado.getValueAt(fila, 0).toString();
@@ -3379,8 +3380,9 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         try {
             int fila = grdArbolado.getSelectedRow();
             String noIndividuo = grdArbolado.getValueAt(fila, 3).toString();
-            FrmClaveColecta claveColecta = new FrmClaveColecta(Main.main, true);
+            
             claveColecta.setLocationRelativeTo(Main.main);
+            
             CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
             CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
             CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();

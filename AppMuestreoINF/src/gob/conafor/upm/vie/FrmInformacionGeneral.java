@@ -1,5 +1,6 @@
 package gob.conafor.upm.vie;
 
+import gob.conafor.conn.dat.LocalConnection;
 import gob.conafor.upm.mod.CDBrigada;
 import gob.conafor.upm.mod.CEBrigadista;
 import gob.conafor.upm.mod.CDUpm;
@@ -17,6 +18,10 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -424,23 +429,55 @@ public class FrmInformacionGeneral extends JInternalFrame {
     }
 
     private void crearBrigada() {
+        int empresaID;
         CEBrigadista jefeBrigada = (CEBrigadista) cmbJefeBrigada.getSelectedItem();
         CEBrigadista auxiliar1 = (CEBrigadista) cmbAuxiliar1.getSelectedItem();
         CEBrigadista auxiliar2 = (CEBrigadista) cmbAuxiliar2.getSelectedItem();
         this.ceBrigada.setBrigadistaID(jefeBrigada.getBrigadistaID());
+        this.ceBrigada.setEmpresaID(getEmpresaID(jefeBrigada.getBrigadistaID()));
         this.ceBrigada.setPuestoID(1);
         this.ceBrigada.setUpmID(this.upm);
         this.cdBrigada.insertBrigada(this.ceBrigada);
         this.ceBrigada.setBrigadistaID(auxiliar1.getBrigadistaID());
+        this.ceBrigada.setEmpresaID(getEmpresaID(auxiliar1.getBrigadistaID()));
         this.ceBrigada.setPuestoID(2);
         this.ceBrigada.setUpmID(this.upm);
         this.cdBrigada.insertBrigada(this.ceBrigada);
         this.ceBrigada.setBrigadistaID(auxiliar2.getBrigadistaID());
+        this.ceBrigada.setEmpresaID(getEmpresaID(auxiliar2.getBrigadistaID()));
         this.ceBrigada.setPuestoID(3);
         this.ceBrigada.setUpmID(this.upm);
         this.cdBrigada.insertBrigada(this.ceBrigada);
     }
 
+    public int getEmpresaID(int brigadistaID){
+        int idEmpresa=0;
+        String query = "SELECT EmpresaID FROM BRIGADA_Brigadistas WHERE BrigadistaID =" + brigadistaID;
+        
+        Connection conn = LocalConnection.getConnection();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                idEmpresa=rs.getInt("EmpresaID");
+            }
+            st.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error! al obtener los ID's de empresa ",
+                    "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener los brigadistas del levantamiento ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        return idEmpresa;
+    }
+    
     private void modificarBrigada() {
         CEBrigadista jefeBrigada = (CEBrigadista) cmbJefeBrigada.getSelectedItem();
         CEBrigadista auxiliar1 = (CEBrigadista) cmbAuxiliar1.getSelectedItem();
@@ -448,11 +485,11 @@ public class FrmInformacionGeneral extends JInternalFrame {
         this.ceBrigada.setBrigadistaID(jefeBrigada.getBrigadistaID());
         this.ceBrigada.setPuestoID(1);
         this.ceBrigada.setUpmID(this.upm);
-        this.cdBrigada.insertBrigada(this.ceBrigada);
+        this.cdBrigada.updateBrigada(this.ceBrigada);
         this.ceBrigada.setBrigadistaID(auxiliar1.getBrigadistaID());
         this.ceBrigada.setPuestoID(2);
         this.ceBrigada.setUpmID(this.upm);
-        this.cdBrigada.insertBrigada(this.ceBrigada);
+        this.cdBrigada.updateBrigada(this.ceBrigada);
         this.ceBrigada.setBrigadistaID(auxiliar2.getBrigadistaID());
         this.ceBrigada.setPuestoID(3);
         this.ceBrigada.setUpmID(this.upm);
@@ -1910,6 +1947,7 @@ public void limpiarControles(){
                 } else if (validarModificarTipoUPM(tipoUpmID.getTipoUPMID())) {
                     if (validarBrigadaObligatoria() && validarBrigadistaDiferente()) {
                         modificarUPM();
+                        //System.out.println("Modo Revision ON");
                         modificarBrigada();
                     }
                     if (chkInformacionContacto.isSelected()) {
@@ -1919,7 +1957,7 @@ public void limpiarControles(){
                             //System.out.println("Hubo contacto en BD");
                             modificarContacto();
                         } else {
-                            System.out.println("NO contacto en BD");
+                            //System.out.println("NO contacto en BD");
                             //crearContacto();
                         }
 

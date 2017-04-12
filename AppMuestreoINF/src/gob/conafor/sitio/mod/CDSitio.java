@@ -894,7 +894,7 @@ public class CDSitio {
     public void updateClaveVegetacion(CESitio sitio) {
         query = "UPDATE SITIOS_Sitio SET ClaveSerieV= " + sitio.getClaveSerieVID() + ", Condicion= " + sitio.getCondicion()+ ", FaseSucecional= " + sitio.getFaseSucecionalID()
                 + ", ArbolFuera= " + sitio.getArbolFuera() + ", Ecotono= " + sitio.getEcotono() + ", CondicionPresenteCampo= '" + sitio.getCondicionPresenteCampo()
-                + "', CondicionEcotono= '" + sitio.getCondicionEcotono() + "' WHERE SitioID= " + sitio.getSitioID() + " AND Sitio= " + sitio.getSitio();
+                + "', CondicionEcotono= '" + sitio.getCondicionEcotono() + "', CoberturaForestal="+sitio.getCoberturaForestal()+" WHERE SitioID= " + sitio.getSitioID() + " AND Sitio= " + sitio.getSitio();
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -902,6 +902,7 @@ public class CDSitio {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información de la clave de vegetacion ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {

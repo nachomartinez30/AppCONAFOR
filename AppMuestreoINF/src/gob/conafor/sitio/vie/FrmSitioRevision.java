@@ -386,7 +386,7 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
     private boolean validarCamposObligatoriosSitioAccesible() {
         if (cmbUPM.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null,
-                    "Error! debe seleccionar una UPM",
+                    "Error! debe seleccionar una UPM ’",
                     "Sitio", JOptionPane.INFORMATION_MESSAGE);
             cmbUPM.requestFocus();
             return false;
@@ -1491,12 +1491,15 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
             }
         } else if (!chkAccesible.isSelected()) { // NO ES ACCESIBLE
             if (validarCamposObligatoriosSitioInaccesible()) {
-                
+                if(txtExplicacion.getText().contains("'")){
+                   JOptionPane.showMessageDialog(null,"Se ha detectado uno o varios caracteres ' que no son valido, por favor modifiquelo por un acento u omitalo","Inaccesibilidad", JOptionPane.INFORMATION_MESSAGE);     
+                    }else{
                 actualizarSitioInaccesible();
-                JOptionPane.showMessageDialog(null, "Ha modificado un Sitio como inaccesible", "Captura de la UPM", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Ha modificado un Sitio como inaccesible ", "Captura de la UPM", JOptionPane.INFORMATION_MESSAGE);
                 reiniciarForma();
                 habilitarControlesIniciales(false);
                 cmbUPM.requestFocus();
+                }
             }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed

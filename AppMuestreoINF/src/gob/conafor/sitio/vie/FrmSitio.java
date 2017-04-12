@@ -1595,6 +1595,10 @@ public class FrmSitio extends javax.swing.JInternalFrame {
                 }
             } else if (!chkAccesible.isSelected()) {//NO ES ACCESIBLE
                 if (validarCamposObligatoriosSitioInaccesible()) {
+                    
+                    if(txtExplicacion.getText().contains("'")){
+                        JOptionPane.showMessageDialog(null,"Se ha detectado uno o varios caracteres ' que no son valido, por favor modifiquelo por un acento u omitalo","Inaccesibilidad", JOptionPane.INFORMATION_MESSAGE); 
+                    }else{
                     cdSitio.insertSitioInaccesible(crearSitioInaccesible());
                     JOptionPane.showMessageDialog(null, "Ha creado un nuevo Sitio inaccesible", "Captura de la UPM", JOptionPane.INFORMATION_MESSAGE);
                     reiniciarForma();
@@ -1603,6 +1607,7 @@ public class FrmSitio extends javax.swing.JInternalFrame {
                     fillSitios(upmID);
                     cmbSitio.setSelectedItem(null);
                     habilitarControlesIniciales(false);
+                    }
                     if(listSitios.getSize() == 1){//Ocultar cuando sea el ultimo sitio
                         this.hide();
                         habilitarControlesIniciales(false);

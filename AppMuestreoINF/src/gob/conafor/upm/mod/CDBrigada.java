@@ -19,9 +19,9 @@ public class CDBrigada {
     public List<CEBrigadista> getJefeBrigada() {
         List<CEBrigadista> listBrigadistas = new ArrayList();
         /*PRODUCCION*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno FROM BRIGADA_Brigadistas WHERE PuestoID= 1 AND Activo= 1  ORDER BY ApellidoPaterno ASC";
-        ///*DIAAPROY*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno FROM BRIGADA_Brigadistas WHERE PuestoID= 1 AND Activo= 1 AND EmpresaID=1 ORDER BY ApellidoPaterno ASC";
-        ///*INYDES*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno FROM BRIGADA_Brigadistas WHERE PuestoID= 1 AND Activo= 1 AND EmpresaID=2 ORDER BY ApellidoPaterno ASC";
-        ///*AMAREF*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno FROM BRIGADA_Brigadistas WHERE PuestoID= 1 AND Activo= 1 AND EmpresaID=3 ORDER BY ApellidoPaterno ASC";
+        // /*DIAAPROY*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno FROM BRIGADA_Brigadistas WHERE PuestoID= 1 AND Activo= 1 AND EmpresaID=1 ORDER BY ApellidoPaterno ASC";
+        // /*INYDES*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno FROM BRIGADA_Brigadistas WHERE PuestoID= 1 AND Activo= 1 AND EmpresaID=2 ORDER BY ApellidoPaterno ASC";
+        // /*AMAREF*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno FROM BRIGADA_Brigadistas WHERE PuestoID= 1 AND Activo= 1 AND EmpresaID=3 ORDER BY ApellidoPaterno ASC";
         
         Connection conn = LocalConnection.getConnection();
         try {
@@ -40,6 +40,7 @@ public class CDBrigada {
             listBrigadistas.add(0, null);
             return listBrigadistas;
         } catch (SQLException e) {
+            //e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener el listado de brigadistas ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -56,9 +57,9 @@ public class CDBrigada {
     public List<CEBrigadista> getBrigadistas() {
         List<CEBrigadista> listBrigadistas = new ArrayList();
         /*PRODUCCION*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno,EmpresaID FROM BRIGADA_Brigadistas WHERE PuestoID= 0 AND Activo= 1 ORDER BY ApellidoPaterno ASC";
-        ///*DIAAPROY*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno FROM BRIGADA_Brigadistas WHERE PuestoID= 0 AND Activo= 1 AND EmpresaID= 1 ORDER BY ApellidoPaterno ASC";
-        ///*INYDES*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno FROM BRIGADA_Brigadistas WHERE PuestoID= 0 AND Activo= 1 AND EmpresaID= 2 ORDER BY ApellidoPaterno ASC";
-        ///*AMAREF*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno FROM BRIGADA_Brigadistas WHERE PuestoID= 0 AND Activo= 1 AND EmpresaID= 3 ORDER BY ApellidoPaterno ASC";
+        // /*DIAAPROY*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno, EmpresaID  FROM BRIGADA_Brigadistas WHERE PuestoID= 0 AND Activo= 1 AND EmpresaID= 1 ORDER BY ApellidoPaterno ASC";
+        // /*INYDES*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno , EmpresaID FROM BRIGADA_Brigadistas WHERE PuestoID= 0 AND Activo= 1 AND EmpresaID= 2 ORDER BY ApellidoPaterno ASC";
+        // /*AMAREF*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno, EmpresaID FROM BRIGADA_Brigadistas WHERE PuestoID= 0 AND Activo= 1 AND EmpresaID= 3 ORDER BY ApellidoPaterno ASC";
         
         Connection conn = LocalConnection.getConnection();
         try {
@@ -78,6 +79,7 @@ public class CDBrigada {
             listBrigadistas.add(0, null);
             return listBrigadistas;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener el listado de brigadistas ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);

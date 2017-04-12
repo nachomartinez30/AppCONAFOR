@@ -187,6 +187,7 @@ public class FrmEliminarUPM extends javax.swing.JInternalFrame {
                             case DONE:
                                 setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                                 cmbUPM.removeAllItems();
+                                fillUPMID();
                                 break;
                             case STARTED:
                                 setCursor(new Cursor(Cursor.WAIT_CURSOR));

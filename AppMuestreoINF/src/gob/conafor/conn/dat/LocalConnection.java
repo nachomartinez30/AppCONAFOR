@@ -42,7 +42,6 @@ public class LocalConnection {
         String path = currentPath.toAbsolutePath().toString();
         
         //return "jdbc:sqlite:" + path + "/MuestreoINF_2015.oct"; //Para distribuir
-  
         return "jdbc:sqlite:" + path + "/src/db/MuestreoINF_2015.db"; //En producción.
     }
 }

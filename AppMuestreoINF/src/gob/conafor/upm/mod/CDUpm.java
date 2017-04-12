@@ -46,9 +46,9 @@ public class CDUpm {
     public List<Integer> getUPMID() {
         List<Integer> listUPMID = new ArrayList();
         /*PRODUCCION*/this.query = "SELECT UPMID, SecuenciaID, ProveedorID FROM UPM_MallaPuntos WHERE UPMID NOT IN (SELECT UPMID FROM UPM_UPM) AND SecuenciaID <> 0";
-        ///*DIAAPROY*/this.query = "SELECT UPMID, SecuenciaID, ProveedorID FROM UPM_MallaPuntos WHERE UPMID NOT IN (SELECT UPMID FROM UPM_UPM) AND SecuenciaID <> 0 AND ProveedorID=1 ORDER BY UPMID";
-        ///*INYDES*/this.query = "SELECT UPMID, SecuenciaID, ProveedorID FROM UPM_MallaPuntos WHERE UPMID NOT IN (SELECT UPMID FROM UPM_UPM) AND SecuenciaID <> 0 AND ProveedorID=2 ORDER BY UPMID";
-        ///*AMAREF*/this.query = "SELECT UPMID, SecuenciaID, ProveedorID FROM UPM_MallaPuntos WHERE UPMID NOT IN (SELECT UPMID FROM UPM_UPM) AND SecuenciaID <> 0 AND ProveedorID=3 ORDER BY UPMID";
+        // /*DIAAPROY*/this.query = "SELECT UPMID, SecuenciaID, ProveedorID FROM UPM_MallaPuntos WHERE UPMID NOT IN (SELECT UPMID FROM UPM_UPM) AND SecuenciaID <> 0 AND ProveedorID=1 ORDER BY UPMID";
+        // /*INYDES*/this.query = "SELECT UPMID, SecuenciaID, ProveedorID FROM UPM_MallaPuntos WHERE UPMID NOT IN (SELECT UPMID FROM UPM_UPM) AND SecuenciaID <> 0 AND ProveedorID=2 ORDER BY UPMID";
+        // /*AMAREF*/this.query = "SELECT UPMID, SecuenciaID, ProveedorID FROM UPM_MallaPuntos WHERE UPMID NOT IN (SELECT UPMID FROM UPM_UPM) AND SecuenciaID <> 0 AND ProveedorID=3 ORDER BY UPMID";
         
         Connection conn = LocalConnection.getConnection();
         try {

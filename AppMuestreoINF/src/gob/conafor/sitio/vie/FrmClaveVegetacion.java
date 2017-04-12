@@ -190,6 +190,14 @@ public class FrmClaveVegetacion extends JInternalFrame {
     private void crearClaveVegetacion() {
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setSitio(this.sitio);
+        if(lblCoberturaVegetal.getText().equals("Forestal")){
+            this.ceSitio.setCoberturaForestal(1);
+            System.out.println("Forestal");
+        }
+        if(lblCoberturaVegetal.getText().equals("No Forestal")){
+            this.ceSitio.setCoberturaForestal(0);
+            System.out.println("No Forestal");
+        }
         this.ceSitio.setCondicion(this.condicion);
         this.ceSitio.setClaveSerieVID(this.claveSerieV);
         this.ceSitio.setFaseSucecionalID(this.faseSucecional);
@@ -908,59 +916,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
 
     private void cmbClaveSerieVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClaveSerieVActionPerformed
        validarComboBoxClaveVegetacion();
-        /* try {
-            CatEClaveSerieV claveV = (CatEClaveSerieV) cmbClaveSerieV.getSelectedItem();
-            if (claveV.getEsForestal() == 1) {
-                lblCoberturaVegetal.setText("Forestal");
-                rbtPrimario.setEnabled(true);
-                rbtSecundario.setEnabled(true);
-                rbtPrimario.setSelected(true);
-                chkArbolFueraBosque.setEnabled(false);
-                chkArbolFueraBosque.setSelected(false);
-                chkEcotono.setEnabled(true);
-                txtDescripcionEcotono.setText("");
-            } else if (claveV.getEsForestal() == 0 && claveV.getClaveSerievID() != 255) {
-                lblCoberturaVegetal.setText("No Forestal");
-                rbtPrimario.setEnabled(false);
-                rbtSecundario.setEnabled(false);
-                grbTipoVegetacion.clearSelection();
-                chkArbolFueraBosque.setEnabled(true);
-                cmbFaseSucecional.setSelectedItem(null);
-                cmbFaseSucecional.setEnabled(false);
-                chkEcotono.setEnabled(false);
-                chkEcotono.setSelected(false);
-                txtDescripcionEcotono.setText("");
-                txtDescripcionEcotono.setEnabled(false);
-            } else if (claveV.getEsForestal() == 0 && claveV.getClaveSerievID() == 255) {
-                lblCoberturaVegetal.setText("No aplica");
-                rbtPrimario.setEnabled(false);
-                rbtSecundario.setEnabled(false);
-                grbTipoVegetacion.clearSelection();
-                chkArbolFueraBosque.setEnabled(false);
-                cmbFaseSucecional.setSelectedItem(null);
-                cmbFaseSucecional.setEnabled(false);
-                chkEcotono.setSelected(false);
-                chkEcotono.setEnabled(false);
-                txtDescripcionEcotono.setText("");
-                txtDescripcionEcotono.setEnabled(false);
-            }
-
-            lblEcosistema.setText(claveV.getTipoVegetacion());
-        } catch (NullPointerException e) {
-            lblCoberturaVegetal.setText("Cobertura vegetal");
-            lblEcosistema.setText("Ecosistema");
-            rbtPrimario.setSelected(false);
-            rbtSecundario.setSelected(false);
-            grbTipoVegetacion.clearSelection();
-            cmbFaseSucecional.setSelectedItem(null);
-            cmbFaseSucecional.setEnabled(false);
-            chkArbolFueraBosque.setEnabled(false);
-            chkArbolFueraBosque.setSelected(false);
-            chkEcotono.setSelected(false);
-            chkEcotono.setEnabled(false);
-            txtDescripcionEcotono.setText("");
-            txtDescripcionEcotono.setEnabled(false);
-        }*/
+       
     }//GEN-LAST:event_cmbClaveSerieVActionPerformed
     
     public void validarComboBoxClaveVegetacion(){
@@ -970,12 +926,10 @@ public class FrmClaveVegetacion extends JInternalFrame {
                 lblCoberturaVegetal.setText("Forestal");
                 rbtPrimario.setEnabled(true);
                 rbtSecundario.setEnabled(true);
-                //rbtPrimario.setSelected(true);
                 chkArbolFueraBosque.setEnabled(false);
                 chkArbolFueraBosque.setSelected(false);
                 chkEcotono.setEnabled(true);
-                System.err.println(txtDescripcionEcotono.getText());
-                //txtDescripcionEcotono.setText("");
+                //System.err.println(txtDescripcionEcotono.getText());
             } else if (claveV.getEsForestal() == 0 && claveV.getClaveSerievID() != 255) {
                 lblCoberturaVegetal.setText("No Forestal");
                 rbtPrimario.setEnabled(false);
@@ -986,7 +940,6 @@ public class FrmClaveVegetacion extends JInternalFrame {
                 cmbFaseSucecional.setEnabled(false);
                 chkEcotono.setEnabled(false);
                 chkEcotono.setSelected(false);
-               
                 txtDescripcionEcotono.setText("");
                 txtDescripcionEcotono.setEnabled(false);
             } else if (claveV.getEsForestal() == 0 && claveV.getClaveSerievID() == 255) {

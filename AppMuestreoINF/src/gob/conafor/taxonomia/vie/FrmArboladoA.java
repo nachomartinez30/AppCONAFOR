@@ -2778,7 +2778,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         DefaultComboBoxModel dcmCN = (DefaultComboBoxModel) cmbCondicion.getModel();
         dcmCN.removeAllElements();
         if (formaVida != null) {
-            if(cmbFormaVida.getSelectedIndex()>2){
+            if(cmbFormaVida.getSelectedIndex()>2){ //3-arborecente 4-lianas y bejucos 5-Cañas y bambu 6-cactaceas arborecentes
                 txtAlturaFusteLimpio.setEnabled(false);
                 txtAlturaComercial.setEnabled(false);
                 cmbVigor.setEnabled(false);

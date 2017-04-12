@@ -9,6 +9,13 @@ package gob.conafor.utils;
  *
  * @author Ignacio
  */
+
 public class ClasePrueba {
+
+    public ClasePrueba() {
+        System.out.println("Hi world");  
+    }
     
+    
+  
 }

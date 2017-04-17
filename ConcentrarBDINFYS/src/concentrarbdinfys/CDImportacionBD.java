@@ -21,6 +21,7 @@ public class CDImportacionBD {
     private int upmIDLocal;
 
     public void validarRepetidos(String ruta) {
+        System.out.println("validando repetidos...");
         this.querySelect = "SELECT UPMID FROM UPM_UPM";
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
@@ -185,7 +186,7 @@ public class CDImportacionBD {
 
 //2
     public void importarPC(String ruta) {
-        this.querySelect = "SELECT UPMID, Descripcion, Paraje, GradosLatitud, MinutosLatitud, SegundosLatitud, GradosLongitud, "
+        this.querySelect = "SELECT PuntoControlID, UPMID, Descripcion, Paraje, GradosLatitud, MinutosLatitud, SegundosLatitud, GradosLongitud, "
                 + "MinutosLongitud, SegundosLongitud, ErrorPresicion, Datum, Azimut, Distancia FROM PC_PuntoControl";
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
@@ -194,6 +195,7 @@ public class CDImportacionBD {
             Statement ps = this.baseDatosLocal.createStatement();
             ResultSet rs = sqlExterno.executeQuery(this.querySelect);
             while (rs.next()) {
+                Integer puntoControlID = rs.getInt("PuntoControlID");
                 Integer upmID = rs.getInt("UPMID");
                 String descripcion = rs.getString("Descripcion");
                 String paraje = rs.getString("Paraje");
@@ -207,8 +209,8 @@ public class CDImportacionBD {
                 String datum = rs.getString("Datum");
                 Integer azimut = rs.getInt("Azimut");
                 Float distancia = rs.getFloat("Distancia");
-                ps.executeUpdate("INSERT INTO PC_PuntoControl(UPMID, Descripcion, Paraje, GradosLatitud, MinutosLatitud, SegundosLatitud, GradosLongitud, "
-                        + "MinutosLongitud, SegundosLongitud, ErrorPresicion, Datum, Azimut, Distancia)VALUES(" + upmID + ", '" + descripcion + "', '" + paraje + "', " + gradosLatitud
+                ps.executeUpdate("INSERT INTO PC_PuntoControl(PuntoControlID,UPMID, Descripcion, Paraje, GradosLatitud, MinutosLatitud, SegundosLatitud, GradosLongitud, "
+                        + "MinutosLongitud, SegundosLongitud, ErrorPresicion, Datum, Azimut, Distancia)VALUES(" +puntoControlID+","+ upmID + ", '" + descripcion + "', '" + paraje + "', " + gradosLatitud
                         + ", " + minutosLatitud + ", " + segundosLatitud + ", " + gradosLongitud + ", " + minutosLongitud + ", " + segundosLongitud + ", " + errorPresicion + ", '"
                         + datum + "', " + azimut + ", " + distancia + ")");
                 this.baseDatosLocal.commit();
@@ -232,7 +234,7 @@ public class CDImportacionBD {
 
 //3
     public void importarAccesibilidadPC(String ruta) {
-        this.querySelect = "SELECT UPMID, MedioTransporteID, ViaAccesibilidadID, Distancia, CondicionAccesibilidadID FROM PC_Accesibilidad";
+        this.querySelect = "SELECT AccesibilidadID ,UPMID, MedioTransporteID, ViaAccesibilidadID, Distancia, CondicionAccesibilidadID FROM PC_Accesibilidad";
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
@@ -240,13 +242,14 @@ public class CDImportacionBD {
             Statement ps = this.baseDatosLocal.createStatement();
             ResultSet rs = sqlExterno.executeQuery(this.querySelect);
             while (rs.next()) {
+                Integer accesibilidadID  = rs.getInt("AccesibilidadID");
                 Integer upmID = rs.getInt("UPMID");
                 Integer medioTransporteID = rs.getInt("MedioTransporteID");
                 Integer viaAccesibilidadID = rs.getInt("ViaAccesibilidadID");
                 Float distancia = rs.getFloat("Distancia");
                 Integer condicionAccesibilidadID = rs.getInt("CondicionAccesibilidadID");
-                ps.executeUpdate("INSERT INTO PC_Accesibilidad(UPMID, MedioTransporteID, ViaAccesibilidadID, Distancia, CondicionAccesibilidadID)"
-                        + "VALUES(" + upmID + ", " + medioTransporteID + ", " + viaAccesibilidadID + ", " + distancia + ", " + condicionAccesibilidadID + ")");
+                ps.executeUpdate("INSERT INTO PC_Accesibilidad(AccesibilidadID, UPMID, MedioTransporteID, ViaAccesibilidadID, Distancia, CondicionAccesibilidadID)"
+                        + "VALUES("+accesibilidadID+"," + upmID + ", " + medioTransporteID + ", " + viaAccesibilidadID + ", " + distancia + ", " + condicionAccesibilidadID + ")");
                 this.baseDatosLocal.commit();
                 ps.close();
             }
@@ -1816,7 +1819,7 @@ public class CDImportacionBD {
         this.querySelect = "SELECT ArboladoID, SitioID, Consecutivo, NoIndividuo, NoRama, Azimut, Distancia, FamiliaID, GeneroID, EspecieID, InfraespecieID, "
                 + "NombreComun, EsSubmuestra, FormaVidaID, FormaFusteID, CondicionID, MuertoPieID, GradoPutrefaccionID, TipoToconID, DiametroNormal, "
                 + "DiametroBasal, AlturaTotal, AnguloInclinacion, AlturaFusteLimpio, AlturaComercial, DiametroCopaNS, DiametroCopaEO, ProporcionCopaVivaID, ExposicionCopaID, "
-                + "PosicionCopaID, DensidadCopaID, MuerteRegresivaID, TransparenciaFollajeID, VigorID, ClaveColecta FROM TAXONOMIA_Arbolado";
+                + "PosicionCopaID, DensidadCopaID, MuerteRegresivaID, TransparenciaFollajeID, VigorID, NivelVigorID, ClaveColecta FROM TAXONOMIA_Arbolado";
         Float diametroNormal = null;
         Integer diametroBasal = null;
         Float alturaTotal = null;
@@ -1883,16 +1886,18 @@ public class CDImportacionBD {
                 Integer muerteRegresivaID = rs.getInt("MuerteRegresivaID");
                 Integer transparenciaFollajeID = rs.getInt("TransparenciaFollajeID");
                 Integer vigorID = rs.getInt("VigorID");
+                Integer nivelVigorID=rs.getInt("NivelVigorID");
+                System.out.println("\t\t\tNivelVigorID===="+nivelVigorID);
                 String claveColecta = rs.getString("ClaveColecta");
                 ps.executeUpdate("INSERT INTO TAXONOMIA_Arbolado(SitioID,UPMID,ArboladoID, Consecutivo, NoIndividuo, NoRama, Azimut, Distancia, FamiliaID, GeneroID, EspecieID, InfraespecieID, "
                         + "NombreComun, EsSubmuestra, FormaVidaID, FormaFusteID, CondicionID, MuertoPieID, GradoPutrefaccionID, TipoToconID, DiametroNormal, "
                         + "DiametroBasal, AlturaTotal, AnguloInclinacion, AlturaFusteLimpio, AlturaComercial, DiametroCopaNS, DiametroCopaEO, ProporcionCopaVivaID, ExposicionCopaID, "
-                        + "PosicionCopaID, DensidadCopaID, MuerteRegresivaID, TransparenciaFollajeID, VigorID, ClaveColecta)VALUES(" + sitioID + ", " + upmid + ", " + arboladoID + ", " + consecutivo + ", " + noIndividuo
+                        + "PosicionCopaID, DensidadCopaID, MuerteRegresivaID, TransparenciaFollajeID, VigorID, NivelVigorID, ClaveColecta)VALUES(" + sitioID + ", " + upmid + ", " + arboladoID + ", " + consecutivo + ", " + noIndividuo
                         + ", " + noRama + ", " + azimut + ", " + distancia + ", " + familiaID + ", " + generoID + ", " + especieID + ", " + infraespecieID + ", '" + nombreComun + "'"
                         + ", " + esSubmuestra + ", " + formaVidaID + ", " + formaFusteID + ", " + condicionID + ", " + muertoPieID + ", " + gradoPutrefaccionID + ", " + tipoToconID
                         + ", " + diametroNormal + ", " + diametroBasal + ", " + alturaTotal + ", " + anguloInclinacion + ", " + alturaFusteLimpio + ", " + alturaComercial + ", " + diametroCopaNS
                         + ", " + diametroCopaEO + ", " + proporcionCopaVivaID + ", " + exposicionCopaID + ", " + posicionCopaID + ", " + densidadCopaID + ", " + muerteRegresivaID + ", " + transparenciaFollajeID
-                        + ", " + vigorID + ", '" + claveColecta + "')");
+                        + ", " + vigorID +", "+nivelVigorID+ ", '" + claveColecta + "')");
                 diametroNormal = null;
                 diametroBasal = null;
                 alturaTotal = null;

@@ -95,7 +95,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
     private Version ver=new Version();
     private String version=ver.getVersion();
     public int[] indexs;
-    FrmClaveColecta claveColecta = new FrmClaveColecta(Main.main, true);;
+    FrmClaveColecta claveColecta = new FrmClaveColecta(Main.main, true);
 
     public FrmArboladoD() {
         initComponents();
@@ -2949,10 +2949,10 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
 
     private void grdArboladoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdArboladoMouseClicked
        indexs =grdArbolado.getSelectedRows();
-       System.out.println("indices ");
+       //System.out.println("indices ");
        for(int i=0;i<=indexs.length;i++){
            try {
-               System.out.println( grdArbolado.getValueAt(indexs[i], 0).toString());
+               //System.out.println( grdArbolado.getValueAt(indexs[i], 0).toString());
            } catch (Exception e) {
            }
        }
@@ -3381,7 +3381,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
             int fila = grdArbolado.getSelectedRow();
             String noIndividuo = grdArbolado.getValueAt(fila, 3).toString();
             
-            claveColecta.setLocationRelativeTo(Main.main);
+           claveColecta.setLocationRelativeTo(Main.main);
             
             CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
             CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
@@ -3401,6 +3401,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
             ceColecta.setNombreComun(txtNombreComun.getText());
             claveColecta.setDatosIniciales(ceColecta, FORMATO_ID, "TAXONOMIA_Arbolado", "NoIndividuo", this.sitioID, Integer.parseInt(noIndividuo));
             claveColecta.setVisible(true);
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un registro para asignar la clave de colecta"
                     + e.getClass().getName() + " : " + e.getMessage(), "Clave de colecta", JOptionPane.ERROR_MESSAGE);

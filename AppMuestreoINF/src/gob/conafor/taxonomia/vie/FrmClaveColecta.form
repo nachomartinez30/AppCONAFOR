@@ -143,18 +143,25 @@
                           <Component id="lblTipoColecta" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtIniciales" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
+                                  <Component id="txtConsecutivo" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
+                                  <Component id="txtPreClave" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtClave" alignment="0" min="-2" pref="213" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="rbtFisica" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="rbtDigital" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
-                          <Component id="txtIniciales" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
-                          <Component id="txtConsecutivo" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
-                          <Component id="txtPreClave" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtClave" alignment="0" min="-2" pref="213" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -181,6 +188,7 @@
                           <Component id="rbtFisica" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="rbtDigital" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblTipoColecta" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -253,9 +261,6 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
                 </Property>
-                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="rbgTipoColecta"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="F&#xed;sica"/>
               </Properties>
               <Events>
@@ -267,9 +272,6 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
                 </Property>
-                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="rbgTipoColecta"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Digital"/>
               </Properties>
               <Events>
@@ -280,6 +282,14 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Tipo de colecta:"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButton1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="limpiar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

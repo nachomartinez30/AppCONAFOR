@@ -1905,7 +1905,6 @@ public class FrmSitio extends javax.swing.JInternalFrame {
                 }
             }
         }
-        
     }//GEN-LAST:event_chkAccesibleActionPerformed
 
     private void chkSenialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkSenialActionPerformed

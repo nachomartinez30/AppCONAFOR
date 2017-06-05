@@ -68,19 +68,9 @@ public class FrmClaveColecta extends javax.swing.JDialog {
     }
 
     public void setDatosIniciales(CEColectaBotanica ceColecta, int formatoID, String tabla, String nombreCampo, Integer sitioID, Integer noIndividuo) {
+        limpiarControles();
         this.UPMID = ceColecta.getUPMID();
         fillCmbClaveColecta(this.UPMID);
-      /*  if (ceColecta.getFamiliaID() != null) {
-            this.familiaID = ceColecta.getFamiliaID();
-        }
-        if (ceColecta.getGeneroID() != null) {
-            this.generoID = ceColecta.getGeneroID();
-        }
-        if (ceColecta.getEspecieID() != null) {
-            this.especieID = ceColecta.getEspecieID();
-        }
-        this.infraespecie = ceColecta.getInfraespecie();
-        this.nombreComun = ceColecta.getNombreComun();*/
         this.formatoID = formatoID;
         this.ceColecta = ceColecta;
         this.tabla = tabla;
@@ -91,7 +81,7 @@ public class FrmClaveColecta extends javax.swing.JDialog {
         this.nombreCampo = nombreCampo;
     }
     
-    private void limpiarControles() {
+    public void limpiarControles() {
         cmbClaveColecta.removeAllItems();
         txtPreClave.setText("");
         txtIniciales.setText("");
@@ -124,7 +114,7 @@ public class FrmClaveColecta extends javax.swing.JDialog {
                 return false;
             } else if (!rbtDigital.isSelected() && !rbtFisica.isSelected()) {
                 JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de colecta", "Clave de colecta", JOptionPane.INFORMATION_MESSAGE);
-                rbtFisica.setSelected(true);
+               
                 return false;
             } else {
                 return true;
@@ -181,6 +171,7 @@ public class FrmClaveColecta extends javax.swing.JDialog {
         rbtFisica = new javax.swing.JRadioButton();
         rbtDigital = new javax.swing.JRadioButton();
         lblTipoColecta = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         lblClaveColecta = new javax.swing.JLabel();
         btnAsignar = new javax.swing.JButton();
@@ -242,7 +233,6 @@ public class FrmClaveColecta extends javax.swing.JDialog {
         });
 
         rbtFisica.setBackground(new java.awt.Color(204, 204, 204));
-        rbgTipoColecta.add(rbtFisica);
         rbtFisica.setText("Física");
         rbtFisica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,7 +241,6 @@ public class FrmClaveColecta extends javax.swing.JDialog {
         });
 
         rbtDigital.setBackground(new java.awt.Color(204, 204, 204));
-        rbgTipoColecta.add(rbtDigital);
         rbtDigital.setText("Digital");
         rbtDigital.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -260,6 +249,13 @@ public class FrmClaveColecta extends javax.swing.JDialog {
         });
 
         lblTipoColecta.setText("Tipo de colecta:");
+
+        jButton1.setText("limpiar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -274,16 +270,21 @@ public class FrmClaveColecta extends javax.swing.JDialog {
                     .addComponent(lblClave)
                     .addComponent(lblTipoColecta))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtIniciales, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtConsecutivo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPreClave)
+                            .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(rbtFisica)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rbtDigital))
-                    .addComponent(txtIniciales, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtConsecutivo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPreClave)
-                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(rbtDigital)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,7 +305,8 @@ public class FrmClaveColecta extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbtFisica)
                     .addComponent(rbtDigital)
-                    .addComponent(lblTipoColecta))
+                    .addComponent(lblTipoColecta)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblClave)
@@ -439,7 +441,6 @@ public class FrmClaveColecta extends javax.swing.JDialog {
         if (cmbClaveColecta.getSelectedItem() != null) {
             String clave = (String) cmbClaveColecta.getSelectedItem();
             this.cdColecta.asignarClaveColecta(this.tabla, this.nombreCampo, this.noIndividuo, this.sitioID, clave);
-            //this.cdColecta.insertarClave(this.ceColecta, this.UPMID, clave);
             limpiarControles();
             actualizarDatosFormato(this.formatoID, clave);
             doClose(returnStatus);
@@ -515,21 +516,24 @@ public class FrmClaveColecta extends javax.swing.JDialog {
     }//GEN-LAST:event_txtInicialesKeyTyped
 
     private void rbtFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtFisicaActionPerformed
-        if (txtIniciales.getText().isEmpty() && rbtFisica.isSelected()) {
+        rbtDigital.setSelected(false);
+        if (txtIniciales.getText().isEmpty()/*&& rbtFisica.isSelected()*/) {
             JOptionPane.showMessageDialog(null, "Error! Debe Proporcionar las iniciales del colector", "Clave de colecta", JOptionPane.INFORMATION_MESSAGE);
             rbtFisica.setSelected(false);
             txtIniciales.requestFocus();
-        } else if (txtConsecutivo.getText().isEmpty() && rbtFisica.isSelected()) {
+        } else if (txtConsecutivo.getText().isEmpty()/* && rbtFisica.isSelected()*/) {
             JOptionPane.showMessageDialog(null, "Error! Debe Proporcionar el número consecutivo de colecta", "Clave de colecta", JOptionPane.INFORMATION_MESSAGE);
             rbtFisica.setSelected(false);
             txtConsecutivo.requestFocus();
         } else {
             this.claveColecta = txtPreClave.getText() + "_" + txtIniciales.getText() + "_" + getConsecutivo(Integer.parseInt(txtConsecutivo.getText())) + "_" + "F";
             txtClave.setText(this.claveColecta);
+            
         }
     }//GEN-LAST:event_rbtFisicaActionPerformed
 
     private void rbtDigitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtDigitalActionPerformed
+        rbtFisica.setSelected(false);
         if (txtIniciales.getText().isEmpty() && rbtDigital.isSelected()) {
             JOptionPane.showMessageDialog(null, "Error! Debe Proporcionar las iniciales del colector", "Clave de colecta", JOptionPane.INFORMATION_MESSAGE);
             rbtDigital.setSelected(false);
@@ -588,7 +592,7 @@ public class FrmClaveColecta extends javax.swing.JDialog {
     {
         
         for(int i=0;i<=index.length;i++){
-            System.out.println(index[i]);
+            //System.out.println(index[i]);
             idArbolado[i]=index[i];
         }
         
@@ -608,52 +612,25 @@ public class FrmClaveColecta extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.rbtFisica.setSelected(false);
+        this.rbtDigital.setSelected(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void doClose(int retStatus) {
         returnStatus = retStatus;
         setVisible(false);
         this.dispose();
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    /*  public static void main(String args[]) {
-     // Set the Nimbus look and feel 
-     //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-     /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-     * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-     */
-    /*  try{
-             
-     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            
-     }catch (Exception e){
-            
-     e.printStackTrace();
-            
-     }*/
-        //</editor-fold>
-    //Create and display the dialog 
-    /*    java.awt.EventQueue.invokeLater(new Runnable() {
-     public void run() {
-     DlgTipoUPM dialog = new DlgTipoUPM(new javax.swing.JFrame(), true);
-     dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-     @Override
-     public void windowClosing(java.awt.event.WindowEvent e) {
-     System.exit(0);
-     }
-     });
-     dialog.setVisible(true);
-     }
-     });
-     }*/
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsignar;
     private javax.swing.JButton btnDesasignar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cmbClaveColecta;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblClave;

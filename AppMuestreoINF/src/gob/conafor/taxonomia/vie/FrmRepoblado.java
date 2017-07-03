@@ -459,7 +459,7 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
             rep.setEdad025150(this.edad025);
             rep.setFrecuencia151275(this.frecuencia151);
             rep.setEdad151275(this.edad151);
-            rep.setFrecuencia275(this.edad275);
+            rep.setFrecuencia275(this.frecuencia275);
             rep.setEdad275(this.edad275);
             rep.setVigorID(vigor.getVigorID());
             rep.setDanioID(danio.getAgenteDanioID());

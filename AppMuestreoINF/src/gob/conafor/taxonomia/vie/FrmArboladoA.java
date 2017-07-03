@@ -845,6 +845,11 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
                 txtAlturaComercialFocusLost(evt);
             }
         });
+        txtAlturaComercial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAlturaComercialActionPerformed(evt);
+            }
+        });
         txtAlturaComercial.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtAlturaComercialKeyTyped(evt);
@@ -2534,7 +2539,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
           txtDiametroNormal.setValue(null);
           txtAlturaComercial.setEnabled(false);
       }
-      if(Integer.parseInt(txtDiametroNormal.getText())>=10&&cmbFormaVida.getSelectedIndex()<3){//si el diametro normal es mayor o igual a 10 y no es arborecente
+      if(Float.parseFloat(txtDiametroNormal.getText())>=10 && cmbFormaVida.getSelectedIndex()<3){//si el diametro normal es mayor o igual a 10 y no es arborecente
          
           if(cmbCondicion.getSelectedIndex()==2){//si la condicion muerto, no hay altura comercial
              txtAlturaComercial.setEnabled(false); 
@@ -3162,6 +3167,10 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
     private void txtNumeroRamaTalloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroRamaTalloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumeroRamaTalloActionPerformed
+
+    private void txtAlturaComercialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAlturaComercialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAlturaComercialActionPerformed
 
     /**
      * @param args the command line arguments

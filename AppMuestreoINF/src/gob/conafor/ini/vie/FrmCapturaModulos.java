@@ -109,6 +109,9 @@ public class FrmCapturaModulos extends javax.swing.JInternalFrame {
             case 15:
                 cdSecuencia.insertSecuencia15(upmID, sitio);
                 break;
+            case 16:
+                 cdSecuencia.insertSecuencia16(upmID, sitio);
+                break;
         }
     }
     

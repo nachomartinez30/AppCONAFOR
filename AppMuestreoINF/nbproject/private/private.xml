@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ignacio.martinez/Desktop/AppMuestreoINF/src/gob/conafor/taxonomia/vie/FrmRepoblado.java</file>
-            <file>file:/C:/Users/ignacio.martinez/Desktop/AppMuestreoINF/src/gob/conafor/taxonomia/mod/CDRepoblado.java</file>
-            <file>file:/C:/Users/ignacio.martinez/Desktop/AppMuestreoINF/src/gob/conafor/taxonomia/vie/FrmColectaBotanica.java</file>
+            <file>file:/C:/Users/ignacio.martinez/Desktop/appCONAFOR/AppMuestreoINF/src/gob/conafor/upm/vie/UPMForms.java</file>
+            <file>file:/C:/Users/ignacio.martinez/Desktop/appCONAFOR/AppMuestreoINF/src/gob/conafor/sys/mod/CDSecuencia.java</file>
+            <file>file:/C:/Users/ignacio.martinez/Desktop/appCONAFOR/AppMuestreoINF/src/gob/conafor/ini/vie/FrmCapturaModulos.java</file>
+            <file>file:/C:/Users/ignacio.martinez/Desktop/appCONAFOR/AppMuestreoINF/src/gob/conafor/ini/vie/FrmInicio.java</file>
         </group>
     </open-files>
 </project-private>

@@ -466,6 +466,7 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
     private void revisarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
         Integer sitio = this.funciones.sitioCapturaSueloCarbono(this.upmID, 3);
+        System.out.println("SecuenciaID="+secuenciaID);
         if (secuenciaID != null) {
             switch (secuenciaID) {
                 case 1: //Módulo A
@@ -543,6 +544,9 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
                     UPMForms.repobladoVM.setVisible(true);*/
                     this.hide();
                     funciones.manipularBotonesMenuPrincipal(false);
+                    break;
+                case 16:
+                    this.funciones.manipularBotonesMenuPrincipal(false);
                     break;
             }
         }
@@ -1561,6 +1565,10 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
                     this.hide();
                     UPMForms.arboladoG.revisarArboladoG(ceSitio);
                     UPMForms.arboladoG.setVisible(true);
+                    break;
+                case 16: //A,C y G
+                    this.funciones.manipularBotonesMenuPrincipal(false);
+                    this.cdSecuencia.insertSecuenciaTerminada(ceSitio);
                     break;
             }
         }

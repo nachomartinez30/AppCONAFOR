@@ -1,5 +1,6 @@
 package gob.conafor.ini.vie;
 
+import gob.conafor.concentrarbdinfys.ConcentradorAbies;
 import gob.conafor.sys.mod.CDSecuencia;
 import gob.conafor.sys.mod.CDSeguimientoUPM;
 import gob.conafor.upm.vie.UPMForms;
@@ -8,17 +9,16 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-
 public class FrmInicio extends javax.swing.JFrame {
 
     private int upm;
     public static FrmInicio principal;
     private CDSeguimientoUPM seguimiento = new CDSeguimientoUPM();
     private CDSecuencia navegacion = new CDSecuencia();
-    private Version ver=new Version();
-    private String version=ver.getVersion();
-    private String versionLayout=version.substring(6, 9);
-    public boolean panelOculto=false;//No esta oculto
+    private Version ver = new Version();
+    private String version = ver.getVersion();
+    private String versionLayout = version.substring(6, 9);
+    public boolean panelOculto = false;//No esta oculto
 
     public FrmInicio() {
         initComponents();
@@ -75,10 +75,10 @@ public class FrmInicio extends javax.swing.JFrame {
         dpPrincipal.add(UPMForms.baseDatos);
         dpPrincipal.add(UPMForms.eliminarBD);
         dpPrincipal.add(UPMForms.eliminarUPM);
-       // btnVerReportes.setVisible(false);
+        // btnVerReportes.setVisible(false);
     }
-    
-     public Image getIconImage() {
+
+    public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
                 getImage(ClassLoader.getSystemResource("gob/conafor/utils/logo_conafor.png"));
         return retValue;
@@ -117,6 +117,7 @@ public class FrmInicio extends javax.swing.JFrame {
         mbMenuSuperiror = new javax.swing.JMenuBar();
         menGuardarArchivo = new javax.swing.JMenu();
         miImportar = new javax.swing.JMenuItem();
+        miConcentrar = new javax.swing.JMenuItem();
         miEliminarPorUPM = new javax.swing.JMenuItem();
         miEliminar = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -448,6 +449,14 @@ public class FrmInicio extends javax.swing.JFrame {
         });
         menGuardarArchivo.add(miImportar);
 
+        miConcentrar.setText("Concentrar BD");
+        miConcentrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miConcentrarActionPerformed(evt);
+            }
+        });
+        menGuardarArchivo.add(miConcentrar);
+
         miEliminarPorUPM.setText("Eliminar por UPM ...");
         miEliminarPorUPM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -548,14 +557,14 @@ public class FrmInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRevisionSitiosActionPerformed
 
     private void btnRevisarModulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevisarModulosActionPerformed
-       UPMForms.revisionModulos.iniciarRevision();
-       UPMForms.revisionModulos.setVisible(true);
-       UPMForms.revisionModulos.manipularBonesMenuprincipal();
+        UPMForms.revisionModulos.iniciarRevision();
+        UPMForms.revisionModulos.setVisible(true);
+        UPMForms.revisionModulos.manipularBonesMenuprincipal();
     }//GEN-LAST:event_btnRevisarModulosActionPerformed
 
     private void btnColectaBotanicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColectaBotanicaActionPerformed
-      UPMForms.colectaBotanica.setVisible(true);
-      UPMForms.colectaBotanica.procesarColecta();
+        UPMForms.colectaBotanica.setVisible(true);
+        UPMForms.colectaBotanica.procesarColecta();
     }//GEN-LAST:event_btnColectaBotanicaActionPerformed
 
     private void btnVerReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerReportesActionPerformed
@@ -580,45 +589,50 @@ public class FrmInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_miEliminarPorUPMActionPerformed
 
     private void menGuardarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menGuardarArchivoActionPerformed
-      
+        
     }//GEN-LAST:event_menGuardarArchivoActionPerformed
 
     private void miEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miEliminarActionPerformed
-       UPMForms.eliminarBD.setVisible(true);
+        UPMForms.eliminarBD.setVisible(true);
     }//GEN-LAST:event_miEliminarActionPerformed
 
     private void menuChkBoxPanelLateralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuChkBoxPanelLateralActionPerformed
-      panelOculto=!panelOculto;
-        if(menuChkBoxPanelLateral.getState()==true){
-          dpMenuLateral.setVisible(false);
-          this.btnOcultarPanel.setText(">");
-      }
-      if(menuChkBoxPanelLateral.getState()==false){
-          dpMenuLateral.setVisible(true);
-          this.btnOcultarPanel.setText("<");
-      }
+        panelOculto = !panelOculto;
+        if (menuChkBoxPanelLateral.getState() == true) {
+            dpMenuLateral.setVisible(false);
+            this.btnOcultarPanel.setText(">");
+        }
+        if (menuChkBoxPanelLateral.getState() == false) {
+            dpMenuLateral.setVisible(true);
+            this.btnOcultarPanel.setText("<");
+        }
     }//GEN-LAST:event_menuChkBoxPanelLateralActionPerformed
 
     private void btnOcultarPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOcultarPanelActionPerformed
-       panelOculto=!panelOculto;
-       if(panelOculto==true){
-           menuChkBoxPanelLateral.setState(true);
-          dpMenuLateral.setVisible(false);
-         this.btnOcultarPanel.setText(">");
-      }
-      if(panelOculto==false){
-          dpMenuLateral.setVisible(true);
-          menuChkBoxPanelLateral.setState(false);
-          this.btnOcultarPanel.setText("<");
-      }
+        panelOculto = !panelOculto;
+        if (panelOculto == true) {
+            menuChkBoxPanelLateral.setState(true);
+            dpMenuLateral.setVisible(false);
+            this.btnOcultarPanel.setText(">");
+        }
+        if (panelOculto == false) {
+            dpMenuLateral.setVisible(true);
+            menuChkBoxPanelLateral.setState(false);
+            this.btnOcultarPanel.setText("<");
+        }
     }//GEN-LAST:event_btnOcultarPanelActionPerformed
+
+    private void miConcentrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConcentrarActionPerformed
+        ConcentradorAbies concentrador = new ConcentradorAbies();
+        concentrador.setVisible(true);
+    }//GEN-LAST:event_miConcentrarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-  //  public static void main(String args[]) {
+    //  public static void main(String args[]) {
 
-        /*try {
+    /*try {
          for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
          if ("System".equals(info.getName())) {
          javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -689,6 +703,7 @@ public class FrmInicio extends javax.swing.JFrame {
     private javax.swing.JMenuBar mbMenuSuperiror;
     public javax.swing.JMenu menGuardarArchivo;
     private javax.swing.JCheckBoxMenuItem menuChkBoxPanelLateral;
+    private javax.swing.JMenuItem miConcentrar;
     private javax.swing.JMenuItem miEliminar;
     private javax.swing.JMenuItem miEliminarPorUPM;
     private javax.swing.JMenuItem miImportar;

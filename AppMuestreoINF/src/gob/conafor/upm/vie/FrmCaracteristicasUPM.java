@@ -341,7 +341,7 @@ public class FrmCaracteristicasUPM extends javax.swing.JInternalFrame {
                     }
                     break;
                 case 3: //Modulos A, C, E y G
-                    if (sitio == this.ceSitio.getSitio()) {
+                    if (sitio == this.ceSitio.getSitio()) {//si es el sitio 3
                         UPMForms.suelo.setDatosiniciales(ceSitio);
                         UPMForms.suelo.setVisible(true);
                     } else {
@@ -456,6 +456,11 @@ public class FrmCaracteristicasUPM extends javax.swing.JInternalFrame {
                         UPMForms.observaciones.setDatosiniciales(ceSitio);
                         UPMForms.observaciones.setVisible(true);
                     }
+                    break;
+                case 16:
+                    UPMForms.observaciones.setDatosiniciales(ceSitio);
+                    UPMForms.observaciones.setVisible(true);
+                    break;
             }
         }
     }

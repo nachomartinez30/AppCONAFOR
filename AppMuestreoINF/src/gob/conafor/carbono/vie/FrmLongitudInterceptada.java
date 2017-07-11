@@ -31,6 +31,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
+
     private boolean revision;
     private int upmID;
     private int sitioID;
@@ -39,7 +40,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     private int suelo;
     private static final int FORMATO_ID = 8;
     private Integer transectoComponente;
-   /* private CatECarbonoComponente indexComponente;
+    /* private CatECarbonoComponente indexComponente;
     private CatEFamiliaEspecie indexFamilia;
     private CatEGenero indexGenero;
     private CatEEspecie indexEspecie;*/
@@ -83,21 +84,21 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private FuncionesComunes funciones = new FuncionesComunes();
     private int modificar;
-    private Version ver=new Version();
-    private String version=ver.getVersion();
-    
+    private Version ver = new Version();
+    private String version = ver.getVersion();
+
     public FrmLongitudInterceptada() {
         initComponents();
         this.longitudInterceptada = 17;
-        this.suelo  = 19;
+        this.suelo = 19;
         fillCmbTransectoComponente();
         fillCmbComponente();
         fillCmbFamilia();
         fillCmbGenero();
         //txtLongitud1.addKeyListener(numeros);
     }
-    
-    public void setDatosIniciales(CESitio sitio){
+
+    public void setDatosIniciales(CESitio sitio) {
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
@@ -117,10 +118,10 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         funciones.manipularBotonesMenuPrincipal(true);
         this.modificar = 0;
     }
-    
-    public void revisarLongitud(CESitio sitio){
-        System.out.println("Degradacion de suelo= "+this.ceSitio.getSecuencia());
-        revision=true;
+
+    public void revisarLongitud(CESitio sitio) {
+        System.out.println("Degradacion de suelo= " + this.ceSitio.getSecuencia());
+        revision = true;
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
@@ -128,7 +129,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         txtSitio.setText(String.valueOf(this.sitio));
         llenarTabla();
         llenarTablaCoberturaDosel();
-       /* funciones.reiniciarComboModel(cmbTransectoComponente);
+        /* funciones.reiniciarComboModel(cmbTransectoComponente);
         fillCmbTransectoComponente();*/
         funciones.reiniciarComboModel(cmbTransectoDosel);
         fillCmbTransectos();
@@ -142,7 +143,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         limpiarControlesComponentes();
         chkLongitudComponentes.setSelected(funciones.habilitarCheckBox("CARBONO_LongitudComponente", this.sitioID));
     }
-    
+
     private void fillCmbTransectoComponente() {
         List<Integer> listTransectos = new ArrayList<>();
         listTransectos = this.cdLongitud.getTransectoCoberturaDosel(this.sitioID);
@@ -153,18 +154,18 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    private void fillCmbComponente(){
+
+    private void fillCmbComponente() {
         List<CatECarbonoComponente> listComponente = new ArrayList<>();
         listComponente = cdLongitud.getComponentesSegemento();
-        if(listComponente != null){
+        if (listComponente != null) {
             int size = listComponente.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbComponente.addItem(listComponente.get(i));
             }
         }
     }
-    
+
     private void fillCmbFamilia() {
         List<CatEFamiliaEspecie> listFamilia = new ArrayList<>();
         listFamilia = cdEspecie.getFamiliaEspecies();
@@ -187,9 +188,9 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    private void fillCmbGeneroSF(){
-         List<CatEGenero> listGenero = new ArrayList<>();
+
+    private void fillCmbGeneroSF() {
+        List<CatEGenero> listGenero = new ArrayList<>();
         CDEspecies sp = new CDEspecies();
         listGenero = sp.getGenerosSF();
         if (listGenero != null) {
@@ -211,29 +212,30 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    private void fillCmbInfraespecie(int index){
+
+    private void fillCmbInfraespecie(int index) {
         List<CatEInfraespecie> listInfraespecie = new ArrayList<>();
         CDEspecies sp = new CDEspecies();
         listInfraespecie = sp.getInfraespecie(index);
-        if(listInfraespecie != null){
+        if (listInfraespecie != null) {
             int size = listInfraespecie.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbInfraespecie.addItem(listInfraespecie.get(i));
             }
         }
     }
-    
-    private void fillCmbTransectos(){
+
+    private void fillCmbTransectos() {
         List<Integer> listTransectos = new ArrayList<>();
         listTransectos = this.cdLongitud.getTransectoCoberturaDosel(this.sitioID);
-        if(listTransectos != null){
+        if (listTransectos != null) {
             int size = listTransectos.size();
-            for(int i = 0; i < size; i++){
-               cmbTransectoDosel.addItem(listTransectos.get(i));
+            for (int i = 0; i < size; i++) {
+                cmbTransectoDosel.addItem(listTransectos.get(i));
             }
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1397,7 +1399,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         } else {
             Object[] opciones = {"Si", "No"};
             int respuesta = JOptionPane.showOptionDialog(null, "Si capturo, se borrarán los datos de longitud interceptada por componente, ¿Esta seguro?",
-                "Carbono e incendios", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
+                    "Carbono e incendios", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
             if (respuesta == JOptionPane.YES_OPTION) {
                 cdLongitud.deleteLongitudComponentesSitio(this.sitioID);
                 this.funciones.reiniciarTabla(this.grdComponentes);
@@ -1417,7 +1419,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         } else {
             Object[] opciones = {"Si", "No"};
             int respuesta = JOptionPane.showOptionDialog(null, "Si capturo, se borrarán los datos de cobertura dosel, ¿Esta seguro?",
-                "Carbono e incendios", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
+                    "Carbono e incendios", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
             if (respuesta == JOptionPane.YES_OPTION) {
                 cdLongitud.deleteCoberturaDoselSitio(this.sitioID);
                 this.funciones.reiniciarTabla(this.grdCoberturaDosel);
@@ -1434,17 +1436,17 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_chkCoberturaDoselActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        if(revision==false){//esta en modo de captura
+        if (revision == false) {//esta en modo de captura
             this.hide();
             funciones.manipularBotonesMenuPrincipal(false);
         }
-        if(revision==true){//entro a modo de revision
+        if (revision == true) {//entro a modo de revision
             //System.err.println("Modo Revision");
             this.hide();
             //UPMForms.revisionModulos.iniciarRevision();
             UPMForms.revisionModulos.setVisible(true);
             UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision=false;
+            revision = false;
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
@@ -1465,7 +1467,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                         System.out.println("ModoCaptura");
                         seleccionarSiguienteFormulario(this.ceSitio);
                     } else {
-                        System.out.println("ModoRevision    "+ this.ceSitio.getSitioID());
+                        System.out.println("ModoRevision    " + this.ceSitio.getSitioID());
                         revisarSiguienteFormulario(this.ceSitio);
                     }
                     this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
@@ -1477,7 +1479,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                     //System.out.println("Modificar=1 "+this.ceSitio);
                     seleccionarSiguienteFormulario(this.ceSitio);
                 } else {
-                     //System.out.println("Modificar=0 "+this.ceSitio);
+                    //System.out.println("Modificar=0 "+this.ceSitio);
                     revisarSiguienteFormulario(this.ceSitio);
                 }
                 this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, -1);
@@ -1785,7 +1787,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             claveColecta.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un registro para asignar la clave de colecta"
-                + e.getClass().getName() + " : " + e.getMessage(), "Clave de colecta", JOptionPane.ERROR_MESSAGE);
+                    + e.getClass().getName() + " : " + e.getMessage(), "Clave de colecta", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnColectaActionPerformed
 
@@ -1836,9 +1838,9 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSegmento10FocusLost
 
     private void txtSegmento10FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento10FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtSegmento10.selectAll();
             }
         });
@@ -1856,9 +1858,9 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSegmento9FocusLost
 
     private void txtSegmento9FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento9FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtSegmento9.selectAll();
             }
         });
@@ -1876,9 +1878,9 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSegmento8FocusLost
 
     private void txtSegmento8FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento8FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtSegmento8.selectAll();
             }
         });
@@ -1896,9 +1898,9 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSegmento7FocusLost
 
     private void txtSegmento7FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento7FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtSegmento7.selectAll();
             }
         });
@@ -1916,9 +1918,9 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSegmento6FocusLost
 
     private void txtSegmento6FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento6FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtSegmento6.selectAll();
             }
         });
@@ -1936,9 +1938,9 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSegmento5FocusLost
 
     private void txtSegmento5FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento5FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtSegmento5.selectAll();
             }
         });
@@ -1956,9 +1958,9 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSegmento4FocusLost
 
     private void txtSegmento4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento4FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtSegmento4.selectAll();
             }
         });
@@ -1976,9 +1978,9 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSegmento3FocusLost
 
     private void txtSegmento3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento3FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtSegmento3.selectAll();
             }
         });
@@ -1996,9 +1998,9 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSegmento2FocusLost
 
     private void txtSegmento2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento2FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtSegmento2.selectAll();
             }
         });
@@ -2016,9 +2018,9 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSegmento1FocusLost
 
     private void txtSegmento1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSegmento1FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtSegmento1.selectAll();
             }
         });
@@ -2078,9 +2080,9 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cmbComponenteActionPerformed
 
-    public void llenarTabla(){
+    public void llenarTabla() {
         grdComponentes.setModel(cdLongitud.getTablaComponentes(this.sitioID));
-        
+
         grdComponentes.getColumnModel().getColumn(2).setPreferredWidth(80);//Consecutivo
         grdComponentes.getColumnModel().getColumn(3).setPreferredWidth(80);//Transecto
         grdComponentes.getColumnModel().getColumn(4).setPreferredWidth(150);//Componente
@@ -2101,18 +2103,18 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         grdComponentes.getColumnModel().getColumn(19).setPreferredWidth(75);//Segmento 10
         grdComponentes.getColumnModel().getColumn(20).setPreferredWidth(70);//Total
         grdComponentes.getColumnModel().getColumn(21).setPreferredWidth(160);//Clave colecta
-        
+
         Tablas tablas = new Tablas();
         int[] column_0 = {0};
         int[] column_1 = {1};
-        
+
         tablas.hideColumnTable(grdComponentes, column_0);
         tablas.hideColumnTable(grdComponentes, column_1);
     }
-    
-    private void llenarTablaCoberturaDosel(){
+
+    private void llenarTablaCoberturaDosel() {
         grdCoberturaDosel.setModel(cdLongitud.getTablaCoberturaDosel(this.sitioID));
-        
+
         grdCoberturaDosel.getColumnModel().getColumn(2).setPreferredWidth(83);
         grdCoberturaDosel.getColumnModel().getColumn(3).setPreferredWidth(83);
         grdCoberturaDosel.getColumnModel().getColumn(4).setPreferredWidth(83);
@@ -2124,18 +2126,18 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         grdCoberturaDosel.getColumnModel().getColumn(10).setPreferredWidth(83);
         grdCoberturaDosel.getColumnModel().getColumn(11).setPreferredWidth(83);
         grdCoberturaDosel.getColumnModel().getColumn(12).setPreferredWidth(84);
-        
+
         Tablas tablas = new Tablas();
-        
+
         int[] column_0 = {0};
         int[] column_1 = {1};
-        
+
         tablas.hideColumnTable(grdCoberturaDosel, column_0);
         tablas.hideColumnTable(grdCoberturaDosel, column_1);
     }
-    
+
     private void asignarDatosLongitudComponente() {
-        this.total =  0;
+        this.total = 0;
         this.nombreComun = txtNombreComun.getText();
         try {
             this.segmento1 = Integer.valueOf(txtSegmento1.getText());
@@ -2207,14 +2209,14 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         } catch (NumberFormatException e) {
             this.segmento10 = null;
         }
-       try {
+        try {
             txtTotal.setText(String.valueOf(this.total));
         } catch (NumberFormatException e) {
             this.total = null;
         }
     }
-    
-    private void reiniciarValoresComponentes(){
+
+    private void reiniciarValoresComponentes() {
         this.segmento1 = null;
         this.segmento2 = null;
         this.segmento3 = null;
@@ -2227,7 +2229,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         this.segmento10 = null;
         this.total = null;
     }
-    
+
     private void asignarDatosDosel() {
         this.transectoDosel = (Integer) cmbTransectoDosel.getSelectedItem();
         if (chkPunto1.isSelected()) {
@@ -2281,8 +2283,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             punto10 = 0;
         }
     }
-    
-    
+
     private boolean validarComponentes() {
         CatECarbonoComponente indexComponente = (CatECarbonoComponente) cmbComponente.getSelectedItem();
         this.transectoComponente = (Integer) cmbTransectoComponente.getSelectedItem();
@@ -2354,7 +2355,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private boolean validarCoberturaDosel() {
         this.transectoDosel = (Integer) cmbTransectoDosel.getSelectedItem();
         if (this.transectoDosel == null) {
@@ -2366,7 +2367,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private boolean validarLongitudComponente() {
         Integer transecto = (Integer) cmbTransectoComponente.getSelectedItem();
         CatECarbonoComponente componente = (CatECarbonoComponente) cmbComponente.getSelectedItem();
@@ -2383,7 +2384,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         }
         return true;
     }
-    
+
     private boolean validarColectasObligatorias() {
         CDColectaBotanica colecta = new CDColectaBotanica();
         if (colecta.validarCapturaGenero("CARBONO_LongitudComponente", this.sitioID) && colecta.validarTipoComponente(this.sitioID)) {
@@ -2393,7 +2394,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private void crearComponente() {
         CatECarbonoComponente indexComponente = (CatECarbonoComponente) cmbComponente.getSelectedItem();
         CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
@@ -2404,57 +2405,57 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         ceLongitud.setSitioID(this.sitioID);
         ceLongitud.setTransecto(this.transectoComponente);
         ceLongitud.setComponenteID(indexComponente.getComponenteID());
-        
-        if(indexFamilia != null){
+
+        if (indexFamilia != null) {
             ceLongitud.setFamiliaID(indexFamilia.getFamiliaID());
         }
-        if(indexGenero != null){
+        if (indexGenero != null) {
             ceLongitud.setGeneroID(indexGenero.getGeneroID());
         }
-        if(indexEspecie != null){
+        if (indexEspecie != null) {
             ceLongitud.setEspecieID(indexEspecie.getEspecieID());
         }
-        if(indexInfraespecie != null){
+        if (indexInfraespecie != null) {
             ceLongitud.setInfraespecieID(indexInfraespecie.getInfraespecieID());
         }
         ceLongitud.setNombreComun(this.nombreComun);
-        
-       // if(this.segmento1 != null){
-            ceLongitud.setSegmento1(this.segmento1);
-       // }
-       // if(this.segmento2 != null){
-            ceLongitud.setSegmento2(this.segmento2);
-       // }
-       // if(this.segmento3 != null){
-            ceLongitud.setSegmento3(this.segmento3);
-       // }
-       // if(this.segmento4 != null){
-            ceLongitud.setSegmento4(this.segmento4);
-       // }
+
+        // if(this.segmento1 != null){
+        ceLongitud.setSegmento1(this.segmento1);
+        // }
+        // if(this.segmento2 != null){
+        ceLongitud.setSegmento2(this.segmento2);
+        // }
+        // if(this.segmento3 != null){
+        ceLongitud.setSegmento3(this.segmento3);
+        // }
+        // if(this.segmento4 != null){
+        ceLongitud.setSegmento4(this.segmento4);
+        // }
         //if(this.segmento5 != null){
-            ceLongitud.setSegmento5(this.segmento5);
+        ceLongitud.setSegmento5(this.segmento5);
         //}
-       // if(this.segmento6 != null){
-            ceLongitud.setSegmento6(this.segmento6);
+        // if(this.segmento6 != null){
+        ceLongitud.setSegmento6(this.segmento6);
         //}
         //if(this.segmento7 != null){
-            ceLongitud.setSegmento7(this.segmento7);
+        ceLongitud.setSegmento7(this.segmento7);
         //}
         //if(this.segmento8 != null){
-            ceLongitud.setSegmento8(this.segmento8);
-       // }
-       // if(this.segmento9 != null){
-            ceLongitud.setSegmento9(this.segmento9);
-       // }
-       // if(this.segmento10 != null){
-            ceLongitud.setSegmento10(this.segmento10);
-       // }
-       // if(this.total != null){
-            ceLongitud.setTotal(this.total);
-      //  }
+        ceLongitud.setSegmento8(this.segmento8);
+        // }
+        // if(this.segmento9 != null){
+        ceLongitud.setSegmento9(this.segmento9);
+        // }
+        // if(this.segmento10 != null){
+        ceLongitud.setSegmento10(this.segmento10);
+        // }
+        // if(this.total != null){
+        ceLongitud.setTotal(this.total);
+        //  }
         cdLongitud.insertDatosSegementoComponente(ceLongitud);
     }
-    
+
     private void actualizarComponente() {
         try {
             int fila = grdComponentes.getSelectedRow();
@@ -2547,7 +2548,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                     + "", "Longitud de componentes", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void limpiarControlesComponentes() {
         cmbTransectoComponente.setSelectedItem(null);
         cmbComponente.setSelectedItem(null);
@@ -2581,7 +2582,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         txtClaveColecta.setText("");
         cmbTransectoComponente.requestFocus();
     }
-    
+
     private void crearCoberturaDosel() {
         this.transectoDosel = (Integer) cmbTransectoDosel.getSelectedItem();
         CECoberturaDosel ceCoberturaDosel = new CECoberturaDosel();
@@ -2599,7 +2600,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         ceCoberturaDosel.setPunto10(this.punto10);
         this.cdLongitud.insertDatosCoberturaDosel(ceCoberturaDosel);
     }
-    
+
     private void actualizarCoberturaDosel() {
         try {
             int fila = grdCoberturaDosel.getSelectedRow();
@@ -2623,10 +2624,10 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningún registro de la tabla de cobertura dosel"
-                   + e.getClass().getName() + " : " + e.getMessage(), "Carbono", JOptionPane.ERROR_MESSAGE);
+                    + e.getClass().getName() + " : " + e.getMessage(), "Carbono", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void eliminarCoberturaDosel() {
         try {
             int fila = grdCoberturaDosel.getSelectedRow();
@@ -2645,8 +2646,8 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                     + "", "Cobertura dosel", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    private void limpiarControlesCobertura(){
+
+    private void limpiarControlesCobertura() {
         cmbTransectoDosel.setSelectedItem(null);
         chkPunto1.setSelected(false);
         chkPunto2.setSelected(false);
@@ -2658,11 +2659,11 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         chkPunto8.setSelected(false);
         chkPunto9.setSelected(false);
         chkPunto10.setSelected(false);
-        
+
         cmbTransectoDosel.requestFocus();
-        
+
     }
-    
+
     private void manipularControleslongitud(boolean habilitar) {
         if (habilitar == true) {
             cmbTransectoComponente.setEnabled(true);
@@ -2742,7 +2743,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             btnEliminarDosel.setEnabled(false);
         }
     }
-    
+
     private void seleccionarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
         Integer sitio = this.funciones.sitioCapturaSueloCarbono(this.upmID, 3);
@@ -2791,7 +2792,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                     //funciones.manipularBotonesMenuPrincipal(true);
                     break;
                 case 8://Modulos A, C, D, E y F
-                    
+
                     UPMForms.arboladoD.setDatosIniciales(ceSitio);
                     UPMForms.arboladoD.setVisible(true);
                     //funciones.manipularBotonesMenuPrincipal(true);
@@ -2812,19 +2813,19 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                     break;
                 case 12://Modulos A, E y H
                     //funciones.manipularBotonesMenuPrincipal(true);
-                    
+
                     UPMForms.suelo.setDatosiniciales(ceSitio);
                     UPMForms.suelo.setVisible(true);
                     break;
                 case 13://Modulos A, C, E y H
                     //funciones.manipularBotonesMenuPrincipal(true);
-                     if (sitio == ceSitio.getSitio()) {
-                    UPMForms.hojarascaProfundidad.setDatosiniciales(ceSitio);
-                    UPMForms.hojarascaProfundidad.setVisible(true);
-                     }else{
-                         UPMForms.vegetacionMenor.setDatosIniciales(ceSitio);
-                         UPMForms.vegetacionMenor.setVisible(true);
-                     }
+                    if (sitio == ceSitio.getSitio()) {
+                        UPMForms.hojarascaProfundidad.setDatosiniciales(ceSitio);
+                        UPMForms.hojarascaProfundidad.setVisible(true);
+                    } else {
+                        UPMForms.vegetacionMenor.setDatosIniciales(ceSitio);
+                        UPMForms.vegetacionMenor.setVisible(true);
+                    }
                     break;
                 case 14://Modulos A, E y G
                     //funciones.manipularBotonesMenuPrincipal(true);
@@ -2836,10 +2837,14 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                     UPMForms.suelo.setDatosiniciales(ceSitio);
                     UPMForms.suelo.setVisible(true);
                     break;
+                case 16:
+                    UPMForms.parametrosFQ.setDatosiniciales(ceSitio);
+                    UPMForms.parametrosFQ.setVisible(true);
+                    break;
             }
         }
     }
-    
+
     private String getModuloActual(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
         String modulo = "";
@@ -2894,81 +2899,11 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         }
         return modulo;
     }
-    
-    /*private void seleccionarSiguienteFormularioRevision(CESitio ceSitio) {
+
+    private void revisarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
         if (secuenciaID != null) {
-            switch (secuenciaID) {
-                case 1: //Módulo A
-                    UPMForms.suelo.setDatosiniciales(ceSitio);
-                    UPMForms.suelo.setVisible(true);
-                    break;
-                case 2: //Módulos A y C
-                    /*UPMForms.carbono.setDatosIniciales(ceSitio);
-                    UPMForms.carbono.setVisible(true);
-                    funciones.manipularBotonesMenuPrincipal(false);
-                    this.hide();
-                    break;
-                case 3: //Modulos A, C, E y G
-                    UPMForms.hojarascaProfundidad.setDatosiniciales(ceSitio);
-                    UPMForms.hojarascaProfundidad.setVisible(true);
-                    break;
-                case 4: //Modulos A y E
-                    UPMForms.suelo.setDatosiniciales(ceSitio);
-                    UPMForms.suelo.setVisible(true);
-                    break;
-                case 5: //Modulos A, C, D y F
-                    UPMForms.arboladoD.setDatosIniciales(ceSitio);
-                    UPMForms.arboladoD.setVisible(true);
-                    break;
-                case 6://Modulos A, C y D
-                    UPMForms.arboladoD.setDatosIniciales(ceSitio);
-                    UPMForms.arboladoD.setVisible(true);
-                    break;
-                case 7://Modulos A, C, D y E
-                    UPMForms.arboladoD.setDatosIniciales(ceSitio);
-                    UPMForms.arboladoD.setVisible(true);
-                    break;
-                case 8://Modulos A, C, D, E y F
-                    UPMForms.arboladoD.setDatosIniciales(ceSitio);
-                    UPMForms.arboladoD.setVisible(true);
-                    break;
-                case 9://Modulos A, C y E
-                    UPMForms.hojarascaProfundidad.setDatosiniciales(ceSitio);
-                    UPMForms.hojarascaProfundidad.setVisible(true);
-                    break;
-                case 10://Modulos A, C, H
-                    UPMForms.vegetacionMenor.setDatosIniciales(ceSitio);
-                    UPMForms.vegetacionMenor.setVisible(true);
-                    break;
-                case 11://Modulos A y H
-                    UPMForms.suelo.setDatosiniciales(ceSitio);
-                    UPMForms.suelo.setVisible(true);
-                    break;
-                case 12://Modulos A, E y H
-                    UPMForms.suelo.revisarSuelo(ceSitio);
-                    UPMForms.suelo.setVisible(true);
-                    break;
-                case 13://Modulos A, C, E y H
-                    UPMForms.hojarascaProfundidad.setDatosiniciales(ceSitio);
-                    UPMForms.hojarascaProfundidad.setVisible(true);
-                    break;
-                case 14://Modulos A, E y G
-                    UPMForms.suelo.setDatosiniciales(ceSitio);
-                    UPMForms.suelo.setVisible(true);
-                    break;
-                case 15://A y G
-                    UPMForms.suelo.setDatosiniciales(ceSitio);
-                    UPMForms.suelo.setVisible(true);
-                    break;
-            }
-        }
-    }*/
-    
-    private void revisarSiguienteFormulario(CESitio ceSitio){
-        Integer secuenciaID = ceSitio.getSecuencia();
-        if (secuenciaID != null) {
-            System.out.println("Secuencia 2967="+secuenciaID);
+            System.out.println("Secuencia 2967=" + secuenciaID);
             switch (secuenciaID) {
                 case 1: //Módulo A
                     UPMForms.suelo.revisarSuelo(ceSitio);
@@ -3032,10 +2967,14 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                     UPMForms.suelo.revisarSuelo(ceSitio);
                     UPMForms.suelo.setVisible(true);
                     break;
+                case 16:
+                    UPMForms.parametrosFQ.setDatosiniciales(ceSitio);
+                    UPMForms.parametrosFQ.setVisible(true);
+                    break;
             }
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarComponente;
     private javax.swing.JButton btnAgregarDosel;

@@ -25,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmSubmuestra extends javax.swing.JInternalFrame {
+
     private boolean revision;
     private final int submuestra;
     private final int claveVegectacion;
@@ -50,8 +51,8 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
     private FuncionesComunes funciones = new FuncionesComunes();
     private int modificar;
     private String observaciones;
-    private Version ver=new Version();
-    private String version=ver.getVersion();
+    private Version ver = new Version();
+    private String version = ver.getVersion();
 
     public FrmSubmuestra() {
         initComponents();
@@ -78,7 +79,7 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
     }
 
     public void revisarSubmuestra(CESitio sitio) {
-        revision=true;
+        revision = true;
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
@@ -308,16 +309,16 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
         ceSubmuestra.setGrozorCorteza(this.grozorCorteza);
         cdSubmuestra.updateSubmuestra(ceSubmuestra);
     }
-    
-    private void crearObservaciones(int sitioID){
+
+    private void crearObservaciones(int sitioID) {
         CESubmuestraObservaciones ceSubmuestraObs = new CESubmuestraObservaciones();
         ceSubmuestraObs.setSitioID(sitioID);
         ceSubmuestraObs.setObservaciones(txtObservaciones.getText());
         CDSubmuestraObservacion cdSubmuestraObs = new CDSubmuestraObservacion();
         cdSubmuestraObs.insertSubmuestra(ceSubmuestraObs);
     }
-    
-    private void actualizarObservaciones(int sitio){
+
+    private void actualizarObservaciones(int sitio) {
         CESubmuestraObservaciones ceSubmuestraObs = new CESubmuestraObservaciones();
         ceSubmuestraObs.setSitioID(sitioID);
         ceSubmuestraObs.setObservaciones(txtObservaciones.getText());
@@ -454,10 +455,14 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
                     funciones.manipularBotonesMenuPrincipal(false);
                     this.cdSecuencia.insertSecuenciaTerminada(ceSitio);
                     break;
+                case 16:
+                    this.funciones.manipularBotonesMenuPrincipal(false);
+                    this.cdSecuencia.insertSecuenciaTerminada(ceSitio);
+                    break;
             }
         }
     }
-   
+
     private void revisarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
         Integer sitio = this.funciones.sitioCapturaSueloCarbono(this.upmID, 3);
@@ -1359,17 +1364,17 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        if(revision==false){//esta en modo de captura
+        if (revision == false) {//esta en modo de captura
             this.hide();
             funciones.manipularBotonesMenuPrincipal(false);
         }
-        if(revision==true){//entro a modo de revision
-             //System.err.println("Modo Revision");
+        if (revision == true) {//entro a modo de revision
+            //System.err.println("Modo Revision");
             this.hide();
             //UPMForms.revisionModulos.iniciarRevision();
             UPMForms.revisionModulos.setVisible(true);
             UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision=false;
+            revision = false;
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
@@ -1473,6 +1478,11 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
                         UPMForms.arboladoG.setDatosIniciales(ceSitio);
                         UPMForms.arboladoG.setVisible(true);
                         break;
+                    case 16: //A,C y G
+                        this.funciones.manipularBotonesMenuPrincipal(false);
+                        this.cdSecuencia.insertSecuenciaTerminada(ceSitio);
+                        break;
+
                 }
             }
         } else if (secuenciaID != null) {

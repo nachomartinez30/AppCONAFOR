@@ -163,6 +163,10 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
                     UPMForms.parametrosFQ.setDatosiniciales(ceSitio);
                     UPMForms.parametrosFQ.setVisible(true);
                     break;
+                case 16:
+                    UPMForms.carbono.setDatosIniciales(ceSitio);
+                    UPMForms.carbono.setVisible(true);
+                    break;
             }
         }
     }

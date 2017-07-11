@@ -368,6 +368,16 @@ public class FrmClaveVegetacion extends JInternalFrame {
                         UPMForms.observaciones.setVisible(true);
                     }
                     break;
+                case 16:
+                    if (sitio == this.ceSitio.getSitio()) {
+                        UPMForms.suelo.setDatosiniciales(ceSitio);
+                        UPMForms.suelo.setVisible(true);
+                    } else
+                    {
+                        UPMForms.observaciones.setDatosiniciales(ceSitio);
+                        UPMForms.observaciones.setVisible(true);
+                    }
+                    break;
             }
         }
     }
@@ -873,7 +883,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
             if (this.modificar == 0) {
                 crearClaveVegetacion();
                 this.hide();
-                if (this.ceSitio.getSitio() == 1) {
+                if (this.ceSitio.getSitio() == 1) { //es sitio 1
                     UPMForms.caracteristicasUPM.setDatosIniciales(ceSitio);
                     UPMForms.caracteristicasUPM.setVisible(true);
                 } else {

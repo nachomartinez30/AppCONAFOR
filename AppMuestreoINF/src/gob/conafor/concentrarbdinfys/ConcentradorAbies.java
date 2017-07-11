@@ -167,7 +167,7 @@ public class ConcentradorAbies extends JFrame {
 	}
 
 	public void migrar(String pathUbicacion){
-		lblEstatus.setText("Iniciando importaci�n...");
+		lblEstatus.setText("Iniciando importación...");
 		pbExportacion.setValue(0);
 		btnEjecutar.setEnabled(false);
 		btnBuscar.setEnabled(false);
@@ -190,17 +190,17 @@ public class ConcentradorAbies extends JFrame {
 		lblEstatus.setText("Importando PC...");
 		bdImportar.importarPC(pathUbicacion); // 3
 
-		lblEstatus.setText("Importando Informaci�n de accesibilidad del PC...");
+		lblEstatus.setText("Importando Información de accesibilidad del PC...");
 		bdImportar.importarAccesibilidadPC(pathUbicacion); // 4
 		pbExportacion.setValue(10);
 		pbExportacion.repaint();
 
-		lblEstatus.setText("Importando Ep�fitas...");
+		lblEstatus.setText("Importando Epífitas...");
 		bdImportar.importarUPMEpifitas(pathUbicacion); // 5
 		pbExportacion.setValue(15);
 		pbExportacion.repaint();
 
-		lblEstatus.setText("Importando Informaci�n de sitios...");
+		lblEstatus.setText("Importando Información de sitios...");
 		bdImportar.importarSitios(pathUbicacion); // 6
 
 		lblEstatus.setText("Importando Cobertura de suelo de sitio...");
@@ -209,24 +209,24 @@ public class ConcentradorAbies extends JFrame {
 		pbExportacion.setValue(20);
 		pbExportacion.repaint();
 
-		lblEstatus.setText("Importando Fotograf�a hemisferica...");
+		lblEstatus.setText("Importando Fotografía hemisferica...");
 		bdImportar.importarFotografiaHemisferica(pathUbicacion); // 8
 		pbExportacion.setValue(25);
 		pbExportacion.repaint();
 
-		lblEstatus.setText("Importando Informaci�n de transponder...");
+		lblEstatus.setText("Importando Información de transponder...");
 		bdImportar.importarTransponder(pathUbicacion); // 9
 		pbExportacion.setValue(30);
 		pbExportacion.repaint();
 
-		lblEstatus.setText("Importando Par�metros f�sico qu�micos...");
+		lblEstatus.setText("Importando Parómetros fósico quómicos...");
 		bdImportar.importarParametrosFisicoQuimicos(pathUbicacion); // 10
 		pbExportacion.setValue(35);
 		pbExportacion.repaint();
 
-		lblEstatus.setText("Importando Informaci�n de suelo...");
+		lblEstatus.setText("Importando Información de suelo...");
 		bdImportar.importarSueloInformacion(pathUbicacion); // 11
-		lblEstatus.setText("Importando varillas de erosi�n...");
+		lblEstatus.setText("Importando varillas de erosión...");
 		bdImportar.importarSueloVarillasErosion(pathUbicacion); // 12
 		lblEstatus.setText("Importando cobertura del suelo...");
 		bdImportar.importarSueloCobertura(pathUbicacion); // 13
@@ -234,39 +234,39 @@ public class ConcentradorAbies extends JFrame {
 		pbExportacion.setValue(40);
 		pbExportacion.repaint();
 
-		lblEstatus.setText("Importando evidencia de erosi�n del suelo...");
+		lblEstatus.setText("Importando evidencia de erosión del suelo...");
 		bdImportar.importarSueloEvidenciaErosion(pathUbicacion); // 14
 		lblEstatus.setText("Importando Pedestal...");
 		bdImportar.importarSueloPedestal(pathUbicacion); // 15
-		lblEstatus.setText("Importando Erosi�n laminar...");
+		lblEstatus.setText("Importando Erosión laminar...");
 		bdImportar.importarSueloErosionLaminar(pathUbicacion); // 16
 		lblEstatus.setText("Importando Costras...");
 		bdImportar.importarSueloCostras(pathUbicacion); // 17
 		lblEstatus.setText("Importando Canalillo...");
 		bdImportar.importarSueloCanalillo(pathUbicacion); // 18
-		lblEstatus.setText("Importando C�rcava...");
+		lblEstatus.setText("Importando Córcava...");
 		bdImportar.importarSueloCarcava(pathUbicacion); // 19
 		lblEstatus.setText("Importando Pavimentos...");
 		bdImportar.importarSueloPavimentos(pathUbicacion); // 20
-		lblEstatus.setText("Importando Medici�n canalillos...");
+		lblEstatus.setText("Importando Medición canalillos...");
 		bdImportar.importarSueloMedicionCanalillos(pathUbicacion); // 21
-		lblEstatus.setText("Importando Medici�n carcavas...");
+		lblEstatus.setText("Importando Medición carcavas...");
 		bdImportar.importarSueloMedicionCarcavas(pathUbicacion); // 22
-		lblEstatus.setText("Importando Medici�n dunas...");
+		lblEstatus.setText("Importando Medición dunas...");
 		bdImportar.importarSueloMedicionDunas(pathUbicacion); // 23
 		pbExportacion.setValue(45);
 		pbExportacion.repaint();
-		lblEstatus.setText("Importando Erosi�n h�drica canalillo...");
+		lblEstatus.setText("Importando Erosión hódrica canalillo...");
 		bdImportar.importarSueloErosionHidricaCanalillo(pathUbicacion); // 24
 		lblEstatus.setText("Importando Longitud canalillo...");
 		bdImportar.importarSueloLongitudCanalillo(pathUbicacion); // 25
-		lblEstatus.setText("Importando Erosi�n hidrica carcava...");
+		lblEstatus.setText("Importando Erosión hidrica carcava...");
 		bdImportar.importarSueloErosionHidricaCarcava(pathUbicacion); // 26
 		lblEstatus.setText("Importando longitud de carcava...");
 		bdImportar.importarSueloLongitudCarcava(pathUbicacion); // 27
-		lblEstatus.setText("Importando deformaci�n por viento...");
+		lblEstatus.setText("Importando deformación por viento...");
 		bdImportar.importarSueloDeformacionViento(pathUbicacion); // 28
-		lblEstatus.setText("Importando longitud mont�culo...");
+		lblEstatus.setText("Importando longitud montóculo...");
 		bdImportar.importarSueloLongitudMonticulo(pathUbicacion); // 29
 		lblEstatus.setText("Importando hojarasca...");
 		bdImportar.importarSueloHojarasca(pathUbicacion); // 30
@@ -279,11 +279,11 @@ public class ConcentradorAbies extends JFrame {
 		pbExportacion.setValue(50);
 		pbExportacion.repaint();
 
-		lblEstatus.setText("Importando Informaci�n de carbono e incendios...");
+		lblEstatus.setText("Importando Información de carbono e incendios...");
 
-		lblEstatus.setText("Importando Material le�oso ca�do de 100...");
+		lblEstatus.setText("Importando Material leóoso caódo de 100...");
 		bdImportar.importarCarbonoMaterialLenioso100(pathUbicacion); // 34
-		lblEstatus.setText("Importando Material le�oso ca�do de 1000...");
+		lblEstatus.setText("Importando Material leóoso caódo de 1000...");
 		bdImportar.importarCarbonoMaterialLenioso1000(pathUbicacion); // 35
 		lblEstatus.setText("Importando cubierta vegetal...");
 		bdImportar.importarCarbonoCubiertaVegetal(pathUbicacion); // 36
@@ -310,7 +310,7 @@ public class ConcentradorAbies extends JFrame {
 		pbExportacion.setValue(65);
 		pbExportacion.repaint();
 
-		lblEstatus.setText("Importando Repoblado vegetaci�n menor...");
+		lblEstatus.setText("Importando Repoblado vegetación menor...");
 		bdImportar.importarTaxonomiaRepobladoVM(pathUbicacion); // 44
 		pbExportacion.setValue(70);
 		pbExportacion.repaint();
@@ -320,25 +320,25 @@ public class ConcentradorAbies extends JFrame {
 		pbExportacion.setValue(75);
 		pbExportacion.repaint();
 
-		lblEstatus.setText("Importando Vegetaci�n mayor gregarios...");
+		lblEstatus.setText("Importando Vegetación mayor gregarios...");
 		bdImportar.importarTaxonomiaVegetacionMayorGregarios(pathUbicacion); // 46
 		bdImportar.importarVegetacionMayorGDanioSeveridad(pathUbicacion); // 47
 		pbExportacion.setValue(80);
 		pbExportacion.repaint();
 
-		lblEstatus.setText("Importando Vegetaci�n mayor individual...");
+		lblEstatus.setText("Importando Vegetación mayor individual...");
 		bdImportar.importarTaxonomiaVegetacionMayorIndividual(pathUbicacion); // 48
 		bdImportar.importarVegetacionMayorIDanioSeveridad(pathUbicacion); // 49
 		pbExportacion.setValue(85);
 		pbExportacion.repaint();
 
-		lblEstatus.setText("Importando Vegetaci�n menor...");
+		lblEstatus.setText("Importando Vegetación menor...");
 		bdImportar.importarTaxonomiaVegetacionMenor(pathUbicacion); // 50
 		bdImportar.importarVegetacionMenorDanioSeveridad(pathUbicacion); // 51
 		pbExportacion.setValue(90);
 		pbExportacion.repaint();
 
-		lblEstatus.setText("Importando Colecta bot�nica...");
+		lblEstatus.setText("Importando Colecta botónica...");
 		bdImportar.importarTaxonomiaColectaBotanica(pathUbicacion); // 52
 		pbExportacion.setValue(95);
 		pbExportacion.repaint();
@@ -374,13 +374,13 @@ public class ConcentradorAbies extends JFrame {
 			String extension = ruta.substring(cadena, tamanio);
 			if (!extension.equals("oct")) {
 				JOptionPane.showMessageDialog(null, "Debe seleccionar un base de datos valida a importar" + "",
-						"Importaci�n", JOptionPane.INFORMATION_MESSAGE);
+						"Importación", JOptionPane.INFORMATION_MESSAGE);
 				txtUbicacion.setText("");
 			} else {
 				txtUbicacion.setText(ruta);
 				Path currentPath = Paths.get("");
 				String path = currentPath.toAbsolutePath().toString();
-				txtRutaSalida.setText(path + "/MuestreoINF_2015.cons");
+				txtRutaSalida.setText(path + "/MuestreoINF_2017.cons");
 				//setPathConcentrador(ruta);
 				btnEjecutar.setEnabled(true);
 

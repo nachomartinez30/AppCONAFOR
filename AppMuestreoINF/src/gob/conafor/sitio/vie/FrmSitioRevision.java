@@ -1706,18 +1706,18 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbUPMActionPerformed
 
     private void chkAccesibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAccesibleActionPerformed
-        if (chkAccesible.isSelected()) {
-            Integer upm = (Integer) cmbUPM.getSelectedItem();
-            Integer sitio = (Integer) cmbSitio.getSelectedItem();
-            Object[] opciones = {"Si", "No"};
-            int respuesta = JOptionPane.showOptionDialog(null, "¿Esta seguro de borrar el registro de sitio y todos los registros relacionados?",
-                    "Suelo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
-            if (respuesta == JOptionPane.YES_OPTION) {
-                this.cdSitio.deleteSitio(upm, sitio);
+        this.accesible = esAccesible();
+        if (this.actualizacion == 1) {
+            Integer upmid = (Integer) cmbUPM.getSelectedItem();
+            Integer sitio = (Integer) cmbUPM.getSelectedItem();
+            if (chkAccesible.isSelected()) {
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro de borrar el registro de sitio y todos los registros relacionados?",
+                        "Sitio", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    this.cdSitio.deleteSitio(upmid, sitio);
+                }
             }
-        }
-        combo.reiniciarComboModel(cmbSitio);
-        fillSitiosRevision();
+        } 
     }//GEN-LAST:event_chkAccesibleActionPerformed
 
     private void chkSenialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkSenialActionPerformed

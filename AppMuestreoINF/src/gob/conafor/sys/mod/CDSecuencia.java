@@ -534,6 +534,49 @@ public class CDSecuencia {
         }
     }
 
+     public void insertSecuencia16(int upmID, int sitio) {
+        FuncionesComunes funciones = new FuncionesComunes();
+        //Solo módulo ACEG
+        List<Integer> listFormatosID = new ArrayList<>();
+        Integer noSitio = funciones.sitioCapturaSueloCarbono(upmID, 3);
+
+            listFormatosID.add(0, 5);//Modulo A
+            listFormatosID.add(1, 6);
+            listFormatosID.add(2, 13);
+            listFormatosID.add(3, 7);//Módulo C
+            listFormatosID.add(4, 8);
+            listFormatosID.add(5, 18);//Módulo G
+            listFormatosID.add(6, 19);
+            listFormatosID.add(7, 20);
+            listFormatosID.add(8, 4);//Submuestra
+            if(sitio != 1){
+                listFormatosID.remove(1);
+            }
+        
+        int size = listFormatosID.size();
+        Connection conn = LocalConnection.getConnection();
+        try {
+            Statement st = conn.createStatement();
+            for (int i = 0; i < size; i++) {
+                query = "INSERT INTO SYS_SecuenciaCaptura(SecuenciaID, UPMID, Sitio, FormatoID)VALUES(" + 16 + ", " + upmID + ", " + sitio + ", " + listFormatosID.get(i) + ")";
+                st.executeUpdate(query);
+                conn.commit();
+            }
+            st.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la secuencia 3", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(
+                        null, "Error! al cerrar la base de datos al insertar datos de la secuencia 3",
+                        "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    
     public void insertSecuencia3(int upmID, int sitio) {
         FuncionesComunes funciones = new FuncionesComunes();
         //Solo módulo ACEG

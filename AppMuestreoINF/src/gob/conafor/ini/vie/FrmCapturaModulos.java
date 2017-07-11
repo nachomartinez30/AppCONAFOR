@@ -20,6 +20,7 @@ public class FrmCapturaModulos extends javax.swing.JInternalFrame {
     private FuncionesComunes combo = new FuncionesComunes();
     private Integer secuenciaID;
     private Integer sitioID;
+    
     private Version ver=new Version();
     private String version=ver.getVersion();
     
@@ -108,6 +109,9 @@ public class FrmCapturaModulos extends javax.swing.JInternalFrame {
                 break;
             case 15:
                 cdSecuencia.insertSecuencia15(upmID, sitio);
+                break;
+            case 16:
+                 cdSecuencia.insertSecuencia16(upmID, sitio);
                 break;
         }
     }
@@ -369,6 +373,10 @@ public class FrmCapturaModulos extends javax.swing.JInternalFrame {
                     UPMForms.claveVegetacion.setVisible(true);
                     break;
                 case 15://A y G
+                    UPMForms.claveVegetacion.setDatosIniciales(ceSitio);
+                    UPMForms.claveVegetacion.setVisible(true);
+                    break;
+                case 16://Modulos A, E y G
                     UPMForms.claveVegetacion.setDatosIniciales(ceSitio);
                     UPMForms.claveVegetacion.setVisible(true);
                     break;

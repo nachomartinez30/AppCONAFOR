@@ -8,7 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
+import gob.conafor.concentrarbdinfys.ConfigUserConnection;
+import gob.conafor.concentrarbdinfys.ExternalConnectionCons;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -38,12 +39,14 @@ import java.nio.file.Paths;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 public class ConcentradorAbies extends JFrame {
 
 	public String ruta;
-	//private String configUser = "/src/lib/ConfigUser.db";
-        private String configUser = "/src/db/ConfigUser.db";
+	private String configUser = "/AbiesProject/src/Database/ConfigUser.db";
+	private ExternalConnectionCons externalConnection = new ExternalConnectionCons();
 	private ConfigUserConnection configUserConnection = new ConfigUserConnection();
 	private Connection baseDatosConfig;
 	private java.sql.Statement sqlConfig;
@@ -57,6 +60,7 @@ public class ConcentradorAbies extends JFrame {
 	public JButton btnEjecutar;
 	public JLabel lblEstatus;
 	public File[] baseDatos;
+	private JTextArea txtaMonitoreo;
 
 	/**
 	 * Create the frame.
@@ -64,7 +68,7 @@ public class ConcentradorAbies extends JFrame {
 	public ConcentradorAbies() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 796, 447);
+		setBounds(100, 100, 796, 557);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -142,13 +146,20 @@ public class ConcentradorAbies extends JFrame {
 		btnEjecutar = new JButton("Ejecutar");
 		btnEjecutar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				HiloImportacion importacion =new HiloImportacion(lblEstatus, pbExportacion, btnEjecutar, baseDatos, btnBuscar, txtUbicacion);
+				HiloImportacion importacion =new HiloImportacion(lblEstatus, pbExportacion, btnEjecutar, baseDatos, btnBuscar, txtUbicacion,txtaMonitoreo);
 				importacion.execute();
 			}
 		});
 		btnEjecutar.setEnabled(false);
 		btnEjecutar.setBounds(351, 293, 111, 24);
 		panel.add(btnEjecutar);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 395, 745, 112);
+		panel.add(scrollPane);
+		
+		txtaMonitoreo = new JTextArea();
+		scrollPane.setViewportView(txtaMonitoreo);
 	}
 
 	public void setPathConcentrador(String ruta) {
@@ -180,6 +191,7 @@ public class ConcentradorAbies extends JFrame {
 
 		lblEstatus.setText("Importando UPM...");
 		bdImportar.validarRepetidos(pathUbicacion);
+		//bdImportar.eliminarRepetido(upmID);
 		bdImportar.importarUPM_UPM(pathUbicacion); // 1
 
 		lblEstatus.setText("Importando Contacto...");
@@ -219,7 +231,7 @@ public class ConcentradorAbies extends JFrame {
 		pbExportacion.setValue(30);
 		pbExportacion.repaint();
 
-		lblEstatus.setText("Importando Parómetros fósico quómicos...");
+		lblEstatus.setText("Importando Parámetros físico químicos...");
 		bdImportar.importarParametrosFisicoQuimicos(pathUbicacion); // 10
 		pbExportacion.setValue(35);
 		pbExportacion.repaint();
@@ -244,7 +256,7 @@ public class ConcentradorAbies extends JFrame {
 		bdImportar.importarSueloCostras(pathUbicacion); // 17
 		lblEstatus.setText("Importando Canalillo...");
 		bdImportar.importarSueloCanalillo(pathUbicacion); // 18
-		lblEstatus.setText("Importando Córcava...");
+		lblEstatus.setText("Importando Cárcava...");
 		bdImportar.importarSueloCarcava(pathUbicacion); // 19
 		lblEstatus.setText("Importando Pavimentos...");
 		bdImportar.importarSueloPavimentos(pathUbicacion); // 20
@@ -256,7 +268,7 @@ public class ConcentradorAbies extends JFrame {
 		bdImportar.importarSueloMedicionDunas(pathUbicacion); // 23
 		pbExportacion.setValue(45);
 		pbExportacion.repaint();
-		lblEstatus.setText("Importando Erosión hódrica canalillo...");
+		lblEstatus.setText("Importando Erosión hídrica canalillo...");
 		bdImportar.importarSueloErosionHidricaCanalillo(pathUbicacion); // 24
 		lblEstatus.setText("Importando Longitud canalillo...");
 		bdImportar.importarSueloLongitudCanalillo(pathUbicacion); // 25
@@ -266,7 +278,7 @@ public class ConcentradorAbies extends JFrame {
 		bdImportar.importarSueloLongitudCarcava(pathUbicacion); // 27
 		lblEstatus.setText("Importando deformación por viento...");
 		bdImportar.importarSueloDeformacionViento(pathUbicacion); // 28
-		lblEstatus.setText("Importando longitud montóculo...");
+		lblEstatus.setText("Importando longitud montículo...");
 		bdImportar.importarSueloLongitudMonticulo(pathUbicacion); // 29
 		lblEstatus.setText("Importando hojarasca...");
 		bdImportar.importarSueloHojarasca(pathUbicacion); // 30
@@ -281,9 +293,9 @@ public class ConcentradorAbies extends JFrame {
 
 		lblEstatus.setText("Importando Información de carbono e incendios...");
 
-		lblEstatus.setText("Importando Material leóoso caódo de 100...");
+		lblEstatus.setText("Importando Material leñoso caído de 100...");
 		bdImportar.importarCarbonoMaterialLenioso100(pathUbicacion); // 34
-		lblEstatus.setText("Importando Material leóoso caódo de 1000...");
+		lblEstatus.setText("Importando Material leñoso caído de 1000...");
 		bdImportar.importarCarbonoMaterialLenioso1000(pathUbicacion); // 35
 		lblEstatus.setText("Importando cubierta vegetal...");
 		bdImportar.importarCarbonoCubiertaVegetal(pathUbicacion); // 36
@@ -338,7 +350,7 @@ public class ConcentradorAbies extends JFrame {
 		pbExportacion.setValue(90);
 		pbExportacion.repaint();
 
-		lblEstatus.setText("Importando Colecta botónica...");
+		lblEstatus.setText("Importando Colecta botánica...");
 		bdImportar.importarTaxonomiaColectaBotanica(pathUbicacion); // 52
 		pbExportacion.setValue(95);
 		pbExportacion.repaint();
@@ -380,8 +392,8 @@ public class ConcentradorAbies extends JFrame {
 				txtUbicacion.setText(ruta);
 				Path currentPath = Paths.get("");
 				String path = currentPath.toAbsolutePath().toString();
-				txtRutaSalida.setText(path + "/MuestreoINF_2017.cons");
-				//setPathConcentrador(ruta);
+				txtRutaSalida.setText(path + "/MuestreoINF_2015.cons");
+				setPathConcentrador(ruta);
 				btnEjecutar.setEnabled(true);
 
 			}

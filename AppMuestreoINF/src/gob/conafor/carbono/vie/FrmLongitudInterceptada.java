@@ -142,6 +142,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         limpiarControlesCobertura();
         limpiarControlesComponentes();
         chkLongitudComponentes.setSelected(funciones.habilitarCheckBox("CARBONO_LongitudComponente", this.sitioID));
+        chkCoberturaDosel.setSelected(funciones.habilitarCheckBox("CARBONO_CoberturaDosel", this.sitioID));
     }
 
     private void fillCmbTransectoComponente() {

@@ -188,7 +188,7 @@ public class FrmSuelo extends JInternalFrame {
             }
         }
         this.actualizar = 1;
-        this.chkCoberturaSuelo.setEnabled(funciones.habilitarCheckBox("SUELO_CoberturaSuelo", this.sitioID));
+        this.chkCoberturaSuelo.setSelected(funciones.habilitarCheckBox("SUELO_CoberturaSuelo", this.sitioID));
         this.funciones.manipularBotonesMenuPrincipal(true);
     }
     
@@ -395,12 +395,12 @@ public class FrmSuelo extends JInternalFrame {
                     "Suelo", JOptionPane.INFORMATION_MESSAGE);
             txtProfundidad4.requestFocus();
             return false;
-        } else if (txtProfundidad5.getText().isEmpty()) {
+        } else /*if (txtProfundidad5.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Error! Debe proporcionar datos para la profundidad 5",
                     "Suelo", JOptionPane.INFORMATION_MESSAGE);
             txtProfundidad5.requestFocus();
             return false;
-        } else {
+        } else */{
             return true;
         }
     }

@@ -155,7 +155,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         this.funciones.reiniciarComboModel(cmbConsecutivo);
         fillCmbConsecutivo();
         funciones.manipularBotonesMenuPrincipal(true);
-        this.chkArbolado.setEnabled(funciones.habilitarCheckBox("TAXONOMIA_Arbolado", this.sitioID));
+        this.chkArbolado.setSelected(funciones.habilitarCheckBox("TAXONOMIA_Arbolado", this.sitioID));
         this.modificar = 1;
     }
     

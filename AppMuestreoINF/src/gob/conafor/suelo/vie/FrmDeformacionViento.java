@@ -140,6 +140,7 @@ private boolean revision;
             }
             txtObservacionesTransponder.setText(this.ceTransponder.getObservaciones());
       
+        this.chkMonticulosDunas.setSelected(funciones.habilitarCheckBox("SUELO_DeformacionViento", this.sitioID));
         this.actualizar = 1;
         funciones.manipularBotonesMenuPrincipal(true);
         limpiarDatosMonticulos();

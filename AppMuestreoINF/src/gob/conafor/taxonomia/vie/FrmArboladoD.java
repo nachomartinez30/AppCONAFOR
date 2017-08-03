@@ -2414,7 +2414,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         cmbMuerteRegresiva.setSelectedItem(null);
         cmbTransparenciaFollaje.setEnabled(false);
         cmbTransparenciaFollaje.setSelectedItem(null);
-        txtAlturaFusteLimpio.setEnabled(false);
+        //txtAlturaFusteLimpio.setEnabled(false);
         txtAlturaFusteLimpio.setText("");
         txtAlturaFusteLimpio.setValue(null);
         txtAlturaComercial.setEnabled(false);
@@ -2529,16 +2529,16 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         CatEGradoPutrefaccionArbolado gp = new CatEGradoPutrefaccionArbolado();
         gp.setGradoPutrefaccionID(arbol.getGradoPutrefaccionID());
         
-        if (arbol.getFormaVidaID() < 4 || arbol.getFormaVidaID() == 7) {   //Ubicar si se habilitara la forma de fuste en base 
-            cmbCondicion.removeAllItems(); // a lo seleccionado en formas de vida arborecentes
+        if (arbol.getFormaVidaID() < 4 || arbol.getFormaVidaID() == 7) {   //Ubicar si se habilitara la forma de fuste con base  en lo seleccionado en formas de vida arborecentes
+            cmbCondicion.removeAllItems();
             fillCmbCondicionArbolado();
             cmbCondicion.setSelectedItem(ca);
-            if (condicionArbolado == 1) { // y condicion
+            if (condicionArbolado == 1) { // VIVO
                 CatEFormaFuste ff = new CatEFormaFuste();
                 ff.setFormaFusteID(arbol.getFormaFusteID());
                 estadoArbolVivo();
                 cmbFormaFuste.setSelectedItem(ff);
-            } else if (condicionArbolado == 2) {
+            } else if (condicionArbolado == 2) {//muerto en pie
                 CatECondicionMuertoPie mp = new CatECondicionMuertoPie();
                 int muertoID = arbol.getMuertoPieID();
                 int gradoP = arbol.getGradoPutrefaccionID();
@@ -2554,7 +2554,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
                     cmbGradoPutrefaccion.setSelectedItem(gp);
                     estadoMuertoPieCD(muertoID);
                 }
-            } else if (condicionArbolado > 2) {
+            } else if (condicionArbolado > 2) {//Tocon
                 estadoArbolTocon();
                 CatETipoTocon tt = new CatETipoTocon();
                 tt.setTipoToconID(arbol.getTipoToconID());
@@ -2563,9 +2563,9 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         } else {
             cmbCondicion.removeAllItems();
             fillCmbCondicionLianas();
-            if (condicionArbolado == 1) {
+            if (condicionArbolado == 1) {//vivo
                 estadoLianaCactaceasCaniasVivos();
-            } else {
+            } else {//muerto
                 CatECondicionMuertoPie mp = new CatECondicionMuertoPie();
                 int muertoID = arbol.getMuertoPieID();
                 int gradoP = arbol.getGradoPutrefaccionID();
@@ -2670,6 +2670,12 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         // txtNumeroIndividuo.requestFocus();
         cmbConsecutivo.requestFocus();
         txtClaveColecta.setText(arbol.getClaveColecta());
+        
+        if(arbol.getFormaVidaID()==3){//Arborecentes vivo
+            estadoArborescenteVivo(true);
+        }
+            
+        
     }
     
     private void seleccionarSiguienteFormulario(CESitio ceSitio) {
@@ -3078,7 +3084,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         dcmCN.removeAllElements();
         if (formaVida != null) {
             if(cmbFormaVida.getSelectedIndex()>2){
-                txtAlturaFusteLimpio.setEnabled(false);
+                //txtAlturaFusteLimpio.setEnabled(false);
                 txtAlturaComercial.setEnabled(false);
                 if(cmbFormaVida.getSelectedIndex()==6){//cactaceas arborecentes
                     txtAlturaFusteLimpio.setEnabled(true);
@@ -3129,7 +3135,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
                 estadoArbolTocon();
             }
             
-            if(cmbCondicion.getSelectedIndex()==2){//es marbol muerto en pie
+            if(cmbCondicion.getSelectedIndex()==2){//es arbol muerto en pie
                 cmbCondicionMuertoPie.setEnabled(true);
                 cmbGradoPutrefaccion.setEnabled(false);
                 cmbTipoTocon.setEnabled(false);
@@ -3148,7 +3154,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
                
             }
              if(cmbCondicion.getSelectedIndex()==1&&cmbFormaVida.getSelectedIndex()==3){//es arborecente 
-                txtAlturaFusteLimpio.setEnabled(false);
+                //txtAlturaFusteLimpio.setEnabled(false);
                 txtAlturaComercial.setEnabled(false);
                 txtDiametroCopaNS.setEnabled(true);
                 txtDiametroCopaEO.setEnabled(true);

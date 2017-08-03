@@ -6,11 +6,10 @@
 package gob.conafor.utils;
 
 /**
- *
  * @author Nacho Martinez
  */
 public class Version {
-    String version="   (V_1.9)";
+    String version="   (V_1.9.1)";
 
     public String getVersion() {
         return version;

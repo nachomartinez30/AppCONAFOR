@@ -2206,7 +2206,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         cmbFormaFuste.setSelectedItem(null);
         cmbTipoTocon.setEnabled(false);
         cmbTipoTocon.setSelectedItem(null);
-        txtAlturaFusteLimpio.setEnabled(false);
+        //txtAlturaFusteLimpio.setEnabled(false);
         txtAlturaFusteLimpio.setText("");
         txtAlturaFusteLimpio.setValue(null);
         txtAlturaComercial.setEnabled(false);
@@ -2428,6 +2428,8 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
             txtAlturaComercial.setText("");
             txtAlturaComercial.setValue(null);
         }
+        
+
 
         // txtNumeroIndividuo.requestFocus();
         cmbConsecutivo.requestFocus();
@@ -2779,8 +2781,8 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
         DefaultComboBoxModel dcmCN = (DefaultComboBoxModel) cmbCondicion.getModel();
         dcmCN.removeAllElements();
         if (formaVida != null) {
-            if (cmbFormaVida.getSelectedIndex() > 2) {
-                txtAlturaFusteLimpio.setEnabled(false);
+            if (cmbFormaVida.getSelectedIndex() > 2) {//
+                //txtAlturaFusteLimpio.setEnabled(false);
                 txtAlturaComercial.setEnabled(false);
                 cmbVigor.setEnabled(false);
                 cmbNivelVigor.setEnabled(false);
@@ -2862,7 +2864,7 @@ public class FrmArboladoG extends javax.swing.JInternalFrame {
                 cmbNivelVigor.setEnabled(false);
             }
             if (cmbCondicion.getSelectedIndex() == 1 && cmbFormaVida.getSelectedIndex() == 3) {//es arborecente 
-                txtAlturaFusteLimpio.setEnabled(false);
+               // txtAlturaFusteLimpio.setEnabled(false);
                 txtAlturaComercial.setEnabled(false);
                 txtDiametroCopaNS.setEnabled(true);
                 txtDiametroCopaEO.setEnabled(true);

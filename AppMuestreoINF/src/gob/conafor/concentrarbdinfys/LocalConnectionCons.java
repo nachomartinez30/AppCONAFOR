@@ -43,10 +43,10 @@ public class LocalConnectionCons {
 		Path currentPath = Paths.get("");
 		String path = currentPath.toAbsolutePath().toString();
 
-		// return "jdbc:sqlite:" + path + "/MuestreoINF_2017.cons"; // Para
+		 return "jdbc:sqlite:" + path + "/MuestreoINF_2017.cons"; // Para
 																	// distribuir
 
-		return "jdbc:sqlite:" + path + "/src/db/MuestreoINF_2017.cons"; //En
+		//return "jdbc:sqlite:" + path + "/src/db/MuestreoINF_2017.cons"; //En
 		// producci�n.
 	}
 

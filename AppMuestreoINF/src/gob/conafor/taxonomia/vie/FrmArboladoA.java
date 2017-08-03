@@ -2162,7 +2162,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         txtAnguloInclinacion.setEnabled(true);
         txtAnguloInclinacion.setText("");
         txtAnguloInclinacion.setValue(null);
-        txtAlturaFusteLimpio.setEnabled(false);
+        //txtAlturaFusteLimpio.setEnabled(false);
         txtAlturaFusteLimpio.setText("");
         txtAlturaFusteLimpio.setValue(null);
         txtAlturaComercial.setEnabled(false);
@@ -2214,7 +2214,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         cmbFormaFuste.setSelectedItem(null);
         cmbTipoTocon.setEnabled(false);
         cmbTipoTocon.setSelectedItem(null);
-        txtAlturaFusteLimpio.setEnabled(false);
+        //txtAlturaFusteLimpio.setEnabled(false);
         txtAlturaFusteLimpio.setText("");
         txtAlturaFusteLimpio.setValue(null);
         txtAlturaComercial.setEnabled(false);
@@ -2448,6 +2448,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         // txtNumeroIndividuo.requestFocus();
         cmbConsecutivo.requestFocus();
         txtClaveColecta.setText(arbol.getClaveColecta());
+
     }
     
     private boolean validarCreacionSubmuestra(){
@@ -2784,7 +2785,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         dcmCN.removeAllElements();
         if (formaVida != null) {
             if(cmbFormaVida.getSelectedIndex()>2){ //3-arborecente 4-lianas y bejucos 5-Cañas y bambu 6-cactaceas arborecentes
-                txtAlturaFusteLimpio.setEnabled(false);
+                //txtAlturaFusteLimpio.setEnabled(false);
                 txtAlturaComercial.setEnabled(false);
                 cmbVigor.setEnabled(false);
                 cmbNivelVigor.setEnabled(false);
@@ -2865,7 +2866,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
                 cmbNivelVigor.setEnabled(false);
             }
              if(cmbCondicion.getSelectedIndex()==1&&cmbFormaVida.getSelectedIndex()==3){//es arborecente 
-                txtAlturaFusteLimpio.setEnabled(false);
+                //txtAlturaFusteLimpio.setEnabled(false);
                 txtAlturaComercial.setEnabled(false);
                 txtDiametroCopaNS.setEnabled(true);
                 txtDiametroCopaEO.setEnabled(true);

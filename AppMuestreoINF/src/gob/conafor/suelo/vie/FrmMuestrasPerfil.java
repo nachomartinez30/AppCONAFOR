@@ -943,6 +943,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        btnContinuar.setMnemonic('c');
         btnContinuar.setText("Continuar");
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -950,6 +951,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             }
         });
 
+        btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1675,6 +1677,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        btnGuardarMuestra.setMnemonic('g');
         btnGuardarMuestra.setText("Guardar");
         btnGuardarMuestra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1682,6 +1685,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             }
         });
 
+        btnModificarMuestra.setMnemonic('m');
         btnModificarMuestra.setText("Modificar");
         btnModificarMuestra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1689,6 +1693,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             }
         });
 
+        btnEliminarMuestra.setMnemonic('e');
         btnEliminarMuestra.setText("Eliminar");
         btnEliminarMuestra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1696,6 +1701,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setMnemonic('l');
         jButton1.setText("Limpiar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -815,6 +815,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
                 .addGap(0, 13, Short.MAX_VALUE))
         );
 
+        btnAgregar.setMnemonic('a');
         btnAgregar.setText("Agregar");
         btnAgregar.setNextFocusableComponent(btnModificar);
         btnAgregar.setPreferredSize(new java.awt.Dimension(79, 23));
@@ -824,6 +825,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
             }
         });
 
+        btnElimnar.setMnemonic('e');
         btnElimnar.setText("Eliminar");
         btnElimnar.setNextFocusableComponent(btnColecta);
         btnElimnar.setPreferredSize(new java.awt.Dimension(79, 23));
@@ -833,6 +835,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
             }
         });
 
+        btnModificar.setMnemonic('m');
         btnModificar.setText(" Modificar");
         btnModificar.setNextFocusableComponent(btnElimnar);
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -857,6 +860,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(grdVegetacionvMayor);
 
+        btnContinuar.setMnemonic('c');
         btnContinuar.setText("Continuar");
         btnContinuar.setNextFocusableComponent(btnSalir);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
@@ -865,6 +869,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
             }
         });
 
+        btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.setNextFocusableComponent(cmbConsecutivo);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -873,6 +878,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
             }
         });
 
+        btnColecta.setMnemonic('o');
         btnColecta.setText("Colecta");
         btnColecta.setNextFocusableComponent(btnLimpiar);
         btnColecta.addActionListener(new java.awt.event.ActionListener() {
@@ -894,6 +900,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
             }
         });
 
+        btnLimpiar.setMnemonic('l');
         btnLimpiar.setText("Limpiar Controles");
         btnLimpiar.setNextFocusableComponent(btnContinuar);
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {

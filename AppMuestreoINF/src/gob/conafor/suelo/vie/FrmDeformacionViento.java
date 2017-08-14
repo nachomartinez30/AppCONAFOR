@@ -1377,6 +1377,7 @@ private boolean revision;
                 .addContainerGap())
         );
 
+        btnContinuar.setMnemonic('c');
         btnContinuar.setText("Continuar");
         btnContinuar.setNextFocusableComponent(btnSalir);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
@@ -1385,6 +1386,7 @@ private boolean revision;
             }
         });
 
+        btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -1723,6 +1723,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnContinuar1.setMnemonic('c');
         btnContinuar1.setText("Continuar");
         btnContinuar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1730,6 +1731,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
             }
         });
 
+        btnSalir1.setMnemonic('s');
         btnSalir1.setText("Salir");
         btnSalir1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

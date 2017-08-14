@@ -513,6 +513,7 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnContinuar">
           <Properties>
+            <Property name="mnemonic" type="int" value="99"/>
             <Property name="label" type="java.lang.String" value="Continuar"/>
           </Properties>
           <Events>
@@ -521,6 +522,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
+            <Property name="mnemonic" type="int" value="115"/>
             <Property name="label" type="java.lang.String" value="Salir"/>
           </Properties>
           <Events>
@@ -818,6 +820,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnRegresar">
           <Properties>
+            <Property name="mnemonic" type="int" value="114"/>
             <Property name="text" type="java.lang.String" value="Regresar"/>
           </Properties>
           <Events>

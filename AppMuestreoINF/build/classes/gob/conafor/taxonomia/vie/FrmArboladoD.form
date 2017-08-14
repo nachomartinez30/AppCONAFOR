@@ -155,6 +155,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnTrazoSitio">
           <Properties>
+            <Property name="mnemonic" type="int" value="116"/>
             <Property name="text" type="java.lang.String" value="Trazo del sitio"/>
           </Properties>
           <Events>
@@ -1099,6 +1100,7 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnAgregar">
           <Properties>
+            <Property name="mnemonic" type="int" value="97"/>
             <Property name="text" type="java.lang.String" value="Agregar"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="btnModificar"/>
@@ -1113,6 +1115,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnElimnar">
           <Properties>
+            <Property name="mnemonic" type="int" value="101"/>
             <Property name="text" type="java.lang.String" value="Eliminar"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="btnContinuar"/>
@@ -1127,6 +1130,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnModificar">
           <Properties>
+            <Property name="mnemonic" type="int" value="109"/>
             <Property name="text" type="java.lang.String" value=" Modificar"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="btnElimnar"/>
@@ -1158,6 +1162,7 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnContinuar">
           <Properties>
+            <Property name="mnemonic" type="int" value="99"/>
             <Property name="text" type="java.lang.String" value="Continuar"/>
           </Properties>
           <Events>
@@ -1166,6 +1171,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
+            <Property name="mnemonic" type="int" value="115"/>
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
           <Events>
@@ -1212,6 +1218,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnColecta">
           <Properties>
+            <Property name="mnemonic" type="int" value="111"/>
             <Property name="text" type="java.lang.String" value="Colecta"/>
           </Properties>
           <Events>
@@ -1220,6 +1227,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnLimparControles">
           <Properties>
+            <Property name="mnemonic" type="int" value="108"/>
             <Property name="text" type="java.lang.String" value="Limpiar controles"/>
           </Properties>
           <Events>

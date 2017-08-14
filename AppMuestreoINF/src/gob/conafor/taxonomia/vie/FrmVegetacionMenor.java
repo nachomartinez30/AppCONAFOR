@@ -765,6 +765,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
         lblVegetacionMenorCobertura.setText("Registro de vegetación menor");
         lblVegetacionMenorCobertura.setOpaque(true);
 
+        btnContinuar.setMnemonic('c');
         btnContinuar.setText("Continuar");
         btnContinuar.setNextFocusableComponent(btnSalir);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
@@ -773,6 +774,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
             }
         });
 
+        btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1242,6 +1244,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnGuardar.setMnemonic('g');
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1249,6 +1252,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
             }
         });
 
+        btnModificar.setMnemonic('m');
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1256,6 +1260,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
             }
         });
 
+        btnEliminar.setMnemonic('e');
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1263,6 +1268,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
             }
         });
 
+        btnColecta.setMnemonic('o');
         btnColecta.setText("Colecta");
         btnColecta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1287,7 +1293,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
         pnlPrincipal.setLayout(pnlPrincipalLayout);
         pnlPrincipalLayout.setHorizontalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PnlCoordenadas4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 942, Short.MAX_VALUE)
+            .addComponent(PnlCoordenadas4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 938, Short.MAX_VALUE)
             .addComponent(lblVegetacionMenorCobertura, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
                 .addComponent(lblUPM)

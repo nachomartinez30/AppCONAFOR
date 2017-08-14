@@ -1365,6 +1365,7 @@ public class FrmMaterialLenioso extends JInternalFrame {
                 .addGap(27, 27, 27))
         );
 
+        btnContinuar.setMnemonic('c');
         btnContinuar.setText("Continuar");
         btnContinuar.setNextFocusableComponent(btnSalir);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
@@ -1373,6 +1374,7 @@ public class FrmMaterialLenioso extends JInternalFrame {
             }
         });
 
+        btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

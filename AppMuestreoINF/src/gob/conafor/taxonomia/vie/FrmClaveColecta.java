@@ -250,6 +250,7 @@ public class FrmClaveColecta extends javax.swing.JDialog {
 
         lblTipoColecta.setText("Tipo de colecta:");
 
+        jButton1.setMnemonic('l');
         jButton1.setText("limpiar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -314,6 +315,7 @@ public class FrmClaveColecta extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -326,6 +328,7 @@ public class FrmClaveColecta extends javax.swing.JDialog {
         lblClaveColecta.setText("Asignación de clave de colecta botánica");
         lblClaveColecta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        btnAsignar.setMnemonic('a');
         btnAsignar.setText("Asignar");
         btnAsignar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -347,6 +350,7 @@ public class FrmClaveColecta extends javax.swing.JDialog {
         lblClaveNueva.setText("Crear una clave nueva");
         lblClaveNueva.setOpaque(true);
 
+        btnDesasignar.setMnemonic('d');
         btnDesasignar.setText("Desasignar");
         btnDesasignar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -354,6 +358,7 @@ public class FrmClaveColecta extends javax.swing.JDialog {
             }
         });
 
+        btnModificar.setMnemonic('m');
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

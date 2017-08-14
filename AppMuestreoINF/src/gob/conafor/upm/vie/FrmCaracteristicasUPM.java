@@ -781,6 +781,7 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
         lblPresenciaRamas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPresenciaRamas.setText("Presencia en ramas");
 
+        btnGuardar.setMnemonic('g');
         btnGuardar.setText("Guardar");
         btnGuardar.setActionCommand("");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -789,6 +790,7 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
             }
         });
 
+        btnModificar.setMnemonic('m');
         btnModificar.setText("Modificar");
         btnModificar.setActionCommand("");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -797,6 +799,7 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
             }
         });
 
+        btnEliminar.setMnemonic('e');
         btnEliminar.setText("Eliminar");
         btnEliminar.setActionCommand("");
         btnEliminar.setNextFocusableComponent(btnContinuar);
@@ -880,6 +883,7 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
         });
         jScrollPane1.setViewportView(grdEpifitas);
 
+        btnContinuar.setMnemonic('c');
         btnContinuar.setText("Continuar");
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -887,6 +891,7 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
             }
         });
 
+        btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

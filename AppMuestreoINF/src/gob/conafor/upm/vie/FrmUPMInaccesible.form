@@ -896,6 +896,7 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnTerminar">
           <Properties>
+            <Property name="mnemonic" type="int" value="116"/>
             <Property name="text" type="java.lang.String" value="Terminar"/>
           </Properties>
           <Events>
@@ -904,6 +905,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
+            <Property name="mnemonic" type="int" value="115"/>
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
           <Events>

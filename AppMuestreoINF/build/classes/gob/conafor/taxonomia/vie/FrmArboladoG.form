@@ -149,6 +149,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnTrazoSitio">
           <Properties>
+            <Property name="mnemonic" type="int" value="116"/>
             <Property name="text" type="java.lang.String" value="Trazo del sitio"/>
           </Properties>
           <Events>
@@ -1035,6 +1036,7 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnAgregar">
           <Properties>
+            <Property name="mnemonic" type="int" value="97"/>
             <Property name="text" type="java.lang.String" value="Agregar"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="btnModificar"/>
@@ -1049,6 +1051,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnElimnar">
           <Properties>
+            <Property name="mnemonic" type="int" value="101"/>
             <Property name="text" type="java.lang.String" value="Eliminar"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="btnClave"/>
@@ -1063,6 +1066,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnModificar">
           <Properties>
+            <Property name="mnemonic" type="int" value="109"/>
             <Property name="text" type="java.lang.String" value=" Modificar"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="btnElimnar"/>
@@ -1094,6 +1098,7 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnContinuar">
           <Properties>
+            <Property name="mnemonic" type="int" value="99"/>
             <Property name="text" type="java.lang.String" value="Continuar"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="btnSalir"/>
@@ -1105,6 +1110,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
+            <Property name="mnemonic" type="int" value="115"/>
             <Property name="text" type="java.lang.String" value="Salir"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="btnTrazoSitio"/>
@@ -1154,6 +1160,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnClave">
           <Properties>
+            <Property name="mnemonic" type="int" value="111"/>
             <Property name="text" type="java.lang.String" value="Colecta"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="btnLimpiarControles"/>
@@ -1165,6 +1172,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnLimpiarControles">
           <Properties>
+            <Property name="mnemonic" type="int" value="108"/>
             <Property name="text" type="java.lang.String" value="Limpiar controles"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="btnContinuar"/>

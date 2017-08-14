@@ -234,6 +234,7 @@ public class FrmCapturaModulos extends javax.swing.JInternalFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
+        btnComenzarCaptura.setMnemonic('c');
         btnComenzarCaptura.setText("Comenzar captura");
         btnComenzarCaptura.setEnabled(false);
         btnComenzarCaptura.addActionListener(new java.awt.event.ActionListener() {
@@ -242,6 +243,7 @@ public class FrmCapturaModulos extends javax.swing.JInternalFrame {
             }
         });
 
+        btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

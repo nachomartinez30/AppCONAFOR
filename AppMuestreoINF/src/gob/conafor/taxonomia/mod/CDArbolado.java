@@ -314,13 +314,13 @@ public class CDArbolado {
                 + ", " + arbolado.getCondicionID() + ", " + arbolado.getMuertoPieID() + ", " + arbolado.getGradoPutrefaccionID() + ", " + arbolado.getTipoToconID() + ", " + arbolado.getDiametroNormal() + ", " + arbolado.getDiametroBasal() + ", " + arbolado.getAlturaTotal() + ", " + arbolado.getAnguloInclinacion()
                 + ", " + arbolado.getAlturaFusteLimpio() + ", " + arbolado.getAlturaComercial() + ", " + arbolado.getDiametroCopaNS() + ", " + arbolado.getDiametroCopaEO() + ", " + arbolado.getProporcionCopaVivaID() + ", " + arbolado.getExposisicionCopaID()
                 + ", " + arbolado.getPosicionCopaID() + ", " + arbolado.getDensidadCopaID() + ", " + arbolado.getMuerteRegresivaID() + ", " + arbolado.getTransparenciaFollajeID() + ", " + arbolado.getVigorID() + ", " + arbolado.getNivelVigorID() + ")";
-        String query2 = "SELECT last_insert_rowid()";
+        //String query2 = "SELECT last_insert_rowid()";
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
-            ResultSet rs = st.executeQuery(query2);
-            this.arboaldoID = rs.getInt(1);
+           // ResultSet rs = st.executeQuery(query2);
+            //this.arboaldoID = rs.getInt(1);
             conn.commit();
             st.close();
         } catch (SQLException e) {
@@ -392,12 +392,12 @@ public class CDArbolado {
     public void deleteDatosArbolado(CEArbolado arbolado) {
         query = "DELETE FROM TAXONOMIA_Arbolado WHERE ArboladoID= " + arbolado.getArboladoID();
         Connection conn = LocalConnection.getConnection();
-        String query2 = "SELECT last_insert_rowid()";
+       // String query2 = "SELECT last_insert_rowid()";
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
-            ResultSet rs = st.executeQuery(query2);
-            this.arboaldoID = rs.getInt(1);
+            //ResultSet rs = st.executeQuery(query2);
+           // this.arboaldoID = rs.getInt(1);
             conn.commit();
             st.close();
         } catch (SQLException e) {

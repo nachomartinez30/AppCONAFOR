@@ -1616,7 +1616,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         arb.setEsSubmuestra(this.esSubmuestra);
 
         this.cdArbolado.insertArboladoA(arb);
-        this.arboladoID = this.cdArbolado.getLastArboladoID();
+        this.arboladoID = arb.getArboladoID();
         crearDanios(arboladoID);
         
         if(chkEsSubmuestra.isSelected()){
@@ -1663,6 +1663,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         }
 
         ceDanio1.setSeccionID(arboladoID);
+        //System.out.println("arbolado ID"+arboladoID);
         ceDanio1.setNumeroDanio(1);
         ceDanio1.setAgenteDanioID(danio1);
         ceDanio1.setSeveridadID(severidad1);

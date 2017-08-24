@@ -363,6 +363,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
         try {
             this.porcentajeCobertura = Integer.valueOf(txtPorcentajeCobertura.getText());
         } catch (NumberFormatException e) {
+            e.printStackTrace();
             this.porcentajeCobertura = null;
         }
     }
@@ -405,7 +406,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
         ceVegetacion.setVigorID(indexvigor.getVigorID());
 
         cdVegetacion.insertVegetacionMenor(ceVegetacion);
-        this.vegetacionMenorID = cdVegetacion.getLastVMID();
+        this.vegetacionMenorID = cdVegetacion.getLastIndexInsertedVegetacionMenor();
         crearDanios(this.vegetacionMenorID);
 
     }
@@ -514,7 +515,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
             ceVegetacionMenor.setNumero76100(this.numero76100);
             ceVegetacionMenor.setNumero101125(this.numero101125);
             ceVegetacionMenor.setVigorID(indexVigor.getVigorID());
-
+            ceVegetacionMenor.setPorcentajeCobertura(this.porcentajeCobertura);
             ceDanio1.setSeccionID(this.vegetacionMenorID);
             ceDanio1.setNumeroDanio(1);
             ceDanio1.setAgenteDanioID(indexAgenteDanio1.getAgenteDanioID());

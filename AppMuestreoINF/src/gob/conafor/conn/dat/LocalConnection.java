@@ -50,8 +50,12 @@ public class LocalConnection {
 
 	public static Connection getConnection() {
 		try {
+                    Path currentPath = Paths.get("");
+                    String path = currentPath.toAbsolutePath().toString(),conexion;
+                    conexion="jdbc:h2:"+path+"/src/db/MuestreoINF_2017"; //desarrollo
+                    //conexion="jdbc:h2:"+path+"/MuestreoINF_2017"; //distribucion
 			Class.forName(driver);
-			connect = DriverManager.getConnection("jdbc:h2:C:\\Users\\ignacio.martinez\\Desktop\\H2_probando\\MuestreoINF_2017.h2.db","usuario_java","211372848");
+			connect = DriverManager.getConnection(conexion,"usuario_java","211372848");
 						connect.setAutoCommit(false);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,

@@ -63,11 +63,13 @@ public class CDSubmuestra {
             conn.commit();
             st.close();
         } catch (SQLException e){
+            e.printStackTrace();
              JOptionPane.showMessageDialog(null, "Error! no se pudo crear una submuestra nueva ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al crear una nueva submuestra ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -85,6 +87,7 @@ public class CDSubmuestra {
             conn.commit();
             st.close();
         }catch(SQLException e){
+            e. printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo crear una troza nueva ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {

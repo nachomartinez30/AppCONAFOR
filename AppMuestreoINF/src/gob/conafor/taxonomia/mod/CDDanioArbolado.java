@@ -29,6 +29,7 @@ public class CDDanioArbolado {
                 listDanio.add(danio);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los datos de daño del arbolado ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -37,6 +38,7 @@ public class CDDanioArbolado {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de daño del arbolado"
                       , "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -45,7 +47,7 @@ public class CDDanioArbolado {
     }
     
     public void insertDanioArbolado(CEDanioSeveridad danio){
-        query = "INSERT INTO Arbolado_DanioSeveridad(ArboladoID, NumeroDanio, AgenteDanioID, SeveridadID)VALUES(" + danio.getSeccionID() + " ," + danio.getNumeroDanio() + " ," + danio.getAgenteDanioID() 
+        query = "INSERT INTO Arbolado_DanioSeveridad(ArboladoID, NumeroDanio, AgenteDanioID, SeveridadID)VALUES(" + danio.getSeccionID()+ " ," + danio.getNumeroDanio() + " ," + danio.getAgenteDanioID() 
                 + " ," + danio.getSeveridadID() + ")"; 
         
         Connection conn = LocalConnection.getConnection();
@@ -56,12 +58,14 @@ public class CDDanioArbolado {
             conn.commit();
             st.close();
         }catch(SQLException e){
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la informacion de daños de arbolado "
                     , "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de daños de arbolado ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);

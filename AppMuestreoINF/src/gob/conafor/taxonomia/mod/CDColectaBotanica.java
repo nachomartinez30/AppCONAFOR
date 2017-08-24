@@ -49,6 +49,7 @@ public class CDColectaBotanica {
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
+            System.out.println(query);
             while (rs.next()) {
                 listClaveColecta.add(rs.getString("ClaveColecta"));
             }
@@ -291,7 +292,7 @@ public class CDColectaBotanica {
     public void insertarClave(CEColectaBotanica ceColecta, int UPMID, String claveColecta) {
         query = "INSERT INTO TAXONOMIA_ColectaBotanica(UPMID, FamiliaID, GeneroID, EspecieID, InfraespecieID, NombreComun, ClaveColecta)VALUES"
                 + "(" + UPMID + ", " + ceColecta.getFamiliaID() + ", " + ceColecta.getGeneroID() + ", " + ceColecta.getEspecieID()
-                + ", '" + ceColecta.getInfraespecie() + "', '" + ceColecta.getNombreComun() + "', '" + claveColecta + "')";
+                + ", " + ceColecta.getInfraespecie() + ", '" + ceColecta.getNombreComun() + "', '" + claveColecta + "')";
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -299,6 +300,7 @@ public class CDColectaBotanica {
             conn.commit();
             st.close();
         } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la clave de colecta botánica"
             , "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
@@ -450,7 +452,8 @@ public class CDColectaBotanica {
     }
     
     public boolean validarCapturaEspecie(String tabla, int sitioID) {
-        this.query = "SELECT EspecieID FROM " + tabla + " WHERE SitioID= " + sitioID + " AND ifnull(EspecieID, '')= '' AND ifnull(ClaveColecta, '')= '' AND CondicionID = 1";
+        
+        this.query = "SELECT EspecieID FROM " + tabla + " WHERE SitioID= " + sitioID + " AND EspecieID is null AND ClaveColecta is null AND CondicionID = 1";
         boolean vacio = false;
         Connection conn = LocalConnection.getConnection();
         try {
@@ -462,6 +465,7 @@ public class CDColectaBotanica {
             st.close();
             rs.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al revisar si se capturo clave de colecta para especie en identificación "
             , "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
@@ -476,7 +480,8 @@ public class CDColectaBotanica {
     }
  
     public boolean validarCapturaGenero(String tabla, int sitioID) {
-        this.query = "SELECT GeneroID FROM " + tabla + " WHERE SitioID= " + sitioID + " AND ifnull(GeneroID, '')= '' AND ifnull(ClaveColecta, '')= ''";
+        this.query = "SELECT GeneroID FROM " + tabla + " WHERE SitioID= " + sitioID + " AND GeneroID is null AND ClaveColecta is null";
+        //System.out.println(query);
         boolean vacio = false;
         Connection conn = LocalConnection.getConnection();
         try {

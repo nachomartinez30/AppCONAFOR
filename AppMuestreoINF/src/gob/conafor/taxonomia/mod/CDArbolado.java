@@ -303,7 +303,7 @@ public class CDArbolado {
         }
     }
 
-    public void insertArboladoA(CEArbolado arbolado) {
+   public void insertArboladoA(CEArbolado arbolado) {
         query = "INSERT INTO TAXONOMIA_Arbolado(SitioID, Consecutivo, NoIndividuo, NoRama, Azimut, Distancia, FamiliaID, "
                 + "GeneroID, EspecieID, InfraespecieID, NombreComun, EsSubmuestra, FormaVidaID, FormaFusteID, CondicionID, MuertoPieID, GradoPutrefaccionID, TipoToconID, "
                 + "DiametroNormal, DiametroBasal, AlturaTotal, AnguloInclinacion, AlturaFusteLimpio, AlturaComercial, "
@@ -314,15 +314,16 @@ public class CDArbolado {
                 + ", " + arbolado.getCondicionID() + ", " + arbolado.getMuertoPieID() + ", " + arbolado.getGradoPutrefaccionID() + ", " + arbolado.getTipoToconID() + ", " + arbolado.getDiametroNormal() + ", " + arbolado.getDiametroBasal() + ", " + arbolado.getAlturaTotal() + ", " + arbolado.getAnguloInclinacion()
                 + ", " + arbolado.getAlturaFusteLimpio() + ", " + arbolado.getAlturaComercial() + ", " + arbolado.getDiametroCopaNS() + ", " + arbolado.getDiametroCopaEO() + ", " + arbolado.getProporcionCopaVivaID() + ", " + arbolado.getExposisicionCopaID()
                 + ", " + arbolado.getPosicionCopaID() + ", " + arbolado.getDensidadCopaID() + ", " + arbolado.getMuerteRegresivaID() + ", " + arbolado.getTransparenciaFollajeID() + ", " + arbolado.getVigorID() + ", " + arbolado.getNivelVigorID() + ")";
-        //String query2 = "SELECT last_insert_rowid()";
+        
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
-           // ResultSet rs = st.executeQuery(query2);
-            //this.arboaldoID = rs.getInt(1);
-            conn.commit();
-            st.close();
+           conn.commit();
+           st.close();
+           this.arboaldoID =getLastIndexInsertedArbolado();
+           arbolado.setArboladoID(this.arboaldoID);
+           //System.out.println("Lats ID="+this.arboaldoID);
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la informacion en arbolado ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -336,6 +337,34 @@ public class CDArbolado {
             }
         }
     }
+   
+   public int getLastIndexInsertedArbolado(){
+       int valor=0;
+       
+        String query = "select MAX(arboladoID) as last_ID from Taxonomia_arbolado";
+        Connection conn = LocalConnection.getConnection();
+        try {
+            Statement st = conn.createStatement();
+            st.executeQuery(query);
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                 valor = rs.getInt("last_ID");
+                 
+            }
+            conn.commit();
+            st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información de arbolado ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la modificación de arbolado", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        return valor;
+   }
 
     public void updateArboladoA(CEArbolado arbolado) {
         query = "UPDATE TAXONOMIA_Arbolado SET Consecutivo= " + arbolado.getConsecutivo() + ", NoIndividuo= " + arbolado.getNumeroIndividuo() + ", NoRama= " + arbolado.getNumeroRama()
@@ -392,15 +421,14 @@ public class CDArbolado {
     public void deleteDatosArbolado(CEArbolado arbolado) {
         query = "DELETE FROM TAXONOMIA_Arbolado WHERE ArboladoID= " + arbolado.getArboladoID();
         Connection conn = LocalConnection.getConnection();
-       // String query2 = "SELECT last_insert_rowid()";
+        
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
-            //ResultSet rs = st.executeQuery(query2);
-           // this.arboaldoID = rs.getInt(1);
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar la información del arbolado ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
@@ -526,6 +554,7 @@ public class CDArbolado {
     private List<Integer> getArboladoID(int sitioID) {
         List<Integer> listArboladoID = new ArrayList<>();
         query = "SELECT ArboladoID, SitioID FROM TAXONOMIA_Arbolado WHERE SitioID= " + sitioID + " ORDER BY ArboladoID ASC";
+
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();

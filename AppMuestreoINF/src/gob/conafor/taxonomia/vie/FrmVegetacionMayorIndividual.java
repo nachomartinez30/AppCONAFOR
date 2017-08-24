@@ -1068,7 +1068,6 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
             vegetacionMayor.setInfraespecieID(indexInfraespecie.getInfraespecieID());
         }
         vegetacionMayor.setConsecutivo(this.consecutivo);
-        //System.out.println("Consecutivo="+this.consecutivo);
         vegetacionMayor.setNumeroIndividuo(this.noIndividuo);
         vegetacionMayor.setNombreComun(txtNombreComun.getText());
         vegetacionMayor.setFormaGeometricaID(indexFormaGeometrica.getFormaGeometricaID());
@@ -1080,7 +1079,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         vegetacionMayor.setVigorID(indexVigor.getVigorID());
 
         this.cdVegetacionMayor.insertVegetacionMayor(vegetacionMayor);
-        this.vegetacionMayorID = this.cdVegetacionMayor.getLastVMID();
+        this.vegetacionMayorID = this.cdVegetacionMayor.getLastIndexInsertedVegetacionMayorIndividual();
         crearDanios(this.vegetacionMayorID);
     }
 

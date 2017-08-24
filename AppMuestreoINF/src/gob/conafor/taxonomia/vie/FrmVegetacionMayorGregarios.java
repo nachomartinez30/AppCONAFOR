@@ -1083,7 +1083,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         vegetacionMayor.setVigorID(indexVigor.getVigorID());
 
         this.cdVegetacionMayor.insertVegetacionMayor(vegetacionMayor);
-        this.vegetacionMayorID = this.cdVegetacionMayor.getLastVMID();
+        this.vegetacionMayorID = this.cdVegetacionMayor.getLastIndexInsertedVegetacionMayorGregarios();
         crearDanios(this.vegetacionMayorID);
     }
 

@@ -55,6 +55,7 @@ public class CDDanioVM {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la informacion de daños de vegetación menor"
                    , "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {

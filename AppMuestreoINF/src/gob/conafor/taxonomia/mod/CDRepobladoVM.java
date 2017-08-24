@@ -64,6 +64,34 @@ public class CDRepobladoVM {
         }
     }
 
+    public int getLastIndexInsertedRepobladoVegetacionMenor(){
+       int valor=0;
+       
+        String query = "select MAX(VegetacionMayorID) as last_ID from TAXONOMIA_VegetacionMayorIndividual";
+        Connection conn = LocalConnection.getConnection();
+        try {
+            Statement st = conn.createStatement();
+            st.executeQuery(query);
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                 valor = rs.getInt("last_ID");
+                 
+            }
+            conn.commit();
+            st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información de arbolado ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la modificación de arbolado", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        return valor;
+   }
+    
     public void insertRepobladoVM(CERepobladoVM ceRepoblado) {
         query = "INSERT INTO TAXONOMIA_RepobladoVM(SitioID, Consecutivo, FormaVidaID, FamiliaID, GeneroID, EspecieID, InfraespecieID, "
                 + "NombreComun, Frecuencia50, PorcentajeCobertura50, Frecuencia51200, PorcentajeCobertura51200, "
@@ -73,13 +101,12 @@ public class CDRepobladoVM {
                 + ceRepoblado.getFrecuencia50() + ", " + ceRepoblado.getPorcentajeCobertura50() + ", " + ceRepoblado.getFrecuencia51200()
                 + ", " + ceRepoblado.getPorcentajeCobertura51200() + ", " + ceRepoblado.getFrecuencia200() + ", " + ceRepoblado.getPorcentajeCobertura200()
                 + ", " + ceRepoblado.getVigorID() + ")";
-        String query2 = "SELECT last_insert_rowid()";
+       
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
-            ResultSet rs = st.executeQuery(query2);
-            this.repobladoVMID = rs.getInt(1);
+            ceRepoblado.setRepobladoVMID(getLastIndexInsertedRepobladoVegetacionMenor());
             conn.commit();
             st.close();
         } catch (SQLException e) {

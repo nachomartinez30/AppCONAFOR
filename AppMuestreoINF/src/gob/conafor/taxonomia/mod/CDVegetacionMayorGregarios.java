@@ -68,6 +68,36 @@ public class CDVegetacionMayorGregarios {
         }
     }
     
+    
+         public int getLastIndexInsertedVegetacionMayorGregarios(){
+       int valor=0;
+       
+        String query = "select MAX(VegetacionMayorID) as last_ID from TAXONOMIA_VegetacionMayorIndividual";
+        Connection conn = LocalConnection.getConnection();
+        try {
+            Statement st = conn.createStatement();
+            st.executeQuery(query);
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                 valor = rs.getInt("last_ID");
+                 
+            }
+            conn.commit();
+            st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información de arbolado ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la modificación de arbolado", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        return valor;
+   }
+    
+    
     public void insertVegetacionMayor(CEVegetacionMayorGregarios vegetacionMayor) {
         query = "INSERT INTO TAXONOMIA_VegetacionMayorGregarios(SitioID,Consecutivo, NoIndividuo, FormaVidaID, CondicionID, FamiliaID, GeneroID, "
                 + "EspecieID, InfraespecieID, NombreComun, FormaCrecimientoID, DensidadColoniaID, AlturaTotalMaxima, AlturaTotalMedia, AlturaTotalMinima, "
@@ -76,14 +106,14 @@ public class CDVegetacionMayorGregarios {
                 + ", " + vegetacionMayor.getEspecieID() + ", " + vegetacionMayor.getInfraespecieID() + ", '" + vegetacionMayor.getNombreComun()
                 + "', " + vegetacionMayor.getFormaCrecimientoID() + ", " + vegetacionMayor.getDensidadColoniaID() + ", " + vegetacionMayor.getAlturaTotalMaxima() + ", " + vegetacionMayor.getAlturaTotalMedia()
                 + ", " + vegetacionMayor.getAlturaTotalMinima() + ", " + vegetacionMayor.getDiametroCoberturaMayor() + ", " + vegetacionMayor.getDiametroCoberturaMenor() + ", " + vegetacionMayor.getVigorID() + ")";
-        String query2 = "SELECT last_insert_rowid()";
+        
         Connection conn = LocalConnection.getConnection();
         //System.out.println(query);
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
-            ResultSet rs = st.executeQuery(query2);
-            this.vegetacionMayorID = rs.getInt(1);
+           
+            vegetacionMayor.setVegetacionMayorID(getLastIndexInsertedVegetacionMayorGregarios());
             conn.commit();
             st.close();
         } catch (SQLException e) {

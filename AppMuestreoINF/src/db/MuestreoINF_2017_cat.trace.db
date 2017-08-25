@@ -1,0 +1,77 @@
+2017-08-25 10:40:28 jdbc[3]: null
+org.h2.message.DbException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:187)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:129)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:247)
+	at gob.conafor.conn.dat.LocalConnectionCat.getConnection(LocalConnectionCat.java:30)
+	at gob.conafor.taxonomia.mod.CDCondicionTaxonomica.getVigorSotobosqueRepoblado(CDCondicionTaxonomica.java:52)
+	at gob.conafor.taxonomia.vie.FrmSotoBosque.fillCmbVigor(FrmSotoBosque.java:389)
+	at gob.conafor.taxonomia.vie.FrmSotoBosque.<init>(FrmSotoBosque.java:91)
+	at gob.conafor.upm.vie.UPMForms.<clinit>(UPMForms.java:47)
+	at gob.conafor.ini.vie.FrmInicio.<init>(FrmInicio.java:37)
+	at gob.conafor.ini.vie.Main.main(Main.java:19)
+Caused by: org.h2.jdbc.JdbcSQLException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 16 more
+2017-08-25 11:21:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabla "UPM_MALLAPUNTOS" no encontrada
+Table "UPM_MALLAPUNTOS" not found; SQL statement:
+SELECT UPMID, Estado, PROYECTO, A, B, C, D, E, F, G, H, Municipio FROM UPM_MallaPuntos WHERE UPMID= 2470 [42102-192]
+2017-08-25 11:27:48 jdbc[6]: null
+org.h2.message.DbException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:187)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:129)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:247)
+	at gob.conafor.conn.dat.LocalConnectionCat.getConnection(LocalConnectionCat.java:28)
+	at gob.conafor.sitio.mod.CDSitio.getTipoInaccesibilidad(CDSitio.java:474)
+	at gob.conafor.sitio.vie.FrmSitio.fillCmbInaccesible(FrmSitio.java:136)
+	at gob.conafor.sitio.vie.FrmSitio.<init>(FrmSitio.java:61)
+	at gob.conafor.upm.vie.UPMForms.<clinit>(UPMForms.java:46)
+	at gob.conafor.ini.vie.FrmInicio.<init>(FrmInicio.java:37)
+	at gob.conafor.ini.vie.Main.main(Main.java:19)
+Caused by: org.h2.jdbc.JdbcSQLException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 16 more
+2017-08-25 11:28:45 jdbc[6]: null
+org.h2.message.DbException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:187)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:129)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:102)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:247)
+	at gob.conafor.conn.dat.LocalConnectionCat.getConnection(LocalConnectionCat.java:28)
+	at gob.conafor.sitio.mod.CDSitio.getTipoInaccesibilidad(CDSitio.java:474)
+	at gob.conafor.sitio.vie.FrmSitio.fillCmbInaccesible(FrmSitio.java:136)
+	at gob.conafor.sitio.vie.FrmSitio.<init>(FrmSitio.java:61)
+	at gob.conafor.upm.vie.UPMForms.<clinit>(UPMForms.java:46)
+	at gob.conafor.ini.vie.FrmInicio.<init>(FrmInicio.java:37)
+	at gob.conafor.ini.vie.Main.main(Main.java:19)
+Caused by: org.h2.jdbc.JdbcSQLException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-192]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 16 more
+2017-08-25 11:32:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabla "UPM_MALLAPUNTOS" no encontrada
+Table "UPM_MALLAPUNTOS" not found; SQL statement:
+SELECT UPMID, Estado, PROYECTO, A, B, C, D, E, F, G, H, Municipio FROM UPM_MallaPuntos WHERE UPMID= 43030 [42102-192]

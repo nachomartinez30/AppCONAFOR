@@ -1,6 +1,6 @@
 package gob.conafor.carbono.mod;
 
-import gob.conafor.conn.dat.LocalConnection;
+import gob.conafor.conn.dat.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -101,7 +101,7 @@ public class CDLongitud {
     public List<CatECarbonoComponente> getComponentesSegemento() {
         List<CatECarbonoComponente> listComponentes = new ArrayList<>();
         query = "SELECT ComponenteID, Componente FROM CAT_TipoComponente";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);

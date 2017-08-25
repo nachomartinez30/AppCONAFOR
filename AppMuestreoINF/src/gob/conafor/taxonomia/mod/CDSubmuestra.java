@@ -1,6 +1,6 @@
 package gob.conafor.taxonomia.mod;
 
-import gob.conafor.conn.dat.LocalConnection;
+import gob.conafor.conn.dat.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -247,7 +247,7 @@ public class CDSubmuestra {
     public List<CatETipoTroza> getTipotroza() {
         List<CatETipoTroza> listTipoTroza = new ArrayList<>();
         query = "SELECT TipoTrozaID, Clave, Descripcion FROM CAT_TipoTroza";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
 
         try {
             Statement st = conn.createStatement();

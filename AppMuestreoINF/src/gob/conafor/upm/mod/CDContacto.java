@@ -1,6 +1,6 @@
 package gob.conafor.upm.mod;
 
-import gob.conafor.conn.dat.LocalConnection;
+import gob.conafor.conn.dat.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -35,15 +35,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" min="-2" pref="407" max="-2" attributes="0"/>
+          <Component id="jPanel1" pref="400" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jPanel1" pref="334" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
+          <Component id="jPanel1" min="-2" pref="308" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -68,10 +65,8 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="btnAsignar" min="-2" pref="83" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                                   <Component id="btnDesasignar" min="-2" pref="85" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="btnModificar" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="btnSalir" min="-2" pref="91" max="-2" attributes="0"/>
                               </Group>
@@ -87,7 +82,7 @@
                           <Component id="cmbClaveColecta" min="-2" pref="173" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="29" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -110,7 +105,6 @@
                       <Component id="btnSalir" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnAsignar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnDesasignar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnModificar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -143,25 +137,18 @@
                           <Component id="lblTipoColecta" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtIniciales" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
-                                  <Component id="txtConsecutivo" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
-                                  <Component id="txtPreClave" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtClave" alignment="0" min="-2" pref="213" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="rbtFisica" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="rbtDigital" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
+                          <Component id="txtIniciales" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
+                          <Component id="txtConsecutivo" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
+                          <Component id="txtPreClave" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtClave" alignment="0" min="-2" pref="213" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace pref="61" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -188,7 +175,6 @@
                           <Component id="rbtFisica" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="rbtDigital" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblTipoColecta" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -261,6 +247,9 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
                 </Property>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="rbgTipoColecta"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="F&#xed;sica"/>
               </Properties>
               <Events>
@@ -271,6 +260,9 @@
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                </Property>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="rbgTipoColecta"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Digital"/>
               </Properties>
@@ -283,20 +275,10 @@
                 <Property name="text" type="java.lang.String" value="Tipo de colecta:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
-              <Properties>
-                <Property name="mnemonic" type="int" value="108"/>
-                <Property name="text" type="java.lang.String" value="limpiar"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
-              </Events>
-            </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
-            <Property name="mnemonic" type="int" value="115"/>
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
           <Events>
@@ -315,7 +297,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnAsignar">
           <Properties>
-            <Property name="mnemonic" type="int" value="97"/>
             <Property name="text" type="java.lang.String" value="Asignar"/>
           </Properties>
           <Events>
@@ -355,20 +336,10 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnDesasignar">
           <Properties>
-            <Property name="mnemonic" type="int" value="100"/>
             <Property name="text" type="java.lang.String" value="Desasignar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDesasignarActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnModificar">
-          <Properties>
-            <Property name="mnemonic" type="int" value="109"/>
-            <Property name="text" type="java.lang.String" value="Modificar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModificarActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

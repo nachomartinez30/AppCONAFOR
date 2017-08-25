@@ -1,6 +1,6 @@
 package gob.conafor.pc.mod;
 
-import gob.conafor.conn.dat.LocalConnection;
+import gob.conafor.conn.dat.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -108,7 +108,7 @@ public class CDAccesibilidadPC {
 
     public List<CatEMedioTransporte> getMedioTransporte() {
         query = "SELECT MedioTransporteID, Medio, Descripcion FROM CAT_MedioTransporte";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         List<CatEMedioTransporte> listaMedioTransporte = new ArrayList<>();
         try {
             Statement st = conn.createStatement();
@@ -133,7 +133,7 @@ public class CDAccesibilidadPC {
         query = "SELECT vi.ViaAccesibilidadID AS Id, vi.Via AS via, vi.Descripcion AS descripcion FROM CAT_ViaAccesibilidad vi "
                 + "LEFT JOIN CAT_TransporteAccesibilidad tra ON tra.ViaAccesibilidadID = vi.ViaAccesibilidadID "
                 + "WHERE tra.MedioTransporteID = " + medioTransporteID;
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         List<CatEViaAcceso> listaMedioTransporte = new ArrayList<>();
         try {
             Statement st = conn.createStatement();
@@ -164,7 +164,7 @@ public class CDAccesibilidadPC {
 
     public List<CatECondicionAccesibilidad> getCondicion() {
         query = "SELECT CondicionAccesibilidadID, Condicion, Descripcion FROM CAT_CondicionAccesibilidad";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         List<CatECondicionAccesibilidad> listaCondicion = new ArrayList<>();
         try {
             Statement st = conn.createStatement();

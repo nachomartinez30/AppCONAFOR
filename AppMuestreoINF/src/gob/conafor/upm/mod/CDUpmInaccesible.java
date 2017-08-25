@@ -1,6 +1,6 @@
 package gob.conafor.upm.mod;
 
-import gob.conafor.conn.dat.LocalConnection;
+import gob.conafor.conn.dat.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +16,7 @@ public class CDUpmInaccesible {
     public List<CatETipoInaccesibilidad> getTipoInaccesibilidad() {
         List<CatETipoInaccesibilidad> listInaccesibilidad = new ArrayList<>();
         query = "SELECT TipoInaccesibilidadID, Clave, Tipo, Descripcion FROM CAT_TipoInaccesibilidad";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);

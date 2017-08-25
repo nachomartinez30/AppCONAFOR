@@ -1,6 +1,6 @@
 package gob.conafor.upm.mod;
 
-import gob.conafor.conn.dat.LocalConnection;
+import gob.conafor.conn.dat.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +18,7 @@ public class CDEpifitas {
     public List<CatETipoEpifita> getTipoEpifitas() {
         query = "SELECT TipoEpifitaID, Nombre FROM CAT_TipoEpifita";
         List<CatETipoEpifita> listEpifita = new ArrayList<>();
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -76,7 +76,7 @@ public class CDEpifitas {
     public List<CatEPresenciaEpifita> getPresenciaEpifita() {
         query = "SELECT PresenciaEpifitaID, Descripcion FROM CAT_PresenciaEpifita";
         List<CatEPresenciaEpifita> listPresencia = new ArrayList<>();
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);

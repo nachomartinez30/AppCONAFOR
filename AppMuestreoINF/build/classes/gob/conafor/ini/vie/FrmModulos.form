@@ -69,7 +69,6 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="btnIniciar">
       <Properties>
-        <Property name="mnemonic" type="int" value="105"/>
         <Property name="text" type="java.lang.String" value="Iniciar"/>
         <Property name="toolTipText" type="java.lang.String" value="Iniciar la captura de una UPM"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -178,7 +177,6 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnCancelar">
       <Properties>
-        <Property name="mnemonic" type="int" value="99"/>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
         <Property name="toolTipText" type="java.lang.String" value="Omitir la captura de una UPM"/>
       </Properties>

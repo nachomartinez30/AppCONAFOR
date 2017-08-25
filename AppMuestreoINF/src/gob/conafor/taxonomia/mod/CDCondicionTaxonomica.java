@@ -1,6 +1,6 @@
 package gob.conafor.taxonomia.mod;
 
-import gob.conafor.conn.dat.LocalConnection;
+import gob.conafor.conn.dat.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +16,7 @@ public class CDCondicionTaxonomica {
     public List<CatEVigorArbolado> getVigorArbolado() {
         List<CatEVigorArbolado> listVigor = new ArrayList<>();
         query = "SELECT VigorID, Descripcion FROM CAT_TipoVigorArbolado";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -49,7 +49,7 @@ public class CDCondicionTaxonomica {
     public List<CatETipoVigor> getVigorSotobosqueRepoblado() {
         List<CatETipoVigor> listVigor = new ArrayList<>();
         query = "SELECT VigorID, Descripcion FROM CAT_TipoVigorSotobosqueRepoblado";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -82,7 +82,7 @@ public class CDCondicionTaxonomica {
     public List<CatENivelVigor> getNivelVigor() {
         List<CatENivelVigor> listNivelVigor = new ArrayList<>();
         query = "SELECT NivelVigorID, Clave, Descripcion FROM CAT_NivelVigor";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -116,7 +116,7 @@ public class CDCondicionTaxonomica {
     public List<CatEAgenteDanio> getAgenteDanio() {
         List<CatEAgenteDanio> listAgente = new ArrayList<>();
         query = "SELECT AgenteDanioID, Clave, Agente, Descripcion FROM CAT_AgenteDanio";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -150,7 +150,8 @@ public class CDCondicionTaxonomica {
     public List<CatEFormaVida> getFormaVida() {
         List<CatEFormaVida> listFormaVida = new ArrayList<>();
         query = "SELECT FormaVidaID, Descripcion FROM CAT_TipoFormaVidaArbolado";
-        Connection conn = LocalConnection.getConnection();
+        System.out.println(query);
+        Connection conn = LocalConnectionCat.getConnection();
 
         try {
             Statement st = conn.createStatement();
@@ -187,7 +188,7 @@ public class CDCondicionTaxonomica {
     public List<CatEFormaVidaRepobladoVM> getFormaVidaRepobladoVM() {
         List<CatEFormaVidaRepobladoVM> listFormaVida = new ArrayList<>();
         query = "SELECT FormaVidaRepobladoVMID, Descripcion FROM CAT_TipoFormaVidaRepobladoVM";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
 
         try {
             Statement st = conn.createStatement();
@@ -222,7 +223,7 @@ public class CDCondicionTaxonomica {
     public List<CatEFormaVidaZA> getFormaVidaZA() {
         List<CatEFormaVidaZA> listFormaVida = new ArrayList<>();
         query = "SELECT FormaVidaZAID, Morfotipo FROM CAT_TipoFormaVidaZA";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
 
         try {
             Statement st = conn.createStatement();
@@ -256,7 +257,7 @@ public class CDCondicionTaxonomica {
     public List<CatEFormaVidaZA> getFormaVidaVM() {
         List<CatEFormaVidaZA> listFormaVida = new ArrayList<>();
         query = "SELECT FormaVidaZAID, Morfotipo FROM CAT_TipoFormaVidaZA WHERE FormaVidaZAID < 15";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -289,7 +290,7 @@ public class CDCondicionTaxonomica {
     public List<CatEFormaFuste> getFormaFuste() {
         List<CatEFormaFuste> listFormaFuste = new ArrayList<>();
         query = "SELECT FormaFusteID, Descripcion AS FormaFuste FROM CAT_TipoFormaFuste";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -324,7 +325,7 @@ public class CDCondicionTaxonomica {
     public List<CatECondicionArbolado> getCondicionArboladoArbol() {
         List<CatECondicionArbolado> listCondicionArbolado = new ArrayList<>();
         query = "SELECT CondicionID, Descripcion AS Condicion FROM CAT_CondicionArbolado";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -359,7 +360,7 @@ public class CDCondicionTaxonomica {
     public List<CatECondicionArbolado> getCondicionArboladoLianas() {
         List<CatECondicionArbolado> listCondicionArbolado = new ArrayList<>();
         query = "SELECT CondicionID, Descripcion AS Condicion FROM CAT_CondicionArbolado WHERE CondicionID IN(1, 2)";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -393,7 +394,7 @@ public class CDCondicionTaxonomica {
     public List<CatECondicionMuertoPie> getCondicionMuertoPie() {
         List<CatECondicionMuertoPie> listMuertoPie = new ArrayList<>();
         query = "SELECT MuertoPieID, Clave, Descripcion  FROM CAT_CondicionMuertoPie";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -428,7 +429,7 @@ public class CDCondicionTaxonomica {
     public List<CatECondicionVM> getCondicionVM() {
         List<CatECondicionVM> listCondicionVM = new ArrayList<>();
         query = "SELECT CondicionVMID, Descripcion FROM CAT_CondicionVM";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -462,7 +463,7 @@ public class CDCondicionTaxonomica {
     public List<CatEGradoPutrefaccionArbolado> getGradoPutrefaccion() {
         List<CatEGradoPutrefaccionArbolado> listGradoPutrefaccion = new ArrayList<>();
         query = "SELECT GradoPutrefaccionID, Clave, Tipo, Descripcion  FROM CAT_GradoPutrefaccionArbolado";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -497,7 +498,7 @@ public class CDCondicionTaxonomica {
     public List<CatETipoTocon> getTipoTocon() {
         List<CatETipoTocon> listTipoTocon = new ArrayList<>();
         query = "SELECT TipoToconID, Clave, Descripcion FROM CAT_TipoTocon";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -534,7 +535,7 @@ public class CDCondicionTaxonomica {
     public List<CatEPorcentajeArbolado> getPorcentajeArboladoCopa() {
         List<CatEPorcentajeArbolado> listPorcentaje = new ArrayList<>();
         query = "SELECT PorcentajeArboladoID, Clave, Descripcion FROM CAT_PorcentajeArbolado WHERE PorcentajeArboladoID < 22";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -568,7 +569,7 @@ public class CDCondicionTaxonomica {
     public List<CatESeveridadZA> getSeveridadZA() {
         List<CatESeveridadZA> listSeveridad = new ArrayList<>();
         query = "SELECT SeveridadID, Descripcion FROM CAT_SeveridadZA";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -600,7 +601,7 @@ public class CDCondicionTaxonomica {
     public List<CatEPorcentajeArbolado> getPorcentajeArboladoCopa6() {
         List<CatEPorcentajeArbolado> listPorcentaje = new ArrayList<>();
         query = "SELECT PorcentajeArboladoID, Clave, Descripcion FROM CAT_PorcentajeArbolado WHERE PorcentajeArboladoID > 21";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -634,7 +635,7 @@ public class CDCondicionTaxonomica {
     public List<CatEExposicionLuzCopa> getExposicionLuzCopa() {
         List<CatEExposicionLuzCopa> listluzExposicion = new ArrayList<>();
         query = "SELECT ExposicionLuzID, Codigo, Descripcion FROM CAT_ExposicionLuzCopa";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -669,7 +670,7 @@ public class CDCondicionTaxonomica {
     public List<CatEPosicionCopa> getPosicionCopa() {
         List<CatEPosicionCopa> listPosicionCopa = new ArrayList<>();
         query = "SELECT PosicionCopaID, PosicionCopa, Descripcion FROM CAT_PosicionCopa";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -704,7 +705,7 @@ public class CDCondicionTaxonomica {
     public List<CatEFormaGeometrica> getFormaGeometrica() {
         List<CatEFormaGeometrica> listFormaGeometrica = new ArrayList<>();
         query = "SELECT FormaGeometricaID, Descripcion FROM CAT_TipoFormaGeometrica";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -737,7 +738,7 @@ public class CDCondicionTaxonomica {
     public List getDensidadFollaje() {
         List<CatEDensidadFollaje> listDensidad = new ArrayList<>();
         query = "SELECT DensidadFollajeID, Descripcion FROM CAT_DensidadFollaje";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -770,7 +771,7 @@ public class CDCondicionTaxonomica {
     public List<CatEFormaCrecimiento> getFormaCrecimiento() {
         List<CatEFormaCrecimiento> listFormaCrecimiento = new ArrayList<>();
         query = "SELECT FormaCrecimientoID, Descripcion FROM CAT_TipoFormaCrecimiento";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -803,7 +804,7 @@ public class CDCondicionTaxonomica {
     public List<CatEDensidadColonia> getDensidadColonia() {
         List<CatEDensidadColonia> listDensidadColonia = new ArrayList<>();
         query = "SELECT DensidadColoniaID, Descripcion FROM CAT_DensidadColonia";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);

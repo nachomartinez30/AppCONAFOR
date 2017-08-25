@@ -1,6 +1,6 @@
 package gob.conafor.sitio.mod;
 
-import gob.conafor.conn.dat.LocalConnection;
+import gob.conafor.conn.dat.*;
 import gob.conafor.upm.mod.CatETipoInaccesibilidad;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -471,7 +471,7 @@ public class CDSitio {
     public List<CatETipoInaccesibilidad> getTipoInaccesibilidad() {
         List<CatETipoInaccesibilidad> listInaccesibilidad = new ArrayList<>();
         query = "SELECT TipoInaccesibilidadID, Clave, Tipo, Descripcion FROM CAT_TipoInaccesibilidad";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -836,7 +836,7 @@ public class CDSitio {
     public List<CatEClaveSerieV> getClaveVegetacion() {
         List<CatEClaveSerieV> listClaveV = new ArrayList<>();
         query = "SELECT ClaveSerieVID, Ecosistema, Formacion, TipoVegetacion, Clave, EsForestal FROM CAT_ClaveSerieV ";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -869,7 +869,7 @@ public class CDSitio {
     public List<CatEFaseSucecional> getClaveSucecional() {
         List<CatEFaseSucecional> listFase = new ArrayList<>();
         query = "SELECT FaseSucecionalID, Descripcion, Clave FROM CAT_FaseSucecional";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);

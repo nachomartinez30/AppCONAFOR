@@ -1,6 +1,6 @@
 package gob.conafor.suelo.mod;
 
-import gob.conafor.conn.dat.LocalConnection;
+import gob.conafor.conn.dat.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +16,7 @@ public class CDSuelo {
     public List<CatEUsoSuelo> getUsoSuelo(){
         query = "SELECT UsoSueloID, Descripcion FROM CAT_UsoSuelo"; 
         List<CatEUsoSuelo> listUsoSuelo = new ArrayList<>();
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         
         try{
             Statement st = conn.createStatement();

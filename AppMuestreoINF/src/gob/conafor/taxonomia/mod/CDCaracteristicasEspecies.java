@@ -1,6 +1,6 @@
 package gob.conafor.taxonomia.mod;
 
-import gob.conafor.conn.dat.LocalConnection;
+import gob.conafor.conn.dat.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +19,7 @@ public class CDCaracteristicasEspecies {
 
     public List<CatEAgenteDanio> getAgentesDanio() {
         query = "SELECT AgenteDanioID, Clave, Agente, Descripcion FROM CAT_AgenteDanio";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);

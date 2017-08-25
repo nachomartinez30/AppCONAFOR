@@ -1,6 +1,6 @@
 package gob.conafor.taxonomia.mod;
 
-import gob.conafor.conn.dat.LocalConnection;
+import gob.conafor.conn.dat.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +16,7 @@ public class CDColectaBotanica {
     public List<CatESeccionTaxonomica> getSecciones() {
         List<CatESeccionTaxonomica> listSeccion = new ArrayList<>();
         query = "SELECT SeccionTaxonomicaID, Seccion FROM CAT_SeccionesTaxonomicas";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);

@@ -14,3 +14,7 @@ SELECT DISTINCT UPMID FROM SYS_SecuenciaCaptura [42102-192]
 org.h2.jdbc.JdbcSQLException: Tabla "TAXONOMIA_COLECTABOTANICA" no encontrada
 Table "TAXONOMIA_COLECTABOTANICA" not found; SQL statement:
 SELECT UPMID FROM TAXONOMIA_ColectaBotanica [42102-192]
+2017-08-25 10:39:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabla "UPM_UPM" no encontrada
+Table "UPM_UPM" not found; SQL statement:
+SELECT * FROM UPM_UPM WHERE Accesible= 1 [42102-192]

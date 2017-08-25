@@ -12,9 +12,7 @@
     </Property>
     <Property name="closable" type="boolean" value="true"/>
     <Property name="defaultCloseOperation" type="int" value="1"/>
-    <Property name="title" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-      <Connection code="&quot;Captura de formatos por sitio &quot;+version" type="code"/>
-    </Property>
+    <Property name="title" type="java.lang.String" value="Captura de formatos por sitio"/>
     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
       <Color id="Cursor Por defecto"/>
     </Property>
@@ -211,7 +209,6 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnComenzarCaptura">
           <Properties>
-            <Property name="mnemonic" type="int" value="99"/>
             <Property name="text" type="java.lang.String" value="Comenzar captura"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
@@ -221,7 +218,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
-            <Property name="mnemonic" type="int" value="115"/>
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
           <Events>

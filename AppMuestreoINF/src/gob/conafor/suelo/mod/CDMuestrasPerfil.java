@@ -1,6 +1,7 @@
 package gob.conafor.suelo.mod;
 
 import gob.conafor.conn.dat.LocalConnection;
+import gob.conafor.conn.dat.LocalConnectionCat;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +19,7 @@ public class CDMuestrasPerfil {
         List listProfundidad = new ArrayList<>();
         CatEProfundidadMuestras profundidad = new CatEProfundidadMuestras();
         query = "SELECT ProfundidadMuestraID, Descripcion FROM CAT_ProfundidadMuestras";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -48,23 +49,25 @@ public class CDMuestrasPerfil {
         String query1 = "SELECT ProfundidadMuestraID, Descripcion FROM CAT_ProfundidadMuestras";
         String query2 = "SELECT SitioID, ProfundidadID FROM SUELO_Muestras WHERE SitioID= " + sitioID;
         Connection conn = LocalConnection.getConnection();
+        Connection conn_2 = LocalConnectionCat.getConnection();
         try {
-            Statement st = conn.createStatement();
-            ResultSet rs1 = st.executeQuery(query1);
+            Statement st1 = conn.createStatement();
+            Statement st2 = conn_2.createStatement();
+            ResultSet rs1 = st2.executeQuery(query1);
             while (rs1.next()) {
                 CatEProfundidadMuestras profundidad1 = new CatEProfundidadMuestras();
                 profundidad1.setProfundidadMuestraID(rs1.getInt("ProfundidadMuestraID"));
                 profundidad1.setDescripcion(rs1.getString("Descripcion"));
                 listProfundidad.add(profundidad1);
             }
-            ResultSet rs2 = st.executeQuery(query2);
+            ResultSet rs2 = st1.executeQuery(query2);
             while (rs2.next()) {
                 profundidad2.setProfundidadMuestraID(rs2.getInt("ProfundidadID"));
                 listProfundidad.remove(profundidad2);
             }
             rs1.close();
             rs2.close();
-            st.close();
+            st1.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los tipos de profundidades de perfil ",

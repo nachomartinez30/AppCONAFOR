@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 public class CDVegetacionMenor {
 
     private String query;
+    public CEVegetacionMenor vegetacionMenor = new CEVegetacionMenor();
     private int vegetacionMenorID;
 
     public CEVegetacionMenor getRegistroVegetacionMenor(int vegetacionMenorID) {
@@ -24,7 +25,7 @@ public class CDVegetacionMenor {
                 + "LEFT JOIN VEGETACIONMENOR_DanioSeveridad ad2 ON vm.VegetacionMenorID = ad2.VegetacionMenorID AND ad2.NumeroDanio = 2 "
                 + "WHERE vm.VegetacionMenorID= " + vegetacionMenorID;
         Connection conn = LocalConnection.getConnection();
-        CEVegetacionMenor vegetacionMenor = new CEVegetacionMenor();
+        
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -80,16 +81,16 @@ public class CDVegetacionMenor {
                 + ", " + ceVegetacionMenor.getNumero1125() + ", " + ceVegetacionMenor.getNumero2650() + ", " + ceVegetacionMenor.getNumero5175()
                 + ", " + ceVegetacionMenor.getNumero76100() + ", " + ceVegetacionMenor.getNumero101125() + ", " + ceVegetacionMenor.getNumero126150()
                 + ", " + ceVegetacionMenor.getNumero150() + ", " + ceVegetacionMenor.getPorcentajeCobertura() + ", " + ceVegetacionMenor.getVigorID() + ")";
-        String query2 = "SELECT last_insert_rowid()";
+        
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
-            ResultSet rs = st.executeQuery(query2);
-            this.vegetacionMenorID = rs.getInt(1);
+           vegetacionMenor.setVegetacionMenorID(getLastIndexInsertedVegetacionMenor());
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la informacion en vegetacion menor ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
@@ -130,13 +131,13 @@ public class CDVegetacionMenor {
     public void deleteVegetacionMenor(int vegetacionMenorID) {
         query = "DELETE FROM TAXONOMIA_VegetacionMenor WHERE VegetacionMenorID= " + vegetacionMenorID;
         Connection conn = LocalConnection.getConnection();
-        String query2 = "SELECT last_insert_rowid()";
+
 
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
-            ResultSet rs = st.executeQuery(query2);
-            this.vegetacionMenorID = rs.getInt(1);
+           
+            vegetacionMenor.setVegetacionMenorID(getLastIndexInsertedVegetacionMenor());
             conn.commit();
             st.close();
         } catch (SQLException e) {
@@ -152,6 +153,34 @@ public class CDVegetacionMenor {
         }
     }
 
+     public int getLastIndexInsertedVegetacionMenor(){
+       int valor=0;
+       
+        String query = "select MAX(vegetacionMenorID) as last_ID from TAXONOMIA_VegetacionMenor";
+        Connection conn = LocalConnection.getConnection();
+        try {
+            Statement st = conn.createStatement();
+            st.executeQuery(query);
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                 valor = rs.getInt("last_ID");
+                 
+            }
+            conn.commit();
+            st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información de arbolado ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la modificación de arbolado", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        return valor;
+   }
+    
     public DefaultTableModel getTableVegetacionMenor(int sitioID) {
         query = "SELECT VegetacionMenorID, SitioID, Consecutivo, Familia, Genero, Especie, Infraespecie, NombreComun, "
                 + "FormaVida, Condicion, Numero0110, Numero1125, Numero2650, Numero5175, Numero76100, Numero101125, Numero126150, "

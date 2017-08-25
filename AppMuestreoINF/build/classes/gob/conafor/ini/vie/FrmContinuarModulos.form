@@ -2,14 +2,7 @@
 
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
-    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-        <LineBorder/>
-      </Border>
-    </Property>
-    <Property name="title" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-      <Connection code="&quot;Lista de formatos capturados por Sitio &quot;+version" type="code"/>
-    </Property>
+    <Property name="title" type="java.lang.String" value="Lista de formatos capturados por Sitio"/>
     <Property name="frameIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
       <Image iconType="3" name="/gob/conafor/utils/logo_conafor.png"/>
     </Property>
@@ -141,7 +134,6 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="btnSalir">
               <Properties>
-                <Property name="mnemonic" type="int" value="115"/>
                 <Property name="text" type="java.lang.String" value="Salir"/>
               </Properties>
               <Events>
@@ -150,7 +142,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnContinuar">
               <Properties>
-                <Property name="mnemonic" type="int" value="99"/>
                 <Property name="text" type="java.lang.String" value="Continuar"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>

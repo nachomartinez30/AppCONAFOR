@@ -1,6 +1,7 @@
 package gob.conafor.suelo.mod;
 
 import gob.conafor.conn.dat.LocalConnection;
+import gob.conafor.conn.dat.LocalConnectionCat;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -215,7 +216,7 @@ public class CDEvidenciaErosion {
     public List<CatELecturaTierra> getTipoLecturaTierra() {
         List<CatELecturaTierra> listLectura = new ArrayList<>();
         query = "SELECT LecturaTierraID, Clave, Descripcion FROM CAT_TipoLecturaTierra";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);

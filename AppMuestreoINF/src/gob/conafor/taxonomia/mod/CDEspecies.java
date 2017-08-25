@@ -1,6 +1,6 @@
 package gob.conafor.taxonomia.mod;
 
-import gob.conafor.conn.dat.LocalConnection;
+import gob.conafor.conn.dat.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +21,7 @@ public class CDEspecies {
     
     public List<CatEFamiliaEspecie> getFamiliaEspecies() {
         query = "SELECT FamiliaID, Nombre FROM CAT_FamiliaEspecie ORDER BY Nombre";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -55,7 +55,7 @@ public class CDEspecies {
         query = "SELECT fa.FamiliaID, fa.Nombre  FROM CAT_FamiliaEspecie fa"
                 + " LEFT JOIN CAT_Genero ge ON fa.FamiliaID = ge.FamiliaID"
                 + " WHERE ge.GeneroID= " + generoID;
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         CatEFamiliaEspecie ceFamilia = new CatEFamiliaEspecie();
         try {
             Statement st = conn.createStatement();
@@ -85,7 +85,7 @@ public class CDEspecies {
     
     public List<CatEGenero> getGeneros(int familiaID) {
         query = "SELECT GeneroID, Nombre, FamiliaID FROM CAT_Genero WHERE FamiliaID= " + familiaID;
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -118,7 +118,7 @@ public class CDEspecies {
     
     public List<CatEGenero> getGenero() {
         query = "SELECT GeneroID, Nombre, FamiliaID FROM CAT_Genero ORDER BY Nombre";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -184,7 +184,7 @@ public class CDEspecies {
 
     public List<CatEGenero> getGenerosSF(){
         query = "SELECT GeneroID, Nombre, FamiliaID FROM CAT_Genero";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         List listGenero = new ArrayList<>();
         try{
             Statement st = conn.createStatement();
@@ -218,7 +218,7 @@ public class CDEspecies {
     
     public List<CatEEspecie> getEspecies(int generoID) {
         query = "SELECT EspecieID, Nombre, GeneroID FROM CAT_Especie WHERE GeneroID= " + generoID + " ORDER BY Nombre";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -252,7 +252,7 @@ public class CDEspecies {
     
     public List<CatEInfraespecie> getInfraespecie(int especieID) {
         query = "SELECT InfraespecieID, Nombre, EspecieID FROM CAT_Infraespecie WHERE EspecieID= " + especieID;
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);

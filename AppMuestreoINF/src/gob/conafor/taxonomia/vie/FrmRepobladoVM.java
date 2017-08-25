@@ -624,7 +624,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
         ceRepoblado.setVigorID(vigor.getVigorID());
 
         cdRepoblado.insertRepobladoVM(ceRepoblado);
-        this.repobladoVMID = cdRepoblado.getLastRepobladoVMID();
+        this.repobladoVMID = cdRepoblado.getLastIndexInsertedRepobladoVegetacionMenor();
         crearDanios(this.repobladoVMID);
     }
 

@@ -1,6 +1,6 @@
 package gob.conafor.upm.mod;
 
-import gob.conafor.conn.dat.LocalConnection;
+import gob.conafor.conn.dat.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,10 +46,10 @@ public class CDUpm {
     public List<Integer> getUPMID() {
         List<Integer> listUPMID = new ArrayList();
         //this.query = "SELECT UPMID, SecuenciaID, ProveedorID FROM UPM_MallaPuntos WHERE upmid =226708 or upmid =4 and UPMID NOT IN (SELECT UPMID FROM UPM_UPM) AND SecuenciaID <> 0";
-        /*PRODUCCION*/ this.query = "SELECT UPMID, SecuenciaID, ProveedorID FROM UPM_MallaPuntos WHERE UPMID NOT IN (SELECT UPMID FROM UPM_UPM) AND SecuenciaID <> 0 order by UPMID";
+        ///*PRODUCCION*/ this.query = "SELECT UPMID, SecuenciaID, ProveedorID FROM UPM_MallaPuntos WHERE UPMID NOT IN (SELECT UPMID FROM UPM_UPM) AND SecuenciaID <> 0 order by UPMID";
         ///*DIAAPROY*/this.query = "SELECT UPMID, SecuenciaID, ProveedorID FROM UPM_MallaPuntos WHERE UPMID NOT IN (SELECT UPMID FROM UPM_UPM) AND SecuenciaID <> 0 AND ProveedorID=1 ORDER BY UPMID";
         ///*INYDES*/this.query = "SELECT UPMID, SecuenciaID, ProveedorID FROM UPM_MallaPuntos WHERE UPMID NOT IN (SELECT UPMID FROM UPM_UPM) AND SecuenciaID <> 0 AND ProveedorID=2 ORDER BY UPMID";
-        ///*AMAREF*/this.query = "SELECT UPMID, SecuenciaID, ProveedorID FROM UPM_MallaPuntos WHERE UPMID NOT IN (SELECT UPMID FROM UPM_UPM) AND SecuenciaID <> 0 AND ProveedorID=3 ORDER BY UPMID";
+        /*AMAREF*/this.query = "SELECT UPMID, SecuenciaID, ProveedorID FROM UPM_MallaPuntos WHERE UPMID NOT IN (SELECT UPMID FROM UPM_UPM) AND SecuenciaID <> 0 AND ProveedorID=3 ORDER BY UPMID";
         
         Connection conn = LocalConnection.getConnection();
         try {
@@ -211,7 +211,7 @@ public class CDUpm {
     
     public List<CatETipoUPM> getTiposUPM() {
         query = "SELECT TipoUPMID, TipoUpm, Descripcion FROM CAT_TipoUPM";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         List<CatETipoUPM> tiposUpm = new ArrayList();
         try {
             Statement st = conn.createStatement();
@@ -245,7 +245,7 @@ public class CDUpm {
     public List<CatETipoTenencia> getTiposTenencia() {
         List<CatETipoTenencia> listTenencias = new ArrayList();
         query = "SELECT TipoTenenciaID, Descripcion FROM CAT_TipoTenencia";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -463,7 +463,7 @@ public List<Object> getUpmInaccesible(int upmID) {
 public List<CatETipoFisiografia> getTipoFisiografia() {
     query = "SELECT FisiografiaID, TipoFisiografia, Descripcion FROM CAT_TipoFisiografia";
     List<CatETipoFisiografia> listFisiografia = new ArrayList<>();
-    Connection conn = LocalConnection.getConnection();
+    Connection conn = LocalConnectionCat.getConnection();
     try {
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(query);
@@ -493,7 +493,7 @@ public List<CatETipoFisiografia> getTipoFisiografia() {
 public List<CatETipoExposicion> getTipoExposicion() {
     query = "SELECT ExposicionID, Clave, Descripcion FROM CAT_TipoExposicion";
     List<CatETipoExposicion> listExposicion = new ArrayList<>();
-    Connection conn = LocalConnection.getConnection();
+    Connection conn = LocalConnectionCat.getConnection();
     try {
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(query);

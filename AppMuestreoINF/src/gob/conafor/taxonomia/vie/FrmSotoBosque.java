@@ -550,7 +550,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
     
      private boolean validarColectasObligatorias() {
         CDColectaBotanica colecta = new CDColectaBotanica();
-        if (colecta.validarCapturaGenero("TAXONOMIA_SotoBosque", this.sitioID)) {
+        if (colecta.validarCapturaGenero("TAXONOMIA_SotoBosque", this.sitioID)) {//si es verdadero
             JOptionPane.showMessageDialog(null, "Error! Faltan por asignar claves de colecta", "Sotobosque", JOptionPane.INFORMATION_MESSAGE);
             return false;
         } else {

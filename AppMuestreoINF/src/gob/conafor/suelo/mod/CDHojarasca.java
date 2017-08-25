@@ -1,6 +1,7 @@
 package gob.conafor.suelo.mod;
 
 import gob.conafor.conn.dat.LocalConnection;
+import gob.conafor.conn.dat.LocalConnectionCat;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -102,7 +103,7 @@ public class CDHojarasca {
     public List<CatETipoHojarasca> getTipohojarasca(int tipoHojarascaID) {
         List<CatETipoHojarasca> lisTipoHojarasca = new ArrayList<>();
         query = "SELECT TipoHojarascaID, Clave, Descripcion FROM CAT_TipoHojarasca";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);

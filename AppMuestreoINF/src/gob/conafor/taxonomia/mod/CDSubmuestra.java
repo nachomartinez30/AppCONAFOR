@@ -1,6 +1,6 @@
 package gob.conafor.taxonomia.mod;
 
-import gob.conafor.conn.dat.LocalConnection;
+import gob.conafor.conn.dat.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -63,11 +63,13 @@ public class CDSubmuestra {
             conn.commit();
             st.close();
         } catch (SQLException e){
+            e.printStackTrace();
              JOptionPane.showMessageDialog(null, "Error! no se pudo crear una submuestra nueva ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al crear una nueva submuestra ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -85,6 +87,7 @@ public class CDSubmuestra {
             conn.commit();
             st.close();
         }catch(SQLException e){
+            e. printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo crear una troza nueva ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
@@ -244,7 +247,7 @@ public class CDSubmuestra {
     public List<CatETipoTroza> getTipotroza() {
         List<CatETipoTroza> listTipoTroza = new ArrayList<>();
         query = "SELECT TipoTrozaID, Clave, Descripcion FROM CAT_TipoTroza";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
 
         try {
             Statement st = conn.createStatement();

@@ -1,6 +1,6 @@
 package gob.conafor.sitio.mod;
 
-import gob.conafor.conn.dat.LocalConnection;
+import gob.conafor.conn.dat.*;
 import gob.conafor.upm.mod.CatETipoInaccesibilidad;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -41,7 +41,7 @@ public class CDSitio {
             }
         }
     }
-    
+
     public List<Integer> getUPMSitios() {
         List<Integer> listUPM = new ArrayList();
         query = "SELECT DISTINCT sit.UPMID FROM SITIOS_Sitio sit WHERE (SELECT COUNT(sit1.UPMID) FROM SITIOS_Sitio sit1 WHERE sit.UPMID = sit1.UPMID) = 4 ORDER BY sit.UPMID ASC";
@@ -69,7 +69,7 @@ public class CDSitio {
             }
         }
     }
-    
+
     public List<Integer> getUPMCreado() {
         List<Integer> listUPM = new ArrayList();
         query = "SELECT UPMID FROM UPM_UPM WHERE Accesible= 1 ORDER BY UPMID ASC";
@@ -97,9 +97,10 @@ public class CDSitio {
             }
         }
     }
-   
+
     public boolean son4Sitios(Integer upmID) {
         this.query = "SELECT COUNT(*) AS Sitios FROM SITIOS_Sitio WHERE UPMID= " + upmID;
+        //System.out.println(query);
         Connection conn = LocalConnection.getConnection();
         Integer noSitios = 0;
         try {
@@ -109,9 +110,15 @@ public class CDSitio {
             rs.close();
             st.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,
-                    "Error! al obtener la cantidad de sitios levantados",
-                    "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            if (e.getErrorCode() == 2000) {
+
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Error! al obtener la cantidad de sitios levantados",
+                        "Conexion BD", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+
             return false;
         } finally {
             try {
@@ -125,7 +132,7 @@ public class CDSitio {
 
     public List<Integer> getSitiosDisponibles(int upmID) {
         List<Integer> listSitios = new ArrayList<>();
-        query = "SELECT UPMID, Sitio, SitioAccesible FROM SITIOS_Sitio sit WHERE  UPMID= " + upmID + " AND SitioAccesible= 1 AND Sitio" 
+        query = "SELECT UPMID, Sitio, SitioAccesible FROM SITIOS_Sitio sit WHERE  UPMID= " + upmID + " AND SitioAccesible= 1 AND Sitio"
                 + " NOT IN (SELECT DISTINCT Sitio FROM SYS_SecuenciaCaptura WHERE UPMID = sit.UPMID)";
         Connection conn = LocalConnection.getConnection();
         try {
@@ -152,7 +159,7 @@ public class CDSitio {
         listSitios.add(0, null);
         return listSitios;
     }
-    
+
     public List<Integer> getSitiosAccesibles(int upmID) {
         List<Integer> listSitios = new ArrayList<>();
         query = "SELECT UPMID, Sitio, SitioAccesible FROM SITIOS_Sitio sit WHERE  UPMID= " + upmID + " AND SitioAccesible= 1";
@@ -181,7 +188,7 @@ public class CDSitio {
         listSitios.add(0, null);
         return listSitios;
     }
-    
+
     public List<Integer> getSitiosEnCaptura(int upmID) {
         List<Integer> listSitios = new ArrayList<>();
         /*query = "SELECT UPMID, Sitio, SitioAccesible FROM SITIOS_Sitio sit WHERE  UPMID= " + upmID + " AND SitioAccesible= 1 AND Sitio "
@@ -213,7 +220,6 @@ public class CDSitio {
         return listSitios;
     }
 
-    
     public List<Integer> getSitios(int upmID) {
         List<Integer> listSitios = new ArrayList<>();
         query = "SELECT UPMID, Sitio FROM SITIOS_Sitio WHERE UPMID= " + upmID;
@@ -247,8 +253,8 @@ public class CDSitio {
         listSitios.add(0, null);
         return listSitios;
     }
-    
-    public List<Integer> getSitiosRevision(){
+
+    public List<Integer> getSitiosRevision() {
         List<Integer> listSitios = new ArrayList<>();
         for (int i = 1; i < 5; i++) {
             listSitios.add(i);
@@ -301,7 +307,7 @@ public class CDSitio {
             }
         }
     }
-    
+
     public CESitio getSitioRevision(int sitioID) {
         this.query = "SELECT UPMID, SitioID, SenialGPS, GradosLatitud, MinutosLatitud, SegundosLatitud, "
                 + "GradosLongitud, MinutosLongitud, SegundosLongitud, ErrorPresicion, EvidenciaMuestreo , Datum, SitioAccesible, "
@@ -347,8 +353,8 @@ public class CDSitio {
             }
         }
     }
-    
-    public CESitio getDatosSitioAccesible(int upmID , int sitio) {
+
+    public CESitio getDatosSitioAccesible(int upmID, int sitio) {
         query = "SELECT SitioID, UPMID, Sitio, SenialGPS, GradosLatitud, MinutosLatitud, SegundosLatitud, "
                 + "GradosLongitud, MinutosLongitud, SegundosLongitud, ErrorPresicion, Datum, SitioAccesible "
                 + "FROM SITIOS_Sitio WHERE UPMID= " + upmID;
@@ -461,12 +467,11 @@ public class CDSitio {
             }
         }
     }
-    
-    
+
     public List<CatETipoInaccesibilidad> getTipoInaccesibilidad() {
         List<CatETipoInaccesibilidad> listInaccesibilidad = new ArrayList<>();
         query = "SELECT TipoInaccesibilidadID, Clave, Tipo, Descripcion FROM CAT_TipoInaccesibilidad";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -502,7 +507,7 @@ public class CDSitio {
                 + sitio.getSitio() + ", " + sitio.getSenialGPS() + ", " + sitio.getGradosLatitud() + ", " + sitio.getMinutosLatitud() + ", "
                 + sitio.getSegundosLatitud() + ", " + sitio.getGradosLongitud() + ", " + sitio.getMinutosLongitud() + ", " + sitio.getSegundosLongitud() + ", "
                 + sitio.getErrorPrecision() + ", " + sitio.getEvidenciaMuestreo() + ", '" + sitio.getDatum() + "' ," + sitio.getSitioAccesible() + ")";
-        System.out.println(query);
+       // System.out.println(query);
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -524,7 +529,7 @@ public class CDSitio {
     public void insertSitioInaccesible(CESitio sitio) {
         query = "INSERT INTO SITIOS_Sitio (UPMID, Sitio, SitioAccesible, TipoInaccesibilidad, ExplicacionInaccesibilidad) VALUES(" + sitio.getUpmID() + ", "
                 + sitio.getSitio() + ", " + sitio.getSitioAccesible() + ", " + sitio.getTipoInaccesibilidadID() + ", '" + sitio.getExplicacionInaccesibilidad() + "')";
-        System.out.println(query);
+        //System.out.println(query);
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -591,16 +596,16 @@ public class CDSitio {
             }
         }
     }
-    
-    public void updateSitio(CESitio ceSitio){
+
+    public void updateSitio(CESitio ceSitio) {
         this.query = "UPDATE SITIOS_Sitio SET SenialGPS= " + ceSitio.getSenialGPS() + ", GradosLatitud= "
                 + ceSitio.getGradosLatitud() + ", MinutosLatitud= " + ceSitio.getMinutosLatitud() + ", SegundosLatitud= "
                 + ceSitio.getSegundosLatitud() + ", GradosLongitud= " + ceSitio.getGradosLongitud() + ", MinutosLongitud= "
                 + ceSitio.getMinutosLongitud() + ", SegundosLongitud= " + ceSitio.getSegundosLongitud() + ", ErrorPresicion= "
                 + ceSitio.getErrorPrecision() + ", Datum= '" + ceSitio.getDatum() + "', Azimut= " + ceSitio.getAzimut() + ", Distancia= "
-                + ceSitio.getDistancia() + ", SitioAccesible= " + ceSitio.getSitioAccesible() + ", EvidenciaMuestreo= " + ceSitio.getEvidenciaMuestreo() 
-                + ", TipoInaccesibilidad= " + ceSitio.getTipoInaccesibilidadID() + ", ExplicacionInaccesibilidad= '" + ceSitio.getExplicacionInaccesibilidad() 
-                + "' WHERE UPMID= " + ceSitio.getUpmID() + " AND Sitio= " +ceSitio.getSitio();
+                + ceSitio.getDistancia() + ", SitioAccesible= " + ceSitio.getSitioAccesible() + ", EvidenciaMuestreo= " + ceSitio.getEvidenciaMuestreo()
+                + ", TipoInaccesibilidad= " + ceSitio.getTipoInaccesibilidadID() + ", ExplicacionInaccesibilidad= '" + ceSitio.getExplicacionInaccesibilidad()
+                + "' WHERE UPMID= " + ceSitio.getUpmID() + " AND Sitio= " + ceSitio.getSitio();
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -670,7 +675,7 @@ public class CDSitio {
             }
         }
     }
-    
+
     public CESitio getSotoBosqueFuera(int sitioID) {
         query = "SELECT SotobosqueFuera, PorcentajeSotobosqueFuera FROM SITIOS_Sitio WHERE SitioID= " + sitioID;
         Connection conn = LocalConnection.getConnection();
@@ -742,7 +747,7 @@ public class CDSitio {
             }
         }
     }
-    
+
     public CESitio getRepobladoFuera(int sitioID) {
         query = "SELECT RepobladoFuera, PorcentajeRepoblado FROM SITIOS_Sitio WHERE SitioID= " + sitioID;
         Connection conn = LocalConnection.getConnection();
@@ -770,10 +775,10 @@ public class CDSitio {
             }
         }
     }
-    
-    public void deleteSitio(int upm, int sitio){
+
+    public void deleteSitio(int upm, int sitio) {
         query = "DELETE FROM SITIOS_Sitio WHERE UPMID= " + upm + " AND Sitio= " + sitio;
-         Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
@@ -831,7 +836,7 @@ public class CDSitio {
     public List<CatEClaveSerieV> getClaveVegetacion() {
         List<CatEClaveSerieV> listClaveV = new ArrayList<>();
         query = "SELECT ClaveSerieVID, Ecosistema, Formacion, TipoVegetacion, Clave, EsForestal FROM CAT_ClaveSerieV ";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -864,7 +869,7 @@ public class CDSitio {
     public List<CatEFaseSucecional> getClaveSucecional() {
         List<CatEFaseSucecional> listFase = new ArrayList<>();
         query = "SELECT FaseSucecionalID, Descripcion, Clave FROM CAT_FaseSucecional";
-        Connection conn = LocalConnection.getConnection();
+        Connection conn = LocalConnectionCat.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -892,9 +897,9 @@ public class CDSitio {
     }
 
     public void updateClaveVegetacion(CESitio sitio) {
-        query = "UPDATE SITIOS_Sitio SET ClaveSerieV= " + sitio.getClaveSerieVID() + ", Condicion= " + sitio.getCondicion()+ ", FaseSucecional= " + sitio.getFaseSucecionalID()
+        query = "UPDATE SITIOS_Sitio SET ClaveSerieV= " + sitio.getClaveSerieVID() + ", Condicion= " + sitio.getCondicion() + ", FaseSucecional= " + sitio.getFaseSucecionalID()
                 + ", ArbolFuera= " + sitio.getArbolFuera() + ", Ecotono= " + sitio.getEcotono() + ", CondicionPresenteCampo= '" + sitio.getCondicionPresenteCampo()
-                + "', CondicionEcotono= '" + sitio.getCondicionEcotono() + "', CoberturaForestal="+sitio.getCoberturaForestal()+" WHERE SitioID= " + sitio.getSitioID() + " AND Sitio= " + sitio.getSitio();
+                + "', CondicionEcotono= '" + sitio.getCondicionEcotono() + "', CoberturaForestal=" + sitio.getCoberturaForestal() + " WHERE SitioID= " + sitio.getSitioID() + " AND Sitio= " + sitio.getSitio();
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -934,7 +939,7 @@ public class CDSitio {
         }
     }
 
-    public CESitio getObservaciones(int sitioID){
+    public CESitio getObservaciones(int sitioID) {
         query = "SELECT Observaciones FROM SITIOS_Sitio WHERE SitioID= " + sitioID;
         Connection conn = LocalConnection.getConnection();
         CESitio ceSitio = new CESitio();
@@ -960,7 +965,7 @@ public class CDSitio {
             }
         }
     }
-    
+
     public boolean validarSitio1(int upmID) {
         query = "SELECT * FROM SITIOS_Sitio WHERE UPMID =" + upmID;
         Connection conn = LocalConnection.getConnection();

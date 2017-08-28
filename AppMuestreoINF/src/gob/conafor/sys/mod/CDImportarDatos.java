@@ -1,6 +1,6 @@
-package gob.conafor.sys.mod;
+/*package gob.conafor.sys.mod;
 
-import gob.conafor.conn.dat.H2Conexion;
+
 import gob.conafor.conn.dat.LocalConnection;
 import gob.conafor.conn.dat.ServerConnection;
 import java.sql.Connection;
@@ -474,6 +474,7 @@ public class CDImportarDatos {
        //exportacion.importarGeneros();
        //exportacion.importarEspecies();
        exportacion.importarInfraespecies();
-    }*/
+    }
 
 }
+*/

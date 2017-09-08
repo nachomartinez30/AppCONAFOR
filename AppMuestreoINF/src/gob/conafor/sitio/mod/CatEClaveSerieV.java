@@ -7,7 +7,7 @@ public class CatEClaveSerieV {
     private String formacion;
     private String tipoVegetacion;
     private String clave;
-    private int EsForestal;
+    private boolean EsForestal;
 
     public int getClaveSerievID() {
         return claveSerieVID;
@@ -49,11 +49,11 @@ public class CatEClaveSerieV {
         this.clave = clave;
     }
 
-    public int getEsForestal() {
+    public boolean getEsForestal() {
         return EsForestal;
     }
 
-    public void setEsForestal(int EsForestal) {
+    public void setEsForestal(boolean EsForestal) {
         this.EsForestal = EsForestal;
     }
     

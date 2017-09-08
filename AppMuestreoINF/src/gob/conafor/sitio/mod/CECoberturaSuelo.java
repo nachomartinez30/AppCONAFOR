@@ -4,6 +4,7 @@ public class CECoberturaSuelo {
 
     //Módulo A, Sección 4.3 Registro de vegetación menor y cobertura del suelo.
     //Módulo G, Sección 10.2.1 Registro de vegetación menor y cobertura de suelo (sitio de 1m).
+    
     private int sitioID;
     private int gramineas;
     private int helechos;
@@ -15,7 +16,15 @@ public class CECoberturaSuelo {
     private int hojarasca;
     private int grava;
     private int otros;
+    private int UPMID;
+    
+    public int getUPMID() {
+        return UPMID;
+    }
 
+    public void setUPMID(int UPMID) {
+        this.UPMID = UPMID;
+    }
     public int getSitioID() {
         return sitioID;
     }

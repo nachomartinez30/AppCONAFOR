@@ -44,7 +44,17 @@ public class LocalConnection {
         return "jdbc:sqlite:" + path + "/MuestreoINF_2017.oct"; //Para distribuir
         //return "jdbc:sqlite:" + path + "/src/db/MuestreoINF_2017.oct"; //En producción.
     }*/
-    private static String driver = "org.h2.Driver";
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*private static String driver = "org.h2.Driver";
 	private static Connection connect;
 
 
@@ -57,6 +67,45 @@ public class LocalConnection {
 			Class.forName(driver);
 			connect = DriverManager.getConnection(conexion,"usuario_java","211372848");
 						connect.setAutoCommit(false);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null,
+					"Error, No hay base de datos local disponible" + e.getClass().getName() + ": " + e.getMessage());
+			e.printStackTrace();
+			System.exit(0);
+		}
+		return connect;
+	}
+
+	public static void closeConnection() {
+		try {
+			connect.close();
+			JOptionPane.showConfirmDialog(null, "Desconectado");
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null,
+					"Error, No hay base de datos local disponible" + e.getClass().getName() + ": " + e.getMessage());
+		}
+	}*/
+        
+    
+    
+    
+    
+    
+    
+        
+        private static String driver = "org.postgresql.Driver";
+	private static Connection connect;
+
+
+	public static Connection getConnection() {
+		try {
+                    Path currentPath = Paths.get("");
+                    String path = currentPath.toAbsolutePath().toString(),conexion;
+                    conexion="jdbc:postgresql://10.57.0.70:5432/MuestreoINF_2017"; //desarrollo
+                    //conexion="jdbc:h2:"+path+"/MuestreoINF_2017"; //distribucion
+			Class.forName(driver);
+			connect = DriverManager.getConnection(conexion,"usuario_java","211372848");
+			connect.setAutoCommit(false);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,
 					"Error, No hay base de datos local disponible" + e.getClass().getName() + ": " + e.getMessage());

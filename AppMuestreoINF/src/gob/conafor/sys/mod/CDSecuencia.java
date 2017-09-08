@@ -34,6 +34,7 @@ public class CDSecuencia {
             }
             return modulos;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los modulos del UPM ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -56,6 +57,7 @@ public class CDSecuencia {
             st.close();
             return listUPM;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener el upm por módulo ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -64,6 +66,7 @@ public class CDSecuencia {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener el upm por modulo ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -84,6 +87,7 @@ public class CDSecuencia {
             st.close();
             return listUPM;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener el upm para revision ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -92,6 +96,7 @@ public class CDSecuencia {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener el upm para revisión ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -112,6 +117,7 @@ public class CDSecuencia {
             st.close();
             return listUPM;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los sitios para revision ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -120,13 +126,14 @@ public class CDSecuencia {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener los sitios para revisión ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
     
     public boolean habilitarCapturaSitio() {
-        query = "SELECT * FROM UPM_UPM WHERE Accesible= 1";
+        query = "SELECT * FROM UPM_UPM WHERE Accesible= true";
         boolean hayRegistros = false;
         Connection conn = LocalConnection.getConnection();
         try {
@@ -136,11 +143,13 @@ public class CDSecuencia {
                 hayRegistros = true;
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! No se pudo validar la existencia de UPM'S capturados", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de validar la presencia de UPM'S capturados ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -148,7 +157,7 @@ public class CDSecuencia {
     }
     
     public boolean habilitarCapturaModulos() {
-        query = "SELECT * FROM SITIOS_Sitio WHERE SitioAccesible= 1";
+        query = "SELECT * FROM SITIOS_Sitio WHERE SitioAccesible= true";
         boolean hayRegistros = false;
         Connection conn = LocalConnection.getConnection();
         try {
@@ -158,11 +167,13 @@ public class CDSecuencia {
                 hayRegistros = true;
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! No se pudo validar la existencia de sitios capturados ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de validar la presencia de sitios capturados ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -180,11 +191,13 @@ public class CDSecuencia {
                 hayRegistros = true;
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! No se pudo validar la existencia de formatos capturados ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de validar la presencia de formatos capturados ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -202,11 +215,13 @@ public class CDSecuencia {
                 hayRegistros = true;
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! No se pudo validar la existencia de UPM'S capturados", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de validar la presencia de UPM'S capturados", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -224,11 +239,13 @@ public class CDSecuencia {
                 hayRegistros = true;
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! No se pudo validar la existencia de Sitios capturados", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de validar la presencia de Sitios capturados", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -246,11 +263,13 @@ public class CDSecuencia {
                 hayRegistros = true;
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! No se pudo validar la existencia de Colectas botánicas ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de validar la presencia de colectas botánicas", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -270,11 +289,13 @@ public class CDSecuencia {
                 conn.commit();
                 st.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información del formato visitado ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             } finally {
                 try {
                     conn.close();
                 } catch (SQLException e) {
+                e.printStackTrace();
                     JOptionPane.showMessageDialog(
                             null, "Error! al cerrar la base de datos al insertar datos del formato visitado ",
                             "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -293,11 +314,13 @@ public class CDSecuencia {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información del sitio para revisión ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos del sitio para revisión ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -314,11 +337,13 @@ public class CDSecuencia {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo actualizar si fue capturado el formato ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al actualizar si fue capturado el formato ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -348,12 +373,14 @@ public class CDSecuencia {
             rs.close();
             return secuenciaModel;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de la vista de secuencia de captura ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos para la vista de secuancia capturada", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -382,12 +409,14 @@ public class CDSecuencia {
             rs.close();
             return secuenciaModel;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de la vista de secuencia de captura ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos para la vista de secuancia capturada", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -407,12 +436,14 @@ public class CDSecuencia {
             rs.close();
             return formatoID;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener el id del formato pendiente", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return 0;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener el id del formato pendiente", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -463,11 +494,13 @@ public class CDSecuencia {
             }
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información de la secuencia 1", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de la secuencia 1",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -522,11 +555,13 @@ public class CDSecuencia {
             }
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información de la secuencia 2", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de la secuencia 2 ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -564,11 +599,13 @@ public class CDSecuencia {
             }
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la secuencia 3", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de la secuencia 3",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -626,11 +663,13 @@ public class CDSecuencia {
             }
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la secuencia 3", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de la secuencia 3",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -685,11 +724,13 @@ public class CDSecuencia {
             }
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información de la secuencia 4 ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de la secuencia 4",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -746,11 +787,13 @@ public class CDSecuencia {
             }
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información de la secuencia 5 ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de la secuencia 5 ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -805,11 +848,13 @@ public class CDSecuencia {
             }
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información de la secuencia 6 ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de la secuencia 6 ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -866,12 +911,14 @@ public class CDSecuencia {
             }
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información de la secuencia 7"
                     , "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de la secuencia 7",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -930,11 +977,13 @@ public class CDSecuencia {
             }
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información de la secuencia 8", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de la secuencia 8",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -991,11 +1040,13 @@ public class CDSecuencia {
             }
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información de la secuencia 9", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de la secuencia 9",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -1056,11 +1107,13 @@ public class CDSecuencia {
             }
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información de la secuencia 10", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de la secuencia 10",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -1118,11 +1171,13 @@ public class CDSecuencia {
             }
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información de la secuencia 11", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de la secuencia 11",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -1184,11 +1239,13 @@ public class CDSecuencia {
             }
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información de la secuencia 12", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de la secuencia 12",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -1252,11 +1309,13 @@ public class CDSecuencia {
             }
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información de la secuencia 13", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de la secuencia 13",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -1311,11 +1370,13 @@ public class CDSecuencia {
             }
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información de la secuencia 14 ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de la secuencia 14",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -1368,11 +1429,13 @@ public class CDSecuencia {
             }
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información de la secuencia 1", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de la secuencia 1",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -1389,11 +1452,13 @@ public class CDSecuencia {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar la informacion de la secuencia del UPM " + upmID, "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al eliminar los datos de la secuencia del upm " + upmID,
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -1412,11 +1477,13 @@ public class CDSecuencia {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la informacion de la secuencia de captura", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al modificar los datos de secuencia de captura",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -1436,12 +1503,14 @@ public class CDSecuencia {
             }
             return formatoID;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! No se pudo obtener el formato a capturar en la secuencia de captura", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos al obtener el siguiente formato en la secuencia", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1459,12 +1528,14 @@ public class CDSecuencia {
             }
             return secuenciaID;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! No se pudo obtener el id de la secuencia de captura", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return 0;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener el id de secuecia de captura", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         } 

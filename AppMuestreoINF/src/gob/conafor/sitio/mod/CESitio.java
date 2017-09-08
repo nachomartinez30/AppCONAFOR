@@ -6,7 +6,7 @@ public class CESitio {
     private int upmID;
     private int sitioID;
     private int sitio;
-    private int senialGPS;
+    private boolean senialGPS;
     private Integer gradosLatitud;
     private Integer minutosLatitud;
     private Float segundosLatitud;
@@ -15,11 +15,11 @@ public class CESitio {
     private Float segundosLongitud;
     private int errorPrecision;
     private String datum;
-    private Integer evidenciaMuestreo;
+    private Boolean evidenciaMuestreo;
     private Integer azimut;
     private Float distancia;
     //Módulo A, Sección 4.2 Características de accesibilidad de los sitios.
-    private int sitioAccesible;
+    private Boolean sitioAccesible;
     private Integer tipoInaccesibilidadID;
     private String explicacionInaccesibilidad;
     //Las siguientes variables se captura una sola vez por sitio, independientemente de los módulos a capturar.
@@ -39,16 +39,16 @@ public class CESitio {
     private Float distancia2;
     private Float distancia3;
     private Float distancia4;
-    private int repobladoFuera;
+    private Boolean repobladoFuera;
     private Integer porcentajeRepoblado;
-    private int sotobosqueFuera;
+    private Boolean sotobosqueFuera;
     private Integer porcentajeSotobosque;
     //Módulo A, Sección 4.8 Clave de vegetación.
-    private int coberturaForestal;
-    private int condicion;
+    private Boolean coberturaForestal;
+    private Boolean condicion;
     private Integer faseSucecionalID;
     private Integer claveSerieVID;
-    private int arbolFuera;
+    private Boolean arbolFuera;
     private int ecotono;
     private String condicionPresenteCampo;
     private String condicionEcotono;
@@ -81,11 +81,11 @@ public class CESitio {
         this.sitio = sitio;
     }
 
-    public int getSenialGPS() {
+    public boolean getSenialGPS() {
         return senialGPS;
     }
 
-    public void setSenialGPS(int senialGPS) {
+    public void setSenialGPS(boolean senialGPS) {
         this.senialGPS = senialGPS;
     }
 
@@ -153,11 +153,11 @@ public class CESitio {
         this.datum = datum;
     }
 
-    public Integer getEvidenciaMuestreo() {
+    public Boolean getEvidenciaMuestreo() {
         return evidenciaMuestreo;
     }
 
-    public void setEvidenciaMuestreo(Integer evidenciaMuestreo) {
+    public void setEvidenciaMuestreo(Boolean evidenciaMuestreo) {
         this.evidenciaMuestreo = evidenciaMuestreo;
     }
 
@@ -177,11 +177,11 @@ public class CESitio {
         this.distancia = distancia;
     }
 
-    public int getSitioAccesible() {
+    public Boolean getSitioAccesible() {
         return sitioAccesible;
     }
 
-    public void setSitioAccesible(int sitioAccesible) {
+    public void setSitioAccesible(Boolean sitioAccesible) {
         this.sitioAccesible = sitioAccesible;
     }
 
@@ -281,11 +281,11 @@ public class CESitio {
         this.distancia4 = distancia4;
     }
 
-    public int getRepobladoFuera() {
+    public Boolean getRepobladoFuera() {
         return repobladoFuera;
     }
 
-    public void setRepobladoFuera(int repobladoFuera) {
+    public void setRepobladoFuera(Boolean repobladoFuera) {
         this.repobladoFuera = repobladoFuera;
     }
 
@@ -297,11 +297,11 @@ public class CESitio {
         this.porcentajeRepoblado = porcentajeRepoblado;
     }
 
-    public int getSotobosqueFuera() {
+    public Boolean getSotobosqueFuera() {
         return sotobosqueFuera;
     }
 
-    public void setSotobosqueFuera(int sotobosqueFuera) {
+    public void setSotobosqueFuera(Boolean sotobosqueFuera) {
         this.sotobosqueFuera = sotobosqueFuera;
     }
 
@@ -313,19 +313,19 @@ public class CESitio {
         this.porcentajeSotobosque = porcentajeSotobosque;
     }
 
-    public int getCoberturaForestal() {
+    public Boolean getCoberturaForestal() {
         return coberturaForestal;
     }
 
-    public void setCoberturaForestal(int coberturaForestal) {
+    public void setCoberturaForestal(Boolean coberturaForestal) {
         this.coberturaForestal = coberturaForestal;
     }
 
-    public int getCondicion() {
+    public Boolean getCondicion() {
         return condicion;
     }
 
-    public void setCondicion(int condicion) {
+    public void setCondicion(Boolean condicion) {
         this.condicion = condicion;
     }
 
@@ -345,11 +345,11 @@ public class CESitio {
         this.claveSerieVID = claveSerieVID;
     }
 
-    public int getArbolFuera() {
+    public Boolean getArbolFuera() {
         return arbolFuera;
     }
 
-    public void setArbolFuera(int arbolFuera) {
+    public void setArbolFuera(Boolean arbolFuera) {
         this.arbolFuera = arbolFuera;
     }
 

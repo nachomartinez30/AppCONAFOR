@@ -28,8 +28,8 @@ public class FrmClaveVegetacion extends JInternalFrame {
     private int sitio;
     private Integer claveSerieV;
     private Integer faseSucecional;
-    private int condicion;
-    private int arbolFuera;
+    private Boolean condicion;
+    private Boolean arbolFuera;
     private int ecotono;
     private String condicionPresente;
     private String condicionEcotono;
@@ -83,11 +83,11 @@ public class FrmClaveVegetacion extends JInternalFrame {
         chkArbolFueraBosque.setEnabled(true);
         chkEcotono.setEnabled(true);
         //System.out.println(ceVegetacion.getCondicion());
-        if (ceVegetacion.getCondicion() == 1) {         //1=Primario
+        if (ceVegetacion.getCondicion() == true) {         //true=Primario
             rbtPrimario.setSelected(true);
             rbtSecundario.setSelected(false);
             cmbFaseSucecional.setEnabled(false);
-        } else {                                        //2=Secundario
+        } else {                                        //false=Secundario
             rbtPrimario.setSelected(false);
             rbtSecundario.setSelected(true);
             CatEFaseSucecional ceFase = new CatEFaseSucecional();
@@ -95,7 +95,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
             cmbFaseSucecional.setEnabled(true);
             cmbFaseSucecional.setSelectedItem(ceFase);
         }
-        if (ceVegetacion.getArbolFuera() == 1) {
+        if (ceVegetacion.getArbolFuera() == true) {
             chkArbolFueraBosque.setSelected(true);
         } else {
             chkArbolFueraBosque.setSelected(false);
@@ -168,15 +168,15 @@ public class FrmClaveVegetacion extends JInternalFrame {
             this.faseSucecional = null;
         }
         if (rbtPrimario.isSelected()==true) {
-            this.condicion = 1;
+            this.condicion = true;
         } else {
-            this.condicion = 0;
+            this.condicion = false;
         }
         //System.out.println("Condicion Continuar"+this.condicion);
         if (chkArbolFueraBosque.isSelected()) {
-            this.arbolFuera = 1;
+            this.arbolFuera = true;
         } else {
-            this.arbolFuera = 0;
+            this.arbolFuera = false;
         }
         if (chkEcotono.isSelected()) {
             this.ecotono = 1;
@@ -191,11 +191,11 @@ public class FrmClaveVegetacion extends JInternalFrame {
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setSitio(this.sitio);
         if(lblCoberturaVegetal.getText().equals("Forestal")){
-            this.ceSitio.setCoberturaForestal(1);
+            this.ceSitio.setCoberturaForestal(true);
             System.out.println("Forestal");
         }
         if(lblCoberturaVegetal.getText().equals("No Forestal")){
-            this.ceSitio.setCoberturaForestal(0);
+            this.ceSitio.setCoberturaForestal(false);
             System.out.println("No Forestal");
         }
         this.ceSitio.setCondicion(this.condicion);
@@ -934,7 +934,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
     public void validarComboBoxClaveVegetacion(){
         try {
             CatEClaveSerieV claveV = (CatEClaveSerieV) cmbClaveSerieV.getSelectedItem();
-            if (claveV.getEsForestal() == 1) {
+            if (claveV.getEsForestal() == true) {
                 lblCoberturaVegetal.setText("Forestal");
                 rbtPrimario.setEnabled(true);
                 rbtSecundario.setEnabled(true);
@@ -942,7 +942,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
                 chkArbolFueraBosque.setSelected(false);
                 chkEcotono.setEnabled(true);
                 //System.err.println(txtDescripcionEcotono.getText());
-            } else if (claveV.getEsForestal() == 0 && claveV.getClaveSerievID() != 255) {
+            } else if (claveV.getEsForestal() == false && claveV.getClaveSerievID() != 255) {
                 lblCoberturaVegetal.setText("No Forestal");
                 rbtPrimario.setEnabled(false);
                 rbtSecundario.setEnabled(false);
@@ -954,7 +954,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
                 chkEcotono.setSelected(false);
                 txtDescripcionEcotono.setText("");
                 txtDescripcionEcotono.setEnabled(false);
-            } else if (claveV.getEsForestal() == 0 && claveV.getClaveSerievID() == 255) {
+            } else if (claveV.getEsForestal() == false && claveV.getClaveSerievID() == 255) {
                 lblCoberturaVegetal.setText("No aplica");
                 rbtPrimario.setEnabled(false);
                 rbtSecundario.setEnabled(false);

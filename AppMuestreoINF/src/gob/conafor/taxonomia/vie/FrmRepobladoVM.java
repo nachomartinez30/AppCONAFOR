@@ -66,7 +66,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
     private Integer porcentajeCobertura51200 = null;
     private Integer frecuencia200 = null;
     private Integer porcentajeCobertura200 = null;
-    private Integer repobladoFuera;
+    private Boolean repobladoFuera;
     private Integer porcentajeRepobladoFuera;
     private CESitio ceSitio = new CESitio();
     private CESeccionesCapturadas seccionActual = new CESeccionesCapturadas();
@@ -142,7 +142,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
         txtOtros.setText(String.valueOf(this.ceCobertura.getOtros()));
         CESitio ceRepobladoFuera;
         ceRepobladoFuera = this.cdSitio.getRepobladoFuera(this.sitioID);
-        if (ceRepobladoFuera.getRepobladoFuera() == 1) {
+        if (ceRepobladoFuera.getRepobladoFuera() == true) {
             chkRepobladoFuera.setSelected(true);
             txtPorcentajeRepobladoFuera.setText(String.valueOf(ceRepobladoFuera.getPorcentajeRepoblado()));
             txtPorcentajeRepobladoFuera.setEnabled(true);
@@ -547,9 +547,9 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
 
     private void asignarDatosRepobladoFuera() {
         if (chkRepobladoFuera.isSelected()) {
-            this.repobladoFuera = 1;
+            this.repobladoFuera = true;
         } else {
-            this.repobladoFuera = 0;
+            this.repobladoFuera = false;
         }
         try {
             this.porcentajeRepobladoFuera = Integer.valueOf(txtPorcentajeRepobladoFuera.getText());

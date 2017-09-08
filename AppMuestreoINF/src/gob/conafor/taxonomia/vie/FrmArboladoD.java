@@ -77,7 +77,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
     private Integer densidadCopa;
     private Integer muerteRegresiva;
     private Integer transparenciaFollaje;
-    private Integer esSubmuestra;
+    private Boolean esSubmuestra;
     private int arboladoID;
     CatECondicionArbolado indexCondicionArbolado;
     private CDArbolado cdArbolado = new CDArbolado();
@@ -886,7 +886,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
                 .addComponent(lblDiametroNormal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDiametroNormal, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1423,7 +1423,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
                         .addComponent(btnElimnar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnModificar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnContinuar)
@@ -1519,9 +1519,9 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
             this.diametroCopaEO = null;
         }
         if (chkEsSubmuestra.isSelected()) {
-            this.esSubmuestra = 1;
+            this.esSubmuestra = true;
         } else {
-            this.esSubmuestra = 0;
+            this.esSubmuestra = false;
         }
     }
     
@@ -1783,9 +1783,9 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
             arb.setDiametroCopaEO(this.diametroCopaEO);
             
             if (chkEsSubmuestra.isSelected()) {
-                arb.setEsSubmuestra(1);
+                arb.setEsSubmuestra(true);
             } else {
-                arb.setEsSubmuestra(0);
+                arb.setEsSubmuestra(false);
             }
             
             CEDanioSeveridad danio1 = new CEDanioSeveridad();
@@ -2610,7 +2610,7 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         txtDiametroCopaNS.setText(String.valueOf(arbol.getDiametroCopaNS()));
         txtDiametroCopaEO.setText(String.valueOf(arbol.getDiametroCopaEO()));
         
-        if (arbol.getEsSubmuestra() == 1) {
+        if (arbol.getEsSubmuestra() == true) {
             chkEsSubmuestra.setSelected(true);
         } else {
             chkEsSubmuestra.setSelected(false);

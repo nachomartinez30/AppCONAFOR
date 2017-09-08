@@ -21,18 +21,18 @@ public class CDContacto {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
-                contacto.setTipoContacto(rs.getInt("TipoContacto"));
+                contacto.setTipoContacto(rs.getBoolean("TipoContacto"));
                 contacto.setNombre(rs.getString("Nombre"));
                 contacto.setDireccion(rs.getString("Direccion"));
-                contacto.setTipoTelefono(rs.getInt("TipoTelefono"));
+                contacto.setTipoTelefono(rs.getBoolean("TipoTelefono"));
                 contacto.setNumeroTelefono(rs.getString("NumeroTelefono"));
-                contacto.setTieneCorreoElectronico(rs.getInt("TieneCorreo"));
-                contacto.setTieneRadio(rs.getInt("TieneRadio"));
-                if (contacto.getTieneCorreoElectronico() == 1) {
+                contacto.setTieneCorreoElectronico(rs.getBoolean("TieneCorreo"));
+                contacto.setTieneRadio(rs.getBoolean("TieneRadio"));
+                if (contacto.getTieneCorreoElectronico() == true) {
                     contacto.setCorreoElectronico(rs.getString("DireccionCorreo"));
                 }
-                contacto.setTieneRadio(rs.getInt("TieneRadio"));
-                if (contacto.getTieneRadio() == 1) {
+                contacto.setTieneRadio(rs.getBoolean("TieneRadio"));
+                if (contacto.getTieneRadio() == true) {
                     contacto.setCanal(rs.getString("Canal"));
                     contacto.setFrecuencia(rs.getString("Frecuencia"));
                 }
@@ -40,6 +40,7 @@ public class CDContacto {
             }
             return contacto;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los datos del contacto ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -48,6 +49,7 @@ public class CDContacto {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos del contacto ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -72,6 +74,7 @@ public class CDContacto {
             }
             
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener existencia del contacto ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -79,6 +82,7 @@ public class CDContacto {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos del contacto ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -102,11 +106,13 @@ public class CDContacto {
             conn.commit();
             st.close();
         } catch (Exception e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información del contacto ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al guardar la información del contacto "
                         + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -126,11 +132,13 @@ public class CDContacto {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo actualizar la información del contacto ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al actualizar la información del contacto ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -146,11 +154,13 @@ public class CDContacto {
             st.close();
 
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar la información del contacto ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al eliminar al contacto ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -168,11 +178,13 @@ public class CDContacto {
             st.close();
 
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar la información del contacto ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al eliminar al contacto ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);

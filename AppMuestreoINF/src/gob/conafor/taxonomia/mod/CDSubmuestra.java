@@ -39,6 +39,7 @@ public class CDSubmuestra {
             }
             return ceSubmuestra;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener un registro de submuestra "
                    , "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
@@ -46,6 +47,7 @@ public class CDSubmuestra {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane
                         .showMessageDialog(null,
                                 "Error! al cerrar la base de datos en datos de registro de submuestra",
@@ -63,12 +65,14 @@ public class CDSubmuestra {
             conn.commit();
             st.close();
         } catch (SQLException e){
+        e.printStackTrace();
             e.printStackTrace();
              JOptionPane.showMessageDialog(null, "Error! no se pudo crear una submuestra nueva ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al crear una nueva submuestra ",
@@ -87,12 +91,14 @@ public class CDSubmuestra {
             conn.commit();
             st.close();
         }catch(SQLException e){
+        e.printStackTrace();
             e. printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo crear una troza nueva ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al crear una nueva troza ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -109,11 +115,13 @@ public class CDSubmuestra {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar la submuestra ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al eliminar la submuestra",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -130,11 +138,13 @@ public class CDSubmuestra {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar el registro de troza ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al eliminar el registro de troza",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -151,11 +161,13 @@ public class CDSubmuestra {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar la submuestra ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al eliminar la submuestra",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -200,12 +212,14 @@ public class CDSubmuestra {
             rs.close();
             return submuestraModel;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de la vista de submuetra ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         }finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en para la vista de submuestra", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -232,12 +246,14 @@ public class CDSubmuestra {
             rs.close();
             return trozaModel;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de la vista de troza de submuestra ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en para la vista de troza de submuestra", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -264,6 +280,7 @@ public class CDSubmuestra {
             listTipoTroza.add(0, null);
             return listTipoTroza;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los datos de tipo de troza de submuestra" ,
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -272,6 +289,7 @@ public class CDSubmuestra {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos en tipos de troza de submuestra", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -294,6 +312,7 @@ public class CDSubmuestra {
                 listNumeroTroza.remove(index);
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los numeros de troza de submuestra",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -301,6 +320,7 @@ public class CDSubmuestra {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en los numeros de troza de submuestra", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -318,11 +338,13 @@ public class CDSubmuestra {
             conn.commit();
             st.close();
         }catch(SQLException e){
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información de submuestra ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la modificación de submuestra", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -337,11 +359,13 @@ public class CDSubmuestra {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información de troza ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la modificación de troza", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -360,12 +384,14 @@ public class CDSubmuestra {
             }
             return ceTroza;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo obtener el registro de troza ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener el registro de troza", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -382,11 +408,13 @@ public class CDSubmuestra {
                 vacio = true;
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al validar la existencia de submuestras", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de validar la existencia de submuestras", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -404,11 +432,13 @@ public class CDSubmuestra {
                 vacio = true;
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al validar la captura de diametro basal", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de validar la captura de diametro basal", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -426,11 +456,13 @@ public class CDSubmuestra {
                 vacio = true;
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al validar la captura de edad", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de validar la captura de edad", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -448,11 +480,13 @@ public class CDSubmuestra {
                 vacio = true;
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al validar la captura de anillos 25", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de validar la captura de anillos 25", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -470,11 +504,13 @@ public class CDSubmuestra {
                 vacio = true;
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al validar la captura de longitud de anillos 10", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de validar la captura de anillos 10", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -492,11 +528,13 @@ public class CDSubmuestra {
                 vacio = true;
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al validar la captura de grozor corteza", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al validar la captura de grozor corteza", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }

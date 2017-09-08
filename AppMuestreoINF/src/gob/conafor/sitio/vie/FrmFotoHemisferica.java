@@ -20,8 +20,8 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
     private CESitio ceSitio = new CESitio();
     private CEFotografiaHemisferica ceFoto = new CEFotografiaHemisferica();
     private CDFotografiaHemisferica cdFoto = new CDFotografiaHemisferica();
-    private int coberturaArborea;
-    private int tomaFotografia;
+    private Boolean coberturaArborea;
+    private Boolean tomaFotografia;
     private String hora;
     private Integer declinacioMagnetica;
     private Datos numeros = new Datos();
@@ -62,14 +62,14 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
         this.ceFoto = this.cdFoto.getDatosFotografia(this.sitioID);
-        if (this.ceFoto.getCoberturaArborea() == 1) {
+        if (this.ceFoto.getCoberturaArborea() == true) {
             rbtCoberturaArboreaSi.setSelected(true);
             rbtCoberturaArboreaNo.setSelected(false);
         } else {
             rbtCoberturaArboreaSi.setSelected(false);
             rbtCoberturaArboreaNo.setSelected(true);
         }
-        if (this.ceFoto.getTomaFotografia() == 1) {
+        if (this.ceFoto.getTomaFotografia() == false) {
             rbtTomaFotografiaSi.setSelected(true);
             rbtTomaFotografiaNo.setSelected(false);
         } else {
@@ -84,14 +84,14 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
     
     private void fijarDatosFotoHemisferica() {
         if (rbtCoberturaArboreaSi.isSelected()) {
-            this.coberturaArborea = 1;
+            this.coberturaArborea = true;
         } else {
-            this.coberturaArborea = 0;
+            this.coberturaArborea = false;
         }
         if (rbtTomaFotografiaSi.isSelected()) {
-            this.tomaFotografia = 1;
+            this.tomaFotografia = true;
         } else {
-            this.tomaFotografia = 0;
+            this.tomaFotografia = false;
         }
         this.hora = txtHora.getText();
         try {

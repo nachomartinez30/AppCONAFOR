@@ -40,12 +40,14 @@ public class FuncionesComunes {
                 vacio = false;
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al revisar si hay datos en una seccion "
                     + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos al revisar si hay datos en una seccion "
                         + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -54,7 +56,7 @@ public class FuncionesComunes {
     }
 
     public boolean validarAccesibilidadSitio3(int upmID, int sitio) {
-        this.query = "SELECT UPMID, Sitio, SitioAccesible FROM SITIOS_Sitio WHERE UPMID= " + upmID + " AND Sitio= 3" + " AND SitioAccesible= 1";
+        this.query = "SELECT UPMID, Sitio, SitioAccesible FROM SITIOS_Sitio WHERE UPMID= " + upmID + " AND Sitio= 3" + " AND SitioAccesible= true";
         boolean vacio = false;
         Connection conn = LocalConnection.getConnection();
         try {
@@ -64,12 +66,14 @@ public class FuncionesComunes {
                 vacio = true;
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al revisar el sitio 3 de levantamiento de suelo y carbono "
                     + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al revisar el sitio 3 de levantamiento de suelo y carbono"
                         + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -78,7 +82,7 @@ public class FuncionesComunes {
     }
     
     public boolean validarAccesibilidadSitio4(int upmID, int sitio) {
-        this.query = "SELECT UPMID, Sitio, SitioAccesible FROM SITIOS_Sitio WHERE UPMID= " + upmID + " AND Sitio= 4" + " AND SitioAccesible= 1";
+        this.query = "SELECT UPMID, Sitio, SitioAccesible FROM SITIOS_Sitio WHERE UPMID= " + upmID + " AND Sitio= 4" + " AND SitioAccesible= true";
         boolean vacio = false;
         Connection conn = LocalConnection.getConnection();
         try {
@@ -88,12 +92,14 @@ public class FuncionesComunes {
                 vacio = true;
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al revisar el sitio 4 de levantamiento de suelo y carbono "
                     + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al revisar el sitio 4 de levantamiento de suelo y carbono"
                         + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -102,7 +108,7 @@ public class FuncionesComunes {
     }
     
     public boolean validarAccesibilidadSitio2(int upmID, int sitio) {
-        this.query = "SELECT UPMID, Sitio, SitioAccesible FROM SITIOS_Sitio WHERE UPMID= " + upmID + " AND Sitio= 2" + " AND SitioAccesible= 1";
+        this.query = "SELECT UPMID, Sitio, SitioAccesible FROM SITIOS_Sitio WHERE UPMID= " + upmID + " AND Sitio= 2" + " AND SitioAccesible= true";
         boolean vacio = false;
         Connection conn = LocalConnection.getConnection();
         try {
@@ -112,12 +118,14 @@ public class FuncionesComunes {
                 vacio = true;
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al revisar el sitio 2 de levantamiento de suelo y carbono "
                     + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al revisar el sitio 2 de levantamiento de suelo y carbono"
                         + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -180,12 +188,14 @@ public class FuncionesComunes {
             st.close();
             rs.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al revisar el sitio 2 de levantamiento de suelo y carbono "
                     + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al revisar el sitio 2 de levantamiento de suelo y carbono"
                         + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -211,12 +221,14 @@ public class FuncionesComunes {
             st.close();
             rs.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al revisar el sitio 2 de levantamiento de suelo y carbono "
                     + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al revisar el sitio 2 de levantamiento de suelo y carbono"
                         + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }

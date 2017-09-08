@@ -67,7 +67,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
     private Integer frecuencia275 = null;
     private Integer cobertura275 = null;
     private Integer porcentajeDanio = null;
-    private Integer sotobosqueFuera;
+    private Boolean sotobosqueFuera;
     private Integer porcentajeSotobosqueFuera;
     private Datos numeros = new Datos();
     private FuncionesComunes combo = new FuncionesComunes();
@@ -139,7 +139,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
         txtOtros.setText(String.valueOf(this.ceCobertura.getOtros()));
         sitioSotobosqueFuera = cdSitio.getSotoBosqueFuera(this.sitioID);
         chkSotobosque.setSelected(!this.cdSotobosque.validarTablaSotobosque(this.ceSitio.getSitioID()));
-        if (sitioSotobosqueFuera.getSotobosqueFuera() == 1) {
+        if (sitioSotobosqueFuera.getSotobosqueFuera() == true) {
             chkSotoBosqueFuera.setEnabled(true);
             chkSotoBosqueFuera.setSelected(true);
             txtPorcentajeSotobosqueFuera.setEnabled(true);
@@ -506,9 +506,9 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
     
     private void asignarDatosSotobosqueFuera(){
         if(chkSotoBosqueFuera.isSelected()){
-            this.sotobosqueFuera = 1;
+            this.sotobosqueFuera = true;
         } else {
-            this.sotobosqueFuera = 0;
+            this.sotobosqueFuera = false;
         }
         try{
              this.porcentajeSotobosqueFuera = Integer.valueOf(txtPorcentajeSotobosqueFuera.getText());

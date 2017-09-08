@@ -16,7 +16,7 @@ public class CEArbolado {
     private Integer infraespecieID;
     private String nombreComun;
     private int esColecta;
-    private int esSubmuestra;
+    private boolean esSubmuestra;
     private int formaVidaID;
     private Integer formaFusteID;
     private Integer condicionID;
@@ -155,11 +155,11 @@ public class CEArbolado {
         this.esColecta = esColecta;
     }
 
-    public int getEsSubmuestra() {
+    public Boolean getEsSubmuestra() {
         return esSubmuestra;
     }
 
-    public void setEsSubmuestra(int esSubmuestra) {
+    public void setEsSubmuestra(Boolean esSubmuestra) {
         this.esSubmuestra = esSubmuestra;
     }
 

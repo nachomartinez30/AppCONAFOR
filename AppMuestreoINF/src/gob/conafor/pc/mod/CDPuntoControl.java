@@ -58,7 +58,7 @@ public class CDPuntoControl {
     public boolean existPuntoControl(int UPMID){
         boolean exist=false;
         int result=0;
-        String query="Select EXISTS (SELECT UPMID From PC_PuntoControl WHERE UPMID="+ UPMID+")";
+        String query="Select EXISTS (SELECT UPMID From PC_PuntoControl WHERE UPMID="+ UPMID+") as Existe";
         Connection conn = LocalConnection.getConnection();
         CEPuntoControl cePuntoControl = new CEPuntoControl();
         
@@ -67,12 +67,8 @@ public class CDPuntoControl {
             ResultSet rs = st.executeQuery(query);
             
             while(rs.next()){
-                result=rs.getInt(1);
-                if(result==0){
-                    exist=false;
-                }else{
-                    exist=true;
-                }
+                exist=rs.getBoolean("Existe");
+
             }
         }  catch (SQLException e) {
             e.printStackTrace();

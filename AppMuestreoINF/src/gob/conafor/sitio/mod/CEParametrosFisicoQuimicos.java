@@ -4,7 +4,7 @@ public class CEParametrosFisicoQuimicos {
 
     //Módulo G, Sección 10.1 Parámetros Físico-Químicos, Agua superficial e intersticial
     private int sitioID;
-    private int tipoAgua;
+    private Boolean tipoAgua;
     private Float salinidad;
     private Float temperaturaAgua;
     private Float conductividadElectrica;
@@ -21,11 +21,11 @@ public class CEParametrosFisicoQuimicos {
         this.sitioID = sitioID;
     }
 
-    public int getTipoAgua() {
+    public Boolean getTipoAgua() {
         return tipoAgua;
     }
 
-    public void setTipoAgua(int tipoAgua) {
+    public void setTipoAgua(Boolean tipoAgua) {
         this.tipoAgua = tipoAgua;
     }
 

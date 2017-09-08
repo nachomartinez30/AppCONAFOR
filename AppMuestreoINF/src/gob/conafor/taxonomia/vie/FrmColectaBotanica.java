@@ -33,25 +33,25 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
     private Integer sitio;
     private Integer seccionID;
     private Integer consecutivo;
-    private Integer contraFuertes;
-    private Integer exudado;
+    private Boolean contraFuertes;
+    private Boolean exudado;
     private String indicarExudado;
-    private Integer color;
+    private Boolean color;
     private String indicarColor;
-    private Integer cambioColor;
-    private Integer aceitesVolatiles;
-    private Integer colorFlor;
+    private Boolean cambioColor;
+    private Boolean aceitesVolatiles;
+    private Boolean colorFlor;
     private String indicaColorFlor;
-    private Integer hojasTejidoVivo;
-    private Integer fotoFlor;
-    private Integer fotoFruto;
-    private Integer fotoHojasArriva;
-    private Integer fotoHojasAbajo;
-    private Integer fotoArbolCompleto;
-    private Integer fotoCorteza;
-    private Integer virutaIncluida;
-    private Integer cortezaIncluida;
-    private Integer maderaIncluida;
+    private Boolean hojasTejidoVivo;
+    private Boolean fotoFlor;
+    private Boolean fotoFruto;
+    private Boolean fotoHojasArriva;
+    private Boolean fotoHojasAbajo;
+    private Boolean fotoArbolCompleto;
+    private Boolean fotoCorteza;
+    private Boolean virutaIncluida;
+    private Boolean cortezaIncluida;
+    private Boolean maderaIncluida;
     private String observaciones;
     private Version ver = new Version();
     private String version = ver.getVersion();
@@ -176,87 +176,87 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
 
     private void fijarValoresColecta() {
         if (chkContraFuertes.isSelected()) {
-            this.contraFuertes = 1;
+            this.contraFuertes = true;
         } else {
-            this.contraFuertes = 0;
+            this.contraFuertes = false;
         }
         if (chkExudado.isSelected()) {
-            this.exudado = 1;
+            this.exudado = true;
             this.indicarExudado = txtExudado.getText();
         } else {
-            this.exudado = 0;
+            this.exudado = false;
         }
         if (chkColor.isSelected()) {
-            this.color = 1;
+            this.color = true;
             this.indicarColor = txtColor.getText();
         } else {
-            this.color = 0;
+            this.color = false;
         }
         if (chkCambioColor.isSelected()) {
-            this.cambioColor = 1;
+            this.cambioColor = true;
         } else {
-            this.cambioColor = 0;
+            this.cambioColor = false;
         }
         if (chkAceitesVolatiles.isSelected()) {
-            this.aceitesVolatiles = 1;
+            this.aceitesVolatiles = true;
         } else {
-            this.aceitesVolatiles = 0;
+            this.aceitesVolatiles = false;
         }
         if (chkColoresFlores.isSelected()) {
-            this.colorFlor = 1;
+            this.colorFlor = true;
             this.indicaColorFlor = txtColoresFlores.getText();
         } else {
-            this.colorFlor = 0;
+            this.colorFlor = false;
         }
         if (chkHojas.isSelected()) {
-            this.hojasTejidoVivo = 1;
+            this.hojasTejidoVivo = true;
         } else {
-            this.hojasTejidoVivo = 0;
+            this.hojasTejidoVivo = false;
         }
         if (chkFotoFlor.isSelected()) {
-            this.fotoFlor = 1;
+            this.fotoFlor = true;
         } else {
-            this.fotoFlor = 0;
+            this.fotoFlor = false;
         }
         if (chkFotoFruto.isSelected()) {
-            this.fotoFruto = 1;
+            this.fotoFruto = true;
         } else {
-            this.fotoFruto = 0;
+            this.fotoFruto = false;
         }
         if (chkHojasVistasArriba.isSelected()) {
-            this.fotoHojasArriva = 1;
+            this.fotoHojasArriva = true;
         } else {
-            this.fotoHojasArriva = 0;
+            this.fotoHojasArriva = false;
         }
         if (chkHojasVistasAbajo.isSelected()) {
-            this.fotoHojasAbajo = 1;
+            this.fotoHojasAbajo = true;
         } else {
-            this.fotoHojasAbajo = 0;
+            this.fotoHojasAbajo = false;
         }
         if (chkFotoArbolCompleto.isSelected()) {
-            this.fotoArbolCompleto = 1;
+            this.fotoArbolCompleto = true;
         } else {
-            this.fotoArbolCompleto = 0;
+            this.fotoArbolCompleto = false;
         }
         if (chkFotoCorteza.isSelected()) {
-            this.fotoCorteza = 1;
+            this.fotoCorteza = true;
         } else {
-            this.fotoCorteza = 0;
+            this.fotoCorteza = false;
         }
         if (chkVirutaIncluida.isSelected()) {
-            this.virutaIncluida = 1;
+            this.virutaIncluida = true;
         } else {
-            this.virutaIncluida = 0;
+            this.virutaIncluida = false;
         }
         if (chkCortezaIncluida.isSelected()) {
-            this.cortezaIncluida = 1;
+            this.cortezaIncluida = true;
         } else {
-            this.cortezaIncluida = 0;
+            this.cortezaIncluida = false;
         }
         if (chkMaderaIncluida.isSelected()) {
-            this.maderaIncluida = 1;
+            this.maderaIncluida = true;
         } else {
-            this.maderaIncluida = 0;
+            this.maderaIncluida = false;
         }
         this.observaciones = txtObservacionesColecta.getText();
     }
@@ -338,12 +338,12 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
         txtNombreComun.setText(this.ceColecta.getNombreComun());
 
         if (this.cdColecta.hayDatosColecta(claveColecta)) {
-            if (this.ceColecta.getContraFuertes() == 1) {
+            if (this.ceColecta.getContraFuertes() == true) {
                 chkContraFuertes.setSelected(true);
             } else {
                 chkContraFuertes.setSelected(false);
             }
-            if (this.ceColecta.getExudado() == 1) {
+            if (this.ceColecta.getExudado() == true) {
                 chkExudado.setSelected(true);
                 txtExudado.setText(this.ceColecta.getIndicarExudado());
                 txtExudado.setEnabled(true);
@@ -352,7 +352,7 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
                 txtExudado.setText("");
                 txtExudado.setEnabled(false);
             }
-            if (this.ceColecta.getColor() == 1) {
+            if (this.ceColecta.getColor() == true) {
                 chkColor.setSelected(true);
                 txtColor.setText(this.ceColecta.getIndicarColor());
                 txtColor.setEnabled(true);
@@ -361,17 +361,17 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
                 txtColor.setText("");
                 txtColor.setEnabled(false);
             }
-            if (this.ceColecta.getCambioColor() == 1) {
+            if (this.ceColecta.getCambioColor() == true) {
                 chkCambioColor.setSelected(true);
             } else {
                 chkCambioColor.setSelected(false);
             }
-            if (this.ceColecta.getAceitesVolatiles() == 1) {
+            if (this.ceColecta.getAceitesVolatiles() == true) {
                 chkAceitesVolatiles.setSelected(true);
             } else {
                 chkAceitesVolatiles.setSelected(false);
             }
-            if (this.ceColecta.getColorFlor() == 1) {
+            if (this.ceColecta.getColorFlor() == true) {
                 chkColoresFlores.setSelected(true);
                 txtColoresFlores.setText(this.ceColecta.getIndicarColorFlor());
                 txtColoresFlores.setEnabled(true);
@@ -380,52 +380,52 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
                 txtColoresFlores.setText("");
                 txtColoresFlores.setEnabled(false);
             }
-            if (this.ceColecta.getHojasTejidoVivo() == 1) {
+            if (this.ceColecta.getHojasTejidoVivo() == true) {
                 chkHojas.setSelected(true);
             } else {
                 chkHojas.setSelected(false);
             }
-            if (this.ceColecta.getFotoFlor() == 1) {
+            if (this.ceColecta.getFotoFlor() == true) {
                 chkFotoFlor.setSelected(true);
             } else {
                 chkFotoFlor.setSelected(false);
             }
-            if (this.ceColecta.getFotoFruto() == 1) {
+            if (this.ceColecta.getFotoFruto() == true) {
                 chkFotoFruto.setSelected(true);
             } else {
                 chkFotoFruto.setSelected(false);
             }
-            if (this.ceColecta.getFotoHojasArriba() == 1) {
+            if (this.ceColecta.getFotoHojasArriba() == true) {
                 chkHojasVistasArriba.setSelected(true);
             } else {
                 chkHojasVistasArriba.setSelected(false);
             }
-            if (this.ceColecta.getFotoHojasAbajo() == 1) {
+            if (this.ceColecta.getFotoHojasAbajo() == true) {
                 chkHojasVistasAbajo.setSelected(true);
             } else {
                 chkHojasVistasAbajo.setSelected(false);
             }
-            if (this.ceColecta.getFotoArbolCompleto() == 1) {
+            if (this.ceColecta.getFotoArbolCompleto() == true) {
                 chkFotoArbolCompleto.setSelected(true);
             } else {
                 chkFotoArbolCompleto.setSelected(false);
             }
-            if (this.ceColecta.getFotoCorteza() == 1) {
+            if (this.ceColecta.getFotoCorteza() == true) {
                 chkFotoCorteza.setSelected(true);
             } else {
                 chkFotoCorteza.setSelected(false);
             }
-            if (this.ceColecta.getVirutaIncluida() == 1) {
+            if (this.ceColecta.getVirutaIncluida() == true) {
                 chkVirutaIncluida.setSelected(true);
             } else {
                 chkVirutaIncluida.setSelected(false);
             }
-            if (this.ceColecta.getCortezaIncluida() == 1) {
+            if (this.ceColecta.getCortezaIncluida() == true) {
                 chkCortezaIncluida.setSelected(true);
             } else {
                 chkCortezaIncluida.setSelected(false);
             }
-            if (this.ceColecta.getMaderaIncluida() == 1) {
+            if (this.ceColecta.getMaderaIncluida() == true) {
                 chkMaderaIncluida.setSelected(true);
             } else {
                 chkMaderaIncluida.setSelected(false);

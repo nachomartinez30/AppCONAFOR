@@ -4,35 +4,6 @@ public class CEColectaBotanica {
 
     //Modulo A, Sección 4.4.8 Clave de colecta botánica
     private Integer UPMID;
-    private Integer familiaID;
-    private Integer generoID;
-    private Integer especieID;
-    private Integer infraespecie;
-    private String nombreComun;
-    private Integer sitio;
-    private Integer seccionID;
-    private Integer consecutivo;
-    private String claveColecta;
-    private Integer contraFuertes;
-    private Integer exudado;
-    private String indicarExudado;
-    private Integer color;
-    private String indicarColor;
-    private Integer cambioColor;
-    private Integer aceitesVolatiles;
-    private Integer colorFlor;
-    private String indicarColorFlor;
-    private Integer hojasTejidoVivo;
-    private Integer fotoFlor;
-    private Integer fotoFruto;
-    private Integer fotoHojasArriba;
-    private Integer fotoHojasAbajo;
-    private Integer fotoArbolCompleto;
-    private Integer fotoCorteza;
-    private Integer virutaIncluida;
-    private Integer cortezaIncluida;
-    private Integer maderaIncluida;
-    private String observaciones;
 
     public Integer getUPMID() {
         return UPMID;
@@ -106,28 +77,140 @@ public class CEColectaBotanica {
         this.consecutivo = consecutivo;
     }
 
+    public Boolean getContraFuertes() {
+        return contraFuertes;
+    }
+
+    public void setContraFuertes(Boolean contraFuertes) {
+        this.contraFuertes = contraFuertes;
+    }
+
+    public Boolean getExudado() {
+        return exudado;
+    }
+
+    public void setExudado(Boolean exudado) {
+        this.exudado = exudado;
+    }
+
+    public Boolean getColor() {
+        return color;
+    }
+
+    public void setColor(Boolean color) {
+        this.color = color;
+    }
+
+    public Boolean getCambioColor() {
+        return cambioColor;
+    }
+
+    public void setCambioColor(Boolean cambioColor) {
+        this.cambioColor = cambioColor;
+    }
+
+    public Boolean getAceitesVolatiles() {
+        return aceitesVolatiles;
+    }
+
+    public void setAceitesVolatiles(Boolean aceitesVolatiles) {
+        this.aceitesVolatiles = aceitesVolatiles;
+    }
+
+    public Boolean getColorFlor() {
+        return colorFlor;
+    }
+
+    public void setColorFlor(Boolean colorFlor) {
+        this.colorFlor = colorFlor;
+    }
+
+    public Boolean getHojasTejidoVivo() {
+        return hojasTejidoVivo;
+    }
+
+    public void setHojasTejidoVivo(Boolean hojasTejidoVivo) {
+        this.hojasTejidoVivo = hojasTejidoVivo;
+    }
+
+    public Boolean getFotoFlor() {
+        return fotoFlor;
+    }
+
+    public void setFotoFlor(Boolean fotoFlor) {
+        this.fotoFlor = fotoFlor;
+    }
+
+    public Boolean getFotoFruto() {
+        return fotoFruto;
+    }
+
+    public void setFotoFruto(Boolean fotoFruto) {
+        this.fotoFruto = fotoFruto;
+    }
+
+    public Boolean getFotoHojasArriba() {
+        return fotoHojasArriba;
+    }
+
+    public void setFotoHojasArriba(Boolean fotoHojasArriba) {
+        this.fotoHojasArriba = fotoHojasArriba;
+    }
+
+    public Boolean getFotoHojasAbajo() {
+        return fotoHojasAbajo;
+    }
+
+    public void setFotoHojasAbajo(Boolean fotoHojasAbajo) {
+        this.fotoHojasAbajo = fotoHojasAbajo;
+    }
+
+    public Boolean getFotoArbolCompleto() {
+        return fotoArbolCompleto;
+    }
+
+    public void setFotoArbolCompleto(Boolean fotoArbolCompleto) {
+        this.fotoArbolCompleto = fotoArbolCompleto;
+    }
+
+    public Boolean getFotoCorteza() {
+        return fotoCorteza;
+    }
+
+    public void setFotoCorteza(Boolean fotoCorteza) {
+        this.fotoCorteza = fotoCorteza;
+    }
+
+    public Boolean getVirutaIncluida() {
+        return virutaIncluida;
+    }
+
+    public void setVirutaIncluida(Boolean virutaIncluida) {
+        this.virutaIncluida = virutaIncluida;
+    }
+
+    public Boolean getCortezaIncluida() {
+        return cortezaIncluida;
+    }
+
+    public void setCortezaIncluida(Boolean cortezaIncluida) {
+        this.cortezaIncluida = cortezaIncluida;
+    }
+
+    public Boolean getMaderaIncluida() {
+        return maderaIncluida;
+    }
+
+    public void setMaderaIncluida(Boolean maderaIncluida) {
+        this.maderaIncluida = maderaIncluida;
+    }
+
     public String getClaveColecta() {
         return claveColecta;
     }
 
     public void setClaveColecta(String claveColecta) {
         this.claveColecta = claveColecta;
-    }
-
-    public Integer getContraFuertes() {
-        return contraFuertes;
-    }
-
-    public void setContraFuertes(Integer contraFuertes) {
-        this.contraFuertes = contraFuertes;
-    }
-
-    public Integer getExudado() {
-        return exudado;
-    }
-
-    public void setExudado(Integer exudado) {
-        this.exudado = exudado;
     }
 
     public String getIndicarExudado() {
@@ -138,44 +221,12 @@ public class CEColectaBotanica {
         this.indicarExudado = indicarExudado;
     }
 
-    public Integer getColor() {
-        return color;
-    }
-
-    public void setColor(Integer color) {
-        this.color = color;
-    }
-
     public String getIndicarColor() {
         return indicarColor;
     }
 
     public void setIndicarColor(String indicarColor) {
         this.indicarColor = indicarColor;
-    }
-
-    public Integer getCambioColor() {
-        return cambioColor;
-    }
-
-    public void setCambioColor(Integer cambioColor) {
-        this.cambioColor = cambioColor;
-    }
-
-    public Integer getAceitesVolatiles() {
-        return aceitesVolatiles;
-    }
-
-    public void setAceitesVolatiles(Integer aceitesVolatiles) {
-        this.aceitesVolatiles = aceitesVolatiles;
-    }
-
-    public Integer getColorFlor() {
-        return colorFlor;
-    }
-
-    public void setColorFlor(Integer colorFlor) {
-        this.colorFlor = colorFlor;
     }
 
     public String getIndicarColorFlor() {
@@ -186,86 +237,6 @@ public class CEColectaBotanica {
         this.indicarColorFlor = indicarColorFlor;
     }
 
-    public Integer getHojasTejidoVivo() {
-        return hojasTejidoVivo;
-    }
-
-    public void setHojasTejidoVivo(Integer hojasTejidoVivo) {
-        this.hojasTejidoVivo = hojasTejidoVivo;
-    }
-
-    public Integer getFotoFlor() {
-        return fotoFlor;
-    }
-
-    public void setFotoFlor(Integer fotoFlor) {
-        this.fotoFlor = fotoFlor;
-    }
-
-    public Integer getFotoFruto() {
-        return fotoFruto;
-    }
-
-    public void setFotoFruto(Integer fotoFruto) {
-        this.fotoFruto = fotoFruto;
-    }
-
-    public Integer getFotoHojasArriba() {
-        return fotoHojasArriba;
-    }
-
-    public void setFotoHojasArriba(Integer fotoHojasArriba) {
-        this.fotoHojasArriba = fotoHojasArriba;
-    }
-
-    public Integer getFotoHojasAbajo() {
-        return fotoHojasAbajo;
-    }
-
-    public void setFotoHojasAbajo(Integer fotoHojasAbajo) {
-        this.fotoHojasAbajo = fotoHojasAbajo;
-    }
-
-    public Integer getFotoArbolCompleto() {
-        return fotoArbolCompleto;
-    }
-
-    public void setFotoArbolCompleto(Integer fotoArbolCompleto) {
-        this.fotoArbolCompleto = fotoArbolCompleto;
-    }
-
-    public Integer getFotoCorteza() {
-        return fotoCorteza;
-    }
-
-    public void setFotoCorteza(Integer fotoCorteza) {
-        this.fotoCorteza = fotoCorteza;
-    }
-
-    public Integer getVirutaIncluida() {
-        return virutaIncluida;
-    }
-
-    public void setVirutaIncluida(Integer virutaIncluida) {
-        this.virutaIncluida = virutaIncluida;
-    }
-
-    public Integer getCortezaIncluida() {
-        return cortezaIncluida;
-    }
-
-    public void setCortezaIncluida(Integer cortezaIncluida) {
-        this.cortezaIncluida = cortezaIncluida;
-    }
-
-    public Integer getMaderaIncluida() {
-        return maderaIncluida;
-    }
-
-    public void setMaderaIncluida(Integer maderaIncluida) {
-        this.maderaIncluida = maderaIncluida;
-    }
-
     public String getObservaciones() {
         return observaciones;
     }
@@ -273,5 +244,34 @@ public class CEColectaBotanica {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
-    
+    private Integer familiaID;
+    private Integer generoID;
+    private Integer especieID;
+    private Integer infraespecie;
+    private String nombreComun;
+    private Integer sitio;
+    private Integer seccionID;
+    private Integer consecutivo;
+    private Boolean contraFuertes;
+    private Boolean exudado;
+    private Boolean color;
+    private Boolean cambioColor;
+    private Boolean aceitesVolatiles;
+    private Boolean colorFlor;
+    private Boolean hojasTejidoVivo;
+    private Boolean fotoFlor;
+    private Boolean fotoFruto;
+    private Boolean fotoHojasArriba;
+    private Boolean fotoHojasAbajo;
+    private Boolean fotoArbolCompleto;
+    private Boolean fotoCorteza;
+    private Boolean virutaIncluida;
+    private Boolean cortezaIncluida;
+    private Boolean maderaIncluida;
+    private String claveColecta;
+    private String indicarExudado;
+    private String indicarColor;
+    private String indicarColorFlor;
+    private String observaciones;
+
 }

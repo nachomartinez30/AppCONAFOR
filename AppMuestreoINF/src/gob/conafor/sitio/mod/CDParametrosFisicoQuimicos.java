@@ -20,7 +20,7 @@ public class CDParametrosFisicoQuimicos {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
-                this.ceParametros.setTipoAgua(rs.getInt("TipoAgua"));
+                this.ceParametros.setTipoAgua(rs.getBoolean("TipoAgua"));
                 this.ceParametros.setSalinidad(rs.getFloat("Salinidad"));
                 this.ceParametros.setTemperaturaAgua(rs.getFloat("Temperatura"));
                 this.ceParametros.setConductividadElectrica(rs.getFloat("ConductividadElectrica"));
@@ -33,12 +33,14 @@ public class CDParametrosFisicoQuimicos {
             rs.close();
             return ceParametros;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de parametros físico químicos ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener los datos de parámetros físico quimicos ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -56,11 +58,13 @@ public class CDParametrosFisicoQuimicos {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información  de parámetros físico químicos", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos parámetros fisíco químicos ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -80,11 +84,13 @@ public class CDParametrosFisicoQuimicos {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información de parámetros físico químicos ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la modificación de parámetros físico químicos ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -99,6 +105,7 @@ public class CDParametrosFisicoQuimicos {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(
                     null, "Error! al cerrar la base de datos  al eliminar parámetros fisico químicos",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -106,6 +113,7 @@ public class CDParametrosFisicoQuimicos {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al eliminar parámetros fisico químicos",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);

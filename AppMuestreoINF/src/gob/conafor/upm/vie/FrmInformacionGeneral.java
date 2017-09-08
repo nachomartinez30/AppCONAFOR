@@ -50,7 +50,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
     private Version ver = new Version();
     private String version = ver.getVersion();
     private boolean existeContacto = false;
-    private  CDContacto cdContacto=new CDContacto();
+    private CDContacto cdContacto = new CDContacto();
 
     public FrmInformacionGeneral() {
         initComponents();
@@ -120,7 +120,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
         ceTipoTenencia.setTipoTenenciaID(ceUPM.getTenenciaID());
         cmbTenencia.setSelectedItem(ceTipoTenencia);
         cmbTenencia.setEnabled(true);
-        int contacto = ceUPM.getInformacionContacto();
+        Integer contacto = ceUPM.getInformacionContacto();
         //Llenar los controles correspondientes al contacto si lo hubo
         chkInformacionContacto.setEnabled(true);
 
@@ -128,11 +128,11 @@ public class FrmInformacionGeneral extends JInternalFrame {
             chkInformacionContacto.setSelected(true);
 
             CEContacto ceContacto = cdContacto.getDatosContacto(upmID);
-            Integer tipoContacto = ceContacto.getTipoContacto();
-            Integer tipoTelefono = ceContacto.getTipoTelefono();
-            Integer tieneCorreElectronico = ceContacto.getTieneCorreoElectronico();
-            Integer tieneRadio = ceContacto.getTieneRadio();
-            if (tipoContacto == 1) {
+            Boolean tipoContacto = ceContacto.getTipoContacto();
+            Boolean tipoTelefono = ceContacto.getTipoTelefono();
+            Boolean tieneCorreElectronico = ceContacto.getTieneCorreoElectronico();
+            Boolean tieneRadio = ceContacto.getTieneRadio();
+            if (tipoContacto == true) {
                 rbtPresencial.setSelected(true);
                 rbtRemoto.setSelected(false);
             } else {
@@ -140,7 +140,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
                 rbtRemoto.setSelected(true);
             }
             if (tipoTelefono != null) {
-                if (tipoTelefono == 1) {
+                if (tipoTelefono == true) {
                     rbtTelefonoFijo.setSelected(true);
                     rbtTelefonoMovil.setSelected(false);
                 } else {
@@ -157,11 +157,11 @@ public class FrmInformacionGeneral extends JInternalFrame {
             if (telefono != null) {
                 txtNumeroTelefonico.setText(telefono);
             }
-            if (tieneCorreElectronico == 1) {
+            if (tieneCorreElectronico == true) {
                 chkCorreoElectronico.setSelected(true);
                 txtCorreoElectronico.setText(ceContacto.getCorreoElectronico());
             }
-            if (tieneRadio == 1) {
+            if (tieneRadio == true) {
                 chkRadio.setSelected(true);
                 txtCanal.setText(ceContacto.getCanal());
                 txtFrecuencia.setText(ceContacto.getFrecuencia());
@@ -277,7 +277,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
     public void setInformacionGeneral(int upm) {
         //this.modificar = 0;
         this.upm = upm;
-        byte A, B, C, D, E, F, G, H;
+        boolean A, B, C, D, E, F, G, H;
         List<CatEMalla> malla = datosUpm.getMalla(upm);
         CatEMalla datosMalla = malla.get(0);
         A = datosMalla.getA();
@@ -292,7 +292,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
         txtMunicipio.setText(datosMalla.getMunicipio());
         txtProyecto.setText(datosMalla.getProyecto());
         //Esta sección permite cambiar los módulos que se levantarán, de manera visual en este formulario.
-        if (A == 1) {
+        if (A == true) {
             lblTModuloA.setFont(letraResaltada);
             lblTModuloA.setOpaque(true);
             lblTModuloA.setBackground(Color.GREEN);
@@ -302,7 +302,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
             LblModuloA.setFont(letraNormal);
             lblTModuloA.setOpaque(false);
         }
-        if (C == 1) {
+        if (C == true) {
             lblTModuloC.setFont(letraResaltada);
             lblTModuloC.setOpaque(true);
             lblTModuloC.setBackground(Color.GREEN);
@@ -312,7 +312,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
             LblModuloC.setFont(letraNormal);
             lblTModuloC.setOpaque(false);
         }
-        if (D == 1) {
+        if (D == true) {
             lblTModuloD.setFont(letraResaltada);
             lblTModuloD.setOpaque(true);
             lblTModuloD.setBackground(Color.GREEN);
@@ -322,7 +322,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
             LblModuloD.setFont(letraNormal);
             lblTModuloD.setOpaque(false);
         }
-        if (E == 1) {
+        if (E == true) {
             lblTModuloE.setFont(letraResaltada);
             lblTModuloE.setOpaque(true);
             lblTModuloE.setBackground(Color.GREEN);
@@ -332,7 +332,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
             LblModuloE.setFont(letraNormal);
             lblTModuloE.setOpaque(false);
         }
-        if (F == 1) {
+        if (F == true) {
             lblTModuloF.setFont(letraResaltada);
             lblTModuloF.setOpaque(true);
             lblTModuloF.setBackground(Color.GREEN);
@@ -342,7 +342,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
             LblModuloF.setFont(letraNormal);
             lblTModuloF.setOpaque(false);
         }
-        if (G == 1) {
+        if (G == true) {
             lblTModuloG.setFont(letraResaltada);
             lblTModuloG.setOpaque(true);
             lblTModuloG.setBackground(Color.GREEN);
@@ -352,7 +352,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
             LblModuloG.setFont(letraNormal);
             lblTModuloG.setOpaque(false);
         }
-        if (H == 1) {
+        if (H == true) {
             lblTModuloH.setFont(letraResaltada);
             lblTModuloH.setOpaque(true);
             lblTModuloH.setBackground(Color.GREEN);
@@ -450,16 +450,16 @@ public class FrmInformacionGeneral extends JInternalFrame {
         this.cdBrigada.insertBrigada(this.ceBrigada);
     }
 
-    public int getEmpresaID(int brigadistaID){
-        int idEmpresa=0;
+    public int getEmpresaID(int brigadistaID) {
+        int idEmpresa = 0;
         String query = "SELECT EmpresaID FROM BRIGADA_Brigadistas WHERE BrigadistaID =" + brigadistaID;
-        
+
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
-                idEmpresa=rs.getInt("EmpresaID");
+                idEmpresa = rs.getInt("EmpresaID");
             }
             st.close();
             rs.close();
@@ -477,7 +477,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
         }
         return idEmpresa;
     }
-    
+
     private void modificarBrigada() {
         CEBrigadista jefeBrigada = (CEBrigadista) cmbJefeBrigada.getSelectedItem();
         CEBrigadista auxiliar1 = (CEBrigadista) cmbAuxiliar1.getSelectedItem();
@@ -499,8 +499,8 @@ public class FrmInformacionGeneral extends JInternalFrame {
     private void crearUPM() {
         CatETipoTenencia tenencia = (CatETipoTenencia) cmbTenencia.getSelectedItem();
         CatETipoUPM tipoUpmID = (CatETipoUPM) cmbTipoUPM.getSelectedItem();
-        Integer accesible = 1;
-        Integer inaccesible = 0;
+        Boolean accesible = true;
+        Boolean inaccesible = false;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String fecIni = null;
         String fecFin = null;
@@ -523,7 +523,13 @@ public class FrmInformacionGeneral extends JInternalFrame {
             this.ceUpm.setAccesible(accesible);
         }
         if (chkInformacionContacto.isSelected()) {
-            this.ceUpm.setInformacionContacto(accesible);
+            int inforContact = 0;
+            if (accesible == true) {
+                inforContact = 1;
+            } else {
+                inforContact = 0;
+            }
+            this.ceUpm.setInformacionContacto(inforContact);
         }
         datosUpm.insertDatosGeneralesUPM(this.ceUpm);
     }
@@ -534,8 +540,8 @@ public class FrmInformacionGeneral extends JInternalFrame {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String fecIni = null;
         String fecFin = null;
-        Integer accesible = 1;
-        Integer inaccesible = 0;
+        Boolean accesible = true;
+        Boolean inaccesible = false;
         if (dpFechaInicio.getDate() != null) {
             fecIni = sdf.format(dpFechaInicio.getDate());
         }
@@ -555,7 +561,13 @@ public class FrmInformacionGeneral extends JInternalFrame {
             this.ceUpm.setAccesible(accesible);
         }
         if (chkInformacionContacto.isSelected()) {
-            this.ceUpm.setInformacionContacto(accesible);
+            int inforContact = 0;
+            if (accesible == true) {
+                inforContact = 1;
+            } else {
+                inforContact = 0;
+            }
+            this.ceUpm.setInformacionContacto(inforContact);
         }
         datosUpm.updateInformacionGeneral(this.ceUpm);
     }
@@ -563,17 +575,17 @@ public class FrmInformacionGeneral extends JInternalFrame {
     private void crearContacto() {
         CEContacto contacto = new CEContacto();
         //CDContacto datosContacto = new CDContacto();
-        Integer tipoContacto;
-        Integer seleccionado = 1;
-        Integer noSeleccionado = 0;
-        Integer medioComunicacion = 0;
-        Integer correoElectronico = 0;
-        Integer radio = 0;
+        Boolean tipoContacto;
+        Boolean seleccionado = true;
+        Boolean noSeleccionado = false;
+        Boolean medioComunicacion = false;
+        Boolean correoElectronico = false;
+        Boolean radio = false;
         //ascdeh_27
         tipoContacto = rbtPresencial.isSelected() ? seleccionado : noSeleccionado;
-        medioComunicacion = rbtTelefonoFijo.isSelected() ? seleccionado : noSeleccionado;
+        medioComunicacion = rbtTelefonoFijo.isSelected() ? true : false;
         correoElectronico = chkCorreoElectronico.isSelected() ? seleccionado : noSeleccionado;
-        radio = chkRadio.isSelected() ? seleccionado : noSeleccionado;
+        radio = chkRadio.isSelected() ? true : false;
 
         contacto.setUpmID(this.upm);
         contacto.setTipoContacto(tipoContacto);
@@ -599,17 +611,17 @@ public class FrmInformacionGeneral extends JInternalFrame {
     private void modificarContacto() {
         CEContacto contacto = new CEContacto();
         //CDContacto datosContacto = new CDContacto();
-        Integer tipoContacto;
-        Integer seleccionado = 1;
-        Integer noSeleccionado = 0;
-        Integer medioComunicacion = 0;
-        Integer correoElectronico = 0;
-        Integer radio = 0;
+        Boolean tipoContacto;
+        Boolean seleccionado = true;
+        Boolean noSeleccionado = false;
+        Boolean medioComunicacion = false;
+        Boolean correoElectronico = false;
+        Boolean radio = false;
 
         tipoContacto = rbtPresencial.isSelected() ? seleccionado : noSeleccionado;
-        medioComunicacion = rbtTelefonoFijo.isSelected() ? seleccionado : noSeleccionado;
+        medioComunicacion = rbtTelefonoFijo.isSelected() ? true : false;
         correoElectronico = chkCorreoElectronico.isSelected() ? seleccionado : noSeleccionado;
-        radio = chkRadio.isSelected() ? seleccionado : noSeleccionado;
+        radio = chkRadio.isSelected() ? true : false;
 
         contacto.setUpmID(this.upm);
         contacto.setTipoContacto(tipoContacto);
@@ -637,7 +649,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
         String fecIni = null;
         String fecFin = null;
         String anio = "2016";//Checar ciclo
-        String anio2= "2017";
+        String anio2 = "2017";
         if (dpFechaInicio.getDate() != null) {
             fecIni = sdf.format(dpFechaInicio.getDate());
         }
@@ -656,11 +668,11 @@ public class FrmInformacionGeneral extends JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error! La fecha de inicio no puede ser mayor a la fecha de final de muestreo", "Información UPM", JOptionPane.INFORMATION_MESSAGE);
             dpFechaFin.requestFocus();
             return false;
-        } else if (!fecIni.equals(anio)&&!fecIni.equals(anio2)) {
+        } else if (!fecIni.equals(anio) && !fecIni.equals(anio2)) {
             JOptionPane.showMessageDialog(null, "Error! La fecha de inicio debe estar dentro del periodo de " + anio, "Información UPM", JOptionPane.INFORMATION_MESSAGE);
             dpFechaInicio.requestFocus();
             return false;
-        } else if (!fecFin.equals(anio)&&!fecFin.equals(anio2)) {
+        } else if (!fecFin.equals(anio) && !fecFin.equals(anio2)) {
             JOptionPane.showMessageDialog(null, "Error! La fecha de fin debe estar dentro del periodo de " + anio2, "Información UPM", JOptionPane.INFORMATION_MESSAGE);
             dpFechaFin.requestFocus();
             return false;
@@ -836,30 +848,31 @@ public class FrmInformacionGeneral extends JInternalFrame {
             txtFrecuencia.setEnabled(false);
         }
     }
-public void limpiarControles(){
-       txtPredio.setText("");
-       txtParaje.setText("");
-       cmbTenencia.setSelectedIndex(0);
-       /*----------------------------------------*/
-       rbtRemoto.setSelected(false);
-       rbtPresencial.setSelected(false);
-       rbtTelefonoFijo.setSelected(false);
-       rbtTelefonoMovil.setSelected(false);
 
-       txtNombreContacto.setText("");
-       txtDireccionContacto.setText("");
-       txtNumeroTelefonico.setText("");
-       txtCorreoElectronico.setText("");
-       txtObservaciones.setText("");
-       
-       chkRadio.setSelected(false);
-       chkCorreoElectronico.setSelected(false);
+    public void limpiarControles() {
+        txtPredio.setText("");
+        txtParaje.setText("");
+        cmbTenencia.setSelectedIndex(0);
+        /*----------------------------------------*/
+        rbtRemoto.setSelected(false);
+        rbtPresencial.setSelected(false);
+        rbtTelefonoFijo.setSelected(false);
+        rbtTelefonoMovil.setSelected(false);
 
-       cmbJefeBrigada.setSelectedIndex(0);
-       cmbAuxiliar1.setSelectedIndex(0);
-       cmbAuxiliar2.setSelectedIndex(0);
+        txtNombreContacto.setText("");
+        txtDireccionContacto.setText("");
+        txtNumeroTelefonico.setText("");
+        txtCorreoElectronico.setText("");
+        txtObservaciones.setText("");
 
-      }                                            
+        chkRadio.setSelected(false);
+        chkCorreoElectronico.setSelected(false);
+
+        cmbJefeBrigada.setSelectedIndex(0);
+        cmbAuxiliar1.setSelectedIndex(0);
+        cmbAuxiliar2.setSelectedIndex(0);
+
+    }
 
     private void reetablecerControles() {
         txtProyecto.setText("");
@@ -1930,7 +1943,7 @@ public void limpiarControles(){
     }//GEN-LAST:event_chkCorreoElectronicoPropertyChange
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-       // CDContacto cdContacto = new CDContacto();
+        // CDContacto cdContacto = new CDContacto();
         CatETipoUPM tipoUpmID = (CatETipoUPM) cmbTipoUPM.getSelectedItem();
         if (validarUPM() && validarFecha()) {
             if (validarContacto() && validarBrigadaObligatoria() && validarBrigadistaDiferente()) {
@@ -2150,7 +2163,7 @@ public void limpiarControles(){
             txtCanal.setEnabled(false);
             txtFrecuencia.setEnabled(false);
             txtObservaciones.setEnabled(false);
-           cdContacto.deleteContacto(this.upm);
+            cdContacto.deleteContacto(this.upm);
         }
     }//GEN-LAST:event_chkInformacionContactoActionPerformed
 

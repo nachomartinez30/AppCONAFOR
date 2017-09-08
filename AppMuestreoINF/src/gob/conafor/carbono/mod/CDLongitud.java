@@ -46,12 +46,14 @@ public class CDLongitud {
             }
             return ceSegemento;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener un registro de longitud por componente ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane
                         .showMessageDialog(null,
                                 "Error! al cerrar la base de datos en datos de registro de longitud por componente",
@@ -59,7 +61,7 @@ public class CDLongitud {
             }
         }
     }
-    
+
     public CECoberturaDosel getRegistroCoberturaDosel(int coberturaID) {
         query = "SELECT CoberturaDoselID, SitioID, Transecto, Punto1, Punto2, Punto3, Punto4, Punto5, Punto6, Punto7, Punto8, "
                 + "Punto9, Punto10 FROM CARBONO_CoberturaDosel WHERE CoberturaDoselID= " + coberturaID;
@@ -71,25 +73,27 @@ public class CDLongitud {
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 ceCobertura.setTransecto(rs.getInt("Transecto"));
-                ceCobertura.setPunto1(rs.getInt("Punto1"));
-                ceCobertura.setPunto2(rs.getInt("Punto2"));
-                ceCobertura.setPunto3(rs.getInt("Punto3"));
-                ceCobertura.setPunto4(rs.getInt("Punto4"));
-                ceCobertura.setPunto5(rs.getInt("Punto5"));
-                ceCobertura.setPunto6(rs.getInt("Punto6"));
-                ceCobertura.setPunto7(rs.getInt("Punto7"));
-                ceCobertura.setPunto8(rs.getInt("Punto8"));
-                ceCobertura.setPunto9(rs.getInt("Punto9"));
-                ceCobertura.setPunto10(rs.getInt("Punto10"));
+                ceCobertura.setPunto1(rs.getBoolean("Punto1"));
+                ceCobertura.setPunto2(rs.getBoolean("Punto2"));
+                ceCobertura.setPunto3(rs.getBoolean("Punto3"));
+                ceCobertura.setPunto4(rs.getBoolean("Punto4"));
+                ceCobertura.setPunto5(rs.getBoolean("Punto5"));
+                ceCobertura.setPunto6(rs.getBoolean("Punto6"));
+                ceCobertura.setPunto7(rs.getBoolean("Punto7"));
+                ceCobertura.setPunto8(rs.getBoolean("Punto8"));
+                ceCobertura.setPunto9(rs.getBoolean("Punto9"));
+                ceCobertura.setPunto10(rs.getBoolean("Punto10"));
             }
             return ceCobertura;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener un registro de cobertura dosel ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane
                         .showMessageDialog(null,
                                 "Error! al cerrar la base de datos en datos de registro de longitud por componente",
@@ -97,7 +101,7 @@ public class CDLongitud {
             }
         }
     }
-    
+
     public List<CatECarbonoComponente> getComponentesSegemento() {
         List<CatECarbonoComponente> listComponentes = new ArrayList<>();
         query = "SELECT ComponenteID, Componente FROM CAT_TipoComponente";
@@ -115,6 +119,7 @@ public class CDLongitud {
             listComponentes.add(0, null);
             return listComponentes;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los datos de tipo de componentes de longitud de componentes en carbono ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -123,22 +128,23 @@ public class CDLongitud {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
 
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en longitud de componentes en carbono "
                         + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
-    
-    public List<Integer> getTransectoComponentes(){
-         List<Integer> listTransecto = new ArrayList<>();
+
+    public List<Integer> getTransectoComponentes() {
+        List<Integer> listTransecto = new ArrayList<>();
         for (int i = 1; i < 3; i++) {
             listTransecto.add(i);
         }
         listTransecto.add(0, null);
         return listTransecto;
     }
-    
+
     public List<Integer> getTransectoCoberturaDosel(int sitioID) {
         List<Integer> listTransecto = new ArrayList<>();
         for (int i = 1; i < 3; i++) {
@@ -155,6 +161,7 @@ public class CDLongitud {
                 listTransecto.remove(index);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los numeros de transecto de cobertura dosel",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -162,6 +169,7 @@ public class CDLongitud {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en los numeros de transecto en cobertura dosel", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -211,12 +219,14 @@ public class CDLongitud {
             rs.close();
             return componentesModel;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de la vista de longitud de componentes de carbono", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en para la vista de longitud de componentes de carbono", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -240,28 +250,30 @@ public class CDLongitud {
                 datosDosel[0] = rs.getInt("CoberturaDoselID");
                 datosDosel[1] = rs.getInt("SitioID");
                 datosDosel[2] = rs.getInt("Transecto");
-                datosDosel[3] = rs.getInt("Punto1");
-                datosDosel[4] = rs.getInt("Punto2");
-                datosDosel[5] = rs.getInt("Punto3");
-                datosDosel[6] = rs.getInt("Punto4");
-                datosDosel[7] = rs.getInt("Punto5");
-                datosDosel[8] = rs.getInt("Punto6");
-                datosDosel[9] = rs.getInt("Punto7");
-                datosDosel[10] = rs.getInt("Punto8");
-                datosDosel[11] = rs.getInt("Punto9");
-                datosDosel[12] = rs.getInt("Punto10");
+                datosDosel[3] = rs.getBoolean("Punto1");
+                datosDosel[4] = rs.getBoolean("Punto2");
+                datosDosel[5] = rs.getBoolean("Punto3");
+                datosDosel[6] = rs.getBoolean("Punto4");
+                datosDosel[7] = rs.getBoolean("Punto5");
+                datosDosel[8] = rs.getBoolean("Punto6");
+                datosDosel[9] = rs.getBoolean("Punto7");
+                datosDosel[10] = rs.getBoolean("Punto8");
+                datosDosel[11] = rs.getBoolean("Punto9");
+                datosDosel[12] = rs.getBoolean("Punto10");
                 doselModel.addRow(datosDosel);
             }
             st.close();
             rs.close();
             return doselModel;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de la vista de cobertura dosel carbono", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos para la vista de cobertura dosel de carbono", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -283,11 +295,13 @@ public class CDLongitud {
             conn.commit();
             st.close();
         } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la informacion en longitud de componentes ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de longitud de componentes ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -308,11 +322,13 @@ public class CDLongitud {
             conn.commit();
             st.close();
         } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la informacion en cobertura dosel ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de cobertura dosel  ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -335,11 +351,13 @@ public class CDLongitud {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información de longitud de componente ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la modificación de longitud de componente", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -357,11 +375,13 @@ public class CDLongitud {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información de cobertura dosel ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la modificación de cobertura dosel ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -376,19 +396,21 @@ public class CDLongitud {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar la información de longitud de componente ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al eliminar la información de longitud de componente",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
-    
-    public void deleteLongitudComponentesSitio(int sitioID){
+
+    public void deleteLongitudComponentesSitio(int sitioID) {
         query = "DELETE FROM CARBONO_LongitudComponente WHERE SitioID= " + sitioID;
         Connection conn = LocalConnection.getConnection();
         try {
@@ -397,11 +419,13 @@ public class CDLongitud {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar la información de longitud de componente por sitio", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al eliminar la información de longitud de componente por sitio",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -418,19 +442,21 @@ public class CDLongitud {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar la información de cobertura dosel ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al eliminar la información de cobertura dosel",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
-    
-    public void deleteCoberturaDoselSitio(int sitioID){
+
+    public void deleteCoberturaDoselSitio(int sitioID) {
         query = "DELETE FROM CARBONO_CoberturaDosel WHERE SitioID= " + sitioID;
         Connection conn = LocalConnection.getConnection();
         try {
@@ -439,18 +465,20 @@ public class CDLongitud {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar la información de cobertura dosel por sitio", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al eliminar la información de cobertura dosel por sitio",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
-    
+
     public boolean validarComponente(int sitioID, int transecto, int componente) {
         query = "SELECT SitioID, Transecto, ComponenteID FROM CARBONO_LongitudComponente WHERE SitioID= " + sitioID + " AND Transecto= " + transecto + " AND ComponenteID= " + componente;
         boolean vacio = false;
@@ -462,17 +490,19 @@ public class CDLongitud {
                 vacio = true;
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de la tabla de cubierta vegetal de carbono ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de validar tabla de sotobosque ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
         return vacio;
     }
-    
+
     public boolean validarTablaComponente(int sitioID) {
         query = "SELECT * FROM CARBONO_LongitudComponente WHERE SitioID= " + sitioID;
         boolean vacio = true;
@@ -484,17 +514,19 @@ public class CDLongitud {
                 vacio = false;
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al validar la presencia de datos en la tabla de longitud interceptada por componente", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de validar longitud interceptada por componente", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
         return vacio;
     }
-    
+
     public boolean validarCoberturaDosel(int sitioID) {
         query = "SELECT * FROM CARBONO_CoberturaDosel WHERE SitioID= " + sitioID;
         boolean vacio = true;
@@ -506,11 +538,13 @@ public class CDLongitud {
                 vacio = false;
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al validar la presencia de datos en la tabla de cobertura dosel", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de cobertura dosel", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -532,6 +566,7 @@ public class CDLongitud {
                     consecutivo++;
                 }
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null,
                         "Error! al enumerar el consecutivo de longitud por componente ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -539,6 +574,7 @@ public class CDLongitud {
                 try {
                     conn.close();
                 } catch (SQLException e) {
+                    e.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al enumerar el consecutivo de longitud por componente ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -556,6 +592,7 @@ public class CDLongitud {
                 listArboladoID.add(rs.getInt("LongitudComponenteID"));
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los datos de longitud componente id ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -564,6 +601,7 @@ public class CDLongitud {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en lista de longitud de componentes id", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }

@@ -40,7 +40,7 @@ public class CDBrigada {
             listBrigadistas.add(0, null);
             return listBrigadistas;
         } catch (SQLException e) {
-            //e.printStackTrace();
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                 "Error! al obtener el listado de brigadistas ",
                 "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -49,6 +49,7 @@ public class CDBrigada {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener el listadod e brigadistas ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -79,7 +80,7 @@ public class CDBrigada {
             listBrigadistas.add(0, null);
             return listBrigadistas;
         } catch (SQLException e) {
-            e.printStackTrace();
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                 "Error! al obtener el listado de brigadistas ",
                 "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -88,6 +89,7 @@ public class CDBrigada {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener el listadod e brigadistas ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -114,6 +116,7 @@ public class CDBrigada {
             rs.close();
             return listBrigada;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                 "Error! al obtener los brigadistas del levantamiento ",
                 "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -122,6 +125,7 @@ public class CDBrigada {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener los brigadistas del levantamiento ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -138,11 +142,13 @@ public class CDBrigada {
             conn.commit();
             st.close();
         } catch (Exception e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información del brigadista ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al guardar la información del brigadista ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -159,11 +165,13 @@ public class CDBrigada {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo actualizar la información del brigadista ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al actualizar la información del brigadista ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -178,11 +186,13 @@ public class CDBrigada {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar la información de la brigada ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                     null, "Error! al cerrar la base de datos  al eliminar al eliminar la información de la brigada ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);

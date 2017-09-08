@@ -11,14 +11,14 @@ public class CatEMalla {
     private String Estado;
     private String region;
     private String proyecto;
-    private byte A;
-    private byte B;
-    private byte C;
-    private byte D;
-    private byte E;
-    private byte F;
-    private byte G;
-    private byte H;
+    private boolean A;
+    private boolean B;
+    private boolean C;
+    private boolean D;
+    private boolean E;
+    private boolean F;
+    private boolean G;
+    private boolean H;
     private String municipio;
 
     public int getUpmId() {
@@ -93,67 +93,67 @@ public class CatEMalla {
         this.proyecto = proyecto;
     }
 
-    public byte getA() {
+    public boolean getA() {
         return A;
     }
 
-    public void setA(byte a) {
+    public void setA(boolean a) {
         A = a;
     }
 
-    public byte getB() {
+    public boolean getB() {
         return B;
     }
 
-    public void setB(byte b) {
+    public void setB(boolean b) {
         B = b;
     }
 
-    public byte getC() {
+    public boolean getC() {
         return C;
     }
 
-    public void setC(byte c) {
+    public void setC(boolean c) {
         C = c;
     }
 
-    public byte getD() {
+    public boolean getD() {
         return D;
     }
 
-    public void setD(byte d) {
+    public void setD(boolean d) {
         D = d;
     }
 
-    public byte getE() {
+    public boolean getE() {
         return E;
     }
 
-    public void setE(byte e) {
+    public void setE(boolean e) {
         E = e;
     }
 
-    public byte getF() {
+    public boolean getF() {
         return F;
     }
 
-    public void setF(byte f) {
+    public void setF(boolean f) {
         F = f;
     }
 
-    public byte getG() {
+    public boolean getG() {
         return G;
     }
 
-    public void setG(byte g) {
+    public void setG(boolean g) {
         G = g;
     }
 
-    public byte getH() {
+    public boolean getH() {
         return H;
     }
 
-    public void setH(byte h) {
+    public void setH(boolean h) {
         H = h;
     }
 

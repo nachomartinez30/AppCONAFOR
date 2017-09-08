@@ -4,10 +4,19 @@ public class CEFotografiaHemisferica {
 
     //Módulo F, Sección 9 Toma de fotografías hemisféricas.
     private int sitioID;
-    private int coberturaArborea;
-    private int tomaFotografia;
+    private Boolean coberturaArborea;
+    private Boolean tomaFotografia;
     private String hora;
     private Integer declinacionMagnetica;
+    private int UPMID;
+
+    public int getUPMID() {
+        return UPMID;
+    }
+
+    public void setUPMID(int UPMID) {
+        this.UPMID = UPMID;
+    }
 
     public int getSitioID() {
         return sitioID;
@@ -17,19 +26,19 @@ public class CEFotografiaHemisferica {
         this.sitioID = sitioID;
     }
 
-    public int getCoberturaArborea() {
+    public Boolean getCoberturaArborea() {
         return coberturaArborea;
     }
 
-    public void setCoberturaArborea(int coberturaArborea) {
+    public void setCoberturaArborea(Boolean coberturaArborea) {
         this.coberturaArborea = coberturaArborea;
     }
 
-    public int getTomaFotografia() {
+    public Boolean getTomaFotografia() {
         return tomaFotografia;
     }
 
-    public void setTomaFotografia(int tomaFotografia) {
+    public void setTomaFotografia(Boolean tomaFotografia) {
         this.tomaFotografia = tomaFotografia;
     }
 

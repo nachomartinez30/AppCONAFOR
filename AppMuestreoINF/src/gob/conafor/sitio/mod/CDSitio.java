@@ -29,6 +29,7 @@ public class CDSitio {
             st.close();
             return listUPM;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los conglomerados por sitio ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -37,6 +38,7 @@ public class CDSitio {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener los conglomerados por sitio ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -57,6 +59,7 @@ public class CDSitio {
             st.close();
             return listUPM;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los conglomerados con sitios a revisión",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -65,6 +68,7 @@ public class CDSitio {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener los conglomerados con sitios a revisión ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -72,7 +76,7 @@ public class CDSitio {
 
     public List<Integer> getUPMCreado() {
         List<Integer> listUPM = new ArrayList();
-        query = "SELECT UPMID FROM UPM_UPM WHERE Accesible= 1 ORDER BY UPMID ASC";
+        query = "SELECT UPMID FROM UPM_UPM WHERE Accesible= true ORDER BY UPMID ASC";
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -85,6 +89,7 @@ public class CDSitio {
             st.close();
             return listUPM;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los conglomerados creados",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -93,6 +98,7 @@ public class CDSitio {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener los conglomerados creados ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -100,16 +106,19 @@ public class CDSitio {
 
     public boolean son4Sitios(Integer upmID) {
         this.query = "SELECT COUNT(*) AS Sitios FROM SITIOS_Sitio WHERE UPMID= " + upmID;
-        //System.out.println(query);
+//System.out.println(query);
         Connection conn = LocalConnection.getConnection();
         Integer noSitios = 0;
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(this.query);
-            noSitios = rs.getInt("Sitios");
+            while (rs.next()) {
+                noSitios = rs.getInt("Sitios");
+            }
             rs.close();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             if (e.getErrorCode() == 2000) {
 
             } else {
@@ -124,6 +133,7 @@ public class CDSitio {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener la cantidad de sitios levantados", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -132,7 +142,7 @@ public class CDSitio {
 
     public List<Integer> getSitiosDisponibles(int upmID) {
         List<Integer> listSitios = new ArrayList<>();
-        query = "SELECT UPMID, Sitio, SitioAccesible FROM SITIOS_Sitio sit WHERE  UPMID= " + upmID + " AND SitioAccesible= 1 AND Sitio"
+        query = "SELECT UPMID, Sitio, SitioAccesible FROM SITIOS_Sitio sit WHERE  UPMID= " + upmID + " AND SitioAccesible= true AND Sitio"
                 + " NOT IN (SELECT DISTINCT Sitio FROM SYS_SecuenciaCaptura WHERE UPMID = sit.UPMID)";
         Connection conn = LocalConnection.getConnection();
         try {
@@ -145,6 +155,7 @@ public class CDSitio {
             rs.close();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los sitios accesibles",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -153,6 +164,7 @@ public class CDSitio {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener los sitios disponibles", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -162,7 +174,7 @@ public class CDSitio {
 
     public List<Integer> getSitiosAccesibles(int upmID) {
         List<Integer> listSitios = new ArrayList<>();
-        query = "SELECT UPMID, Sitio, SitioAccesible FROM SITIOS_Sitio sit WHERE  UPMID= " + upmID + " AND SitioAccesible= 1";
+        query = "SELECT UPMID, Sitio, SitioAccesible FROM SITIOS_Sitio sit WHERE  UPMID= " + upmID + " AND SitioAccesible= true";
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -174,6 +186,7 @@ public class CDSitio {
             rs.close();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los sitios accesibles",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -182,6 +195,7 @@ public class CDSitio {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener los sitios accesibles", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -192,7 +206,7 @@ public class CDSitio {
     public List<Integer> getSitiosEnCaptura(int upmID) {
         List<Integer> listSitios = new ArrayList<>();
         /*query = "SELECT UPMID, Sitio, SitioAccesible FROM SITIOS_Sitio sit WHERE  UPMID= " + upmID + " AND SitioAccesible= 1 AND Sitio "
-                + "IN (SELECT Sitio FROM SYS_SecuenciaCaptura WHERE Sitio = sit.sitio AND Estatus= 0)";*/
+        + "IN (SELECT Sitio FROM SYS_SecuenciaCaptura WHERE Sitio = sit.sitio AND Estatus= 0)";*/
         query = "SELECT DISTINCT UPMID, Sitio FROM SYS_SecuenciaCaptura WHERE UPMID= " + upmID;
         Connection conn = LocalConnection.getConnection();
         try {
@@ -205,6 +219,7 @@ public class CDSitio {
             rs.close();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los sitios accesibles",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -213,6 +228,7 @@ public class CDSitio {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener los sitios accesibles", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -238,6 +254,7 @@ public class CDSitio {
             rs.close();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los numeros de sitio ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -246,6 +263,7 @@ public class CDSitio {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener los sitios "
                         + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -276,7 +294,7 @@ public class CDSitio {
             while (rs.next()) {
                 ceSitio.setSitioID(rs.getInt("SitioID"));
                 ceSitio.setUpmID(rs.getInt("UPMID"));
-                ceSitio.setSenialGPS(rs.getInt("SenialGPS"));
+                ceSitio.setSenialGPS(rs.getBoolean("SenialGPS"));
                 ceSitio.setGradosLatitud(rs.getInt("GradosLatitud"));
                 ceSitio.setMinutosLatitud(rs.getInt("MinutosLatitud"));
                 ceSitio.setSegundosLatitud(rs.getFloat("SegundosLatitud"));
@@ -285,7 +303,7 @@ public class CDSitio {
                 ceSitio.setSegundosLongitud(rs.getFloat("SegundosLongitud"));
                 ceSitio.setErrorPrecision(rs.getInt("ErrorPresicion"));
                 ceSitio.setDatum(rs.getString("Datum"));
-                ceSitio.setSitioAccesible(rs.getInt("SitioAccesible"));
+                ceSitio.setSitioAccesible(rs.getBoolean("SitioAccesible"));
                 ceSitio.setAzimut(rs.getInt("Azimut"));
                 ceSitio.setDistancia(rs.getFloat("Distancia"));
                 ceSitio.setTipoInaccesibilidadID(rs.getInt("TipoInaccesibilidad"));
@@ -295,6 +313,7 @@ public class CDSitio {
             rs.close();
             return ceSitio;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los datos del sitio ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -303,6 +322,7 @@ public class CDSitio {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos del sitio", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -320,7 +340,7 @@ public class CDSitio {
             ResultSet rs = st.executeQuery(this.query);
             while (rs.next()) {
                 ceSitio.setUpmID(rs.getInt("UPMID"));
-                ceSitio.setSenialGPS(rs.getInt("SenialGPS"));
+                ceSitio.setSenialGPS(rs.getBoolean("SenialGPS"));
                 ceSitio.setGradosLatitud(rs.getInt("GradosLatitud"));
                 ceSitio.setMinutosLatitud(rs.getInt("MinutosLatitud"));
                 ceSitio.setSegundosLatitud(rs.getFloat("SegundosLatitud"));
@@ -329,9 +349,9 @@ public class CDSitio {
                 ceSitio.setSegundosLongitud(rs.getFloat("SegundosLongitud"));
                 ceSitio.setErrorPrecision(rs.getInt("ErrorPresicion"));
                 //System.err.println("Linea 325 CDSitio= "+ rs.getInt("EvidenciaMuestreo"));
-                ceSitio.setEvidenciaMuestreo(rs.getInt("EvidenciaMuestreo"));
+                ceSitio.setEvidenciaMuestreo(rs.getBoolean("EvidenciaMuestreo"));
                 ceSitio.setDatum(rs.getString("Datum"));
-                ceSitio.setSitioAccesible(rs.getInt("SitioAccesible"));
+                ceSitio.setSitioAccesible(rs.getBoolean("SitioAccesible"));
                 ceSitio.setAzimut(rs.getInt("Azimut"));
                 ceSitio.setDistancia(rs.getFloat("Distancia"));
                 ceSitio.setTipoInaccesibilidadID(rs.getInt("TipoInaccesibilidad"));
@@ -341,6 +361,7 @@ public class CDSitio {
             rs.close();
             return ceSitio;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los datos del sitio en revisión ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -349,6 +370,7 @@ public class CDSitio {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos del sitio en revisión", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -366,7 +388,7 @@ public class CDSitio {
             while (rs.next()) {
                 ceSitio.setSitioID(rs.getInt("SitioID"));
                 ceSitio.setUpmID(rs.getInt("UPMID"));
-                ceSitio.setSenialGPS(rs.getInt("SenialGPS"));
+                ceSitio.setSenialGPS(rs.getBoolean("SenialGPS"));
                 ceSitio.setGradosLatitud(rs.getInt("GradosLatitud"));
                 ceSitio.setMinutosLatitud(rs.getInt("MinutosLatitud"));
                 ceSitio.setSegundosLatitud(rs.getFloat("SegundosLatitud"));
@@ -375,12 +397,13 @@ public class CDSitio {
                 ceSitio.setSegundosLongitud(rs.getFloat("SegundosLongitud"));
                 ceSitio.setErrorPrecision(rs.getInt("ErrorPresicion"));
                 ceSitio.setDatum(rs.getString("Datum"));
-                ceSitio.setSitioAccesible(rs.getInt("SitioAccesible"));
+                ceSitio.setSitioAccesible(rs.getBoolean("SitioAccesible"));
             }
             st.close();
             rs.close();
             return ceSitio;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los datos del sitio ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -389,6 +412,7 @@ public class CDSitio {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos del sitio", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -406,7 +430,7 @@ public class CDSitio {
             while (rs.next()) {
                 ceSitio.setSitioID(rs.getInt("SitioID"));
                 ceSitio.setUpmID(rs.getInt("UPMID"));
-                ceSitio.setSenialGPS(rs.getInt("SenialGPS"));
+                ceSitio.setSenialGPS(rs.getBoolean("SenialGPS"));
                 ceSitio.setGradosLatitud(rs.getInt("GradosLatitud"));
                 ceSitio.setMinutosLatitud(rs.getInt("MinutosLatitud"));
                 ceSitio.setSegundosLatitud(rs.getFloat("SegundosLatitud"));
@@ -417,12 +441,13 @@ public class CDSitio {
                 ceSitio.setDatum(rs.getString("Datum"));
                 ceSitio.setAzimut(rs.getInt("Azimut"));
                 ceSitio.setDistancia(rs.getFloat("Distancia"));
-                ceSitio.setSitioAccesible(rs.getInt("SitioAccesible"));
+                ceSitio.setSitioAccesible(rs.getBoolean("SitioAccesible"));
             }
             st.close();
             rs.close();
             return ceSitio;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los datos del sitio sin senial",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -431,6 +456,7 @@ public class CDSitio {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos del sitio sin senial", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -447,7 +473,7 @@ public class CDSitio {
             while (rs.next()) {
                 ceSitio.setSitioID(rs.getInt("SitioID"));
                 ceSitio.setUpmID(rs.getInt("UPMID"));
-                ceSitio.setSitioAccesible(rs.getInt("SitioAccesible"));
+                ceSitio.setSitioAccesible(rs.getBoolean("SitioAccesible"));
                 ceSitio.setTipoInaccesibilidadID(rs.getInt("TipoInaccesibilidad"));
                 ceSitio.setExplicacionInaccesibilidad(rs.getString("ExplicacionInaccesibilidad"));
             }
@@ -455,6 +481,7 @@ public class CDSitio {
             rs.close();
             return ceSitio;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los datos del sitio inaccesible",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -463,6 +490,7 @@ public class CDSitio {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos del sitio inaccesible", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -484,6 +512,7 @@ public class CDSitio {
                 listInaccesibilidad.add(ti);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los datos de tipo de inaccesibilidad ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -492,6 +521,7 @@ public class CDSitio {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
 
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos en tipos de inaccesibilidad"
                         + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -507,7 +537,7 @@ public class CDSitio {
                 + sitio.getSitio() + ", " + sitio.getSenialGPS() + ", " + sitio.getGradosLatitud() + ", " + sitio.getMinutosLatitud() + ", "
                 + sitio.getSegundosLatitud() + ", " + sitio.getGradosLongitud() + ", " + sitio.getMinutosLongitud() + ", " + sitio.getSegundosLongitud() + ", "
                 + sitio.getErrorPrecision() + ", " + sitio.getEvidenciaMuestreo() + ", '" + sitio.getDatum() + "' ," + sitio.getSitioAccesible() + ")";
-       // System.out.println(query);
+        // System.out.println(query);
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -515,11 +545,13 @@ public class CDSitio {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información del sitio ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en guardar sitio accesible", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -538,11 +570,13 @@ public class CDSitio {
             st.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información del sitio inaccesible", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en guardar sitio inaaccesible", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -561,11 +595,13 @@ public class CDSitio {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información del sitio con coordenadas auxiliares", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en guardar sitio accesible con coordenadas auxiliares", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -585,11 +621,13 @@ public class CDSitio {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información del sitio accesible ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al modificar el sitio accesible",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -613,11 +651,13 @@ public class CDSitio {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información del sitio", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al modificar el sitio",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -639,11 +679,13 @@ public class CDSitio {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información del sitio accesible sin senial", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al modificar el sitio accesible sin senial",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -663,12 +705,14 @@ public class CDSitio {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información del sitio inaccesible", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al modificar el sitio inaccesible",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -684,19 +728,21 @@ public class CDSitio {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
-                ceSitio.setSotobosqueFuera(rs.getInt("SotobosqueFuera"));
+                ceSitio.setSotobosqueFuera(rs.getBoolean("SotobosqueFuera"));
                 ceSitio.setPorcentajeSotobosque(rs.getInt("PorcentajeSotobosqueFuera"));
             }
             st.close();
             rs.close();
             return ceSitio;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo obtener la información de sotobosque fuera", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al obtener la información de sotobosque fuera",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -714,11 +760,13 @@ public class CDSitio {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información del sotobosque fuera fuera del sitio ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al modificar el sotobosque fuera",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -736,11 +784,13 @@ public class CDSitio {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información del repoblado fuera del sitio ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al modificar el repoblado fuera",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -756,19 +806,21 @@ public class CDSitio {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
-                ceSitio.setRepobladoFuera(rs.getInt("RepobladoFuera"));
+                ceSitio.setRepobladoFuera(rs.getBoolean("RepobladoFuera"));
                 ceSitio.setPorcentajeRepoblado(rs.getInt("PorcentajeRepoblado"));
             }
             st.close();
             rs.close();
             return ceSitio;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo obtener la información de repoblado fuera", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al obtener la información de repoblado fuera",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -785,11 +837,13 @@ public class CDSitio {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar la información del sitio ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al eliminar la información del sitio",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -809,9 +863,9 @@ public class CDSitio {
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 ceSitio.setClaveSerieVID(rs.getInt("ClaveSerieV"));
-                ceSitio.setCondicion(rs.getInt("Condicion"));
+                ceSitio.setCondicion(rs.getBoolean("Condicion"));
                 ceSitio.setFaseSucecionalID(rs.getInt("FaseSucecional"));
-                ceSitio.setArbolFuera(rs.getInt("ArbolFuera"));
+                ceSitio.setArbolFuera(rs.getBoolean("ArbolFuera"));
                 ceSitio.setEcotono(rs.getInt("Ecotono"));
                 ceSitio.setCondicionPresenteCampo(rs.getString("CondicionPresenteCampo"));
                 ceSitio.setCondicionEcotono(rs.getString("CondicionEcotono"));
@@ -820,12 +874,14 @@ public class CDSitio {
             rs.close();
             return ceSitio;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo obtener la información de la clave de vegetación del sitio ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al obtener la información de la clave de vegetación del sitio",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -847,10 +903,11 @@ public class CDSitio {
                 cs.setFormacion(rs.getString("Formacion"));
                 cs.setTipoVegetacion(rs.getString("TipoVegetacion"));
                 cs.setClave(rs.getString("Clave"));
-                cs.setEsForestal(rs.getInt("EsForestal"));
+                cs.setEsForestal(rs.getBoolean("EsForestal"));
                 listClaveV.add(cs);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los datos de clave de vegetacion serie V ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -859,6 +916,7 @@ public class CDSitio {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos en tipos de inaccesibilidad", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -881,6 +939,7 @@ public class CDSitio {
                 listFase.add(fs);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los datos de fase sucecional ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -889,6 +948,7 @@ public class CDSitio {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de fase sucecional", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -908,11 +968,13 @@ public class CDSitio {
             st.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información de la clave de vegetacion ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la modificación de la clave de vegetacion", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -929,11 +991,13 @@ public class CDSitio {
             st.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo agregar la información de observaciones del sitio ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al agregar la información de observacioens del sitio ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -953,12 +1017,14 @@ public class CDSitio {
             rs.close();
             return ceSitio;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo obtener las observaciones del sitio ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al obtener las observaciones del sitio ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -977,11 +1043,13 @@ public class CDSitio {
                 vacio = true;
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo validar la existencia de sitios ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de validar la existencia de sitios ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -1000,12 +1068,14 @@ public class CDSitio {
             }
             return sitioID;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo obtener el sitioID ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener el sitioID ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }

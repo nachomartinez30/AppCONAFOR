@@ -67,7 +67,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
     private Float alturaComercial;
     private Float diametroCopaNS;
     private Float diametroCopaEO;
-    private Integer esSubmuestra;
+    private Boolean esSubmuestra;
     private int arboladoID;
     CatECondicionArbolado indexCondicionArbolado;
     private CDArbolado cdArbolado = new CDArbolado();
@@ -1421,9 +1421,9 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
             this.diametroCopaEO = null;
         }
         if(chkEsSubmuestra.isSelected()){
-            this.esSubmuestra = 1;
+            this.esSubmuestra = true;
         }else{
-            this.esSubmuestra = 0;
+            this.esSubmuestra = false;
         }
     }
     
@@ -1644,9 +1644,9 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
             arb.setDiametroCopaEO(this.diametroCopaEO);
            
             if(chkEsSubmuestra.isSelected()){
-                arb.setEsSubmuestra(1);
+                arb.setEsSubmuestra(true);
             }else{
-                arb.setEsSubmuestra(0);
+                arb.setEsSubmuestra(false);
             }
             
             CEDanioSeveridad danio1 = new CEDanioSeveridad();
@@ -2388,7 +2388,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         txtDiametroCopaNS.setText(String.valueOf(arbol.getDiametroCopaNS()));
         txtDiametroCopaEO.setText(String.valueOf(arbol.getDiametroCopaEO()));
 
-        if (arbol.getEsSubmuestra() == 1) {
+        if (arbol.getEsSubmuestra() == true) {
             chkEsSubmuestra.setSelected(true);
         } else {
             chkEsSubmuestra.setSelected(false);

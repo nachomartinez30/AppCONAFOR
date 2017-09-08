@@ -34,8 +34,8 @@ public class FrmSitio extends javax.swing.JInternalFrame {
     private CESeccionesCapturadas siguinete = new CESeccionesCapturadas();
     private Datos numeros = new Datos();
     private FuncionesComunes combo = new FuncionesComunes();
-    private Integer esAccesible;
-    private Integer senialGPS;
+    private Boolean esAccesible;
+    private Boolean senialGPS;
     private Integer azimut;
     private Float distancia;
     private Integer gradosLatitud;
@@ -45,7 +45,7 @@ public class FrmSitio extends javax.swing.JInternalFrame {
     private Integer minutosLongitud;
     private Float segundosLongitud;
     private Integer errorPresicion;
-    private Integer evidenciaMuestreo;
+    private Boolean evidenciaMuestreo;
     private Integer tipoInaccesibilidad;
     private String explicacionaInaccesibilidad;
     private int actualizacion;
@@ -143,9 +143,9 @@ public class FrmSitio extends javax.swing.JInternalFrame {
     }
     
     private void llenarControlesSitio(CESitio ceSitio){
-        if (ceSitio.getSitioAccesible() == 1) {
+        if (ceSitio.getSitioAccesible() == true) {
             chkAccesible.setSelected(true);
-            if (this.ceSitio.getSenialGPS() == 1) {
+            if (this.ceSitio.getSenialGPS() == true) {
                 chkSenial.setSelected(true);
                 txtAzimut.setEnabled(false);
                 txtAzimut.setText("");
@@ -177,7 +177,7 @@ public class FrmSitio extends javax.swing.JInternalFrame {
             txtEPE.setText(String.valueOf(ceSitio.getErrorPrecision()));
             rbtEvidenciaSi.setEnabled(true);
             rbtEvidenciaNo.setEnabled(true);
-            if (ceSitio.getEvidenciaMuestreo() == 1) {
+            if (ceSitio.getEvidenciaMuestreo() == true) {
                 rbtEvidenciaSi.setSelected(true);
                 rbtEvidenciaNo.setSelected(false);
             } else {
@@ -594,9 +594,9 @@ public class FrmSitio extends javax.swing.JInternalFrame {
     private CESitio crearSitioAccesible() {
         Integer upmID = (Integer) cmbUPM.getSelectedItem();
         Integer numeroSitio = (Integer) cmbSitio.getSelectedItem();
-        Integer esAccesible = chkAccesible.isSelected() ? 1 : 0;
+        Boolean esAccesible = chkAccesible.isSelected() ? true : false;
 
-        Integer haySenial = chkSenial.isSelected() ? 1 : 0;
+        Boolean haySenial = chkSenial.isSelected() ? true : false;
         this.ceSitio.setSitio(numeroSitio);
         this.ceSitio.setSitioAccesible(esAccesible);
         this.ceSitio.setSenialGPS(haySenial);
@@ -610,9 +610,9 @@ public class FrmSitio extends javax.swing.JInternalFrame {
         this.ceSitio.setErrorPrecision(Integer.parseInt(txtEPE.getText()));
         this.ceSitio.setDatum(txtDatum.getText());
         if (rbtEvidenciaSi.isSelected()) {
-            this.ceSitio.setEvidenciaMuestreo(1);
+            this.ceSitio.setEvidenciaMuestreo(true);
         } else if (rbtEvidenciaNo.isSelected()) {
-            this.ceSitio.setEvidenciaMuestreo(0);
+            this.ceSitio.setEvidenciaMuestreo(false);
         }
         return ceSitio;
     }
@@ -620,8 +620,8 @@ public class FrmSitio extends javax.swing.JInternalFrame {
     private CESitio crearSitioSenial(){
         int upmID = (Integer) cmbUPM.getSelectedItem();
         int numeroSitio = (Integer) cmbSitio.getSelectedItem();
-        int esAccesible = chkAccesible.isSelected() ? 1 : 0;
-        int haySenial = chkSenial.isSelected() ? 1 : 0;
+        Boolean esAccesible = chkAccesible.isSelected() ? true : false;
+        Boolean haySenial = chkSenial.isSelected() ? true : false;
         this.ceSitio.setSitio(numeroSitio);
         this.ceSitio.setSitioAccesible(esAccesible);
         this.ceSitio.setSenialGPS(haySenial);
@@ -638,9 +638,9 @@ public class FrmSitio extends javax.swing.JInternalFrame {
         this.ceSitio.setDatum(txtDatum.getText());
         //this.ceSitio.setEvidenciaMuestreo(evidenciaMuestreo);
          if (rbtEvidenciaSi.isSelected()) {
-            this.ceSitio.setEvidenciaMuestreo(1);
+            this.ceSitio.setEvidenciaMuestreo(true);
         } else if (rbtEvidenciaNo.isSelected()) {
-            this.ceSitio.setEvidenciaMuestreo(0);
+            this.ceSitio.setEvidenciaMuestreo(false);
         } else {
             this.ceSitio.setEvidenciaMuestreo(null);
         }
@@ -650,7 +650,7 @@ public class FrmSitio extends javax.swing.JInternalFrame {
     private CESitio crearSitioInaccesible(){
          int upmID = (Integer) cmbUPM.getSelectedItem();
          int numeroSitio = (Integer) cmbSitio.getSelectedItem();
-         int esAccesible = chkAccesible.isSelected() ? 1 : 0;
+         Boolean esAccesible = chkAccesible.isSelected() ? true : false;
          CatETipoInaccesibilidad inaccesibilidad = (CatETipoInaccesibilidad) cmbInaccesibilidad.getSelectedItem();
          this.ceSitio.setUpmID(upmID);
          this.ceSitio.setSitio(numeroSitio);
@@ -663,14 +663,14 @@ public class FrmSitio extends javax.swing.JInternalFrame {
     
     private void fijarDatosSitio() {
         if (chkAccesible.isSelected()) {
-            this.esAccesible = 1;
+            this.esAccesible = true;
         } else {
-            this.esAccesible = 0;
+            this.esAccesible = false;
         }
         if (chkSenial.isSelected()) {
-            this.senialGPS = 1;
+            this.senialGPS = true;
         } else {
-            this.senialGPS = 0;
+            this.senialGPS = false;
         }
         try {
             this.azimut = Integer.parseInt(txtAzimut.getText());
@@ -718,9 +718,9 @@ public class FrmSitio extends javax.swing.JInternalFrame {
             this.errorPresicion = null;
         }
         if (rbtEvidenciaSi.isSelected()) {
-            this.evidenciaMuestreo = 1;
+            this.evidenciaMuestreo = true;
         } else if (rbtEvidenciaNo.isSelected()) {
-            this.evidenciaMuestreo = 0;
+            this.evidenciaMuestreo = false;
         } else {
             this.evidenciaMuestreo = null;
         }
@@ -1934,13 +1934,13 @@ public class FrmSitio extends javax.swing.JInternalFrame {
             Integer sitioID = cdSitio.getSitioID(upm, sitio);
             this.ceSitio = cdSitio.getSitioRevision(sitioID);
             llenarControlesSitio(ceSitio);
-            int accesible = this.ceSitio.getSitioAccesible();
-            int senial = this.ceSitio.getSenialGPS();
-            if (accesible == 1 && senial == 1) {
+            Boolean accesible = this.ceSitio.getSitioAccesible();
+            Boolean senial = this.ceSitio.getSenialGPS();
+            if (accesible == true && senial == true) {
                 habilitarControlesPorSitio(1);
-            } else if (accesible == 0) {
+            } else if (accesible == false) {
                 habilitarControlesPorSitio(3);
-            } else if (accesible == 1 && senial == 0) {
+            } else if (accesible == true && senial == false) {
                 habilitarControlesPorSitio(2);
             }
         }

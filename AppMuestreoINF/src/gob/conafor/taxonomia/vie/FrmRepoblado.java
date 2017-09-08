@@ -45,7 +45,7 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
     private Integer frecuencia275;
     private Integer edad275;
     private Integer porcentajeDanio;
-    private int repobladoFuera;
+    private Boolean repobladoFuera;
     private Integer porcentajeRepobladoFuera;
     private CDEspecies especie = new CDEspecies();
     private CDCondicionTaxonomica condicion = new CDCondicionTaxonomica();
@@ -105,7 +105,7 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
         ceSitio = sitio;
         llenarTabla();
         CESitio repobladoFuera= this.cdSitio.getRepobladoFuera(this.sitioID);
-        if (repobladoFuera.getRepobladoFuera() == 1) {
+        if (repobladoFuera.getRepobladoFuera() == true) {
             chkRepobladoFuera.setSelected(true);
             txtPorcentajeRepobladoFuera.setEnabled(true);
             txtPorcentajeRepobladoFuera.setText(String.valueOf(repobladoFuera.getPorcentajeRepoblado()));
@@ -239,9 +239,9 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
     
     private void asignarDatosRepobladoFuera(){
         if(chkRepobladoFuera.isSelected()){
-            this.repobladoFuera = 1;
+            this.repobladoFuera = true;
         }else{
-            this.repobladoFuera = 0;
+            this.repobladoFuera = false;
         }
         try{
             this.porcentajeRepobladoFuera = Integer.valueOf(txtPorcentajeRepobladoFuera.getText());

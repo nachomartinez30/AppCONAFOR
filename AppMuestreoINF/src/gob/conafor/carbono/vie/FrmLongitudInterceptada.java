@@ -58,16 +58,16 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     private Integer segmento10;
     private Integer total;
     private Integer transectoDosel;
-    private int punto1;
-    private int punto2;
-    private int punto3;
-    private int punto4;
-    private int punto5;
-    private int punto6;
-    private int punto7;
-    private int punto8;
-    private int punto9;
-    private int punto10;
+    private Boolean punto1;
+    private Boolean punto2;
+    private Boolean punto3;
+    private Boolean punto4;
+    private Boolean punto5;
+    private Boolean punto6;
+    private Boolean punto7;
+    private Boolean punto8;
+    private Boolean punto9;
+    private Boolean punto10;
     private int componenteID;
     private int coberturaID;
     private CDEspecies cdEspecie = new CDEspecies();
@@ -1499,52 +1499,52 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             Integer trans = ceDosel.getTransecto();
             cmbTransectoDosel.setSelectedItem(trans);
 
-            if (ceDosel.getPunto1() == 1) {
+            if (ceDosel.getPunto1() == true) {
                 chkPunto1.setSelected(true);
             } else {
                 chkPunto1.setSelected(false);
             }
-            if (ceDosel.getPunto2() == 1) {
+            if (ceDosel.getPunto2() == true) {
                 chkPunto2.setSelected(true);
             } else {
                 chkPunto2.setSelected(false);
             }
-            if (ceDosel.getPunto3() == 1) {
+            if (ceDosel.getPunto3() == true) {
                 chkPunto3.setSelected(true);
             } else {
                 chkPunto3.setSelected(false);
             }
-            if (ceDosel.getPunto4() == 1) {
+            if (ceDosel.getPunto4() == true) {
                 chkPunto4.setSelected(true);
             } else {
                 chkPunto4.setSelected(false);
             }
-            if (ceDosel.getPunto5() == 1) {
+            if (ceDosel.getPunto5() == true) {
                 chkPunto5.setSelected(true);
             } else {
                 chkPunto5.setSelected(false);
             }
-            if (ceDosel.getPunto6() == 1) {
+            if (ceDosel.getPunto6() == true) {
                 chkPunto6.setSelected(true);
             } else {
                 chkPunto6.setSelected(false);
             }
-            if (ceDosel.getPunto7() == 1) {
+            if (ceDosel.getPunto7() == true) {
                 chkPunto7.setSelected(true);
             } else {
                 chkPunto7.setSelected(false);
             }
-            if (ceDosel.getPunto8() == 1) {
+            if (ceDosel.getPunto8() == true) {
                 chkPunto8.setSelected(true);
             } else {
                 chkPunto8.setSelected(false);
             }
-            if (ceDosel.getPunto9() == 1) {
+            if (ceDosel.getPunto9() == true) {
                 chkPunto9.setSelected(true);
             } else {
                 chkPunto9.setSelected(false);
             }
-            if (ceDosel.getPunto10() == 1) {
+            if (ceDosel.getPunto10() == true) {
                 chkPunto10.setSelected(true);
             } else {
                 chkPunto10.setSelected(false);
@@ -2235,54 +2235,54 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     private void asignarDatosDosel() {
         this.transectoDosel = (Integer) cmbTransectoDosel.getSelectedItem();
         if (chkPunto1.isSelected()) {
-            punto1 = 1;
+            punto1 = true;
         } else {
-            punto1 = 0;
+            punto1 = false;
         }
         if (chkPunto2.isSelected()) {
-            punto2 = 1;
+            punto2 = true;
         } else {
-            punto2 = 0;
+            punto2 = false;
         }
         if (chkPunto3.isSelected()) {
-            punto3 = 1;
+            punto3 = true;
         } else {
-            punto3 = 0;
+            punto3 = false;
         }
         if (chkPunto4.isSelected()) {
-            punto4 = 1;
+            punto4 = true;
         } else {
-            punto4 = 0;
+            punto4 = false;
         }
         if (chkPunto5.isSelected()) {
-            punto5 = 1;
+            punto5 = true;
         } else {
-            punto5 = 0;
+            punto5 = false;
         }
         if (chkPunto6.isSelected()) {
-            punto6 = 1;
+            punto6 = true;
         } else {
-            punto6 = 0;
+            punto6 = false;
         }
         if (chkPunto7.isSelected()) {
-            punto7 = 1;
+            punto7 = true;
         } else {
-            punto7 = 0;
+            punto7 = false;
         }
         if (chkPunto8.isSelected()) {
-            punto8 = 1;
+            punto8 = true;
         } else {
-            punto8 = 0;
+            punto8 = false;
         }
         if (chkPunto9.isSelected()) {
-            punto9 = 1;
+            punto9 = true;
         } else {
-            punto9 = 0;
+            punto9 = false;
         }
         if (chkPunto10.isSelected()) {
-            punto10 = 1;
+            punto10 = true;
         } else {
-            punto10 = 0;
+            punto10 = false;
         }
     }
 

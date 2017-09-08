@@ -11,7 +11,7 @@ public class CEUPM {
     private String predio;
     private String paraje;
     private Integer tenenciaID;
-    private Integer accesible;
+    private Boolean accesible;
     //Módulo A, Sección 4.9 Características del conglomerado
     private Float altitud;
     private Integer pendienteRepresentativa;
@@ -89,11 +89,11 @@ public class CEUPM {
         this.tenenciaID = tenenciaID;
     }
 
-    public Integer getAccesible() {
+    public Boolean getAccesible() {
         return accesible;
     }
 
-    public void setAccesible(Integer accesible) {
+    public void setAccesible(Boolean accesible) {
         this.accesible = accesible;
     }
 

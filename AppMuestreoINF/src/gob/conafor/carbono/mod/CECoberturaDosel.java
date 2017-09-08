@@ -8,16 +8,16 @@ public class CECoberturaDosel {
     private int coberturaDoselID;
     private int sitioID;
     private Integer transecto;
-    private Integer punto1;
-    private Integer punto2;
-    private Integer punto3;
-    private Integer punto4;
-    private Integer punto5;
-    private Integer punto6;
-    private Integer punto7;
-    private Integer punto8;
-    private Integer punto9;
-    private Integer punto10;
+    private Boolean punto1;
+    private Boolean punto2;
+    private Boolean punto3;
+    private Boolean punto4;
+    private Boolean punto5;
+    private Boolean punto6;
+    private Boolean punto7;
+    private Boolean punto8;
+    private Boolean punto9;
+    private Boolean punto10;
 
     public int getCoberturaDoselID() {
         return coberturaDoselID;
@@ -43,83 +43,83 @@ public class CECoberturaDosel {
         this.transecto = transecto;
     }
 
-    public Integer getPunto1() {
+    public Boolean getPunto1() {
         return punto1;
     }
 
-    public void setPunto1(Integer punto1) {
+    public void setPunto1(Boolean punto1) {
         this.punto1 = punto1;
     }
 
-    public Integer getPunto2() {
+    public Boolean getPunto2() {
         return punto2;
     }
 
-    public void setPunto2(Integer punto2) {
+    public void setPunto2(Boolean punto2) {
         this.punto2 = punto2;
     }
 
-    public Integer getPunto3() {
+    public Boolean getPunto3() {
         return punto3;
     }
 
-    public void setPunto3(Integer punto3) {
+    public void setPunto3(Boolean punto3) {
         this.punto3 = punto3;
     }
 
-    public Integer getPunto4() {
+    public Boolean getPunto4() {
         return punto4;
     }
 
-    public void setPunto4(Integer punto4) {
+    public void setPunto4(Boolean punto4) {
         this.punto4 = punto4;
     }
 
-    public Integer getPunto5() {
+    public Boolean getPunto5() {
         return punto5;
     }
 
-    public void setPunto5(Integer punto5) {
+    public void setPunto5(Boolean punto5) {
         this.punto5 = punto5;
     }
 
-    public Integer getPunto6() {
+    public Boolean getPunto6() {
         return punto6;
     }
 
-    public void setPunto6(Integer punto6) {
+    public void setPunto6(Boolean punto6) {
         this.punto6 = punto6;
     }
 
-    public Integer getPunto7() {
+    public Boolean getPunto7() {
         return punto7;
     }
 
-    public void setPunto7(Integer punto7) {
+    public void setPunto7(Boolean punto7) {
         this.punto7 = punto7;
     }
 
-    public Integer getPunto8() {
+    public Boolean getPunto8() {
         return punto8;
     }
 
-    public void setPunto8(Integer punto8) {
+    public void setPunto8(Boolean punto8) {
         this.punto8 = punto8;
     }
 
-    public Integer getPunto9() {
+    public Boolean getPunto9() {
         return punto9;
     }
 
-    public void setPunto9(Integer punto9) {
+    public void setPunto9(Boolean punto9) {
         this.punto9 = punto9;
     }
 
-    public Integer getPunto10() {
+    public Boolean getPunto10() {
         return punto10;
     }
 
-    public void setPunto10(Integer punto10) {
+    public void setPunto10(Boolean punto10) {
         this.punto10 = punto10;
     }
     

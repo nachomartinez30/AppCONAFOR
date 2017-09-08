@@ -32,7 +32,7 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
     private Float Ph;
     private Float potencialRedox;
     private Float profundidad;
-    private int tipoAgua;
+    private Boolean tipoAgua;
     private String observaciones;
     private CESeccionesCapturadas seccionActual = new CESeccionesCapturadas();
     private CESeccionesCapturadas seccionSiguiente = new CESeccionesCapturadas();
@@ -84,7 +84,7 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         this.repobladoVM = 29;
         this.actualizar = 1;
         ceParametro = this.cdParametro.getDatosParametrosFQ(this.sitioID);
-        if (ceParametro.getTipoAgua() == 0) {//Superficial
+        if (ceParametro.getTipoAgua() == false) {//Superficial
             rbtAguaIntersticial.setSelected(true);
             txtSalinidadAguaIntersticial.setText(ceParametro.getSalinidad().toString());
             txtTemperaturaAguaIntersticial.setText(ceParametro.getTemperaturaAgua().toString());
@@ -94,7 +94,7 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
             txtProfundidadAguaIntersticial.setText(ceParametro.getProfundidad().toString());
             controlesAguaIntersticial();
         }
-        if (ceParametro.getTipoAgua() == 1) {//intersitical
+        if (ceParametro.getTipoAgua() == true) {//intersitical
             rbtAguasuperficial.setSelected(true);
             txtSalinidadAguaSuperficial.setText(ceParametro.getSalinidad().toString());
             txtTemperaturaAguaSuperficial.setText(ceParametro.getTemperaturaAgua().toString());
@@ -222,12 +222,12 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
 
     private void fijarDatosParametros() {
         if (rbtAguasuperficial.isSelected()) {
-            this.tipoAgua = 1;
+            this.tipoAgua = true;
         } else if (rbtAguaIntersticial.isSelected()) {
-            this.tipoAgua = 0;
+            this.tipoAgua = false;
         }
 
-        if (this.tipoAgua == 1) {
+        if (this.tipoAgua == true) {
             try {
                 this.salinidad = Float.valueOf(txtSalinidadAguaSuperficial.getText());
             } catch (NumberFormatException e) {

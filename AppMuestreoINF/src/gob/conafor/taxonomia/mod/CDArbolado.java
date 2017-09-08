@@ -42,7 +42,7 @@ public class CDArbolado {
                 arbolado.setInfraespecieID(rs.getInt("InfraespecieID"));
                 arbolado.setNombreComun(rs.getString("NombreComun"));
                 arbolado.setEsColecta(rs.getInt("EsColecta"));
-                arbolado.setEsSubmuestra(rs.getInt("EsSubmuestra"));
+                arbolado.setEsSubmuestra(rs.getBoolean("EsSubmuestra"));
                 arbolado.setFormaVidaID(rs.getInt("FormaVidaID"));
                 arbolado.setFormaFusteID(rs.getInt("FormaFusteID"));
                 arbolado.setCondicionID(rs.getInt("CondicionID"));
@@ -60,6 +60,7 @@ public class CDArbolado {
                 listArbolado.add(arbolado);
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los datos del arbolado ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -68,6 +69,7 @@ public class CDArbolado {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos del arbolado", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -85,11 +87,13 @@ public class CDArbolado {
                 vacio = false;
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de la tabla de repoblado ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de validar tabla de repoblado ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -152,12 +156,14 @@ public class CDArbolado {
             rs.close();
             return arboladoModel;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de la vista de arbolado del modulo A ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en para la vista de arbolado del modulo A ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -224,12 +230,14 @@ public class CDArbolado {
             rs.close();
             return arboladoModel;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de la vista de arbolado del modulo D ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en para la vista de arbolado del modulo D ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -292,12 +300,14 @@ public class CDArbolado {
             rs.close();
             return arboladoModel;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de la vista de arbolado del modulo G ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en para la vista de arbolado del modulo G ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -325,12 +335,14 @@ public class CDArbolado {
            arbolado.setArboladoID(this.arboaldoID);
            //System.out.println("Lats ID="+this.arboaldoID);
         } catch (SQLException e) {
+        e.printStackTrace();
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la informacion en arbolado ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de arbolado ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -354,12 +366,14 @@ public class CDArbolado {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información de arbolado ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la modificación de arbolado", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -384,19 +398,21 @@ public class CDArbolado {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información de arbolado ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la modificación de arbolado", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
     public void updateArboladoSubmuestra(boolean haySubmuetra, int arboladoID) {
-        String query1 = "UPDATE TAXONOMIA_Arbolado SET EsSubmuestra = 1 WHERE arboladoID= " + arboladoID;
-        String query2 = "UPDATE TAXONOMIA_Arbolado SET EsSubmuestra = 0 WHERE arboladoID= " + arboladoID;
+        String query1 = "UPDATE TAXONOMIA_Arbolado SET EsSubmuestra = true WHERE arboladoID= " + arboladoID;
+        String query2 = "UPDATE TAXONOMIA_Arbolado SET EsSubmuestra = false WHERE arboladoID= " + arboladoID;
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -408,11 +424,13 @@ public class CDArbolado {
             conn.commit();
             st.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error! no se pudo actualizar si hay submuestra ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error! no se pudo actualizar si hay submuestra aqui ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la modificación de si hay submuestra", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -428,12 +446,14 @@ public class CDArbolado {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar la información del arbolado ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al eliminar el arbolado",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -450,11 +470,13 @@ public class CDArbolado {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar la información del arbolado en sitio ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al eliminar el arbolado en sitio",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -473,18 +495,21 @@ public class CDArbolado {
                 registros = rs.getInt("Registros");
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener el conteo de registros del arbolado ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return 0;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener el conteo de registros del arbolado "
                         + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
             } finally {
                 try {
                     conn.close();
                 } catch (SQLException e) {
+                e.printStackTrace();
                     JOptionPane.showMessageDialog(
                             null, "Error! al cerrar la base de datos  al eliminar el arbolado"
                             + e.getClass().getName() + " : " + e.getMessage(),
@@ -510,6 +535,7 @@ public class CDArbolado {
                     consecutivo++;
                 }
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null,
                         "Error! al enumerar el consecutivo del arbolado ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -517,6 +543,7 @@ public class CDArbolado {
                 try {
                     conn.close();
                 } catch (SQLException e) {
+                e.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al enumerar el consecutivo del arbolado", "Conexion BD", JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -538,6 +565,7 @@ public class CDArbolado {
                     consecutivo++;
                 }
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null,
                         "Error! al enumerar rama o tallo ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -545,6 +573,7 @@ public class CDArbolado {
                 try {
                     conn.close();
                 } catch (SQLException e) {
+                e.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al enumerar rama o tallo", "Conexion BD", JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -563,6 +592,7 @@ public class CDArbolado {
                 listArboladoID.add(rs.getInt("ArboladoID"));
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los datos de arbolado id ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -571,6 +601,7 @@ public class CDArbolado {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en lista de Arbolado id", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -592,6 +623,7 @@ public class CDArbolado {
                 listConsecutivo.add(rs.getInt("Consecutivo"));
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener la lista de consecutivos ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -600,6 +632,7 @@ public class CDArbolado {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en lista de consecutivos", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -618,6 +651,7 @@ public class CDArbolado {
                 registros = rs.getInt("Registros");
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! no se pudo obtener el numero de ramas o tallos ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -625,6 +659,7 @@ public class CDArbolado {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos el obtener el numero de ramas o tallos", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -652,7 +687,7 @@ public class CDArbolado {
                 arb.setEspecieID(rs.getInt("EspecieID"));
                 arb.setInfraespecieID(rs.getInt("InfraespecieID"));
                 arb.setNombreComun(rs.getString("NombreComun"));
-                arb.setEsSubmuestra(rs.getInt("EsSubmuestra"));
+                arb.setEsSubmuestra(rs.getBoolean("EsSubmuestra"));
                 arb.setFormaVidaID(rs.getInt("FormaVidaID"));
                 arb.setCondicionID(rs.getInt("CondicionID"));
                 arb.setFormaFusteID(rs.getInt("FormaFusteID"));
@@ -679,12 +714,14 @@ public class CDArbolado {
             }
             return arb;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener un registro de arbolado ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane
                         .showMessageDialog(null,
                                 "Error! al cerrar la base de datos en datos de registro de arbolado",
@@ -715,7 +752,7 @@ public class CDArbolado {
                 arb.setEspecieID(rs.getInt("EspecieID"));
                 arb.setInfraespecieID(rs.getInt("InfraespecieID"));
                 arb.setNombreComun(rs.getString("NombreComun"));
-                arb.setEsSubmuestra(rs.getInt("EsSubmuestra"));
+                arb.setEsSubmuestra(rs.getBoolean("EsSubmuestra"));
                 arb.setFormaVidaID(rs.getInt("FormaVidaID"));
                 arb.setCondicionID(rs.getInt("CondicionID"));
                 arb.setFormaFusteID(rs.getInt("FormaFusteID"));
@@ -748,12 +785,14 @@ public class CDArbolado {
             }
             return arb;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener un registro de arbolado ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane
                         .showMessageDialog(null,
                                 "Error! al cerrar la base de datos en datos de registro de arbolado",
@@ -783,7 +822,7 @@ public class CDArbolado {
                 arb.setEspecieID(rs.getInt("EspecieID"));
                 arb.setInfraespecieID(rs.getInt("InfraespecieID"));
                 arb.setNombreComun(rs.getString("NombreComun"));
-                arb.setEsSubmuestra(rs.getInt("EsSubmuestra"));
+                arb.setEsSubmuestra(rs.getBoolean("EsSubmuestra"));
                 arb.setFormaVidaID(rs.getInt("FormaVidaID"));
                 arb.setCondicionID(rs.getInt("CondicionID"));
                 arb.setFormaFusteID(rs.getInt("FormaFusteID"));
@@ -816,12 +855,14 @@ public class CDArbolado {
             }
             return arb;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener un registro de arbolado ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane
                         .showMessageDialog(null,
                                 "Error! al cerrar la base de datos en datos de registro de arbolado",
@@ -843,12 +884,14 @@ public class CDArbolado {
             }
             return arb.getArboladoID();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener un arbol por consecutivo ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane
                         .showMessageDialog(null,
                                 "Error! al cerrar la base de datos en datos al obtener un arbol por consecutivo",
@@ -858,7 +901,7 @@ public class CDArbolado {
     }
 
     public boolean validarCrearSubmuestra(int sitioID) {
-        query = "SELECT SitioID, EsSubmuestra FROM TAXONOMIA_Arbolado WHERE SitioID= " + sitioID + " AND EsSubmuestra= 1";
+        query = "SELECT SitioID, EsSubmuestra FROM TAXONOMIA_Arbolado WHERE SitioID= " + sitioID + " AND EsSubmuestra= true";
         boolean vacio = true;
         Connection conn = LocalConnection.getConnection();
         try {
@@ -868,11 +911,13 @@ public class CDArbolado {
                 vacio = false;
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al validar la creación de submuestras", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de validar la creación de submuestras", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -891,11 +936,13 @@ public class CDArbolado {
                 vacio = true;
             }
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al validar la creación de submuestras", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos de validar la creación de submuestras", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }

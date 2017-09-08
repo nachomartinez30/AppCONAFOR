@@ -21,8 +21,8 @@ public class CDFotografiaHemisferica {
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 ceFoto.setSitioID(rs.getInt("SitioID"));
-                ceFoto.setCoberturaArborea(rs.getInt("CoberturaArborea"));
-                ceFoto.setTomaFotografia(rs.getInt("TomaFotografia"));
+                ceFoto.setCoberturaArborea(rs.getBoolean("CoberturaArborea"));
+                ceFoto.setTomaFotografia(rs.getBoolean("TomaFotografia"));
                 ceFoto.setHora(rs.getString("Hora"));
                 ceFoto.setDeclinacionMagnetica(rs.getInt("DeclinacionMagnetica"));
             }

@@ -3,15 +3,15 @@ package gob.conafor.upm.mod;
 public class CEContacto {
     
     private int upmID;
-    private Integer tipoContacto;
+    private Boolean tipoContacto;
     private String nombre;
     private String direccion;
-    private Integer tipoTelefono;
+    private Boolean tipoTelefono;
     private String numeroTelefono;
-    private Integer tieneRadio;
+    private Boolean tieneRadio;
     private String canal;
     private String frecuencia;
-    private Integer tieneCorreoElectronico;
+    private Boolean tieneCorreoElectronico;
     private String correoElectronico;
     private String observaciones;
 
@@ -23,11 +23,11 @@ public class CEContacto {
         this.upmID = upmID;
     }
 
-    public Integer getTipoContacto() {
+    public Boolean getTipoContacto() {
         return tipoContacto;
     }
 
-    public void setTipoContacto(Integer tipoContacto) {
+    public void setTipoContacto(Boolean tipoContacto) {
         this.tipoContacto = tipoContacto;
     }
 
@@ -47,11 +47,11 @@ public class CEContacto {
         this.direccion = direccion;
     }
 
-    public Integer getTipoTelefono() {
+    public Boolean getTipoTelefono() {
         return tipoTelefono;
     }
 
-    public void setTipoTelefono(Integer tipoTelefono) {
+    public void setTipoTelefono(Boolean tipoTelefono) {
         this.tipoTelefono = tipoTelefono;
     }
 
@@ -63,11 +63,11 @@ public class CEContacto {
         this.numeroTelefono = numeroTelefono;
     }
 
-    public Integer getTieneRadio() {
+    public Boolean getTieneRadio() {
         return tieneRadio;
     }
 
-    public void setTieneRadio(Integer tieneRadio) {
+    public void setTieneRadio(Boolean tieneRadio) {
         this.tieneRadio = tieneRadio;
     }
 
@@ -87,11 +87,11 @@ public class CEContacto {
         this.frecuencia = frecuencia;
     }
 
-    public Integer getTieneCorreoElectronico() {
+    public Boolean getTieneCorreoElectronico() {
         return tieneCorreoElectronico;
     }
 
-    public void setTieneCorreoElectronico(Integer tieneCorreoElectronico) {
+    public void setTieneCorreoElectronico(Boolean tieneCorreoElectronico) {
         this.tieneCorreoElectronico = tieneCorreoElectronico;
     }
 

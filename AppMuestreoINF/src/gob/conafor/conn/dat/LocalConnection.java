@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 public class LocalConnection {
 
-   /* private static String driver = "org.sqlite.JDBC";
+    private static String driver = "org.sqlite.JDBC";
     private static Connection connect;
     
     public static Connection getConnection() {
@@ -41,10 +41,10 @@ public class LocalConnection {
         Path currentPath = Paths.get("");
         String path = currentPath.toAbsolutePath().toString();
         
-        return "jdbc:sqlite:" + path + "/MuestreoINF_2017.oct"; //Para distribuir
-        //return "jdbc:sqlite:" + path + "/src/db/MuestreoINF_2017.oct"; //En producción.
-    }*/
-    private static String driver = "org.h2.Driver";
+        return "jdbc:sqlite:" + path + "/MuestreoINF_2015.oct"; //Para distribuir
+        //return "jdbc:sqlite:" + path + "/src/db/MuestreoINF_2015.oct"; //En producción.
+    }
+   /* private static String driver = "org.h2.Driver";
 	private static Connection connect;
 
 

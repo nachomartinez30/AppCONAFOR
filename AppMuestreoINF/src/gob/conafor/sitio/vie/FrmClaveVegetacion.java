@@ -368,7 +368,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
                         UPMForms.observaciones.setVisible(true);
                     }
                     break;
-                case 16:
+                case 16: //A,C y G
                     if (sitio == this.ceSitio.getSitio()) {
                         UPMForms.suelo.setDatosiniciales(ceSitio);
                         UPMForms.suelo.setVisible(true);
@@ -378,6 +378,19 @@ public class FrmClaveVegetacion extends JInternalFrame {
                         UPMForms.observaciones.setVisible(true);
                     }
                     break;
+                case 17://A, C, E, F y G
+                     if (sitio == this.ceSitio.getSitio()) {
+                        UPMForms.suelo.setDatosiniciales(ceSitio);
+                        UPMForms.suelo.setVisible(true);
+                    } else {
+                        UPMForms.observaciones.setDatosiniciales(ceSitio);
+                        UPMForms.observaciones.setVisible(true);
+                    }
+                    break;
+                case 18://A y F
+                    
+                    break;
+                    
             }
         }
     }
@@ -517,6 +530,16 @@ public class FrmClaveVegetacion extends JInternalFrame {
                     if (sitio == this.ceSitio.getSitio()) {
                         UPMForms.carbono.revisarCarbono(ceSitio);
                         UPMForms.carbono.setVisible(true);
+                    } else {
+                        UPMForms.observaciones.revisarObservaciones(ceSitio);
+                        UPMForms.observaciones.setVisible(true);
+                    }
+                    break;
+                    
+                    case 16: //Módulos A, C y G
+                    if (sitio == this.ceSitio.getSitio()) {
+                        UPMForms.suelo.revisarSuelo(ceSitio);
+                        UPMForms.suelo.setVisible(true);
                     } else {
                         UPMForms.observaciones.revisarObservaciones(ceSitio);
                         UPMForms.observaciones.setVisible(true);

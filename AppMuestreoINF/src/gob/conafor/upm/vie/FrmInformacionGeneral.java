@@ -50,7 +50,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
     private Version ver = new Version();
     private String version = ver.getVersion();
     private boolean existeContacto = false;
-    private  CDContacto cdContacto=new CDContacto();
+    private CDContacto cdContacto = new CDContacto();
 
     public FrmInformacionGeneral() {
         initComponents();
@@ -433,33 +433,66 @@ public class FrmInformacionGeneral extends JInternalFrame {
         CEBrigadista jefeBrigada = (CEBrigadista) cmbJefeBrigada.getSelectedItem();
         CEBrigadista auxiliar1 = (CEBrigadista) cmbAuxiliar1.getSelectedItem();
         CEBrigadista auxiliar2 = (CEBrigadista) cmbAuxiliar2.getSelectedItem();
-        this.ceBrigada.setBrigadistaID(jefeBrigada.getBrigadistaID());
-        this.ceBrigada.setEmpresaID(getEmpresaID(jefeBrigada.getBrigadistaID()));
-        this.ceBrigada.setPuestoID(1);
-        this.ceBrigada.setUpmID(this.upm);
-        this.cdBrigada.insertBrigada(this.ceBrigada);
-        this.ceBrigada.setBrigadistaID(auxiliar1.getBrigadistaID());
-        this.ceBrigada.setEmpresaID(getEmpresaID(auxiliar1.getBrigadistaID()));
-        this.ceBrigada.setPuestoID(2);
-        this.ceBrigada.setUpmID(this.upm);
-        this.cdBrigada.insertBrigada(this.ceBrigada);
-        this.ceBrigada.setBrigadistaID(auxiliar2.getBrigadistaID());
-        this.ceBrigada.setEmpresaID(getEmpresaID(auxiliar2.getBrigadistaID()));
-        this.ceBrigada.setPuestoID(3);
-        this.ceBrigada.setUpmID(this.upm);
-        this.cdBrigada.insertBrigada(this.ceBrigada);
+        System.out.println("Creacion jefeBrigada=" + jefeBrigada);
+        System.out.println("Creacion auxiliar1=" + auxiliar1);
+        System.out.println("Creacion auxiliar2=" + auxiliar2);
+        
+        
+        if (jefeBrigada != null) {
+            this.ceBrigada.setBrigadistaID(jefeBrigada.getBrigadistaID());
+            this.ceBrigada.setEmpresaID(getEmpresaID(jefeBrigada.getBrigadistaID()));
+            this.ceBrigada.setPuestoID(1);
+            this.ceBrigada.setUpmID(this.upm);
+            this.cdBrigada.insertBrigada(this.ceBrigada);
+        }else{
+            this.ceBrigada.setBrigadistaID(0);
+            this.ceBrigada.setEmpresaID(0);
+            this.ceBrigada.setPuestoID(1);
+            this.ceBrigada.setUpmID(this.upm);
+            this.cdBrigada.insertBrigada(this.ceBrigada);
+        }
+        if (auxiliar1 != null) {
+            this.ceBrigada.setBrigadistaID(auxiliar1.getBrigadistaID());
+            this.ceBrigada.setEmpresaID(getEmpresaID(auxiliar1.getBrigadistaID()));
+            this.ceBrigada.setPuestoID(2);
+            this.ceBrigada.setUpmID(this.upm);
+            this.cdBrigada.insertBrigada(this.ceBrigada);
+        }else{
+            this.ceBrigada.setBrigadistaID(0);
+            this.ceBrigada.setEmpresaID(0);
+            this.ceBrigada.setPuestoID(2);
+            this.ceBrigada.setUpmID(this.upm);
+            this.cdBrigada.insertBrigada(this.ceBrigada);
+        }
+        
+        if (auxiliar2 != null) {
+            this.ceBrigada.setBrigadistaID(auxiliar2.getBrigadistaID());
+            this.ceBrigada.setEmpresaID(getEmpresaID(auxiliar2.getBrigadistaID()));
+            this.ceBrigada.setPuestoID(3);
+            this.ceBrigada.setUpmID(this.upm);
+            this.cdBrigada.insertBrigada(this.ceBrigada);
+        }else{
+            this.ceBrigada.setBrigadistaID(0);
+            this.ceBrigada.setEmpresaID(0);
+            this.ceBrigada.setPuestoID(3);
+            this.ceBrigada.setUpmID(this.upm);
+            this.cdBrigada.insertBrigada(this.ceBrigada);
+        }
+        
+        
+        
     }
 
-    public int getEmpresaID(int brigadistaID){
-        int idEmpresa=0;
+    public int getEmpresaID(int brigadistaID) {
+        int idEmpresa = 0;
         String query = "SELECT EmpresaID FROM BRIGADA_Brigadistas WHERE BrigadistaID =" + brigadistaID;
-        
+
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
-                idEmpresa=rs.getInt("EmpresaID");
+                idEmpresa = rs.getInt("EmpresaID");
             }
             st.close();
             rs.close();
@@ -477,23 +510,52 @@ public class FrmInformacionGeneral extends JInternalFrame {
         }
         return idEmpresa;
     }
-    
+
     private void modificarBrigada() {
         CEBrigadista jefeBrigada = (CEBrigadista) cmbJefeBrigada.getSelectedItem();
         CEBrigadista auxiliar1 = (CEBrigadista) cmbAuxiliar1.getSelectedItem();
         CEBrigadista auxiliar2 = (CEBrigadista) cmbAuxiliar2.getSelectedItem();
-        this.ceBrigada.setBrigadistaID(jefeBrigada.getBrigadistaID());
-        this.ceBrigada.setPuestoID(1);
-        this.ceBrigada.setUpmID(this.upm);
-        this.cdBrigada.updateBrigada(this.ceBrigada);
-        this.ceBrigada.setBrigadistaID(auxiliar1.getBrigadistaID());
-        this.ceBrigada.setPuestoID(2);
-        this.ceBrigada.setUpmID(this.upm);
-        this.cdBrigada.updateBrigada(this.ceBrigada);
-        this.ceBrigada.setBrigadistaID(auxiliar2.getBrigadistaID());
-        this.ceBrigada.setPuestoID(3);
-        this.ceBrigada.setUpmID(this.upm);
-        this.cdBrigada.updateBrigada(this.ceBrigada);
+        
+        System.out.println("Modificacion jefeBrigada="+ jefeBrigada);
+        System.out.println("Modificacion auxiliar1="+ auxiliar1);
+        System.out.println("Modificacion auxiliar2="+ auxiliar2);
+        
+        if (jefeBrigada != null) {
+            this.ceBrigada.setBrigadistaID(jefeBrigada.getBrigadistaID());
+            this.ceBrigada.setPuestoID(1);
+            this.ceBrigada.setUpmID(this.upm);
+            this.cdBrigada.updateBrigada(this.ceBrigada);
+        }else{
+            this.ceBrigada.setBrigadistaID(0);
+            this.ceBrigada.setPuestoID(1);
+            this.ceBrigada.setUpmID(this.upm);
+            this.cdBrigada.updateBrigada(this.ceBrigada);
+        }
+        
+        if (auxiliar1 != null) {
+            this.ceBrigada.setBrigadistaID(auxiliar1.getBrigadistaID());
+            this.ceBrigada.setPuestoID(2);
+            this.ceBrigada.setUpmID(this.upm);
+            this.cdBrigada.updateBrigada(this.ceBrigada);
+        }else{
+            this.ceBrigada.setBrigadistaID(0);
+            this.ceBrigada.setPuestoID(2);
+            this.ceBrigada.setUpmID(this.upm);
+            this.cdBrigada.updateBrigada(this.ceBrigada);
+        }
+        
+        if (auxiliar2 != null) {
+            this.ceBrigada.setBrigadistaID(auxiliar2.getBrigadistaID());
+            this.ceBrigada.setPuestoID(3);
+            this.ceBrigada.setUpmID(this.upm);
+            this.cdBrigada.updateBrigada(this.ceBrigada);
+        }else{
+            this.ceBrigada.setBrigadistaID(0);
+            this.ceBrigada.setPuestoID(3);
+            this.ceBrigada.setUpmID(this.upm);
+            this.cdBrigada.updateBrigada(this.ceBrigada);
+        }
+        
     }
 
     private void crearUPM() {
@@ -636,8 +698,8 @@ public class FrmInformacionGeneral extends JInternalFrame {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
         String fecIni = null;
         String fecFin = null;
-        String anio = "2016";//Checar ciclo
-        String anio2= "2017";
+        String anio = "2015";//Checar ciclo
+        String anio2 = "2017";
         if (dpFechaInicio.getDate() != null) {
             fecIni = sdf.format(dpFechaInicio.getDate());
         }
@@ -656,11 +718,11 @@ public class FrmInformacionGeneral extends JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error! La fecha de inicio no puede ser mayor a la fecha de final de muestreo", "Información UPM", JOptionPane.INFORMATION_MESSAGE);
             dpFechaFin.requestFocus();
             return false;
-        } else if (!fecIni.equals(anio)&&!fecIni.equals(anio2)) {
+        } else if (!fecIni.equals(anio) && !fecIni.equals(anio2)) {
             JOptionPane.showMessageDialog(null, "Error! La fecha de inicio debe estar dentro del periodo de " + anio, "Información UPM", JOptionPane.INFORMATION_MESSAGE);
             dpFechaInicio.requestFocus();
             return false;
-        } else if (!fecFin.equals(anio)&&!fecFin.equals(anio2)) {
+        } else if (!fecFin.equals(anio) && !fecFin.equals(anio2)) {
             JOptionPane.showMessageDialog(null, "Error! La fecha de fin debe estar dentro del periodo de " + anio2, "Información UPM", JOptionPane.INFORMATION_MESSAGE);
             dpFechaFin.requestFocus();
             return false;
@@ -836,30 +898,31 @@ public class FrmInformacionGeneral extends JInternalFrame {
             txtFrecuencia.setEnabled(false);
         }
     }
-public void limpiarControles(){
-       txtPredio.setText("");
-       txtParaje.setText("");
-       cmbTenencia.setSelectedIndex(0);
-       /*----------------------------------------*/
-       rbtRemoto.setSelected(false);
-       rbtPresencial.setSelected(false);
-       rbtTelefonoFijo.setSelected(false);
-       rbtTelefonoMovil.setSelected(false);
 
-       txtNombreContacto.setText("");
-       txtDireccionContacto.setText("");
-       txtNumeroTelefonico.setText("");
-       txtCorreoElectronico.setText("");
-       txtObservaciones.setText("");
-       
-       chkRadio.setSelected(false);
-       chkCorreoElectronico.setSelected(false);
+    public void limpiarControles() {
+        txtPredio.setText("");
+        txtParaje.setText("");
+        cmbTenencia.setSelectedIndex(0);
+        /*----------------------------------------*/
+        rbtRemoto.setSelected(false);
+        rbtPresencial.setSelected(false);
+        rbtTelefonoFijo.setSelected(false);
+        rbtTelefonoMovil.setSelected(false);
 
-       cmbJefeBrigada.setSelectedIndex(0);
-       cmbAuxiliar1.setSelectedIndex(0);
-       cmbAuxiliar2.setSelectedIndex(0);
+        txtNombreContacto.setText("");
+        txtDireccionContacto.setText("");
+        txtNumeroTelefonico.setText("");
+        txtCorreoElectronico.setText("");
+        txtObservaciones.setText("");
 
-      }                                            
+        chkRadio.setSelected(false);
+        chkCorreoElectronico.setSelected(false);
+
+        cmbJefeBrigada.setSelectedIndex(-1);
+        cmbAuxiliar1.setSelectedIndex(-1);
+        cmbAuxiliar2.setSelectedIndex(-1);
+
+    }
 
     private void reetablecerControles() {
         txtProyecto.setText("");
@@ -1930,13 +1993,14 @@ public void limpiarControles(){
     }//GEN-LAST:event_chkCorreoElectronicoPropertyChange
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-       // CDContacto cdContacto = new CDContacto();
+        // CDContacto cdContacto = new CDContacto();
         CatETipoUPM tipoUpmID = (CatETipoUPM) cmbTipoUPM.getSelectedItem();
         if (validarUPM() && validarFecha()) {
-            if (validarContacto() && validarBrigadaObligatoria() && validarBrigadistaDiferente()) {
+            if (validarContacto() /*&& validarBrigadaObligatoria() && validarBrigadistaDiferente()*/) {
                 if (this.modificar == 0) {
                     crearUPM();
                     crearBrigada();
+
                     if (chkInformacionContacto.isSelected()) {
                         crearContacto();
                     }
@@ -1947,11 +2011,15 @@ public void limpiarControles(){
                     UPMForms.puntoControlUPM.setDatosIniciales(this.ceUpm);
                     UPMForms.puntoControlUPM.setVisible(true);
                 } else if (validarModificarTipoUPM(tipoUpmID.getTipoUPMID())) {
-                    if (validarBrigadaObligatoria() && validarBrigadistaDiferente()) {
-                        modificarUPM();
-                        //System.out.println("Modo Revision ON");
-                        modificarBrigada();
+                    /* if (validarBrigadaObligatoria() && validarBrigadistaDiferente()) {*/
+                    modificarUPM();
+                    //System.out.println("Modo Revision ON");
+                    modificarBrigada();
+                    if (chkInformacionContacto.isSelected()) {
+                        crearContacto();
                     }
+
+                    /*}*/
                     if (chkInformacionContacto.isSelected()) {
                         //System.err.println("Entro modificaicon de contacto");
 
@@ -2150,7 +2218,7 @@ public void limpiarControles(){
             txtCanal.setEnabled(false);
             txtFrecuencia.setEnabled(false);
             txtObservaciones.setEnabled(false);
-           cdContacto.deleteContacto(this.upm);
+            cdContacto.deleteContacto(this.upm);
         }
     }//GEN-LAST:event_chkInformacionContactoActionPerformed
 

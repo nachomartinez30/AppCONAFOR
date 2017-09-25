@@ -131,11 +131,12 @@ public class CDBrigada {
         this.query = "INSERT INTO UPM_Brigada(UPMID, BrigadistaID, PuestoID, EmpresaID)VALUES(" + ceBrigada.getUpmID() + "," + ceBrigada.getBrigadistaID()
         + ", " + ceBrigada.getPuestoID() + ","+ceBrigada.getEmpresaID()+")";
         Connection conn = LocalConnection.getConnection();
-        //System.out.println(query);
+        System.out.println(query);
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
             conn.commit();
+
             st.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información del brigadista ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -151,7 +152,7 @@ public class CDBrigada {
     public void updateBrigada(CEBrigada ceBrigada) {
         this.query = "UPDATE UPM_Brigada SET BrigadistaID= " + ceBrigada.getBrigadistaID() + ", PuestoID= " + ceBrigada.getPuestoID()
         + " WHERE UPMID= " + ceBrigada.getUpmID() + " AND PuestoID= " + ceBrigada.getPuestoID();
-        //System.out.println(query);
+        System.out.println(query);
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -169,6 +170,7 @@ public class CDBrigada {
         }
     }
 
+    
     public void deleteBrigada(Integer upmID) {
         this.query = "DELETE FROM UPM_Brigada WHERE UPMID= " + upmID;
         Connection conn = LocalConnection.getConnection();

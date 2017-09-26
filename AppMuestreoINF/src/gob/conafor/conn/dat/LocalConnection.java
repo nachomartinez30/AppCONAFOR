@@ -41,36 +41,9 @@ public class LocalConnection {
         Path currentPath = Paths.get("");
         String path = currentPath.toAbsolutePath().toString();
         
-        return "jdbc:sqlite:" + path + "/MuestreoINF_2015.oct"; //Para distribuir
-        //return "jdbc:sqlite:" + path + "/src/db/MuestreoINF_2015.oct"; //En producción.
+        //return "jdbc:sqlite:" + path + "/MuestreoINF_2017.oct"; //Para distribuir
+        return "jdbc:sqlite:" + path + "/src/db/MuestreoINF_2017.oct"; //En producción.
     }
-   /* private static String driver = "org.h2.Driver";
-	private static Connection connect;
-
-
-	public static Connection getConnection() {
-		try {
-			Class.forName(driver);
-			connect = DriverManager.getConnection("jdbc:h2:C:\\Users\\ignacio.martinez\\Desktop\\H2_probando\\MuestreoINF_2017.h2.db","usuario_java","211372848");
-						connect.setAutoCommit(false);
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null,
-					"Error, No hay base de datos local disponible" + e.getClass().getName() + ": " + e.getMessage());
-			e.printStackTrace();
-			System.exit(0);
-		}
-		return connect;
-	}
-
-	public static void closeConnection() {
-		try {
-			connect.close();
-			JOptionPane.showConfirmDialog(null, "Desconectado");
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null,
-					"Error, No hay base de datos local disponible" + e.getClass().getName() + ": " + e.getMessage());
-		}
-	}/**/
 }
 
 

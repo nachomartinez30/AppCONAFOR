@@ -51,63 +51,64 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                          <Component id="lblUPM" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                          <Component id="txtUPM" min="-2" pref="97" max="-2" attributes="0"/>
+                          <EmptySpace min="608" pref="608" max="-2" attributes="0"/>
+                          <Component id="lblSitio" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
+                          <Component id="txtSitio" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="chkRepobladoFuera" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="260" pref="260" max="-2" attributes="0"/>
+                                  <Component id="txtPorcentajeRepobladoFuera" min="-2" pref="80" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="chkRepobladoVM" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="PnlDescripcion" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="PnlDescripcion1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblVegetacionMenorCobertura" alignment="0" min="-2" pref="900" max="-2" attributes="0"/>
+                              <Component id="lblRegistroRepobladoVegetacionMenor" alignment="0" min="-2" pref="900" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="31" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <Component id="PnlCoordenadas4" pref="935" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <Component id="jScrollPane2" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   <Component id="btnContinuar" min="-2" pref="95" max="-2" attributes="0"/>
                   <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
                   <Component id="btnSalir" min="-2" pref="93" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                  <Component id="lblUPM" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                  <Component id="txtUPM" min="-2" pref="97" max="-2" attributes="0"/>
-                                  <EmptySpace min="608" pref="608" max="-2" attributes="0"/>
-                                  <Component id="lblSitio" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                                  <Component id="txtSitio" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="chkRepobladoFuera" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="260" pref="260" max="-2" attributes="0"/>
-                                          <Component id="txtPorcentajeRepobladoFuera" min="-2" pref="80" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="chkRepobladoVM" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="PnlDescripcion" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="PnlDescripcion1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblVegetacionMenorCobertura" alignment="0" min="-2" pref="900" max="-2" attributes="0"/>
-                                      <Component id="lblRegistroRepobladoVegetacionMenor" alignment="0" min="-2" pref="900" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Component id="PnlCoordenadas4" alignment="1" pref="931" max="32767" attributes="0"/>
-                      <Component id="jScrollPane2" alignment="1" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="31" pref="31" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -695,7 +696,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnContinuar">
           <Properties>
-            <Property name="mnemonic" type="int" value="99"/>
             <Property name="text" type="java.lang.String" value="Continuar"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="btnSalir"/>
@@ -707,7 +707,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
-            <Property name="mnemonic" type="int" value="115"/>
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
           <Events>
@@ -906,6 +905,7 @@
                                       <Component id="txtClaveColecta" min="-2" pref="152" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
@@ -1303,7 +1303,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnGuardar">
               <Properties>
-                <Property name="mnemonic" type="int" value="103"/>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
               <Events>
@@ -1312,7 +1311,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnModificar">
               <Properties>
-                <Property name="mnemonic" type="int" value="109"/>
                 <Property name="text" type="java.lang.String" value="Modificar"/>
               </Properties>
               <Events>
@@ -1321,7 +1319,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnEliminar">
               <Properties>
-                <Property name="mnemonic" type="int" value="101"/>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
               </Properties>
               <Events>
@@ -1330,7 +1327,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnColecta">
               <Properties>
-                <Property name="mnemonic" type="int" value="111"/>
                 <Property name="text" type="java.lang.String" value="Colecta"/>
               </Properties>
               <Events>

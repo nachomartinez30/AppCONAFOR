@@ -651,7 +651,6 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnContinuar">
           <Properties>
-            <Property name="mnemonic" type="int" value="99"/>
             <Property name="text" type="java.lang.String" value="Continuar"/>
             <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="btnSalir"/>
@@ -663,7 +662,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
-            <Property name="mnemonic" type="int" value="115"/>
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
           <Events>
@@ -1248,7 +1246,6 @@
             </Container>
             <Component class="javax.swing.JButton" name="btnGuardar">
               <Properties>
-                <Property name="mnemonic" type="int" value="103"/>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
               <Events>
@@ -1257,7 +1254,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnModificar">
               <Properties>
-                <Property name="mnemonic" type="int" value="109"/>
                 <Property name="text" type="java.lang.String" value="Modificar"/>
               </Properties>
               <Events>
@@ -1266,7 +1262,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnEliminar">
               <Properties>
-                <Property name="mnemonic" type="int" value="101"/>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
               </Properties>
               <Events>
@@ -1275,7 +1270,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnColecta">
               <Properties>
-                <Property name="mnemonic" type="int" value="111"/>
                 <Property name="text" type="java.lang.String" value="Colecta"/>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="chkSotoBosqueFuera"/>

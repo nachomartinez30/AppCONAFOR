@@ -603,7 +603,6 @@ public class FrmTrazoSitio extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnGuardar.setMnemonic('g');
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -611,7 +610,6 @@ public class FrmTrazoSitio extends javax.swing.JDialog {
             }
         });
 
-        btnEliminar.setMnemonic('e');
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -619,7 +617,6 @@ public class FrmTrazoSitio extends javax.swing.JDialog {
             }
         });
 
-        btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -679,7 +676,7 @@ public class FrmTrazoSitio extends javax.swing.JDialog {
                     .addComponent(btnGuardar)
                     .addComponent(btnEliminar)
                     .addComponent(btnSalir))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -599,7 +599,6 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
-        btnTrazoSitio.setMnemonic('t');
         btnTrazoSitio.setText("Trazo del sitio");
         btnTrazoSitio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1247,7 +1246,6 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        btnAgregar.setMnemonic('a');
         btnAgregar.setText("Agregar");
         btnAgregar.setNextFocusableComponent(btnModificar);
         btnAgregar.setPreferredSize(new java.awt.Dimension(79, 23));
@@ -1257,7 +1255,6 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
             }
         });
 
-        btnElimnar.setMnemonic('e');
         btnElimnar.setText("Eliminar");
         btnElimnar.setNextFocusableComponent(btnContinuar);
         btnElimnar.setPreferredSize(new java.awt.Dimension(79, 23));
@@ -1267,7 +1264,6 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
             }
         });
 
-        btnModificar.setMnemonic('m');
         btnModificar.setText(" Modificar");
         btnModificar.setNextFocusableComponent(btnElimnar);
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -1292,7 +1288,6 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(grdArbolado);
 
-        btnContinuar.setMnemonic('c');
         btnContinuar.setText("Continuar");
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1300,7 +1295,6 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
             }
         });
 
-        btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1331,7 +1325,6 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
 
         txtClaveColecta.setEnabled(false);
 
-        btnColecta.setMnemonic('o');
         btnColecta.setText("Colecta");
         btnColecta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1339,7 +1332,6 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
             }
         });
 
-        btnLimparControles.setMnemonic('l');
         btnLimparControles.setText("Limpiar controles");
         btnLimparControles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

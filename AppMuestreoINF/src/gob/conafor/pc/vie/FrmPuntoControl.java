@@ -1043,7 +1043,6 @@ public class FrmPuntoControl extends javax.swing.JInternalFrame {
         PnlContinuar.setBackground(new java.awt.Color(204, 204, 204));
         PnlContinuar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnContinuar.setMnemonic('c');
         btnContinuar.setText("Continuar");
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1051,7 +1050,6 @@ public class FrmPuntoControl extends javax.swing.JInternalFrame {
             }
         });
 
-        btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.setPreferredSize(new java.awt.Dimension(79, 23));
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -1084,7 +1082,6 @@ public class FrmPuntoControl extends javax.swing.JInternalFrame {
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
         jPanel3.setPreferredSize(new java.awt.Dimension(523, 51));
 
-        btnGuardar.setMnemonic('g');
         btnGuardar.setText("Guardar");
         btnGuardar.setPreferredSize(new java.awt.Dimension(100, 23));
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -1094,7 +1091,6 @@ public class FrmPuntoControl extends javax.swing.JInternalFrame {
         });
         jPanel3.add(btnGuardar);
 
-        btnActualizar.setMnemonic('a');
         btnActualizar.setText("Actualizar");
         btnActualizar.setPreferredSize(new java.awt.Dimension(100, 23));
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -1104,7 +1100,6 @@ public class FrmPuntoControl extends javax.swing.JInternalFrame {
         });
         jPanel3.add(btnActualizar);
 
-        btnEliminar.setMnemonic('e');
         btnEliminar.setText("Eliminar");
         btnEliminar.setNextFocusableComponent(btnContinuar);
         btnEliminar.setPreferredSize(new java.awt.Dimension(100, 23));

@@ -230,7 +230,6 @@ public class FrmContinuarModulos extends javax.swing.JInternalFrame {
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,7 +237,6 @@ public class FrmContinuarModulos extends javax.swing.JInternalFrame {
             }
         });
 
-        btnContinuar.setMnemonic('c');
         btnContinuar.setText("Continuar");
         btnContinuar.setEnabled(false);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {

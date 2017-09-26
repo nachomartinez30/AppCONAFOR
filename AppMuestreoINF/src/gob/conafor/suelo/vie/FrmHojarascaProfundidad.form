@@ -1278,7 +1278,6 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="btnContinuar">
               <Properties>
-                <Property name="mnemonic" type="int" value="99"/>
                 <Property name="text" type="java.lang.String" value="Continuar"/>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
                   <ComponentRef name="btnSalir"/>
@@ -1290,7 +1289,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnSalir">
               <Properties>
-                <Property name="mnemonic" type="int" value="115"/>
                 <Property name="text" type="java.lang.String" value="Salir"/>
               </Properties>
               <Events>

@@ -875,7 +875,6 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
         });
         jPanel3.add(txtGrozorCorteza, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, 136, -1));
 
-        btnContinuar.setMnemonic('c');
         btnContinuar.setLabel("Continuar");
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -883,7 +882,6 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
             }
         });
 
-        btnSalir.setMnemonic('s');
         btnSalir.setLabel("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1067,7 +1065,6 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Observaciones:");
 
-        btnRegresar.setMnemonic('r');
         btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1121,7 +1118,8 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(19, 19, 19))))
         );
         jPanel1Layout.setVerticalGroup(

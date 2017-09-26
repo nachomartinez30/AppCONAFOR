@@ -136,18 +136,17 @@ public class CDEpifitas {
     public void insertEpifita(CEEpifita epifita) {
         query = "INSERT INTO UPM_Epifita(UPMID, ClaseTipoID, PresenciaTroncosID, PresenciaRamasID)VALUES(" + epifita.getUpmID() + ", "
                 + epifita.getClaseTipoID() + ", " + epifita.getPresenciaTroncosID() + ", " + epifita.getPresenciaRamasID() + ")";
-        //String query2 = "SELECT last_insert_rowid()";
+        String query2 = "SELECT last_insert_rowid()";
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
-            //ResultSet rs = st.executeQuery(query2);
-            //this.epifitaID = rs.getInt(1);
+            ResultSet rs = st.executeQuery(query2);
+            this.epifitaID = rs.getInt(1);
             conn.commit();
             st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la informacion de epifita", "Conexion BD", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
         } finally {
             try {
                 conn.close();

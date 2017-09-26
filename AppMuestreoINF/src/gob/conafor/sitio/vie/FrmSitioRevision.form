@@ -1003,7 +1003,6 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnGuardar">
           <Properties>
-            <Property name="mnemonic" type="int" value="103"/>
             <Property name="text" type="java.lang.String" value="Guardar"/>
           </Properties>
           <Events>
@@ -1012,7 +1011,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
-            <Property name="mnemonic" type="int" value="115"/>
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
           <Events>

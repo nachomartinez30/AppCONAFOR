@@ -1369,7 +1369,6 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        btnContinuar.setMnemonic('c');
         btnContinuar.setText("Continuar");
         btnContinuar.setNextFocusableComponent(btnSalir);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
@@ -1378,7 +1377,6 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
             }
         });
 
-        btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1708,7 +1706,6 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        btnGuardar.setMnemonic('g');
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1716,7 +1713,6 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
             }
         });
 
-        btnModificar.setMnemonic('m');
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1724,7 +1720,6 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
             }
         });
 
-        btnEliminar.setMnemonic('e');
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1732,7 +1727,6 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
             }
         });
 
-        btnColecta.setMnemonic('o');
         btnColecta.setText("Colecta");
         btnColecta.setNextFocusableComponent(chkSotoBosqueFuera);
         btnColecta.addActionListener(new java.awt.event.ActionListener() {

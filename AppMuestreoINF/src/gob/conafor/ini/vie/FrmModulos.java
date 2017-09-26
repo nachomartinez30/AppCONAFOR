@@ -119,7 +119,6 @@ public class FrmModulos extends javax.swing.JDialog {
             }
         });
 
-        btnIniciar.setMnemonic('i');
         btnIniciar.setText("Iniciar");
         btnIniciar.setToolTipText("Iniciar la captura de una UPM");
         btnIniciar.setEnabled(false);
@@ -186,7 +185,6 @@ public class FrmModulos extends javax.swing.JDialog {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        btnCancelar.setMnemonic('c');
         btnCancelar.setText("Cancelar");
         btnCancelar.setToolTipText("Omitir la captura de una UPM");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {

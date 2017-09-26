@@ -488,7 +488,6 @@ public class CDColectaBotanica {
             st.close();
             rs.close();
         } catch (SQLException e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al revisar si se capturo colecta botánica para género en identificación "
             , "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {

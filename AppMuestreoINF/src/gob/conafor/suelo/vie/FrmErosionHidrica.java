@@ -1906,7 +1906,6 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
-        btnContinuar.setMnemonic('c');
         btnContinuar.setText("Continuar");
         btnContinuar.setNextFocusableComponent(btnSalir);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
@@ -1915,7 +1914,6 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
             }
         });
 
-        btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

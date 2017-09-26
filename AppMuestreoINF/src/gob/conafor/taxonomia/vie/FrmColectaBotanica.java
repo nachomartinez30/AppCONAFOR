@@ -960,7 +960,6 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(txtObservacionesColecta);
 
-        btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -978,7 +977,6 @@ public class FrmColectaBotanica extends javax.swing.JInternalFrame {
             }
         });
 
-        btnAgregar.setMnemonic('a');
         btnAgregar.setText("Agregar");
         btnAgregar.setEnabled(false);
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {

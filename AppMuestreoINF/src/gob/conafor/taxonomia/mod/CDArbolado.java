@@ -324,7 +324,6 @@ public class CDArbolado {
             conn.commit();
             st.close();
         } catch (SQLException e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la informacion en arbolado ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {

@@ -267,7 +267,6 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="btnContinuar">
               <Properties>
-                <Property name="mnemonic" type="int" value="99"/>
                 <Property name="text" type="java.lang.String" value="Continuar"/>
               </Properties>
               <Events>
@@ -276,7 +275,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnSalir">
               <Properties>
-                <Property name="mnemonic" type="int" value="115"/>
                 <Property name="text" type="java.lang.String" value="Salir"/>
               </Properties>
               <Events>
@@ -1327,7 +1325,6 @@
             </Container>
             <Component class="javax.swing.JButton" name="btnGuardarMuestra">
               <Properties>
-                <Property name="mnemonic" type="int" value="103"/>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
               <Events>
@@ -1336,7 +1333,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnModificarMuestra">
               <Properties>
-                <Property name="mnemonic" type="int" value="109"/>
                 <Property name="text" type="java.lang.String" value="Modificar"/>
               </Properties>
               <Events>
@@ -1345,7 +1341,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnEliminarMuestra">
               <Properties>
-                <Property name="mnemonic" type="int" value="101"/>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
               </Properties>
               <Events>
@@ -1354,7 +1349,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButton1">
               <Properties>
-                <Property name="mnemonic" type="int" value="108"/>
                 <Property name="text" type="java.lang.String" value="Limpiar"/>
               </Properties>
               <Events>

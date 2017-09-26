@@ -20,27 +20,27 @@ public class FrmCapturaModulos extends javax.swing.JInternalFrame {
     private FuncionesComunes combo = new FuncionesComunes();
     private Integer secuenciaID;
     private Integer sitioID;
-
-    private Version ver = new Version();
-    private String version = ver.getVersion();
-
+    
+    private Version ver=new Version();
+    private String version=ver.getVersion();
+    
     public FrmCapturaModulos() {
         initComponents();
         this.setLocation(300, 110);
     }
-
-    public void llenarControles() {
+    
+    public void llenarControles(){
         combo.reiniciarComboModel(this.cmbUPMID);
         fillUPMID();
     }
-
-    public void manipularBonesMenuprincipal() {
+    
+     public void manipularBonesMenuprincipal(){
         combo.manipularBotonesMenuPrincipal(true);
         cmbUPMID.setSelectedItem(null);
         cmbSitios.setSelectedItem(null);
         combo.reiniciarComboModel(cmbSitios);
     }
-
+    
     private void fillUPMID() {
         List<Integer> listCapturado = new ArrayList<>();
         listCapturado = this.cdSitio.getUPMSitios();
@@ -51,7 +51,7 @@ public class FrmCapturaModulos extends javax.swing.JInternalFrame {
             }
         }
     }
-
+    
     private void fillCmbSitio(int upmID) {
         List<Integer> listSitios = new ArrayList<>();
         listSitios = this.cdSitio.getSitiosDisponibles(upmID);
@@ -62,7 +62,7 @@ public class FrmCapturaModulos extends javax.swing.JInternalFrame {
             }
         }
     }
-
+    
     private void crearSecuencia(int secuenciaID, int upmID, int sitio) {
         switch (secuenciaID) {
             case 1:
@@ -111,23 +111,11 @@ public class FrmCapturaModulos extends javax.swing.JInternalFrame {
                 cdSecuencia.insertSecuencia15(upmID, sitio);
                 break;
             case 16:
-                cdSecuencia.insertSecuencia16(upmID, sitio);
-                break;
-            case 17:
-                cdSecuencia.insertSecuencia17(upmID, sitio);
-                break;
-            case 18:
-                cdSecuencia.insertSecuencia18(upmID, sitio);
-                break;
-            case 19:
-                cdSecuencia.insertSecuencia19(upmID, sitio);
-                break;
-            case 20:
-                cdSecuencia.insertSecuencia20(upmID, sitio);
+                 cdSecuencia.insertSecuencia16(upmID, sitio);
                 break;
         }
     }
-
+    
     private void setSecuencia(int upmID) {
         secuenciaID = this.cdUpm.getSecuenciaID(upmID);
     }
@@ -143,7 +131,6 @@ public class FrmCapturaModulos extends javax.swing.JInternalFrame {
     private Integer getSitioID() {
         return this.sitioID;
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -247,7 +234,6 @@ public class FrmCapturaModulos extends javax.swing.JInternalFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        btnComenzarCaptura.setMnemonic('c');
         btnComenzarCaptura.setText("Comenzar captura");
         btnComenzarCaptura.setEnabled(false);
         btnComenzarCaptura.addActionListener(new java.awt.event.ActionListener() {
@@ -256,7 +242,6 @@ public class FrmCapturaModulos extends javax.swing.JInternalFrame {
             }
         });
 
-        btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -314,7 +299,7 @@ public class FrmCapturaModulos extends javax.swing.JInternalFrame {
         this.hide();
         Integer upmID = (Integer) cmbUPMID.getSelectedItem();
         Integer sitio = (Integer) cmbSitios.getSelectedItem();
-
+        
         setSitioID(upmID, sitio);
         CESitio ceSitio = new CESitio();
         setSecuencia(upmID);
@@ -391,25 +376,7 @@ public class FrmCapturaModulos extends javax.swing.JInternalFrame {
                     UPMForms.claveVegetacion.setDatosIniciales(ceSitio);
                     UPMForms.claveVegetacion.setVisible(true);
                     break;
-                case 16://Modulos A, C y G
-                    UPMForms.claveVegetacion.setDatosIniciales(ceSitio);
-                    UPMForms.claveVegetacion.setVisible(true);
-                    break;
-                    
-                    
-                case 17: //Modulos A, C, E, F y G
-                    UPMForms.claveVegetacion.setDatosIniciales(ceSitio);
-                    UPMForms.claveVegetacion.setVisible(true);
-                    break;
-                 case 18: //Modulos A y F
-                    UPMForms.sotoBosque.setDatosIniciales(ceSitio);
-                    UPMForms.sotoBosque.setVisible(true);
-                    break;
-                 case 19://Modulos A, E y F
-                    UPMForms.sotoBosque.setDatosIniciales(ceSitio);
-                    UPMForms.sotoBosque.setVisible(true);
-                    break;
-                 case 20: //Modulos A, C y E
+                case 16://Modulos A, E y G
                     UPMForms.claveVegetacion.setDatosIniciales(ceSitio);
                     UPMForms.claveVegetacion.setVisible(true);
                     break;

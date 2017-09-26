@@ -285,7 +285,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButton1">
               <Properties>
-                <Property name="mnemonic" type="int" value="108"/>
                 <Property name="text" type="java.lang.String" value="limpiar"/>
               </Properties>
               <Events>
@@ -296,7 +295,6 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
-            <Property name="mnemonic" type="int" value="115"/>
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
           <Events>
@@ -315,7 +313,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnAsignar">
           <Properties>
-            <Property name="mnemonic" type="int" value="97"/>
             <Property name="text" type="java.lang.String" value="Asignar"/>
           </Properties>
           <Events>
@@ -355,7 +352,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnDesasignar">
           <Properties>
-            <Property name="mnemonic" type="int" value="100"/>
             <Property name="text" type="java.lang.String" value="Desasignar"/>
           </Properties>
           <Events>
@@ -364,7 +360,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnModificar">
           <Properties>
-            <Property name="mnemonic" type="int" value="109"/>
             <Property name="text" type="java.lang.String" value="Modificar"/>
           </Properties>
           <Events>

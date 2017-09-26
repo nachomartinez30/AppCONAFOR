@@ -211,7 +211,6 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnComenzarCaptura">
           <Properties>
-            <Property name="mnemonic" type="int" value="99"/>
             <Property name="text" type="java.lang.String" value="Comenzar captura"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
@@ -221,7 +220,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
-            <Property name="mnemonic" type="int" value="115"/>
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
           <Events>

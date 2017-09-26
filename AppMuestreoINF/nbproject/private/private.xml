@@ -4,12 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/ignacio.martinez/Desktop/AppCONAFOR/AppMuestreoINF/src/gob/conafor/taxonomia/vie/FrmSotoBosque.java</file>
-            <file>file:/C:/Users/ignacio.martinez/Desktop/AppCONAFOR/AppMuestreoINF/src/gob/conafor/taxonomia/vie/FrmRepobladoVM.java</file>
-            <file>file:/C:/Users/ignacio.martinez/Desktop/AppCONAFOR/AppMuestreoINF/src/gob/conafor/carbono/vie/FrmMaterialLenioso.java</file>
-            <file>file:/C:/Users/ignacio.martinez/Desktop/AppCONAFOR/AppMuestreoINF/src/gob/conafor/suelo/vie/FrmCondicionDegradacionSuelo.java</file>
-            <file>file:/C:/Users/ignacio.martinez/Desktop/AppCONAFOR/AppMuestreoINF/src/gob/conafor/suelo/vie/FrmHojarascaProfundidad.java</file>
-            <file>file:/C:/Users/ignacio.martinez/Desktop/AppCONAFOR/AppMuestreoINF/src/gob/conafor/suelo/vie/FrmSuelo.java</file>
-            <file>file:/C:/Users/ignacio.martinez/Desktop/AppCONAFOR/AppMuestreoINF/src/gob/conafor/suelo/vie/FrmErosionHidrica.java</file>
+            <file>file:/C:/Users/ignacio.martinez/Desktop/AppCONAFOR/AppMuestreoINF/src/gob/conafor/sitio/mod/CESitio.java</file>
+            <file>file:/C:/Users/ignacio.martinez/Desktop/AppCONAFOR/AppMuestreoINF/src/gob/conafor/sitio/vie/FrmSitio.java</file>
+            <file>file:/C:/Users/ignacio.martinez/Desktop/AppCONAFOR/AppMuestreoINF/src/gob/conafor/ini/vie/FrmRevisionModulos.java</file>
+            <file>file:/C:/Users/ignacio.martinez/Desktop/AppCONAFOR/AppMuestreoINF/src/gob/conafor/sys/mod/CDSecuencia.java</file>
         </group>
     </open-files>
 </project-private>

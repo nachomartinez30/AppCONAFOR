@@ -29,9 +29,6 @@ public class FrmSitio extends javax.swing.JInternalFrame {
     private final int ubicacionSitio;
     private final int accesibilidad;
     private final int sotoBosque;
-    private CDSeguimientoUPM seguimiento = new CDSeguimientoUPM();
-    private CESeccionesCapturadas sitioCapturado = new CESeccionesCapturadas();
-    private CESeccionesCapturadas siguinete = new CESeccionesCapturadas();
     private Datos numeros = new Datos();
     private FuncionesComunes combo = new FuncionesComunes();
     private Integer esAccesible;
@@ -50,7 +47,6 @@ public class FrmSitio extends javax.swing.JInternalFrame {
     private String explicacionaInaccesibilidad;
     private int actualizacion;
     private Integer sitioID;
-    private CDSecuencia navegacion = new CDSecuencia();
     private Version ver=new Version();
     private String version=ver.getVersion();
     

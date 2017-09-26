@@ -386,10 +386,12 @@ public class CESitio {
     }
 
     public Integer getSecuencia() {
+        System.out.println("se solicitó secuencia= "+secuencia);
         return secuencia;
     }
 
     public void setSecuencia(Integer secuencia) {
+        System.out.println("se envió secuencia= "+secuencia);
         this.secuencia = secuencia;
     }
 

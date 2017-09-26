@@ -1685,6 +1685,7 @@ public class CDSecuencia {
     
     public Integer getSecuencia(int upmID){
         this.query = "SELECT UPMID, secuenciaID FROM UPM_MallaPuntos WHERE UPMID= " + upmID;
+        System.out.println("QUERY="+this.query);
         Integer secuenciaID = 0;
         Connection conn = LocalConnection.getConnection();
         try {
@@ -1692,6 +1693,7 @@ public class CDSecuencia {
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                secuenciaID = rs.getInt("secuenciaID");
+                System.out.println("SecuenciaID = "+secuenciaID);
             }
             return secuenciaID;
         } catch (SQLException e) {

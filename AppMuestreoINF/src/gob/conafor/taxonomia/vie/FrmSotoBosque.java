@@ -149,7 +149,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
             txtPorcentajeSotobosqueFuera.setEnabled(false);
         }
         funciones.manipularBotonesMenuPrincipal(true);
-        chkSotobosque.setEnabled(funciones.habilitarCheckBox("TAXONOMIA_SotoBosque", this.sitioID));
+        chkSotobosque.setSelected(funciones.habilitarCheckBox("TAXONOMIA_SotoBosque", this.sitioID));
     }
     
     public void desabilitarSotobosque(){

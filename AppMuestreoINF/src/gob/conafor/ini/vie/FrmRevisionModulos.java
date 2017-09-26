@@ -73,7 +73,6 @@ public class FrmRevisionModulos extends javax.swing.JInternalFrame {
     }
 
     private void mostrarFormato(int formatoID, int secuenciaID) {
-        System.out.println("secuencia frmRevisionModulos "+this.ceSitio.getSecuencia());
         
         switch (formatoID) {
             case 1:
@@ -110,7 +109,7 @@ public class FrmRevisionModulos extends javax.swing.JInternalFrame {
                 UPMForms.carbono.revisarCarbono(this.ceSitio);
                 break;
             case 8:
-                System.out.println("Formato ID frmRevisionModulos "+formatoID+" secuencia id="+this.ceSitio.getSecuencia());
+                //System.out.println("Formato ID frmRevisionModulos "+formatoID+" secuencia id="+this.ceSitio.getSecuencia());
                 UPMForms.longitud.setVisible(true);
                 UPMForms.longitud.revisarLongitud(this.ceSitio);
                 break;
@@ -119,7 +118,7 @@ public class FrmRevisionModulos extends javax.swing.JInternalFrame {
                 UPMForms.suelo.revisarSuelo(this.ceSitio);
                 break;
             case 10:
-                System.out.println("Formato ID frmRevisionModulos "+formatoID+" secuencia id="+this.ceSitio.getSecuencia());
+              //  System.out.println("Formato ID frmRevisionModulos "+formatoID+" secuencia id="+this.ceSitio.getSecuencia());
                 UPMForms.condicionDegradacion.setVisible(true);
                 UPMForms.condicionDegradacion.revisarCondicionDegradacion(this.ceSitio);
                 break;
@@ -414,19 +413,18 @@ public class FrmRevisionModulos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbUPMIDActionPerformed
 
     private void grdSecuenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdSecuenciaMouseClicked
-        if (evt.getButton() == 1) {
-            Integer upm = (Integer)cmbUPMID.getSelectedItem();
-            Integer sitio = (Integer)cmbSitios.getSelectedItem();
-            Integer sitioID = this.cdSitio.getSitioID(upm, sitio);
-            this.ceSitio.setUpmID(upm);
-            this.ceSitio.setSitio(sitio);
-            this.ceSitio.setSitioID(sitioID);
-            this.ceSitio.setSecuencia(cdSecuencia.getSecuencia(upm));
-            
-            int fila = grdSecuencia.getSelectedRow();
-            String formatoID = grdSecuencia.getValueAt(fila, 1).toString();
-            this.hide();
-            mostrarFormato(Integer.parseInt(formatoID), cdSecuencia.getSecuencia(upm));
+        if (evt.getButton() == 1) { // si dio click
+            Integer upm = (Integer)cmbUPMID.getSelectedItem(); //toma el upm del combo box
+            Integer sitio = (Integer)cmbSitios.getSelectedItem(); //toma el numero del sitio
+            Integer sitioID = this.cdSitio.getSitioID(upm, sitio); //consulta la sitioID con  el UPM y el sitio
+            this.ceSitio.setUpmID(upm);//envia a los datos el UPM
+            this.ceSitio.setSitio(sitio);//envia a los datos el Sitio
+            this.ceSitio.setSitioID(sitioID);//envia a los datos el sitioID
+            this.ceSitio.setSecuencia(cdSecuencia.getSecuencia(upm));//extrae el UPM y el id de secuenacia y los manda a la secuencia del sitio
+            int fila = grdSecuencia.getSelectedRow();//guarda la fila seleccionada         
+            String formatoID = grdSecuencia.getValueAt(fila, 1/*columna 1 =Formato ID*/).toString(); //obtiene FormatoID desde la tabla de secuencia
+            this.hide();// esconde el frame
+            mostrarFormato(Integer.parseInt(formatoID), cdSecuencia.getSecuencia(upm)); // muetsra el formato (formatoID,consulta la secuencia en elconglomerado)
         }
     }//GEN-LAST:event_grdSecuenciaMouseClicked
 

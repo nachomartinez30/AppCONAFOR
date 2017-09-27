@@ -176,8 +176,10 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <Component id="dpMenuLateral" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="dpPrincipal" pref="813" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="dpPrincipal" pref="1019" max="32767" attributes="0"/>
+              <Component id="scrpanelModulos" min="-2" pref="218" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -186,6 +188,10 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="dpMenuLateral" alignment="0" max="32767" attributes="0"/>
           <Component id="dpPrincipal" alignment="0" pref="665" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="scrpanelModulos" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -238,9 +244,9 @@
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
-                  <EmptySpace pref="155" max="32767" attributes="0"/>
+                  <EmptySpace pref="52" max="32767" attributes="0"/>
                   <Component id="jLabel4" min="-2" pref="708" max="-2" attributes="0"/>
-                  <EmptySpace pref="156" max="32767" attributes="0"/>
+                  <EmptySpace pref="53" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -268,9 +274,9 @@
                   <Component id="jLabel3" min="-2" pref="8" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" min="-2" pref="154" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel5" pref="280" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel6" min="-2" pref="8" max="-2" attributes="0"/>
@@ -432,9 +438,9 @@
                   <Component id="btnRevisarModulos" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnVerReportes" min="-2" pref="31" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="70" max="32767" attributes="0"/>
                   <Component id="btnSalir" min="-2" pref="31" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="71" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -625,6 +631,19 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="scrpanelModulos">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTree" name="jTree1">
+          <Properties>
+            <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
+              <TreeModel code="Modulos&#xa;        A&#xa;                Sotobosque&#xa;                Repoblado&#xa;                Arbolado&#xa;                Submuestra&#xa;                Clave de vegetaci&#xf3;n&#xa;                Caracter&#xed;sticas del conglomerado&#xa;                Carbono e incendios&#xa;                Longitud interceptada&#xa;                Suelos&#xa;                Degradaci&#xf3;n del suelo&#xa;                Herosi&#xf3;n h&#xed;drica&#xa;                Deformaci&#xf3;n del terreno&#xa;                Observaciones&#xa;        C&#xa;                Carbono e incendios&#xa;                Longitud interceptada&#xa;        D&#xa;                Arbolado&#xa;        E&#xa;                Hojarasca profundidad suelo&#xa;                Muestras del perfil&#xa;        F&#xa;                Fotograf&#xed;a hemisferica&#xa;        G&#xa;                Par&#xe1;metros f&#xed;sico qu&#xed;micos&#xa;                Repoblado vegetaci&#xf3;n menor&#xa;                Arbolado&#xa;        H&#xa;                Vegetaci&#xf3;n menor&#xa;                Vegetaci&#xf3;n mayor MCMI&#xa;                Vegetaci&#xf3;n mayor MCMG&#xa;&#xa;"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

@@ -152,6 +152,7 @@ public class FuncionesComunes {
             Main.main.btnRevisarModulos.setEnabled(false);
             Main.main.btnVerReportes.setEnabled(false);
             Main.main.btnVerReportes.setEnabled(false);
+            Main.main.scrpanelModulos.setVisible(false);
         } else {
             Main.main.btnCrearUPM.setEnabled(true);
             Main.main.menGuardarArchivo.setEnabled(true);
@@ -163,6 +164,7 @@ public class FuncionesComunes {
             Main.main.btnRevisionSitios.setEnabled(navegacion.habilitarRevisarSitios());
             Main.main.btnRevisarModulos.setEnabled(navegacion.habilitarContinuarModulos());
             Main.main.btnVerReportes.setEnabled(true);
+            Main.main.scrpanelModulos.setVisible(true);
         }
     }
     

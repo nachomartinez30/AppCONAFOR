@@ -179,7 +179,7 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="dpPrincipal" pref="813" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="scrpanelModulos" min="-2" pref="218" max="-2" attributes="0"/>
+              <Component id="scrpanelModulos" pref="218" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -382,6 +382,25 @@
             </Component>
           </SubComponents>
         </Container>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="scrpanelModulos">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTree" name="jTree1">
+          <Properties>
+            <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
+              <TreeModel code="Modulos&#xa;        A&#xa;                Sotobosque&#xa;                Repoblado&#xa;                Arbolado&#xa;                Submuestra&#xa;                Clave de vegetaci&#xf3;n&#xa;                Caracter&#xed;sticas del conglomerado&#xa;                Carbono e incendios&#xa;                Longitud interceptada&#xa;                Suelos&#xa;                Degradaci&#xf3;n del suelo&#xa;                Herosi&#xf3;n h&#xed;drica&#xa;                Deformaci&#xf3;n del terreno&#xa;                Observaciones&#xa;        C&#xa;                Carbono e incendios&#xa;                Longitud interceptada&#xa;        D&#xa;                Arbolado&#xa;        E&#xa;                Hojarasca profundidad suelo&#xa;                Muestras del perfil&#xa;        F&#xa;                Fotograf&#xed;a hemisferica&#xa;        G&#xa;                Par&#xe1;metros f&#xed;sico qu&#xed;micos&#xa;                Repoblado vegetaci&#xf3;n menor&#xa;                Arbolado&#xa;        H&#xa;                Vegetaci&#xf3;n menor&#xa;                Vegetaci&#xf3;n mayor MCMI&#xa;                Vegetaci&#xf3;n mayor MCMG&#xa;&#xa;"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTree1MouseClicked"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JDesktopPane" name="dpMenuLateral">
@@ -631,19 +650,6 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
-        </Component>
-      </SubComponents>
-    </Container>
-    <Container class="javax.swing.JScrollPane" name="scrpanelModulos">
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JTree" name="jTree1">
-          <Properties>
-            <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
-              <TreeModel code="Modulos&#xa;        A&#xa;                Sotobosque&#xa;                Repoblado&#xa;                Arbolado&#xa;                Submuestra&#xa;                Clave de vegetaci&#xf3;n&#xa;                Caracter&#xed;sticas del conglomerado&#xa;                Carbono e incendios&#xa;                Longitud interceptada&#xa;                Suelos&#xa;                Degradaci&#xf3;n del suelo&#xa;                Herosi&#xf3;n h&#xed;drica&#xa;                Deformaci&#xf3;n del terreno&#xa;                Observaciones&#xa;        C&#xa;                Carbono e incendios&#xa;                Longitud interceptada&#xa;        D&#xa;                Arbolado&#xa;        E&#xa;                Hojarasca profundidad suelo&#xa;                Muestras del perfil&#xa;        F&#xa;                Fotograf&#xed;a hemisferica&#xa;        G&#xa;                Par&#xe1;metros f&#xed;sico qu&#xed;micos&#xa;                Repoblado vegetaci&#xf3;n menor&#xa;                Arbolado&#xa;        H&#xa;                Vegetaci&#xf3;n menor&#xa;                Vegetaci&#xf3;n mayor MCMI&#xa;                Vegetaci&#xf3;n mayor MCMG&#xa;&#xa;"/>
-            </Property>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

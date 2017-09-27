@@ -4,6 +4,7 @@ import gob.conafor.concentrarbdinfys.ConcentradorAbies;
 import gob.conafor.sys.mod.CDSecuencia;
 import gob.conafor.sys.mod.CDSeguimientoUPM;
 import gob.conafor.upm.vie.UPMForms;
+import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Version;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -12,13 +13,14 @@ import java.awt.Toolkit;
 public class FrmInicio extends javax.swing.JFrame {
 
     private int upm;
-    public static FrmInicio principal;
+    public  FrmInicio principal;
     private CDSeguimientoUPM seguimiento = new CDSeguimientoUPM();
     private CDSecuencia navegacion = new CDSecuencia();
     private Version ver = new Version();
     private String version = ver.getVersion();
     private String versionLayout = version.substring(6, 9);
     public boolean panelOculto = false;//No esta oculto
+    public FuncionesComunes funcionesComunes=new FuncionesComunes();
 
     public FrmInicio() {
         initComponents();
@@ -104,6 +106,8 @@ public class FrmInicio extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         btnOcultarPanel = new javax.swing.JButton();
+        scrpanelModulos = new javax.swing.JScrollPane();
+        jTree1 = new javax.swing.JTree();
         dpMenuLateral = new javax.swing.JDesktopPane();
         btnCrearUPM = new javax.swing.JButton();
         btnCapturarModulos = new javax.swing.JButton();
@@ -115,8 +119,6 @@ public class FrmInicio extends javax.swing.JFrame {
         btnColectaBotanica = new javax.swing.JButton();
         btnVerReportes = new javax.swing.JButton();
         btnContinuarModulos = new javax.swing.JButton();
-        scrpanelModulos = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
         mbMenuSuperiror = new javax.swing.JMenuBar();
         menGuardarArchivo = new javax.swing.JMenu();
         miImportar = new javax.swing.JMenuItem();
@@ -258,6 +260,79 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8))
         );
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Modulos");
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("A");
+        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Sotobosque");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Repoblado");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Arbolado");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Submuestra");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Clave de vegetación");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Características del conglomerado");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Carbono e incendios");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Longitud interceptada");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Suelos");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Degradación del suelo");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Herosión hídrica");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Deformación del terreno");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Observaciones");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("C");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Carbono e incendios");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Longitud interceptada");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("D");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Arbolado");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("E");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Hojarasca profundidad suelo");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Muestras del perfil");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("F");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Fotografía hemisferica");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("G");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Parámetros físico químicos");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Repoblado vegetación menor");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Arbolado");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("H");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Vegetación menor");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Vegetación mayor MCMI");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Vegetación mayor MCMG");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTree1MouseClicked(evt);
+            }
+        });
+        scrpanelModulos.setViewportView(jTree1);
 
         dpMenuLateral.setBackground(new java.awt.Color(204, 204, 204));
         dpMenuLateral.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -427,74 +502,6 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addContainerGap(71, Short.MAX_VALUE))
         );
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Modulos");
-        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("A");
-        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Sotobosque");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Repoblado");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Arbolado");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Submuestra");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Clave de vegetación");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Características del conglomerado");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Carbono e incendios");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Longitud interceptada");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Suelos");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Degradación del suelo");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Herosión hídrica");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Deformación del terreno");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Observaciones");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("C");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Carbono e incendios");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Longitud interceptada");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("D");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Arbolado");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("E");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Hojarasca profundidad suelo");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Muestras del perfil");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("F");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Fotografía hemisferica");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("G");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Parámetros físico químicos");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Repoblado vegetación menor");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Arbolado");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("H");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Vegetación menor");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Vegetación mayor MCMI");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Vegetación mayor MCMG");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        scrpanelModulos.setViewportView(jTree1);
-
         mbMenuSuperiror.setBorder(null);
         mbMenuSuperiror.setPreferredSize(new java.awt.Dimension(89, 39));
 
@@ -582,7 +589,7 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrpanelModulos, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scrpanelModulos, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -655,6 +662,7 @@ public class FrmInicio extends javax.swing.JFrame {
         UPMForms.continuarModulos.setVisible(true);
         UPMForms.continuarModulos.manipularBonesMenuprincipal();
         scrpanelModulos.setVisible(true);
+        UPMForms.continuarModulos.setVisible(false);
     }//GEN-LAST:event_btnContinuarModulosActionPerformed
 
     private void miImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miImportarActionPerformed
@@ -706,6 +714,11 @@ public class FrmInicio extends javax.swing.JFrame {
         concentrador.setVisible(true);
     }//GEN-LAST:event_miConcentrarActionPerformed
 
+    private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
+     
+
+    }//GEN-LAST:event_jTree1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -750,6 +763,20 @@ public class FrmInicio extends javax.swing.JFrame {
 
     }*/
 
+    
+    public void capturarModulosIndependientes(){
+           try {
+            String path = jTree1.getSelectionPath().toString();
+            System.out.println(path);
+            if (path.equals("[Modulos, D, Arbolado]")) {
+                UPMForms.arboladoD.setVisible(true);
+                funcionesComunes.manipularBotonesMenuPrincipal(true);
+            }
+        } catch (Exception e) {
+        }
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnCapturarModulos;
     public javax.swing.JButton btnColectaBotanica;
@@ -788,7 +815,7 @@ public class FrmInicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem miEliminarPorUPM;
     private javax.swing.JMenuItem miImportar;
     private javax.swing.JMenuItem miSalir;
-    private javax.swing.JScrollPane scrpanelModulos;
+    public javax.swing.JScrollPane scrpanelModulos;
     // End of variables declaration//GEN-END:variables
 
 }

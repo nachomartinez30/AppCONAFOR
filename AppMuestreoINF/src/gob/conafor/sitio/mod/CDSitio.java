@@ -124,29 +124,36 @@ public class CDSitio {
     }
 
     public List<Integer> getSitiosDisponibles(int upmID) {
+
         List<Integer> listSitios = new ArrayList<>();
-        query = "SELECT UPMID, Sitio, SitioAccesible FROM SITIOS_Sitio sit WHERE  UPMID= " + upmID + " AND SitioAccesible= 1 AND Sitio" 
+        query = "SELECT UPMID, Sitio, SitioAccesible FROM SITIOS_Sitio sit WHERE  UPMID= " + upmID + " AND SitioAccesible= 1 --AND Sitio"
                 + " NOT IN (SELECT DISTINCT Sitio FROM SYS_SecuenciaCaptura WHERE UPMID = sit.UPMID)";
+        
         Connection conn = LocalConnection.getConnection();
-        try {
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            while (rs.next()) {
-                Integer index = rs.getInt(2);
-                listSitios.add(index);
-            }
-            rs.close();
-            st.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,
-                    "Error! al obtener los sitios accesibles",
-                    "Conexion BD", JOptionPane.ERROR_MESSAGE);
-            return null;
-        } finally {
+        if (upmID == 0) {
+
+        } else {
+            System.out.println(query);
             try {
-                conn.close();
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(query);
+                while (rs.next()) {
+                    Integer index = rs.getInt(2);
+                    listSitios.add(index);
+                }
+                rs.close();
+                st.close();
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener los sitios disponibles", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,
+                        "Error! al obtener los sitios accesibles",
+                        "Conexion BD", JOptionPane.ERROR_MESSAGE);
+                return null;
+            } finally {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener los sitios disponibles", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
         listSitios.add(0, null);
@@ -566,6 +573,36 @@ public class CDSitio {
         }
     }
 
+    public int getSitioID(int UPM,int numeroSitio){
+        int sitioID=0;
+        query = "SELECT SitioIDFROM SITIOS_Sitio WHERE UPMID= " + UPM+" AND Sitio="+numeroSitio;
+        Connection conn = LocalConnection.getConnection();
+       
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+               sitioID = rs.getInt("SitioID");
+                
+            }
+            st.close();
+            rs.close();
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error! al obtener los datos del sitio inaccesible",
+                    "Conexion BD", JOptionPane.ERROR_MESSAGE);
+           
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos del sitio inaccesible", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        return sitioID;
+    }
+    
     public void updateSitioAccesible(CESitio sitio) {
         query = "UPDATE SITIOS_Sitio SET SenialGPS= " + sitio.getSenialGPS() + ", GradosLatitud= "
                 + sitio.getGradosLatitud() + ", MinutosLatitus= " + sitio.getMinutosLatitud() + ", SegundosLatitud= "
@@ -983,7 +1020,7 @@ public class CDSitio {
         return vacio;
     }
 
-    public Integer getSitioID(Integer upmID, Integer sitio) {
+    public Integer getSitioIDNuevo(String upmID, String sitio) {
         query = "SELECT UPMID, Sitio, SitioID FROM SITIOS_Sitio WHERE UPMID= " + upmID + " AND Sitio= " + sitio;
         Connection conn = LocalConnection.getConnection();
         Integer sitioID = 0;

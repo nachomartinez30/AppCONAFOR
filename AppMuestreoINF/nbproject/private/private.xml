@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ignacio.martinez/Desktop/AppCONAFOR/AppMuestreoINF/src/gob/conafor/taxonomia/vie/FrmSotoBosque.java</file>
-            <file>file:/C:/Users/ignacio.martinez/Desktop/AppCONAFOR/AppMuestreoINF/src/gob/conafor/sitio/mod/CESitio.java</file>
-            <file>file:/C:/Users/ignacio.martinez/Desktop/AppCONAFOR/AppMuestreoINF/src/gob/conafor/sitio/vie/FrmSitio.java</file>
-            <file>file:/C:/Users/ignacio.martinez/Desktop/AppCONAFOR/AppMuestreoINF/src/gob/conafor/ini/vie/FrmRevisionModulos.java</file>
-            <file>file:/C:/Users/ignacio.martinez/Desktop/AppCONAFOR/AppMuestreoINF/src/gob/conafor/sys/mod/CDSecuencia.java</file>
+            <file>file:/C:/Users/ignacio.martinez/Desktop/AppCONAFOR/AppMuestreoINF/src/gob/conafor/utils/FuncionesComunes.java</file>
+            <file>file:/C:/Users/ignacio.martinez/Desktop/AppCONAFOR/AppMuestreoINF/src/gob/conafor/ini/vie/FrmInicio.java</file>
+            <file>file:/C:/Users/ignacio.martinez/Desktop/AppCONAFOR/AppMuestreoINF/src/gob/conafor/taxonomia/vie/FrmArboladoD.java</file>
+            <file>file:/C:/Users/ignacio.martinez/Desktop/AppCONAFOR/AppMuestreoINF/src/gob/conafor/ini/vie/Main.java</file>
         </group>
     </open-files>
 </project-private>

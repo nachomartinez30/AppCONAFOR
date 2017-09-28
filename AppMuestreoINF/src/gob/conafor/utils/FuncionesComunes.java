@@ -15,7 +15,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class FuncionesComunes {
-
+    
     private String query;
     private CDSecuencia navegacion = new CDSecuencia();
 

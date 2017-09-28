@@ -715,9 +715,121 @@ public class FrmInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_miConcentrarActionPerformed
 
     private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
-     
+        try {
+             String path = jTree1.getSelectionPath().toString();
+             System.out.println(path);
+             openForm(path);
+        } catch (Exception e) {
+        }
 
     }//GEN-LAST:event_jTree1MouseClicked
+    public void openForm(String path) {
+        
+
+            switch (path) {
+                case "[Modulos, A, Sotobosque]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, A, Repoblado]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, A, Arbolado]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, A, Submuestra]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, A, Clave de vegetación]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, A, Características del conglomerado]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, A, Carbono e incendios]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, A, Longitud interceptada]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, A, Suelos]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, A, Degradación del suelo]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, A, Herosión hídrica]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, A, Deformación del terreno]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, A, Observaciones]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, C, Carbono e incendios]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, C, Longitud interceptada]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, D, Arbolado]":
+                     UPMForms.arboladoD.setVisible(true);
+                    UPMForms.arboladoD.llenarControles();
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, E, Hojarasca profundidad suelo]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, E, Muestras del perfil]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, F, Fotografía hemisferica]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, G, Parámetros físico químicos]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, G, Repoblado vegetación menor]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, G, Arbolado]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, H, Vegetación menor]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, H, Vegetación mayor MCMI]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+                case "[Modulos, H, Vegetación mayor MCMG]":
+                    /*FORMULARIO A ABRIR*/
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    break;
+            }
+    }
 
     /**
      * @param args the command line arguments

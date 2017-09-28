@@ -59,7 +59,7 @@ public class UPMForms {
     public static final FrmErosionHidrica erosionHidrica = new FrmErosionHidrica();
     public static final FrmDeformacionViento deformacionTerreno = new FrmDeformacionViento();
     public static final FrmObservaciones observaciones = new FrmObservaciones();
-    public static final FrmArboladoD arboladoD = new FrmArboladoD();
+    public  static final FrmArboladoD arboladoD = new FrmArboladoD();
     public static final FrmHojarascaProfundidad hojarascaProfundidad = new FrmHojarascaProfundidad();
     public static final FrmMuestrasPerfil muestrasPerfil = new FrmMuestrasPerfil();
     public static final FrmFotoHemisferica fotoHemisferica = new FrmFotoHemisferica();

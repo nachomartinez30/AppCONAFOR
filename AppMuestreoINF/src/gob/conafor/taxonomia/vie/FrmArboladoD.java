@@ -121,19 +121,19 @@ public class FrmArboladoD extends javax.swing.JInternalFrame {
         txtNumeroIndividuo.requestFocus();
         estadoArbolVivo();
         funciones.reiniciarComboModel(cmbUPMID);
-        fillUPMID();
+        //fillUPMID();
         funciones.reiniciarComboModel(cmbSitios);
         
     }
     
     
-    public void llenarControles() {
+public void llenarControles() {
 	combo.reiniciarComboModel(this.cmbUPMID);
 	fillUPMID();
 }
 private void fillUPMID() {
 	List<Integer> listCapturado = new ArrayList<>();
-	listCapturado = this.cdSitio.getUPMSitios();
+	listCapturado = this.cdSitio.getUPMArboladosSitios(/*A*/1,/*D*/1,/*G*/0); //Arbolado D
 	if (listCapturado != null) {
 		int size = listCapturado.size();
 		for (int i = 0; i < size; i++) {
@@ -3041,9 +3041,9 @@ private void fillCmbSitio(int upmID) {
         FrmTrazoSitio trazo = new FrmTrazoSitio(Main.main, true);
         trazo.setLocationRelativeTo(Main.main);
         CESitio sitio = new CESitio();
-        sitio.setUpmID(this.upmID);
+        sitio.setUpmID((int) cmbUPMID.getSelectedItem());
         sitio.setSitioID(this.sitioID);
-        sitio.setSitio(this.sitio);
+        sitio.setSitio((int) cmbSitios.getSelectedItem());
         trazo.setDatosIniciales(sitio);
         trazo.setVisible(true);     
     }//GEN-LAST:event_btnTrazoSitioActionPerformed
@@ -3495,6 +3495,7 @@ private void fillCmbSitio(int upmID) {
             combo.reiniciarComboModel(cmbSitios);
             cmbSitios.setSelectedItem(null);
             cmbSitios.setEnabled(false);
+            limpiarControles();
         }
     }//GEN-LAST:event_cmbUPMIDActionPerformed
 

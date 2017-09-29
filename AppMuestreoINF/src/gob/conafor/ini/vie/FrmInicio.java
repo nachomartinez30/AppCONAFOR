@@ -231,7 +231,7 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addContainerGap(52, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(53, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dpPrincipalLayout.createSequentialGroup()
+            .addGroup(dpPrincipalLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -327,6 +327,7 @@ public class FrmInicio extends javax.swing.JFrame {
         treeNode2.add(treeNode3);
         treeNode1.add(treeNode2);
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTree1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTree1MouseClicked(evt);
@@ -623,13 +624,6 @@ public class FrmInicio extends javax.swing.JFrame {
         //UPMForms.ubicacionSitio.manipularBotonesMenu();
     }//GEN-LAST:event_btnCrearSitioActionPerformed
 
-    private void btnCapturarModulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarModulosActionPerformed
-        /*UPMForms.capturarModulos.llenarControles();
-        UPMForms.capturarModulos.setVisible(true);
-        UPMForms.capturarModulos.manipularBonesMenuprincipal();*/
-        scrpanelModulos.setVisible(true);
-    }//GEN-LAST:event_btnCapturarModulosActionPerformed
-
     private void btnRevisarUPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevisarUPMActionPerformed
         UPMForms.revisionUPM.setVisible(true);
         UPMForms.revisionUPM.iniciar();
@@ -660,7 +654,7 @@ public class FrmInicio extends javax.swing.JFrame {
     private void btnContinuarModulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarModulosActionPerformed
         UPMForms.continuarModulos.continuarModulos();
         UPMForms.continuarModulos.setVisible(true);
-        UPMForms.continuarModulos.manipularBonesMenuprincipal();
+        //UPMForms.continuarModulos.manipularBonesMenuprincipal();
         scrpanelModulos.setVisible(true);
         UPMForms.continuarModulos.setVisible(false);
     }//GEN-LAST:event_btnContinuarModulosActionPerformed
@@ -715,20 +709,34 @@ public class FrmInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_miConcentrarActionPerformed
 
     private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
-        try {
-             String path = jTree1.getSelectionPath().toString();
-             System.out.println(path);
-             openForm(path);
-        } catch (Exception e) {
-        }
+         String path="";
+         System.out.println("Path= "+path);
+         if(evt.getClickCount()==2){
+             try {
 
-    }//GEN-LAST:event_jTree1MouseClicked
-    public void openForm(String path) {
+            path = jTree1.getSelectionPath().toString();
+           // System.out.println("Path ANTES= "+path);
+            openForm(path);
+            
+        } catch (Exception e) {
+            
+        }
+         }
         
+    }//GEN-LAST:event_jTree1MouseClicked
+
+    private void btnCapturarModulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarModulosActionPerformed
+        /*UPMForms.capturarModulos.llenarControles();
+        UPMForms.capturarModulos.setVisible(true);
+        UPMForms.capturarModulos.manipularBonesMenuprincipal();*/
+        scrpanelModulos.setVisible(true);
+    }//GEN-LAST:event_btnCapturarModulosActionPerformed
+    public void openForm(String path) {
+        System.out.println("Pathe OPEN_FORM"+path);
 
             switch (path) {
                 case "[Modulos, A, Sotobosque]":
-                    /*FORMULARIO A ABRIR*/
+                    UPMForms.sotoBosque.setVisible(true);
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Repoblado]":
@@ -736,7 +744,9 @@ public class FrmInicio extends javax.swing.JFrame {
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Arbolado]":
-                    /*FORMULARIO A ABRIR*/
+                    UPMForms.arbolado.setVisible(true);
+                    UPMForms.arbolado.llenarControles();
+                    
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Submuestra]":
@@ -813,7 +823,8 @@ public class FrmInicio extends javax.swing.JFrame {
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, G, Arbolado]":
-                    /*FORMULARIO A ABRIR*/
+                    UPMForms.arboladoG.setVisible(true);
+                    UPMForms.arboladoG.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, H, Vegetación menor]":
@@ -829,6 +840,7 @@ public class FrmInicio extends javax.swing.JFrame {
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
             }
+            
     }
 
     /**

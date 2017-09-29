@@ -1,6 +1,7 @@
 package gob.conafor.taxonomia.vie;
 
 import gob.conafor.ini.vie.Main;
+import gob.conafor.sitio.mod.CDSitio;
 import gob.conafor.sitio.mod.CDTrazoSitio;
 import gob.conafor.sitio.mod.CESitio;
 import gob.conafor.sitio.vie.FrmTrazoSitio;
@@ -69,6 +70,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
     private Float diametroCopaEO;
     private Integer esSubmuestra;
     private int arboladoID;
+    private CDSitio cdSitio = new CDSitio();
     CatECondicionArbolado indexCondicionArbolado;
     private CDArbolado cdArbolado = new CDArbolado();
     private CESitio ceSitio;
@@ -104,13 +106,38 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         txtNumeroIndividuo.requestFocus();
         estadoArbolVivo();
     }
+    
+    
+    public void llenarControles() {
+	combo.reiniciarComboModel(this.cmbUPMID);
+	fillUPMID();
+}
+private void fillUPMID() {
+	List<Integer> listCapturado = new ArrayList<>();
+	listCapturado = this.cdSitio.getUPMArboladosSitios(/*A*/1,/*D*/0,/*G*/0); //Arbolado A
+	if (listCapturado != null) {
+		int size = listCapturado.size();
+		for (int i = 0; i < size; i++) {
+			cmbUPMID.addItem(listCapturado.get(i));
+		}
+	}
+}
+
+private void fillCmbSitio(int upmID) {
+	List<Integer> listSitios = new ArrayList<>();
+	listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+	if (listSitios != null) {
+		int size = listSitios.size();
+		for (int i = 0; i < size; i++) {
+			cmbSitios.addItem(listSitios.get(i));
+		}
+	}
+}
         
     public void setDatosIniciales(CESitio sitio) {
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
-        txtUPM.setText(String.valueOf(this.upmID));
-        txtSitio.setText(String.valueOf(this.sitio));
         this.ceSitio = sitio;
         evitarCapturaPorTrazo(sitio);
         llenarTabla();
@@ -129,8 +156,6 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
-        txtUPM.setText(String.valueOf(this.upmID));
-        txtSitio.setText(String.valueOf(this.sitio));
         this.ceSitio = sitio;
         evitarCapturaPorTrazo(sitio);
         llenarTabla();
@@ -424,9 +449,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         btnTrazoSitio = new javax.swing.JButton();
         lblUPM = new javax.swing.JLabel();
-        txtUPM = new javax.swing.JTextField();
         lblSitio = new javax.swing.JLabel();
-        txtSitio = new javax.swing.JTextField();
         lblArbolado = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         lblNumeroIndividuo = new javax.swing.JLabel();
@@ -503,6 +526,8 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         txtClaveColecta = new javax.swing.JTextField();
         btnColecta = new javax.swing.JButton();
         btnLimpiarControles = new javax.swing.JButton();
+        cmbUPMID = new javax.swing.JComboBox<>();
+        cmbSitios = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximizable(true);
@@ -523,14 +548,8 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         lblUPM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUPM.setText("UPMID:");
 
-        txtUPM.setEditable(false);
-        txtUPM.setEnabled(false);
-
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-
-        txtSitio.setEditable(false);
-        txtSitio.setEnabled(false);
 
         lblArbolado.setBackground(new java.awt.Color(153, 153, 153));
         lblArbolado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -648,7 +667,7 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
                 .addComponent(lblDistancia)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDistancia, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1252,6 +1271,18 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
             }
         });
 
+        cmbUPMID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUPMIDActionPerformed(evt);
+            }
+        });
+
+        cmbSitios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSitiosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1284,11 +1315,11 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
                         .addGap(11, 11, 11)
                         .addComponent(lblUPM)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblSitio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(90, 90, 90)
@@ -1305,11 +1336,11 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSitio)
-                    .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUPM)
-                    .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTrazoSitio)
-                    .addComponent(chkArbolado))
+                    .addComponent(chkArbolado)
+                    .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblArbolado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2698,12 +2729,12 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnTrazoSitioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrazoSitioActionPerformed
-        FrmTrazoSitio trazo = new FrmTrazoSitio(Main.main, true);
+       FrmTrazoSitio trazo = new FrmTrazoSitio(Main.main, true);
         trazo.setLocationRelativeTo(Main.main);
         CESitio sitio = new CESitio();
-        sitio.setUpmID(this.upmID);
+        sitio.setUpmID((int) cmbUPMID.getSelectedItem());
         sitio.setSitioID(this.sitioID);
-        sitio.setSitio(this.sitio);
+        sitio.setSitio((int) cmbSitios.getSelectedItem());
         trazo.setDatosIniciales(sitio);
         trazo.setVisible(true);     
     }//GEN-LAST:event_btnTrazoSitioActionPerformed
@@ -3182,6 +3213,32 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAlturaComercialActionPerformed
 
+    private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
+        Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        Integer sitio = (Integer) cmbSitios.getSelectedItem();
+        if (cmbUPMID.getSelectedItem() != null) {
+            combo.reiniciarComboModel(cmbSitios);
+            fillCmbSitio(upmID);
+            cmbSitios.setEnabled(true);
+        } else {
+            combo.reiniciarComboModel(cmbSitios);
+            cmbSitios.setSelectedItem(null);
+            cmbSitios.setEnabled(false);
+            limpiarControles();
+        }
+    }//GEN-LAST:event_cmbUPMIDActionPerformed
+
+    private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
+         try {
+            String upm = cmbUPMID.getSelectedItem().toString();
+            String sitio = cmbSitios.getSelectedItem().toString();
+            this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
+            llenarTabla();
+        } catch (Exception e) {
+            e.getCause();
+        }
+    }//GEN-LAST:event_cmbSitiosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3212,7 +3269,9 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cmbNivelVigor;
     private javax.swing.JComboBox cmbSeveridad1;
     private javax.swing.JComboBox cmbSeveridad2;
+    private javax.swing.JComboBox<Integer> cmbSitios;
     private javax.swing.JComboBox cmbTipoTocon;
+    private javax.swing.JComboBox<Integer> cmbUPMID;
     private javax.swing.JComboBox cmbVigor;
     private javax.swing.JTable grdArbolado;
     private javax.swing.JLabel jLabel1;
@@ -3267,7 +3326,5 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNombreComun;
     private javax.swing.JFormattedTextField txtNumeroIndividuo;
     private javax.swing.JFormattedTextField txtNumeroRamaTallo;
-    private javax.swing.JTextField txtSitio;
-    private javax.swing.JTextField txtUPM;
     // End of variables declaration//GEN-END:variables
 }

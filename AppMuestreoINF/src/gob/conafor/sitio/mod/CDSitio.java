@@ -70,6 +70,63 @@ public class CDSitio {
         }
     }
     
+    public List<Integer> getUPMArboladoASitios() {
+        List<Integer> listUPM = new ArrayList();
+        query = "SELECT DISTINCT sit.UPMID FROM SITIOS_Sitio sit WHERE (SELECT COUNT(sit1.UPMID) FROM SITIOS_Sitio sit1 WHERE sit.UPMID = sit1.UPMID) = 4 ORDER BY sit.UPMID ASC";
+        Connection conn = LocalConnection.getConnection();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                listUPM.add(rs.getInt("UPMID"));
+            }
+            listUPM.add(0, null);
+            rs.close();
+            st.close();
+            return listUPM;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error! al obtener los conglomerados con sitios a revisión",
+                    "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            return null;
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener los conglomerados con sitios a revisión ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    public List<Integer> getUPMArboladosSitios(int A,int D, int G) {
+        List<Integer> listUPM = new ArrayList();
+        query = "SELECT DISTINCT  sit.UPMID  FROM SITIOS_Sitio sit  join UPM_MallaPuntos malla ON malla.UPMID = sit.UPMID WHERE (SELECT COUNT(sit1.UPMID) FROM SITIOS_Sitio sit1 WHERE sit.UPMID = sit1.UPMID) = 4  and malla.A = "+A+" and malla.D = "+D+" and malla.G = "+G+" ORDER BY sit.UPMID ASC ";
+        System.out.println(query);
+        Connection conn = LocalConnection.getConnection();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                listUPM.add(rs.getInt("UPMID"));
+            }
+            listUPM.add(0, null);
+            rs.close();
+            st.close();
+            return listUPM;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error! al obtener los conglomerados con sitios a revisión",
+                    "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            return null;
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener los conglomerados con sitios a revisión ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
     public List<Integer> getUPMCreado() {
         List<Integer> listUPM = new ArrayList();
         query = "SELECT UPMID FROM UPM_UPM WHERE Accesible= 1 ORDER BY UPMID ASC";

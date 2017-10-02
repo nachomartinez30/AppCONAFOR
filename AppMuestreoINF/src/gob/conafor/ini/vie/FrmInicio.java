@@ -779,7 +779,8 @@ public class FrmInicio extends javax.swing.JFrame {
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Degradación del suelo]":
-                    /*FORMULARIO A ABRIR*/
+                    UPMForms.condicionDegradacion.setVisible(true);
+                    UPMForms.condicionDegradacion.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Herosión hídrica]":

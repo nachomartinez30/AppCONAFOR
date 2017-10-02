@@ -3330,10 +3330,10 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_chkEsSubmuestraActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        if (funciones.validarSeccionCapturada("TAXONOMIA_Arbolado", this.ceSitio) && chkArbolado.isSelected()) {
+        if (funciones.validarSeccionCapturada("TAXONOMIA_Arbolado",sitioID) && chkArbolado.isSelected()) {
             JOptionPane.showMessageDialog(null, "Si selecciona Arbolado, se debe capturar", "Arbolado D", JOptionPane.INFORMATION_MESSAGE);
             chkArbolado.requestFocus();
-        } else if (funciones.validarSeccionCapturada("TAXONOMIA_Arbolado", this.ceSitio) == false && chkArbolado.isSelected()) {
+        } else if (funciones.validarSeccionCapturada("TAXONOMIA_Arbolado",sitioID) == false && chkArbolado.isSelected()) {
             if (validarColectasObligatorias() && validarCreacionSubmuestra()) {
                 this.hide();
                 if (this.modificar == 0) {
@@ -3348,7 +3348,7 @@ private void fillCmbSitio(int upmID) {
                 //funciones.manipularBotonesMenuPrincipal(false);
                 
             }
-        } else if (funciones.validarSeccionCapturada("TAXONOMIA_Arbolado", this.ceSitio) == true && !chkArbolado.isSelected()) {
+        } else if (funciones.validarSeccionCapturada("TAXONOMIA_Arbolado",sitioID) == true && !chkArbolado.isSelected()) {
             this.hide();
             if (this.modificar == 0) {
                 UPMForms.submuestra.setDatosIniciales(this.ceSitio);
@@ -3485,7 +3485,7 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_cmbFormaFusteActionPerformed
 
     private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
-         Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        Integer upmID = (Integer) cmbUPMID.getSelectedItem();
         Integer sitio = (Integer) cmbSitios.getSelectedItem();
         if (cmbUPMID.getSelectedItem() != null) {
             combo.reiniciarComboModel(cmbSitios);

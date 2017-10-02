@@ -99,8 +99,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
         this.upmID = sitio.getUpmID();
         this.sitioID = this.cdSotobosque.getSitioID(sitio.getUpmID(), sitio.getSitio());
         this.secuenciaID = sitio.getSecuencia();
-        txtUPM.setText(String.valueOf(sitio.getUpmID()));
-        txtSitio.setText(String.valueOf(sitio.getSitio()));
+        
         limpiarControlesCubiertaSuelo();
         llenarTabla();
         if (danio.getAgenteDanioID() > 1) {
@@ -109,24 +108,51 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
         funciones.manipularBotonesMenuPrincipal(true);
     }
 
-    public void revisarSotoBosque(CESitio sitio) {
+    
+    public void llenarControles() {
+	combo.reiniciarComboModel(this.cmbUPMID);
+	fillUPMID();
+}
+private void fillUPMID() {
+	List<Integer> listCapturado = new ArrayList<>();
+	listCapturado = this.cdSitio.getUPMArboladosSitios(/*A*/1,/*D*/1,/*G*/0); //Arbolado D
+	if (listCapturado != null) {
+		int size = listCapturado.size();
+		for (int i = 0; i < size; i++) {
+			cmbUPMID.addItem(listCapturado.get(i));
+		}
+	}
+}
+
+private void fillCmbSitio(int upmID) {
+	List<Integer> listSitios = new ArrayList<>();
+	listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+	if (listSitios != null) {
+		int size = listSitios.size();
+		for (int i = 0; i < size; i++) {
+			cmbSitios.addItem(listSitios.get(i));
+		}
+	}
+}
+    
+    
+    public void revisarSotoBosque(int sitioID) {
         revision=true;
         
         CatEAgenteDanio danio = (CatEAgenteDanio) cmbDanio.getSelectedItem();
         CESitio sitioSotobosqueFuera;
-        this.actualizar = 1;
+       /* this.actualizar = 1;
         this.ceSitio = sitio;
         this.sitio = sitio.getSitio();
         this.sitioID = sitio.getSitioID();
         this.upmID = sitio.getUpmID();
-        this.secuenciaID = sitio.getSecuencia();
-        txtSitio.setText(String.valueOf(this.sitio));
-        txtUPM.setText(String.valueOf(this.upmID));
+        this.secuenciaID = sitio.getSecuencia();*/
+       
         llenarTabla();
         if (danio.getAgenteDanioID() > 1) {
             txtPorcentajeDanio.setEnabled(true);
         }
-        ceCobertura = this.cdCobertura.getDatosCoberturaSitio(sitio.getSitioID());
+        ceCobertura = this.cdCobertura.getDatosCoberturaSitio(sitioID);
         txtGramineas.setText(String.valueOf(this.ceCobertura.getGramineas()));
         txtHelechos.setText(String.valueOf(this.ceCobertura.getHelechos()));
         txtMusgos.setText(String.valueOf(this.ceCobertura.getMusgos()));
@@ -137,8 +163,8 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
         txtHojarasca.setText(String.valueOf(this.ceCobertura.getHojarasca()));
         txtGravaPiedra.setText(String.valueOf(this.ceCobertura.getGrava()));
         txtOtros.setText(String.valueOf(this.ceCobertura.getOtros()));
-        sitioSotobosqueFuera = cdSitio.getSotoBosqueFuera(this.sitioID);
-        chkSotobosque.setSelected(!this.cdSotobosque.validarTablaSotobosque(this.ceSitio.getSitioID()));
+        sitioSotobosqueFuera = cdSitio.getSotoBosqueFuera(sitioID);
+        chkSotobosque.setSelected(!this.cdSotobosque.validarTablaSotobosque(sitioID));
         if (sitioSotobosqueFuera.getSotobosqueFuera() == 1) {
             chkSotoBosqueFuera.setEnabled(true);
             chkSotoBosqueFuera.setSelected(true);
@@ -149,7 +175,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
             txtPorcentajeSotobosqueFuera.setEnabled(false);
         }
         funciones.manipularBotonesMenuPrincipal(true);
-        chkSotobosque.setSelected(funciones.habilitarCheckBox("TAXONOMIA_SotoBosque", this.sitioID));
+        chkSotobosque.setSelected(funciones.habilitarCheckBox("TAXONOMIA_SotoBosque", sitioID));
     }
     
     public void desabilitarSotobosque(){
@@ -601,6 +627,8 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
         ceSitio.setSotobosqueFuera(this.sotobosqueFuera);
         ceSitio.setPorcentajeSotobosque(this.porcentajeSotobosqueFuera);
         cdSitio.updateSotobosqueFuera(ceSitio);
+        JOptionPane.showMessageDialog(null, "Sotobosque insertado con éxito");
+        limpiarControles();
     }
 
     public void llenarTabla() {
@@ -716,6 +744,21 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
         txtPorcentajeDanio.setText("");
         cmbFamilia.requestFocus();
         txtClaveColecta.setText("");
+        cmbSitios.setSelectedIndex(0);
+    }
+    public void limpiarPorcentajes() {
+        txtGramineas.setText("");
+        txtGravaPiedra.setText("");
+        txtHelechos.setText("");
+        txtHierbas.setText("");
+        txtHojarasca.setText("");
+        txtLiquenes.setText("");
+        txtMusgos.setText("");
+        txtOtros.setText("");
+        txtPorcentajeDanio.setText("");
+        txtPorcentajeSotobosqueFuera.setText("");
+        txtRoca.setText("");
+        txtSueloDesnudo.setText("");
     }
     
     public void limpiarControlesCubiertaSuelo() {
@@ -884,9 +927,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lblUPM = new javax.swing.JLabel();
-        txtUPM = new javax.swing.JTextField();
         lblSitio = new javax.swing.JLabel();
-        txtSitio = new javax.swing.JTextField();
         lblVegetacionMenorCobertura = new javax.swing.JLabel();
         PnlDescripcion = new javax.swing.JPanel();
         PnlCoordenadas1 = new javax.swing.JPanel();
@@ -965,6 +1006,8 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
         chkSotoBosqueFuera = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         txtPorcentajeSotobosqueFuera = new javax.swing.JFormattedTextField();
+        cmbUPMID = new javax.swing.JComboBox<>();
+        cmbSitios = new javax.swing.JComboBox<>();
 
         setMaximizable(true);
         setTitle("Regitro de vegetación menor, cubierta de suelo y sotobosque módulo A "+version);
@@ -976,14 +1019,8 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
         lblUPM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUPM.setText("UPMID:");
 
-        txtUPM.setEditable(false);
-        txtUPM.setEnabled(false);
-
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-
-        txtSitio.setEditable(false);
-        txtSitio.setEnabled(false);
 
         lblVegetacionMenorCobertura.setBackground(new java.awt.Color(153, 153, 153));
         lblVegetacionMenorCobertura.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -1370,7 +1407,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
         );
 
         btnContinuar.setMnemonic('c');
-        btnContinuar.setText("Continuar");
+        btnContinuar.setText("Capturar");
         btnContinuar.setNextFocusableComponent(btnSalir);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1867,6 +1904,18 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)))
         );
 
+        cmbUPMID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUPMIDActionPerformed(evt);
+            }
+        });
+
+        cmbSitios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSitiosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1875,12 +1924,12 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
                 .addGap(174, 174, 174)
                 .addComponent(lblUPM)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblSitio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(193, 193, 193))
+                .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(180, 180, 180))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1907,9 +1956,9 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSitio)
-                    .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUPM)
-                    .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -1947,37 +1996,37 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
         CDSotoBosque tblSotoBosque = new CDSotoBosque();
         asignarDatosSotobosqueFuera();
         if (setDatosCobertura() && validarSumaCubiertaSuelo() && validarPorcentaje() && validarSotobosqueFuera()) {
-            if (funciones.validarSeccionCapturada("TAXONOMIA_SotoBosque", this.ceSitio) && chkSotobosque.isSelected()) {
+            if (funciones.validarSeccionCapturada("TAXONOMIA_SotoBosque", sitioID) && chkSotobosque.isSelected()) {
                 JOptionPane.showMessageDialog(null, "Si selecciona Sotobosque, se debe capturar", "Sotobosque", JOptionPane.INFORMATION_MESSAGE);
                 chkSotobosque.requestFocus();
-            } else if (funciones.validarSeccionCapturada("TAXONOMIA_SotoBosque", this.ceSitio) == false && chkSotobosque.isSelected()) {
+            } else if (funciones.validarSeccionCapturada("TAXONOMIA_SotoBosque", sitioID) == false && chkSotobosque.isSelected()) {
                 if (validarColectasObligatorias()) {
                     if (this.actualizar == 0) {
                         crearCoberturaSuelo();
-                        this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
+                        //this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
                         crearSotoBosqueFuera();
-                        this.hide();
-                        seleccionarSiguienteFormulario(this.ceSitio.getSecuencia());
+                        //this.hide();
+                        //seleccionarSiguienteFormulario(this.ceSitio.getSecuencia());
                     } else {
                         actualizarCoberturaSuelo();
                         crearSotoBosqueFuera();
-                        this.hide();
-                        revisarSiguienteFormulario(this.ceSitio.getSecuencia());
+                        //this.hide();
+                        //revisarSiguienteFormulario(this.ceSitio.getSecuencia());
                     }
                    // funciones.manipularBotonesMenuPrincipal(false);
                 }
-            } else if (funciones.validarSeccionCapturada("TAXONOMIA_SotoBosque", this.ceSitio) == true && !chkSotobosque.isSelected()) {
+            } else if (funciones.validarSeccionCapturada("TAXONOMIA_SotoBosque", sitioID) == true && !chkSotobosque.isSelected()) {
                 if (this.actualizar == 0) {
                     crearCoberturaSuelo();
                     crearSotoBosqueFuera();
-                    this.hide();
-                    seleccionarSiguienteFormulario(this.ceSitio.getSecuencia());
-                    this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
+                    //this.hide();
+                    //seleccionarSiguienteFormulario(this.ceSitio.getSecuencia());
+                    //this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
                 } else {
                     actualizarCoberturaSuelo();
                     crearSotoBosqueFuera();
-                    this.hide();
-                    revisarSiguienteFormulario(this.ceSitio.getSecuencia());
+                    //this.hide();
+                    //revisarSiguienteFormulario(this.ceSitio.getSecuencia());
                 }
               /*  this.hide();
                 UPMForms.repoblado.setDatosIniciales(this.ceSitio);
@@ -2083,16 +2132,13 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
         
         if(revision==false){//esta en modo de captura
             this.hide();
-             //System.out.println("Modo Captura");
+             limpiarPorcentajes();
             funciones.manipularBotonesMenuPrincipal(false);
         }
         if(revision==true){//entro a modo de revision
-            //System.err.println("Modo Revision");
-            this.hide();
-            //UPMForms.revisionModulos.iniciarRevision();
-            UPMForms.revisionModulos.setVisible(true);
-            UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision=false;
+           limpiarPorcentajes();
+           this.hide();
+           funciones.manipularBotonesMenuPrincipal(false);
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
@@ -2577,6 +2623,42 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
         numeros.keyTyped(evt);
     }//GEN-LAST:event_txtCobertura151KeyTyped
 
+    private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
+        Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        Integer sitio = (Integer) cmbSitios.getSelectedItem();
+        if (cmbUPMID.getSelectedItem() != null) {
+            combo.reiniciarComboModel(cmbSitios);
+            fillCmbSitio(upmID);
+            cmbSitios.setEnabled(true);
+        } else {
+            combo.reiniciarComboModel(cmbSitios);
+            cmbSitios.setSelectedItem(null);
+            cmbSitios.setEnabled(false);
+            limpiarControles();
+        }
+    }//GEN-LAST:event_cmbUPMIDActionPerformed
+
+    private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
+        try {
+            //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
+            if(cmbSitios.getSelectedItem() == null){
+                this.sitioID=0;
+                limpiarControles();
+                limpiarPorcentajes();
+            }else{
+            String upm = cmbUPMID.getSelectedItem().toString();
+            String sitio = cmbSitios.getSelectedItem().toString();
+            this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
+           
+            }
+            revisarSotoBosque(this.sitioID);
+
+//llenarTabla();
+        } catch (Exception e) {
+            e.getCause();
+        }
+    }//GEN-LAST:event_cmbSitiosActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PnlCoordenadas1;
     private javax.swing.JPanel PnlCoordenadas2;
@@ -2596,6 +2678,8 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cmbFamilia;
     private javax.swing.JComboBox cmbGenero;
     private javax.swing.JComboBox cmbInfraespecie;
+    private javax.swing.JComboBox<Integer> cmbSitios;
+    private javax.swing.JComboBox<Integer> cmbUPMID;
     private javax.swing.JComboBox cmbVigor;
     private javax.swing.JTable grdSotobosque;
     private javax.swing.JLabel jLabel1;
@@ -2658,8 +2742,6 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txtPorcentajeDanio;
     private javax.swing.JFormattedTextField txtPorcentajeSotobosqueFuera;
     private javax.swing.JFormattedTextField txtRoca;
-    private javax.swing.JTextField txtSitio;
     private javax.swing.JFormattedTextField txtSueloDesnudo;
-    private javax.swing.JTextField txtUPM;
     // End of variables declaration//GEN-END:variables
 }

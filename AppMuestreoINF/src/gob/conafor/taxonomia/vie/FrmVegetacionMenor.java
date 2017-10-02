@@ -1386,10 +1386,10 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         ceSitio.setSitioID(this.sitioID);
-        if (funciones.validarSeccionCapturada("TAXONOMIA_VegetacionMenor", this.ceSitio) && chkVegetacionMenor.isSelected()) {
+        if (funciones.validarSeccionCapturada("TAXONOMIA_VegetacionMenor", sitioID) && chkVegetacionMenor.isSelected()) {
             JOptionPane.showMessageDialog(null, "Si seleccionó vegetación menor, se debe capturar ", "Vegetacion menor", JOptionPane.INFORMATION_MESSAGE);
             chkVegetacionMenor.requestFocus();
-        } else if (funciones.validarSeccionCapturada("TAXONOMIA_VegetacionMenor", this.ceSitio) == false && chkVegetacionMenor.isSelected()) {
+        } else if (funciones.validarSeccionCapturada("TAXONOMIA_VegetacionMenor", sitioID) == false && chkVegetacionMenor.isSelected()) {
             if (validarColectasObligatorias()) {
                 this.hide();
                 if (this.actualizar == 0) {
@@ -1401,7 +1401,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
                 }
                 this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
             }
-        } else if (funciones.validarSeccionCapturada("TAXONOMIA_VegetacionMenor", this.ceSitio) == true && !chkVegetacionMenor.isSelected()) {
+        } else if (funciones.validarSeccionCapturada("TAXONOMIA_VegetacionMenor", sitioID) == true && !chkVegetacionMenor.isSelected()) {
             this.hide();
             if (this.actualizar == 0) {
                 UPMForms.vegetacionMayorI.setDatosIniciales(this.ceSitio);

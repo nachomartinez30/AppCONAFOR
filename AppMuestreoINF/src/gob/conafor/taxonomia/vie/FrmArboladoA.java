@@ -3032,10 +3032,10 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_chkEsSubmuestraActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        if (funciones.validarSeccionCapturada("TAXONOMIA_Arbolado", this.ceSitio) == true && chkArbolado.isSelected()) {
+        if (funciones.validarSeccionCapturada("TAXONOMIA_Arbolado", sitioID) == true && chkArbolado.isSelected()) {
             JOptionPane.showMessageDialog(null, "Si selecciona Arbolado, se debe capturar o falta capturar trazo del sitio", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
             chkArbolado.requestFocus();
-        } else if (funciones.validarSeccionCapturada("TAXONOMIA_Arbolado", this.ceSitio) == false && chkArbolado.isSelected()) {
+        } else if (funciones.validarSeccionCapturada("TAXONOMIA_Arbolado", sitioID) == false && chkArbolado.isSelected()) {
             //System.out.println("Entro");
             if (validarColectasObligatorias() && validarCreacionSubmuestra()) {
                 this.hide();
@@ -3050,7 +3050,7 @@ private void fillCmbSitio(int upmID) {
                 }
                 //funciones.manipularBotonesMenuPrincipal(false);
             }
-        } else if (funciones.validarSeccionCapturada("TAXONOMIA_Arbolado", this.ceSitio) == true && !chkArbolado.isSelected()) {
+        } else if (funciones.validarSeccionCapturada("TAXONOMIA_Arbolado", sitioID) == true && !chkArbolado.isSelected()) {
             if (modificar == 0) {
                 this.hide();
                 UPMForms.submuestra.setDatosIniciales(this.ceSitio);

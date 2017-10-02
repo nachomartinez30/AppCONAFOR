@@ -709,20 +709,18 @@ public class FrmInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_miConcentrarActionPerformed
 
     private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
-         String path="";
-         System.out.println("Path= "+path);
-         if(evt.getClickCount()==2){
-             try {
+        String path = "";
+        if (evt.getClickCount() == 2) {
+            try {
 
-            path = jTree1.getSelectionPath().toString();
-           // System.out.println("Path ANTES= "+path);
-            openForm(path);
-            
-        } catch (Exception e) {
-            
+                path = jTree1.getSelectionPath().toString();
+                openForm(path);
+
+            } catch (Exception e) {
+
+            }
         }
-         }
-        
+
     }//GEN-LAST:event_jTree1MouseClicked
 
     private void btnCapturarModulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarModulosActionPerformed
@@ -737,6 +735,7 @@ public class FrmInicio extends javax.swing.JFrame {
             switch (path) {
                 case "[Modulos, A, Sotobosque]":
                     UPMForms.sotoBosque.setVisible(true);
+                    UPMForms.sotoBosque.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Repoblado]":

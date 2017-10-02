@@ -1460,7 +1460,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             } else if (chkCoberturaDosel.isSelected() && this.cdLongitud.validarCoberturaDosel(this.sitioID)) {
                 JOptionPane.showMessageDialog(null, "Si selecciona cobertura dosel se debe capturar", "Carbono e incendios", JOptionPane.INFORMATION_MESSAGE);
                 chkCoberturaDosel.requestFocus();
-            } else if (this.funciones.validarSeccionCapturada("CARBONO_LongitudComponente", ceSitio) == false && chkLongitudComponentes.isSelected()) {
+            } else if (this.funciones.validarSeccionCapturada("CARBONO_LongitudComponente", sitioID) == false && chkLongitudComponentes.isSelected()) {
                 System.out.println("BtnConitnuar");
                 if (validarColectasObligatorias()) {
                     this.hide();
@@ -1474,7 +1474,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                     }
                     this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
                 }
-            } else if (this.funciones.validarSeccionCapturada("CARBONO_LongitudComponente", ceSitio) == true && !chkLongitudComponentes.isSelected()) {
+            } else if (this.funciones.validarSeccionCapturada("CARBONO_LongitudComponente", sitioID) == true && !chkLongitudComponentes.isSelected()) {
                 this.hide();
                 funciones.manipularBotonesMenuPrincipal(true);
                 if (this.modificar == 0) {

@@ -1694,10 +1694,10 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbGeneroActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        if (funciones.validarSeccionCapturada("TAXONOMIA_VegetacionMayorIndividual", this.ceSitio) && chkVegetacionMayorMCI.isSelected()) {
+        if (funciones.validarSeccionCapturada("TAXONOMIA_VegetacionMayorIndividual",sitioID) && chkVegetacionMayorMCI.isSelected()) {
             JOptionPane.showMessageDialog(null, "Si seleccionó vegetación mayor individuales, se debe capturar ", "Vegetacion mayor individuales", JOptionPane.INFORMATION_MESSAGE);
             chkVegetacionMayorMCI.requestFocus();
-        } else if (funciones.validarSeccionCapturada("TAXONOMIA_VegetacionMayorIndividual", this.ceSitio) == false && chkVegetacionMayorMCI.isSelected()) {
+        } else if (funciones.validarSeccionCapturada("TAXONOMIA_VegetacionMayorIndividual",sitioID) == false && chkVegetacionMayorMCI.isSelected()) {
             if (validarColectasObligatorias()) {
                 this.hide();
                 if (this.actualizar == 0) {
@@ -1710,7 +1710,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
 
                 this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
             }
-        } else if (funciones.validarSeccionCapturada("TAXONOMIA_VegetacionMayorIndividual", this.ceSitio) == true && !chkVegetacionMayorMCI.isSelected()) {
+        } else if (funciones.validarSeccionCapturada("TAXONOMIA_VegetacionMayorIndividual",sitioID) == true && !chkVegetacionMayorMCI.isSelected()) {
             this.hide();
              if (this.actualizar == 0) {
                     UPMForms.vegetacionMayorG.setDatosIniciales(this.ceSitio);

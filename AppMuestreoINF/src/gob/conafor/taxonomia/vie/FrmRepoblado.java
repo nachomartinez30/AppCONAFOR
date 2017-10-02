@@ -1526,10 +1526,10 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         if (validarRepobladoFuera()) {
-            if (funciones.validarSeccionCapturada("TAXONOMIA_Repoblado", this.ceSitio) && chkRepoblado.isSelected()) {
+            if (funciones.validarSeccionCapturada("TAXONOMIA_Repoblado",sitioID) && chkRepoblado.isSelected()) {
                 JOptionPane.showMessageDialog(null, "Si selecciona repoblado, se debe capturar", "Repoblado", JOptionPane.INFORMATION_MESSAGE);
                 chkRepoblado.requestFocus();
-            } else if (funciones.validarSeccionCapturada("TAXONOMIA_Repoblado", this.ceSitio) == false && chkRepoblado.isSelected()) {
+            } else if (funciones.validarSeccionCapturada("TAXONOMIA_Repoblado",sitioID) == false && chkRepoblado.isSelected()) {
                 if (validarColectasObligatorias()) {
                     asignarDatosRepobladoFuera();
                     crearRepobladoFuera();
@@ -1541,7 +1541,7 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
                         revisarSiguienteFormulario(this.ceSitio);
                     }
                 }
-            } else if (funciones.validarSeccionCapturada("TAXONOMIA_Repoblado", this.ceSitio) == true && !chkRepoblado.isSelected()) {
+            } else if (funciones.validarSeccionCapturada("TAXONOMIA_Repoblado",sitioID) == true && !chkRepoblado.isSelected()) {
                 asignarDatosRepobladoFuera();
                 crearRepobladoFuera();
                 this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, -1);

@@ -82,7 +82,7 @@ public class FrmRevisionModulos extends javax.swing.JInternalFrame {
                     UPMForms.sotoBosque.habilitarSotobosque();
                 }
                 UPMForms.sotoBosque.setVisible(true);
-                UPMForms.sotoBosque.revisarSotoBosque(this.ceSitio);
+                //UPMForms.sotoBosque.revisarSotoBosque(this.ceSitio);
                 break;
             case 2:
                 UPMForms.repoblado.setVisible(true);

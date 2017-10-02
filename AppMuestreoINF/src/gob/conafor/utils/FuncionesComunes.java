@@ -29,8 +29,8 @@ public class FuncionesComunes {
         model.setRowCount(0);
     }
 
-    public boolean validarSeccionCapturada(String nombreTabla, CESitio ceSitio) {
-        this.query = "SELECT * FROM " + nombreTabla + " WHERE SitioID= " + ceSitio.getSitioID();
+    public boolean validarSeccionCapturada(String nombreTabla, int sitioID) {
+        this.query = "SELECT * FROM " + nombreTabla + " WHERE SitioID= " + sitioID;
         boolean vacio = true;
         Connection conn = LocalConnection.getConnection();
         try {

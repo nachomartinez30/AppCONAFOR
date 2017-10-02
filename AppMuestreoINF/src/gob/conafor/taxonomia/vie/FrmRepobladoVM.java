@@ -1907,10 +1907,10 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
         ceSitio.setRepobladoFuera(this.repobladoFuera);
         ceSitio.setPorcentajeRepoblado(this.porcentajeRepobladoFuera);
         if (setDatosCobertura() && validarSumaCubiertaSuelo() && validarPorcentaje() && validarRepobladoFuera()) {
-            if (funciones.validarSeccionCapturada("TAXONOMIA_RepobladoVM", this.ceSitio) && chkRepobladoVM.isSelected()) {
+            if (funciones.validarSeccionCapturada("TAXONOMIA_RepobladoVM", sitioID) && chkRepobladoVM.isSelected()) {
                 JOptionPane.showMessageDialog(null, "Si selecciona Repoblado, se debe capturar ", "Repoblado vegetación menor", JOptionPane.INFORMATION_MESSAGE);
                 chkRepobladoVM.requestFocus();
-            } else if (funciones.validarSeccionCapturada("TAXONOMIA_RepobladoVM", this.ceSitio) == false && chkRepobladoVM.isSelected()) {
+            } else if (funciones.validarSeccionCapturada("TAXONOMIA_RepobladoVM", sitioID) == false && chkRepobladoVM.isSelected()) {
                 if (validarColectasObligatorias()) {
                     if (this.modificar == 0) {
                         crearCoberturaSuelo();
@@ -1927,7 +1927,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                     }
                     this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
                 }
-            } else if (funciones.validarSeccionCapturada("TAXONOMIA_RepobladoVM", this.ceSitio) == true && !chkRepobladoVM.isSelected()) {
+            } else if (funciones.validarSeccionCapturada("TAXONOMIA_RepobladoVM", sitioID) == true && !chkRepobladoVM.isSelected()) {
                 if (this.modificar == 0) {
                     crearCoberturaSuelo();
                     this.cdRepoblado.updateRepobladoFuera(this.ceSitio);

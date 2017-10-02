@@ -410,7 +410,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
         }
     }
     
-    private void revisarSiguienteFormulario(CESitio ceSitio){
+   /* private void revisarSiguienteFormulario(CESitio ceSitio){
         Integer secuenciaID = ceSitio.getSecuencia();
         Integer sitio = this.funciones.sitioCapturaSueloCarbono(this.upmID, 3);
         if (secuenciaID != null) {
@@ -552,7 +552,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
                     break;
             }
         }
-    }
+    }*/
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

@@ -5,6 +5,7 @@ import gob.conafor.carbono.mod.CECubiertaVegetal;
 import gob.conafor.carbono.mod.CEMaterialLenioso100;
 import gob.conafor.carbono.mod.CEMaterialLenioso1000;
 import gob.conafor.carbono.mod.CatECarbonoComponente;
+import gob.conafor.sitio.mod.CDSitio;
 import gob.conafor.sitio.mod.CESitio;
 import gob.conafor.sys.mod.CDSecuencia;
 import gob.conafor.sys.mod.CDSeguimientoUPM;
@@ -57,6 +58,8 @@ public class FrmMaterialLenioso extends JInternalFrame {
     private Version ver=new Version();
     private String version=ver.getVersion();
     private boolean  revision;
+     private CDSitio cdSitio = new CDSitio();
+    private FuncionesComunes combo = new FuncionesComunes();
     
     public FrmMaterialLenioso() {
         initComponents();
@@ -73,8 +76,7 @@ public class FrmMaterialLenioso extends JInternalFrame {
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
-        txtUPM.setText(String.valueOf(this.upmID));
-        txtSitio.setText(String.valueOf(this.sitio));
+        
         llenarTablaMaterialLenioso100();
         llenarTablaMaterialLenioso1000();
         llenarTablaCubiertaVegetal();
@@ -89,20 +91,46 @@ public class FrmMaterialLenioso extends JInternalFrame {
        // cdSecuencia.insertFormatoCapturado(ceSitio, FORMATO_ID);
     }
     
-    public void revisarCarbono(CESitio sitio){
-        revision=true;
+    
+    public void llenarControles() {
+	combo.reiniciarComboModel(this.cmbUPMID);
+	fillUPMID();
+}
+private void fillUPMID() {
+	List<Integer> listCapturado = new ArrayList<>();
+	listCapturado = this.cdSitio.getUPMSitios();
+	if (listCapturado != null) {
+		int size = listCapturado.size();
+		for (int i = 0; i < size; i++) {
+			cmbUPMID.addItem(listCapturado.get(i));
+		}
+	}
+}
+
+private void fillCmbSitio(int upmID) {
+	List<Integer> listSitios = new ArrayList<>();
+	listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+	if (listSitios != null) {
+		int size = listSitios.size();
+		for (int i = 0; i < size; i++) {
+			cmbSitios.addItem(listSitios.get(i));
+		}
+	}
+}
+    
+    
+    public void revisarCarbono(int sitioID){
+        /*revision=true;
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
-        this.sitio = sitio.getSitio();
-        txtUPM.setText(String.valueOf(this.upmID));
-        txtSitio.setText(String.valueOf(this.sitio));
+        this.sitio = sitio.getSitio();*/
+        
         llenarTablaMaterialLenioso100();
         llenarTablaMaterialLenioso1000();
         llenarTablaCubiertaVegetal();
         ceSitio.setUpmID(this.upmID);
         ceSitio.setSitioID(this.sitioID);
         ceSitio.setSitio(this.sitio);
-        this.ceSitio.setSecuencia(sitio.getSecuencia());
         funciones.manipularBotonesMenuPrincipal(true);
         chkMaterialLenioso110100.setSelected(!cdCarbono.hayMaterialLenioso100(this.sitioID));
         if (chkMaterialLenioso110100.isSelected()){
@@ -706,9 +734,7 @@ public class FrmMaterialLenioso extends JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lblUPM = new javax.swing.JLabel();
-        txtUPM = new javax.swing.JTextField();
         lblSitio = new javax.swing.JLabel();
-        txtSitio = new javax.swing.JTextField();
         lblCarbonoIncendios = new javax.swing.JLabel();
         lblMaterialLenioso100 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -761,8 +787,9 @@ public class FrmMaterialLenioso extends JInternalFrame {
         txtComponente5m = new javax.swing.JFormattedTextField();
         txtComponente10m = new javax.swing.JFormattedTextField();
         chkAlturaArbustosHierbasPastos = new javax.swing.JCheckBox();
-        btnContinuar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        cmbUPMID = new javax.swing.JComboBox<>();
+        cmbSitios = new javax.swing.JComboBox<>();
 
         setMaximizable(true);
         setTitle("Material leñoso caído de 100 y 1000, altura por forma biológica, módulo C "+version);
@@ -774,14 +801,8 @@ public class FrmMaterialLenioso extends JInternalFrame {
         lblUPM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUPM.setText("UPMID:");
 
-        txtUPM.setEditable(false);
-        txtUPM.setEnabled(false);
-
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-
-        txtSitio.setEditable(false);
-        txtSitio.setEnabled(false);
 
         lblCarbonoIncendios.setBackground(new java.awt.Color(153, 153, 153));
         lblCarbonoIncendios.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -1213,7 +1234,6 @@ public class FrmMaterialLenioso extends JInternalFrame {
         });
 
         btnEliminarComponentes.setText("Eliminar");
-        btnEliminarComponentes.setNextFocusableComponent(btnContinuar);
         btnEliminarComponentes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarComponentesActionPerformed(evt);
@@ -1365,15 +1385,6 @@ public class FrmMaterialLenioso extends JInternalFrame {
                 .addGap(27, 27, 27))
         );
 
-        btnContinuar.setMnemonic('c');
-        btnContinuar.setText("Continuar");
-        btnContinuar.setNextFocusableComponent(btnSalir);
-        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContinuarActionPerformed(evt);
-            }
-        });
-
         btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -1382,26 +1393,27 @@ public class FrmMaterialLenioso extends JInternalFrame {
             }
         });
 
+        cmbUPMID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUPMIDActionPerformed(evt);
+            }
+        });
+
+        cmbSitios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSitiosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(7, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblUPM)
-                        .addGap(10, 10, 10)
-                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(608, 608, 608)
-                        .addComponent(lblSitio)
-                        .addGap(8, 8, 8)
-                        .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
                         .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -1418,20 +1430,31 @@ public class FrmMaterialLenioso extends JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(lblMaterialLenioso102, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(lblCarbonoIncendios, javax.swing.GroupLayout.PREFERRED_SIZE, 909, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(18, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(lblUPM)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(592, 592, 592)
+                                    .addComponent(lblSitio)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(cmbSitios, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(lblCarbonoIncendios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 909, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(12, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(15, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSitio)
-                    .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblSitio)
+                        .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(lblUPM))
-                    .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblUPM)
+                            .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(20, 20, 20)
                 .addComponent(lblCarbonoIncendios)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1445,14 +1468,12 @@ public class FrmMaterialLenioso extends JInternalFrame {
                             .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnContinuar)
-                            .addComponent(btnSalir)))
+                        .addComponent(btnSalir))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblMaterialLenioso100)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1605,33 +1626,6 @@ public class FrmMaterialLenioso extends JInternalFrame {
             txtComponente10m.setValue(null);
         }
     }//GEN-LAST:event_txtComponente10mFocusLost
-
-    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        if (chkMaterialLenioso110100.isSelected() && this.cdCarbono.hayMaterialLenioso100(this.ceSitio.getSitioID())) {
-            JOptionPane.showMessageDialog(null, "Si selecciona Material leñoso caido 1, 10 y 100 se debe capturar"
-                    + "", "Carbono e incendios", JOptionPane.INFORMATION_MESSAGE);
-            cmbTransecto100.requestFocus();
-        } else if (chkMaterialLenioso1000.isSelected() && this.cdCarbono.hayMaterialLenioso1000(this.ceSitio.getSitioID())) {
-            JOptionPane.showMessageDialog(null, "Si selecciona Material leñoso caido 1000 se debe caprturar"
-                    + "", "Carbono e incendios", JOptionPane.INFORMATION_MESSAGE);
-            cmbTransecto1000.requestFocus();
-        } else if (chkAlturaArbustosHierbasPastos.isSelected() && this.cdCarbono.hayCubiertaVegetal(this.ceSitio.getSitioID())) {
-            JOptionPane.showMessageDialog(null, "Si selecciona cubierta vegetal, se debe de capturar"
-                    + "", "Carbono e incendios", JOptionPane.INFORMATION_MESSAGE);
-        } else if (this.modificar == 0) {//modo Captura
-            this.hide();
-            UPMForms.longitud.setDatosIniciales(this.ceSitio);
-            UPMForms.longitud.setVisible(true);
-            this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-            funciones.manipularBotonesMenuPrincipal(true);
-        } else {//modo revision
-            System.out.println("Secuencia material lenioso = "+this.ceSitio.getSecuencia());
-            this.hide();
-            UPMForms.longitud.revisarLongitud(this.ceSitio);
-            UPMForms.longitud.setVisible(true);
-            funciones.manipularBotonesMenuPrincipal(true);
-        }
-    }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnGuardarComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarComponenteActionPerformed
         asignarDatosCubiertaVegetal();
@@ -1841,6 +1835,41 @@ public class FrmMaterialLenioso extends JInternalFrame {
         }
     }//GEN-LAST:event_chkAlturaArbustosHierbasPastosActionPerformed
 
+    private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
+        Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        Integer sitio = (Integer) cmbSitios.getSelectedItem();
+        if (cmbUPMID.getSelectedItem() != null) {
+            combo.reiniciarComboModel(cmbSitios);
+            fillCmbSitio(upmID);
+            cmbSitios.setEnabled(true);
+        } else {
+            combo.reiniciarComboModel(cmbSitios);
+            cmbSitios.setSelectedItem(null);
+            cmbSitios.setEnabled(false);
+        }
+    }//GEN-LAST:event_cmbUPMIDActionPerformed
+
+    private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
+ try {
+            //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
+            if (cmbSitios.getSelectedItem() == null) {
+                this.sitioID = 0;
+                /*limpiarControles();
+                limpiarPorcentajes();*/
+            } else {
+                String upm = cmbUPMID.getSelectedItem().toString();
+                String sitio = cmbSitios.getSelectedItem().toString();
+                this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
+
+            }
+            revisarCarbono(this.sitioID);
+
+//llenarTabla();
+        } catch (Exception e) {
+            e.getCause();
+        }
+    }//GEN-LAST:event_cmbSitiosActionPerformed
+
     private void limpiarControlesMaterial100(){
         cmbTransecto100.setSelectedItem(null);
         txtPendiente100.setText("");
@@ -1872,7 +1901,6 @@ public class FrmMaterialLenioso extends JInternalFrame {
         cmbNoCubiertaVegetal.requestFocus();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnEliminar100;
     private javax.swing.JButton btnEliminar1000;
     private javax.swing.JButton btnEliminarComponentes;
@@ -1889,8 +1917,10 @@ public class FrmMaterialLenioso extends JInternalFrame {
     private javax.swing.JComboBox cmbComponentes;
     private javax.swing.JComboBox cmbGradoPutrefaccion;
     private javax.swing.JComboBox cmbNoCubiertaVegetal;
+    private javax.swing.JComboBox<Integer> cmbSitios;
     private javax.swing.JComboBox cmbTransecto100;
     private javax.swing.JComboBox cmbTransecto1000;
+    private javax.swing.JComboBox<Integer> cmbUPMID;
     private javax.swing.JTable grdCubiertaVegetal;
     private javax.swing.JTable grdMaterialLenioso100;
     private javax.swing.JTable grdMaterialLenioso1000;
@@ -1928,8 +1958,6 @@ public class FrmMaterialLenioso extends JInternalFrame {
     private javax.swing.JFormattedTextField txtDiametro1000;
     private javax.swing.JFormattedTextField txtDiezHoras100;
     private javax.swing.JFormattedTextField txtPendiente100;
-    private javax.swing.JTextField txtSitio;
-    private javax.swing.JTextField txtUPM;
     private javax.swing.JFormattedTextField txtUnaHora100;
     // End of variables declaration//GEN-END:variables
 }

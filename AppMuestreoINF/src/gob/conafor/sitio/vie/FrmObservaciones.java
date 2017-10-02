@@ -171,7 +171,7 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
         }
     }
 
-    public void revisarSiguienteFormulario(CESitio ceSitio) {
+    /*public void revisarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
         Integer sitio = this.funciones.sitioCapturaSueloCarbono(this.upmID, 3);
         //System.out.println("secuencia="+secuenciaID);
@@ -184,7 +184,7 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
             switch (secuenciaID) {
                 case 1: //Módulo A
                     /* UPMForms.carbono.setDatosIniciales(ceSitio);
-                    UPMForms.carbono.setVisible(true);*/
+                    UPMForms.carbono.setVisible(true);
                     this.hide();
                     funciones.manipularBotonesMenuPrincipal(false);
                     break;
@@ -261,7 +261,7 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
                     break;
             }
         
-    }
+    }*/
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -402,7 +402,7 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
                 //System.out.println("Sitio"+this.ceSitio.getSitio()+" UPID="+this.ceSitio.getUpmID()+" Secuencia="+this.ceSitio.getSecuencia());
                 this.cdSitio.setObservacionesSitio(this.ceSitio);
                 //System.out.println("es Revision "+this.ceSitio.getSecuencia());
-                revisarSiguienteFormulario(this.ceSitio);
+                //revisarSiguienteFormulario(this.ceSitio);
                 this.hide();
             }
         //}

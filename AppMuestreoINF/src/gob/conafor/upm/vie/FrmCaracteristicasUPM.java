@@ -489,7 +489,7 @@ private void fillUPMID() {
         }
     }
     
-private void revisarSiguienteFormulario(CESitio ceSitio) {
+/*private void revisarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
         Integer sitio = this.funciones.sitioCapturaSueloCarbono(this.upmID, 3);
         if (secuenciaID != null) {
@@ -630,7 +630,7 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
                     }
             }
         }
-    }
+    }*/
     private void manipularControlesEpifitas(boolean habilitar) {
         if (habilitar == true) {
             cmbClaseTipo.setEnabled(true);

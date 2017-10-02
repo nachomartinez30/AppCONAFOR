@@ -739,7 +739,6 @@ public class FrmInicio extends javax.swing.JFrame {
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Repoblado]":
-                    /*FORMULARIO A ABRIR*/
                     UPMForms.repoblado.setVisible(true);
                     UPMForms.repoblado.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
@@ -747,11 +746,11 @@ public class FrmInicio extends javax.swing.JFrame {
                 case "[Modulos, A, Arbolado]":
                     UPMForms.arbolado.setVisible(true);
                     UPMForms.arbolado.llenarControles();
-                    
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Submuestra]":
-                    /*FORMULARIO A ABRIR*/
+                    UPMForms.submuestra.setVisible(true);
+                    UPMForms.submuestra.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Clave de vegetación]":

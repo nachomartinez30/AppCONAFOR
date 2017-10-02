@@ -3341,7 +3341,7 @@ private void fillCmbSitio(int upmID) {
                     UPMForms.submuestra.setVisible(true);
                     this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
                 } else {
-                    UPMForms.submuestra.revisarSubmuestra(this.ceSitio);
+                    UPMForms.submuestra.revisarSubmuestra(this.sitioID);
                     UPMForms.submuestra.setVisible(true);
                     this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
                 }
@@ -3355,7 +3355,7 @@ private void fillCmbSitio(int upmID) {
                 UPMForms.submuestra.setVisible(true);
                 this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, -1);
             } else {
-                UPMForms.submuestra.revisarSubmuestra(this.ceSitio);
+                UPMForms.submuestra.revisarSubmuestra(this.sitioID);
                 UPMForms.submuestra.setVisible(true);
                 this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, -1);
             }

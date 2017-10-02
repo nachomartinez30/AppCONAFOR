@@ -1,6 +1,7 @@
 package gob.conafor.taxonomia.vie;
 
 import gob.conafor.sitio.mod.CDObservaciones;
+import gob.conafor.sitio.mod.CDSitio;
 import gob.conafor.sitio.mod.CEObservaciones;
 import gob.conafor.sitio.mod.CESitio;
 import gob.conafor.sys.mod.CDSecuencia;
@@ -53,6 +54,9 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
     private String observaciones;
     private Version ver = new Version();
     private String version = ver.getVersion();
+    private CDSitio cdSitio = new CDSitio();
+    private FuncionesComunes combo = new FuncionesComunes();
+    
 
     public FrmSubmuestra() {
         initComponents();
@@ -69,8 +73,7 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
         ceSitio.setSitioID(this.sitioID);
         ceSitio.setSitio(this.sitio);
         ceSitio.setSecuencia(sitio.getSecuencia());
-        txtUPM.setText(String.valueOf(this.upmID));
-        txtSitio.setText(String.valueOf(this.sitio));
+        
         llenarTablaSubmuestra();
         funciones.manipularBotonesMenuPrincipal(true);
         modificar = 0;
@@ -78,17 +81,44 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
         funciones.reiniciarTabla(grdTrozas);
     }
 
-    public void revisarSubmuestra(CESitio sitio) {
-        revision = true;
+    
+    public void llenarControles() {
+	combo.reiniciarComboModel(this.cmbUPMID);
+	fillUPMID();
+}
+private void fillUPMID() {
+	List<Integer> listCapturado = new ArrayList<>();
+	listCapturado = this.cdSitio.getUPMSitios();
+	if (listCapturado != null) {
+		int size = listCapturado.size();
+		for (int i = 0; i < size; i++) {
+			cmbUPMID.addItem(listCapturado.get(i));
+		}
+	}
+}
+
+private void fillCmbSitio(int upmID) {
+	List<Integer> listSitios = new ArrayList<>();
+	listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+	if (listSitios != null) {
+		int size = listSitios.size();
+		for (int i = 0; i < size; i++) {
+			cmbSitios.addItem(listSitios.get(i));
+		}
+	}
+}
+    
+    
+    public void revisarSubmuestra(int sitioID) {
+        /*revision = true;
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
         ceSitio.setUpmID(this.upmID);
         ceSitio.setSitioID(this.sitioID);
         ceSitio.setSitio(this.sitio);
-        ceSitio.setSecuencia(sitio.getSecuencia());
-        txtUPM.setText(String.valueOf(this.upmID));
-        txtSitio.setText(String.valueOf(this.sitio));
+        ceSitio.setSecuencia(sitio.getSecuencia());*/
+        
         llenarTablaSubmuestra();
         funciones.manipularBotonesMenuPrincipal(true);
         modificar = 1;
@@ -96,7 +126,7 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
         funciones.reiniciarTabla(grdTrozas);
         CEObservaciones ceObservaciones = new CEObservaciones();
         ceObservaciones.setFormatoID(4);
-        ceObservaciones.setSitioID(this.sitioID);
+        ceObservaciones.setSitioID(sitioID);
         CDObservaciones observaciones = new CDObservaciones();
         txtObservaciones.setText(observaciones.getObservaciones(ceObservaciones));
     }
@@ -589,6 +619,7 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
         CDObservaciones cdObservaciones = new CDObservaciones();
 
         cdObservaciones.insertObservaciones(ceObservaciones);
+        JOptionPane.showMessageDialog(null, "Observaciones de submuestra insertada");
     }
 
     private void actualizarObservaciones() {
@@ -600,6 +631,7 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
         CDObservaciones cdObservaciones = new CDObservaciones();
 
         cdObservaciones.updateObservaciones(ceObservaciones);
+        JOptionPane.showMessageDialog(null, "Observaciones de submuestra actualizada");
     }
 
     private boolean validarPresenciaSubmuestra() {
@@ -633,9 +665,7 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lblUPM = new javax.swing.JLabel();
-        txtUPM = new javax.swing.JTextField();
         lblSitio = new javax.swing.JLabel();
-        txtSitio = new javax.swing.JTextField();
         lblVegetacionMenorCobertura = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblFamilia = new javax.swing.JLabel();
@@ -682,7 +712,8 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtObservaciones = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
-        btnRegresar = new javax.swing.JButton();
+        cmbUPMID = new javax.swing.JComboBox<>();
+        cmbSitios = new javax.swing.JComboBox<>();
 
         setMaximizable(true);
         setTitle("Submuestra "+version);
@@ -694,14 +725,8 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
         lblUPM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUPM.setText("UPMID:");
 
-        txtUPM.setEditable(false);
-        txtUPM.setEnabled(false);
-
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-
-        txtSitio.setEditable(false);
-        txtSitio.setEnabled(false);
 
         lblVegetacionMenorCobertura.setBackground(new java.awt.Color(153, 153, 153));
         lblVegetacionMenorCobertura.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -876,7 +901,7 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
         jPanel3.add(txtGrozorCorteza, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, 136, -1));
 
         btnContinuar.setMnemonic('c');
-        btnContinuar.setLabel("Continuar");
+        btnContinuar.setText("Capturar");
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarActionPerformed(evt);
@@ -1061,17 +1086,21 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel1.setText("Observaciones:");
 
-        btnRegresar.setMnemonic('r');
-        btnRegresar.setText("Regresar");
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+        cmbUPMID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
+                cmbUPMIDActionPerformed(evt);
+            }
+        });
+
+        cmbSitios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSitiosActionPerformed(evt);
             }
         });
 
@@ -1083,11 +1112,12 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(lblUPM)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblSitio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1117,8 +1147,6 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
                             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
                                 .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1130,9 +1158,9 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSitio)
-                    .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUPM)
-                    .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblVegetacionMenorCobertura)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1158,8 +1186,7 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnContinuar)
-                    .addComponent(btnSalir)
-                    .addComponent(btnRegresar))
+                    .addComponent(btnSalir))
                 .addContainerGap())
         );
 
@@ -1358,14 +1385,15 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         if (modificar == 0) {
             crearObservaciones();
-            this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-            this.hide();
-            seleccionarSiguienteFormulario(this.ceSitio);
+            //this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
+            //this.hide();
+            //seleccionarSiguienteFormulario(this.ceSitio);
 
         } else {
-            actualizarObservaciones();
-            this.hide();
-            revisarSiguienteFormulario(this.ceSitio);
+            crearObservaciones();
+            //actualizarObservaciones();
+            //this.hide();
+            //revisarSiguienteFormulario(this.ceSitio);
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
@@ -1404,177 +1432,40 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
         numeros.keyTyped(evt);
     }//GEN-LAST:event_txtGrozorCortezaKeyTyped
 
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        Integer secuenciaID = ceSitio.getSecuencia();
-        if (this.modificar == 0) {
-            if (secuenciaID != null) {
-                switch (secuenciaID) {
-                    case 1: //Módulo A
-                        this.hide();
-                        UPMForms.arbolado.setDatosIniciales(ceSitio);
-                        UPMForms.arbolado.setVisible(true);
-                        break;
-                    case 2: //Módulos A y C
-                        this.hide();
-                        UPMForms.arbolado.setDatosIniciales(ceSitio);
-                        UPMForms.arbolado.setVisible(true);
-                        break;
-                    case 3: //Modulos A, C, E y G
-                        this.hide();
-                        UPMForms.arboladoG.setDatosIniciales(ceSitio);
-                        UPMForms.arboladoG.setVisible(true);
-                        break;
-                    case 4: //Modulos A y E
-                        this.hide();
-                        UPMForms.arbolado.setDatosIniciales(ceSitio);
-                        UPMForms.arbolado.setVisible(true);
-                        break;
-                    case 5: //Modulos A, C, D y F
-                        this.hide();
-                        UPMForms.arboladoD.setDatosIniciales(ceSitio);
-                        UPMForms.arboladoD.setVisible(true);
-                        break;
-                    case 6://Modulos A, C y D
-                        this.hide();
-                        UPMForms.arboladoD.setDatosIniciales(ceSitio);
-                        UPMForms.arboladoD.setVisible(true);
-                        break;
-                    case 7://Modulos A, C, D y E
-                        this.hide();
-                        UPMForms.arboladoD.setDatosIniciales(ceSitio);
-                        UPMForms.arboladoD.setVisible(true);
-                        break;
-                    case 8://Modulos A, C, D, E y F
-                        this.hide();
-                        UPMForms.arboladoD.setDatosIniciales(ceSitio);
-                        UPMForms.arboladoD.setVisible(true);
-                        break;
-                    case 9://Modulos A, C y E
-                        this.hide();
-                        UPMForms.arbolado.setDatosIniciales(ceSitio);
-                        UPMForms.arbolado.setVisible(true);
-                        break;
-                    case 10://Modulos A, C, H
-                        this.hide();
-                        UPMForms.arbolado.setDatosIniciales(ceSitio);
-                        UPMForms.arbolado.setVisible(true);
-                        break;
-                    case 11://Modulos A y H
-                        this.hide();
-                        UPMForms.arbolado.setDatosIniciales(ceSitio);
-                        UPMForms.arbolado.setVisible(true);
-                        break;
-                    case 12://Modulos A, E y H
-                        this.hide();
-                        UPMForms.arbolado.setDatosIniciales(ceSitio);
-                        UPMForms.arbolado.setVisible(true);
-                        break;
-                    case 13://Modulos A, C, E y H
-                        this.hide();
-                        UPMForms.arbolado.setDatosIniciales(ceSitio);
-                        UPMForms.arbolado.setVisible(true);
-                        break;
-                    case 14://Modulos A, E y G
-                        this.hide();
-                        UPMForms.arboladoG.setDatosIniciales(ceSitio);
-                        UPMForms.arboladoG.setVisible(true);
-                        break;
-                    case 15://A y G
-                        this.hide();
-                        UPMForms.arboladoG.setDatosIniciales(ceSitio);
-                        UPMForms.arboladoG.setVisible(true);
-                        break;
-                    case 16: //A,C y G
-                        this.funciones.manipularBotonesMenuPrincipal(false);
-                        this.cdSecuencia.insertSecuenciaTerminada(ceSitio);
-                        break;
-
-                }
-            }
-        } else if (secuenciaID != null) {
-            switch (secuenciaID) {
-                case 1: //Módulo A
-                    this.hide();
-                    UPMForms.arbolado.revisarArbolado(ceSitio);
-                    UPMForms.arbolado.setVisible(true);
-                    break;
-                case 2: //Módulos A y C
-                    this.hide();
-                    UPMForms.arbolado.revisarArbolado(ceSitio);
-                    UPMForms.arbolado.setVisible(true);
-                    break;
-                case 3: //Modulos A, C, E y G
-                    this.hide();
-                    UPMForms.arboladoG.revisarArboladoG(ceSitio);
-                    UPMForms.arboladoG.setVisible(true);
-                    break;
-                case 4: //Modulos A y E
-                    this.hide();
-                    UPMForms.arbolado.revisarArbolado(ceSitio);
-                    UPMForms.arbolado.setVisible(true);
-                    break;
-                case 5: //Modulos A, C, D y F
-                    this.hide();
-                    UPMForms.arboladoD.revisarArboladoD(ceSitio);
-                    UPMForms.arboladoD.setVisible(true);
-                    break;
-                case 6://Modulos A, C y D
-                    this.hide();
-                    UPMForms.arboladoD.revisarArboladoD(ceSitio);
-                    UPMForms.arboladoD.setVisible(true);
-                    break;
-                case 7://Modulos A, C, D y E
-                    this.hide();
-                    UPMForms.arboladoD.revisarArboladoD(ceSitio);
-                    UPMForms.arboladoD.setVisible(true);
-                    break;
-                case 8://Modulos A, C, D, E y F
-                    this.hide();
-                    UPMForms.arboladoD.revisarArboladoD(ceSitio);
-                    UPMForms.arboladoD.setVisible(true);
-                    break;
-                case 9://Modulos A, C y E
-                    this.hide();
-                    UPMForms.arbolado.revisarArbolado(ceSitio);
-                    UPMForms.arbolado.setVisible(true);
-                    break;
-                case 10://Modulos A, C, H
-                    this.hide();
-                    UPMForms.arbolado.revisarArbolado(ceSitio);
-                    UPMForms.arbolado.setVisible(true);
-                    break;
-                case 11://Modulos A y H
-                    this.hide();
-                    UPMForms.arbolado.revisarArbolado(ceSitio);
-                    UPMForms.arbolado.setVisible(true);
-                    break;
-                case 12://Modulos A, E y H
-                    this.hide();
-                    UPMForms.arbolado.revisarArbolado(ceSitio);
-                    UPMForms.arbolado.setVisible(true);
-                    break;
-                case 13://Modulos A, C, E y H
-                    this.hide();
-                    UPMForms.arbolado.revisarArbolado(ceSitio);
-                    UPMForms.arbolado.setVisible(true);
-                    break;
-                case 14://Modulos A, E y G
-                    this.hide();
-                    UPMForms.arboladoG.revisarArboladoG(ceSitio);
-                    UPMForms.arboladoG.setVisible(true);
-                    break;
-                case 15://A y G
-                    this.hide();
-                    UPMForms.arboladoG.revisarArboladoG(ceSitio);
-                    UPMForms.arboladoG.setVisible(true);
-                    break;
-                case 16: //A,C y G
-                    this.funciones.manipularBotonesMenuPrincipal(false);
-                    this.cdSecuencia.insertSecuenciaTerminada(ceSitio);
-                    break;
-            }
+    private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
+        Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        Integer sitio = (Integer) cmbSitios.getSelectedItem();
+        if (cmbUPMID.getSelectedItem() != null) {
+            combo.reiniciarComboModel(cmbSitios);
+            fillCmbSitio(upmID);
+            cmbSitios.setEnabled(true);
+        } else {
+            combo.reiniciarComboModel(cmbSitios);
+            cmbSitios.setSelectedItem(null);
+            cmbSitios.setEnabled(false);
         }
-    }//GEN-LAST:event_btnRegresarActionPerformed
+    }//GEN-LAST:event_cmbUPMIDActionPerformed
+
+    private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
+                try {
+            //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
+            if (cmbSitios.getSelectedItem() == null) {
+                this.sitioID = 0;
+                /*limpiarControles();
+                limpiarPorcentajes();*/
+            } else {
+                String upm = cmbUPMID.getSelectedItem().toString();
+                String sitio = cmbSitios.getSelectedItem().toString();
+                this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
+
+            }
+            revisarSubmuestra(this.sitioID);
+
+//llenarTabla();
+        } catch (Exception e) {
+            e.getCause();
+        }
+    }//GEN-LAST:event_cmbSitiosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
@@ -1583,10 +1474,11 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnElimnarTroza;
     private javax.swing.JButton btnModificarTroza;
-    private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox cmbNumeroTroza;
+    private javax.swing.JComboBox<Integer> cmbSitios;
     private javax.swing.JComboBox cmbTipoTroza;
+    private javax.swing.JComboBox<Integer> cmbUPMID;
     private javax.swing.JTable grdSubmuestra;
     private javax.swing.JTable grdTrozas;
     private javax.swing.JLabel jLabel1;
@@ -1627,7 +1519,5 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txtNumeroAnillos;
     private javax.swing.JTextArea txtObservaciones;
     private javax.swing.JTextField txtRamaTallo;
-    private javax.swing.JTextField txtSitio;
-    private javax.swing.JTextField txtUPM;
     // End of variables declaration//GEN-END:variables
 }

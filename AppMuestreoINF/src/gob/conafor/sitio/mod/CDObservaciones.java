@@ -12,7 +12,7 @@ public class CDObservaciones {
     private String query;
 
     public void insertObservaciones(CEObservaciones observaciones) {
-        query = "INSERT INTO SITIOS_Observaciones(SitioID, FormatoID, Observaciones)VALUES(" + observaciones.getSitioID() + ", " + observaciones.getFormatoID()
+        query = "INSERT or replace  INTO SITIOS_Observaciones(SitioID, FormatoID, Observaciones)VALUES(" + observaciones.getSitioID() + ", " + observaciones.getFormatoID()
                 + ", '" + observaciones.getObservaciones() + "')";
         Connection conn = LocalConnection.getConnection();
         try {
@@ -21,12 +21,14 @@ public class CDObservaciones {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudieron guardar las observaciones "
                     + e.getClass().getName() + " : " + e.getMessage(), "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al guardar las observaciones",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -44,11 +46,13 @@ public class CDObservaciones {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudieron modificar las observaciones ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la modificacion de observaciones ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -63,11 +67,13 @@ public class CDObservaciones {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudieron eliminar las observaciones ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos  al eliminar las observaciones",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -77,6 +83,7 @@ public class CDObservaciones {
 
     public String getObservaciones(CEObservaciones observaciones) {
         query = "SELECT Observaciones FROM SITIOS_Observaciones WHERE SitioID= " + observaciones.getSitioID() + " AND FormatoID= " + observaciones.getFormatoID();
+        System.out.println("observaciones query\t"+query);
         Connection conn = LocalConnection.getConnection();
         String texto = null;
         try {
@@ -87,12 +94,14 @@ public class CDObservaciones {
             }
             return texto;
         } catch (SQLException e) {
+        e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener las observaciones ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            e.printStackTrace();
                 JOptionPane
                         .showMessageDialog(null,
                                 "Error! al cerrar la base de datos al obtener las observaciones",

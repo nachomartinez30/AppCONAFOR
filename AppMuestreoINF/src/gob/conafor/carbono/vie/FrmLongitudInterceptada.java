@@ -2923,7 +2923,7 @@ try {
         return modulo;
     }
 
-    private void revisarSiguienteFormulario(CESitio ceSitio) {
+   /* private void revisarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
         if (secuenciaID != null) {
             System.out.println("Secuencia 2967=" + secuenciaID);
@@ -2934,7 +2934,7 @@ try {
                     break;
                 case 2: //Módulos A y C
                     /*UPMForms.carbono.setDatosIniciales(ceSitio);
-                    UPMForms.carbono.setVisible(true);*/
+                    UPMForms.carbono.setVisible(true);
                     funciones.manipularBotonesMenuPrincipal(false);
                     this.hide();
                     break;
@@ -2996,7 +2996,7 @@ try {
                     break;
             }
         }
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarComponente;

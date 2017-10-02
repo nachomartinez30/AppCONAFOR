@@ -46,7 +46,7 @@ public class CDVarillasErosion {
     }
 
     public void insertDatosVarillas(CEVarillaErosion ceVarilla) {
-        query = "INSERT INTO SUELO_VarillaErosion(SitioID, NoVarilla, Azimut, Distancia, Profundidad)VALUES(" + ceVarilla.getSitioID()
+        query = "INSERT OR REPLACE INTO SUELO_VarillaErosion(SitioID, NoVarilla, Azimut, Distancia, Profundidad)VALUES(" + ceVarilla.getSitioID()
                 + ", " + ceVarilla.getNoVarilla() + ", " + ceVarilla.getAzimut() + ", " + ceVarilla.getDistancia() + ", " + ceVarilla.getProfundidad() + ")";
         Connection conn = LocalConnection.getConnection();
         try {

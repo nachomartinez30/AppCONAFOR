@@ -78,7 +78,7 @@ public class CDSuelo {
     }
     
     public void insertDatosSuelo(CESuelo ceSuelo) {
-        query = "INSERT INTO SUELO_Suelo(SitioID, UsoSueloID, OtroUsoSuelo, Espesor, PendienteDominante, Observaciones)VALUES("
+        query = "INSERT or REPLACE INTO SUELO_Suelo(SitioID, UsoSueloID, OtroUsoSuelo, Espesor, PendienteDominante, Observaciones)VALUES("
                 + ceSuelo.getSitioID() + ", " + ceSuelo.getUsoSueloID() + ", '" + ceSuelo.getOtroUsoSuelo() + "', " + ceSuelo.getEspesor() + ", "
                 + ceSuelo.getPendienteDominante() + ", '" + ceSuelo.getObservaciones() + "')";
         Connection conn = LocalConnection.getConnection();
@@ -86,6 +86,7 @@ public class CDSuelo {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
             conn.commit();
+            JOptionPane.showMessageDialog(null, "Se inserto correctamente los datos de suelo");
             st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la informacion de suelo ", "Conexion BD", JOptionPane.ERROR_MESSAGE);

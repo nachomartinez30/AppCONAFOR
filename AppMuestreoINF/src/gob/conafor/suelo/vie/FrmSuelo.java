@@ -1,5 +1,6 @@
 package gob.conafor.suelo.vie;
 
+import gob.conafor.sitio.mod.CDSitio;
 import gob.conafor.sitio.mod.CESitio;
 import gob.conafor.suelo.mod.CDEvidenciaErosion;
 import gob.conafor.suelo.mod.CDSuelo;
@@ -92,6 +93,7 @@ public class FrmSuelo extends JInternalFrame {
     private Version ver=new Version();
     private String version=ver.getVersion();
     private boolean revision;
+    private CDSitio cdSitio = new CDSitio();
     
     public FrmSuelo() {
         this.suelo = 19;
@@ -106,8 +108,7 @@ public class FrmSuelo extends JInternalFrame {
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
-        txtUPM.setText(String.valueOf(this.upmID));
-        txtSitio.setText(String.valueOf(this.sitio));
+       
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -123,18 +124,46 @@ public class FrmSuelo extends JInternalFrame {
         limpiarSuelo();
     }
 
-    public void revisarSuelo(CESitio ceSitio) {
-        revision=true;
+    
+    public void llenarControles() {
+        combo.reiniciarComboModel(this.cmbUPMID);
+        fillUPMID();
+    }
+
+    private void fillUPMID() {
+        List<Integer> listCapturado = new ArrayList<>();
+        listCapturado = this.cdSitio.getUPMSitios();
+        if (listCapturado != null) {
+            int size = listCapturado.size();
+            for (int i = 0; i < size; i++) {
+                cmbUPMID.addItem(listCapturado.get(i));
+            }
+        }
+    }
+
+    private void fillCmbSitio(int upmID) {
+        List<Integer> listSitios = new ArrayList<>();
+        listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+        if (listSitios != null) {
+            int size = listSitios.size();
+            for (int i = 0; i < size; i++) {
+                cmbSitios.addItem(listSitios.get(i));
+            }
+        }
+    }
+    
+    
+    public void revisarSuelo(int sitioID) {
+        /*revision=true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
-        this.sitio = ceSitio.getSitio();
+        this.sitio = ceSitio.getSitio();*/
         //System.out.println("Suelo "+this.ceSitio.getSecuencia());
-        txtUPM.setText(String.valueOf(this.upmID));
-        txtSitio.setText(String.valueOf(this.sitio));
+        
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
-        this.ceSitio.setSecuencia(ceSitio.getSecuencia());
+        //this.ceSitio.setSecuencia(ceSitio.getSecuencia());
         llenarTablaEvidenciaErosion();
         combo.reiniciarComboModel(cmbTransecto);
         combo.reiniciarComboModel(cmbUsoSuelo);
@@ -317,6 +346,7 @@ public class FrmSuelo extends JInternalFrame {
         ceSuelo.setPendienteDominante(this.pendienteDominante);
         ceSuelo.setObservaciones(this.observaciones);
         this.cdSuelo.insertDatosSuelo(ceSuelo);
+        limpiarSuelo();
     }
     
     private void actualizarSuelo(){
@@ -409,7 +439,7 @@ public class FrmSuelo extends JInternalFrame {
         cmbUsoSuelo.setSelectedItem(null);
         txtOtroUsoSuelo.setText("");
         txtOtroUsoSuelo.setEnabled(false);
-        txtEspesor.setValue(null);
+        //txtEspesor.setValue(null);
         txtEspesor.setText("");
         txtPendienteCobertura.setValue(null);
         txtPendienteCobertura.setText("");
@@ -817,9 +847,7 @@ public class FrmSuelo extends JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lblUPM = new javax.swing.JLabel();
-        txtUPM = new javax.swing.JTextField();
         lblSitio = new javax.swing.JLabel();
-        txtSitio = new javax.swing.JTextField();
         lblSuelo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblUsoActualSuelo = new javax.swing.JLabel();
@@ -885,6 +913,8 @@ public class FrmSuelo extends JInternalFrame {
         lblVarilla4 = new javax.swing.JLabel();
         lblVarilla5 = new javax.swing.JLabel();
         lblUsoSuelo = new javax.swing.JLabel();
+        cmbUPMID = new javax.swing.JComboBox<>();
+        cmbSitios = new javax.swing.JComboBox<>();
 
         setMaximizable(true);
         setTitle("Suelo, cobertura y evidencia de erosión "+version);
@@ -896,14 +926,8 @@ public class FrmSuelo extends JInternalFrame {
         lblUPM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUPM.setText("UPMID:");
 
-        txtUPM.setEditable(false);
-        txtUPM.setEnabled(false);
-
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-
-        txtSitio.setEditable(false);
-        txtSitio.setEnabled(false);
 
         lblSuelo.setBackground(new java.awt.Color(153, 153, 153));
         lblSuelo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -1612,6 +1636,18 @@ public class FrmSuelo extends JInternalFrame {
         lblUsoSuelo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUsoSuelo.setToolTipText("Descricpcion del uso actual del suelo");
 
+        cmbUPMID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUPMIDActionPerformed(evt);
+            }
+        });
+
+        cmbSitios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSitiosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1632,12 +1668,13 @@ public class FrmSuelo extends JInternalFrame {
                     .addComponent(lblSuelo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblUPM)
-                        .addGap(4, 4, 4)
-                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblSitio)
-                        .addGap(4, 4, 4)
-                        .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1665,15 +1702,14 @@ public class FrmSuelo extends JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
+                .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblUPM)
-                            .addComponent(lblSitio))))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblUPM)
+                        .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblSitio)
+                        .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSuelo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1693,7 +1729,7 @@ public class FrmSuelo extends JInternalFrame {
                         .addComponent(lblObservaciones)
                         .addGap(4, 4, 4)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnContinuar)
                     .addComponent(btnSalir))
@@ -2117,21 +2153,17 @@ public class FrmSuelo extends JInternalFrame {
                 crearVarilla3();
                 crearVarilla4();
                 crearVarilla5();
-                this.hide();
+                /*this.hide();
                 UPMForms.condicionDegradacion.setDatosiniciales(this.ceSitio);
                 UPMForms.condicionDegradacion.setVisible(true);
-                this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
+                this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);*/
             } else {
-                 //JOptionPane.showMessageDialog(null, "Actualizar");
-                actualizarSuelo();
-                actualizarVarilla1();
-                actualizarVarilla2();
-                actualizarVarilla3();
-                actualizarVarilla4();
-                actualizarVarilla5();
-                this.hide();
-                UPMForms.condicionDegradacion.revisarCondicionDegradacion(this.ceSitio);
-                UPMForms.condicionDegradacion.setVisible(true);
+                crearSuelo();
+                crearVarilla1();
+                crearVarilla2();
+                crearVarilla3();
+                crearVarilla4();
+                crearVarilla5();
             }
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
@@ -2371,6 +2403,42 @@ public class FrmSuelo extends JInternalFrame {
         }
     }//GEN-LAST:event_chkDoselKeyPressed
 
+    private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
+        Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        this.upmID = (Integer) cmbUPMID.getSelectedItem();
+        Integer sitio = (Integer) cmbSitios.getSelectedItem();
+        if (cmbUPMID.getSelectedItem() != null) {
+            combo.reiniciarComboModel(cmbSitios);
+            fillCmbSitio(upmID);
+            cmbSitios.setEnabled(true);
+        } else {
+            combo.reiniciarComboModel(cmbSitios);
+            cmbSitios.setSelectedItem(null);
+            cmbSitios.setEnabled(false);
+        }
+    }//GEN-LAST:event_cmbUPMIDActionPerformed
+
+    private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
+        try {
+            //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
+            if (cmbSitios.getSelectedItem() == null) {
+                this.sitioID = 0;
+                limpiarSuelo();
+                /*limpiarPorcentajes();*/
+            } else {
+                String upm = cmbUPMID.getSelectedItem().toString();
+                String sitio = cmbSitios.getSelectedItem().toString();
+                this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
+
+            }
+            revisarSuelo(this.sitioID);
+
+//llenarTabla();
+        } catch (Exception e) {
+            e.getCause();
+        }
+    }//GEN-LAST:event_cmbSitiosActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarPunto;
     private javax.swing.JButton btnContinuar;
@@ -2384,7 +2452,9 @@ public class FrmSuelo extends JInternalFrame {
     private javax.swing.JCheckBox chkDosel;
     private javax.swing.JComboBox cmbLecturaTierra;
     private javax.swing.JComboBox cmbPunto;
+    private javax.swing.JComboBox<Integer> cmbSitios;
     private javax.swing.JComboBox cmbTransecto;
+    private javax.swing.JComboBox<Integer> cmbUPMID;
     private javax.swing.JComboBox cmbUsoSuelo;
     private javax.swing.JTable grdEvidenciaErosion;
     private javax.swing.JLabel jLabel1;
@@ -2440,7 +2510,5 @@ public class FrmSuelo extends JInternalFrame {
     private javax.swing.JFormattedTextField txtProfundidad3;
     private javax.swing.JFormattedTextField txtProfundidad4;
     private javax.swing.JFormattedTextField txtProfundidad5;
-    private javax.swing.JTextField txtSitio;
-    private javax.swing.JTextField txtUPM;
     // End of variables declaration//GEN-END:variables
 }

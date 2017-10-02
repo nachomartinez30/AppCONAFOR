@@ -22,6 +22,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
     private final int caracteristicasUPM;
     private CDSitio cdSitio = new CDSitio();
     private CESitio ceSitio = new CESitio();
+    private FuncionesComunes combo = new FuncionesComunes();
     private static final int FORMATO_ID = 5;
     private int upmID;
     private int sitioID;
@@ -51,29 +52,55 @@ public class FrmClaveVegetacion extends JInternalFrame {
         this.caracteristicasUPM = 13;
     }
     
+     public void llenarControles() {
+        combo.reiniciarComboModel(this.cmbUPMID);
+        fillUPMID();
+    }
+
+    private void fillUPMID() {
+        List<Integer> listCapturado = new ArrayList<>();
+        listCapturado = this.cdSitio.getUPMSitios();
+        if (listCapturado != null) {
+            int size = listCapturado.size();
+            for (int i = 0; i < size; i++) {
+                cmbUPMID.addItem(listCapturado.get(i));
+            }
+        }
+    }
+
+    private void fillCmbSitio(int upmID) {
+        List<Integer> listSitios = new ArrayList<>();
+        listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+        if (listSitios != null) {
+            int size = listSitios.size();
+            for (int i = 0; i < size; i++) {
+                cmbSitios.addItem(listSitios.get(i));
+            }
+        }
+    }
+    
+    
     public void setDatosIniciales(CESitio sitio){
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
-        txtUPM.setText(String.valueOf(this.upmID));
-        txtSitio.setText(String.valueOf(this.sitio));
+        
         this.ceSitio = sitio;
         this.modificar = 0;
         funciones.manipularBotonesMenuPrincipal(true);
         limpiarControles();
     }
     
-    public void revisarClaveVegetacion(CESitio sitio) {
-        revision=true;
+    public void revisarClaveVegetacion(int sitioID) {
+       /* revision=true;
         limpiarControles();
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
-        txtUPM.setText(String.valueOf(this.upmID));
-        txtSitio.setText(String.valueOf(this.sitio));
-        this.ceSitio = sitio;
+       
+        this.ceSitio = sitio;*/
 
-        CESitio ceVegetacion = cdSitio.getClaveVegetacion(this.sitioID);
+        CESitio ceVegetacion = cdSitio.getClaveVegetacion(sitioID);
         CatEClaveSerieV claveVegetacion = new CatEClaveSerieV();
         claveVegetacion.setClaveSerievID(ceVegetacion.getClaveSerieVID());
         
@@ -186,15 +213,15 @@ public class FrmClaveVegetacion extends JInternalFrame {
         this.condicionPresente = txtCondicionPresente.getText();
         this.condicionEcotono = txtDescripcionEcotono.getText();
     }
-    
+
     private void crearClaveVegetacion() {
         this.ceSitio.setSitioID(this.sitioID);
-        this.ceSitio.setSitio(this.sitio);
-        if(lblCoberturaVegetal.getText().equals("Forestal")){
+        this.ceSitio.setSitio((Integer) cmbSitios.getSelectedItem());
+        if (lblCoberturaVegetal.getText().equals("Forestal")) {
             this.ceSitio.setCoberturaForestal(1);
             System.out.println("Forestal");
         }
-        if(lblCoberturaVegetal.getText().equals("No Forestal")){
+        if (lblCoberturaVegetal.getText().equals("No Forestal")) {
             this.ceSitio.setCoberturaForestal(0);
             System.out.println("No Forestal");
         }
@@ -207,6 +234,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
         this.ceSitio.setCondicionEcotono(this.condicionEcotono);
 
         this.cdSitio.updateClaveVegetacion(ceSitio);
+        //limpiarControles();
     }
     
     
@@ -533,9 +561,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
         grbTipoVegetacion = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         lblUPM = new javax.swing.JLabel();
-        txtUPM = new javax.swing.JTextField();
         lblSitio = new javax.swing.JLabel();
-        txtSitio = new javax.swing.JTextField();
         lblClaveVegetacion = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblCondicion = new javax.swing.JLabel();
@@ -559,6 +585,8 @@ public class FrmClaveVegetacion extends JInternalFrame {
         txtCondicionPresente = new javax.swing.JTextArea();
         btnContinuar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        cmbUPMID = new javax.swing.JComboBox<>();
+        cmbSitios = new javax.swing.JComboBox<>();
 
         setMaximizable(true);
         setTitle("Clave de vegetacion "+version);
@@ -570,14 +598,8 @@ public class FrmClaveVegetacion extends JInternalFrame {
         lblUPM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUPM.setText("UPMID:");
 
-        txtUPM.setEditable(false);
-        txtUPM.setEnabled(false);
-
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-
-        txtSitio.setEditable(false);
-        txtSitio.setEnabled(false);
 
         lblClaveVegetacion.setBackground(new java.awt.Color(153, 153, 153));
         lblClaveVegetacion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -761,7 +783,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
         jScrollPane2.setViewportView(txtCondicionPresente);
 
         btnContinuar.setMnemonic('c');
-        btnContinuar.setText("Continuar");
+        btnContinuar.setText("Capturar");
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarActionPerformed(evt);
@@ -776,6 +798,18 @@ public class FrmClaveVegetacion extends JInternalFrame {
             }
         });
 
+        cmbUPMID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUPMIDActionPerformed(evt);
+            }
+        });
+
+        cmbSitios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSitiosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -787,13 +821,13 @@ public class FrmClaveVegetacion extends JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblUPM)
-                                .addGap(10, 10, 10)
-                                .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(588, 588, 588)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(570, 570, 570)
                                 .addComponent(lblSitio)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(49, 49, 49))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -818,16 +852,16 @@ public class FrmClaveVegetacion extends JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(lblUPM))
+                        .addGap(7, 7, 7)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblUPM)
+                            .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lblSitio)
-                                .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(6, 6, 6)
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblSitio)
+                            .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(2, 2, 2)
                 .addComponent(lblClaveVegetacion)
                 .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -884,23 +918,23 @@ public class FrmClaveVegetacion extends JInternalFrame {
         if (validarClaveVegetacion()) {
             if (this.modificar == 0) {
                 crearClaveVegetacion();
-                this.hide();
-                if (this.ceSitio.getSitio() == 1) { //es sitio 1
+                //this.hide();
+                /*if (this.ceSitio.getSitio() == 1) { //es sitio 1
                     UPMForms.caracteristicasUPM.setDatosIniciales(ceSitio);
                     UPMForms.caracteristicasUPM.setVisible(true);
                 } else {
-                    seleccionarSiguienteFormulario(this.ceSitio);
-                }
-                this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
+                    //seleccionarSiguienteFormulario(this.ceSitio);
+                }*/
+                //this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
             } else {
                 crearClaveVegetacion();
-                this.hide();
-                if (this.ceSitio.getSitio() == 1) {
+                //this.hide();
+                /*if (this.ceSitio.getSitio() == 1) {
                     UPMForms.caracteristicasUPM.revisarCaracteristicasUPM(ceSitio);
                     UPMForms.caracteristicasUPM.setVisible(true);
                 } else {
                     revisarSiguienteFormulario(this.ceSitio);
-                }
+                }*/
             }
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
@@ -996,6 +1030,41 @@ public class FrmClaveVegetacion extends JInternalFrame {
         cmbFaseSucecional.setSelectedItem(null);
     }//GEN-LAST:event_rbtPrimarioActionPerformed
 
+    private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
+        Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        Integer sitio = (Integer) cmbSitios.getSelectedItem();
+        if (cmbUPMID.getSelectedItem() != null) {
+            combo.reiniciarComboModel(cmbSitios);
+            fillCmbSitio(upmID);
+            cmbSitios.setEnabled(true);
+        } else {
+            combo.reiniciarComboModel(cmbSitios);
+            cmbSitios.setSelectedItem(null);
+            cmbSitios.setEnabled(false);
+        }
+    }//GEN-LAST:event_cmbUPMIDActionPerformed
+
+    private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
+        try {
+            //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
+            if (cmbSitios.getSelectedItem() == null) {
+                this.sitioID = 0;
+                limpiarControles();
+                
+            } else {
+                String upm = cmbUPMID.getSelectedItem().toString();
+                String sitio = cmbSitios.getSelectedItem().toString();
+                this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
+
+            }
+            revisarClaveVegetacion(this.sitioID);
+
+//llenarTabla();
+        } catch (Exception e) {
+            e.getCause();
+        }
+    }//GEN-LAST:event_cmbSitiosActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnSalir;
@@ -1003,6 +1072,8 @@ public class FrmClaveVegetacion extends JInternalFrame {
     private javax.swing.JCheckBox chkEcotono;
     private javax.swing.JComboBox cmbClaveSerieV;
     private javax.swing.JComboBox cmbFaseSucecional;
+    private javax.swing.JComboBox<Integer> cmbSitios;
+    private javax.swing.JComboBox<Integer> cmbUPMID;
     private javax.swing.ButtonGroup grbTipoVegetacion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -1024,7 +1095,5 @@ public class FrmClaveVegetacion extends JInternalFrame {
     private javax.swing.JRadioButton rbtSecundario;
     private javax.swing.JTextArea txtCondicionPresente;
     private javax.swing.JTextArea txtDescripcionEcotono;
-    private javax.swing.JTextField txtSitio;
-    private javax.swing.JTextField txtUPM;
     // End of variables declaration//GEN-END:variables
 }

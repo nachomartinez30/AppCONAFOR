@@ -989,11 +989,13 @@ public class CDSitio {
         query = "UPDATE SITIOS_Sitio SET ClaveSerieV= " + sitio.getClaveSerieVID() + ", Condicion= " + sitio.getCondicion()+ ", FaseSucecional= " + sitio.getFaseSucecionalID()
                 + ", ArbolFuera= " + sitio.getArbolFuera() + ", Ecotono= " + sitio.getEcotono() + ", CondicionPresenteCampo= '" + sitio.getCondicionPresenteCampo()
                 + "', CondicionEcotono= '" + sitio.getCondicionEcotono() + "', CoberturaForestal="+sitio.getCoberturaForestal()+" WHERE SitioID= " + sitio.getSitioID() + " AND Sitio= " + sitio.getSitio();
+        System.out.println("clave vegetacion = \t"+query);
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
             conn.commit();
+            JOptionPane.showMessageDialog(null, "Clave de vegetacion actualizada");
             st.close();
         } catch (SQLException e) {
             e.printStackTrace();

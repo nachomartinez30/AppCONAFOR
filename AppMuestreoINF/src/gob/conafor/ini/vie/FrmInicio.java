@@ -754,7 +754,8 @@ public class FrmInicio extends javax.swing.JFrame {
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Clave de vegetación]":
-                    /*FORMULARIO A ABRIR*/
+                    UPMForms.claveVegetacion.setVisible(true);
+                    UPMForms.claveVegetacion.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Características del conglomerado]":

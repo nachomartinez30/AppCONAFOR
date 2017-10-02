@@ -611,7 +611,7 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
         }
     }
 
-    private void revisarSiguienteFormulario(CESitio ceSitio) {
+    /*private void revisarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
         if (secuenciaID != null) {
             switch (secuenciaID) {
@@ -624,8 +624,8 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
                     UPMForms.arbolado.setVisible(true);
                     break;
                 case 3: //Modulos A, C, E y G
-                    /*UPMForms.arboladoG.setDatosIniciales(ceSitio);
-                    UPMForms.arboladoG.setVisible(true);*/
+                    UPMForms.arboladoG.setDatosIniciales(ceSitio);
+                    UPMForms.arboladoG.setVisible(true);
                     break;
                 case 4: //Modulos A y E
                     UPMForms.arbolado.revisarArbolado(ceSitio);
@@ -669,15 +669,15 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
                     break;
                 case 14://Modulos A, E y G
                     /* UPMForms.repobladoVM.setDatosIniciales(ceSitio);
-                    UPMForms.repobladoVM.setVisible(true);*/
+                    UPMForms.repobladoVM.setVisible(true);
                     break;
                 case 15://A y G
                     /* UPMForms.repobladoVM.setDatosIniciales(ceSitio);
-                    UPMForms.repobladoVM.setVisible(true);*/
+                    UPMForms.repobladoVM.setVisible(true);
                     break;
             }
         }
-    }
+    }*/
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

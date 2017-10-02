@@ -493,7 +493,7 @@ private void fillCmbSitio(int upmID) {
         }
     }
 
-    private void revisarSiguienteFormulario(CESitio ceSitio) {
+    /*private void revisarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
         Integer sitio = this.funciones.sitioCapturaSueloCarbono(this.upmID, 3);
         System.out.println("SecuenciaID="+secuenciaID);
@@ -521,7 +521,7 @@ private void fillCmbSitio(int upmID) {
                     break;
                 case 6://Modulos A, C y D
                     /*UPMForms.suelo.setDatosiniciales(ceSitio);
-                    UPMForms.suelo.setVisible(true);*/
+                    UPMForms.suelo.setVisible(true);
                     this.hide();
                     funciones.manipularBotonesMenuPrincipal(false);
                     break;
@@ -565,13 +565,13 @@ private void fillCmbSitio(int upmID) {
                     break;
                 case 14://Modulos A, E y G
                     /* UPMForms.carbono.setDatosIniciales(ceSitio);
-                    UPMForms.carbono.setVisible(true);*/
+                    UPMForms.carbono.setVisible(true);
                     this.hide();
                     funciones.manipularBotonesMenuPrincipal(false);
                     break;
                 case 15://A y G
                     /* UPMForms.repobladoVM.setDatosIniciales(ceSitio);
-                    UPMForms.repobladoVM.setVisible(true);*/
+                    UPMForms.repobladoVM.setVisible(true);
                     this.hide();
                     funciones.manipularBotonesMenuPrincipal(false);
                     break;
@@ -580,7 +580,7 @@ private void fillCmbSitio(int upmID) {
                     break;
             }
         }
-    }
+    }*/
 
     private void manipularControles(boolean habilitar) {
         if (habilitar == true) {

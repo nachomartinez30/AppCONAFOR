@@ -1,5 +1,6 @@
 package gob.conafor.upm.vie;
 
+import gob.conafor.sitio.mod.CDSitio;
 import gob.conafor.sitio.mod.CESitio;
 import gob.conafor.sys.mod.CDSecuencia;
 import gob.conafor.sys.mod.CDSeguimientoUPM;
@@ -43,6 +44,8 @@ public class FrmCaracteristicasUPM extends javax.swing.JInternalFrame {
     private FuncionesComunes funciones = new FuncionesComunes();
     private Version ver=new Version();
     private String version=ver.getVersion();
+    private FuncionesComunes combo = new FuncionesComunes();
+    private CDSitio cdSitio = new CDSitio();
 
     public FrmCaracteristicasUPM() {
         initComponents();
@@ -55,7 +58,7 @@ public class FrmCaracteristicasUPM extends javax.swing.JInternalFrame {
 
     public void setDatosIniciales(CESitio ceSitio) {
         this.upmID = ceSitio.getUpmID();
-        txtUPM.setText(String.valueOf(this.upmID));
+        
         this.ceSitio = ceSitio;
         DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbClaseTipo.getModel();
         dcm.removeAllElements();
@@ -67,16 +70,36 @@ public class FrmCaracteristicasUPM extends javax.swing.JInternalFrame {
         limpiarControlesUPM();
     }
 
-    public void revisarCaracteristicasUPM(CESitio ceSitio) {
-        revision=true;
-        this.upmID = ceSitio.getUpmID();
-        txtUPM.setText(String.valueOf(this.upmID));
-        this.ceSitio = ceSitio;
+    
+ public void llenarControles() {
+	combo.reiniciarComboModel(this.cmbUPMID);
+	fillUPMID();
+}
+private void fillUPMID() {
+	List<Integer> listCapturado = new ArrayList<>();
+	listCapturado = this.cdSitio.getUPMSitios();
+	if (listCapturado != null) {
+		int size = listCapturado.size();
+		for (int i = 0; i < size; i++) {
+			cmbUPMID.addItem(listCapturado.get(i));
+		}
+	}
+}
+
+
+    
+    
+    
+    public void revisarCaracteristicasUPM(int upmid) {
+        //revision=true;
+        //this.upmID = ceSitio.getUpmID();
+        
+        //this.ceSitio = ceSitio;
         DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbClaseTipo.getModel();
         dcm.removeAllElements();
         fillCmbTipoEpifita();
         llenarTablaEpifitas();
-        this.ceUpm = this.cdUPM.getCaracteristicasUPM(ceSitio.getUpmID());
+        this.ceUpm = this.cdUPM.getCaracteristicasUPM(upmid);
         txtAltitud.setText(String.valueOf(this.ceUpm.getAltitud()));
         txtPendiente.setText(String.valueOf(this.ceUpm.getPendienteRepresentativa()));
         CatETipoFisiografia ceFisiografia = new CatETipoFisiografia();
@@ -85,7 +108,7 @@ public class FrmCaracteristicasUPM extends javax.swing.JInternalFrame {
         CatETipoExposicion ceExposicion = new CatETipoExposicion();
         ceExposicion.setExposicionID(this.ceUpm.getExposicionID());
         cmbExposicion.setSelectedItem(ceExposicion);
-        this.modificar = 1;
+        //this.modificar = 1;
         funciones.manipularBotonesMenuPrincipal(true);
     }
 
@@ -170,6 +193,7 @@ public class FrmCaracteristicasUPM extends javax.swing.JInternalFrame {
     }
 
     private void crearCaracteristicasUPM() {
+        this.upmID = (Integer) cmbUPMID.getSelectedItem();
         CatETipoFisiografia fisiografiaID = (CatETipoFisiografia) cmbFisiografia.getSelectedItem();
         CatETipoExposicion exposicionID = (CatETipoExposicion) cmbExposicion.getSelectedItem();
         CEUPM ceUpm = new CEUPM();
@@ -634,7 +658,6 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
 
         jPanel1 = new javax.swing.JPanel();
         lblUPM = new javax.swing.JLabel();
-        txtUPM = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         lblAltitud = new javax.swing.JLabel();
         lblPendiente = new javax.swing.JLabel();
@@ -662,6 +685,7 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
         btnContinuar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         chkEpifitas = new javax.swing.JCheckBox();
+        cmbUPMID = new javax.swing.JComboBox<>();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jPanel3 = new javax.swing.JPanel();
         lblUPM1 = new javax.swing.JLabel();
@@ -703,9 +727,6 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
 
         lblUPM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUPM.setText("UPMID:");
-
-        txtUPM.setEditable(false);
-        txtUPM.setEnabled(false);
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -884,7 +905,7 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
         jScrollPane1.setViewportView(grdEpifitas);
 
         btnContinuar.setMnemonic('c');
-        btnContinuar.setText("Continuar");
+        btnContinuar.setText("Capturar");
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarActionPerformed(evt);
@@ -908,6 +929,12 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
             }
         });
 
+        cmbUPMID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUPMIDActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -921,15 +948,15 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(lblUPM)
-                        .addGap(10, 10, 10)
-                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblDiversidadEpifita, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 904, Short.MAX_VALUE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 926, Short.MAX_VALUE))
                         .addContainerGap())))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -941,14 +968,11 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(lblUPM))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addGap(8, 8, 8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUPM)
+                    .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDiversidadEpifita)
@@ -958,7 +982,7 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnContinuar)
                     .addComponent(btnSalir))
@@ -1269,18 +1293,18 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         asignarDatosUPM();
         if (validarCaracteristicasConglomerado()) {
-            if (chkEpifitas.isSelected() && cdEpifita.validarTablaEpifitas(ceSitio.getUpmID())) {
+            if (chkEpifitas.isSelected() && cdEpifita.validarTablaEpifitas((Integer) cmbUPMID.getSelectedItem())) {
                 JOptionPane.showMessageDialog(null, "Si selecciona Epifitas, se debe capturar", "Características del UPM", JOptionPane.INFORMATION_MESSAGE);
                 chkEpifitas.requestFocus();
             } else if (this.modificar == 0) {
                 crearCaracteristicasUPM();
-                this.hide();
-                seleccionarSiguienteFormulario(this.ceSitio);
-                this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
+                //this.hide();
+                //seleccionarSiguienteFormulario(this.ceSitio);
+                //this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
             } else {
-                this.hide();
+                //this.hide();
                 crearCaracteristicasUPM();
-               revisarSiguienteFormulario(this.ceSitio);
+               //revisarSiguienteFormulario(this.ceSitio);
             }
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
@@ -1463,6 +1487,12 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
         // TODO add your handling code here:
     }//GEN-LAST:event_chkEpifitas1ActionPerformed
 
+    private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
+        Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        this.upmID = upmID;
+        revisarCaracteristicasUPM(upmID);
+    }//GEN-LAST:event_cmbUPMIDActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnContinuar1;
@@ -1486,6 +1516,7 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
     private javax.swing.JComboBox cmbPresenciaRamas1;
     private javax.swing.JComboBox cmbPresenciaTroncos;
     private javax.swing.JComboBox cmbPresenciaTroncos1;
+    private javax.swing.JComboBox<Integer> cmbUPMID;
     private javax.swing.JTable grdEpifitas;
     private javax.swing.JTable grdEpifitas1;
     private javax.swing.JInternalFrame jInternalFrame1;
@@ -1523,7 +1554,6 @@ private void revisarSiguienteFormulario(CESitio ceSitio) {
     private javax.swing.JFormattedTextField txtAltitud1;
     private javax.swing.JFormattedTextField txtPendiente;
     private javax.swing.JFormattedTextField txtPendiente1;
-    private javax.swing.JTextField txtUPM;
     private javax.swing.JTextField txtUPM1;
     // End of variables declaration//GEN-END:variables
 }

@@ -759,7 +759,8 @@ public class FrmInicio extends javax.swing.JFrame {
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Características del conglomerado]":
-                    /*FORMULARIO A ABRIR*/
+                    UPMForms.caracteristicasUPM.setVisible(true);
+                    UPMForms.caracteristicasUPM.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Carbono e incendios]":

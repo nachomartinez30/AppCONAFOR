@@ -250,6 +250,7 @@ public class CDEpifitas {
 
     public boolean validarTablaEpifitas(int upmID) {
         query = "SELECT * FROM UPM_Epifita WHERE UPMID= " + upmID;
+        System.out.println("epifitas\t"+query);
         boolean vacio = true;
         Connection conn = LocalConnection.getConnection();
         try {

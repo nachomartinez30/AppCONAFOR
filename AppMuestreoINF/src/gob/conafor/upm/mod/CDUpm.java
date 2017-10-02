@@ -555,11 +555,13 @@ public CEUPM getCaracteristicasUPM(int upmID) {
 public void updateCaracteristicasUPM(CEUPM ceupm) {
     query = "UPDATE  UPM_UPM SET Altitud= " + ceupm.getAltitud() + ", PendienteRepresentativa= " + ceupm.getPendienteRepresentativa()
     + ", FisiografiaID= " + ceupm.getFisiografiaID() + ", ExposicionID= " + ceupm.getExposicionID() + " WHERE UPMID= " + ceupm.getUpmID();
+    System.out.println("updateCaracteristicasUPM \t"+query);
     Connection conn = LocalConnection.getConnection();
     try {
         Statement st = conn.createStatement();
         st.executeUpdate(query);
         conn.commit();
+        JOptionPane.showMessageDialog(null, "Caracteristicas actualizadas correctamente");
         st.close();
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información de caracteristicas de la UPM "

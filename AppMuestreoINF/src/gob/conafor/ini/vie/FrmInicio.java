@@ -740,6 +740,8 @@ public class FrmInicio extends javax.swing.JFrame {
                     break;
                 case "[Modulos, A, Repoblado]":
                     /*FORMULARIO A ABRIR*/
+                    UPMForms.repoblado.setVisible(true);
+                    UPMForms.repoblado.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Arbolado]":

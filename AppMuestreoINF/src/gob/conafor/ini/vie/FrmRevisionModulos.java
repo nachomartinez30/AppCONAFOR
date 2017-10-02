@@ -72,7 +72,7 @@ public class FrmRevisionModulos extends javax.swing.JInternalFrame {
         }
     }
 
-    private void mostrarFormato(int formatoID, int secuenciaID) {
+    /*private void mostrarFormato(int formatoID, int secuenciaID) {
         
         switch (formatoID) {
             case 1:
@@ -176,7 +176,7 @@ public class FrmRevisionModulos extends javax.swing.JInternalFrame {
                 break;
         }
         
-    }
+    }*/
 
     private void llenarTablaSeguimiento(int upm, int sitio){
       grdSecuencia.setModel(cdSecuencia.getTablaSecuenciaCapturaRevision(upm, sitio));
@@ -424,7 +424,7 @@ public class FrmRevisionModulos extends javax.swing.JInternalFrame {
             int fila = grdSecuencia.getSelectedRow();//guarda la fila seleccionada         
             String formatoID = grdSecuencia.getValueAt(fila, 1/*columna 1 =Formato ID*/).toString(); //obtiene FormatoID desde la tabla de secuencia
             this.hide();// esconde el frame
-            mostrarFormato(Integer.parseInt(formatoID), cdSecuencia.getSecuencia(upm)); // muetsra el formato (formatoID,consulta la secuencia en elconglomerado)
+            /*mostrarFormato(Integer.parseInt(formatoID), cdSecuencia.getSecuencia(upm));*/ // muestra el formato (formatoID,consulta la secuencia en elconglomerado)
         }
     }//GEN-LAST:event_grdSecuenciaMouseClicked
 

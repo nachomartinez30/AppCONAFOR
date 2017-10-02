@@ -3449,7 +3449,7 @@ private void fillCmbSitio(int upmID) {
             if(indexEspecie != null){
                 ceColecta.setEspecieID(indexEspecie.getEspecieID());
             }
-            ceColecta.setUPMID(this.upmID);
+             ceColecta.setUPMID((Integer) cmbUPMID.getSelectedItem());
             //ceColecta.setInfraespecie(txtInfraespecie.getText());
             ceColecta.setNombreComun(txtNombreComun.getText());
             claveColecta.setDatosIniciales(ceColecta, FORMATO_ID, "TAXONOMIA_Arbolado", "NoIndividuo", this.sitioID, Integer.parseInt(noIndividuo));

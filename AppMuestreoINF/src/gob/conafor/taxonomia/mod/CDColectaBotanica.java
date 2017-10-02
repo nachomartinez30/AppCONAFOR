@@ -31,12 +31,14 @@ public class CDColectaBotanica {
             rs.close();
             return listSeccion;
         } catch (SQLException e) {
+        	e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en lista de secciones taxonómicas", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            	e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al cargar la lista de secciones taxonómicas", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -57,6 +59,7 @@ public class CDColectaBotanica {
             rs.close();
             return listClaveColecta;
         } catch (SQLException e) {
+        	e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener las clave de colecta creadas ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -65,6 +68,7 @@ public class CDColectaBotanica {
             try {
                 conn.close();
             } catch (SQLException e) {
+            	e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener las claves de colecta creadas "
                 , "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -76,6 +80,7 @@ public class CDColectaBotanica {
         String upm = null;
         String preclave = null;
         this.query = "SELECT UPMID, FechaInicio FROM UPM_UPM WHERE UPMID= " + upmID;
+           System.out.println("fecha UPM=\t"+query);
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -105,6 +110,7 @@ public class CDColectaBotanica {
             preclave = upm + "_" + fechaInicio;
             return preclave;
         } catch (Exception e) {
+        	e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener la fecha de inicio para la pre-clave de colecta ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -113,6 +119,7 @@ public class CDColectaBotanica {
             try {
                 conn.close();
             } catch (SQLException e) {
+            	e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener la fecha de inicio para la pre-clave de colecta "
                 , "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -134,6 +141,7 @@ public class CDColectaBotanica {
             rs.close();
             return listUPMID;
         } catch (SQLException e) {
+        	e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener los puntos UPM de la colecta botanica ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -142,6 +150,7 @@ public class CDColectaBotanica {
             try {
                 conn.close();
             } catch (SQLException e) {
+            	e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener los puntos UPM de la colecta botanica"
                 , "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -163,6 +172,7 @@ public class CDColectaBotanica {
             rs.close();
             return listClave;
         } catch (SQLException e) {
+        	e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener las claves de la colecta botanica ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -171,6 +181,7 @@ public class CDColectaBotanica {
             try {
                 conn.close();
             } catch (SQLException e) {
+            	e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener las claves de la colecta botanica"
                 , "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -196,12 +207,14 @@ public class CDColectaBotanica {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        	e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la informacion de colecta botánica"
              , "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            	e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar datos de colecta botánica ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -221,12 +234,14 @@ public class CDColectaBotanica {
             JOptionPane.showMessageDialog(null, "Clave Actualizada"
                 , "Conexion BD", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
+        	e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la Clave de Colecta"
             , "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            	e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la actualizacion de Clave"
                 , "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -249,12 +264,14 @@ public class CDColectaBotanica {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        	e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la información de colecta botánica"
             , "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            	e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la información de colecta botánica"
                 , "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -276,12 +293,14 @@ public class CDColectaBotanica {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+        	e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo asignar la clave de colecta botánica "
             , "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            	e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al asignar la clave de colecta botánica"
                 , "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -299,12 +318,14 @@ public class CDColectaBotanica {
             conn.commit();
             st.close();
         } catch (Exception e) {
+        	e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la clave de colecta botánica"
             , "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            	e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar la clave de colecta botánica",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -357,6 +378,7 @@ public class CDColectaBotanica {
             rs.close();
             return ceColecta;
         } catch (SQLException e) {
+        	e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     "Error! al obtener la información general del upm ",
                     "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -365,6 +387,7 @@ public class CDColectaBotanica {
             try {
                 conn.close();
             } catch (SQLException e) {
+            	e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos al revisar si hay datos de colecta botánica "
                 , "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -384,12 +407,14 @@ public class CDColectaBotanica {
             st.close();
             rs.close();
         } catch (SQLException e) {
+        	e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al revisar si ya existe la clave  de colecta botánica "
             , "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            	e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al revisar si ya existe la clave de colecta botánica "
                 , "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -410,12 +435,14 @@ public class CDColectaBotanica {
             st.close();
             rs.close();
         } catch (SQLException e) {
+        	e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al revisar si hay datos de colecta botánica "
             , "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            	e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos al revisar si hay datos de colecta botánica "
                 , "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -436,12 +463,14 @@ public class CDColectaBotanica {
             st.close();
             rs.close();
         } catch (SQLException e) {
+        	e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al revisar si hay datos de colecta botánica "
              , "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            	e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos al revisar si hay datos de colecta botánica "
                , "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -462,12 +491,14 @@ public class CDColectaBotanica {
             st.close();
             rs.close();
         } catch (SQLException e) {
+        	e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al revisar si se capturo clave de colecta para especie en identificación "
             , "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            	e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos al revisar si se capturo colecta botánica para especie en identificación"
                 , "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -488,6 +519,7 @@ public class CDColectaBotanica {
             st.close();
             rs.close();
         } catch (SQLException e) {
+        	e.printStackTrace();
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al revisar si se capturo colecta botánica para género en identificación "
             , "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -495,6 +527,7 @@ public class CDColectaBotanica {
             try {
                 conn.close();
             } catch (SQLException e) {
+            	e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos al revisar si se capturo colecta botánica para género en identificación "
                 , "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
@@ -515,11 +548,13 @@ public class CDColectaBotanica {
             st.close();
             rs.close();
         } catch (SQLException e) {
+        	e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al revisar si se capturo colecta botánica para género en identificación ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+            	e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en datos al revisar si se capturo colecta botánica para género en identificación ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }

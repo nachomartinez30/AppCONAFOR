@@ -3150,7 +3150,7 @@ private void fillCmbSitio(int upmID) {
             CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
             CatEInfraespecie indexInfraespecie = (CatEInfraespecie) cmbInfraespecie.getSelectedItem();
             CEColectaBotanica ceColecta = new CEColectaBotanica();
-            ceColecta.setUPMID(this.upmID);
+             ceColecta.setUPMID((Integer) cmbUPMID.getSelectedItem());
             if(indexFamilia != null){
                  ceColecta.setFamiliaID(indexFamilia.getFamiliaID());
             }

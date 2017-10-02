@@ -30,6 +30,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmRepoblado extends javax.swing.JInternalFrame {
+
     private boolean revision;
     private final int repoblado;
     private final int arbolado;
@@ -61,8 +62,8 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private int actulizar;
     private FuncionesComunes funciones = new FuncionesComunes();
-    private Version ver=new Version();
-    private String version=ver.getVersion();
+    private Version ver = new Version();
+    private String version = ver.getVersion();
 
     public FrmRepoblado() {
         initComponents();
@@ -78,8 +79,7 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
-        txtUPM.setText(String.valueOf(this.upmID));
-        txtSitio.setText(String.valueOf(this.sitio));
+
         ceSitio.setUpmID(this.upmID);
         ceSitio.setSitioID(this.sitioID);
         ceSitio.setSitio(this.sitio);
@@ -91,20 +91,46 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
         reiniciarRepobladoFuera();
     }
 
-    public void revisarRepoblado(CESitio sitio) {
-        revision=true;
+    public void llenarControles() {
+        combo.reiniciarComboModel(this.cmbUPMID);
+        fillUPMID();
+    }
+
+    private void fillUPMID() {
+        List<Integer> listCapturado = new ArrayList<>();
+        listCapturado = this.cdSitio.getUPMSitios();
+        if (listCapturado != null) {
+            int size = listCapturado.size();
+            for (int i = 0; i < size; i++) {
+                cmbUPMID.addItem(listCapturado.get(i));
+            }
+        }
+    }
+
+    private void fillCmbSitio(int upmID) {
+        List<Integer> listSitios = new ArrayList<>();
+        listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+        if (listSitios != null) {
+            int size = listSitios.size();
+            for (int i = 0; i < size; i++) {
+                cmbSitios.addItem(listSitios.get(i));
+            }
+        }
+    }
+
+    public void revisarRepoblado(int sitioID) {
+        /*revision = true;
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
-        txtUPM.setText(String.valueOf(this.upmID));
-        txtSitio.setText(String.valueOf(this.sitio));
+
         ceSitio.setUpmID(this.upmID);
         ceSitio.setSitioID(this.sitioID);
         ceSitio.setSitio(this.sitio);
         ceSitio.setSecuencia(sitio.getSecuencia());
-        ceSitio = sitio;
+        ceSitio = sitio;*/
         llenarTabla();
-        CESitio repobladoFuera= this.cdSitio.getRepobladoFuera(this.sitioID);
+        CESitio repobladoFuera = this.cdSitio.getRepobladoFuera(sitioID);
         if (repobladoFuera.getRepobladoFuera() == 1) {
             chkRepobladoFuera.setSelected(true);
             txtPorcentajeRepobladoFuera.setEnabled(true);
@@ -115,9 +141,9 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
         }
         this.actulizar = 1;
         funciones.manipularBotonesMenuPrincipal(true);
-        this.chkRepoblado.setSelected(funciones.habilitarCheckBox("TAXONOMIA_Repoblado", this.sitioID));
+        this.chkRepoblado.setSelected(funciones.habilitarCheckBox("TAXONOMIA_Repoblado", sitioID));
     }
-    
+
     public void fillCmbFamilia() {
         List<CatEFamiliaEspecie> listFamilia = new ArrayList<>();
         listFamilia = especie.getFamiliaEspecies();
@@ -140,9 +166,9 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    private void fillCmbGeneroSF(){
-         List<CatEGenero> listGenero = new ArrayList<>();
+
+    private void fillCmbGeneroSF() {
+        List<CatEGenero> listGenero = new ArrayList<>();
         CDEspecies sp = new CDEspecies();
         listGenero = sp.getGenerosSF();
         if (listGenero != null) {
@@ -164,14 +190,14 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    private void fillCmbInfraespecie(int index){
+
+    private void fillCmbInfraespecie(int index) {
         List<CatEInfraespecie> listInfraespecie = new ArrayList<>();
         CDEspecies sp = new CDEspecies();
         listInfraespecie = sp.getInfraespecie(index);
-        if(listInfraespecie != null){
+        if (listInfraespecie != null) {
             int size = listInfraespecie.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbInfraespecie.addItem(listInfraespecie.get(i));
             }
         }
@@ -236,16 +262,16 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
             this.porcentajeDanio = null;
         }
     }
-    
-    private void asignarDatosRepobladoFuera(){
-        if(chkRepobladoFuera.isSelected()){
+
+    private void asignarDatosRepobladoFuera() {
+        if (chkRepobladoFuera.isSelected()) {
             this.repobladoFuera = 1;
-        }else{
+        } else {
             this.repobladoFuera = 0;
         }
-        try{
+        try {
             this.porcentajeRepobladoFuera = Integer.valueOf(txtPorcentajeRepobladoFuera.getText());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             this.porcentajeRepobladoFuera = null;
         }
     }
@@ -279,18 +305,19 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
-    private void reiniciarRepobladoFuera(){
+
+    private void reiniciarRepobladoFuera() {
         chkRepobladoFuera.setSelected(true);
         txtPorcentajeRepobladoFuera.setValue(null);
         txtPorcentajeRepobladoFuera.setText("");
     }
-    private boolean validarRepobladoFuera(){
-        if(chkRepobladoFuera.isSelected() && txtPorcentajeRepobladoFuera.getText().isEmpty()){
+
+    private boolean validarRepobladoFuera() {
+        if (chkRepobladoFuera.isSelected() && txtPorcentajeRepobladoFuera.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Si selecciona repoblado fuera, debe proporcionar el porcentaje", "Repoblado fuera", JOptionPane.INFORMATION_MESSAGE);
             txtPorcentajeRepobladoFuera.requestFocus();
             return false;
-        }else{
+        } else {
             return true;
         }
     }
@@ -337,8 +364,8 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
-     private boolean validarColectasObligatorias() {
+
+    private boolean validarColectasObligatorias() {
         CDColectaBotanica colecta = new CDColectaBotanica();
         if (colecta.validarCapturaGenero("TAXONOMIA_Repoblado", this.sitioID)) {
             JOptionPane.showMessageDialog(null, "Error! Faltan por asignar claves de colecta", "Repoblado", JOptionPane.INFORMATION_MESSAGE);
@@ -358,7 +385,7 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
         CDRepoblado cdRepoblado = new CDRepoblado();
         CERepoblado rep = new CERepoblado();
 
-        rep.setSitioID(this.sitioID); 
+        rep.setSitioID(this.sitioID);
         if (indexFamilia != null) {
             rep.setFamiliaID(indexFamilia.getFamiliaID());
         }
@@ -368,7 +395,7 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
         if (indexEspecie != null) {
             rep.setEspecieID(indexEspecie.getEspecieID());
         }
-        if(indexInfraespecie != null){
+        if (indexInfraespecie != null) {
             rep.setInfraespecieID(indexInfraespecie.getInfraespecieID());
         }
         rep.setNombreComun(txtNombreComun.getText());
@@ -384,7 +411,7 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
 
         cdRepoblado.insertDatosRepoblado(rep);
     }
-    
+
     private void crearRepobladoFuera() {
         CESitio ceSitio = new CESitio();
         CDSitio cdSitio = new CDSitio();
@@ -419,12 +446,12 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
         tabla.hideColumnTable(grdRepoblado, columna_0);
         tabla.hideColumnTable(grdRepoblado, column_1);
     }
-    
+
     private void actualizarRepoblado() {
         try {
             int fila = grdRepoblado.getSelectedRow();
             String registro = grdRepoblado.getValueAt(fila, 0).toString();
-           
+
             CatEFamiliaEspecie familia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
             CatEGenero generoIndex = (CatEGenero) cmbGenero.getSelectedItem();
             CatEEspecie especieIndex = (CatEEspecie) cmbEspecie.getSelectedItem();
@@ -467,12 +494,12 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
             datosRepoblado.updateDatosRepoblado(rep);
             reiniciarRepoblado();
         } catch (Exception e) {
-           JOptionPane.showMessageDialog(null, "No ha seleccionado ningún registro de la tabla de repoblado"
+            JOptionPane.showMessageDialog(null, "No ha seleccionado ningún registro de la tabla de repoblado"
                     + e.getClass().getName() + " : " + e.getMessage(), "Repoblado", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
-    private void eliminarRepoblado(){
+
+    private void eliminarRepoblado() {
         try {
             int fila = grdRepoblado.getSelectedRow();
             String registro = grdRepoblado.getValueAt(fila, 0).toString();
@@ -489,7 +516,7 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
                     + "", "Repoblado", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
+
     public void reiniciarRepoblado() {
         cmbFamilia.setSelectedItem(null);
         cmbGenero.setSelectedItem(null);
@@ -583,8 +610,8 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    private void revisarSiguienteFormulario(CESitio ceSitio){
+
+    private void revisarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
         if (secuenciaID != null) {
             switch (secuenciaID) {
@@ -651,16 +678,14 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
         lblUPM = new javax.swing.JLabel();
-        txtUPM = new javax.swing.JTextField();
         lblSitio = new javax.swing.JLabel();
-        txtSitio = new javax.swing.JTextField();
         lblRegistroRepoblado = new javax.swing.JLabel();
         btnContinuar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -709,6 +734,8 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
         lblClaveColecta = new javax.swing.JLabel();
         txtClaveColecta = new javax.swing.JTextField();
         btnColecta = new javax.swing.JButton();
+        cmbUPMID = new javax.swing.JComboBox<>();
+        cmbSitios = new javax.swing.JComboBox<>();
 
         setMaximizable(true);
         setTitle("Repoblado (Sitio de 12.56m) módulo A "+version);
@@ -720,14 +747,8 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
         lblUPM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUPM.setText("UPMID:");
 
-        txtUPM.setEditable(false);
-        txtUPM.setEnabled(false);
-
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-
-        txtSitio.setEditable(false);
-        txtSitio.setEnabled(false);
 
         lblRegistroRepoblado.setBackground(new java.awt.Color(153, 153, 153));
         lblRegistroRepoblado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -736,7 +757,7 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
         lblRegistroRepoblado.setOpaque(true);
 
         btnContinuar.setMnemonic('c');
-        btnContinuar.setText("Continuar");
+        btnContinuar.setText("Capturar");
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarActionPerformed(evt);
@@ -1183,6 +1204,18 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
             }
         });
 
+        cmbUPMID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUPMIDActionPerformed(evt);
+            }
+        });
+
+        cmbSitios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSitiosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1193,11 +1226,11 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblUPM)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblSitio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
@@ -1239,9 +1272,9 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSitio)
-                    .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUPM)
-                    .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblRegistroRepoblado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1292,118 +1325,118 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNombreComunFocusGained
 
     private void txtFrecuencia025FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFrecuencia025FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
-                 txtFrecuencia025.selectAll();
+            public void run() {
+                txtFrecuencia025.selectAll();
             }
         });
     }//GEN-LAST:event_txtFrecuencia025FocusGained
 
     private void txtEdad025FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEdad025FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
-                 txtEdad025.selectAll();
+            public void run() {
+                txtEdad025.selectAll();
             }
         });
     }//GEN-LAST:event_txtEdad025FocusGained
 
     private void txtFrecuencia151FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFrecuencia151FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
-                 txtFrecuencia151.selectAll();
+            public void run() {
+                txtFrecuencia151.selectAll();
             }
         });
     }//GEN-LAST:event_txtFrecuencia151FocusGained
 
     private void txtEdad151FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEdad151FocusGained
-         SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
-                 txtEdad151.selectAll();
+            public void run() {
+                txtEdad151.selectAll();
             }
         });
     }//GEN-LAST:event_txtEdad151FocusGained
 
     private void txtFrecuencia275FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFrecuencia275FocusGained
-       SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
-                 txtFrecuencia275.selectAll();
+            public void run() {
+                txtFrecuencia275.selectAll();
             }
         });
     }//GEN-LAST:event_txtFrecuencia275FocusGained
 
     private void txtEdad275FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEdad275FocusGained
-         SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
-                 txtEdad275.selectAll();
+            public void run() {
+                txtEdad275.selectAll();
             }
         });
     }//GEN-LAST:event_txtEdad275FocusGained
 
     private void txtPorcentajeDanioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPorcentajeDanioFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
-                 txtPorcentajeDanio.selectAll();
+            public void run() {
+                txtPorcentajeDanio.selectAll();
             }
         });
     }//GEN-LAST:event_txtPorcentajeDanioFocusGained
 
     private void txtFrecuencia025FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFrecuencia025FocusLost
-        if(txtFrecuencia025.getText().isEmpty()){
-           txtFrecuencia025.setValue(null);
+        if (txtFrecuencia025.getText().isEmpty()) {
+            txtFrecuencia025.setValue(null);
         }
     }//GEN-LAST:event_txtFrecuencia025FocusLost
 
     private void txtEdad025FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEdad025FocusLost
-       if(txtEdad025.getText().isEmpty()){
-           txtEdad025.setValue(null);
+        if (txtEdad025.getText().isEmpty()) {
+            txtEdad025.setValue(null);
         }
     }//GEN-LAST:event_txtEdad025FocusLost
 
     private void txtFrecuencia151FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFrecuencia151FocusLost
-        if(txtFrecuencia151.getText().isEmpty()){
-           txtFrecuencia151.setValue(null);
+        if (txtFrecuencia151.getText().isEmpty()) {
+            txtFrecuencia151.setValue(null);
         }
     }//GEN-LAST:event_txtFrecuencia151FocusLost
 
     private void txtEdad151FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEdad151FocusLost
-        if(txtEdad151.getText().isEmpty()){
-           txtEdad151.setValue(null);
+        if (txtEdad151.getText().isEmpty()) {
+            txtEdad151.setValue(null);
         }
     }//GEN-LAST:event_txtEdad151FocusLost
 
     private void txtFrecuencia275FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFrecuencia275FocusLost
-        if(txtFrecuencia275.getText().isEmpty()){
-           txtFrecuencia275.setValue(null);
+        if (txtFrecuencia275.getText().isEmpty()) {
+            txtFrecuencia275.setValue(null);
         }
     }//GEN-LAST:event_txtFrecuencia275FocusLost
 
     private void txtEdad275FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEdad275FocusLost
-        if(txtEdad275.getText().isEmpty()){
-           txtEdad275.setValue(null);
+        if (txtEdad275.getText().isEmpty()) {
+            txtEdad275.setValue(null);
         }
     }//GEN-LAST:event_txtEdad275FocusLost
 
     private void txtPorcentajeDanioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPorcentajeDanioFocusLost
-        if(txtPorcentajeDanio.getText().isEmpty()){
-           txtPorcentajeDanio.setValue(null);
+        if (txtPorcentajeDanio.getText().isEmpty()) {
+            txtPorcentajeDanio.setValue(null);
         }
     }//GEN-LAST:event_txtPorcentajeDanioFocusLost
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       asignarDatosRepoblado();
-       if(validarRepobladoVacios() && validarDatosRepoblado()){
-           crearRepoblado();
-           this.datosRepoblado.enumerarConsecutivo(this.sitioID);
-           llenarTabla();
-           reiniciarRepoblado();
-       }
+        asignarDatosRepoblado();
+        if (validarRepobladoVacios() && validarDatosRepoblado()) {
+            crearRepoblado();
+            this.datosRepoblado.enumerarConsecutivo(this.sitioID);
+            llenarTabla();
+            reiniciarRepoblado();
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
@@ -1423,133 +1456,132 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void grdRepobladoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdRepobladoMouseClicked
-       if (evt.getButton() == 1) {
+        if (evt.getButton() == 1) {
             btnGuardar.setEnabled(true);
             int fila = grdRepoblado.getSelectedRow();
             String repoID = grdRepoblado.getValueAt(fila, 0).toString();
             this.repobladoID = Integer.parseInt(repoID);
-            CERepoblado rep; 
+            CERepoblado rep;
             rep = datosRepoblado.getRegistroRepoblado(Integer.parseInt(repoID));
-            
+
             CatEFamiliaEspecie fam = new CatEFamiliaEspecie();
             fam.setFamiliaID(rep.getFamiliaID());
             cmbFamilia.setSelectedItem(fam);
-          
+
             CatEGenero gen = new CatEGenero();
             gen.setGeneroID(rep.getGeneroID());
             cmbGenero.setSelectedItem(gen);
-            
+
             /*CatEGenero gen = new CatEGenero();
             gen.setGeneroID(rep.getGeneroID());
             cmbGenero.removeAllItems();
             fillCmbGenero(rep.getFamiliaID());
             cmbGenero.setSelectedItem(gen);*/
-           
             CatEEspecie esp = new CatEEspecie();
             esp.setEspecieID(rep.getEspecieID());
             cmbEspecie.removeAllItems();
-           fillCmbEspecie(rep.getGeneroID());
-           cmbEspecie.setSelectedItem(esp);
+            fillCmbEspecie(rep.getGeneroID());
+            cmbEspecie.setSelectedItem(esp);
 
-           CatEInfraespecie inf = new CatEInfraespecie();
-           inf.setInfraespecieID(rep.getInfraespecieID());
-           cmbInfraespecie.removeAllItems();
-           fillCmbInfraespecie(rep.getEspecieID());
-           cmbInfraespecie.setSelectedItem(inf);
+            CatEInfraespecie inf = new CatEInfraespecie();
+            inf.setInfraespecieID(rep.getInfraespecieID());
+            cmbInfraespecie.removeAllItems();
+            fillCmbInfraespecie(rep.getEspecieID());
+            cmbInfraespecie.setSelectedItem(inf);
 
             txtNombreComun.setText(rep.getNombreComun());
-            
+
             txtFrecuencia025.setText(String.valueOf(rep.getFrecuecia025150()));
-            if((txtFrecuencia025.getText()).equals("0")) {
+            if ((txtFrecuencia025.getText()).equals("0")) {
                 txtFrecuencia025.setText("");
             }
             txtEdad025.setText(String.valueOf(rep.getEdad025150()));
-            if(txtEdad025.getText().equals("0")) {
+            if (txtEdad025.getText().equals("0")) {
                 txtEdad025.setText("");
             }
             txtFrecuencia151.setText(String.valueOf(rep.getFrecuencia151275()));
-            if(txtFrecuencia151.getText().equals("0")) {
+            if (txtFrecuencia151.getText().equals("0")) {
                 txtFrecuencia151.setText("");
             }
             txtEdad151.setText(String.valueOf(rep.getEdad151275()));
-            if(txtEdad151.getText().equals("0")){
+            if (txtEdad151.getText().equals("0")) {
                 txtEdad151.setText("");
             }
             txtFrecuencia275.setText(String.valueOf(rep.getFrecuencia275()));
-            if(txtFrecuencia275.getText().equals("0")){
+            if (txtFrecuencia275.getText().equals("0")) {
                 txtFrecuencia275.setText("");
             }
             txtEdad275.setText(String.valueOf(rep.getEdad275()));
-            if(txtEdad275.getText().equals("0")){
+            if (txtEdad275.getText().equals("0")) {
                 txtEdad275.setText("");
             }
             CatETipoVigor vig = new CatETipoVigor();
             vig.setVigorID(rep.getVigorID());
             cmbVigor.setSelectedItem(vig);
-            
+
             CatEAgenteDanio danio = new CatEAgenteDanio();
             danio.setAgenteDanioID(rep.getDanioID());
             cmbDanio.setSelectedItem(danio);
-            
+
             txtPorcentajeDanio.setText(String.valueOf(rep.getPorcentajeDanio()));
             if (txtPorcentajeDanio.getText().equals("0")) {
                 txtPorcentajeDanio.setText("");
             }
-            
+
             txtClaveColecta.setText(rep.getClaveColecta());
         }
     }//GEN-LAST:event_grdRepobladoMouseClicked
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        if(revision==false){//esta en modo de captura
+        if (revision == false) {//esta en modo de captura
             this.hide();
             funciones.manipularBotonesMenuPrincipal(false);
         }
-        if(revision==true){//entro a modo de revision
-             //System.err.println("Modo Revision");
+        if (revision == true) {//entro a modo de revision
+            //System.err.println("Modo Revision");
             this.hide();
             //UPMForms.revisionModulos.iniciarRevision();
             UPMForms.revisionModulos.setVisible(true);
             UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision=false;
+            revision = false;
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtPorcentajeRepobladoFueraFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPorcentajeRepobladoFueraFocusGained
-       SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
-                 txtPorcentajeRepobladoFuera.selectAll();
+            public void run() {
+                txtPorcentajeRepobladoFuera.selectAll();
             }
         });
     }//GEN-LAST:event_txtPorcentajeRepobladoFueraFocusGained
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         if (validarRepobladoFuera()) {
-            if (funciones.validarSeccionCapturada("TAXONOMIA_Repoblado",sitioID) && chkRepoblado.isSelected()) {
+            if (funciones.validarSeccionCapturada("TAXONOMIA_Repoblado", sitioID) && chkRepoblado.isSelected()) {
                 JOptionPane.showMessageDialog(null, "Si selecciona repoblado, se debe capturar", "Repoblado", JOptionPane.INFORMATION_MESSAGE);
                 chkRepoblado.requestFocus();
-            } else if (funciones.validarSeccionCapturada("TAXONOMIA_Repoblado",sitioID) == false && chkRepoblado.isSelected()) {
+            } else if (funciones.validarSeccionCapturada("TAXONOMIA_Repoblado", sitioID) == false && chkRepoblado.isSelected()) {
                 if (validarColectasObligatorias()) {
                     asignarDatosRepobladoFuera();
                     crearRepobladoFuera();
-                    this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-                    this.hide();
+                    // this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
+                    //this.hide();
                     if (this.actulizar == 0) {
-                        seleccionarSiguienteFormulario(this.ceSitio);
+                        // seleccionarSiguienteFormulario(this.ceSitio);
                     } else {
-                        revisarSiguienteFormulario(this.ceSitio);
+                        // revisarSiguienteFormulario(this.ceSitio);
                     }
                 }
-            } else if (funciones.validarSeccionCapturada("TAXONOMIA_Repoblado",sitioID) == true && !chkRepoblado.isSelected()) {
+            } else if (funciones.validarSeccionCapturada("TAXONOMIA_Repoblado", sitioID) == true && !chkRepoblado.isSelected()) {
                 asignarDatosRepobladoFuera();
                 crearRepobladoFuera();
-                this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, -1);
-                this.hide();
+                // this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, -1);
+               // this.hide();
                 if (this.actulizar == 0) {
-                    seleccionarSiguienteFormulario(this.ceSitio);
+                    // seleccionarSiguienteFormulario(this.ceSitio);
                 } else {
-                    revisarSiguienteFormulario(this.ceSitio);
+                    // revisarSiguienteFormulario(this.ceSitio);
                 }
             }
         }
@@ -1623,7 +1655,7 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
             cmbDanio.setEnabled(true);
             txtPorcentajeDanio.setEnabled(true);
         } else {
-             Object[] opciones = {"Si", "No"};
+            Object[] opciones = {"Si", "No"};
             int respuesta = JOptionPane.showOptionDialog(null, "Si capturó, se eliminará la información de repoblado del sitio " + this.sitio + ", ¿Esta seguro?",
                     "Repoblado", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
             if (respuesta == JOptionPane.YES_OPTION) {
@@ -1658,7 +1690,7 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
                 cmbDanio.setEnabled(false);
                 cmbDanio.setSelectedItem(null);
                 txtPorcentajeDanio.setEnabled(false);
-                txtPorcentajeDanio.setValue(null);    
+                txtPorcentajeDanio.setValue(null);
             } else {
                 chkRepoblado.setSelected(true);
             }
@@ -1667,7 +1699,7 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
 
     private void cmbDanioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDanioActionPerformed
         CatEAgenteDanio danio = (CatEAgenteDanio) cmbDanio.getSelectedItem();
-        
+
         if (danio != null) {
             if (danio.getAgenteDanioID() == 1) {
                 txtPorcentajeDanio.setEnabled(false);
@@ -1676,10 +1708,10 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
             } else {
                 txtPorcentajeDanio.setEnabled(true);
             }
-        }else{
-                txtPorcentajeDanio.setEnabled(false);
-                txtPorcentajeDanio.setText("");
-                txtPorcentajeDanio.setValue(null);
+        } else {
+            txtPorcentajeDanio.setEnabled(false);
+            txtPorcentajeDanio.setText("");
+            txtPorcentajeDanio.setValue(null);
         }
     }//GEN-LAST:event_cmbDanioActionPerformed
 
@@ -1693,16 +1725,16 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
             CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
             CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
             CEColectaBotanica ceColecta = new CEColectaBotanica();
-            if(indexFamilia != null){
+            if (indexFamilia != null) {
                 ceColecta.setFamiliaID(indexFamilia.getFamiliaID());
             }
-            if(indexGenero != null){
+            if (indexGenero != null) {
                 ceColecta.setGeneroID(indexGenero.getGeneroID());
             }
-            if(indexEspecie != null){
+            if (indexEspecie != null) {
                 ceColecta.setEspecieID(indexEspecie.getEspecieID());
             }
-            ceColecta.setUPMID(this.upmID);
+            ceColecta.setUPMID((Integer) cmbUPMID.getSelectedItem());
             //ceColecta.setInfraespecie(txtInfraespecie.getText());
             ceColecta.setNombreComun(txtNombreComun.getText());
             claveColecta.setDatosIniciales(ceColecta, FORMATO_ID, "TAXONOMIA_Repoblado", "Consecutivo", this.sitioID, Integer.parseInt(consecutivo));
@@ -1714,13 +1746,48 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnColectaActionPerformed
 
     private void cmbEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEspecieActionPerformed
-       CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
+        CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
         DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbInfraespecie.getModel();
         dcm.removeAllElements();
         if (indexEspecie != null) {
             fillCmbInfraespecie(indexEspecie.getEspecieID());
         }
     }//GEN-LAST:event_cmbEspecieActionPerformed
+
+    private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
+        Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        Integer sitio = (Integer) cmbSitios.getSelectedItem();
+        if (cmbUPMID.getSelectedItem() != null) {
+            combo.reiniciarComboModel(cmbSitios);
+            fillCmbSitio(upmID);
+            cmbSitios.setEnabled(true);
+        } else {
+            combo.reiniciarComboModel(cmbSitios);
+            cmbSitios.setSelectedItem(null);
+            cmbSitios.setEnabled(false);
+        }
+    }//GEN-LAST:event_cmbUPMIDActionPerformed
+
+    private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
+        try {
+            //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
+            if (cmbSitios.getSelectedItem() == null) {
+                this.sitioID = 0;
+                /*limpiarControles();
+                limpiarPorcentajes();*/
+            } else {
+                String upm = cmbUPMID.getSelectedItem().toString();
+                String sitio = cmbSitios.getSelectedItem().toString();
+                this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
+
+            }
+            revisarRepoblado(this.sitioID);
+
+//llenarTabla();
+        } catch (Exception e) {
+            e.getCause();
+        }
+    }//GEN-LAST:event_cmbSitiosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnColecta;
@@ -1736,6 +1803,8 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cmbFamilia;
     private javax.swing.JComboBox cmbGenero;
     private javax.swing.JComboBox cmbInfraespecie;
+    private javax.swing.JComboBox<Integer> cmbSitios;
+    private javax.swing.JComboBox<Integer> cmbUPMID;
     private javax.swing.JComboBox cmbVigor;
     private javax.swing.JTable grdRepoblado;
     private javax.swing.JLabel jLabel1;
@@ -1774,7 +1843,5 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNombreComun;
     private javax.swing.JFormattedTextField txtPorcentajeDanio;
     private javax.swing.JFormattedTextField txtPorcentajeRepobladoFuera;
-    private javax.swing.JTextField txtSitio;
-    private javax.swing.JTextField txtUPM;
     // End of variables declaration//GEN-END:variables
 }

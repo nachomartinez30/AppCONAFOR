@@ -109,13 +109,13 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
     }
 
     
-    public void llenarControles() {
+public void llenarControles() {
 	combo.reiniciarComboModel(this.cmbUPMID);
 	fillUPMID();
 }
 private void fillUPMID() {
 	List<Integer> listCapturado = new ArrayList<>();
-	listCapturado = this.cdSitio.getUPMArboladosSitios(/*A*/1,/*D*/1,/*G*/0); //Arbolado D
+	listCapturado = this.cdSitio.getUPMSitios();
 	if (listCapturado != null) {
 		int size = listCapturado.size();
 		for (int i = 0; i < size; i++) {
@@ -854,7 +854,7 @@ private void fillCmbSitio(int upmID) {
         }
     }
     
-    private void revisarSiguienteFormulario(Integer secuenciaID) {
+    /*private void revisarSiguienteFormulario(Integer secuenciaID) {
         if (secuenciaID != null) {
             switch (secuenciaID) {
                 case 1: //Módulo A
@@ -919,7 +919,7 @@ private void fillCmbSitio(int upmID) {
                     break;
             }
         }
-    }
+    }*/
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -1993,7 +1993,6 @@ private void fillCmbSitio(int upmID) {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        CDSotoBosque tblSotoBosque = new CDSotoBosque();
         asignarDatosSotobosqueFuera();
         if (setDatosCobertura() && validarSumaCubiertaSuelo() && validarPorcentaje() && validarSotobosqueFuera()) {
             if (funciones.validarSeccionCapturada("TAXONOMIA_SotoBosque", sitioID) && chkSotobosque.isSelected()) {
@@ -2498,7 +2497,7 @@ private void fillCmbSitio(int upmID) {
             CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
             CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
             CEColectaBotanica ceColecta = new CEColectaBotanica();
-            ceColecta.setUPMID(this.upmID);
+            ceColecta.setUPMID((Integer) cmbUPMID.getSelectedItem());
             if (indexFamilia != null) {
                 ceColecta.setFamiliaID(indexFamilia.getFamiliaID());
             }

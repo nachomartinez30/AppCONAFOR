@@ -89,8 +89,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
-        txtUPM.setText(String.valueOf(this.upmID));
-        txtSitio.setText(String.valueOf(this.sitio));
+        
         this.ceSitio = sitio;
         llenarTabla();
         txtNumeroIndividuo.requestFocus();
@@ -105,8 +104,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
-        txtUPM.setText(String.valueOf(this.upmID));
-        txtSitio.setText(String.valueOf(this.sitio));
+       
         this.ceSitio = sitio;
         llenarTabla();
         txtNumeroIndividuo.requestFocus();
@@ -332,9 +330,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lblUPM = new javax.swing.JLabel();
-        txtUPM = new javax.swing.JTextField();
         lblSitio = new javax.swing.JLabel();
-        txtSitio = new javax.swing.JTextField();
         lblVegetacionMayorGragarios = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         lblNumeroIndividuo = new javax.swing.JLabel();
@@ -394,6 +390,8 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         txtClaveColecta = new javax.swing.JTextField();
         chkVegetacionMayorMCG = new javax.swing.JCheckBox();
         btnLimpiar = new javax.swing.JButton();
+        cmbUPMID = new javax.swing.JComboBox<>();
+        cmbSitios = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximizable(true);
@@ -406,14 +404,8 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         lblUPM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUPM.setText("UPMID:");
 
-        txtUPM.setEditable(false);
-        txtUPM.setEnabled(false);
-
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-
-        txtSitio.setEditable(false);
-        txtSitio.setEnabled(false);
 
         lblVegetacionMayorGragarios.setBackground(new java.awt.Color(153, 153, 153));
         lblVegetacionMayorGragarios.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -942,11 +934,11 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblUPM)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblSitio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -955,9 +947,9 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSitio)
-                    .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUPM)
-                    .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblVegetacionMayorGragarios)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -976,7 +968,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
                         .addComponent(btnColecta))
                     .addComponent(chkVegetacionMayorMCG))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnContinuar)
@@ -1764,7 +1756,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
             CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
             CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
             CEColectaBotanica ceColecta = new CEColectaBotanica();
-            ceColecta.setUPMID(this.upmID);
+            ceColecta.setUPMID((Integer) cmbUPMID.getSelectedItem());
             if (indexFamilia != null) {
                 ceColecta.setFamiliaID(indexFamilia.getFamiliaID());
             }
@@ -1913,6 +1905,8 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cmbInfraespecie;
     private javax.swing.JComboBox cmbSeveridad1;
     private javax.swing.JComboBox cmbSeveridad2;
+    private javax.swing.JComboBox<Integer> cmbSitios;
+    private javax.swing.JComboBox<Integer> cmbUPMID;
     private javax.swing.JComboBox cmbVigor;
     private javax.swing.JTable grdVegetacionvMayor;
     private javax.swing.JLabel jLabel1;
@@ -1954,7 +1948,5 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txtDiametroCoberturaMenor;
     private javax.swing.JTextField txtNombreComun;
     private javax.swing.JFormattedTextField txtNumeroIndividuo;
-    private javax.swing.JTextField txtSitio;
-    private javax.swing.JTextField txtUPM;
     // End of variables declaration//GEN-END:variables
 }

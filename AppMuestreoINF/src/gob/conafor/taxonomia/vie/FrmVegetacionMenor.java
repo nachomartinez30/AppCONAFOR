@@ -89,8 +89,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
-        txtUPM.setText(String.valueOf(this.upmID));
-        txtSitio.setText(String.valueOf(this.sitio));
+       
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -108,8 +107,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
         this.sitio = ceSitio.getSitio();
         this.sitioID = ceSitio.getSitioID();
         this.upmID = ceSitio.getUpmID();
-        txtSitio.setText(String.valueOf(this.sitio));
-        txtUPM.setText(String.valueOf(this.upmID));
+       
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -679,9 +677,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
 
         pnlPrincipal = new javax.swing.JPanel();
         lblUPM = new javax.swing.JLabel();
-        txtUPM = new javax.swing.JTextField();
         lblSitio = new javax.swing.JLabel();
-        txtSitio = new javax.swing.JTextField();
         lblVegetacionMenorCobertura = new javax.swing.JLabel();
         btnContinuar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -739,6 +735,8 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
         lblClaveColecta = new javax.swing.JLabel();
         txtClaveColecta = new javax.swing.JTextField();
         chkVegetacionMenor = new javax.swing.JCheckBox();
+        cmbUPMID = new javax.swing.JComboBox<>();
+        cmbSitios = new javax.swing.JComboBox<>();
 
         setMaximizable(true);
         setTitle("Vegetación menor, módulo H "+version);
@@ -750,14 +748,8 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
         lblUPM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUPM.setText("UPMID:");
 
-        txtUPM.setEditable(false);
-        txtUPM.setEnabled(false);
-
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-
-        txtSitio.setEditable(false);
-        txtSitio.setEnabled(false);
 
         lblVegetacionMenorCobertura.setBackground(new java.awt.Color(153, 153, 153));
         lblVegetacionMenorCobertura.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -1193,7 +1185,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
                                 .addComponent(lblNombreComun, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtNombreComun, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(16, Short.MAX_VALUE))))
+                        .addContainerGap(12, Short.MAX_VALUE))))
         );
         PnlCoordenadas4Layout.setVerticalGroup(
             PnlCoordenadas4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1297,12 +1289,12 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
             .addComponent(lblVegetacionMenorCobertura, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
                 .addComponent(lblUPM)
-                .addGap(10, 10, 10)
-                .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblSitio)
-                .addGap(8, 8, 8)
-                .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlPrincipalLayout.createSequentialGroup()
@@ -1340,15 +1332,16 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(lblUPM))
+                        .addGap(7, 7, 7)
+                        .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblUPM)
+                            .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(5, 5, 5)
+                        .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblSitio)
-                            .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(2, 2, 2)
+                            .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(4, 4, 4)
                 .addComponent(lblVegetacionMenorCobertura)
                 .addGap(8, 8, 8)
                 .addComponent(PnlCoordenadas4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1363,11 +1356,11 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
                     .addComponent(btnEliminar))
                 .addGap(7, 7, 7)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnContinuar)
                     .addComponent(btnSalir))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1789,7 +1782,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
             if(indexEspecie != null){
                 ceColecta.setEspecieID(indexEspecie.getEspecieID());
             }
-            ceColecta.setUPMID(this.upmID);
+             ceColecta.setUPMID((Integer) cmbUPMID.getSelectedItem());
             //ceColecta.setInfraespecie(txtInfraespecie.getText());
             ceColecta.setNombreComun(txtNombreComun.getText());
             claveColecta.setDatosIniciales(ceColecta, FORMATO_ID, "TAXONOMIA_VegetacionMenor", "Consecutivo" ,this.sitioID, Integer.parseInt(consecutivo));
@@ -1888,6 +1881,8 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cmbInfraespecie;
     private javax.swing.JComboBox cmbSeveridad1;
     private javax.swing.JComboBox cmbSeveridad2;
+    private javax.swing.JComboBox<Integer> cmbSitios;
+    private javax.swing.JComboBox<Integer> cmbUPMID;
     private javax.swing.JComboBox cmbVigor;
     private javax.swing.JTable grdVegetacionMenor;
     private javax.swing.JPanel jPanel2;
@@ -1930,7 +1925,5 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txtNumero5175;
     private javax.swing.JFormattedTextField txtNumero76100;
     private javax.swing.JFormattedTextField txtPorcentajeCobertura;
-    private javax.swing.JTextField txtSitio;
-    private javax.swing.JTextField txtUPM;
     // End of variables declaration//GEN-END:variables
 }

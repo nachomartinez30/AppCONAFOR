@@ -83,30 +83,31 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
 
     
     public void llenarControles() {
-	combo.reiniciarComboModel(this.cmbUPMID);
-	fillUPMID();
-}
-private void fillUPMID() {
-	List<Integer> listCapturado = new ArrayList<>();
-	listCapturado = this.cdSitio.getUPMSitios();
-	if (listCapturado != null) {
-		int size = listCapturado.size();
-		for (int i = 0; i < size; i++) {
-			cmbUPMID.addItem(listCapturado.get(i));
-		}
-	}
-}
+        combo.reiniciarComboModel(this.cmbUPMID);
+        fillUPMID();
+    }
 
-private void fillCmbSitio(int upmID) {
-	List<Integer> listSitios = new ArrayList<>();
-	listSitios = this.cdSitio.getSitiosDisponibles(upmID);
-	if (listSitios != null) {
-		int size = listSitios.size();
-		for (int i = 0; i < size; i++) {
-			cmbSitios.addItem(listSitios.get(i));
-		}
-	}
-}
+    private void fillUPMID() {
+        List<Integer> listCapturado = new ArrayList<>();
+        listCapturado = this.cdSitio.getUPMSitios();
+        if (listCapturado != null) {
+            int size = listCapturado.size();
+            for (int i = 0; i < size; i++) {
+                cmbUPMID.addItem(listCapturado.get(i));
+            }
+        }
+    }
+
+    private void fillCmbSitio(int upmID) {
+        List<Integer> listSitios = new ArrayList<>();
+        listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+        if (listSitios != null) {
+            int size = listSitios.size();
+            for (int i = 0; i < size; i++) {
+                cmbSitios.addItem(listSitios.get(i));
+            }
+        }
+    }
     
     
     public void revisarSubmuestra(int sitioID) {

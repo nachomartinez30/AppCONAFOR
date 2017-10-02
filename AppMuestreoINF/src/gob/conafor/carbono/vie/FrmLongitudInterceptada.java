@@ -6,6 +6,7 @@ import gob.conafor.carbono.mod.CECoberturaDosel;
 import gob.conafor.carbono.mod.CELongitudComponente;
 import gob.conafor.carbono.mod.CatECarbonoComponente;
 import gob.conafor.ini.vie.Main;
+import gob.conafor.sitio.mod.CDSitio;
 import gob.conafor.sitio.mod.CESitio;
 import gob.conafor.sys.mod.CDSecuencia;
 import gob.conafor.sys.mod.CDSeguimientoUPM;
@@ -86,7 +87,10 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     private int modificar;
     private Version ver = new Version();
     private String version = ver.getVersion();
-
+    private CDSitio cdSitio = new CDSitio();
+    
+    
+    
     public FrmLongitudInterceptada() {
         initComponents();
         this.longitudInterceptada = 17;
@@ -102,8 +106,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
-        txtUPM.setText(String.valueOf(this.upmID));
-        txtSitio.setText(String.valueOf(this.sitio));
+        
         llenarTabla();
         llenarTablaCoberturaDosel();
         //funciones.reiniciarComboModel(cmbTransectoComponente);
@@ -119,14 +122,42 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         this.modificar = 0;
     }
 
-    public void revisarLongitud(CESitio sitio) {
+    
+    public void llenarControles() {
+        combo.reiniciarComboModel(this.cmbUPMID);
+        fillUPMID();
+    }
+
+    private void fillUPMID() {
+        List<Integer> listCapturado = new ArrayList<>();
+        listCapturado = this.cdSitio.getUPMSitios();
+        if (listCapturado != null) {
+            int size = listCapturado.size();
+            for (int i = 0; i < size; i++) {
+                cmbUPMID.addItem(listCapturado.get(i));
+            }
+        }
+    }
+
+    private void fillCmbSitio(int upmID) {
+        List<Integer> listSitios = new ArrayList<>();
+        listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+        if (listSitios != null) {
+            int size = listSitios.size();
+            for (int i = 0; i < size; i++) {
+                cmbSitios.addItem(listSitios.get(i));
+            }
+        }
+    }
+    
+    
+    public void revisarLongitud(int sitio) {
         System.out.println("Degradacion de suelo= " + this.ceSitio.getSecuencia());
-        revision = true;
+        /*revision = true;
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
-        txtUPM.setText(String.valueOf(this.upmID));
-        txtSitio.setText(String.valueOf(this.sitio));
+        */
         llenarTabla();
         llenarTablaCoberturaDosel();
         /* funciones.reiniciarComboModel(cmbTransectoComponente);
@@ -136,9 +167,9 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setSitio(this.sitio);
-        this.ceSitio.setSecuencia(sitio.getSecuencia());
+        //this.ceSitio.setSecuencia(sitio.getSecuencia());
         funciones.manipularBotonesMenuPrincipal(true);
-        this.modificar = 1;
+        //this.modificar = 1;
         limpiarControlesCobertura();
         limpiarControlesComponentes();
         chkLongitudComponentes.setSelected(funciones.habilitarCheckBox("CARBONO_LongitudComponente", this.sitioID));
@@ -330,14 +361,13 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         chkPunto10 = new javax.swing.JCheckBox();
         jScrollPane4 = new javax.swing.JScrollPane();
         grdCoberturaDosel = new javax.swing.JTable();
-        btnContinuar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         lblUPM = new javax.swing.JLabel();
-        txtUPM = new javax.swing.JTextField();
         lblSitio = new javax.swing.JLabel();
-        txtSitio = new javax.swing.JTextField();
         chkCoberturaDosel = new javax.swing.JCheckBox();
         chkLongitudComponentes = new javax.swing.JCheckBox();
+        cmbUPMID = new javax.swing.JComboBox<>();
+        cmbSitios = new javax.swing.JComboBox<>();
 
         setMaximizable(true);
         setTitle("Longitud interceptada por componente, cobertura dosel, módulo A o C "+version);
@@ -834,7 +864,6 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         });
 
         btnEliminarDosel.setText("Eliminar");
-        btnEliminarDosel.setNextFocusableComponent(btnContinuar);
         btnEliminarDosel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarDoselActionPerformed(evt);
@@ -1264,16 +1293,6 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         });
         jScrollPane4.setViewportView(grdCoberturaDosel);
 
-        btnContinuar.setMnemonic('c');
-        btnContinuar.setText("Continuar");
-        btnContinuar.setName(""); // NOI18N
-        btnContinuar.setNextFocusableComponent(btnSalir);
-        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContinuarActionPerformed(evt);
-            }
-        });
-
         btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -1285,14 +1304,8 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         lblUPM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUPM.setText("UPMID:");
 
-        txtUPM.setEditable(false);
-        txtUPM.setEnabled(false);
-
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-
-        txtSitio.setEditable(false);
-        txtSitio.setEnabled(false);
 
         chkCoberturaDosel.setBackground(new java.awt.Color(204, 204, 204));
         chkCoberturaDosel.setSelected(true);
@@ -1313,13 +1326,26 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             }
         });
 
+        cmbUPMID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUPMIDActionPerformed(evt);
+            }
+        });
+
+        cmbSitios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSitiosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(chkCoberturaDosel)
                         .addComponent(lblCoberturaDosel, javax.swing.GroupLayout.DEFAULT_SIZE, 892, Short.MAX_VALUE)
@@ -1332,30 +1358,28 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addComponent(lblUPM)
-                            .addGap(10, 10, 10)
-                            .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblSitio)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnContinuar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(lblUPM))
-                    .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblSitio)
-                        .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblUPM)
+                            .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblSitio)
+                            .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblCarbonoIncendios)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1375,9 +1399,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnContinuar)
-                    .addComponent(btnSalir))
+                .addComponent(btnSalir)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1451,43 +1473,6 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             revision = false;
         }
     }//GEN-LAST:event_btnSalirActionPerformed
-
-    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        if (validarColectasObligatorias()) {
-            if (chkLongitudComponentes.isSelected() && this.cdLongitud.validarTablaComponente(this.sitioID)) {
-                JOptionPane.showMessageDialog(null, "Si selecciona longitud por componentes se debe capturar", "Carbono e incendios", JOptionPane.INFORMATION_MESSAGE);
-                chkLongitudComponentes.requestFocus();
-            } else if (chkCoberturaDosel.isSelected() && this.cdLongitud.validarCoberturaDosel(this.sitioID)) {
-                JOptionPane.showMessageDialog(null, "Si selecciona cobertura dosel se debe capturar", "Carbono e incendios", JOptionPane.INFORMATION_MESSAGE);
-                chkCoberturaDosel.requestFocus();
-            } else if (this.funciones.validarSeccionCapturada("CARBONO_LongitudComponente", sitioID) == false && chkLongitudComponentes.isSelected()) {
-                System.out.println("BtnConitnuar");
-                if (validarColectasObligatorias()) {
-                    this.hide();
-                    funciones.manipularBotonesMenuPrincipal(true);
-                    if (this.modificar == 0) {//Esta en modo de captura
-                        System.out.println("ModoCaptura");
-                        seleccionarSiguienteFormulario(this.ceSitio);
-                    } else {
-                        //System.out.println("ModoRevision    " + this.ceSitio.getSitioID());
-                        revisarSiguienteFormulario(this.ceSitio);
-                    }
-                    this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-                }
-            } else if (this.funciones.validarSeccionCapturada("CARBONO_LongitudComponente", sitioID) == true && !chkLongitudComponentes.isSelected()) {
-                this.hide();
-                funciones.manipularBotonesMenuPrincipal(true);
-                if (this.modificar == 0) {
-                    //System.out.println("Modificar=1 "+this.ceSitio);
-                    seleccionarSiguienteFormulario(this.ceSitio);
-                } else {
-                    //System.out.println("Modificar=0 "+this.ceSitio);
-                    revisarSiguienteFormulario(this.ceSitio);
-                }
-                this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, -1);
-            }
-        }
-    }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void grdCoberturaDoselMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdCoberturaDoselMouseClicked
         if (evt.getButton() == 1) {
@@ -2081,6 +2066,42 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_cmbComponenteActionPerformed
+
+    private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
+        Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        this.upmID = (Integer) cmbUPMID.getSelectedItem();
+        Integer sitio = (Integer) cmbSitios.getSelectedItem();
+        if (cmbUPMID.getSelectedItem() != null) {
+            combo.reiniciarComboModel(cmbSitios);
+            fillCmbSitio(upmID);
+            cmbSitios.setEnabled(true);
+        } else {
+            combo.reiniciarComboModel(cmbSitios);
+            cmbSitios.setSelectedItem(null);
+            cmbSitios.setEnabled(false);
+        }
+    }//GEN-LAST:event_cmbUPMIDActionPerformed
+
+    private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
+try {
+            //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
+            if (cmbSitios.getSelectedItem() == null) {
+                this.sitioID = 0;
+                /*limpiarControles();
+                limpiarPorcentajes();*/
+            } else {
+                String upm = cmbUPMID.getSelectedItem().toString();
+                String sitio = cmbSitios.getSelectedItem().toString();
+                this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
+
+            }
+            revisarLongitud(this.sitioID);
+
+//llenarTabla();
+        } catch (Exception e) {
+            e.getCause();
+        }
+    }//GEN-LAST:event_cmbSitiosActionPerformed
 
     public void llenarTabla() {
         grdComponentes.setModel(cdLongitud.getTablaComponentes(this.sitioID));
@@ -2981,7 +3002,6 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnAgregarComponente;
     private javax.swing.JButton btnAgregarDosel;
     private javax.swing.JButton btnColecta;
-    private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnEliminarComponente;
     private javax.swing.JButton btnEliminarDosel;
     private javax.swing.JButton btnModificarComponente;
@@ -3004,8 +3024,10 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cmbFamilia;
     private javax.swing.JComboBox cmbGenero;
     private javax.swing.JComboBox cmbInfraespecie;
+    private javax.swing.JComboBox<Integer> cmbSitios;
     private javax.swing.JComboBox cmbTransectoComponente;
     private javax.swing.JComboBox cmbTransectoDosel;
+    private javax.swing.JComboBox<Integer> cmbUPMID;
     private javax.swing.JTable grdCoberturaDosel;
     private javax.swing.JTable grdComponentes;
     private javax.swing.JLabel jLabel11;
@@ -3072,8 +3094,6 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txtSegmento7;
     private javax.swing.JFormattedTextField txtSegmento8;
     private javax.swing.JFormattedTextField txtSegmento9;
-    private javax.swing.JTextField txtSitio;
     private javax.swing.JFormattedTextField txtTotal;
-    private javax.swing.JTextField txtUPM;
     // End of variables declaration//GEN-END:variables
 }

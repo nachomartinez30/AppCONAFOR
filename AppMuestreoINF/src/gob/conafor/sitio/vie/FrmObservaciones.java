@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FrmObservaciones extends javax.swing.JInternalFrame {
+
     private boolean revision;
     private int upmID;
     private int sitioID;
@@ -23,21 +24,20 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private FuncionesComunes funciones = new FuncionesComunes();
     private int modificar;
-    private Version ver=new Version();
-    private String version=ver.getVersion();
+    private Version ver = new Version();
+    private String version = ver.getVersion();
     private FuncionesComunes combo = new FuncionesComunes();
-
 
     public FrmObservaciones() {
         initComponents();
         intObservaciones = 23;
     }
 
-     public void setDatosiniciales(CESitio ceSitio) {
+    public void setDatosiniciales(CESitio ceSitio) {
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
-        
+
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -46,9 +46,8 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
         funciones.manipularBotonesMenuPrincipal(true);
         txtObservacionesSitio.setText("");
     }
-     
-     
-      public void llenarControles() {
+
+    public void llenarControles() {
         combo.reiniciarComboModel(this.cmbUPMID);
         cmbSitios.setEnabled(true);
         fillUPMID();
@@ -76,14 +75,13 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
             }
         }
     }
-     
 
     public void revisarObservaciones(int sitioID) {
         /*revision=true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();*/
-        
+
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -94,14 +92,14 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
         modificar = 1;
         funciones.manipularBotonesMenuPrincipal(true);
     }
-    
-    private void fijarDatosObservaciones(){
+
+    private void fijarDatosObservaciones() {
         this.observaciones = txtObservacionesSitio.getText();
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setObservaciones(this.observaciones);
     }
 
-/*    private boolean validarObservaciones() {
+    /*    private boolean validarObservaciones() {
         if (txtObservacionesSitio.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Error! Debe proporcionar las observaciones del sitio ",
                     "Sitio", JOptionPane.INFORMATION_MESSAGE);
@@ -111,7 +109,6 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
             return true;
         }
     }*/
-    
     private void seleccionarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
         Integer sitio = this.funciones.sitioCapturaSueloCarbono(this.upmID, 3);
@@ -295,7 +292,6 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
             }
         
     }*/
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -347,7 +343,9 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
         });
 
         txtObservacionesSitio.setColumns(20);
+        txtObservacionesSitio.setLineWrap(true);
         txtObservacionesSitio.setRows(5);
+        txtObservacionesSitio.setWrapStyleWord(true);
         txtObservacionesSitio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtObservacionesSitioKeyPressed(evt);
@@ -430,33 +428,36 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         fijarDatosObservaciones();
-        this.cdSitio.setObservacionesSitio(this.ceSitio);
-              
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            this.cdSitio.setObservacionesSitio(this.ceSitio);
+        }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-       if(revision==false){//esta en modo de captura
+        if (revision == false) {//esta en modo de captura
             this.hide();
             funciones.manipularBotonesMenuPrincipal(false);
         }
-        if(revision==true){//entro a modo de revision
-             //System.err.println("Modo Revision");
+        if (revision == true) {//entro a modo de revision
+            //System.err.println("Modo Revision");
             this.hide();
             //UPMForms.revisionModulos.iniciarRevision();
             UPMForms.revisionModulos.setVisible(true);
             UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision=false;
+            revision = false;
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtObservacionesSitioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObservacionesSitioKeyPressed
-         if(evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB) {
             evt.consume();
         }
     }//GEN-LAST:event_txtObservacionesSitioKeyPressed
 
     private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
-Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        Integer upmID = (Integer) cmbUPMID.getSelectedItem();
         Integer sitio = (Integer) cmbSitios.getSelectedItem();
         if (cmbUPMID.getSelectedItem() != null) {
             this.upmID = (Integer) cmbUPMID.getSelectedItem();
@@ -471,7 +472,7 @@ Integer upmID = (Integer) cmbUPMID.getSelectedItem();
     }//GEN-LAST:event_cmbUPMIDActionPerformed
 
     private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
-try {
+        try {
             //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
             if (cmbSitios.getSelectedItem() == null) {
                 this.sitioID = 0;
@@ -489,7 +490,7 @@ try {
         } catch (Exception e) {
             e.getCause();
         }
-        
+
     }//GEN-LAST:event_cmbSitiosActionPerformed
 
     /**
@@ -507,5 +508,5 @@ try {
     private javax.swing.JLabel lblUPM;
     private javax.swing.JTextArea txtObservacionesSitio;
     // End of variables declaration//GEN-END:variables
-  
+
 }

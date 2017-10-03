@@ -862,6 +862,7 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Observaciones"));
 
         txtObservaciones.setColumns(20);
+        txtObservaciones.setLineWrap(true);
         txtObservaciones.setRows(5);
         txtObservaciones.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -895,7 +896,6 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
             }
         });
 
-        cmbSitios.setEnabled(false);
         cmbSitios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSitiosActionPerformed(evt);
@@ -1062,8 +1062,12 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
 
         fijarDatosParametros();
-        if (validarCamposParametrosFQ()) {
-            crearParametro();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarCamposParametrosFQ()) {
+                crearParametro();
+            }
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
 

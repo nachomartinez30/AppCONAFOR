@@ -88,9 +88,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     private Version ver = new Version();
     private String version = ver.getVersion();
     private CDSitio cdSitio = new CDSitio();
-    
-    
-    
+
     public FrmLongitudInterceptada() {
         initComponents();
         this.longitudInterceptada = 17;
@@ -106,7 +104,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
-        
+
         llenarTabla();
         llenarTablaCoberturaDosel();
         //funciones.reiniciarComboModel(cmbTransectoComponente);
@@ -122,7 +120,6 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
         this.modificar = 0;
     }
 
-    
     public void llenarControles() {
         combo.reiniciarComboModel(this.cmbUPMID);
         fillUPMID();
@@ -149,15 +146,14 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    
+
     public void revisarLongitud(int sitio) {
         System.out.println("Degradacion de suelo= " + this.ceSitio.getSecuencia());
         /*revision = true;
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
-        */
+         */
         llenarTabla();
         llenarTablaCoberturaDosel();
         /* funciones.reiniciarComboModel(cmbTransectoComponente);
@@ -1332,6 +1328,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
             }
         });
 
+        cmbSitios.setEnabled(false);
         cmbSitios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSitiosActionPerformed(evt);
@@ -1639,32 +1636,44 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
 
     private void btnEliminarDoselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarDoselActionPerformed
         DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbTransectoDosel.getModel();
-        eliminarCoberturaDosel();
-        funciones.reiniciarTabla(this.grdCoberturaDosel);
-        llenarTablaCoberturaDosel();
-        limpiarControlesCobertura();
-        dcm.removeAllElements();
-        fillCmbTransectos();
-        btnAgregarDosel.setEnabled(true);
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            eliminarCoberturaDosel();
+            funciones.reiniciarTabla(this.grdCoberturaDosel);
+            llenarTablaCoberturaDosel();
+            limpiarControlesCobertura();
+            dcm.removeAllElements();
+            fillCmbTransectos();
+            btnAgregarDosel.setEnabled(true);
+        }
     }//GEN-LAST:event_btnEliminarDoselActionPerformed
 
     private void btnModificarDoselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarDoselActionPerformed
         asignarDatosDosel();
-        actualizarCoberturaDosel();
-        llenarTablaCoberturaDosel();
-        limpiarControlesCobertura();
-        btnAgregarDosel.setEnabled(true);
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            actualizarCoberturaDosel();
+            llenarTablaCoberturaDosel();
+            limpiarControlesCobertura();
+            btnAgregarDosel.setEnabled(true);
+        }
     }//GEN-LAST:event_btnModificarDoselActionPerformed
 
     private void btnAgregarDoselActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDoselActionPerformed
         DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbTransectoDosel.getModel();
         asignarDatosDosel();
-        if (validarCoberturaDosel()) {
-            crearCoberturaDosel();
-            llenarTablaCoberturaDosel();
-            limpiarControlesCobertura();
-            dcm.removeAllElements();
-            fillCmbTransectos();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarCoberturaDosel()) {
+                crearCoberturaDosel();
+                llenarTablaCoberturaDosel();
+                limpiarControlesCobertura();
+                dcm.removeAllElements();
+                fillCmbTransectos();
+            }
         }
     }//GEN-LAST:event_btnAgregarDoselActionPerformed
 
@@ -1750,28 +1759,32 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
 
     private void btnColectaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColectaActionPerformed
         try {
-            int fila = grdComponentes.getSelectedRow();
-            String consecutivo = grdComponentes.getValueAt(fila, 2).toString();
-            FrmClaveColecta claveColecta = new FrmClaveColecta(Main.main, true);
-            claveColecta.setLocationRelativeTo(Main.main);
-            CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
-            CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
-            CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
-            CEColectaBotanica ceColecta = new CEColectaBotanica();
-            if (indexFamilia != null) {
-                ceColecta.setFamiliaID(indexFamilia.getFamiliaID());
+            if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+            } else {
+                int fila = grdComponentes.getSelectedRow();
+                String consecutivo = grdComponentes.getValueAt(fila, 2).toString();
+                FrmClaveColecta claveColecta = new FrmClaveColecta(Main.main, true);
+                claveColecta.setLocationRelativeTo(Main.main);
+                CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
+                CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
+                CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
+                CEColectaBotanica ceColecta = new CEColectaBotanica();
+                if (indexFamilia != null) {
+                    ceColecta.setFamiliaID(indexFamilia.getFamiliaID());
+                }
+                if (indexGenero != null) {
+                    ceColecta.setGeneroID(indexGenero.getGeneroID());
+                }
+                if (indexEspecie != null) {
+                    ceColecta.setEspecieID(indexEspecie.getEspecieID());
+                }
+                ceColecta.setUPMID(this.upmID);
+                //ceColecta.setInfraespecie(txtInfraespecie.getText());
+                ceColecta.setNombreComun(txtNombreComun.getText());
+                claveColecta.setDatosIniciales(ceColecta, FORMATO_ID, "CARBONO_LongitudComponente", "Consecutivo", this.sitioID, Integer.parseInt(consecutivo));
+                claveColecta.setVisible(true);
             }
-            if (indexGenero != null) {
-                ceColecta.setGeneroID(indexGenero.getGeneroID());
-            }
-            if (indexEspecie != null) {
-                ceColecta.setEspecieID(indexEspecie.getEspecieID());
-            }
-            ceColecta.setUPMID(this.upmID);
-            //ceColecta.setInfraespecie(txtInfraespecie.getText());
-            ceColecta.setNombreComun(txtNombreComun.getText());
-            claveColecta.setDatosIniciales(ceColecta, FORMATO_ID, "CARBONO_LongitudComponente", "Consecutivo", this.sitioID, Integer.parseInt(consecutivo));
-            claveColecta.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un registro para asignar la clave de colecta"
                     + e.getClass().getName() + " : " + e.getMessage(), "Clave de colecta", JOptionPane.ERROR_MESSAGE);
@@ -1779,33 +1792,45 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnColectaActionPerformed
 
     private void btnEliminarComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarComponenteActionPerformed
-        eliminarComponente();
-        this.cdLongitud.enumerarConsecutivo(this.sitioID);
-        funciones.reiniciarTabla(this.grdComponentes);
-        llenarTabla();
-        limpiarControlesComponentes();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            eliminarComponente();
+            this.cdLongitud.enumerarConsecutivo(this.sitioID);
+            funciones.reiniciarTabla(this.grdComponentes);
+            llenarTabla();
+            limpiarControlesComponentes();
+        }
     }//GEN-LAST:event_btnEliminarComponenteActionPerformed
 
     private void btnModificarComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarComponenteActionPerformed
         asignarDatosLongitudComponente();
-        if (validarComponentes()) {
-            actualizarComponente();
-            funciones.reiniciarTabla(this.grdComponentes);
-            llenarTabla();
-            reiniciarValoresComponentes();
-            limpiarControlesComponentes();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarComponentes()) {
+                actualizarComponente();
+                funciones.reiniciarTabla(this.grdComponentes);
+                llenarTabla();
+                reiniciarValoresComponentes();
+                limpiarControlesComponentes();
+            }
         }
     }//GEN-LAST:event_btnModificarComponenteActionPerformed
 
     private void btnAgregarComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarComponenteActionPerformed
         asignarDatosLongitudComponente();
-        if (validarComponentes() /*&& validarLongitudComponente()*/) {
-            crearComponente();
-            this.cdLongitud.enumerarConsecutivo(this.sitioID);
-            funciones.reiniciarTabla(this.grdComponentes);
-            llenarTabla();
-            reiniciarValoresComponentes();
-            limpiarControlesComponentes();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarComponentes() /*&& validarLongitudComponente()*/) {
+                crearComponente();
+                this.cdLongitud.enumerarConsecutivo(this.sitioID);
+                funciones.reiniciarTabla(this.grdComponentes);
+                llenarTabla();
+                reiniciarValoresComponentes();
+                limpiarControlesComponentes();
+            }
         }
     }//GEN-LAST:event_btnAgregarComponenteActionPerformed
 
@@ -2083,7 +2108,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbUPMIDActionPerformed
 
     private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
-try {
+        try {
             //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
             if (cmbSitios.getSelectedItem() == null) {
                 this.sitioID = 0;
@@ -2923,7 +2948,7 @@ try {
         return modulo;
     }
 
-   /* private void revisarSiguienteFormulario(CESitio ceSitio) {
+    /* private void revisarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
         if (secuenciaID != null) {
             System.out.println("Secuencia 2967=" + secuenciaID);

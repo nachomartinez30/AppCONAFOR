@@ -24,12 +24,12 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmMaterialLenioso extends JInternalFrame {
-    
+
     private int upmID;
     private int sitioID;
     private int sitio;
     private int carbono;
-     private static final int FORMATO_ID = 7;
+    private static final int FORMATO_ID = 7;
     private int longitudInterceptada;
     private int material100ID;
     private int transecto;
@@ -40,7 +40,7 @@ public class FrmMaterialLenioso extends JInternalFrame {
     private Float diametro1000;
     private Integer grado1000;
     private Float componente5m;
-    private Float componente10m;  
+    private Float componente10m;
     private Integer indexTrasectoCubierta;
     private Integer indexTransecto100;
     private Integer indexTransecto1000;
@@ -54,13 +54,13 @@ public class FrmMaterialLenioso extends JInternalFrame {
     private Datos numeros = new Datos();
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private FuncionesComunes funciones = new FuncionesComunes();
-    private int modificar; 
-    private Version ver=new Version();
-    private String version=ver.getVersion();
-    private boolean  revision;
-     private CDSitio cdSitio = new CDSitio();
+    private int modificar;
+    private Version ver = new Version();
+    private String version = ver.getVersion();
+    private boolean revision;
+    private CDSitio cdSitio = new CDSitio();
     private FuncionesComunes combo = new FuncionesComunes();
-    
+
     public FrmMaterialLenioso() {
         initComponents();
         this.carbono = 14;
@@ -71,12 +71,12 @@ public class FrmMaterialLenioso extends JInternalFrame {
         fillCmbCubiertaVegetal();
         fillCmbComponentes();
     }
-    
-    public void setDatosIniciales(CESitio sitio){
+
+    public void setDatosIniciales(CESitio sitio) {
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
-        
+
         llenarTablaMaterialLenioso100();
         llenarTablaMaterialLenioso1000();
         llenarTablaCubiertaVegetal();
@@ -88,43 +88,42 @@ public class FrmMaterialLenioso extends JInternalFrame {
         this.ceSitio = sitio;
         funciones.manipularBotonesMenuPrincipal(true);
         this.modificar = 0;
-       // cdSecuencia.insertFormatoCapturado(ceSitio, FORMATO_ID);
+        // cdSecuencia.insertFormatoCapturado(ceSitio, FORMATO_ID);
     }
-    
-    
-    public void llenarControles() {
-	combo.reiniciarComboModel(this.cmbUPMID);
-	fillUPMID();
-}
-private void fillUPMID() {
-	List<Integer> listCapturado = new ArrayList<>();
-	listCapturado = this.cdSitio.getUPMSitios();
-	if (listCapturado != null) {
-		int size = listCapturado.size();
-		for (int i = 0; i < size; i++) {
-			cmbUPMID.addItem(listCapturado.get(i));
-		}
-	}
-}
 
-private void fillCmbSitio(int upmID) {
-	List<Integer> listSitios = new ArrayList<>();
-	listSitios = this.cdSitio.getSitiosDisponibles(upmID);
-	if (listSitios != null) {
-		int size = listSitios.size();
-		for (int i = 0; i < size; i++) {
-			cmbSitios.addItem(listSitios.get(i));
-		}
-	}
-}
-    
-    
-    public void revisarCarbono(int sitioID){
+    public void llenarControles() {
+        combo.reiniciarComboModel(this.cmbUPMID);
+        fillUPMID();
+    }
+
+    private void fillUPMID() {
+        List<Integer> listCapturado = new ArrayList<>();
+        listCapturado = this.cdSitio.getUPMSitios();
+        if (listCapturado != null) {
+            int size = listCapturado.size();
+            for (int i = 0; i < size; i++) {
+                cmbUPMID.addItem(listCapturado.get(i));
+            }
+        }
+    }
+
+    private void fillCmbSitio(int upmID) {
+        List<Integer> listSitios = new ArrayList<>();
+        listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+        if (listSitios != null) {
+            int size = listSitios.size();
+            for (int i = 0; i < size; i++) {
+                cmbSitios.addItem(listSitios.get(i));
+            }
+        }
+    }
+
+    public void revisarCarbono(int sitioID) {
         /*revision=true;
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();*/
-        
+
         llenarTablaMaterialLenioso100();
         llenarTablaMaterialLenioso1000();
         llenarTablaCubiertaVegetal();
@@ -133,83 +132,83 @@ private void fillCmbSitio(int upmID) {
         ceSitio.setSitio(this.sitio);
         funciones.manipularBotonesMenuPrincipal(true);
         chkMaterialLenioso110100.setSelected(!cdCarbono.hayMaterialLenioso100(this.sitioID));
-        if (chkMaterialLenioso110100.isSelected()){
+        if (chkMaterialLenioso110100.isSelected()) {
             manipularControlesMaterial100(true);
-        }else{
+        } else {
             manipularControlesMaterial100(false);
         }
         chkMaterialLenioso1000.setSelected(!this.cdCarbono.hayMaterialLenioso1000(this.sitioID));
-        if (chkMaterialLenioso1000.isSelected()){
+        if (chkMaterialLenioso1000.isSelected()) {
             manipularControlesMateriales1000(true);
-        }else{
+        } else {
             manipularControlesMateriales1000(false);
         }
         chkAlturaArbustosHierbasPastos.setSelected(!this.cdCarbono.hayCubiertaVegetal(this.sitioID));
-        if (chkAlturaArbustosHierbasPastos.isSelected()){
+        if (chkAlturaArbustosHierbasPastos.isSelected()) {
             manipularAlturaPastosHierbas(true);
-        }else{
+        } else {
             manipularAlturaPastosHierbas(false);
         }
         this.modificar = 1;
         funciones.reiniciarComboModel(cmbTransecto100);
         fillCmbMaterial100();
     }
-    
-    private void fillCmbMaterial100(){
+
+    private void fillCmbMaterial100() {
         List<Integer> listTransectos = new ArrayList<>();
         listTransectos = cdCarbono.getTransectoMaterial100(this.sitioID);
-        if(listTransectos != null){
+        if (listTransectos != null) {
             int size = listTransectos.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbTransecto100.addItem(listTransectos.get(i));
             }
         }
     }
-    
-    private void fillCmbTransecto1000(){
+
+    private void fillCmbTransecto1000() {
         List<Integer> listTransectos = new ArrayList<>();
         listTransectos = cdCarbono.getTransectoMaterial1000();
-        if(listTransectos != null){
+        if (listTransectos != null) {
             int size = listTransectos.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbTransecto1000.addItem(listTransectos.get(i));
             }
         }
     }
-    
-    private void fillCmbGradoPutrefaccion1000(){
+
+    private void fillCmbGradoPutrefaccion1000() {
         List<Integer> listTransectos = new ArrayList<>();
         listTransectos = cdCarbono.getGradoPutrefaccionl1000();
-        if(listTransectos != null){
+        if (listTransectos != null) {
             int size = listTransectos.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbGradoPutrefaccion.addItem(listTransectos.get(i));
             }
         }
     }
-    
-    private void fillCmbCubiertaVegetal(){
+
+    private void fillCmbCubiertaVegetal() {
         List<Integer> listTransectos = new ArrayList<>();
         listTransectos = cdCarbono.getTransectoCubiertaVegetal();
-        if(listTransectos != null){
+        if (listTransectos != null) {
             int size = listTransectos.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbNoCubiertaVegetal.addItem(listTransectos.get(i));
             }
         }
     }
-    
-    private void fillCmbComponentes(){
+
+    private void fillCmbComponentes() {
         List<CatECarbonoComponente> listComponentes = new ArrayList<>();
         listComponentes = cdCarbono.getComponentesCV();
-        if(listComponentes != null){
+        if (listComponentes != null) {
             int size = listComponentes.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbComponentes.addItem(listComponentes.get(i));
             }
         }
     }
-    
+
     private void llenarTablaMaterialLenioso100() {
         grdMaterialLenioso100.setModel(cdCarbono.getTablaMaterialLenioso100(this.sitioID));
         grdMaterialLenioso100.getColumnModel().getColumn(2).setPreferredWidth(60);
@@ -248,7 +247,7 @@ private void fillCmbSitio(int upmID) {
         tabla.hideColumnTable(grdCubiertaVegetal, column_0);
         tabla.hideColumnTable(grdCubiertaVegetal, column_1);
     }
-    
+
     private void asignarDatosMaterial100() {
         this.indexTransecto100 = (Integer) cmbTransecto100.getSelectedItem();
 
@@ -276,7 +275,7 @@ private void fillCmbSitio(int upmID) {
             this.cienHoras = null;
         }
     }
-    
+
     private void asignarDatosMaterial1000() {
         this.indexTransecto1000 = (Integer) cmbTransecto1000.getSelectedItem();
 
@@ -287,7 +286,7 @@ private void fillCmbSitio(int upmID) {
         }
         this.grado1000 = (Integer) cmbGradoPutrefaccion.getSelectedItem();
     }
-    
+
     private void asignarDatosCubiertaVegetal() {
         this.indexTrasectoCubierta = (Integer) cmbNoCubiertaVegetal.getSelectedItem();
         try {
@@ -302,7 +301,7 @@ private void fillCmbSitio(int upmID) {
             this.componente10m = null;
         }
     }
-    
+
     private boolean validarObligatorioMaterial100() {
         if (cmbTransecto100.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un numero de transecto",
@@ -333,7 +332,7 @@ private void fillCmbSitio(int upmID) {
             return true;
         }
     }
-    
+
     private boolean validarObligatorioMaterial100Modificacion() {
         if (txtPendiente100.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Error! Debe proporcionar la pendiente",
@@ -380,7 +379,7 @@ private void fillCmbSitio(int upmID) {
             return true;
         }
     }
-    
+
     private boolean validarOblitariosMateriales1000Modificacion() {
         if (txtDiametro1000.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Error! Debe proporcionar el diametro",
@@ -422,7 +421,7 @@ private void fillCmbSitio(int upmID) {
             return true;
         }
     }
-    
+
     private boolean validarDatosMateriales100() {
         ValidacionesComunes validar = new ValidacionesComunes();
         if (validar.esPorcentajeExtendido(this.pendiente)) {
@@ -449,7 +448,7 @@ private void fillCmbSitio(int upmID) {
             return true;
         }
     }
-    
+
     public boolean validarDatosCubiertaVegetal() {
         if (this.componente5m < 0 || this.componente5m > 1000) {
             JOptionPane.showMessageDialog(null, "Error! Debe proporcionar un valor entre 0 y 1000 ",
@@ -465,7 +464,7 @@ private void fillCmbSitio(int upmID) {
             return true;
         }
     }
-    
+
     private boolean validarCubiertaVegetal() {
         Integer transectoComponente = (Integer) cmbNoCubiertaVegetal.getSelectedItem();
         CatECarbonoComponente caComponente = (CatECarbonoComponente) cmbComponentes.getSelectedItem();
@@ -483,56 +482,56 @@ private void fillCmbSitio(int upmID) {
         }
         return true;
     }
-    
-    private void crearMaterialLenioso100(){
+
+    private void crearMaterialLenioso100() {
         Integer transecto100 = (Integer) cmbTransecto100.getSelectedItem();
         CEMaterialLenioso100 material100 = new CEMaterialLenioso100();
-        
+
         material100.setSitioID(this.sitioID);
-        if(transecto100 != null){
+        if (transecto100 != null) {
             material100.setTransecto(transecto100);
         }
         material100.setPendiente(this.pendiente);
         material100.setUnaHora(this.unaHora);
         material100.setDiezHoras(this.diezHoras);
         material100.setCienHoras(this.cienHoras);
-        
+
         cdCarbono.insertMaterialLenioso100(material100);
     }
-    
-    private void crearMaterialLenioso1000(){
+
+    private void crearMaterialLenioso1000() {
         Integer transecto1000 = (Integer) cmbTransecto1000.getSelectedItem();
         CEMaterialLenioso1000 material1000 = new CEMaterialLenioso1000();
         Integer gradoPutrefaccion = (Integer) cmbGradoPutrefaccion.getSelectedItem();
-        
+
         material1000.setSitioID(this.sitioID);
-        if(transecto1000 != null){
+        if (transecto1000 != null) {
             material1000.setTransecto(transecto1000);
         }
         material1000.setDiametro(this.diametro1000);
         material1000.setGrado(gradoPutrefaccion);
-        
+
         cdCarbono.insertMaterialLenioso1000(material1000);
     }
-    
-    private void crearCubiertaVegetal(){
+
+    private void crearCubiertaVegetal() {
         Integer transectoCV = (Integer) cmbNoCubiertaVegetal.getSelectedItem();
-        CatECarbonoComponente componente = ( CatECarbonoComponente)cmbComponentes.getSelectedItem();
+        CatECarbonoComponente componente = (CatECarbonoComponente) cmbComponentes.getSelectedItem();
         CECubiertaVegetal cubierta = new CECubiertaVegetal();
-        
+
         cubierta.setSitioID(this.sitioID);
-        if(transectoCV != null){
+        if (transectoCV != null) {
             cubierta.setTransecto(transectoCV);
         }
-        if(componente != null){
+        if (componente != null) {
             cubierta.setComponente(componente.getComponenteID());
         }
         cubierta.setAltura5(this.componente5m);
         cubierta.setAltura10(this.componente10m);
-        
+
         cdCarbono.insertCubiertaVegetal(cubierta);
     }
-    
+
     private void actualizarMaterialLenioso100() {
         try {
             int fila = grdMaterialLenioso100.getSelectedRow();
@@ -558,7 +557,7 @@ private void fillCmbSitio(int upmID) {
                     + e.getClass().getName() + " : " + e.getMessage(), "Carbono", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
+
     private void actualizarMaterialLenioso1000() {
         try {
             int fila = grdMaterialLenioso1000.getSelectedRow();
@@ -583,7 +582,7 @@ private void fillCmbSitio(int upmID) {
                     + e.getClass().getName() + " : " + e.getMessage(), "Carbono", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
+
     private void actualizarCubiertaVegetal() {
         try {
             int fila = grdCubiertaVegetal.getSelectedRow();
@@ -613,9 +612,9 @@ private void fillCmbSitio(int upmID) {
                     + e.getClass().getName() + " : " + e.getMessage(), "Carbono", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
-    private void eliminarMaterial100(){
-        try{
+
+    private void eliminarMaterial100() {
+        try {
             int fila = grdMaterialLenioso100.getSelectedRow();
             String registro = grdMaterialLenioso100.getValueAt(fila, 0).toString();
             int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro de borrar el registro de material leñoso 100?",
@@ -625,14 +624,14 @@ private void fillCmbSitio(int upmID) {
                 ml.setMaterialLenioso100ID(Integer.parseInt(registro));
                 this.cdCarbono.deleteMaterialLenioso100(ml);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningún registro de la tabla de material leñoso 100"
                     + "", "Carbono", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
-    private void eliminarMaterial1000(){
-        try{
+
+    private void eliminarMaterial1000() {
+        try {
             int fila = grdMaterialLenioso1000.getSelectedRow();
             String registro = grdMaterialLenioso1000.getValueAt(fila, 0).toString();
             int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro de borrar el registro de material leñoso 1000?",
@@ -642,14 +641,14 @@ private void fillCmbSitio(int upmID) {
                 ml.setMaterialLenioso1000ID(Integer.parseInt(registro));
                 this.cdCarbono.deleteMaterialLenioso1000(ml);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningún registro de la tabla de material leñoso 100"
                     + "", "Carbono", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-     private void eliminarCubiertaVegetal(){
-        try{
+
+    private void eliminarCubiertaVegetal() {
+        try {
             int fila = grdCubiertaVegetal.getSelectedRow();
             String registro = grdCubiertaVegetal.getValueAt(fila, 0).toString();
             int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro de borrar el registro de cubierta vegetal?",
@@ -659,12 +658,12 @@ private void fillCmbSitio(int upmID) {
                 ml.setCubiertaVegetalID(Integer.parseInt(registro));
                 this.cdCarbono.deleteCubiertaVegetal(ml);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningún registro de la tabla de cubierta vegetal"
                     + "", "Carbono", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-     
+
     private void manipularControlesMaterial100(boolean habilitados) {
         if (habilitados == true) {
             cmbTransecto100.setEnabled(true);
@@ -687,7 +686,7 @@ private void fillCmbSitio(int upmID) {
             limpiarControlesMaterial100();
         }
     }
-    
+
     private void manipularControlesMateriales1000(boolean habilitados) {
         if (habilitados == true) {
             cmbTransecto1000.setEnabled(true);
@@ -706,7 +705,7 @@ private void fillCmbSitio(int upmID) {
             limpiarControlesMaterial1000();
         }
     }
-    
+
     private void manipularAlturaPastosHierbas(boolean habilitados) {
         if (habilitados == true) {
             cmbNoCubiertaVegetal.setEnabled(true);
@@ -727,7 +726,7 @@ private void fillCmbSitio(int upmID) {
             limpiarControlesCubierta();
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1399,6 +1398,7 @@ private void fillCmbSitio(int upmID) {
             }
         });
 
+        cmbSitios.setEnabled(false);
         cmbSitios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSitiosActionPerformed(evt);
@@ -1495,28 +1495,36 @@ private void fillCmbSitio(int upmID) {
     private void btnGuardar100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar100ActionPerformed
         DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbTransecto100.getModel();
         asignarDatosMaterial100();
-        if (validarObligatorioMaterial100() && validarDatosMateriales100()) {
-            crearMaterialLenioso100();
-            llenarTablaMaterialLenioso100();
-            limpiarControlesMaterial100();
-            dcm.removeAllElements();
-            fillCmbMaterial100();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarObligatorioMaterial100() && validarDatosMateriales100()) {
+                crearMaterialLenioso100();
+                llenarTablaMaterialLenioso100();
+                limpiarControlesMaterial100();
+                dcm.removeAllElements();
+                fillCmbMaterial100();
+            }
         }
     }//GEN-LAST:event_btnGuardar100ActionPerformed
 
     private void btnGuardar1000ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar1000ActionPerformed
         asignarDatosMaterial1000();
-        if (validarOblitariosMateriales1000()) {
-            crearMaterialLenioso1000();
-            limpiarControlesMaterial1000();
-            llenarTablaMaterialLenioso1000();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarOblitariosMateriales1000()) {
+                crearMaterialLenioso1000();
+                limpiarControlesMaterial1000();
+                llenarTablaMaterialLenioso1000();
+            }
         }
     }//GEN-LAST:event_btnGuardar1000ActionPerformed
 
     private void txtPendiente100FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPendiente100FocusGained
-       SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtPendiente100.selectAll();
             }
         });
@@ -1541,7 +1549,7 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_txtDiezHoras100ActionPerformed
 
     private void txtCienHoras100FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCienHoras100FocusGained
-       SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 txtCienHoras100.selectAll();
@@ -1550,7 +1558,7 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_txtCienHoras100FocusGained
 
     private void txtDiametro1000FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametro1000FocusGained
-         SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 txtDiametro1000.selectAll();
@@ -1559,7 +1567,7 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_txtDiametro1000FocusGained
 
     private void txtComponente5mFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtComponente5mFocusGained
-       SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 txtComponente5m.selectAll();
@@ -1568,7 +1576,7 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_txtComponente5mFocusGained
 
     private void txtComponente10mFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtComponente10mFocusGained
-         SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 txtComponente10m.selectAll();
@@ -1577,19 +1585,19 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_txtComponente10mFocusGained
 
     private void txtPendiente100FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPendiente100FocusLost
-         if(txtPendiente100.getText().isEmpty()){
+        if (txtPendiente100.getText().isEmpty()) {
             txtPendiente100.setValue(null);
         }
     }//GEN-LAST:event_txtPendiente100FocusLost
 
     private void txtUnaHora100FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUnaHora100FocusLost
-        if(txtUnaHora100.getText().isEmpty()){
+        if (txtUnaHora100.getText().isEmpty()) {
             txtUnaHora100.setValue(null);
         }
     }//GEN-LAST:event_txtUnaHora100FocusLost
 
     private void txtDiezHoras100FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiezHoras100FocusGained
-         SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 txtDiezHoras100.selectAll();
@@ -1598,91 +1606,120 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_txtDiezHoras100FocusGained
 
     private void txtDiezHoras100FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiezHoras100FocusLost
-        if(txtDiezHoras100.getText().isEmpty()){
+        if (txtDiezHoras100.getText().isEmpty()) {
             txtDiezHoras100.setValue(null);
         }
     }//GEN-LAST:event_txtDiezHoras100FocusLost
 
     private void txtCienHoras100FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCienHoras100FocusLost
-         if(txtCienHoras100.getText().isEmpty()){
+        if (txtCienHoras100.getText().isEmpty()) {
             txtCienHoras100.setValue(null);
         }
     }//GEN-LAST:event_txtCienHoras100FocusLost
 
     private void txtDiametro1000FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametro1000FocusLost
-        if(txtDiametro1000.getText().isEmpty()){
+        if (txtDiametro1000.getText().isEmpty()) {
             txtDiametro1000.setValue(null);
         }
     }//GEN-LAST:event_txtDiametro1000FocusLost
 
     private void txtComponente5mFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtComponente5mFocusLost
-       if(txtComponente5m.getText().isEmpty()){
+        if (txtComponente5m.getText().isEmpty()) {
             txtComponente5m.setValue(null);
         }
     }//GEN-LAST:event_txtComponente5mFocusLost
 
     private void txtComponente10mFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtComponente10mFocusLost
-       if(txtComponente10m.getText().isEmpty()){
+        if (txtComponente10m.getText().isEmpty()) {
             txtComponente10m.setValue(null);
         }
     }//GEN-LAST:event_txtComponente10mFocusLost
 
     private void btnGuardarComponenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarComponenteActionPerformed
         asignarDatosCubiertaVegetal();
-        if(validarObligatoriosCubiertaVegetal() && validarDatosCubiertaVegetal() && validarDatosCubiertaVegetal() && validarCubiertaVegetal()){
-           crearCubiertaVegetal();
-           limpiarControlesCubierta();
-           llenarTablaCubiertaVegetal();
-       }
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarObligatoriosCubiertaVegetal() && validarDatosCubiertaVegetal() && validarDatosCubiertaVegetal() && validarCubiertaVegetal()) {
+                crearCubiertaVegetal();
+                limpiarControlesCubierta();
+                llenarTablaCubiertaVegetal();
+            }
+        }
     }//GEN-LAST:event_btnGuardarComponenteActionPerformed
 
     private void btnModificar100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificar100ActionPerformed
-         asignarDatosMaterial100();
-        if(validarObligatorioMaterial100Modificacion()&& validarDatosMateriales100()){
-            actualizarMaterialLenioso100();
-            limpiarControlesMaterial100();
-            llenarTablaMaterialLenioso100();
+        asignarDatosMaterial100();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarObligatorioMaterial100Modificacion() && validarDatosMateriales100()) {
+                actualizarMaterialLenioso100();
+                limpiarControlesMaterial100();
+                llenarTablaMaterialLenioso100();
+            }
         }
     }//GEN-LAST:event_btnModificar100ActionPerformed
 
     private void btnModificar1000ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificar1000ActionPerformed
         asignarDatosMaterial1000();
-        if (validarOblitariosMateriales1000()) {
-            actualizarMaterialLenioso1000();
-            limpiarControlesMaterial1000();
-            llenarTablaMaterialLenioso1000();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarOblitariosMateriales1000()) {
+                actualizarMaterialLenioso1000();
+                limpiarControlesMaterial1000();
+                llenarTablaMaterialLenioso1000();
+            }
         }
     }//GEN-LAST:event_btnModificar1000ActionPerformed
 
     private void btnModificarComponentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarComponentesActionPerformed
         asignarDatosCubiertaVegetal();
-        if(validarDatosCubiertaVegetal() && validarDatosCubiertaVegetal()){
-           actualizarCubiertaVegetal();
-           limpiarControlesCubierta();
-           llenarTablaCubiertaVegetal();
-   
-       }
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarDatosCubiertaVegetal() && validarDatosCubiertaVegetal()) {
+                actualizarCubiertaVegetal();
+                limpiarControlesCubierta();
+                llenarTablaCubiertaVegetal();
+
+            }
+        }
     }//GEN-LAST:event_btnModificarComponentesActionPerformed
 
     private void btnEliminar100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar100ActionPerformed
         DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbTransecto100.getModel();
-        eliminarMaterial100();
-        limpiarControlesMaterial100();
-        llenarTablaMaterialLenioso100();
-        dcm.removeAllElements();
-        fillCmbMaterial100();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            eliminarMaterial100();
+            limpiarControlesMaterial100();
+            llenarTablaMaterialLenioso100();
+            dcm.removeAllElements();
+            fillCmbMaterial100();
+        }
     }//GEN-LAST:event_btnEliminar100ActionPerformed
 
     private void btnEliminar1000ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1000ActionPerformed
-       eliminarMaterial1000();
-       limpiarControlesMaterial1000();
-       llenarTablaMaterialLenioso1000();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            eliminarMaterial1000();
+            limpiarControlesMaterial1000();
+            llenarTablaMaterialLenioso1000();
+        }
     }//GEN-LAST:event_btnEliminar1000ActionPerformed
 
     private void btnEliminarComponentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarComponentesActionPerformed
-        eliminarCubiertaVegetal();
-        limpiarControlesCubierta();
-        llenarTablaCubiertaVegetal();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            eliminarCubiertaVegetal();
+
+            limpiarControlesCubierta();
+            llenarTablaCubiertaVegetal();
+        }
     }//GEN-LAST:event_btnEliminarComponentesActionPerformed
 
     private void grdMaterialLenioso100MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdMaterialLenioso100MouseClicked
@@ -1730,17 +1767,17 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_grdCubiertaVegetalMouseClicked
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        if(revision==false){//esta en modo de captura
+        if (revision == false) {//esta en modo de captura
             this.hide();
             funciones.manipularBotonesMenuPrincipal(false);
         }
-        if(revision==true){//entro a modo de revision
-             //System.err.println("Modo Revision");
+        if (revision == true) {//entro a modo de revision
+            //System.err.println("Modo Revision");
             this.hide();
             //UPMForms.revisionModulos.iniciarRevision();
             UPMForms.revisionModulos.setVisible(true);
             UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision=false;
+            revision = false;
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
@@ -1814,7 +1851,7 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_chkMaterialLenioso1000ActionPerformed
 
     private void chkAlturaArbustosHierbasPastosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAlturaArbustosHierbasPastosActionPerformed
-        if(chkAlturaArbustosHierbasPastos.isSelected()){
+        if (chkAlturaArbustosHierbasPastos.isSelected()) {
             manipularAlturaPastosHierbas(true);
         } else {
             int respuesta = JOptionPane.showConfirmDialog(null, "Si capturo, se borrarán los datos de combustibles 1000, ¿Esta seguro?",
@@ -1850,7 +1887,7 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_cmbUPMIDActionPerformed
 
     private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
- try {
+        try {
             //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
             if (cmbSitios.getSelectedItem() == null) {
                 this.sitioID = 0;
@@ -1870,7 +1907,7 @@ private void fillCmbSitio(int upmID) {
         }
     }//GEN-LAST:event_cmbSitiosActionPerformed
 
-    private void limpiarControlesMaterial100(){
+    private void limpiarControlesMaterial100() {
         cmbTransecto100.setSelectedItem(null);
         txtPendiente100.setText("");
         txtPendiente100.setValue(null);
@@ -1882,16 +1919,16 @@ private void fillCmbSitio(int upmID) {
         txtCienHoras100.setValue(null);
         cmbTransecto100.requestFocus();
     }
-    
-    private void limpiarControlesMaterial1000(){
+
+    private void limpiarControlesMaterial1000() {
         cmbTransecto1000.setSelectedItem(null);
         txtDiametro1000.setText("");
         txtDiametro1000.setValue(null);
         cmbGradoPutrefaccion.setSelectedItem(null);
         cmbTransecto1000.requestFocus();
     }
-    
-    private void limpiarControlesCubierta(){
+
+    private void limpiarControlesCubierta() {
         cmbNoCubiertaVegetal.setSelectedItem(null);
         cmbComponentes.setSelectedItem(null);
         txtComponente5m.setText("");

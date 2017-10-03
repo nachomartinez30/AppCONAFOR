@@ -9,7 +9,7 @@ package gob.conafor.utils;
  * @author Nacho Martinez
  */
 public class Version {
-    String version="   (V_1.9.1)";
+    String version="   (V_1.9.1 2015 special)";
 
     public String getVersion() {
         return version;

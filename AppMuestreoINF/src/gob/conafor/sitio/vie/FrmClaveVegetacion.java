@@ -17,7 +17,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 public class FrmClaveVegetacion extends JInternalFrame {
-    
+
     private final int claveVegetacion;
     private final int caracteristicasUPM;
     private CDSitio cdSitio = new CDSitio();
@@ -40,10 +40,10 @@ public class FrmClaveVegetacion extends JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private int modificar;
     private FuncionesComunes funciones = new FuncionesComunes();
-    private Version ver=new Version();
-    private String version=ver.getVersion();
+    private Version ver = new Version();
+    private String version = ver.getVersion();
     private boolean revision;
-    
+
     public FrmClaveVegetacion() {
         initComponents();
         fillCmbClaveSerieV();
@@ -51,8 +51,8 @@ public class FrmClaveVegetacion extends JInternalFrame {
         this.claveVegetacion = 12;
         this.caracteristicasUPM = 13;
     }
-    
-     public void llenarControles() {
+
+    public void llenarControles() {
         combo.reiniciarComboModel(this.cmbUPMID);
         fillUPMID();
     }
@@ -78,21 +78,20 @@ public class FrmClaveVegetacion extends JInternalFrame {
             }
         }
     }
-    
-    
-    public void setDatosIniciales(CESitio sitio){
+
+    public void setDatosIniciales(CESitio sitio) {
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
-        
+
         this.ceSitio = sitio;
         this.modificar = 0;
         funciones.manipularBotonesMenuPrincipal(true);
         limpiarControles();
     }
-    
+
     public void revisarClaveVegetacion(int sitioID) {
-       /* revision=true;
+        /* revision=true;
         limpiarControles();
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
@@ -103,7 +102,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
         CESitio ceVegetacion = cdSitio.getClaveVegetacion(sitioID);
         CatEClaveSerieV claveVegetacion = new CatEClaveSerieV();
         claveVegetacion.setClaveSerievID(ceVegetacion.getClaveSerieVID());
-        
+
         cmbClaveSerieV.setSelectedItem(claveVegetacion);
         rbtPrimario.setEnabled(true);
         rbtSecundario.setEnabled(true);
@@ -130,7 +129,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
         if (ceVegetacion.getEcotono() == 1) {
             chkEcotono.setSelected(true);
             txtDescripcionEcotono.setEnabled(true);
-            
+
             txtDescripcionEcotono.setText(ceVegetacion.getCondicionEcotono());
         } else {
             chkEcotono.setSelected(false);
@@ -138,12 +137,11 @@ public class FrmClaveVegetacion extends JInternalFrame {
         txtCondicionPresente.setText(ceVegetacion.getCondicionPresenteCampo());
         this.modificar = 1;
         validarComboBoxClaveVegetacion();
-        
-        
+
         funciones.manipularBotonesMenuPrincipal(true);
     }
-    
-    private void limpiarControles(){
+
+    private void limpiarControles() {
         cmbClaveSerieV.setSelectedItem(null);
         grbTipoVegetacion.clearSelection();
         rbtPrimario.setEnabled(false);
@@ -158,29 +156,29 @@ public class FrmClaveVegetacion extends JInternalFrame {
         txtDescripcionEcotono.setText("");
         txtDescripcionEcotono.setEnabled(false);
     }
-    
-    private void fillCmbClaveSerieV(){
+
+    private void fillCmbClaveSerieV() {
         List<CatEClaveSerieV> listClaveV = new ArrayList<>();
         listClaveV = cdSitio.getClaveVegetacion();
-        if(listClaveV != null){
+        if (listClaveV != null) {
             int size = listClaveV.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbClaveSerieV.addItem(listClaveV.get(i));
             }
         }
     }
-    
-    private void fillCmbFaseSucecional(){
+
+    private void fillCmbFaseSucecional() {
         List<CatEFaseSucecional> listFase = new ArrayList<>();
         listFase = cdSitio.getClaveSucecional();
-        if(listFase != null){
+        if (listFase != null) {
             int size = listFase.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbFaseSucecional.addItem(listFase.get(i));
-            }                   
+            }
         }
     }
-    
+
     private void asignarDatosClaveVegetacion() {
         CatEClaveSerieV claveSerieV = (CatEClaveSerieV) cmbClaveSerieV.getSelectedItem();
         CatEFaseSucecional faseSucecional = (CatEFaseSucecional) cmbFaseSucecional.getSelectedItem();
@@ -194,7 +192,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
         } catch (NullPointerException e) {
             this.faseSucecional = null;
         }
-        if (rbtPrimario.isSelected()==true) {
+        if (rbtPrimario.isSelected() == true) {
             this.condicion = 1;
         } else {
             this.condicion = 0;
@@ -236,8 +234,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
         this.cdSitio.updateClaveVegetacion(ceSitio);
         //limpiarControles();
     }
-    
-    
+
     private boolean validarClaveVegetacion() {
         if (this.claveSerieV != null && txtCondicionPresente.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe proporcionar la condicion presente en el campo", "Clave de vegetacion", JOptionPane.INFORMATION_MESSAGE);
@@ -255,7 +252,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
             return true;
         }
     }
-    
+
     private void seleccionarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
         Integer sitio = this.funciones.sitioCapturaSueloCarbono(this.upmID, 3);
@@ -388,7 +385,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
                     }
                     break;
                 case 15://A y G
-                   if (sitio == this.ceSitio.getSitio()) {
+                    if (sitio == this.ceSitio.getSitio()) {
                         UPMForms.carbono.setDatosIniciales(ceSitio);
                         UPMForms.carbono.setVisible(true);
                     } else {
@@ -400,8 +397,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
                     if (sitio == this.ceSitio.getSitio()) {
                         UPMForms.suelo.setDatosiniciales(ceSitio);
                         UPMForms.suelo.setVisible(true);
-                    } else
-                    {
+                    } else {
                         UPMForms.observaciones.setDatosiniciales(ceSitio);
                         UPMForms.observaciones.setVisible(true);
                     }
@@ -409,8 +405,8 @@ public class FrmClaveVegetacion extends JInternalFrame {
             }
         }
     }
-    
-   /* private void revisarSiguienteFormulario(CESitio ceSitio){
+
+    /* private void revisarSiguienteFormulario(CESitio ceSitio){
         Integer secuenciaID = ceSitio.getSecuencia();
         Integer sitio = this.funciones.sitioCapturaSueloCarbono(this.upmID, 3);
         if (secuenciaID != null) {
@@ -553,7 +549,6 @@ public class FrmClaveVegetacion extends JInternalFrame {
             }
         }
     }*/
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -804,6 +799,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
             }
         });
 
+        cmbSitios.setEnabled(false);
         cmbSitios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSitiosActionPerformed(evt);
@@ -899,60 +895,64 @@ public class FrmClaveVegetacion extends JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        if(revision==false){//esta en modo de captura
+        if (revision == false) {//esta en modo de captura
             this.hide();
             funciones.manipularBotonesMenuPrincipal(false);
         }
-        if(revision==true){//entro a modo de revision
+        if (revision == true) {//entro a modo de revision
             //System.err.println("Modo Revision");
             this.hide();
             //UPMForms.revisionModulos.iniciarRevision();
             UPMForms.revisionModulos.setVisible(true);
             UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision=false;
+            revision = false;
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         asignarDatosClaveVegetacion();
-        if (validarClaveVegetacion()) {
-            if (this.modificar == 0) {
-                crearClaveVegetacion();
-                //this.hide();
-                /*if (this.ceSitio.getSitio() == 1) { //es sitio 1
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarClaveVegetacion()) {
+                if (this.modificar == 0) {
+                    crearClaveVegetacion();
+                    //this.hide();
+                    /*if (this.ceSitio.getSitio() == 1) { //es sitio 1
                     UPMForms.caracteristicasUPM.setDatosIniciales(ceSitio);
                     UPMForms.caracteristicasUPM.setVisible(true);
                 } else {
                     //seleccionarSiguienteFormulario(this.ceSitio);
                 }*/
-                //this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-            } else {
-                crearClaveVegetacion();
-                //this.hide();
-                /*if (this.ceSitio.getSitio() == 1) {
+                    //this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
+                } else {
+                    crearClaveVegetacion();
+                    //this.hide();
+                    /*if (this.ceSitio.getSitio() == 1) {
                     UPMForms.caracteristicasUPM.revisarCaracteristicasUPM(ceSitio);
                     UPMForms.caracteristicasUPM.setVisible(true);
                 } else {
                     revisarSiguienteFormulario(this.ceSitio);
                 }*/
+                }
             }
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void txtCondicionPresenteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCondicionPresenteKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB) {
             evt.consume();
         }
     }//GEN-LAST:event_txtCondicionPresenteKeyPressed
 
     private void txtDescripcionEcotonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionEcotonoKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB) {
             evt.consume();
         }
     }//GEN-LAST:event_txtDescripcionEcotonoKeyPressed
 
     private void chkEcotonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkEcotonoActionPerformed
-        if (chkEcotono.isSelected()==true) {
+        if (chkEcotono.isSelected() == true) {
             txtDescripcionEcotono.setEnabled(true);
         } else {
             txtDescripcionEcotono.setEnabled(false);
@@ -961,11 +961,11 @@ public class FrmClaveVegetacion extends JInternalFrame {
     }//GEN-LAST:event_chkEcotonoActionPerformed
 
     private void cmbClaveSerieVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClaveSerieVActionPerformed
-       validarComboBoxClaveVegetacion();
-       
+        validarComboBoxClaveVegetacion();
+
     }//GEN-LAST:event_cmbClaveSerieVActionPerformed
-    
-    public void validarComboBoxClaveVegetacion(){
+
+    public void validarComboBoxClaveVegetacion() {
         try {
             CatEClaveSerieV claveV = (CatEClaveSerieV) cmbClaveSerieV.getSelectedItem();
             if (claveV.getEsForestal() == 1) {
@@ -998,7 +998,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
                 cmbFaseSucecional.setEnabled(false);
                 chkEcotono.setSelected(false);
                 chkEcotono.setEnabled(false);
-                 
+
                 txtDescripcionEcotono.setText("");
                 txtDescripcionEcotono.setEnabled(false);
             }
@@ -1020,7 +1020,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
             txtDescripcionEcotono.setEnabled(false);
         }
     }
-    
+
     private void rbtSecundarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtSecundarioActionPerformed
         cmbFaseSucecional.setEnabled(true);
     }//GEN-LAST:event_rbtSecundarioActionPerformed
@@ -1050,7 +1050,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
             if (cmbSitios.getSelectedItem() == null) {
                 this.sitioID = 0;
                 limpiarControles();
-                
+
             } else {
                 String upm = cmbUPMID.getSelectedItem().toString();
                 String sitio = cmbSitios.getSelectedItem().toString();

@@ -1,6 +1,7 @@
 package gob.conafor.sitio.vie;
 
 import gob.conafor.sitio.mod.CDFotografiaHemisferica;
+import gob.conafor.sitio.mod.CDSitio;
 import gob.conafor.sitio.mod.CEFotografiaHemisferica;
 import gob.conafor.sitio.mod.CESitio;
 import gob.conafor.sys.mod.CDSecuencia;
@@ -8,6 +9,8 @@ import gob.conafor.upm.vie.UPMForms;
 import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Version;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -30,6 +33,8 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
     private FuncionesComunes funciones = new FuncionesComunes();
     private Version ver=new Version();
     private String version=ver.getVersion();
+     private CDSitio cdSitio = new CDSitio();
+    private FuncionesComunes combo = new FuncionesComunes();
     
     public FrmFotoHemisferica() {
         initComponents();
@@ -39,8 +44,7 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
-        this.txtUPM.setText(String.valueOf(this.upmID));
-        this.txtSitio.setText(String.valueOf(this.sitio));
+        
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -50,14 +54,45 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
         this.funciones.manipularBotonesMenuPrincipal(true);
         limpiarControles();
     }
+    
+    
+    
+     public void llenarControles() {
+        combo.reiniciarComboModel(this.cmbUPMID);
+        cmbSitios.setEnabled(true);
+        fillUPMID();
+    }
 
-    public void revisarFotoHemisferica(CESitio ceSitio) {
-        revision=true;
+    private void fillUPMID() {
+        List<Integer> listCapturado = new ArrayList<>();
+        listCapturado = this.cdSitio.getUPMSitios();
+        if (listCapturado != null) {
+            int size = listCapturado.size();
+            for (int i = 0; i < size; i++) {
+                cmbUPMID.addItem(listCapturado.get(i));
+            }
+        }
+    }
+
+    private void fillCmbSitio(int upmID) {
+
+        List<Integer> listSitios = new ArrayList<>();
+        listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+        if (listSitios != null) {
+            int size = listSitios.size();
+            for (int i = 0; i < size; i++) {
+                cmbSitios.addItem(listSitios.get(i));
+            }
+        }
+    }
+
+
+    public void revisarFotoHemisferica(int sitioID) {
+        /*revision=true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
-        this.sitio = ceSitio.getSitio();
-        this.txtUPM.setText(String.valueOf(this.upmID));
-        this.txtSitio.setText(String.valueOf(this.sitio));
+        this.sitio = ceSitio.getSitio();*/
+        
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -239,10 +274,8 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
         rbgTomaFotografia = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         lblUPM = new javax.swing.JLabel();
-        txtUPM = new javax.swing.JTextField();
         lblTomaFotografiaHemisferica = new javax.swing.JLabel();
         lblSitio = new javax.swing.JLabel();
-        txtSitio = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         btnContinuar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -258,6 +291,8 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
         rbtTomaFotografiaNo = new javax.swing.JRadioButton();
         txtHora = new javax.swing.JFormattedTextField();
         txtDeclinacionMagnetica = new javax.swing.JFormattedTextField();
+        cmbSitios = new javax.swing.JComboBox<>();
+        cmbUPMID = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximizable(true);
@@ -273,10 +308,6 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
         lblUPM.setText("UPMID:");
         jPanel1.add(lblUPM, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 15, -1, -1));
 
-        txtUPM.setEditable(false);
-        txtUPM.setEnabled(false);
-        jPanel1.add(txtUPM, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 13, 97, -1));
-
         lblTomaFotografiaHemisferica.setBackground(new java.awt.Color(153, 153, 153));
         lblTomaFotografiaHemisferica.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTomaFotografiaHemisferica.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -286,11 +317,7 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
 
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-        jPanel1.add(lblSitio, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 10, -1, -1));
-
-        txtSitio.setEditable(false);
-        txtSitio.setEnabled(false);
-        jPanel1.add(txtSitio, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, 100, -1));
+        jPanel1.add(lblSitio, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, -1, -1));
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -472,6 +499,21 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 790, 350));
 
+        cmbSitios.setEnabled(false);
+        cmbSitios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSitiosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmbSitios, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, 120, -1));
+
+        cmbUPMID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUPMIDActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmbUPMID, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 120, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -519,16 +561,7 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         fijarDatosFotoHemisferica();
         if (validarCamposobligatorios()) {
-            if (this.modificar == 0) {
                 crearFotografiaHemisferica();
-                this.hide();
-                seleccionarSiguienteFormulario(this.ceSitio);
-                this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-            } else {
-                actualizarFotografiaHemisferica();
-                this.hide();
-                this.funciones.manipularBotonesMenuPrincipal(false);
-            }
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
@@ -551,10 +584,48 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
         numeros.keyTyped(evt);
     }//GEN-LAST:event_txtDeclinacionMagneticaKeyTyped
 
+    private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
+        Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        Integer sitio = (Integer) cmbSitios.getSelectedItem();
+        if (cmbUPMID.getSelectedItem() != null) {
+            limpiarControles();
+            this.upmID = (Integer) cmbUPMID.getSelectedItem();
+            combo.reiniciarComboModel(cmbSitios);
+            fillCmbSitio(upmID);
+            cmbSitios.setEnabled(true);
+        } else {
+            combo.reiniciarComboModel(cmbSitios);
+            cmbSitios.setSelectedItem(null);
+            cmbSitios.setEnabled(false);
+        }
+    }//GEN-LAST:event_cmbUPMIDActionPerformed
+
+    private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
+try {
+            limpiarControles();
+            if (cmbSitios.getSelectedItem() == null) {
+                this.sitioID = 0;
+                
+            } else {
+                String upm = cmbUPMID.getSelectedItem().toString();
+                String sitio = cmbSitios.getSelectedItem().toString();
+                this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
+
+            }
+            revisarFotoHemisferica(this.sitioID);
+
+//llenarTabla();
+        } catch (Exception e) {
+            e.getCause();
+        }
+    }//GEN-LAST:event_cmbSitiosActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<Integer> cmbSitios;
+    private javax.swing.JComboBox<Integer> cmbUPMID;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -574,8 +645,6 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rbtTomaFotografiaSi;
     private javax.swing.JFormattedTextField txtDeclinacionMagnetica;
     private javax.swing.JFormattedTextField txtHora;
-    private javax.swing.JTextField txtSitio;
-    private javax.swing.JTextField txtUPM;
     // End of variables declaration//GEN-END:variables
    
 }

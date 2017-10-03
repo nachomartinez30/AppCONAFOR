@@ -826,7 +826,8 @@ public class FrmInicio extends javax.swing.JFrame {
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, F, Fotografía hemisferica]":
-                    /*FORMULARIO A ABRIR*/
+                    UPMForms.fotoHemisferica.setVisible(true);
+                    UPMForms.fotoHemisferica.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, G, Parámetros físico químicos]":

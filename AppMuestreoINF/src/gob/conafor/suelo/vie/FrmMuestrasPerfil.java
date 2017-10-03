@@ -720,7 +720,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         }
     }
 
-    private void revisarSiguienteFormulario(CESitio ceSitio) {
+    /*private void revisarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
         //System.out.println("FrmMuestrasDePerfil Linea 679 "+secuenciaID);
         if (secuenciaID != null) {
@@ -729,11 +729,11 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
                 case 1: //Módulo A
                     /* UPMForms.carbono.setDatosIniciales(ceSitio);
                     UPMForms.carbono.setVisible(true);
-                    this.hide();*/
+                    this.hide();
                     break;
                 case 2: //Módulos A y C
                     /* UPMForms.carbono.setDatosIniciales(ceSitio);
-                    UPMForms.carbono.setVisible(true);*/
+                    UPMForms.carbono.setVisible(true);
                     break;
                 case 3: //Modulos A, C, E y G
                     UPMForms.parametrosFQ.continuarParametrosFQ(ceSitio);
@@ -741,41 +741,40 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
                     break;
                 case 4: //Modulos A y E
                     /*UPMForms.hojarascaProfundidad.setDatosiniciales(ceSitio);
-                    UPMForms.hojarascaProfundidad.setVisible(true);*/
+                    UPMForms.hojarascaProfundidad.setVisible(true);
                     this.hide();
                     this.funciones.manipularBotonesMenuPrincipal(false);
                     break;
                 case 5: //Modulos A, C, D y F
                     /*UPMForms.carbono.setDatosIniciales(ceSitio);
-                    UPMForms.carbono.setVisible(true);*/
+                    UPMForms.carbono.setVisible(true);
                     break;
                 case 6://Modulos A, C y D
                     /*UPMForms.suelo.setDatosiniciales(ceSitio);
-                    UPMForms.suelo.setVisible(true);*/
+                    UPMForms.suelo.setVisible(true);
                     break;
                 case 7://Modulos A, C, D y E
                     /* UPMForms.carbono.setDatosIniciales(ceSitio);
-                    UPMForms.carbono.setVisible(true);*/
+                    UPMForms.carbono.setVisible(true);
                     this.hide();
                     this.funciones.manipularBotonesMenuPrincipal(false);
                     break;
                 case 8://Modulos A, C, D, E y F
-                    UPMForms.fotoHemisferica.revisarFotoHemisferica(ceSitio);
-                    UPMForms.fotoHemisferica.setVisible(true);
+                    
                     break;
                 case 9://Modulos A, C y E
                     /*UPMForms.carbono.setDatosIniciales(ceSitio);
-                    UPMForms.carbono.setVisible(true);*/
+                    UPMForms.carbono.setVisible(true);
                     this.hide();
                     this.funciones.manipularBotonesMenuPrincipal(false);
                     break;
                 case 10://Modulos A, C, H
                     /*UPMForms.suelo.setDatosiniciales(ceSitio);
-                    UPMForms.suelo.setVisible(true);*/
+                    UPMForms.suelo.setVisible(true);
                     break;
                 case 11://Modulos A y H
                     /* UPMForms.carbono.setDatosIniciales(ceSitio);
-                    UPMForms.carbono.setVisible(true);*/
+                    UPMForms.carbono.setVisible(true);
                     break;
                 case 12://Modulos A, E y H
                     UPMForms.vegetacionMenor.revisarVegetacionMenor(ceSitio);
@@ -791,14 +790,14 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
                     break;
                 case 15://A y G
                     /* UPMForms.repobladoVM.setDatosIniciales(ceSitio);
-                    UPMForms.repobladoVM.setVisible(true);*/
+                    UPMForms.repobladoVM.setVisible(true);
                     break;
             }
         } else {
             //this.hide();
             this.funciones.manipularBotonesMenuPrincipal(false);
         }
-    }
+    }*/
 
     public void reiniciarControlesMuestras() {
         this.cmbProfundidad.setSelectedItem(null);

@@ -30,19 +30,21 @@ public class CDFotografiaHemisferica {
             rs.close();
             return ceFoto;
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! al obtener los datos de fotografía hemisferica ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             return null;
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos al obtener la deformacion fotografía hemisférica ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
     public void insertFotografiaHemisferica(CEFotografiaHemisferica ceFoto) {
-        query = "INSERT INTO SITIOS_FotografiaHemisferica(SitioID, CoberturaArborea, TomaFotografia, Hora, DeclinacionMagnetica)VALUES("
+        query = "INSERT OR REPLACE INTO SITIOS_FotografiaHemisferica(SitioID, CoberturaArborea, TomaFotografia, Hora, DeclinacionMagnetica)VALUES("
                 + ceFoto.getSitioID() + ", " + ceFoto.getCoberturaArborea() + ", " + ceFoto.getTomaFotografia() + ", '" + ceFoto.getHora()
                 + "', " + ceFoto.getDeclinacionMagnetica() + ")";
         Connection conn = LocalConnection.getConnection();
@@ -50,13 +52,16 @@ public class CDFotografiaHemisferica {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
             conn.commit();
+            JOptionPane.showMessageDialog(null, "informacion de fotografia hemisferica insertada");
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la informacion de fotografía hemisférica ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al insertar los datos de fotografía hemisférica ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -74,11 +79,13 @@ public class CDFotografiaHemisferica {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo modificar la informacion de fotografía hemisférica ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al modificar los datos de fotografía hemisférica ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -95,11 +102,13 @@ public class CDFotografiaHemisferica {
             conn.commit();
             st.close();
         } catch (SQLException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo eliminar la informacion de fotografía hemisférica ", "Conexion BD", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 conn.close();
             } catch (SQLException e) {
+                e.printStackTrace();
                 JOptionPane.showMessageDialog(
                         null, "Error! al cerrar la base de datos al eliminar los datos de fotografía hemisférica ",
                         "Conexion BD", JOptionPane.ERROR_MESSAGE);

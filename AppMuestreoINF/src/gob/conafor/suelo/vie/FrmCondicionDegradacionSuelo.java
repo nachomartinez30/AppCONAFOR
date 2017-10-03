@@ -88,7 +88,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
         this.sitio = ceSitio.getSitio();
         
         this.txtUPM2.setText(String.valueOf(this.upmID));
-        this.txtSitio2.setText(String.valueOf(this.sitio));
+        //this.txtSitio2.setText(String.valueOf(this.sitio));
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -154,7 +154,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
         this.sitio = ceSitio.getSitio();*/
         
         this.txtUPM2.setText(String.valueOf(this.upmID));
-        this.txtSitio2.setText(String.valueOf(this.sitio));
+        //this.txtSitio2.setText(String.valueOf(this.sitio));
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -891,7 +891,6 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
         grdCostras = new javax.swing.JTable();
         txtDiametroCostras = new javax.swing.JFormattedTextField();
         chkCostras = new javax.swing.JCheckBox();
-        btnContinuar1 = new javax.swing.JButton();
         btnSalir1 = new javax.swing.JButton();
         cmbUPMID = new javax.swing.JComboBox<>();
         cmbSitios = new javax.swing.JComboBox<>();
@@ -941,7 +940,6 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
         grdPavimento = new javax.swing.JTable();
         txtDiametroPavimento = new javax.swing.JFormattedTextField();
         chkPavimentos = new javax.swing.JCheckBox();
-        btnContinuar2 = new javax.swing.JButton();
         btnSalir2 = new javax.swing.JButton();
 
         setMaximizable(true);
@@ -1748,14 +1746,6 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnContinuar1.setMnemonic('c');
-        btnContinuar1.setText("Continuar");
-        btnContinuar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContinuar1ActionPerformed(evt);
-            }
-        });
-
         btnSalir1.setMnemonic('s');
         btnSalir1.setText("Salir");
         btnSalir1.addActionListener(new java.awt.event.ActionListener() {
@@ -1782,8 +1772,6 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnContinuar1)
-                .addGap(15, 15, 15)
                 .addComponent(btnSalir1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -1833,9 +1821,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
                     .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnContinuar1)
-                    .addComponent(btnSalir1))
+                .addComponent(btnSalir1)
                 .addContainerGap())
         );
 
@@ -1865,6 +1851,11 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
 
         txtSitio2.setEditable(false);
         txtSitio2.setEnabled(false);
+        txtSitio2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSitio2ActionPerformed(evt);
+            }
+        });
         jPanel3.add(txtSitio2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, 100, -1));
 
         jPanel11.setBackground(new java.awt.Color(204, 204, 204));
@@ -2341,14 +2332,6 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
         );
 
         jPanel3.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, -1, 460));
-
-        btnContinuar2.setText("Continuar");
-        btnContinuar2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContinuar2ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnContinuar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 540, -1, -1));
 
         btnSalir2.setText("Salir");
         btnSalir2.addActionListener(new java.awt.event.ActionListener() {
@@ -2900,45 +2883,6 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cmbNoPavimentoActionPerformed
 
-    private void btnContinuar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuar1ActionPerformed
-        
-        if (chkPedestal.isSelected() && this.cdPedestal.validarTablaPedestal(this.sitioID)) {
-            JOptionPane.showMessageDialog(null, "Si selecciona pedestales, se deben capturar"
-                    + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
-            txtAlturaPedestal.requestFocus();
-        } else if (chkErosionLaminar.isSelected() && this.cdErosion.validarTablaErosionLaminar(this.sitioID)) {
-            JOptionPane.showMessageDialog(null, "Si selecciona erosión laminar, se debe capturar"
-                    + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
-            txtAnchoErosionLaminar.requestFocus();
-        } else if (chkCostras.isSelected() && this.cdCostras.validarTablaCostras(this.sitioID)) {
-            JOptionPane.showMessageDialog(null, "Si selecciona costras, se deben capturar"
-                    + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
-            txtDiametroCostras.requestFocus();
-        } else if (chkCanalillo.isSelected() && this.cdCanalillo.validarTablaCanalillos(this.sitioID)) {
-            JOptionPane.showMessageDialog(null, "Si selecciona canalillos, se deben capturar"
-                    + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
-            //cmbNoCanalillo.requestFocus();
-        } else if (chkCarcavas.isSelected() && this.cdCarcava.validarTablaCarcavas(this.sitioID)) {
-            JOptionPane.showMessageDialog(null, "Si selecciona carcavas, se deben capturar"
-                    + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
-            //cmbNoCarcava.requestFocus();
-        } else if (chkPavimentos.isSelected() && this.cdPavimento.validarTablaPavimentos(this.sitioID)) {
-            JOptionPane.showMessageDialog(null, "Si selecciona pavimentos, se deben capturar"
-                    + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
-            //cmbNoPavimento.requestFocus();
-        } else if (modificar == 0) {//modo captura
-            this.hide();
-            UPMForms.erosionHidrica.setDatosiniciales(this.ceSitio);
-            UPMForms.erosionHidrica.setVisible(true);
-            this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-        } else {//modo revision
-            
-            this.hide();
-            UPMForms.erosionHidrica.revisarErosionHidrica(this.ceSitio);
-            UPMForms.erosionHidrica.setVisible(true);
-        }
-    }//GEN-LAST:event_btnContinuar1ActionPerformed
-
     private void txtAlturaPedestalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAlturaPedestalKeyTyped
        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtAlturaPedestalKeyTyped
@@ -2989,43 +2933,6 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
             revision=false;
         }
     }//GEN-LAST:event_btnSalir1ActionPerformed
-
-    private void btnContinuar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuar2ActionPerformed
-        if (chkPedestal.isSelected() && this.cdPedestal.validarTablaPedestal(this.sitioID)) {
-            JOptionPane.showMessageDialog(null, "Si selecciona pedestales, se deben capturar"
-                    + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
-           // cmbNoPedestal.requestFocus();
-        } else if (chkErosionLaminar.isSelected() && this.cdErosion.validarTablaErosionLaminar(this.sitioID)) {
-            JOptionPane.showMessageDialog(null, "Si selecciona erosión laminar, se debe capturar"
-                    + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
-           // cmbNoErosionLaminar.requestFocus();
-        } else if (chkCostras.isSelected() && this.cdCostras.validarTablaCostras(this.sitioID)) {
-            JOptionPane.showMessageDialog(null, "Si selecciona costras, se deben capturar"
-                    + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
-           // cmbNoCostra.requestFocus();
-        } else if (chkCanalillo.isSelected() && this.cdCanalillo.validarTablaCanalillos(this.sitioID)) {
-            JOptionPane.showMessageDialog(null, "Si selecciona canalillos, se deben capturar"
-                    + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
-            txtAnchoCanalillo.requestFocus();
-        } else if (chkCarcavas.isSelected() && this.cdCarcava.validarTablaCarcavas(this.sitioID)) {
-            JOptionPane.showMessageDialog(null, "Si selecciona carcavas, se deben capturar"
-                    + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
-            txtAnchoCarcavas.requestFocus();
-        } else if (chkPavimentos.isSelected() && this.cdPavimento.validarTablaPavimentos(this.sitioID)) {
-            JOptionPane.showMessageDialog(null, "Si selecciona pavimentos, se deben capturar"
-                    + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
-            txtDiametroPavimento.requestFocus();
-        } else if (modificar == 0) {
-            this.hide();
-            UPMForms.erosionHidrica.setDatosiniciales(this.ceSitio);
-            UPMForms.erosionHidrica.setVisible(true);
-            this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-        } else {
-            this.hide();
-            UPMForms.erosionHidrica.revisarErosionHidrica(this.ceSitio);
-            UPMForms.erosionHidrica.setVisible(true);
-        }
-    }//GEN-LAST:event_btnContinuar2ActionPerformed
 
     private void btnSalir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir2ActionPerformed
        this.hide();
@@ -3157,6 +3064,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
         this.upmID = (Integer) cmbUPMID.getSelectedItem();
         //Integer sitio = (Integer) cmbSitios.getSelectedItem();
         if (cmbUPMID.getSelectedItem() != null) {
+            this.upmID = (Integer) cmbUPMID.getSelectedItem();
             combo.reiniciarComboModel(cmbSitios);
             fillCmbSitio(upmID);
             cmbSitios.setEnabled(true);
@@ -3178,7 +3086,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
                 String upm = cmbUPMID.getSelectedItem().toString();
                 String sitio = cmbSitios.getSelectedItem().toString();
                 this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
-
+                txtSitio2.setText(sitio);
             }
             revisarCondicionDegradacion(this.sitioID);
 
@@ -3190,6 +3098,10 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_cmbSitiosActionPerformed
 
+    private void txtSitio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSitio2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSitio2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarCanalillo;
     private javax.swing.JButton btnAgregarCarcava;
@@ -3197,8 +3109,6 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnAgregarErosionLaminar;
     private javax.swing.JButton btnAgregarPavimento;
     private javax.swing.JButton btnAgregarPedestal;
-    private javax.swing.JButton btnContinuar1;
-    private javax.swing.JButton btnContinuar2;
     private javax.swing.JButton btnEliminarCanalillo;
     private javax.swing.JButton btnEliminarCarcava;
     private javax.swing.JButton btnEliminarCostra;

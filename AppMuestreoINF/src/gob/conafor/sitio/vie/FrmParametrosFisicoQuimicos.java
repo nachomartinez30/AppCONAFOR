@@ -1,6 +1,7 @@
 package gob.conafor.sitio.vie;
 
 import gob.conafor.sitio.mod.CDParametrosFisicoQuimicos;
+import gob.conafor.sitio.mod.CDSitio;
 import gob.conafor.sitio.mod.CEParametrosFisicoQuimicos;
 import gob.conafor.sitio.mod.CESitio;
 import gob.conafor.sys.mod.CDSecuencia;
@@ -11,8 +12,10 @@ import gob.conafor.utils.Datos;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Version;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import java.util.*;
 
 public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
 
@@ -43,6 +46,8 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
     private FuncionesComunes funciones = new FuncionesComunes();
     private Version ver = new Version();
     private String version = ver.getVersion();
+    private CDSitio cdSitio = new CDSitio();
+    private FuncionesComunes combo = new FuncionesComunes();
 
     public FrmParametrosFisicoQuimicos() {
         initComponents();
@@ -52,8 +57,7 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
-        this.txtUPM.setText(String.valueOf(this.upmID));
-        this.txtSitio.setText(String.valueOf(this.sitio));
+        
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -66,16 +70,45 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         limpiarControles();
     }
 
-    public void continuarParametrosFQ(CESitio ceSitio) {
-        limpiarControles();
+    
+    
+     public void llenarControles() {
+         limpiarControles();
+        combo.reiniciarComboModel(this.cmbUPMID);
+        cmbSitios.setEnabled(true);
+        fillUPMID();
+    }
 
-        revision = true;
+    private void fillUPMID() {
+        List<Integer> listCapturado = new ArrayList<>();
+        listCapturado = this.cdSitio.getUPMSitios();
+        if (listCapturado != null) {
+            int size = listCapturado.size();
+            for (int i = 0; i < size; i++) {
+                cmbUPMID.addItem(listCapturado.get(i));
+            }
+        }
+    }
+
+    private void fillCmbSitio(int upmID) {
+
+        List<Integer> listSitios = new ArrayList<>();
+        listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+        if (listSitios != null) {
+            int size = listSitios.size();
+            for (int i = 0; i < size; i++) {
+                cmbSitios.addItem(listSitios.get(i));
+            }
+        }
+    }
+    
+    
+    public void continuarParametrosFQ(int sitioID) {
+        /*revision = true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
-        this.sitio = ceSitio.getSitio();
-        //System.out.println(this.upmID + " Sitio=" + this.sitio);
-        this.txtUPM.setText(String.valueOf(this.upmID));
-        this.txtSitio.setText(String.valueOf(this.sitio));
+        this.sitio = ceSitio.getSitio();*/
+        
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -111,6 +144,7 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
     }
 
     private void limpiarControles() {
+        System.out.println("Limpió PFQ");
         rbtAguasuperficial.setSelected(true);
         rbtAguaIntersticial.setSelected(false);
         txtSalinidadAguaSuperficial.setValue(null);
@@ -343,10 +377,8 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         rbgTipoAgua = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         lblUPM = new javax.swing.JLabel();
-        txtUPM = new javax.swing.JTextField();
         lblHojarascaFermentacion = new javax.swing.JLabel();
         lblSitio = new javax.swing.JLabel();
-        txtSitio = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         btnContinuar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -383,6 +415,8 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtObservaciones = new javax.swing.JTextArea();
+        cmbUPMID = new javax.swing.JComboBox<>();
+        cmbSitios = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximizable(true);
@@ -396,9 +430,6 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         lblUPM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUPM.setText("UPMID:");
 
-        txtUPM.setEditable(false);
-        txtUPM.setEnabled(false);
-
         lblHojarascaFermentacion.setBackground(new java.awt.Color(153, 153, 153));
         lblHojarascaFermentacion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblHojarascaFermentacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -407,14 +438,6 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
 
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-
-        txtSitio.setEditable(false);
-        txtSitio.setEnabled(false);
-        txtSitio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSitioActionPerformed(evt);
-            }
-        });
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -863,9 +886,22 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        cmbUPMID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUPMIDActionPerformed(evt);
+            }
+        });
+
+        cmbSitios.setEnabled(false);
+        cmbSitios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSitiosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -885,22 +921,21 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
                         .addContainerGap(8, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblHojarascaFermentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 902, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lblUPM)
-                                        .addGap(4, 4, 4)
-                                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblSitio)
-                                        .addGap(8, 8, 8)
-                                        .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(14, 14, 14)
-                                        .addComponent(rbtAguasuperficial)
-                                        .addGap(19, 19, 19)
-                                        .addComponent(rbtAguaIntersticial)))
-                                .addGap(2, 2, 2)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(lblUPM)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblSitio)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(14, 14, 14)
+                                    .addComponent(rbtAguasuperficial)
+                                    .addGap(19, 19, 19)
+                                    .addComponent(rbtAguaIntersticial)
+                                    .addGap(2, 2, 2))))
                         .addGap(0, 22, Short.MAX_VALUE))
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -908,17 +943,17 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addComponent(lblUPM))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblSitio)
-                    .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblUPM)
+                            .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblSitio)
+                        .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(8, 8, 8)
                 .addComponent(lblHojarascaFermentacion)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -936,7 +971,7 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
                 .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1028,18 +1063,7 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         fijarDatosParametros();
         if (validarCamposParametrosFQ()) {
-            if (actualizar == 0) {
-                crearParametro();
-                this.hide();
-                UPMForms.repobladoVM.setDatosIniciales(this.ceSitio);
-                UPMForms.repobladoVM.setVisible(true);
-                this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-            } else {
-                actualizarParametro();
-                this.hide();
-                UPMForms.repobladoVM.revisarRepobladoVM(this.ceSitio);
-                UPMForms.repobladoVM.setVisible(true);
-            }
+           crearParametro();
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
@@ -1145,18 +1169,11 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtObservacionesKeyPressed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        if (revision == false) {//esta en modo de captura
+       
             this.hide();
+            limpiarControles();
             funciones.manipularBotonesMenuPrincipal(false);
-        }
-        if (revision == true) {//entro a modo de revision
-            //System.err.println("Modo Revision");
-            this.hide();
-            //UPMForms.revisionModulos.iniciarRevision();
-            UPMForms.revisionModulos.setVisible(true);
-            UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision = false;
-        }
+       
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtSalinidadAguaIntersticialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSalinidadAguaIntersticialKeyTyped
@@ -1301,14 +1318,47 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtProfundidadAguaSuperficialActionPerformed
 
-    private void txtSitioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSitioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSitioActionPerformed
+    private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
+Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        Integer sitio = (Integer) cmbSitios.getSelectedItem();
+        if (cmbUPMID.getSelectedItem() != null) {
+            this.upmID = (Integer) cmbUPMID.getSelectedItem();
+            combo.reiniciarComboModel(cmbSitios);
+            fillCmbSitio(upmID);
+            cmbSitios.setEnabled(true);
+        } else {
+            combo.reiniciarComboModel(cmbSitios);
+            cmbSitios.setSelectedItem(null);
+            cmbSitios.setEnabled(false);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbUPMIDActionPerformed
+
+    private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
+ try {
+            //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
+            if (cmbSitios.getSelectedItem() == null) {
+                this.sitioID = 0;
+               limpiarControles();
+            } else {
+                String upm = cmbUPMID.getSelectedItem().toString();
+                String sitio = cmbSitios.getSelectedItem().toString();
+                this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
+
+            }
+            continuarParametrosFQ(this.sitioID);
+
+//llenarTabla();
+        } catch (Exception e) {
+            e.getCause();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbSitiosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<Integer> cmbSitios;
+    private javax.swing.JComboBox<Integer> cmbUPMID;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1346,10 +1396,8 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txtProfundidadAguaSuperficial;
     private javax.swing.JFormattedTextField txtSalinidadAguaIntersticial;
     private javax.swing.JFormattedTextField txtSalinidadAguaSuperficial;
-    private javax.swing.JTextField txtSitio;
     private javax.swing.JFormattedTextField txtTemperaturaAguaIntersticial;
     private javax.swing.JFormattedTextField txtTemperaturaAguaSuperficial;
-    private javax.swing.JTextField txtUPM;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -45,7 +45,7 @@ public class CDParametrosFisicoQuimicos {
     }
     
     public void inserParametrosFQ(CEParametrosFisicoQuimicos ceParametros) {
-        query = "INSERT INTO SITIOS_ParametrosFisicoQuimicos(SitioID, TipoAgua, Salinidad, Temperatura, ConductividadElectrica, Ph, PotencialRedox, "
+        query = "INSERT OR REPLACE INTO SITIOS_ParametrosFisicoQuimicos(SitioID, TipoAgua, Salinidad, Temperatura, ConductividadElectrica, Ph, PotencialRedox, "
                 + "Profundidad, Observaciones)VALUES(" + ceParametros.getSitioID() + ", " + ceParametros.getTipoAgua() + ", " + ceParametros.getSalinidad() + ", " + ceParametros.getTemperaturaAgua()
                 + ", " + ceParametros.getConductividadElectrica() + ", " + ceParametros.getPh() + ", " + ceParametros.getPotencialRedox() + ", " + ceParametros.getProfundidad()
                 + ", '" + ceParametros.getObservaciones() + "')";

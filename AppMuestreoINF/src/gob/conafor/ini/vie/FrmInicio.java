@@ -831,7 +831,8 @@ public class FrmInicio extends javax.swing.JFrame {
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, G, Parámetros físico químicos]":
-                    /*FORMULARIO A ABRIR*/
+                    UPMForms.parametrosFQ.setVisible(true);
+                    UPMForms.parametrosFQ.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, G, Repoblado vegetación menor]":

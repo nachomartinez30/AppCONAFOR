@@ -1,5 +1,6 @@
 package gob.conafor.suelo.vie;
 
+import gob.conafor.sitio.mod.CDSitio;
 import gob.conafor.sitio.mod.CDTransponder;
 import gob.conafor.sitio.mod.CESitio;
 import gob.conafor.sitio.mod.CETransponder;
@@ -25,7 +26,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmDeformacionViento extends JInternalFrame {
-private boolean revision;
+
+    private boolean revision;
     private int upmID;
     private int sitioID;
     private int sitio;
@@ -35,6 +37,7 @@ private boolean revision;
     private CESitio ceSitio = new CESitio();
     private CESuelo ceSuelo = new CESuelo();
     private CDSuelo cdSuelo = new CDSuelo();
+    private CDSitio cdSitio = new CDSitio();
     private CEDeformacionViento ceMonticulo = new CEDeformacionViento();
     private CELongitudMonticulos ceLongitud = new CELongitudMonticulos();
     private CDDeformacionViento cdDeformacion = new CDDeformacionViento();
@@ -63,8 +66,8 @@ private boolean revision;
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private int actualizar;
     private FuncionesComunes funciones = new FuncionesComunes();
-    private Version ver=new Version();
-    private String version=ver.getVersion();
+    private Version ver = new Version();
+    private String version = ver.getVersion();
 
     public FrmDeformacionViento() {
         initComponents();
@@ -78,8 +81,7 @@ private boolean revision;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
-        this.txtUPM.setText(String.valueOf(this.upmID));
-        this.txtSitio.setText(String.valueOf(this.sitio));
+
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -98,48 +100,74 @@ private boolean revision;
         funciones.manipularBotonesMenuPrincipal(true);
     }
 
-    public void revisarDeformacionViento(CESitio ceSitio) {
-        revision=true;
+    public void llenarControles() {
+        combo.reiniciarComboModel(this.cmbUPMID);
+        fillUPMID();
+    }
+
+    private void fillUPMID() {
+        List<Integer> listCapturado = new ArrayList<>();
+        listCapturado = this.cdSitio.getUPMSitios();
+        if (listCapturado != null) {
+            int size = listCapturado.size();
+            for (int i = 0; i < size; i++) {
+                cmbUPMID.addItem(listCapturado.get(i));
+            }
+        }
+    }
+
+    private void fillCmbSitio(int upmID) {
+        List<Integer> listSitios = new ArrayList<>();
+        listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+        if (listSitios != null) {
+            int size = listSitios.size();
+            for (int i = 0; i < size; i++) {
+                cmbSitios.addItem(listSitios.get(i));
+            }
+        }
+    }
+
+    public void revisarDeformacionViento(int sitioID) {
+        /*revision=true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
-        this.sitio = ceSitio.getSitio();
-        this.txtUPM.setText(String.valueOf(this.upmID));
-        this.txtSitio.setText(String.valueOf(this.sitio));
+        this.sitio = ceSitio.getSitio();*/
+
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
         //System.out.println("DeformacionViento "+this.ceSitio.getSecuencia());
-        this.ceSitio.setSecuencia(ceSitio.getSecuencia());
+        //this.ceSitio.setSecuencia(ceSitio.getSecuencia());
         fillCmbMedionesMonticulos();
         fillCmbLongitudMonticulos();
         llenarTablaDeformacionViento();
         llenarTablaLongitudMonticulos();
         calcularMonticulos();
-            this.ceTransponder = this.cdTransponder.getTransponder(ceSitio.getSitioID());
-            int tipoColocacion = this.ceTransponder.getTipoColocacionID();
-            switch (tipoColocacion) {
-                case 1:
-                    rbtUnidosVarilla.setSelected(true);
-                    break;
-                case 2:
-                    rbtUnidosPegamento.setSelected(true);
-                    break;
-                case 3:
-                    rbtClavadoArbol.setSelected(true);
-                    break;
-                case 4:
-                    rbtOtroLugar.setSelected(true);
-                    break;
-                case 5:
-                    rbtNoSepudo.setSelected(true);
-                    break;
-            }
-            if (tipoColocacion == 5 || tipoColocacion == 6) {
-                txtEspecifiqueTransponder.setEnabled(true);
-                txtEspecifiqueTransponder.setText(this.ceTransponder.getEspecifique());
-            }
-            txtObservacionesTransponder.setText(this.ceTransponder.getObservaciones());
-      
+        this.ceTransponder = this.cdTransponder.getTransponder(this.sitioID);
+        int tipoColocacion = this.ceTransponder.getTipoColocacionID();
+        switch (tipoColocacion) {
+            case 1:
+                rbtUnidosVarilla.setSelected(true);
+                break;
+            case 2:
+                rbtUnidosPegamento.setSelected(true);
+                break;
+            case 3:
+                rbtClavadoArbol.setSelected(true);
+                break;
+            case 4:
+                rbtOtroLugar.setSelected(true);
+                break;
+            case 5:
+                rbtNoSepudo.setSelected(true);
+                break;
+        }
+        if (tipoColocacion == 4 || tipoColocacion == 5) {
+            txtEspecifiqueTransponder.setEnabled(true);
+            txtEspecifiqueTransponder.setText(this.ceTransponder.getEspecifique());
+        }
+        txtObservacionesTransponder.setText(this.ceTransponder.getObservaciones());
+
         this.chkMonticulosDunas.setSelected(funciones.habilitarCheckBox("SUELO_DeformacionViento", this.sitioID));
         this.actualizar = 1;
         funciones.manipularBotonesMenuPrincipal(true);
@@ -148,6 +176,7 @@ private boolean revision;
     }
 
     private void fillCmbMedionesMonticulos() {
+        cmbMedicionMonticulos.removeAllItems();
         List<Integer> listMedionesMonticulos = new ArrayList<>();
         listMedionesMonticulos = this.cdDeformacion.getMedicionMonticulo(this.sitioID);
         if (listMedionesMonticulos != null) {
@@ -159,6 +188,7 @@ private boolean revision;
     }
 
     private void fillCmbLongitudMonticulos() {
+        cmbLongitudMonticulos.removeAllItems();
         List<Integer> listLongitudMonticulo = new ArrayList<>();
         listLongitudMonticulo = this.cdDeformacion.getCampoLongitudMonticulo(this.sitioID);
         if (listLongitudMonticulo != null) {
@@ -298,6 +328,10 @@ private boolean revision;
         this.ceTransponder.setEspecifique(this.especificarTipo);
         this.ceTransponder.setObservaciones(this.observaciones);
         this.cdTransponder.insertDatosTransponder(ceTransponder);
+        /*limpiarCamposCalculados();
+        limpiarColocacionTAG();
+        limpiarDatosLongitud();
+        limpiarDatosMonticulos();*/
     }
 
     private void crearMonticulo() {
@@ -327,7 +361,7 @@ private boolean revision;
         this.ceSuelo.setAnchoPromedioMonticulos(this.anchoPromedio);
         this.ceSuelo.setLongitudPromedioMonticulos(this.longitudPromedio);
         this.ceSuelo.setVolumenMonticulos(this.volumenCalculado);
-        
+
         this.cdSuelo.agregarDeformacionTerrenoSuelo(ceSuelo);
     }
 
@@ -478,6 +512,8 @@ private boolean revision;
         txtAlturaMonticulos.setValue(null);
         txtAzimutMonticulos.setText("");
         cmbMedicionMonticulos.requestFocus();
+        //grdLongitudMonticulos.setModel(new javax.swing.table.DefaultTableModel(new Object [][] {},new String [] {}));
+        //grdMonticulos.setModel(new javax.swing.table.DefaultTableModel(new Object [][] {},new String [] {}));
     }
 
     private void limpiarDatosLongitud() {
@@ -499,13 +535,13 @@ private boolean revision;
         txtVolumenMonticulos.setValue(null);
     }
 
-    private void limpiarColocacionTAG(){
+    private void limpiarColocacionTAG() {
         btgColocacionTAG.clearSelection();
         txtObservacionesTransponder.setText("");
         txtEspecifiqueTransponder.setText("");
         txtEspecifiqueTransponder.setEnabled(false);
     }
-            
+
     private boolean validarLongitudMoticulosObligatorios() {
         if (cmbLongitudMonticulos.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un campo de longitud ",
@@ -599,10 +635,8 @@ private boolean revision;
         btgColocacionTAG = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         lblUPM = new javax.swing.JLabel();
-        txtUPM = new javax.swing.JTextField();
         lblDeformacionTerreno = new javax.swing.JLabel();
         lblSitio = new javax.swing.JLabel();
-        txtSitio = new javax.swing.JTextField();
         lblRegistroMonticulos = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -665,6 +699,8 @@ private boolean revision;
         txtObservacionesTransponder = new javax.swing.JTextArea();
         btnContinuar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        cmbUPMID = new javax.swing.JComboBox<>();
+        cmbSitios = new javax.swing.JComboBox<>();
 
         setMaximizable(true);
         setTitle("Deformación del terreno por acción del viento, colocación del TAG "+version);
@@ -676,9 +712,6 @@ private boolean revision;
         lblUPM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUPM.setText("UPMID:");
 
-        txtUPM.setEditable(false);
-        txtUPM.setEnabled(false);
-
         lblDeformacionTerreno.setBackground(new java.awt.Color(153, 153, 153));
         lblDeformacionTerreno.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblDeformacionTerreno.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -687,9 +720,6 @@ private boolean revision;
 
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-
-        txtSitio.setEditable(false);
-        txtSitio.setEnabled(false);
 
         lblRegistroMonticulos.setBackground(new java.awt.Color(153, 153, 153));
         lblRegistroMonticulos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -1378,7 +1408,7 @@ private boolean revision;
         );
 
         btnContinuar.setMnemonic('c');
-        btnContinuar.setText("Continuar");
+        btnContinuar.setText("Capturar");
         btnContinuar.setNextFocusableComponent(btnSalir);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1391,6 +1421,19 @@ private boolean revision;
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
+            }
+        });
+
+        cmbUPMID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUPMIDActionPerformed(evt);
+            }
+        });
+
+        cmbSitios.setEnabled(false);
+        cmbSitios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSitiosActionPerformed(evt);
             }
         });
 
@@ -1413,12 +1456,12 @@ private boolean revision;
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(lblUPM)
-                                .addGap(10, 10, 10)
-                                .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(596, 596, 596)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(587, 587, 587)
                                 .addComponent(lblSitio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1435,11 +1478,12 @@ private boolean revision;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(lblUPM))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblUPM)
+                            .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblSitio)))
+                        .addComponent(lblSitio)
+                        .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDeformacionTerreno)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1450,11 +1494,11 @@ private boolean revision;
                 .addComponent(lblColocacionTAG)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlColocacionTag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 19, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnContinuar)
                     .addComponent(btnSalir))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1722,42 +1766,38 @@ private boolean revision;
         fijarDatosTransponder();
         agregarDatosSuelo();
         if (chkMonticulosDunas.isSelected() && this.cdDeformacion.validarTablaErosionViento(this.sitioID)) {
-            
+
             JOptionPane.showMessageDialog(null, "Si selecciona motículos o dunas, se deben capturar"
                     + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
             cmbMedicionMonticulos.requestFocus();
         } else if (this.actualizar == 0) {
-                if (validarTransponder()) {
-                    crearTransponder();
-                }
-            this.hide();
+            if (validarTransponder()) {
+                crearTransponder();
+            }
+            /*this.hide();
             UPMForms.observaciones.setDatosiniciales(this.ceSitio);
             UPMForms.observaciones.setVisible(true);
-            this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
+            this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);*/
         } else {
-                if (validarTransponder()) {
-                    modificarTransponder();
-                }
-             //System.out.println(ceSitio.getSecuencia()+"  BTN Continuar");
-            this.hide();
+            if (validarTransponder()) {
+                crearTransponder();
+            }
+            //System.out.println(ceSitio.getSecuencia()+"  BTN Continuar");
+            /*this.hide();
             UPMForms.observaciones.revisarObservaciones(this.ceSitio);
-            UPMForms.observaciones.setVisible(true);
+            UPMForms.observaciones.setVisible(true);*/
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        if(revision==false){//esta en modo de captura
-            this.hide();
-            funciones.manipularBotonesMenuPrincipal(false);
-        }
-        if(revision==true){//entro a modo de revision
-             //System.err.println("Modo Revision");
-            this.hide();
-            //UPMForms.revisionModulos.iniciarRevision();
-            UPMForms.revisionModulos.setVisible(true);
-            UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision=false;
-        }
+        
+        limpiarCamposCalculados();
+        limpiarColocacionTAG();
+        limpiarDatosLongitud();
+        limpiarDatosMonticulos();
+        this.hide();
+        funciones.manipularBotonesMenuPrincipal(false);
+       
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void rbtOtroLugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtOtroLugarActionPerformed
@@ -1843,16 +1883,54 @@ private boolean revision;
     }//GEN-LAST:event_chkMonticulosDunasActionPerformed
 
     private void txtEspecifiqueTransponderKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEspecifiqueTransponderKeyPressed
-         if(evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB) {
             evt.consume();
-         }
+        }
     }//GEN-LAST:event_txtEspecifiqueTransponderKeyPressed
 
     private void txtObservacionesTransponderKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObservacionesTransponderKeyPressed
-       if(evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB) {
             evt.consume();
-         }
+        }
     }//GEN-LAST:event_txtObservacionesTransponderKeyPressed
+
+    private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
+        Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        Integer sitio = (Integer) cmbSitios.getSelectedItem();
+        if (cmbUPMID.getSelectedItem() != null) {
+            this.upmID = (Integer) cmbUPMID.getSelectedItem();
+            combo.reiniciarComboModel(cmbSitios);
+            fillCmbSitio(upmID);
+            cmbSitios.setEnabled(true);
+        } else {
+            combo.reiniciarComboModel(cmbSitios);
+            cmbSitios.setSelectedItem(null);
+            cmbSitios.setEnabled(false);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbUPMIDActionPerformed
+
+    private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
+        try {
+            //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
+            if (cmbSitios.getSelectedItem() == null) {
+                this.sitioID = 0;
+                limpiarCamposCalculados();
+                limpiarColocacionTAG();
+                limpiarDatosLongitud();
+                limpiarDatosMonticulos();
+
+                /*limpiarPorcentajes();*/
+            } else {
+                String upm = cmbUPMID.getSelectedItem().toString();
+                String sitio = cmbSitios.getSelectedItem().toString();
+                this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
+                revisarDeformacionViento(this.sitioID);
+            }
+
+        } catch (Exception e) {
+            e.getCause();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbSitiosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btgColocacionTAG;
@@ -1867,6 +1945,8 @@ private boolean revision;
     private javax.swing.JCheckBox chkMonticulosDunas;
     private javax.swing.JComboBox cmbLongitudMonticulos;
     private javax.swing.JComboBox cmbMedicionMonticulos;
+    private javax.swing.JComboBox<Integer> cmbSitios;
+    private javax.swing.JComboBox<Integer> cmbUPMID;
     private javax.swing.JTable grdLongitudMonticulos;
     private javax.swing.JTable grdMonticulos;
     private javax.swing.JLabel jLabel1;
@@ -1921,8 +2001,6 @@ private boolean revision;
     private javax.swing.JFormattedTextField txtLongitudPromedioMonticulos;
     private javax.swing.JFormattedTextField txtNoMonticulos;
     private javax.swing.JTextArea txtObservacionesTransponder;
-    private javax.swing.JTextField txtSitio;
-    private javax.swing.JTextField txtUPM;
     private javax.swing.JFormattedTextField txtVolumenMonticulos;
     // End of variables declaration//GEN-END:variables
 }

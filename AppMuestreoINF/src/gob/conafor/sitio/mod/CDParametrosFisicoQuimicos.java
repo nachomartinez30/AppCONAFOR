@@ -54,6 +54,7 @@ public class CDParametrosFisicoQuimicos {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
             conn.commit();
+            JOptionPane.showMessageDialog(null, "Se inserto correctamente los parametros fisico-quimicos");
             st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información  de parámetros físico químicos", "Conexion BD", JOptionPane.ERROR_MESSAGE);

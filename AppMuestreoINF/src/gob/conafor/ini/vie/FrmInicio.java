@@ -836,7 +836,8 @@ public class FrmInicio extends javax.swing.JFrame {
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, G, Repoblado vegetación menor]":
-                    /*FORMULARIO A ABRIR*/
+                    UPMForms.repobladoVM.setVisible(true);
+                    UPMForms.repobladoVM.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, G, Arbolado]":

@@ -57,7 +57,7 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
-        
+
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -70,10 +70,8 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
         limpiarControles();
     }
 
-    
-    
-     public void llenarControles() {
-         limpiarControles();
+    public void llenarControles() {
+        limpiarControles();
         combo.reiniciarComboModel(this.cmbUPMID);
         cmbSitios.setEnabled(true);
         fillUPMID();
@@ -101,14 +99,14 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    
+
     public void continuarParametrosFQ(int sitioID) {
+        System.out.println("continuar pFQ");
         /*revision = true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();*/
-        
+
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -255,6 +253,7 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
     }
 
     private void fijarDatosParametros() {
+        System.out.println("fijar parametros");
         if (rbtAguasuperficial.isSelected()) {
             this.tipoAgua = 1;
         } else if (rbtAguaIntersticial.isSelected()) {
@@ -1061,9 +1060,10 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
     }
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
+
         fijarDatosParametros();
         if (validarCamposParametrosFQ()) {
-           crearParametro();
+            crearParametro();
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
@@ -1169,11 +1169,11 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtObservacionesKeyPressed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-       
-            this.hide();
-            limpiarControles();
-            funciones.manipularBotonesMenuPrincipal(false);
-       
+
+        this.hide();
+        limpiarControles();
+        funciones.manipularBotonesMenuPrincipal(false);
+
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtSalinidadAguaIntersticialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSalinidadAguaIntersticialKeyTyped
@@ -1319,7 +1319,8 @@ public class FrmParametrosFisicoQuimicos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtProfundidadAguaSuperficialActionPerformed
 
     private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
-Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        limpiarControles();
+        Integer upmID = (Integer) cmbUPMID.getSelectedItem();
         Integer sitio = (Integer) cmbSitios.getSelectedItem();
         if (cmbUPMID.getSelectedItem() != null) {
             this.upmID = (Integer) cmbUPMID.getSelectedItem();
@@ -1334,18 +1335,19 @@ Integer upmID = (Integer) cmbUPMID.getSelectedItem();
     }//GEN-LAST:event_cmbUPMIDActionPerformed
 
     private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
- try {
+        try {
             //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
             if (cmbSitios.getSelectedItem() == null) {
                 this.sitioID = 0;
-               limpiarControles();
+
             } else {
                 String upm = cmbUPMID.getSelectedItem().toString();
                 String sitio = cmbSitios.getSelectedItem().toString();
                 this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
 
+                continuarParametrosFQ(this.sitioID);
             }
-            continuarParametrosFQ(this.sitioID);
+            //limpiarControles();
 
 //llenarTabla();
         } catch (Exception e) {

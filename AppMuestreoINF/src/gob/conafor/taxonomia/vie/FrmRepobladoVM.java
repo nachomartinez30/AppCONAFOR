@@ -98,6 +98,36 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
         txtGramineas.requestFocus();
     }
     
+    
+    public void llenarControles() {
+        combo.reiniciarComboModel(this.cmbUPMID);
+        cmbSitios.setEnabled(true);
+        fillUPMID();
+    }
+
+    private void fillUPMID() {
+        List<Integer> listCapturado = new ArrayList<>();
+        listCapturado = this.cdSitio.getUPMSitios();
+        if (listCapturado != null) {
+            int size = listCapturado.size();
+            for (int i = 0; i < size; i++) {
+                cmbUPMID.addItem(listCapturado.get(i));
+            }
+        }
+    }
+
+    private void fillCmbSitio(int upmID) {
+
+        List<Integer> listSitios = new ArrayList<>();
+        listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+        if (listSitios != null) {
+            int size = listSitios.size();
+            for (int i = 0; i < size; i++) {
+                cmbSitios.addItem(listSitios.get(i));
+            }
+        }
+    }
+    
     public void setDatosIniciales(CESitio ceSitio) {
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
@@ -115,13 +145,13 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
         funciones.manipularBotonesMenuPrincipal(true);
     }
 
-    public void revisarRepobladoVM(CESitio ceSitio) {
-        revision=true;
+    public void revisarRepobladoVM(int sitioID) {
+        /*revision=true;
         limpiarControles();
         CatEAgenteDanio agenteDanio1 = (CatEAgenteDanio) cmbAgenteDanio1.getSelectedItem();
         this.sitio = ceSitio.getSitio();
         this.sitioID = ceSitio.getSitioID();
-        this.upmID = ceSitio.getUpmID();
+        this.upmID = ceSitio.getUpmID();*/
         
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
@@ -1318,7 +1348,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
         lblRegistroRepobladoVegetacionMenor.setOpaque(true);
 
         btnContinuar.setMnemonic('c');
-        btnContinuar.setText("Continuar");
+        btnContinuar.setText("Capturar");
         btnContinuar.setNextFocusableComponent(btnSalir);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1786,6 +1816,18 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        cmbUPMID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUPMIDActionPerformed(evt);
+            }
+        });
+
+        cmbSitios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSitiosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
         pnlPrincipal.setLayout(pnlPrincipalLayout);
         pnlPrincipalLayout.setHorizontalGroup(
@@ -1904,33 +1946,24 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                     if (this.modificar == 0) {
                         crearCoberturaSuelo();
                         this.cdRepoblado.updateRepobladoFuera(this.ceSitio);
-                        this.hide();
-                        UPMForms.arboladoG.setDatosIniciales(this.ceSitio);
-                        UPMForms.arboladoG.setVisible(true);
+                        
                     } else {
-                        actualizarCoberturaSuelo();
-                        this.cdRepoblado.updateRepobladoFuera(this.ceSitio);
-                        this.hide();
-                        UPMForms.arboladoG.revisarArboladoG(this.ceSitio);
-                        UPMForms.arboladoG.setVisible(true);
+                       crearCoberturaSuelo();
+                       this.cdRepoblado.updateRepobladoFuera(this.ceSitio);
                     }
-                    this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
+                    
                 }
             } else if (funciones.validarSeccionCapturada("TAXONOMIA_RepobladoVM", sitioID) == true && !chkRepobladoVM.isSelected()) {
                 if (this.modificar == 0) {
                     crearCoberturaSuelo();
                     this.cdRepoblado.updateRepobladoFuera(this.ceSitio);
-                    this.hide();
-                    UPMForms.arboladoG.setDatosIniciales(this.ceSitio);
-                    UPMForms.arboladoG.setVisible(true);
+                    
                 } else {
-                    actualizarCoberturaSuelo();
+                    crearCoberturaSuelo();
                     this.cdRepoblado.updateRepobladoFuera(this.ceSitio);
-                    this.hide();
-                    UPMForms.arboladoG.revisarArboladoG(this.ceSitio);
-                    UPMForms.arboladoG.setVisible(true);
+                    
                 }
-                this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, -1);
+                
             }
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
@@ -2026,18 +2059,8 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtOtrosFocusGained
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        if(revision==false){//esta en modo de captura
             this.hide();
-            funciones.manipularBotonesMenuPrincipal(false);
-        }
-        if(revision==true){//entro a modo de revision
-             //System.err.println("Modo Revision");
-            this.hide();
-            //UPMForms.revisionModulos.iniciarRevision();
-            UPMForms.revisionModulos.setVisible(true);
-            UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision=false;
-        }
+            funciones.manipularBotonesMenuPrincipal(false);       
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void grdRepobladoVMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdRepobladoVMMouseClicked
@@ -2535,6 +2558,43 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
             fillCmbInfraespecie(indexEspecie.getEspecieID());
         }
     }//GEN-LAST:event_cmbEspecieActionPerformed
+
+    private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
+Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        Integer sitio = (Integer) cmbSitios.getSelectedItem();
+        if (cmbUPMID.getSelectedItem() != null) {
+            this.upmID = (Integer) cmbUPMID.getSelectedItem();
+            combo.reiniciarComboModel(cmbSitios);
+            fillCmbSitio(upmID);
+            cmbSitios.setEnabled(true);
+        } else {
+            combo.reiniciarComboModel(cmbSitios);
+            cmbSitios.setSelectedItem(null);
+            cmbSitios.setEnabled(false);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbUPMIDActionPerformed
+
+    private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
+ try {
+            //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
+            if (cmbSitios.getSelectedItem() == null) {
+                this.sitioID = 0;
+                /*limpiarControles();
+                limpiarPorcentajes();*/
+            } else {
+                String upm = cmbUPMID.getSelectedItem().toString();
+                String sitio = cmbSitios.getSelectedItem().toString();
+                this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
+
+            }
+            revisarRepobladoVM(this.sitioID);
+
+//llenarTabla();
+        } catch (Exception e) {
+            e.getCause();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbSitiosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PnlCoordenadas1;

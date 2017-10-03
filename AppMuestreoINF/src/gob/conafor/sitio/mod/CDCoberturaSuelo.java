@@ -48,7 +48,7 @@ public class CDCoberturaSuelo {
     }
 
     public void insertCoberturaSuelo(CECoberturaSuelo coberturaSuelo) {
-        query = "INSERT INTO SITIOS_CoberturaSuelo (SitioID, Gramineas, Helechos, Musgos, Liquenes, Hierbas, Roca, SueloDesnudo, "
+        query = "INSERT or replace INTO SITIOS_CoberturaSuelo (SitioID, Gramineas, Helechos, Musgos, Liquenes, Hierbas, Roca, SueloDesnudo, "
                 + "Hojarasca, Grava, Otros) VALUES(" + coberturaSuelo.getSitioID() + ", "
                 + coberturaSuelo.getGramineas() + ", " + coberturaSuelo.getHelechos() + ", "
                 + coberturaSuelo.getMusgos() + ", " + coberturaSuelo.getLiquenes() + ", " + coberturaSuelo.getHierbas()
@@ -60,6 +60,7 @@ public class CDCoberturaSuelo {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
             conn.commit();
+            JOptionPane.showMessageDialog(null, "Combertura de suelo insertada correctamente");
             st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la información de cobertura del suelo en sitio", "Conexion BD", JOptionPane.ERROR_MESSAGE);

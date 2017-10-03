@@ -231,7 +231,7 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addContainerGap(52, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(53, Short.MAX_VALUE))
-            .addGroup(dpPrincipalLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dpPrincipalLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -283,7 +283,7 @@ public class FrmInicio extends javax.swing.JFrame {
         treeNode2.add(treeNode3);
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Degradación del suelo");
         treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Herosión hídrica");
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Erosión hídrica");
         treeNode2.add(treeNode3);
         treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Deformación del terreno");
         treeNode2.add(treeNode3);
@@ -783,8 +783,10 @@ public class FrmInicio extends javax.swing.JFrame {
                     UPMForms.condicionDegradacion.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
-                case "[Modulos, A, Herosión hídrica]":
-                    /*FORMULARIO A ABRIR*/
+                case "[Modulos, A, Erosión hídrica]":
+                    funcionesComunes.manipularBotonesMenuPrincipal(true);
+                    UPMForms.erosionHidrica.setVisible(true);
+                    UPMForms.erosionHidrica.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Deformación del terreno]":

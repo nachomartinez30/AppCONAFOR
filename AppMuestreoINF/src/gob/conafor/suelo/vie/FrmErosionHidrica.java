@@ -1,5 +1,6 @@
 package gob.conafor.suelo.vie;
 
+import gob.conafor.sitio.mod.CDSitio;
 import gob.conafor.sitio.mod.CESitio;
 import gob.conafor.suelo.mod.CDErosionHidrica;
 import gob.conafor.suelo.mod.CDSuelo;
@@ -75,6 +76,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
     private Version ver=new Version();
     private String version=ver.getVersion();
     private boolean revision;
+     private CDSitio cdSitio = new CDSitio();
 
     public FrmErosionHidrica() {
         initComponents();
@@ -94,8 +96,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
-        this.txtUPM.setText(String.valueOf(this.upmID));
-        this.txtSitio.setText(String.valueOf(this.sitio));
+        
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -121,13 +122,41 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         limpiarControlesLongitudCarcava();
     }
 
-    public void revisarErosionHidrica(CESitio ceSitio) {
-        revision=true;
+    
+        public void llenarControles() {
+        combo.reiniciarComboModel(this.cmbUPMID);
+        fillUPMID();
+    }
+
+    private void fillUPMID() {
+        List<Integer> listCapturado = new ArrayList<>();
+        listCapturado = this.cdSitio.getUPMSitios();
+        if (listCapturado != null) {
+            int size = listCapturado.size();
+            for (int i = 0; i < size; i++) {
+                cmbUPMID.addItem(listCapturado.get(i));
+            }
+        }
+    }
+
+    private void fillCmbSitio(int upmID) {
+        List<Integer> listSitios = new ArrayList<>();
+        listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+        if (listSitios != null) {
+            int size = listSitios.size();
+            for (int i = 0; i < size; i++) {
+                cmbSitios.addItem(listSitios.get(i));
+            }
+        }
+    }
+    
+    
+    public void revisarErosionHidrica(int sitioID) {
+        /*revision=true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
-        this.sitio = ceSitio.getSitio();
-        this.txtUPM.setText(String.valueOf(this.upmID));
-        this.txtSitio.setText(String.valueOf(this.sitio));
+        this.sitio = ceSitio.getSitio();*/
+        
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -903,9 +932,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         lblErosionHidrica = new javax.swing.JLabel();
         lblUPM = new javax.swing.JLabel();
-        txtUPM = new javax.swing.JTextField();
         lblSitio = new javax.swing.JLabel();
-        txtSitio = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         lblMedicionCanales = new javax.swing.JLabel();
@@ -984,8 +1011,9 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         txtVolumenCarcavas = new javax.swing.JFormattedTextField();
         txtNoCarcavas = new javax.swing.JFormattedTextField();
         chkCarcavas = new javax.swing.JCheckBox();
-        btnContinuar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        cmbUPMID = new javax.swing.JComboBox<>();
+        cmbSitios = new javax.swing.JComboBox<>();
 
         setMaximizable(true);
         setTitle("Erosión hídrica con deformación del terreno "+version);
@@ -1003,14 +1031,8 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         lblUPM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUPM.setText("UPMID:");
 
-        txtUPM.setEditable(false);
-        txtUPM.setEnabled(false);
-
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-
-        txtSitio.setEditable(false);
-        txtSitio.setEnabled(false);
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro de canalillos/canales"));
@@ -1692,7 +1714,6 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         });
 
         btnEliminarLongitudCarcava.setText("Eliminar");
-        btnEliminarLongitudCarcava.setNextFocusableComponent(btnContinuar);
         btnEliminarLongitudCarcava.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarLongitudCarcavaActionPerformed(evt);
@@ -1906,20 +1927,25 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
-        btnContinuar.setMnemonic('c');
-        btnContinuar.setText("Continuar");
-        btnContinuar.setNextFocusableComponent(btnSalir);
-        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContinuarActionPerformed(evt);
-            }
-        });
-
         btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
+            }
+        });
+
+        cmbUPMID.setBorder(null);
+        cmbUPMID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUPMIDActionPerformed(evt);
+            }
+        });
+
+        cmbSitios.setBorder(null);
+        cmbSitios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSitiosActionPerformed(evt);
             }
         });
 
@@ -1929,28 +1955,26 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnContinuar)
-                .addGap(18, 18, 18)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblErosionHidrica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(14, Short.MAX_VALUE)
+                        .addContainerGap(19, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 898, Short.MAX_VALUE))
-                        .addGap(0, 9, Short.MAX_VALUE))
+                        .addGap(0, 15, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(lblUPM)
-                        .addGap(10, 10, 10)
-                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblSitio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -1962,19 +1986,17 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
                         .addGap(2, 2, 2)
                         .addComponent(lblUPM))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblSitio)))
+                        .addComponent(lblSitio)
+                        .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblErosionHidrica)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnContinuar)
-                    .addComponent(btnSalir))
+                .addComponent(btnSalir)
                 .addContainerGap())
         );
 
@@ -2424,45 +2446,15 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         calcularSueloCarcavas();
     }//GEN-LAST:event_btnEliminarLongitudCarcavaActionPerformed
 
-    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        fijarDatosSuelos();
-        agregarDatosSuelo();
-        if (chkCanalillos.isSelected() && this.cdErosion.validarTablaErosionCanalillos(this.sitioID)) {
-            JOptionPane.showMessageDialog(null, "Si selecciona canalillos/canales , se deben capturar"
-                    + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
-            cmbMedicionCanalillos.requestFocus();
-        } else if (chkCarcavas.isSelected() && this.cdErosion.validarTablaErosionCarcava(this.sitioID)) {
-            JOptionPane.showMessageDialog(null, "Si selecciona carcavas , se deben capturar"
-                    + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
-            cmbMedicionCarcavas.requestFocus();
-        } else if (revisar == 0) {
-            
-            this.hide();
-            UPMForms.deformacionTerreno.setDatosiniciales(this.ceSitio);
-            UPMForms.deformacionTerreno.setVisible(true);
-            this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-        } else {
-            this.hide();
-            //System.out.println("entró en modo de revision LINEA 2434 FRMEROSIONHIDRICA");
-            UPMForms.deformacionTerreno.revisarDeformacionViento(this.ceSitio);
-            UPMForms.deformacionTerreno.setVisible(true);
-        }
-        
-    }//GEN-LAST:event_btnContinuarActionPerformed
-
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-       if(revision==false){//esta en modo de captura
             this.hide();
+            limpiarCamposCalculadosCanalillos();
+            limpiarCamposCalculadosCarcavas();
+            limpiarControlesCanalillo();
+            limpiarControlesCarcava();
+            limpiarControlesLongitudCanalillo();
+            limpiarControlesLongitudCarcava();
             funciones.manipularBotonesMenuPrincipal(false);
-        }
-        if(revision==true){//entro a modo de revision
-             //System.err.println("Modo Revision");
-            this.hide();
-            //UPMForms.revisionModulos.iniciarRevision();
-            UPMForms.revisionModulos.setVisible(true);
-            UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision=false;
-        }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void grdCanalillosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdCanalillosMouseClicked
@@ -2623,12 +2615,48 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbMedicionCarcavasActionPerformed
 
+    private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
+        Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        
+        Integer sitio = (Integer) cmbSitios.getSelectedItem();
+        if (cmbUPMID.getSelectedItem() != null) {
+            this.upmID = (Integer) cmbUPMID.getSelectedItem();
+            combo.reiniciarComboModel(cmbSitios);
+            fillCmbSitio(upmID);
+            cmbSitios.setEnabled(true);
+        } else {
+            combo.reiniciarComboModel(cmbSitios);
+            cmbSitios.setSelectedItem(null);
+            cmbSitios.setEnabled(false);
+        }
+    }//GEN-LAST:event_cmbUPMIDActionPerformed
+
+    private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
+try {
+            //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
+            if (cmbSitios.getSelectedItem() == null) {
+                this.sitioID = 0;
+                /*limpiarControles();
+                limpiarPorcentajes();*/
+            } else {
+                String upm = cmbUPMID.getSelectedItem().toString();
+                String sitio = cmbSitios.getSelectedItem().toString();
+                this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
+
+            }
+            revisarErosionHidrica(this.sitioID);
+
+//llenarTabla();
+        } catch (Exception e) {
+            e.getCause();
+        }
+    }//GEN-LAST:event_cmbSitiosActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarCanalillos;
     private javax.swing.JButton btnAgregarCarcava;
     private javax.swing.JButton btnAgregarLongitudCanalillos;
     private javax.swing.JButton btnAgregarLongitudCarcava;
-    private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnEliminarCanalillos;
     private javax.swing.JButton btnEliminarCarcava;
     private javax.swing.JButton btnEliminarLongitudCanalillos;
@@ -2644,6 +2672,8 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cmbLongitudCarcava;
     private javax.swing.JComboBox cmbMedicionCanalillos;
     private javax.swing.JComboBox cmbMedicionCarcavas;
+    private javax.swing.JComboBox<Integer> cmbSitios;
+    private javax.swing.JComboBox<Integer> cmbUPMID;
     private javax.swing.JTable grdCanalillos;
     private javax.swing.JTable grdCarcavas;
     private javax.swing.JTable grdLongitudCanalillos;
@@ -2706,8 +2736,6 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txtProfundidadPromedioCarcavas;
     private javax.swing.JFormattedTextField txtPromedioLongitudCanalillos;
     private javax.swing.JFormattedTextField txtPromedioLongitudCarcavas;
-    private javax.swing.JTextField txtSitio;
-    private javax.swing.JTextField txtUPM;
     private javax.swing.JFormattedTextField txtVolumenCanalillos;
     private javax.swing.JFormattedTextField txtVolumenCarcavas;
     // End of variables declaration//GEN-END:variables

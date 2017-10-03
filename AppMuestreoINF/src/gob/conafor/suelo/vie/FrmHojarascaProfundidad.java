@@ -1853,12 +1853,12 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAgregarProfundidad)
                     .addComponent(btnModificarProfundidad)
                     .addComponent(btnEliminarProfundidad))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
@@ -2050,38 +2050,50 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
 
     private void btnAgregarHojarascaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarHojarascaActionPerformed
         fijarDatosHojarasca();
-        if (validarCapturaHojarasca() && validarCapturaFermentacion() && validarDatosHojarasca() && validarCamposObligatoriosHojarasca() && validarPuntoHojarasca()) {
-            crearHojarasca();
-            //this.cdHojarasca.reenumerarHojarasca(this.sitioID);
-            llenarTablaHojarsaca();
-            //this.combo.reiniciarComboModel(cmbPuntoHojarasca);
-            //fillCmbPuntosHojarasca();
-            limpiarControlesHojarasca();
-        }
-    }//GEN-LAST:event_btnAgregarHojarascaActionPerformed
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
 
-    private void btnModificarHojarscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarHojarscaActionPerformed
-        fijarDatosHojarasca();
-        if (validarCapturaHojarasca() && validarCapturaFermentacion() && validarDatosHojarasca() && validarCamposObligatoriosHojarasca()) {
-            actualizarHojarasca();
-            llenarTablaHojarsaca();
-            limpiarControlesHojarasca();
-        }
-    }//GEN-LAST:event_btnModificarHojarscaActionPerformed
-
-    private void btnEliminarHojarascaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarHojarascaActionPerformed
-        try {
-            int fila = grdHojarasca.getSelectedRow();
-            String registro = grdHojarasca.getValueAt(fila, 0).toString();
-            int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro de borrar el registro de hojarasca",
-                    "Hojarasca", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (respuesta == JOptionPane.YES_OPTION) {
-                this.cdHojarasca.deleteHojarasca(Integer.parseInt(registro));
+        } else {
+            if (validarCapturaHojarasca() && validarCapturaFermentacion() && validarDatosHojarasca() && validarCamposObligatoriosHojarasca() && validarPuntoHojarasca()) {
+                crearHojarasca();
                 //this.cdHojarasca.reenumerarHojarasca(this.sitioID);
                 llenarTablaHojarsaca();
                 //this.combo.reiniciarComboModel(cmbPuntoHojarasca);
                 //fillCmbPuntosHojarasca();
                 limpiarControlesHojarasca();
+            }
+        }
+    }//GEN-LAST:event_btnAgregarHojarascaActionPerformed
+
+    private void btnModificarHojarscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarHojarscaActionPerformed
+        fijarDatosHojarasca();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarCapturaHojarasca() && validarCapturaFermentacion() && validarDatosHojarasca() && validarCamposObligatoriosHojarasca()) {
+                actualizarHojarasca();
+                llenarTablaHojarsaca();
+                limpiarControlesHojarasca();
+            }
+        }
+    }//GEN-LAST:event_btnModificarHojarscaActionPerformed
+
+    private void btnEliminarHojarascaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarHojarascaActionPerformed
+        try {
+            if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+            } else {
+                int fila = grdHojarasca.getSelectedRow();
+                String registro = grdHojarasca.getValueAt(fila, 0).toString();
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro de borrar el registro de hojarasca",
+                        "Hojarasca", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    this.cdHojarasca.deleteHojarasca(Integer.parseInt(registro));
+                    //this.cdHojarasca.reenumerarHojarasca(this.sitioID);
+                    llenarTablaHojarsaca();
+                    //this.combo.reiniciarComboModel(cmbPuntoHojarasca);
+                    //fillCmbPuntosHojarasca();
+                    limpiarControlesHojarasca();
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningún registro de la tabla de hojarasca"
@@ -2091,38 +2103,50 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
 
     private void btnAgregarProfundidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProfundidadActionPerformed
         fijarDatosProfundidad();
-        if (validarCapturaProfundidad030() && validarCapturaProfundidad3060() && validarPesoTotal030() && validarPesoTotal3060() && validarProfundidad030() && validarProfundidad3060() && validarPuntoProfundidad()) {
-            crearProfundidad();
-            // this.cdProfundidad.reenumerarProfundidad(this.sitioID);
-            llenarTablaProfundidad();
-            //this.combo.reiniciarComboModel(cmbPuntoProfundidad);
-            // fillCmbPuntosProfundidad();
-            limpiarControlesProfundidades();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarCapturaProfundidad030() && validarCapturaProfundidad3060() && validarPesoTotal030() && validarPesoTotal3060() && validarProfundidad030() && validarProfundidad3060() && validarPuntoProfundidad()) {
+                crearProfundidad();
+                // this.cdProfundidad.reenumerarProfundidad(this.sitioID);
+                llenarTablaProfundidad();
+                //this.combo.reiniciarComboModel(cmbPuntoProfundidad);
+                // fillCmbPuntosProfundidad();
+                limpiarControlesProfundidades();
+            }
         }
     }//GEN-LAST:event_btnAgregarProfundidadActionPerformed
 
     private void btnModificarProfundidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarProfundidadActionPerformed
         fijarDatosProfundidad();
-        if (validarCapturaProfundidad030() && validarCapturaProfundidad3060() && validarPesoTotal030() && validarPesoTotal3060() && validarProfundidad030() && validarProfundidad3060()) {
-            actualizarProfundidad();
-            llenarTablaProfundidad();
-            limpiarControlesProfundidades();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarCapturaProfundidad030() && validarCapturaProfundidad3060() && validarPesoTotal030() && validarPesoTotal3060() && validarProfundidad030() && validarProfundidad3060()) {
+                actualizarProfundidad();
+                llenarTablaProfundidad();
+                limpiarControlesProfundidades();
+            }
         }
     }//GEN-LAST:event_btnModificarProfundidadActionPerformed
 
     private void btnEliminarProfundidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProfundidadActionPerformed
         try {
-            int fila = grdProfundidad.getSelectedRow();
-            String registro = grdProfundidad.getValueAt(fila, 0).toString();
-            int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro de borrar el registro de profundidad?",
-                    "Profundidad de suelo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (respuesta == JOptionPane.YES_OPTION) {
-                this.cdProfundidad.deleteProfundidad(Integer.parseInt(registro));
-                //this.cdProfundidad.reenumerarProfundidad(this.sitioID);
-                llenarTablaProfundidad();
-                //this.combo.reiniciarComboModel(cmbPuntoProfundidad);
-                // fillCmbPuntosProfundidad();
-                limpiarControlesProfundidades();
+            if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+            } else {
+                int fila = grdProfundidad.getSelectedRow();
+                String registro = grdProfundidad.getValueAt(fila, 0).toString();
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro de borrar el registro de profundidad?",
+                        "Profundidad de suelo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    this.cdProfundidad.deleteProfundidad(Integer.parseInt(registro));
+                    //this.cdProfundidad.reenumerarProfundidad(this.sitioID);
+                    llenarTablaProfundidad();
+                    //this.combo.reiniciarComboModel(cmbPuntoProfundidad);
+                    // fillCmbPuntosProfundidad();
+                    limpiarControlesProfundidades();
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningún registro de la tabla de profundidades de suelo "

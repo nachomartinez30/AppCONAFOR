@@ -68,7 +68,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
-        
+
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -85,7 +85,6 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         limpiarMuestrasPerfil();
     }
 
-    
     public void llenarControles() {
         combo.reiniciarComboModel(this.cmbUPMID);
         cmbSitios.setEnabled(true);
@@ -114,14 +113,14 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     public void revisarMuestrasPerfil(int sitioID) {
         /*revision = true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
 
         this.sitio = ceSitio.getSitio();*/
-       
+
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -798,7 +797,6 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             this.funciones.manipularBotonesMenuPrincipal(false);
         }
     }*/
-
     public void reiniciarControlesMuestras() {
         this.cmbProfundidad.setSelectedItem(null);
         this.txtPesoMuestra.setText("");
@@ -1848,10 +1846,14 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         fijarDatosMuestraPerfil();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
             if (validarDatosobligatoriosMuestrasPerfil() && validarDatosMuestrasPerfil()) {
                 crearMuestrasPerfil();
-                
+
             }
+        }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void txtObservacionesFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObservacionesFocusGained
@@ -2013,42 +2015,54 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
 
     private void btnGuardarMuestraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarMuestraActionPerformed
         fijarDatosMuestras();
-        if (validarCamposObligatoriosMuestras() && validarCamposMuestras()) {
-            crearMuestras();
-            funciones.reiniciarTabla(this.grdMuestras);
-            llenarTablaMuestras();
-            funciones.reiniciarComboModel(this.cmbProfundidad);
-            fillCmbProfundidad();
-            reiniciarControlesMuestras();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarCamposObligatoriosMuestras() && validarCamposMuestras()) {
+                crearMuestras();
+                funciones.reiniciarTabla(this.grdMuestras);
+                llenarTablaMuestras();
+                funciones.reiniciarComboModel(this.cmbProfundidad);
+                fillCmbProfundidad();
+                reiniciarControlesMuestras();
+            }
         }
     }//GEN-LAST:event_btnGuardarMuestraActionPerformed
 
     private void btnModificarMuestraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarMuestraActionPerformed
         fijarDatosMuestras();
-        if (validarCamposMuestras()) {
-            actualizarMuestras();
-            this.funciones.reiniciarTabla(this.grdMuestras);
-            llenarTablaMuestras();
-            this.funciones.reiniciarComboModel(this.cmbProfundidad);
-            fillCmbProfundidad();
-            reiniciarControlesMuestras();
-        }
-    }//GEN-LAST:event_btnModificarMuestraActionPerformed
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
 
-    private void btnEliminarMuestraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarMuestraActionPerformed
-        try {
-            int fila = grdMuestras.getSelectedRow();
-            String registro = grdMuestras.getValueAt(fila, 0).toString();
-            Object[] opciones = {"Si", "No"};
-            int respuesta = JOptionPane.showOptionDialog(null, "Se borrará el registro de muestra ¿Esta seguro?",
-                    "Suelo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
-            if (respuesta == JOptionPane.YES_OPTION) {
-                this.cdPerfil.deleteMuestras(Integer.parseInt(registro));
+        } else {
+            if (validarCamposMuestras()) {
+                actualizarMuestras();
                 this.funciones.reiniciarTabla(this.grdMuestras);
                 llenarTablaMuestras();
                 this.funciones.reiniciarComboModel(this.cmbProfundidad);
                 fillCmbProfundidad();
                 reiniciarControlesMuestras();
+            }
+        }
+    }//GEN-LAST:event_btnModificarMuestraActionPerformed
+
+    private void btnEliminarMuestraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarMuestraActionPerformed
+        try {
+            if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+            } else {
+                int fila = grdMuestras.getSelectedRow();
+                String registro = grdMuestras.getValueAt(fila, 0).toString();
+                Object[] opciones = {"Si", "No"};
+                int respuesta = JOptionPane.showOptionDialog(null, "Se borrará el registro de muestra ¿Esta seguro?",
+                        "Suelo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    this.cdPerfil.deleteMuestras(Integer.parseInt(registro));
+                    this.funciones.reiniciarTabla(this.grdMuestras);
+                    llenarTablaMuestras();
+                    this.funciones.reiniciarComboModel(this.cmbProfundidad);
+                    fillCmbProfundidad();
+                    reiniciarControlesMuestras();
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningún registro de la tabla de muestras"
@@ -2373,7 +2387,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
-Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        Integer upmID = (Integer) cmbUPMID.getSelectedItem();
         Integer sitio = (Integer) cmbSitios.getSelectedItem();
         if (cmbUPMID.getSelectedItem() != null) {
             this.upmID = (Integer) cmbUPMID.getSelectedItem();
@@ -2389,7 +2403,7 @@ Integer upmID = (Integer) cmbUPMID.getSelectedItem();
     }//GEN-LAST:event_cmbUPMIDActionPerformed
 
     private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
-try {
+        try {
             //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
             if (cmbSitios.getSelectedItem() == null) {
                 this.sitioID = 0;

@@ -1681,8 +1681,40 @@ public class FrmDeformacionViento extends JInternalFrame {
 
     private void btnAgregarMonticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMonticulosActionPerformed
         fijarDatosDeformacionTerreno();
-        if (validarMonticulosObligatorio() && validarDatosMonticulos()) {
-            crearMonticulo();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarMonticulosObligatorio() && validarDatosMonticulos()) {
+                crearMonticulo();
+                this.cdDeformacion.reenumerarMonticulos(this.sitioID);
+                llenarTablaDeformacionViento();
+                this.combo.reiniciarComboModel(cmbMedicionMonticulos);
+                fillCmbMedionesMonticulos();
+                limpiarDatosMonticulos();
+                calcularMonticulos();
+            }
+        }
+    }//GEN-LAST:event_btnAgregarMonticulosActionPerformed
+
+    private void btnModificarMonticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarMonticulosActionPerformed
+        fijarDatosDeformacionTerreno();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarDatosMonticulos()) {
+                modificarMonticulos();
+                llenarTablaDeformacionViento();
+                limpiarDatosMonticulos();
+                calcularMonticulos();
+            }
+        }
+    }//GEN-LAST:event_btnModificarMonticulosActionPerformed
+
+    private void btnEliminarMonticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarMonticulosActionPerformed
+        eliminarMonticulos();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
             this.cdDeformacion.reenumerarMonticulos(this.sitioID);
             llenarTablaDeformacionViento();
             this.combo.reiniciarComboModel(cmbMedicionMonticulos);
@@ -1690,59 +1722,51 @@ public class FrmDeformacionViento extends JInternalFrame {
             limpiarDatosMonticulos();
             calcularMonticulos();
         }
-    }//GEN-LAST:event_btnAgregarMonticulosActionPerformed
-
-    private void btnModificarMonticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarMonticulosActionPerformed
-        fijarDatosDeformacionTerreno();
-        if (validarDatosMonticulos()) {
-            modificarMonticulos();
-            llenarTablaDeformacionViento();
-            limpiarDatosMonticulos();
-            calcularMonticulos();
-        }
-    }//GEN-LAST:event_btnModificarMonticulosActionPerformed
-
-    private void btnEliminarMonticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarMonticulosActionPerformed
-        eliminarMonticulos();
-        this.cdDeformacion.reenumerarMonticulos(this.sitioID);
-        llenarTablaDeformacionViento();
-        this.combo.reiniciarComboModel(cmbMedicionMonticulos);
-        fillCmbMedionesMonticulos();
-        limpiarDatosMonticulos();
-        calcularMonticulos();
     }//GEN-LAST:event_btnEliminarMonticulosActionPerformed
 
     private void btnAgregarLongitudMonticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarLongitudMonticulosActionPerformed
         fijarDatosLongitudMonticulos();
-        if (validarLongitudMoticulosObligatorios() && validarDatosLongitud()) {
-            crearLongitud();
-            this.cdDeformacion.reenumerarLongitudMonticulo(sitioID);
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarLongitudMoticulosObligatorios() && validarDatosLongitud()) {
+                crearLongitud();
+                this.cdDeformacion.reenumerarLongitudMonticulo(sitioID);
+                llenarTablaLongitudMonticulos();
+                this.combo.reiniciarComboModel(cmbLongitudMonticulos);
+                fillCmbLongitudMonticulos();
+                limpiarDatosLongitud();
+                calcularMonticulos();
+            }
+        }
+    }//GEN-LAST:event_btnAgregarLongitudMonticulosActionPerformed
+
+    private void btnModificarLongitudMonticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarLongitudMonticulosActionPerformed
+        fijarDatosLongitudMonticulos();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarDatosLongitud()) {
+                modificarLongitudMonticulos();
+                llenarTablaLongitudMonticulos();
+                limpiarDatosLongitud();
+                calcularMonticulos();
+            }
+        }
+    }//GEN-LAST:event_btnModificarLongitudMonticulosActionPerformed
+
+    private void btnEliminarLongitudMonticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarLongitudMonticulosActionPerformed
+        eliminarLongitudMonticulos();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            this.cdDeformacion.reenumerarLongitudMonticulo(this.sitioID);
             llenarTablaLongitudMonticulos();
             this.combo.reiniciarComboModel(cmbLongitudMonticulos);
             fillCmbLongitudMonticulos();
             limpiarDatosLongitud();
             calcularMonticulos();
         }
-    }//GEN-LAST:event_btnAgregarLongitudMonticulosActionPerformed
-
-    private void btnModificarLongitudMonticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarLongitudMonticulosActionPerformed
-        fijarDatosLongitudMonticulos();
-        if (validarDatosLongitud()) {
-            modificarLongitudMonticulos();
-            llenarTablaLongitudMonticulos();
-            limpiarDatosLongitud();
-            calcularMonticulos();
-        }
-    }//GEN-LAST:event_btnModificarLongitudMonticulosActionPerformed
-
-    private void btnEliminarLongitudMonticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarLongitudMonticulosActionPerformed
-        eliminarLongitudMonticulos();
-        this.cdDeformacion.reenumerarLongitudMonticulo(this.sitioID);
-        llenarTablaLongitudMonticulos();
-        this.combo.reiniciarComboModel(cmbLongitudMonticulos);
-        fillCmbLongitudMonticulos();
-        limpiarDatosLongitud();
-        calcularMonticulos();
 
     }//GEN-LAST:event_btnEliminarLongitudMonticulosActionPerformed
 
@@ -1765,39 +1789,43 @@ public class FrmDeformacionViento extends JInternalFrame {
         fijarDatosSuelo();
         fijarDatosTransponder();
         agregarDatosSuelo();
-        if (chkMonticulosDunas.isSelected() && this.cdDeformacion.validarTablaErosionViento(this.sitioID)) {
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
 
-            JOptionPane.showMessageDialog(null, "Si selecciona motículos o dunas, se deben capturar"
-                    + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
-            cmbMedicionMonticulos.requestFocus();
-        } else if (this.actualizar == 0) {
-            if (validarTransponder()) {
-                crearTransponder();
-            }
-            /*this.hide();
+        } else {
+            if (chkMonticulosDunas.isSelected() && this.cdDeformacion.validarTablaErosionViento(this.sitioID)) {
+
+                JOptionPane.showMessageDialog(null, "Si selecciona motículos o dunas, se deben capturar"
+                        + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
+                cmbMedicionMonticulos.requestFocus();
+            } else if (this.actualizar == 0) {
+                if (validarTransponder()) {
+                    crearTransponder();
+                }
+                /*this.hide();
             UPMForms.observaciones.setDatosiniciales(this.ceSitio);
             UPMForms.observaciones.setVisible(true);
             this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);*/
-        } else {
-            if (validarTransponder()) {
-                crearTransponder();
-            }
-            //System.out.println(ceSitio.getSecuencia()+"  BTN Continuar");
-            /*this.hide();
+            } else {
+                if (validarTransponder()) {
+                    crearTransponder();
+                }
+                //System.out.println(ceSitio.getSecuencia()+"  BTN Continuar");
+                /*this.hide();
             UPMForms.observaciones.revisarObservaciones(this.ceSitio);
             UPMForms.observaciones.setVisible(true);*/
+            }
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        
+
         limpiarCamposCalculados();
         limpiarColocacionTAG();
         limpiarDatosLongitud();
         limpiarDatosMonticulos();
         this.hide();
         funciones.manipularBotonesMenuPrincipal(false);
-       
+
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void rbtOtroLugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtOtroLugarActionPerformed

@@ -28,6 +28,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
+
     private boolean revision;
     private int upmID;
     private int sitioID;
@@ -71,10 +72,9 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private FuncionesComunes funciones = new FuncionesComunes();
     private int modificar;
-    private Version ver=new Version();
-    private String version=ver.getVersion();
+    private Version ver = new Version();
+    private String version = ver.getVersion();
     private CDSitio cdSitio = new CDSitio();
-    
 
     public FrmCondicionDegradacionSuelo() {
         initComponents();
@@ -86,14 +86,14 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
-        
+
         this.txtUPM2.setText(String.valueOf(this.upmID));
         //this.txtSitio2.setText(String.valueOf(this.sitio));
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
         this.ceSitio = ceSitio;
-       // cdSecuencia.insertFormatoCapturado(this.ceSitio, FORMATO_ID);
+        // cdSecuencia.insertFormatoCapturado(this.ceSitio, FORMATO_ID);
         llenarTablaPedestal();
         fillCmbNumeroPedestal();
         llenarTablaErosionLaminar();
@@ -116,8 +116,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
         this.modificar = 0;
     }
 
-    
-        public void llenarControles() {
+    public void llenarControles() {
         combo.reiniciarComboModel(this.cmbUPMID);
         fillUPMID();
     }
@@ -143,16 +142,14 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    
-    
+
     public void revisarCondicionDegradacion(int sitioID) {
-       // System.out.println("Degradacion de suelo= "+this.ceSitio.getSecuencia());
-       /*revision=true;
+        // System.out.println("Degradacion de suelo= "+this.ceSitio.getSecuencia());
+        /*revision=true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();*/
-        
+
         this.txtUPM2.setText(String.valueOf(this.upmID));
         //this.txtSitio2.setText(String.valueOf(this.sitio));
         this.ceSitio.setSitioID(this.sitioID);
@@ -692,7 +689,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
                     + "", "Condicion de degradacion", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void manipularControlesPedestal(boolean activar) {
         if (activar == true) {
             cmbNoPedestal.setEnabled(true);
@@ -709,7 +706,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
             btnModificarPedestal.setEnabled(false);
         }
     }
-    
+
     private void manipularControlesErosionLaminar(boolean activar) {
         if (activar == true) {
             cmbNoErosionLaminar.setEnabled(true);
@@ -728,9 +725,9 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
             btnEliminarErosion.setEnabled(false);
         }
     }
-    
-    private void manipularControlesCostras(boolean activar){
-        if(activar == true){
+
+    private void manipularControlesCostras(boolean activar) {
+        if (activar == true) {
             cmbNoCostra.setEnabled(true);
             txtDiametroCostras.setEnabled(true);
             btnAgregarCostra.setEnabled(true);
@@ -745,9 +742,9 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
             btnEliminarCostra.setEnabled(false);
         }
     }
-    
-    private void manipularControlesCanalillo(boolean activar){
-        if(activar == true){
+
+    private void manipularControlesCanalillo(boolean activar) {
+        if (activar == true) {
             cmbNoCanalillo.setEnabled(true);
             txtAnchoCanalillo.setEnabled(true);
             txtProfundidadCanalillos.setEnabled(true);
@@ -764,9 +761,9 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
             btnEliminarCanalillo.setEnabled(false);
         }
     }
-    
-    private void manipularControlesCarcava(boolean activar){
-        if(activar == true){
+
+    private void manipularControlesCarcava(boolean activar) {
+        if (activar == true) {
             cmbNoCarcava.setEnabled(true);
             txtAnchoCarcavas.setEnabled(true);
             txtProfundidadCarcavas.setEnabled(true);
@@ -783,9 +780,9 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
             btnEliminarCarcava.setEnabled(false);
         }
     }
-    
-    private void manipularControlesPavimentos(boolean activar){
-        if(activar == true){
+
+    private void manipularControlesPavimentos(boolean activar) {
+        if (activar == true) {
             cmbNoPavimento.setEnabled(true);
             txtDiametroPavimento.setEnabled(true);
             btnAgregarPavimento.setEnabled(true);
@@ -1760,6 +1757,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
             }
         });
 
+        cmbSitios.setEnabled(false);
         cmbSitios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSitiosActionPerformed(evt);
@@ -2447,8 +2445,42 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
 
     private void btnAgregarPedestalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPedestalActionPerformed
         fijarDatosPedestal();
-        if (validarPedestal()) {
-            crearPedestal();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarPedestal()) {
+                crearPedestal();
+                this.cdPedestal.renumerarRegistros(this.sitioID);
+                this.combo.reiniciarComboModel(cmbNoPedestal);
+                fillCmbNumeroPedestal();
+                llenarTablaPedestal();
+                cmbNoPedestal.setSelectedItem(null);
+                txtAlturaPedestal.setText("");
+                txtAlturaPedestal.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_btnAgregarPedestalActionPerformed
+
+    private void btnModificarPedestalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarPedestalActionPerformed
+        fijarDatosPedestal();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarPedestal()) {
+                modificarPedestal();
+                llenarTablaPedestal();
+                cmbNoPedestal.setSelectedItem(null);
+                txtAlturaPedestal.setText("");
+                txtAlturaPedestal.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_btnModificarPedestalActionPerformed
+
+    private void btnEliminarPedestalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPedestalActionPerformed
+        eliminarPedestal();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
             this.cdPedestal.renumerarRegistros(this.sitioID);
             this.combo.reiniciarComboModel(cmbNoPedestal);
             fillCmbNumeroPedestal();
@@ -2457,34 +2489,48 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
             txtAlturaPedestal.setText("");
             txtAlturaPedestal.requestFocus();
         }
-    }//GEN-LAST:event_btnAgregarPedestalActionPerformed
-
-    private void btnModificarPedestalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarPedestalActionPerformed
-        fijarDatosPedestal();
-        if (validarPedestal()) {
-            modificarPedestal();
-            llenarTablaPedestal();
-            cmbNoPedestal.setSelectedItem(null);
-            txtAlturaPedestal.setText("");
-            txtAlturaPedestal.requestFocus();
-        }
-    }//GEN-LAST:event_btnModificarPedestalActionPerformed
-
-    private void btnEliminarPedestalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPedestalActionPerformed
-        eliminarPedestal();
-        this.cdPedestal.renumerarRegistros(this.sitioID);
-        this.combo.reiniciarComboModel(cmbNoPedestal);
-        fillCmbNumeroPedestal();
-        llenarTablaPedestal();
-        cmbNoPedestal.setSelectedItem(null);
-        txtAlturaPedestal.setText("");
-        txtAlturaPedestal.requestFocus();
     }//GEN-LAST:event_btnEliminarPedestalActionPerformed
 
     private void btnAgregarErosionLaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarErosionLaminarActionPerformed
         fijarDatosErosion();
-        if (validarErosion()) {
-            crearErosion();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarErosion()) {
+                crearErosion();
+                this.cdErosion.renumerarRegistros(this.sitioID);
+                combo.reiniciarComboModel(cmbNoErosionLaminar);
+                fillCmbNumeroErosion();
+                llenarTablaErosionLaminar();
+                cmbNoErosionLaminar.setSelectedItem(null);
+                txtAnchoErosionLaminar.setText("");
+                txtLargoErosionLaminar.setText("");
+                txtAnchoErosionLaminar.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_btnAgregarErosionLaminarActionPerformed
+
+    private void btnModificarErosionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarErosionActionPerformed
+        fijarDatosErosion();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarErosion()) {
+                modificarErosion();
+                llenarTablaErosionLaminar();
+                cmbNoErosionLaminar.setSelectedItem(null);
+                txtAnchoErosionLaminar.setText("");
+                txtLargoErosionLaminar.setText("");
+                txtAnchoErosionLaminar.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_btnModificarErosionActionPerformed
+
+    private void btnEliminarErosionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarErosionActionPerformed
+        eliminarErosion();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
             this.cdErosion.renumerarRegistros(this.sitioID);
             combo.reiniciarComboModel(cmbNoErosionLaminar);
             fillCmbNumeroErosion();
@@ -2494,36 +2540,46 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
             txtLargoErosionLaminar.setText("");
             txtAnchoErosionLaminar.requestFocus();
         }
-    }//GEN-LAST:event_btnAgregarErosionLaminarActionPerformed
-
-    private void btnModificarErosionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarErosionActionPerformed
-        fijarDatosErosion();
-        if (validarErosion()) {
-            modificarErosion();
-            llenarTablaErosionLaminar();
-            cmbNoErosionLaminar.setSelectedItem(null);
-            txtAnchoErosionLaminar.setText("");
-            txtLargoErosionLaminar.setText("");
-            txtAnchoErosionLaminar.requestFocus();
-        }
-    }//GEN-LAST:event_btnModificarErosionActionPerformed
-
-    private void btnEliminarErosionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarErosionActionPerformed
-        eliminarErosion();
-        this.cdErosion.renumerarRegistros(this.sitioID);
-        combo.reiniciarComboModel(cmbNoErosionLaminar);
-        fillCmbNumeroErosion();
-        llenarTablaErosionLaminar();
-        cmbNoErosionLaminar.setSelectedItem(null);
-        txtAnchoErosionLaminar.setText("");
-        txtLargoErosionLaminar.setText("");
-        txtAnchoErosionLaminar.requestFocus();
     }//GEN-LAST:event_btnEliminarErosionActionPerformed
 
     private void btnAgregarCostraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCostraActionPerformed
         fijarDatosCostras();
-        if (validarCostras()) {
-            crearCostras();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarCostras()) {
+                crearCostras();
+                this.cdCostras.renumerarRegistros(this.sitioID);
+                combo.reiniciarComboModel(cmbNoCostra);
+                fillCmbNumeroCostras();
+                llenarTablaCostras();
+                cmbNoCostra.setSelectedItem(null);
+                txtDiametroCostras.setText("");
+                txtDiametroCostras.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_btnAgregarCostraActionPerformed
+
+    private void btnModificarCostraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCostraActionPerformed
+        fijarDatosCostras();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarCostras()) {
+                modificarCostra();
+                llenarTablaCostras();
+                cmbNoCostra.setSelectedItem(null);
+                txtDiametroCostras.setText("");
+                txtDiametroCostras.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_btnModificarCostraActionPerformed
+
+    private void btnEliminarCostraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCostraActionPerformed
+        eliminarCostra();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
             this.cdCostras.renumerarRegistros(this.sitioID);
             combo.reiniciarComboModel(cmbNoCostra);
             fillCmbNumeroCostras();
@@ -2532,34 +2588,48 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
             txtDiametroCostras.setText("");
             txtDiametroCostras.requestFocus();
         }
-    }//GEN-LAST:event_btnAgregarCostraActionPerformed
-
-    private void btnModificarCostraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCostraActionPerformed
-        fijarDatosCostras();
-        if (validarCostras()) {
-            modificarCostra();
-            llenarTablaCostras();
-            cmbNoCostra.setSelectedItem(null);
-            txtDiametroCostras.setText("");
-            txtDiametroCostras.requestFocus();
-        }
-    }//GEN-LAST:event_btnModificarCostraActionPerformed
-
-    private void btnEliminarCostraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCostraActionPerformed
-        eliminarCostra();
-        this.cdCostras.renumerarRegistros(this.sitioID);
-        combo.reiniciarComboModel(cmbNoCostra);
-        fillCmbNumeroCostras();
-        llenarTablaCostras();
-        cmbNoCostra.setSelectedItem(null);
-        txtDiametroCostras.setText("");
-        txtDiametroCostras.requestFocus();
     }//GEN-LAST:event_btnEliminarCostraActionPerformed
 
     private void btnAgregarCanalilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCanalilloActionPerformed
         fijarDatosCanalillo();
-        if (validarCanalillos()) {
-            crearCanalillo();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarCanalillos()) {
+                crearCanalillo();
+                this.cdCanalillo.renumerarRegistros(this.sitioID);
+                combo.reiniciarComboModel(cmbNoCanalillo);
+                fillCmbNumeroCanalillo();
+                llenarTablaCanalillo();
+                cmbNoCanalillo.setSelectedItem(null);
+                txtAnchoCanalillo.setText("");
+                txtProfundidadCanalillos.setText("");
+                txtAnchoCanalillo.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_btnAgregarCanalilloActionPerformed
+
+    private void btnModificarCanalilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCanalilloActionPerformed
+        fijarDatosCanalillo();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarCanalillos()) {
+                modificarCanalillo();
+                llenarTablaCanalillo();
+                cmbNoCanalillo.setSelectedItem(null);
+                txtAnchoCanalillo.setText("");
+                txtProfundidadCanalillos.setText("");
+                txtAnchoCanalillo.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_btnModificarCanalilloActionPerformed
+
+    private void btnEliminarCanalilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCanalilloActionPerformed
+        eliminarCanalillo();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
             this.cdCanalillo.renumerarRegistros(this.sitioID);
             combo.reiniciarComboModel(cmbNoCanalillo);
             fillCmbNumeroCanalillo();
@@ -2569,36 +2639,48 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
             txtProfundidadCanalillos.setText("");
             txtAnchoCanalillo.requestFocus();
         }
-    }//GEN-LAST:event_btnAgregarCanalilloActionPerformed
-
-    private void btnModificarCanalilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCanalilloActionPerformed
-        fijarDatosCanalillo();
-        if (validarCanalillos()) {
-            modificarCanalillo();
-            llenarTablaCanalillo();
-            cmbNoCanalillo.setSelectedItem(null);
-            txtAnchoCanalillo.setText("");
-            txtProfundidadCanalillos.setText("");
-            txtAnchoCanalillo.requestFocus();
-        }
-    }//GEN-LAST:event_btnModificarCanalilloActionPerformed
-
-    private void btnEliminarCanalilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCanalilloActionPerformed
-        eliminarCanalillo();
-        this.cdCanalillo.renumerarRegistros(this.sitioID);
-        combo.reiniciarComboModel(cmbNoCanalillo);
-        fillCmbNumeroCanalillo();
-        llenarTablaCanalillo();
-        cmbNoCanalillo.setSelectedItem(null);
-        txtAnchoCanalillo.setText("");
-        txtProfundidadCanalillos.setText("");
-        txtAnchoCanalillo.requestFocus();
     }//GEN-LAST:event_btnEliminarCanalilloActionPerformed
 
     private void btnAgregarCarcavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCarcavaActionPerformed
         fijarDatosCarcava();
-        if (validarCarcava()) {
-            crearCarcava();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarCarcava()) {
+                crearCarcava();
+                this.cdCarcava.renumerarRegistros(this.sitioID);
+                combo.reiniciarComboModel(cmbNoCarcava);
+                fillCmbNumeroCarcavas();
+                llenarTablaCarcava();
+                cmbNoCarcava.setSelectedItem(null);
+                txtAnchoCarcavas.setText("");
+                txtProfundidadCarcavas.setText("");
+                txtAnchoCarcavas.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_btnAgregarCarcavaActionPerformed
+
+    private void btnModificarCarcavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCarcavaActionPerformed
+        fijarDatosCarcava();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarCarcava()) {
+                modificarCarcava();
+                llenarTablaCarcava();
+                cmbNoCarcava.setSelectedItem(null);
+                txtAnchoCarcavas.setText("");
+                txtProfundidadCarcavas.setText("");
+                txtAnchoCarcavas.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_btnModificarCarcavaActionPerformed
+
+    private void btnEliminarCarcavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCarcavaActionPerformed
+        eliminarCarcava();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
             this.cdCarcava.renumerarRegistros(this.sitioID);
             combo.reiniciarComboModel(cmbNoCarcava);
             fillCmbNumeroCarcavas();
@@ -2608,36 +2690,46 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
             txtProfundidadCarcavas.setText("");
             txtAnchoCarcavas.requestFocus();
         }
-    }//GEN-LAST:event_btnAgregarCarcavaActionPerformed
-
-    private void btnModificarCarcavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCarcavaActionPerformed
-        fijarDatosCarcava();
-        if (validarCarcava()) {
-            modificarCarcava();
-            llenarTablaCarcava();
-            cmbNoCarcava.setSelectedItem(null);
-            txtAnchoCarcavas.setText("");
-            txtProfundidadCarcavas.setText("");
-            txtAnchoCarcavas.requestFocus();
-        }
-    }//GEN-LAST:event_btnModificarCarcavaActionPerformed
-
-    private void btnEliminarCarcavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCarcavaActionPerformed
-        eliminarCarcava();
-        this.cdCarcava.renumerarRegistros(this.sitioID);
-        combo.reiniciarComboModel(cmbNoCarcava);
-        fillCmbNumeroCarcavas();
-        llenarTablaCarcava();
-        cmbNoCarcava.setSelectedItem(null);
-        txtAnchoCarcavas.setText("");
-        txtProfundidadCarcavas.setText("");
-        txtAnchoCarcavas.requestFocus();
     }//GEN-LAST:event_btnEliminarCarcavaActionPerformed
 
     private void btnAgregarPavimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPavimentoActionPerformed
         fijarDatosPavimento();
-        if (validarPavimento()) {
-            crearPavimento();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarPavimento()) {
+                crearPavimento();
+                this.cdPavimento.renumerarRegistros(this.sitioID);
+                combo.reiniciarComboModel(cmbNoPavimento);
+                fillCmbNumeroPavimento();
+                llenarTablaPavimento();
+                cmbNoPavimento.setSelectedItem(null);
+                txtDiametroPavimento.setText("");
+                txtDiametroPavimento.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_btnAgregarPavimentoActionPerformed
+
+    private void btnModificarPavimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarPavimentoActionPerformed
+        fijarDatosPavimento();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarPavimento()) {
+                modificarPavimento();
+                llenarTablaPavimento();
+                cmbNoPavimento.setSelectedItem(null);
+                txtDiametroPavimento.setText("");
+                txtDiametroPavimento.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_btnModificarPavimentoActionPerformed
+
+    private void btnEliminarPavimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPavimentoActionPerformed
+        eliminarPavimento();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
             this.cdPavimento.renumerarRegistros(this.sitioID);
             combo.reiniciarComboModel(cmbNoPavimento);
             fillCmbNumeroPavimento();
@@ -2646,28 +2738,6 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
             txtDiametroPavimento.setText("");
             txtDiametroPavimento.requestFocus();
         }
-    }//GEN-LAST:event_btnAgregarPavimentoActionPerformed
-
-    private void btnModificarPavimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarPavimentoActionPerformed
-        fijarDatosPavimento();
-        if (validarPavimento()) {
-            modificarPavimento();
-            llenarTablaPavimento();
-            cmbNoPavimento.setSelectedItem(null);
-            txtDiametroPavimento.setText("");
-            txtDiametroPavimento.requestFocus();
-        }
-    }//GEN-LAST:event_btnModificarPavimentoActionPerformed
-
-    private void btnEliminarPavimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPavimentoActionPerformed
-        eliminarPavimento();
-        this.cdPavimento.renumerarRegistros(this.sitioID);
-        combo.reiniciarComboModel(cmbNoPavimento);
-        fillCmbNumeroPavimento();
-        llenarTablaPavimento();
-        cmbNoPavimento.setSelectedItem(null);
-        txtDiametroPavimento.setText("");
-        txtDiametroPavimento.requestFocus();
     }//GEN-LAST:event_btnEliminarPavimentoActionPerformed
 
     private void txtAlturaPedestalFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaPedestalFocusGained
@@ -2806,10 +2876,10 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDiametroCostrasFocusLost
 
     private void cmbNoCanalilloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNoCanalilloActionPerformed
-        if(cmbNoCanalillo.getSelectedItem() != null){
+        if (cmbNoCanalillo.getSelectedItem() != null) {
             CECanalillo canalillo;
             this.ceCanalillo.setSitioID(this.sitioID);
-            this.ceCanalillo.setNumero((Integer)cmbNoCanalillo.getSelectedItem());
+            this.ceCanalillo.setNumero((Integer) cmbNoCanalillo.getSelectedItem());
             canalillo = this.cdCanalillo.getCanalilloPorNumero(ceCanalillo);
             txtAnchoCanalillo.setText(String.valueOf(canalillo.getAncho()));
             txtProfundidadCanalillos.setText(String.valueOf(canalillo.getProfundidad()));
@@ -2884,11 +2954,11 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbNoPavimentoActionPerformed
 
     private void txtAlturaPedestalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAlturaPedestalKeyTyped
-       numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtAlturaPedestalKeyTyped
 
     private void txtAnchoErosionLaminarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnchoErosionLaminarKeyTyped
-       numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtAnchoErosionLaminarKeyTyped
 
     private void txtLargoErosionLaminarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLargoErosionLaminarKeyTyped
@@ -2908,7 +2978,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtProfundidadCanalillosKeyTyped
 
     private void txtAnchoCarcavasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnchoCarcavasKeyTyped
-       numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtAnchoCarcavasKeyTyped
 
     private void txtProfundidadCarcavasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProfundidadCarcavasKeyTyped
@@ -2916,27 +2986,27 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtProfundidadCarcavasKeyTyped
 
     private void txtDiametroPavimentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiametroPavimentoKeyTyped
-       numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtDiametroPavimentoKeyTyped
 
     private void btnSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir1ActionPerformed
-        if(revision==false){//esta en modo de captura
+        if (revision == false) {//esta en modo de captura
             this.hide();
             funciones.manipularBotonesMenuPrincipal(false);
         }
-        if(revision==true){//entro a modo de revision
-             //System.err.println("Modo Revision");
+        if (revision == true) {//entro a modo de revision
+            //System.err.println("Modo Revision");
             this.hide();
             //UPMForms.revisionModulos.iniciarRevision();
             UPMForms.revisionModulos.setVisible(true);
             UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision=false;
+            revision = false;
         }
     }//GEN-LAST:event_btnSalir1ActionPerformed
 
     private void btnSalir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir2ActionPerformed
-       this.hide();
-       funciones.manipularBotonesMenuPrincipal(false);
+        this.hide();
+        funciones.manipularBotonesMenuPrincipal(false);
     }//GEN-LAST:event_btnSalir2ActionPerformed
 
     private void chkPedestalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPedestalActionPerformed
@@ -3076,7 +3146,7 @@ public class FrmCondicionDegradacionSuelo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbUPMIDActionPerformed
 
     private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
-       try {
+        try {
             //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
             if (cmbSitios.getSelectedItem() == null) {
                 this.sitioID = 0;

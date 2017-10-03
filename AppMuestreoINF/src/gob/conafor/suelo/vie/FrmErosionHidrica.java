@@ -73,10 +73,10 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private FuncionesComunes funciones = new FuncionesComunes();
     private int revisar;
-    private Version ver=new Version();
-    private String version=ver.getVersion();
+    private Version ver = new Version();
+    private String version = ver.getVersion();
     private boolean revision;
-     private CDSitio cdSitio = new CDSitio();
+    private CDSitio cdSitio = new CDSitio();
 
     public FrmErosionHidrica() {
         initComponents();
@@ -96,7 +96,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
-        
+
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -122,8 +122,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         limpiarControlesLongitudCarcava();
     }
 
-    
-        public void llenarControles() {
+    public void llenarControles() {
         combo.reiniciarComboModel(this.cmbUPMID);
         fillUPMID();
     }
@@ -149,18 +148,17 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    
+
     public void revisarErosionHidrica(int sitioID) {
         /*revision=true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();*/
-        
+
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
-        this.ceSitio=ceSitio;
+        this.ceSitio = ceSitio;
         //System.out.println("Erosion hidrica "+this.ceSitio.getSecuencia());
         llenarTablaErosionCanalillos();
         llenarTablaLongitudCanalillos();
@@ -306,7 +304,6 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
             this.azimutCanalillos = null;
         }
     }
-    
 
     private void fijarDatosCarcavas() {
         try {
@@ -338,7 +335,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
             this.longitudCanalillo = null;
         }
     }
-    
+
     private void fijarDatosLongitudesCarcavas() {
         try {
             this.longitudCarcava = Float.valueOf(txtLongitudCarcavas.getText());
@@ -347,26 +344,26 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         }
     }
 
-    private void calcularSueloCanalillos(){
+    private void calcularSueloCanalillos() {
         txtNoCanalillos.setText(String.valueOf(this.cdErosion.getNumeroRegistros("SUELO_LongitudCanalillo", this.sitioID)));
         txtProfundidadPromedioCanalillos.setText(String.valueOf(this.cdErosion.getPromedioCampo("SUELO_ErosionHidricaCanalillo", "Profundidad", this.sitioID)));
         txtAnchoPromedioCanalillos.setText(String.valueOf(this.cdErosion.getPromedioCampo("SUELO_ErosionHidricaCanalillo", "Ancho", this.sitioID)));
         txtPromedioLongitudCanalillos.setText(String.valueOf(this.cdErosion.getPromedioCampo("SUELO_LongitudCanalillo", "Longitud", this.sitioID)));
-        Float volumen = (Float.parseFloat(txtProfundidadPromedioCanalillos.getText()) * Float.parseFloat(txtAnchoPromedioCanalillos.getText())/2)
-                         * Float.parseFloat(txtPromedioLongitudCanalillos.getText());
+        Float volumen = (Float.parseFloat(txtProfundidadPromedioCanalillos.getText()) * Float.parseFloat(txtAnchoPromedioCanalillos.getText()) / 2)
+                * Float.parseFloat(txtPromedioLongitudCanalillos.getText());
         txtVolumenCanalillos.setText(String.valueOf(volumen));
     }
-    
-    private void calcularSueloCarcavas(){
+
+    private void calcularSueloCarcavas() {
         txtNoCarcavas.setText(String.valueOf(this.cdErosion.getNumeroRegistros("SUELO_LongitudCarcava", this.sitioID)));
         txtProfundidadPromedioCarcavas.setText(String.valueOf(this.cdErosion.getPromedioCampo("SUELO_ErosionHidricaCarcava", "Profundidad", this.sitioID)));
         txtAnchoPromedioCarcavas.setText(String.valueOf(this.cdErosion.getPromedioCampo("SUELO_ErosionHidricaCarcava", "Ancho", this.sitioID)));
         txtPromedioLongitudCarcavas.setText(String.valueOf(this.cdErosion.getPromedioCampo("SUELO_LongitudCarcava", "Longitud", this.sitioID)));
-        Float volumen = (Float.parseFloat(txtProfundidadPromedioCarcavas.getText()) * Float.parseFloat(txtAnchoPromedioCarcavas.getText())/2)
-                         * Float.parseFloat(txtPromedioLongitudCarcavas.getText());
+        Float volumen = (Float.parseFloat(txtProfundidadPromedioCarcavas.getText()) * Float.parseFloat(txtAnchoPromedioCarcavas.getText()) / 2)
+                * Float.parseFloat(txtPromedioLongitudCarcavas.getText());
         txtVolumenCarcavas.setText(String.valueOf(volumen));
     }
-    
+
     private void fijarDatosSuelos() {
         try {
             this.numeroCanalillos = Integer.valueOf(txtNoCanalillos.getText());
@@ -449,8 +446,8 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
             this.volumenCarcavas = null;
         }
     }
-    
-    private void agregarDatosSuelo(){
+
+    private void agregarDatosSuelo() {
         this.ceSuelo.setSitioID(this.sitioID);
         this.ceSuelo.setNumeroCanalillos(this.numeroCanalillos);
         this.ceSuelo.setProfundidadPromedioCanalillos(this.profundidadPromedioCanalillos);
@@ -462,32 +459,32 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         this.ceSuelo.setAnchoPromedioCarcavas(this.anchoPromedioCarcavas);
         this.ceSuelo.setLongitudCarcavas(this.promedioLongitudCarcava);
         this.ceSuelo.setVolumenCarcavas(this.volumenCarcavas);
-        
+
         this.cdSuelo.agregarErosionHidricaSuelo(ceSuelo);
     }
-    
-    private boolean validarCanalillosObligatorios(){
-        if(cmbMedicionCanalillos.getSelectedItem() == null){
+
+    private boolean validarCanalillosObligatorios() {
+        if (cmbMedicionCanalillos.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un número de medición ",
                     "Erosion hidrica", JOptionPane.INFORMATION_MESSAGE);
             cmbMedicionCanalillos.requestFocus();
             return false;
-        } else if(txtProfundidadCanalillos.getText().isEmpty()){
+        } else if (txtProfundidadCanalillos.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Error! Debe proporcionar profundidad ",
                     "Erosion hidrica", JOptionPane.INFORMATION_MESSAGE);
             txtProfundidadCanalillos.requestFocus();
             return false;
-        } else if(txtAnchoCanalillo.getText().isEmpty()){
+        } else if (txtAnchoCanalillo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Error! Debe proporcionar ancho ",
                     "Erosion hidrica", JOptionPane.INFORMATION_MESSAGE);
             txtAnchoCanalillo.requestFocus();
             return false;
-        } else if(txtDistanciaCanalillos.getText().isEmpty()){
+        } else if (txtDistanciaCanalillos.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Error! Debe proporcionar distancia ",
                     "Erosion hidrica", JOptionPane.INFORMATION_MESSAGE);
             txtDistanciaCanalillos.requestFocus();
             return false;
-        } else if(txtAzimutCanalillos.getText().isEmpty()){
+        } else if (txtAzimutCanalillos.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Error! Debe proporcionar azimut ",
                     "Erosion hidrica", JOptionPane.INFORMATION_MESSAGE);
             txtAzimutCanalillos.requestFocus();
@@ -496,7 +493,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private boolean validarCarcavasObligatorios() {
         if (cmbMedicionCarcavas.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un número de medición ",
@@ -527,7 +524,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private boolean validarLongitudCanalillosObligatorios() {
         if (cmbLongitudCanalillos.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un número de campo de longitud ",
@@ -543,7 +540,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private boolean validarLongitudCarcavasObligatorios() {
         if (cmbLongitudCarcava.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un número de campo de longitud ",
@@ -559,7 +556,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private boolean validarDatosCanalillos() {
         if (validacion.esMayorCero(this.profundidadCanalillos)) {
             txtProfundidadCanalillos.requestFocus();
@@ -577,7 +574,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private boolean validarDatosCarcavas() {
         if (validacion.esMayorCero(this.profundidadCarcava)) {
             txtProfundidadCarcavas.requestFocus();
@@ -595,7 +592,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private boolean validarDatosLongitudCanalillos() {
         if (validacion.esMayorCero(this.longitudCanalillo)) {
             txtLongitudCanalillos.requestFocus();
@@ -604,7 +601,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private boolean validarDatosLongitudCarcavas() {
         if (validacion.esMayorCero(this.longitudCarcava)) {
             txtLongitudCarcavas.requestFocus();
@@ -613,53 +610,53 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
-    private void crearCanalillos(){
+
+    private void crearCanalillos() {
         Integer medicion = (Integer) cmbMedicionCanalillos.getSelectedItem();
-        
+
         this.ceCanalillos.setSitioID(this.sitioID);
         this.ceCanalillos.setMedicion(medicion);
         this.ceCanalillos.setProfundidad(this.profundidadCanalillos);
         this.ceCanalillos.setAncho(this.anchoCanalillos);
         this.ceCanalillos.setDistancia(this.distanciaCanalillos);
         this.ceCanalillos.setAzimut(this.azimutCanalillos);
-        
+
         this.cdErosion.insertErosionCanalillo(ceCanalillos);
     }
-    
-    private void crearCarcavas(){
+
+    private void crearCarcavas() {
         Integer medicion = (Integer) cmbMedicionCarcavas.getSelectedItem();
-        
+
         this.ceCarcavas.setSitioID(this.sitioID);
         this.ceCarcavas.setMedicion(medicion);
         this.ceCarcavas.setProfundidad(this.profundidadCarcava);
         this.ceCarcavas.setAncho(this.anchoCarcava);
         this.ceCarcavas.setDistancia(this.distanciaCarcava);
         this.ceCarcavas.setAzimut(this.azimutCarcava);
-        
+
         this.cdErosion.insertErosionCarcava(ceCarcavas);
     }
-    
-    private void crearLongitudCanalillo(){
+
+    private void crearLongitudCanalillo() {
         Integer campoLongitud = (Integer) cmbLongitudCanalillos.getSelectedItem();
-        
+
         this.ceLongitudCanalillos.setSitioID(this.sitioID);
         this.ceLongitudCanalillos.setCampoLongitud(campoLongitud);
         this.ceLongitudCanalillos.setLongitud(this.longitudCanalillo);
-        
+
         this.cdErosion.insertLongitudCanalillo(ceLongitudCanalillos);
     }
-    
-    private void crearLongitudCarcava(){
+
+    private void crearLongitudCarcava() {
         Integer campoLongitud = (Integer) cmbLongitudCarcava.getSelectedItem();
-        
+
         this.ceLongitudCarcavas.setSitioID(this.sitioID);
         this.ceLongitudCarcavas.setCampoLongitud(campoLongitud);
         this.ceLongitudCarcavas.setLongitud(this.longitudCarcava);
-        
+
         this.cdErosion.insertLongitudCarcava(ceLongitudCarcavas);
     }
-    
+
     /*private void enviarInformacionSuelo(){
         this.ceSuelo.setSitioID(sitioID);
         this.ceSuelo.setNumeroCanalillos(this.numeroCanalillos);
@@ -676,7 +673,6 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         
         this.cdSuelo.agregarErosionHidricaSuelo(ceSuelo);
     }*/
-    
     private void modificarCanalillos() {
         try {
             int fila = grdCanalillos.getSelectedRow();
@@ -694,7 +690,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
                     + e.getClass().getName() + " : " + e.getMessage(), "Erosion hidrica", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void modificarCarcavas() {
         try {
             int fila = grdCarcavas.getSelectedRow();
@@ -711,7 +707,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
                     + e.getClass().getName() + " : " + e.getMessage(), "Erosion hidrica", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void modificarlongitudCanalillos() {
         try {
             int fila = grdLongitudCanalillos.getSelectedRow();
@@ -725,7 +721,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
                     + e.getClass().getName() + " : " + e.getMessage(), "Erosion hidrica", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void modificarLongitudCarcavas() {
         try {
             int fila = grdLongitudCarcavas.getSelectedRow();
@@ -739,7 +735,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
                     + e.getClass().getName() + " : " + e.getMessage(), "Erosion hidrica", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void eliminarCanalillo() {
         try {
             int fila = grdCanalillos.getSelectedRow();
@@ -769,7 +765,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
                     + "", "Erosion hidrica", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void eliminarLongitudCanalillo() {
         try {
             int fila = grdLongitudCanalillos.getSelectedRow();
@@ -784,7 +780,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
                     + "", "Erosion hidrica", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void eliminarLongitudCarcava() {
         try {
             int fila = grdLongitudCarcavas.getSelectedRow();
@@ -799,8 +795,8 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
                     + "", "Erosion hidrica", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    private void limpiarControlesCanalillo(){
+
+    private void limpiarControlesCanalillo() {
         cmbMedicionCanalillos.setSelectedItem(null);
         txtProfundidadCanalillos.setText("");
         txtAnchoCanalillo.setText("");
@@ -808,8 +804,8 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         txtAzimutCanalillos.setText("");
         cmbMedicionCanalillos.requestFocus();
     }
-    
-    private void limpiarControlesCarcava(){
+
+    private void limpiarControlesCarcava() {
         cmbMedicionCarcavas.setSelectedItem(null);
         txtProfundidadCarcavas.setText("");
         txtAnchoCarcavas.setText("");
@@ -817,19 +813,19 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         txtAzimutCarcavas.setText("");
         cmbMedicionCarcavas.requestFocus();
     }
-    
-    private void limpiarControlesLongitudCanalillo(){
+
+    private void limpiarControlesLongitudCanalillo() {
         cmbLongitudCanalillos.setSelectedItem(null);
         txtLongitudCanalillos.setText("");
         cmbLongitudCanalillos.requestFocus();
     }
-    
-    private void limpiarControlesLongitudCarcava(){
+
+    private void limpiarControlesLongitudCarcava() {
         cmbLongitudCarcava.setSelectedItem(null);
         txtLongitudCarcavas.setText("");
         cmbLongitudCarcava.requestFocus();
     }
-  
+
     private void manipularControlesCanalillos(boolean abilitar) {
         if (abilitar == true) {
             cmbMedicionCanalillos.setEnabled(true);
@@ -897,8 +893,8 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
             btnModificarLongitudCarcava.setEnabled(false);
         }
     }
-    
-    private void limpiarCamposCalculadosCanalillos(){
+
+    private void limpiarCamposCalculadosCanalillos() {
         txtNoCanalillos.setText("");
         txtNoCanalillos.setValue(null);
         txtProfundidadPromedioCanalillos.setText("");
@@ -910,8 +906,8 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         txtVolumenCanalillos.setText("");
         txtVolumenCanalillos.setValue(null);
     }
-    
-    private void limpiarCamposCalculadosCarcavas(){
+
+    private void limpiarCamposCalculadosCarcavas() {
         txtNoCarcavas.setText("");
         txtNoCarcavas.setValue(null);
         txtProfundidadPromedioCarcavas.setText("");
@@ -925,6 +921,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         txtPromedioLongitudCarcavas.setText("");
         txtPromedioLongitudCarcavas.setValue(null);
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1943,6 +1940,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         });
 
         cmbSitios.setBorder(null);
+        cmbSitios.setEnabled(false);
         cmbSitios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSitiosActionPerformed(evt);
@@ -2316,8 +2314,40 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
 
     private void btnAgregarCanalillosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCanalillosActionPerformed
         fijarDatosCanalillos();
-        if (validarCanalillosObligatorios() && validarDatosCanalillos()) {
-            crearCanalillos();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarCanalillosObligatorios() && validarDatosCanalillos()) {
+                crearCanalillos();
+                this.cdErosion.reenumerarErosionCanalillo(this.sitioID);
+                llenarTablaErosionCanalillos();
+                this.combo.reiniciarComboModel(cmbMedicionCanalillos);
+                fillCmbMedionesCanalillos();
+                limpiarControlesCanalillo();
+                calcularSueloCanalillos();
+            }
+        }
+    }//GEN-LAST:event_btnAgregarCanalillosActionPerformed
+
+    private void btnModificarCanalillosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCanalillosActionPerformed
+        fijarDatosCanalillos();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarDatosCanalillos()) {
+                modificarCanalillos();
+                llenarTablaErosionCanalillos();
+                limpiarControlesCanalillo();
+                calcularSueloCanalillos();
+            }
+        }
+    }//GEN-LAST:event_btnModificarCanalillosActionPerformed
+
+    private void btnEliminarCanalillosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCanalillosActionPerformed
+        eliminarCanalillo();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
             this.cdErosion.reenumerarErosionCanalillo(this.sitioID);
             llenarTablaErosionCanalillos();
             this.combo.reiniciarComboModel(cmbMedicionCanalillos);
@@ -2325,32 +2355,44 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
             limpiarControlesCanalillo();
             calcularSueloCanalillos();
         }
-    }//GEN-LAST:event_btnAgregarCanalillosActionPerformed
-
-    private void btnModificarCanalillosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCanalillosActionPerformed
-        fijarDatosCanalillos();
-        if (validarDatosCanalillos()) {
-            modificarCanalillos();
-            llenarTablaErosionCanalillos();
-            limpiarControlesCanalillo();
-            calcularSueloCanalillos();
-        }
-    }//GEN-LAST:event_btnModificarCanalillosActionPerformed
-
-    private void btnEliminarCanalillosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCanalillosActionPerformed
-        eliminarCanalillo();
-        this.cdErosion.reenumerarErosionCanalillo(this.sitioID);
-        llenarTablaErosionCanalillos();
-        this.combo.reiniciarComboModel(cmbMedicionCanalillos);
-        fillCmbMedionesCanalillos();
-        limpiarControlesCanalillo();
-        calcularSueloCanalillos();
     }//GEN-LAST:event_btnEliminarCanalillosActionPerformed
 
     private void btnAgregarCarcavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCarcavaActionPerformed
         fijarDatosCarcavas();
-        if (validarCarcavasObligatorios() && validarDatosCarcavas()) {
-            crearCarcavas();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarCarcavasObligatorios() && validarDatosCarcavas()) {
+                crearCarcavas();
+                this.cdErosion.reenumerarErosionCarcava(this.sitioID);
+                llenarTablaErosionCarcavas();
+                this.combo.reiniciarComboModel(cmbMedicionCarcavas);
+                fillCmbMedionesCarcava();
+                limpiarControlesCarcava();
+                calcularSueloCarcavas();
+            }
+        }
+    }//GEN-LAST:event_btnAgregarCarcavaActionPerformed
+
+    private void btnModificarCarcavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCarcavaActionPerformed
+        fijarDatosCarcavas();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarDatosCarcavas()) {
+                modificarCarcavas();
+                llenarTablaErosionCarcavas();
+                limpiarControlesCarcava();
+                calcularSueloCarcavas();
+            }
+        }
+    }//GEN-LAST:event_btnModificarCarcavaActionPerformed
+
+    private void btnEliminarCarcavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCarcavaActionPerformed
+        eliminarCarcava();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
             this.cdErosion.reenumerarErosionCarcava(this.sitioID);
             llenarTablaErosionCarcavas();
             this.combo.reiniciarComboModel(cmbMedicionCarcavas);
@@ -2358,32 +2400,44 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
             limpiarControlesCarcava();
             calcularSueloCarcavas();
         }
-    }//GEN-LAST:event_btnAgregarCarcavaActionPerformed
-
-    private void btnModificarCarcavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCarcavaActionPerformed
-        fijarDatosCarcavas();
-        if (validarDatosCarcavas()) {
-            modificarCarcavas();
-            llenarTablaErosionCarcavas();
-            limpiarControlesCarcava();
-            calcularSueloCarcavas();
-        }
-    }//GEN-LAST:event_btnModificarCarcavaActionPerformed
-
-    private void btnEliminarCarcavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCarcavaActionPerformed
-        eliminarCarcava();
-        this.cdErosion.reenumerarErosionCarcava(this.sitioID);
-        llenarTablaErosionCarcavas();
-        this.combo.reiniciarComboModel(cmbMedicionCarcavas);
-        fillCmbMedionesCarcava();
-        limpiarControlesCarcava();
-        calcularSueloCarcavas();
     }//GEN-LAST:event_btnEliminarCarcavaActionPerformed
 
     private void btnAgregarLongitudCanalillosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarLongitudCanalillosActionPerformed
         fijarDatosLontudesCanalillos();
-        if(validarLongitudCanalillosObligatorios() && validarDatosLongitudCanalillos()){
-            crearLongitudCanalillo();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarLongitudCanalillosObligatorios() && validarDatosLongitudCanalillos()) {
+                crearLongitudCanalillo();
+                this.cdErosion.reenumerarLongitudCanalillo(this.sitioID);
+                llenarTablaLongitudCanalillos();
+                this.combo.reiniciarComboModel(cmbLongitudCanalillos);
+                fillCmbLongitudCanalillo();
+                limpiarControlesLongitudCanalillo();
+                calcularSueloCanalillos();
+            }
+        }
+    }//GEN-LAST:event_btnAgregarLongitudCanalillosActionPerformed
+
+    private void btnModificarLongitudCanalillosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarLongitudCanalillosActionPerformed
+        fijarDatosLontudesCanalillos();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarDatosLongitudCanalillos()) {
+                modificarlongitudCanalillos();
+                llenarTablaLongitudCanalillos();
+                limpiarControlesLongitudCanalillo();
+                calcularSueloCanalillos();
+            }
+        }
+    }//GEN-LAST:event_btnModificarLongitudCanalillosActionPerformed
+
+    private void btnEliminarLongitudCanalillosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarLongitudCanalillosActionPerformed
+        eliminarLongitudCanalillo();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
             this.cdErosion.reenumerarLongitudCanalillo(this.sitioID);
             llenarTablaLongitudCanalillos();
             this.combo.reiniciarComboModel(cmbLongitudCanalillos);
@@ -2391,32 +2445,44 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
             limpiarControlesLongitudCanalillo();
             calcularSueloCanalillos();
         }
-    }//GEN-LAST:event_btnAgregarLongitudCanalillosActionPerformed
-
-    private void btnModificarLongitudCanalillosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarLongitudCanalillosActionPerformed
-        fijarDatosLontudesCanalillos();
-        if(validarDatosLongitudCanalillos()){
-            modificarlongitudCanalillos();
-            llenarTablaLongitudCanalillos();
-            limpiarControlesLongitudCanalillo();
-            calcularSueloCanalillos();
-        }
-    }//GEN-LAST:event_btnModificarLongitudCanalillosActionPerformed
-
-    private void btnEliminarLongitudCanalillosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarLongitudCanalillosActionPerformed
-        eliminarLongitudCanalillo();
-         this.cdErosion.reenumerarLongitudCanalillo(this.sitioID);
-        llenarTablaLongitudCanalillos();
-        this.combo.reiniciarComboModel(cmbLongitudCanalillos);
-        fillCmbLongitudCanalillo();
-        limpiarControlesLongitudCanalillo();
-        calcularSueloCanalillos();
     }//GEN-LAST:event_btnEliminarLongitudCanalillosActionPerformed
 
     private void btnAgregarLongitudCarcavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarLongitudCarcavaActionPerformed
         fijarDatosLongitudesCarcavas();
-        if(validarLongitudCarcavasObligatorios() && validarDatosLongitudCarcavas()){
-            crearLongitudCarcava();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarLongitudCarcavasObligatorios() && validarDatosLongitudCarcavas()) {
+                crearLongitudCarcava();
+                this.cdErosion.reenumerarLongitudCarcava(this.sitioID);
+                llenarTablaLongitudCarcavas();
+                this.combo.reiniciarComboModel(cmbLongitudCarcava);
+                fillCmbLongitudCarcavas();
+                limpiarControlesLongitudCarcava();
+                calcularSueloCarcavas();
+            }
+        }
+    }//GEN-LAST:event_btnAgregarLongitudCarcavaActionPerformed
+
+    private void btnModificarLongitudCarcavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarLongitudCarcavaActionPerformed
+        fijarDatosLongitudesCarcavas();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarDatosLongitudCarcavas()) {
+                modificarLongitudCarcavas();
+                llenarTablaLongitudCarcavas();
+                limpiarControlesLongitudCarcava();
+                calcularSueloCarcavas();
+            }
+        }
+    }//GEN-LAST:event_btnModificarLongitudCarcavaActionPerformed
+
+    private void btnEliminarLongitudCarcavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarLongitudCarcavaActionPerformed
+        eliminarLongitudCarcava();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
             this.cdErosion.reenumerarLongitudCarcava(this.sitioID);
             llenarTablaLongitudCarcavas();
             this.combo.reiniciarComboModel(cmbLongitudCarcava);
@@ -2424,37 +2490,17 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
             limpiarControlesLongitudCarcava();
             calcularSueloCarcavas();
         }
-    }//GEN-LAST:event_btnAgregarLongitudCarcavaActionPerformed
-
-    private void btnModificarLongitudCarcavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarLongitudCarcavaActionPerformed
-        fijarDatosLongitudesCarcavas();
-        if(validarDatosLongitudCarcavas()){
-            modificarLongitudCarcavas();
-            llenarTablaLongitudCarcavas();
-            limpiarControlesLongitudCarcava();
-            calcularSueloCarcavas();
-        }
-    }//GEN-LAST:event_btnModificarLongitudCarcavaActionPerformed
-
-    private void btnEliminarLongitudCarcavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarLongitudCarcavaActionPerformed
-        eliminarLongitudCarcava();
-        this.cdErosion.reenumerarLongitudCarcava(this.sitioID);
-        llenarTablaLongitudCarcavas();
-        this.combo.reiniciarComboModel(cmbLongitudCarcava);
-        fillCmbLongitudCarcavas();
-        limpiarControlesLongitudCarcava();
-        calcularSueloCarcavas();
     }//GEN-LAST:event_btnEliminarLongitudCarcavaActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-            this.hide();
-            limpiarCamposCalculadosCanalillos();
-            limpiarCamposCalculadosCarcavas();
-            limpiarControlesCanalillo();
-            limpiarControlesCarcava();
-            limpiarControlesLongitudCanalillo();
-            limpiarControlesLongitudCarcava();
-            funciones.manipularBotonesMenuPrincipal(false);
+        this.hide();
+        limpiarCamposCalculadosCanalillos();
+        limpiarCamposCalculadosCarcavas();
+        limpiarControlesCanalillo();
+        limpiarControlesCarcava();
+        limpiarControlesLongitudCanalillo();
+        limpiarControlesLongitudCarcava();
+        funciones.manipularBotonesMenuPrincipal(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void grdCanalillosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdCanalillosMouseClicked
@@ -2585,10 +2631,10 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_chkCanalillosActionPerformed
 
     private void chkCarcavasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkCarcavasActionPerformed
-       if(chkCarcavas.isSelected()){
-           manipularControlesCarcavas(true);
-       } else {
-           Object[] opciones = {"Si", "No"};
+        if (chkCarcavas.isSelected()) {
+            manipularControlesCarcavas(true);
+        } else {
+            Object[] opciones = {"Si", "No"};
             int respuesta = JOptionPane.showOptionDialog(null, "Si capturo, se borrarán todos los datos de carcavas y longitudes, ¿Esta seguro?",
                     "Suelo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
             if (respuesta == JOptionPane.YES_OPTION) {
@@ -2608,7 +2654,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
                 chkCarcavas.setSelected(true);
                 chkCarcavas.requestFocus();
             }
-       }
+        }
     }//GEN-LAST:event_chkCarcavasActionPerformed
 
     private void cmbMedicionCarcavasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMedicionCarcavasActionPerformed
@@ -2617,7 +2663,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
 
     private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
         Integer upmID = (Integer) cmbUPMID.getSelectedItem();
-        
+
         Integer sitio = (Integer) cmbSitios.getSelectedItem();
         if (cmbUPMID.getSelectedItem() != null) {
             this.upmID = (Integer) cmbUPMID.getSelectedItem();
@@ -2632,7 +2678,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbUPMIDActionPerformed
 
     private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
-try {
+        try {
             //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
             if (cmbSitios.getSelectedItem() == null) {
                 this.sitioID = 0;

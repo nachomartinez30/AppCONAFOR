@@ -30,7 +30,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 public class FrmSuelo extends JInternalFrame {
-    
+
     private int upmID;
     private int sitioID;
     private int sitio;
@@ -90,25 +90,25 @@ public class FrmSuelo extends JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private int actualizar;
     private FuncionesComunes funciones = new FuncionesComunes();
-    private Version ver=new Version();
-    private String version=ver.getVersion();
+    private Version ver = new Version();
+    private String version = ver.getVersion();
     private boolean revision;
     private CDSitio cdSitio = new CDSitio();
-    
+
     public FrmSuelo() {
         this.suelo = 19;
         this.condicionDegradacion = 20;
         initComponents();
-     /*   fillCmbUsoSuelo();
+        /*   fillCmbUsoSuelo();
         fillCmbTransectos();
         fillCmbLecturaTierra();*/
     }
-    
+
     public void setDatosiniciales(CESitio ceSitio) {
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
-       
+
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -124,7 +124,6 @@ public class FrmSuelo extends JInternalFrame {
         limpiarSuelo();
     }
 
-    
     public void llenarControles() {
         combo.reiniciarComboModel(this.cmbUPMID);
         fillUPMID();
@@ -151,15 +150,14 @@ public class FrmSuelo extends JInternalFrame {
             }
         }
     }
-    
-    
+
     public void revisarSuelo(int sitioID) {
         /*revision=true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();*/
         //System.out.println("Suelo "+this.ceSitio.getSecuencia());
-        
+
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -220,18 +218,18 @@ public class FrmSuelo extends JInternalFrame {
         this.chkCoberturaSuelo.setSelected(funciones.habilitarCheckBox("SUELO_CoberturaSuelo", this.sitioID));
         this.funciones.manipularBotonesMenuPrincipal(true);
     }
-    
-    private void fillCmbUsoSuelo(){
+
+    private void fillCmbUsoSuelo() {
         List<CatEUsoSuelo> listUsoSuelo = new ArrayList<>();
         listUsoSuelo = cdSuelo.getUsoSuelo();
-        if(listUsoSuelo != null){
+        if (listUsoSuelo != null) {
             int size = listUsoSuelo.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbUsoSuelo.addItem(listUsoSuelo.get(i));
             }
         }
     }
-    
+
     private void fillCmbTransectos() {
         List<Integer> listTransectos = new ArrayList<>();
         listTransectos = cdEvidencia.getTransecto();
@@ -242,30 +240,30 @@ public class FrmSuelo extends JInternalFrame {
             }
         }
     }
-    
+
     private void fillCmbPuntos(int indexCobertura) {
         List<Integer> listPuntos = new ArrayList<>();
         listPuntos = cdEvidencia.getPuntos(indexCobertura);
-        if(listPuntos != null){
+        if (listPuntos != null) {
             int size = listPuntos.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbPunto.addItem(listPuntos.get(i));
             }
         }
     }
-    
-    private void fillCmbLecturaTierra(){
+
+    private void fillCmbLecturaTierra() {
         List<CatELecturaTierra> listLectura = new ArrayList<>();
         listLectura = this.cdEvidencia.getTipoLecturaTierra();
-        if(listLectura != null){
+        if (listLectura != null) {
             int size = listLectura.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbLecturaTierra.addItem(listLectura.get(i));
             }
         }
     }
-    
-    private void llenarTablaEvidenciaErosion(){
+
+    private void llenarTablaEvidenciaErosion() {
         grdEvidenciaErosion.setModel(cdEvidencia.getTableEvidenciaErosion(this.coberturaID));
         grdEvidenciaErosion.getColumnModel().getColumn(2).setPreferredWidth(70);
         grdEvidenciaErosion.getColumnModel().getColumn(3).setPreferredWidth(70);
@@ -277,7 +275,7 @@ public class FrmSuelo extends JInternalFrame {
         tabla.hideColumnTable(grdEvidenciaErosion, columna_0);
         tabla.hideColumnTable(grdEvidenciaErosion, column_1);
     }
-    
+
     private boolean validarObligatoriosSuelo() {
         this.indexUsoSuelo = (CatEUsoSuelo) cmbUsoSuelo.getSelectedItem();
         if (indexUsoSuelo == null) {
@@ -304,14 +302,14 @@ public class FrmSuelo extends JInternalFrame {
             return true;
         }
     }
-    
+
     private boolean validarDatosSuelo() {
         if (this.espesor < 1 || this.espesor > 200) {
             JOptionPane.showMessageDialog(null, "Error! El espesor debe ser un valor entre 1 y 200 ",
                     "Suelo", JOptionPane.INFORMATION_MESSAGE);
             txtEspesor.requestFocus();
             return false;
-        } else if (this.pendienteDominante < 0 || this.pendienteDominante > 100 ) {
+        } else if (this.pendienteDominante < 0 || this.pendienteDominante > 100) {
             JOptionPane.showMessageDialog(null, "Error! La pendiente dominante debe ser un valor entre 0 y 100",
                     "Suelo", JOptionPane.INFORMATION_MESSAGE);
             txtPendienteDominante.requestFocus();
@@ -320,7 +318,7 @@ public class FrmSuelo extends JInternalFrame {
             return true;
         }
     }
-    
+
     private void asignarDatosSuelo() {
         try {
             this.espesor = Float.valueOf(txtEspesor.getText());
@@ -335,7 +333,7 @@ public class FrmSuelo extends JInternalFrame {
         this.observaciones = txtObservaciones.getText();
         this.otroUsoSuelo = txtOtroUsoSuelo.getText();
     }
-    
+
     private void crearSuelo() {
         CESuelo ceSuelo = new CESuelo();
         CatEUsoSuelo usoSueloID = (CatEUsoSuelo) cmbUsoSuelo.getSelectedItem();
@@ -348,8 +346,8 @@ public class FrmSuelo extends JInternalFrame {
         this.cdSuelo.insertDatosSuelo(ceSuelo);
         limpiarSuelo();
     }
-    
-    private void actualizarSuelo(){
+
+    private void actualizarSuelo() {
         CatEUsoSuelo usoSueloID = (CatEUsoSuelo) cmbUsoSuelo.getSelectedItem();
         this.ceSuelo.setSitioID(this.sitioID);
         this.ceSuelo.setUsoSueloID(usoSueloID.getUsoSueloID());
@@ -359,11 +357,11 @@ public class FrmSuelo extends JInternalFrame {
         this.ceSuelo.setObservaciones(this.observaciones);
         this.cdSuelo.updateDatosSuelo(ceSuelo);
     }
-    
-    private void eliminarSuelo(){
+
+    private void eliminarSuelo() {
         this.cdSuelo.deleteDatosSuelo(this.sitioID);
     }
-    
+
     private boolean validarObligatoriosVarilla() {
         if (txtAzimut1.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Error! Debe proporcionar datos para el azimut 1",
@@ -430,12 +428,12 @@ public class FrmSuelo extends JInternalFrame {
                     "Suelo", JOptionPane.INFORMATION_MESSAGE);
             txtProfundidad5.requestFocus();
             return false;
-        } else */{
+        } else */ {
             return true;
         }
     }
-    
-    private void limpiarSuelo(){
+
+    private void limpiarSuelo() {
         cmbUsoSuelo.setSelectedItem(null);
         txtOtroUsoSuelo.setText("");
         txtOtroUsoSuelo.setEnabled(false);
@@ -477,7 +475,7 @@ public class FrmSuelo extends JInternalFrame {
         txtProfundidad5.setValue(null);
         txtProfundidad5.setText("");
     }
-    
+
     private void asignarDatosVarillas1() {
         this.noVarilla1 = 1;
         try {
@@ -496,7 +494,7 @@ public class FrmSuelo extends JInternalFrame {
             this.profundidad1 = null;
         }
     }
-    
+
     private void asignarDatosVarillas2() {
         this.noVarilla2 = 2;
         try {
@@ -515,7 +513,7 @@ public class FrmSuelo extends JInternalFrame {
             this.profundidad2 = null;
         }
     }
-    
+
     private void asignarDatosVarillas3() {
         this.noVarilla3 = 3;
         try {
@@ -553,67 +551,67 @@ public class FrmSuelo extends JInternalFrame {
             this.profundidad4 = null;
         }
     }
-    
-    private void asignarDatosVarillas5(){
+
+    private void asignarDatosVarillas5() {
         this.noVarilla5 = 5;
-        try{
+        try {
             this.azimut5 = Integer.valueOf(txtAzimut5.getText());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             this.azimut5 = null;
         }
-        try{
+        try {
             this.distancia5 = Float.valueOf(txtDistancia5.getText());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             this.distancia5 = null;
         }
-        try{
+        try {
             this.profundidad5 = Float.valueOf(txtProfundidad5.getText());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             this.profundidad5 = null;
         }
     }
-    
-    private void crearVarilla1(){
+
+    private void crearVarilla1() {
         this.varilla1.setSitioID(this.sitioID);
         this.varilla1.setNoVarilla(this.noVarilla1);
         this.varilla1.setAzimut(this.azimut1);
         this.varilla1.setDistancia(this.distancia1);
         this.varilla1.setProfundidad(this.profundidad1);
-        
+
         this.cdVarillas.insertDatosVarillas(varilla1);
     }
-    
-    private void crearVarilla2(){
+
+    private void crearVarilla2() {
         this.varilla2.setSitioID(this.sitioID);
         this.varilla2.setNoVarilla(this.noVarilla2);
         this.varilla2.setAzimut(this.azimut2);
         this.varilla2.setDistancia(this.distancia2);
         this.varilla2.setProfundidad(this.profundidad2);
-        
+
         this.cdVarillas.insertDatosVarillas(varilla2);
     }
-    
-    private void crearVarilla3(){
+
+    private void crearVarilla3() {
         this.varilla3.setSitioID(this.sitioID);
         this.varilla3.setNoVarilla(this.noVarilla3);
         this.varilla3.setAzimut(this.azimut3);
         this.varilla3.setDistancia(this.distancia3);
         this.varilla3.setProfundidad(this.profundidad3);
-        
+
         this.cdVarillas.insertDatosVarillas(varilla3);
     }
-    
-    private void crearVarilla4(){
+
+    private void crearVarilla4() {
         this.varilla4.setSitioID(this.sitioID);
         this.varilla4.setNoVarilla(this.noVarilla4);
         this.varilla4.setAzimut(this.azimut4);
         this.varilla4.setDistancia(this.distancia4);
         this.varilla4.setProfundidad(this.profundidad4);
-        
+
         this.cdVarillas.insertDatosVarillas(varilla4);
     }
-    
-    private void crearVarilla5(){
+
+    private void crearVarilla5() {
         this.varilla5.setSitioID(this.sitioID);
         this.varilla5.setNoVarilla(this.noVarilla5);
         this.varilla5.setAzimut(this.azimut5);
@@ -621,8 +619,8 @@ public class FrmSuelo extends JInternalFrame {
         this.varilla5.setProfundidad(this.profundidad5);
         this.cdVarillas.insertDatosVarillas(varilla5);
     }
-    
-    private void actualizarVarilla1(){
+
+    private void actualizarVarilla1() {
         this.varilla1.setSitioID(this.sitioID);
         this.varilla1.setNoVarilla(this.noVarilla1);
         this.varilla1.setAzimut(this.azimut1);
@@ -630,8 +628,8 @@ public class FrmSuelo extends JInternalFrame {
         this.varilla1.setProfundidad(this.profundidad1);
         this.cdVarillas.updateDatosVarillas(varilla1);
     }
-    
-    private void actualizarVarilla2(){
+
+    private void actualizarVarilla2() {
         this.varilla2.setSitioID(this.sitioID);
         this.varilla2.setNoVarilla(this.noVarilla2);
         this.varilla2.setAzimut(this.azimut2);
@@ -639,8 +637,8 @@ public class FrmSuelo extends JInternalFrame {
         this.varilla2.setProfundidad(this.profundidad2);
         this.cdVarillas.updateDatosVarillas(varilla2);
     }
-    
-    private void actualizarVarilla3(){
+
+    private void actualizarVarilla3() {
         this.varilla3.setSitioID(this.sitioID);
         this.varilla3.setNoVarilla(this.noVarilla3);
         this.varilla3.setAzimut(this.azimut3);
@@ -648,8 +646,8 @@ public class FrmSuelo extends JInternalFrame {
         this.varilla3.setProfundidad(this.profundidad3);
         this.cdVarillas.updateDatosVarillas(varilla3);
     }
-    
-    private void actualizarVarilla4(){
+
+    private void actualizarVarilla4() {
         this.varilla4.setSitioID(this.sitioID);
         this.varilla4.setNoVarilla(this.noVarilla4);
         this.varilla4.setAzimut(this.azimut4);
@@ -657,8 +655,8 @@ public class FrmSuelo extends JInternalFrame {
         this.varilla4.setProfundidad(this.profundidad4);
         this.cdVarillas.updateDatosVarillas(varilla4);
     }
-    
-    private void actualizarVarilla5(){
+
+    private void actualizarVarilla5() {
         this.varilla5.setSitioID(this.sitioID);
         this.varilla5.setNoVarilla(this.noVarilla5);
         this.varilla5.setAzimut(this.azimut5);
@@ -666,11 +664,11 @@ public class FrmSuelo extends JInternalFrame {
         this.varilla5.setProfundidad(this.profundidad5);
         this.cdVarillas.updateDatosVarillas(varilla5);
     }
-  
-    private void eliminarVarillas(){
+
+    private void eliminarVarillas() {
         this.cdVarillas.deleteDatosVarillas(this.sitioID);
     }
-    
+
     private boolean validarVarillas() {
         if (this.azimut1 != null && validacion.esAzimut(this.azimut1, "Suelo")) {
             txtAzimut1.requestFocus();
@@ -706,7 +704,7 @@ public class FrmSuelo extends JInternalFrame {
             return true;
         }
     }
-    
+
     private boolean validarCobertura() {
         if (txtPendienteCobertura.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe proporcionar la pendiente de cobertura ",
@@ -717,48 +715,48 @@ public class FrmSuelo extends JInternalFrame {
             return true;
         }
     }
-    
-   private void fijarDatosCobertura(){
-        try{
+
+    private void fijarDatosCobertura() {
+        try {
             this.pendienteCobertura = Float.valueOf(txtPendienteCobertura.getText());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             this.pendienteCobertura = null;
         }
     }
-    
-    private void crearCobertura(){
+
+    private void crearCobertura() {
         Integer transecto = (Integer) cmbTransecto.getSelectedItem();
-        
+
         this.ceCobertura.setSitioID(this.sitioID);
         this.ceCobertura.setTransecto(transecto);
         this.ceCobertura.setPendiente(this.pendienteCobertura);
-        
-        if(this.cdEvidencia.validarTransectoCobertura(ceCobertura)){
-             JOptionPane.showMessageDialog(null, "Ya capturo cobertura para ese transecto, seleccione otro ",
+
+        if (this.cdEvidencia.validarTransectoCobertura(ceCobertura)) {
+            JOptionPane.showMessageDialog(null, "Ya capturo cobertura para ese transecto, seleccione otro ",
                     "Suelo", JOptionPane.INFORMATION_MESSAGE);
         } else {
             this.cdEvidencia.insertCoberturaSuelo(ceCobertura);
         }
     }
-    
-    private void actualizarCobertura(){
+
+    private void actualizarCobertura() {
         Integer transecto = (Integer) cmbTransecto.getSelectedItem();
         this.ceCobertura.setSitioID(this.sitioID);
         this.ceCobertura.setTransecto(transecto);
         this.ceCobertura.setPendiente(this.pendienteCobertura);
         this.cdEvidencia.updateCoberturaSuelo(ceCobertura);
     }
-    
-    private void eliminarCobertura(){
-         Integer transecto = (Integer) cmbTransecto.getSelectedItem();
-         this.ceCobertura.setSitioID(this.sitioID);
-         this.ceCobertura.setTransecto(transecto);
-         this.cdEvidencia.deleteCoberturaSuelo(ceCobertura);
+
+    private void eliminarCobertura() {
+        Integer transecto = (Integer) cmbTransecto.getSelectedItem();
+        this.ceCobertura.setSitioID(this.sitioID);
+        this.ceCobertura.setTransecto(transecto);
+        this.cdEvidencia.deleteCoberturaSuelo(ceCobertura);
     }
-    
-    private boolean validarDatosEvidencia(){
-        if(cmbLecturaTierra.getSelectedItem() == null){
-             JOptionPane.showMessageDialog(null, "Debe seleccioner un tipo de lectura de tierra ",
+
+    private boolean validarDatosEvidencia() {
+        if (cmbLecturaTierra.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(null, "Debe seleccioner un tipo de lectura de tierra ",
                     "Suelo", JOptionPane.INFORMATION_MESSAGE);
             cmbLecturaTierra.requestFocus();
             return false;
@@ -766,36 +764,36 @@ public class FrmSuelo extends JInternalFrame {
             return true;
         }
     }
-    
-   private void fijarDatosEvidencia(){
-       if(chkDosel.isSelected()){
-           this.dosel = 1;
-       } else{
-           this.dosel = 0;
-       }
-   }
-   
-   private void crearDatosEvidencia(){
-      Integer indexPunto = (Integer) cmbPunto.getSelectedItem();
-      CatELecturaTierra indexLectura = (CatELecturaTierra) cmbLecturaTierra.getSelectedItem();
-      Integer transecto = (Integer) cmbTransecto.getSelectedItem();
-      
-      this.ceCobertura.setSitioID(this.sitioID);
-      this.ceCobertura.setTransecto(transecto);
-      Integer coberturaSueloID = this.cdEvidencia.getIdCoberturaActual(ceCobertura);
-      
-      this.ceEvidencia.setCoberturaSueloID(this.coberturaID);
-      this.ceEvidencia.setPunto(indexPunto);
-      this.ceEvidencia.setDosel(this.dosel);
-      this.ceEvidencia.setLecturaTierraID(indexLectura.getLecturaTierraID());
-      this.cdEvidencia.insertEvidenciaErosion(ceEvidencia);
-   }
-   
+
+    private void fijarDatosEvidencia() {
+        if (chkDosel.isSelected()) {
+            this.dosel = 1;
+        } else {
+            this.dosel = 0;
+        }
+    }
+
+    private void crearDatosEvidencia() {
+        Integer indexPunto = (Integer) cmbPunto.getSelectedItem();
+        CatELecturaTierra indexLectura = (CatELecturaTierra) cmbLecturaTierra.getSelectedItem();
+        Integer transecto = (Integer) cmbTransecto.getSelectedItem();
+
+        this.ceCobertura.setSitioID(this.sitioID);
+        this.ceCobertura.setTransecto(transecto);
+        Integer coberturaSueloID = this.cdEvidencia.getIdCoberturaActual(ceCobertura);
+
+        this.ceEvidencia.setCoberturaSueloID(this.coberturaID);
+        this.ceEvidencia.setPunto(indexPunto);
+        this.ceEvidencia.setDosel(this.dosel);
+        this.ceEvidencia.setLecturaTierraID(indexLectura.getLecturaTierraID());
+        this.cdEvidencia.insertEvidenciaErosion(ceEvidencia);
+    }
+
     private void actualizarDatosEvidencia() {
         try {
             int fila = grdEvidenciaErosion.getSelectedRow();
             String registro = grdEvidenciaErosion.getValueAt(fila, 0).toString();
-            
+
             CatELecturaTierra indexLectura = (CatELecturaTierra) cmbLecturaTierra.getSelectedItem();
             Integer transecto = (Integer) cmbTransecto.getSelectedItem();
 
@@ -809,7 +807,7 @@ public class FrmSuelo extends JInternalFrame {
                     + e.getClass().getName() + " : " + e.getMessage(), "Longitud de componentes", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-   
+
     private void eliminarDatosEvidencia() {
         try {
             int fila = grdEvidenciaErosion.getSelectedRow();
@@ -820,7 +818,7 @@ public class FrmSuelo extends JInternalFrame {
                     + e.getClass().getName() + " : " + e.getMessage(), "Longitud de componentes", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
+
     private void manipularControlesCobertura(boolean habilitar) {
         if (habilitar == true) {
             cmbTransecto.setEnabled(true);
@@ -829,9 +827,9 @@ public class FrmSuelo extends JInternalFrame {
             cmbTransecto.setEnabled(false);
         }
     }
-   
-    private boolean validarPorcentajePendiente(float pendiente){
-        if(pendiente > 100.00 || pendiente < -100.00){
+
+    private boolean validarPorcentajePendiente(float pendiente) {
+        if (pendiente > 100.00 || pendiente < -100.00) {
             JOptionPane.showMessageDialog(null, "El valor introducido debe estar entre 100.00 y -100.00 ",
                     "Suelo", JOptionPane.INFORMATION_MESSAGE);
             txtPendienteCobertura.requestFocus();
@@ -841,6 +839,7 @@ public class FrmSuelo extends JInternalFrame {
             return true;
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1642,6 +1641,7 @@ public class FrmSuelo extends JInternalFrame {
             }
         });
 
+        cmbSitios.setEnabled(false);
         cmbSitios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSitiosActionPerformed(evt);
@@ -1774,7 +1774,7 @@ public class FrmSuelo extends JInternalFrame {
         Integer transecto = (Integer) cmbTransecto.getSelectedItem();
         DefaultTableModel model = (DefaultTableModel) grdEvidenciaErosion.getModel();
         DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbPunto.getModel();
-        
+
         //dcm.removeAllElements();
         if (transecto != null) {
             txtPendienteCobertura.setEnabled(true);
@@ -1784,7 +1784,7 @@ public class FrmSuelo extends JInternalFrame {
             this.ceCobertura.setTransecto(transecto);
             this.ceCobertura.setSitioID(this.sitioID);
             this.pendienteCobertura = this.cdEvidencia.getCoberturaSuelo(ceCobertura);
-           // dcm.removeAllElements();
+            // dcm.removeAllElements();
             //fillCmbPuntos(this.coberturaID);
             if (this.pendienteCobertura == null) {
                 txtPendienteCobertura.setText("");
@@ -1812,7 +1812,7 @@ public class FrmSuelo extends JInternalFrame {
             btnCrearTransecto.setEnabled(false);
             btnEliminarTransecto.setEnabled(false);
             btnModificarTransecto.setEnabled(false);
-           // dcm.removeAllElements();
+            // dcm.removeAllElements();
             cmbPunto.setEnabled(false);
             cmbPunto.setSelectedItem(null);
             cmbLecturaTierra.setEnabled(false);
@@ -1825,7 +1825,7 @@ public class FrmSuelo extends JInternalFrame {
     private void cmbPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPuntoActionPerformed
         Integer punto = (Integer) cmbPunto.getSelectedItem();
         DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbPunto.getModel();
-        
+
         if (punto == null) {
             chkDosel.setEnabled(false);
             cmbLecturaTierra.setEnabled(false);
@@ -1840,7 +1840,7 @@ public class FrmSuelo extends JInternalFrame {
             btnEliminarPunto.setEnabled(true);
         }
         //dcm.removeAllElements();
-       // fillCmbPuntos(this.coberturaID);
+        // fillCmbPuntos(this.coberturaID);
     }//GEN-LAST:event_cmbPuntoActionPerformed
 
     private void txtOtroUsoSueloFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtOtroUsoSueloFocusGained
@@ -1848,7 +1848,7 @@ public class FrmSuelo extends JInternalFrame {
     }//GEN-LAST:event_txtOtroUsoSueloFocusGained
 
     private void txtEspesorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEspesorFocusGained
-         SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 txtEspesor.selectAll();
@@ -1857,7 +1857,7 @@ public class FrmSuelo extends JInternalFrame {
     }//GEN-LAST:event_txtEspesorFocusGained
 
     private void txtPendienteDominanteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPendienteDominanteFocusGained
-       SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 txtPendienteDominante.selectAll();
@@ -1920,7 +1920,7 @@ public class FrmSuelo extends JInternalFrame {
     }//GEN-LAST:event_txtAzimut5FocusGained
 
     private void txtDistancia1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDistancia1FocusGained
-       SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 txtDistancia1.selectAll();
@@ -2029,104 +2029,104 @@ public class FrmSuelo extends JInternalFrame {
                 lblCategoria.setText("Profundo");
             } else if (espesor > 90) {
                 lblCategoria.setText("Muy profundo");
-            }            
+            }
         }
     }//GEN-LAST:event_txtEspesorFocusLost
 
     private void txtPendienteDominanteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPendienteDominanteFocusLost
-        if(txtPendienteDominante.getText().isEmpty()){
+        if (txtPendienteDominante.getText().isEmpty()) {
             txtPendienteDominante.setValue(null);
         }
     }//GEN-LAST:event_txtPendienteDominanteFocusLost
 
     private void txtPendienteCoberturaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPendienteCoberturaFocusLost
-       if(txtPendienteCobertura.getText().isEmpty()){
-           txtPendienteCobertura.setValue(null);
-       }
+        if (txtPendienteCobertura.getText().isEmpty()) {
+            txtPendienteCobertura.setValue(null);
+        }
     }//GEN-LAST:event_txtPendienteCoberturaFocusLost
 
     private void txtAzimut1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAzimut1FocusLost
-       if(txtAzimut1.getText().isEmpty()){
-           txtAzimut1.setValue(null);
-       }
+        if (txtAzimut1.getText().isEmpty()) {
+            txtAzimut1.setValue(null);
+        }
     }//GEN-LAST:event_txtAzimut1FocusLost
 
     private void txtAzimut2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAzimut2FocusLost
-        if(txtAzimut2.getText().isEmpty()){
-           txtAzimut2.setValue(null);
-       }
+        if (txtAzimut2.getText().isEmpty()) {
+            txtAzimut2.setValue(null);
+        }
     }//GEN-LAST:event_txtAzimut2FocusLost
 
     private void txtAzimut3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAzimut3FocusLost
-        if(txtAzimut3.getText().isEmpty()){
-           txtAzimut3.setValue(null);
-       }
+        if (txtAzimut3.getText().isEmpty()) {
+            txtAzimut3.setValue(null);
+        }
     }//GEN-LAST:event_txtAzimut3FocusLost
 
     private void txtAzimut4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAzimut4FocusLost
-        if(txtAzimut4.getText().isEmpty()){
-           txtAzimut4.setValue(null);
-       }
+        if (txtAzimut4.getText().isEmpty()) {
+            txtAzimut4.setValue(null);
+        }
     }//GEN-LAST:event_txtAzimut4FocusLost
 
     private void txtAzimut5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAzimut5FocusLost
-        if(txtAzimut5.getText().isEmpty()){
-           txtAzimut5.setValue(null);
-       }
+        if (txtAzimut5.getText().isEmpty()) {
+            txtAzimut5.setValue(null);
+        }
     }//GEN-LAST:event_txtAzimut5FocusLost
 
     private void txtDistancia1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDistancia1FocusLost
-        if(txtDistancia1.getText().isEmpty()){
-           txtDistancia1.setValue(null);
-       }
+        if (txtDistancia1.getText().isEmpty()) {
+            txtDistancia1.setValue(null);
+        }
     }//GEN-LAST:event_txtDistancia1FocusLost
 
     private void txtDistancia2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDistancia2FocusLost
-        if(txtDistancia2.getText().isEmpty()){
-           txtDistancia2.setValue(null);
-       }
+        if (txtDistancia2.getText().isEmpty()) {
+            txtDistancia2.setValue(null);
+        }
     }//GEN-LAST:event_txtDistancia2FocusLost
 
     private void txtDistancia3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDistancia3FocusLost
-        if(txtDistancia3.getText().isEmpty()){
-           txtDistancia3.setValue(null);
-       }
+        if (txtDistancia3.getText().isEmpty()) {
+            txtDistancia3.setValue(null);
+        }
     }//GEN-LAST:event_txtDistancia3FocusLost
 
     private void txtDistancia4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDistancia4FocusLost
-         if(txtDistancia4.getText().isEmpty()){
-           txtDistancia4.setValue(null);
-       }
+        if (txtDistancia4.getText().isEmpty()) {
+            txtDistancia4.setValue(null);
+        }
     }//GEN-LAST:event_txtDistancia4FocusLost
 
     private void txtDistancia5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDistancia5FocusLost
-         if(txtDistancia5.getText().isEmpty()){
-           txtDistancia5.setValue(null);
-       }
+        if (txtDistancia5.getText().isEmpty()) {
+            txtDistancia5.setValue(null);
+        }
     }//GEN-LAST:event_txtDistancia5FocusLost
 
     private void txtProfundidad1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtProfundidad1FocusLost
-        if(txtProfundidad1.getText().isEmpty()){
-           txtProfundidad1.setValue(null);
-       }
+        if (txtProfundidad1.getText().isEmpty()) {
+            txtProfundidad1.setValue(null);
+        }
     }//GEN-LAST:event_txtProfundidad1FocusLost
 
     private void txtProfundidad2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtProfundidad2FocusLost
-        if(txtProfundidad2.getText().isEmpty()){
-           txtProfundidad2.setValue(null);
-       }
+        if (txtProfundidad2.getText().isEmpty()) {
+            txtProfundidad2.setValue(null);
+        }
     }//GEN-LAST:event_txtProfundidad2FocusLost
 
     private void txtProfundidad3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtProfundidad3FocusLost
-        if(txtProfundidad3.getText().isEmpty()){
-           txtProfundidad3.setValue(null);
-       }
+        if (txtProfundidad3.getText().isEmpty()) {
+            txtProfundidad3.setValue(null);
+        }
     }//GEN-LAST:event_txtProfundidad3FocusLost
 
     private void txtProfundidad4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtProfundidad4FocusLost
-         if(txtProfundidad4.getText().isEmpty()){
-           txtProfundidad4.setValue(null);
-       }
+        if (txtProfundidad4.getText().isEmpty()) {
+            txtProfundidad4.setValue(null);
+        }
     }//GEN-LAST:event_txtProfundidad4FocusLost
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
@@ -2136,84 +2136,100 @@ public class FrmSuelo extends JInternalFrame {
         asignarDatosVarillas3();
         asignarDatosVarillas4();
         asignarDatosVarillas5();
-        if (validarObligatoriosSuelo() && validarDatosSuelo() && validarObligatoriosVarilla()
-                && validarVarillas()) {
-            if (chkCoberturaSuelo.isSelected() && this.cdEvidencia.validarTablaCubiertaSuelo(this.sitioID)) {
-                JOptionPane.showMessageDialog(null, "Si selecciona cobertura de suelo y evidencia de erosión, se deben capturar"
-                        + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
-                cmbTransecto.requestFocus();
-            } else if (chkCoberturaSuelo.isSelected() && this.cdEvidencia.validarTablaEvidenciaErosion(this.sitioID)) {
-                JOptionPane.showMessageDialog(null, "Si se selecciona cobertura de suelo se debe capturar evidencia de erosión"
-                        + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
-                cmbTransecto.requestFocus();
-            } else if (this.actualizar == 0) {
-                crearSuelo();
-                crearVarilla1();
-                crearVarilla2();
-                crearVarilla3();
-                crearVarilla4();
-                crearVarilla5();
-                /*this.hide();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarObligatoriosSuelo() && validarDatosSuelo() && validarObligatoriosVarilla()
+                    && validarVarillas()) {
+                if (chkCoberturaSuelo.isSelected() && this.cdEvidencia.validarTablaCubiertaSuelo(this.sitioID)) {
+                    JOptionPane.showMessageDialog(null, "Si selecciona cobertura de suelo y evidencia de erosión, se deben capturar"
+                            + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
+                    cmbTransecto.requestFocus();
+                } else if (chkCoberturaSuelo.isSelected() && this.cdEvidencia.validarTablaEvidenciaErosion(this.sitioID)) {
+                    JOptionPane.showMessageDialog(null, "Si se selecciona cobertura de suelo se debe capturar evidencia de erosión"
+                            + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
+                    cmbTransecto.requestFocus();
+                } else if (this.actualizar == 0) {
+                    crearSuelo();
+                    crearVarilla1();
+                    crearVarilla2();
+                    crearVarilla3();
+                    crearVarilla4();
+                    crearVarilla5();
+                    /*this.hide();
                 UPMForms.condicionDegradacion.setDatosiniciales(this.ceSitio);
                 UPMForms.condicionDegradacion.setVisible(true);
                 this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);*/
-            } else {
-                crearSuelo();
-                crearVarilla1();
-                crearVarilla2();
-                crearVarilla3();
-                crearVarilla4();
-                crearVarilla5();
+                } else {
+                    crearSuelo();
+                    crearVarilla1();
+                    crearVarilla2();
+                    crearVarilla3();
+                    crearVarilla4();
+                    crearVarilla5();
+                }
             }
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-           
-        if(revision==false){//esta en modo de captura
+
+        if (revision == false) {//esta en modo de captura
             this.hide();
-             //System.out.println("Modo Captura");
+            //System.out.println("Modo Captura");
             funciones.manipularBotonesMenuPrincipal(false);
         }
-        if(revision==true){//entro a modo de revision
+        if (revision == true) {//entro a modo de revision
             //System.err.println("Modo Revision");
             this.hide();
             //UPMForms.revisionModulos.iniciarRevision();
             UPMForms.revisionModulos.setVisible(true);
             UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision=false;
+            revision = false;
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnCrearTransectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearTransectoActionPerformed
         fijarDatosCobertura();
-        if(validarCobertura() && validarPorcentajePendiente(this.pendienteCobertura)){
-            crearCobertura();
-             cmbTransecto.setSelectedItem(null);
-             txtPendienteCobertura.setText("");
-             txtPendienteCobertura.setValue(null);
-             cmbTransecto.requestFocus();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarCobertura() && validarPorcentajePendiente(this.pendienteCobertura)) {
+                crearCobertura();
+                cmbTransecto.setSelectedItem(null);
+                txtPendienteCobertura.setText("");
+                txtPendienteCobertura.setValue(null);
+                cmbTransecto.requestFocus();
+            }
         }
     }//GEN-LAST:event_btnCrearTransectoActionPerformed
 
     private void btnModificarTransectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarTransectoActionPerformed
         fijarDatosCobertura();
-        if(validarCobertura() && validarPorcentajePendiente(this.pendienteCobertura)){
-            actualizarCobertura();
-             cmbTransecto.setSelectedItem(null);
-             txtPendienteCobertura.setText("");
-             txtPendienteCobertura.setValue(null);
-             cmbTransecto.requestFocus();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarCobertura() && validarPorcentajePendiente(this.pendienteCobertura)) {
+                actualizarCobertura();
+                cmbTransecto.setSelectedItem(null);
+                txtPendienteCobertura.setText("");
+                txtPendienteCobertura.setValue(null);
+                cmbTransecto.requestFocus();
+            }
         }
     }//GEN-LAST:event_btnModificarTransectoActionPerformed
 
     private void btnEliminarTransectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTransectoActionPerformed
         fijarDatosCobertura();
-        eliminarCobertura();
-        cmbTransecto.setSelectedItem(null);
-        txtPendienteCobertura.setText("");
-        txtPendienteCobertura.setValue(null);
-        cmbTransecto.requestFocus();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            eliminarCobertura();
+            cmbTransecto.setSelectedItem(null);
+            txtPendienteCobertura.setText("");
+            txtPendienteCobertura.setValue(null);
+            cmbTransecto.requestFocus();
+        }
     }//GEN-LAST:event_btnEliminarTransectoActionPerformed
 
     private void grdEvidenciaErosionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdEvidenciaErosionMouseClicked
@@ -2224,7 +2240,7 @@ public class FrmSuelo extends JInternalFrame {
             this.ceEvidencia = this.cdEvidencia.getEvidenciaErosionPunto(evidenciaID);
             chkDosel.setEnabled(true);
             cmbLecturaTierra.setEnabled(true);
-           // btnAgregarPunto.setEnabled(true);
+            // btnAgregarPunto.setEnabled(true);
             btnModificarPunto.setEnabled(true);
             btnEliminarPunto.setEnabled(true);
             Integer indexPunto = this.ceEvidencia.getPunto();
@@ -2245,42 +2261,55 @@ public class FrmSuelo extends JInternalFrame {
 
     private void btnAgregarPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPuntoActionPerformed
         DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbPunto.getModel();
-        
+
         fijarDatosEvidencia();
-        if (validarDatosEvidencia()) {
-            crearDatosEvidencia();
-            llenarTablaEvidenciaErosion();
-            cmbLecturaTierra.setSelectedItem(null);
-            cmbPunto.requestFocus();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarDatosEvidencia()) {
+                crearDatosEvidencia();
+                llenarTablaEvidenciaErosion();
+                cmbLecturaTierra.setSelectedItem(null);
+                cmbPunto.requestFocus();
+            }
+            dcm.removeAllElements();
+            fillCmbPuntos(this.coberturaID);
         }
-         dcm.removeAllElements();
-         fillCmbPuntos(this.coberturaID);
     }//GEN-LAST:event_btnAgregarPuntoActionPerformed
 
     private void btnModificarPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarPuntoActionPerformed
         fijarDatosEvidencia();
-        if (validarDatosEvidencia()) {
-            actualizarDatosEvidencia();
-            cmbLecturaTierra.setSelectedItem(null);
-            cmbLecturaTierra.setEnabled(false);
-            chkDosel.setSelected(false);
-            chkDosel.setEnabled(false);
-            cmbPunto.requestFocus();
-            llenarTablaEvidenciaErosion();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarDatosEvidencia()) {
+                actualizarDatosEvidencia();
+                cmbLecturaTierra.setSelectedItem(null);
+                cmbLecturaTierra.setEnabled(false);
+                chkDosel.setSelected(false);
+                chkDosel.setEnabled(false);
+                cmbPunto.requestFocus();
+                llenarTablaEvidenciaErosion();
+            }
         }
     }//GEN-LAST:event_btnModificarPuntoActionPerformed
 
     private void btnEliminarPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPuntoActionPerformed
         DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbPunto.getModel();
-        eliminarDatosEvidencia();
-        cmbLecturaTierra.setSelectedItem(null);
-        cmbLecturaTierra.setEnabled(false);
-        chkDosel.setSelected(false);
-        chkDosel.setEnabled(false);
-        cmbPunto.requestFocus();
-        dcm.removeAllElements();
-        fillCmbPuntos(this.coberturaID);
-        llenarTablaEvidenciaErosion();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            eliminarDatosEvidencia();
+
+            cmbLecturaTierra.setSelectedItem(null);
+            cmbLecturaTierra.setEnabled(false);
+            chkDosel.setSelected(false);
+            chkDosel.setEnabled(false);
+            cmbPunto.requestFocus();
+            dcm.removeAllElements();
+            fillCmbPuntos(this.coberturaID);
+            llenarTablaEvidenciaErosion();
+        }
     }//GEN-LAST:event_btnEliminarPuntoActionPerformed
 
     private void txtEspesorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEspesorKeyTyped
@@ -2288,7 +2317,7 @@ public class FrmSuelo extends JInternalFrame {
     }//GEN-LAST:event_txtEspesorKeyTyped
 
     private void txtPendienteDominanteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPendienteDominanteKeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtPendienteDominanteKeyTyped
 
     private void txtPendienteCoberturaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPendienteCoberturaKeyTyped
@@ -2296,7 +2325,7 @@ public class FrmSuelo extends JInternalFrame {
     }//GEN-LAST:event_txtPendienteCoberturaKeyTyped
 
     private void txtAzimut1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAzimut1KeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtAzimut1KeyTyped
 
     private void txtDistancia1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDistancia1KeyTyped
@@ -2308,47 +2337,47 @@ public class FrmSuelo extends JInternalFrame {
     }//GEN-LAST:event_txtProfundidad1KeyTyped
 
     private void txtAzimut2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAzimut2KeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtAzimut2KeyTyped
 
     private void txtDistancia2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDistancia2KeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtDistancia2KeyTyped
 
     private void txtProfundidad2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProfundidad2KeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtProfundidad2KeyTyped
 
     private void txtAzimut3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAzimut3KeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtAzimut3KeyTyped
 
     private void txtDistancia3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDistancia3KeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtDistancia3KeyTyped
 
     private void txtProfundidad3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProfundidad3KeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtProfundidad3KeyTyped
 
     private void txtAzimut4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAzimut4KeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtAzimut4KeyTyped
 
     private void txtDistancia4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDistancia4KeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtDistancia4KeyTyped
 
     private void txtProfundidad4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProfundidad4KeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtProfundidad4KeyTyped
 
     private void txtProfundidad5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProfundidad5KeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtProfundidad5KeyTyped
 
     private void txtAzimut5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAzimut5KeyTyped
-         numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtAzimut5KeyTyped
 
     private void txtDistancia5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDistancia5KeyTyped
@@ -2378,9 +2407,9 @@ public class FrmSuelo extends JInternalFrame {
     }//GEN-LAST:event_chkCoberturaSueloActionPerformed
 
     private void txtObservacionesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObservacionesKeyPressed
-         if(evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB) {
             evt.consume();
-         }
+        }
     }//GEN-LAST:event_txtObservacionesKeyPressed
 
     private void chkCoberturaSueloKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_chkCoberturaSueloKeyPressed

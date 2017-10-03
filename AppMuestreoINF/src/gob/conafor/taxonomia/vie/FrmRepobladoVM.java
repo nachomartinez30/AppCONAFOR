@@ -37,6 +37,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmRepobladoVM extends javax.swing.JInternalFrame {
+
     private boolean revision;
     private int sitio;
     private int repobladoVMID;
@@ -81,8 +82,8 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
     private CECoberturaSuelo ceCobertura = new CECoberturaSuelo();
     private int modificar;
     private FuncionesComunes funciones = new FuncionesComunes();
-    private Version ver=new Version();
-    private String version=ver.getVersion();
+    private Version ver = new Version();
+    private String version = ver.getVersion();
 
     public FrmRepobladoVM() {
         initComponents();
@@ -97,8 +98,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
         fillCmbVigor();
         txtGramineas.requestFocus();
     }
-    
-    
+
     public void llenarControles() {
         combo.reiniciarComboModel(this.cmbUPMID);
         cmbSitios.setEnabled(true);
@@ -127,12 +127,12 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     public void setDatosIniciales(CESitio ceSitio) {
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
-        
+
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -152,7 +152,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
         this.sitio = ceSitio.getSitio();
         this.sitioID = ceSitio.getSitioID();
         this.upmID = ceSitio.getUpmID();*/
-        
+
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -180,12 +180,12 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
         this.modificar = 1;
         funciones.manipularBotonesMenuPrincipal(true);
         this.chkRepobladoVM.setSelected(funciones.habilitarCheckBox("TAXONOMIA_RepobladoVM", this.sitioID));
-        
-        boolean selecc=chkRepobladoVM.isSelected();
+
+        boolean selecc = chkRepobladoVM.isSelected();
         //System.out.println(selecc);
         habilitarControles(selecc);
     }
-    
+
     public void fillCmbFormaVida() {
         List<CatEFormaVidaRepobladoVM> listFormaVida = new ArrayList<>();
         listFormaVida = condicion.getFormaVidaRepobladoVM();
@@ -234,7 +234,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+
     private void fillCmbInfraespecie(int index) {
         List<CatEInfraespecie> listInfraespecie = new ArrayList<>();
         CDEspecies sp = new CDEspecies();
@@ -246,9 +246,9 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    private void fillCmbGeneroSF(){
-         List<CatEGenero> listGenero = new ArrayList<>();
+
+    private void fillCmbGeneroSF() {
+        List<CatEGenero> listGenero = new ArrayList<>();
         CDEspecies sp = new CDEspecies();
         listGenero = sp.getGenerosSF();
         if (listGenero != null) {
@@ -311,10 +311,10 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
 
     public void fillCmbSeveridad2(int agente) {
         List<CatEPorcentajeArbolado> listSeveridad = new ArrayList<>();
-         if(agente == 21 || agente == 33){
-             combo.reiniciarComboModel(cmbSeveridad2);
+        if (agente == 21 || agente == 33) {
+            combo.reiniciarComboModel(cmbSeveridad2);
             listSeveridad = condicion.getPorcentajeArboladoCopa();
-        } else if(agente == 22){
+        } else if (agente == 22) {
             combo.reiniciarComboModel(cmbSeveridad2);
             listSeveridad = condicion.getPorcentajeArboladoCopa6();
         }
@@ -349,7 +349,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
         grdRepobladoVM.getColumnModel().getColumn(18).setPreferredWidth(70);//Severidad 2
         grdRepobladoVM.getColumnModel().getColumn(19).setPreferredWidth(120);//Vigor
         grdRepobladoVM.getColumnModel().getColumn(20).setPreferredWidth(180);//Clave colecta
-      
+
         Tablas tabla = new Tablas();
         int[] columna_0 = {0};
         int[] column_1 = {1};
@@ -393,8 +393,8 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
 
         cdCobertura.insertCoberturaSuelo(cobertura);
     }
-    
-    public void actualizarCoberturaSuelo(){
+
+    public void actualizarCoberturaSuelo() {
         this.ceCobertura.setSitioID(this.sitioID);
         this.ceCobertura.setGramineas(this.gramineas);
         this.ceCobertura.setHelechos(this.helechos);
@@ -496,7 +496,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
     public boolean validarSumaCubiertaSuelo() {
         int suma = this.rocas + this.sueloDesnudo + this.hojarasca + this.gravaPiedra + this.otros;
         if (suma != 100) {
-            JOptionPane.showMessageDialog(null, "Los porcentajes de cubierta del suelo deben sumar 100 " , "Vegetación menor", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Los porcentajes de cubierta del suelo deben sumar 100 ", "Vegetación menor", JOptionPane.INFORMATION_MESSAGE);
             txtRoca.requestFocus();
             return false;
         }
@@ -538,7 +538,6 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
 
     public void asignarDatosRepoblado() {
         try {
@@ -713,7 +712,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
         try {
             int fila = grdRepobladoVM.getSelectedRow();
             String registro = grdRepobladoVM.getValueAt(fila, 0).toString();
-            
+
             CatEFormaVidaRepobladoVM indexFormaVida = (CatEFormaVidaRepobladoVM) cmbFormaVida.getSelectedItem();
             CatEFamiliaEspecie familia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
             CatEGenero generoIndex = (CatEGenero) cmbGenero.getSelectedItem();
@@ -759,34 +758,34 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
             ceRepobladoVM.setFrecuencia200(this.frecuencia200);
             ceRepobladoVM.setPorcentajeCobertura200(this.porcentajeCobertura200);
             ceRepobladoVM.setVigorID(vigor.getVigorID());
-            
+
             ceDanio1.setSeccionID(Integer.parseInt(registro));
             ceDanio1.setNumeroDanio(1);
             ceDanio1.setAgenteDanioID(indexAgenteDanio1.getAgenteDanioID());
-            if(indexSeveridad1 != null){
+            if (indexSeveridad1 != null) {
                 ceDanio1.setSeveridadID(indexSeveridad1.getPorcentajeArboladoID());
             }
-            
+
             cdDanio.updateDanio(ceDanio1);
-            
+
             ceDanio2.setSeccionID(Integer.parseInt(registro));
             ceDanio2.setNumeroDanio(2);
             ceDanio2.setAgenteDanioID(indexAgenteDanio2.getAgenteDanioID());
-            if(indexSeveridad2 != null){
+            if (indexSeveridad2 != null) {
                 ceDanio2.setSeveridadID(indexSeveridad2.getPorcentajeArboladoID());
             }
             cdDanio.updateDanio(ceDanio2);
-            
+
             cdRepoblado.updateRepobladoVM(ceRepobladoVM);
-            
+
             limpiarControles();
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningún registro de la tabla de repoblado vegetación menor "
                     + e.getClass().getName() + " : " + e.getMessage(), "Repoblado", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
+
     private void eliminarRepoblado() {
         try {
             int fila = grdRepobladoVM.getSelectedRow();
@@ -831,13 +830,13 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
         cmbVigor.setSelectedItem(null);
         txtClaveColecta.setText("");
     }
-    
-    private void limpiarRepobladoFuera(){
+
+    private void limpiarRepobladoFuera() {
         chkRepobladoFuera.setSelected(true);
         txtPorcentajeRepobladoFuera.setValue(null);
         txtPorcentajeRepobladoFuera.setText("");
     }
-    
+
     public void limpiarControlesCubiertaSuelo() {
         txtGramineas.setValue(null);
         txtGramineas.setText("");
@@ -860,13 +859,13 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
         txtOtros.setValue(null);
         txtOtros.setText("");
     }
-    
-    private boolean validarSeveridadDanio(){
-        if(cmbSeveridad1.isEnabled() && cmbSeveridad1.getSelectedItem() == null){
+
+    private boolean validarSeveridadDanio() {
+        if (cmbSeveridad1.isEnabled() && cmbSeveridad1.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe de seleccionar un nivel de severidad 1 ", "Repoblado VM", JOptionPane.INFORMATION_MESSAGE);
             cmbSeveridad1.requestFocus();
             return false;
-        } else if(cmbSeveridad2.isEnabled() && cmbSeveridad2.getSelectedItem() == null){
+        } else if (cmbSeveridad2.isEnabled() && cmbSeveridad2.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe de seleccionar un nivel de severidad 2 ", "Repoblado VM", JOptionPane.INFORMATION_MESSAGE);
             cmbSeveridad2.requestFocus();
             return false;
@@ -874,7 +873,8 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
             return true;
         }
     }
-     private boolean validarColectasObligatorias() {
+
+    private boolean validarColectasObligatorias() {
         CDColectaBotanica colecta = new CDColectaBotanica();
         if (colecta.validarCapturaGenero("TAXONOMIA_RepobladoVM", this.sitioID)) {
             JOptionPane.showMessageDialog(null, "Error! Faltan por asignar claves de colecta", "Repoblado VM", JOptionPane.INFORMATION_MESSAGE);
@@ -1822,6 +1822,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
             }
         });
 
+        cmbSitios.setEnabled(false);
         cmbSitios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSitiosActionPerformed(evt);
@@ -1934,36 +1935,40 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         asignarDatosRepobladoFuera();
-        ceSitio.setSitioID(this.sitioID);
-        ceSitio.setRepobladoFuera(this.repobladoFuera);
-        ceSitio.setPorcentajeRepoblado(this.porcentajeRepobladoFuera);
-        if (setDatosCobertura() && validarSumaCubiertaSuelo() && validarPorcentaje() && validarRepobladoFuera()) {
-            if (funciones.validarSeccionCapturada("TAXONOMIA_RepobladoVM", sitioID) && chkRepobladoVM.isSelected()) {
-                JOptionPane.showMessageDialog(null, "Si selecciona Repoblado, se debe capturar ", "Repoblado vegetación menor", JOptionPane.INFORMATION_MESSAGE);
-                chkRepobladoVM.requestFocus();
-            } else if (funciones.validarSeccionCapturada("TAXONOMIA_RepobladoVM", sitioID) == false && chkRepobladoVM.isSelected()) {
-                if (validarColectasObligatorias()) {
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            ceSitio.setSitioID(this.sitioID);
+            ceSitio.setRepobladoFuera(this.repobladoFuera);
+            ceSitio.setPorcentajeRepoblado(this.porcentajeRepobladoFuera);
+            if (setDatosCobertura() && validarSumaCubiertaSuelo() && validarPorcentaje() && validarRepobladoFuera()) {
+                if (funciones.validarSeccionCapturada("TAXONOMIA_RepobladoVM", sitioID) && chkRepobladoVM.isSelected()) {
+                    JOptionPane.showMessageDialog(null, "Si selecciona Repoblado, se debe capturar ", "Repoblado vegetación menor", JOptionPane.INFORMATION_MESSAGE);
+                    chkRepobladoVM.requestFocus();
+                } else if (funciones.validarSeccionCapturada("TAXONOMIA_RepobladoVM", sitioID) == false && chkRepobladoVM.isSelected()) {
+                    if (validarColectasObligatorias()) {
+                        if (this.modificar == 0) {
+                            crearCoberturaSuelo();
+                            this.cdRepoblado.updateRepobladoFuera(this.ceSitio);
+
+                        } else {
+                            crearCoberturaSuelo();
+                            this.cdRepoblado.updateRepobladoFuera(this.ceSitio);
+                        }
+
+                    }
+                } else if (funciones.validarSeccionCapturada("TAXONOMIA_RepobladoVM", sitioID) == true && !chkRepobladoVM.isSelected()) {
                     if (this.modificar == 0) {
                         crearCoberturaSuelo();
                         this.cdRepoblado.updateRepobladoFuera(this.ceSitio);
-                        
+
                     } else {
-                       crearCoberturaSuelo();
-                       this.cdRepoblado.updateRepobladoFuera(this.ceSitio);
+                        crearCoberturaSuelo();
+                        this.cdRepoblado.updateRepobladoFuera(this.ceSitio);
+
                     }
-                    
+
                 }
-            } else if (funciones.validarSeccionCapturada("TAXONOMIA_RepobladoVM", sitioID) == true && !chkRepobladoVM.isSelected()) {
-                if (this.modificar == 0) {
-                    crearCoberturaSuelo();
-                    this.cdRepoblado.updateRepobladoFuera(this.ceSitio);
-                    
-                } else {
-                    crearCoberturaSuelo();
-                    this.cdRepoblado.updateRepobladoFuera(this.ceSitio);
-                    
-                }
-                
             }
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
@@ -2059,8 +2064,8 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtOtrosFocusGained
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-            this.hide();
-            funciones.manipularBotonesMenuPrincipal(false);       
+        this.hide();
+        funciones.manipularBotonesMenuPrincipal(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void grdRepobladoVMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdRepobladoVMMouseClicked
@@ -2079,7 +2084,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
             CatEFamiliaEspecie fam = new CatEFamiliaEspecie();
             fam.setFamiliaID(ceRepobladoVM.getFamiliaID());
             cmbFamilia.setSelectedItem(fam);
-            
+
             CatEGenero gen = new CatEGenero();
             gen.setGeneroID(ceRepobladoVM.getGeneroID());
             cmbGenero.setSelectedItem(gen);
@@ -2100,7 +2105,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
             cmbInfraespecie.removeAllItems();
             fillCmbInfraespecie(ceRepobladoVM.getEspecieID());
             cmbInfraespecie.setSelectedItem(inf);
-            
+
             txtNombreComun.setText(ceRepobladoVM.getNombreComun());
             txtFrecuencia50.setText(String.valueOf(ceRepobladoVM.getFrecuencia50()));
             if ((txtFrecuencia50.getText()).equals("0")) {
@@ -2129,27 +2134,27 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
             CatETipoVigor vig = new CatETipoVigor();
             vig.setVigorID(ceRepobladoVM.getVigorID());
             cmbVigor.setSelectedItem(vig);
-            
+
             CatEAgenteDanio agente1 = new CatEAgenteDanio();
             agente1.setAgenteDanioID(ceRepobladoVM.getAgenteDanio1ID());
             cmbAgenteDanio1.setSelectedItem(agente1);
-            
+
             CatEAgenteDanio agente2 = new CatEAgenteDanio();
             agente2.setAgenteDanioID(ceRepobladoVM.getAgenteDanio2ID());
             cmbAgenteDanio2.setSelectedItem(agente2);
-            
+
             CatEPorcentajeArbolado severidad1 = new CatEPorcentajeArbolado();
             severidad1.setPorcentajeArboladoID(ceRepobladoVM.getSeveridad1ID());
             combo.reiniciarComboModel(cmbSeveridad1);
             fillCmbSeveridad1(ceRepobladoVM.getAgenteDanio1ID());
             cmbSeveridad1.setSelectedItem(severidad1);
-            
+
             CatEPorcentajeArbolado severidad2 = new CatEPorcentajeArbolado();
             severidad2.setPorcentajeArboladoID(ceRepobladoVM.getSeveridad2ID());
             combo.reiniciarComboModel(cmbSeveridad2);
             fillCmbSeveridad2(ceRepobladoVM.getAgenteDanio2ID());
             cmbSeveridad2.setSelectedItem(severidad2);
-            
+
             txtClaveColecta.setText(ceRepobladoVM.getClaveColecta());
         }
     }//GEN-LAST:event_grdRepobladoVMMouseClicked
@@ -2288,31 +2293,43 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         asignarDatosRepoblado();
-        if (validarRepobladoVacios() && validarDatosRepoblado() && validarSeveridadDanio()) {
-            crearRepobladoVM();
-            this.cdRepoblado.enumerarConsecutivo(this.sitioID);
-            llenarTabla();
-            limpiarControles();
-            cmbFormaVida.requestFocus();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarRepobladoVacios() && validarDatosRepoblado() && validarSeveridadDanio()) {
+                crearRepobladoVM();
+                this.cdRepoblado.enumerarConsecutivo(this.sitioID);
+                llenarTabla();
+                limpiarControles();
+                cmbFormaVida.requestFocus();
+            }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         asignarDatosRepoblado();
-        if (validarRepobladoVacios() && validarDatosRepoblado() && validarSeveridadDanio()) {
-            actualizarRepoblado();
-            llenarTabla();
-            limpiarControles();
-            cmbFormaVida.requestFocus();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarRepobladoVacios() && validarDatosRepoblado() && validarSeveridadDanio()) {
+                actualizarRepoblado();
+                llenarTabla();
+                limpiarControles();
+                cmbFormaVida.requestFocus();
+            }
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        eliminarRepoblado();
-        this.cdRepoblado.enumerarConsecutivo(this.sitioID);
-        llenarTabla();
-        limpiarControles();
-        cmbFormaVida.requestFocus();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            eliminarRepoblado();
+            this.cdRepoblado.enumerarConsecutivo(this.sitioID);
+            llenarTabla();
+            limpiarControles();
+            cmbFormaVida.requestFocus();
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void chkRepobladoVMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkRepobladoVMActionPerformed
@@ -2344,7 +2361,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                     btnModificar.setEnabled(false);
                     btnEliminar.setEnabled(false);
                 }
-            } else if(!chkRepobladoVM.isSelected()){
+            } else if (!chkRepobladoVM.isSelected()) {
                 cmbFormaVida.setEnabled(false);
                 cmbFamilia.setEnabled(false);
                 cmbGenero.setEnabled(false);
@@ -2390,30 +2407,30 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_chkRepobladoVMActionPerformed
 
-    public void habilitarControles(boolean seleccionado){
-        
-        if(seleccionado==false){
+    public void habilitarControles(boolean seleccionado) {
+
+        if (seleccionado == false) {
             cmbFormaVida.setEnabled(false);
-                cmbFamilia.setEnabled(false);
-                cmbGenero.setEnabled(false);
-                cmbEspecie.setEnabled(false);
-                cmbInfraespecie.setEnabled(false);
-                txtNombreComun.setEnabled(false);
-                txtFrecuencia50.setEnabled(false);
-                txtPorcentajeCobertura50.setEnabled(false);
-                txtFrecuencia51200.setEnabled(false);
-                txtPorcentajeCobertura51200.setEnabled(false);
-                txtFrecuencia200.setEnabled(false);
-                txtPorcentajeCobertura200.setEnabled(false);
-                cmbAgenteDanio1.setEnabled(false);
-                cmbSeveridad1.setEnabled(false);
-                cmbAgenteDanio2.setEnabled(false);
-                cmbSeveridad2.setEnabled(false);
-                cmbVigor.setEnabled(false);
-                btnGuardar.setEnabled(false);
-                btnModificar.setEnabled(false);
-                btnEliminar.setEnabled(false);
-        }else{
+            cmbFamilia.setEnabled(false);
+            cmbGenero.setEnabled(false);
+            cmbEspecie.setEnabled(false);
+            cmbInfraespecie.setEnabled(false);
+            txtNombreComun.setEnabled(false);
+            txtFrecuencia50.setEnabled(false);
+            txtPorcentajeCobertura50.setEnabled(false);
+            txtFrecuencia51200.setEnabled(false);
+            txtPorcentajeCobertura51200.setEnabled(false);
+            txtFrecuencia200.setEnabled(false);
+            txtPorcentajeCobertura200.setEnabled(false);
+            cmbAgenteDanio1.setEnabled(false);
+            cmbSeveridad1.setEnabled(false);
+            cmbAgenteDanio2.setEnabled(false);
+            cmbSeveridad2.setEnabled(false);
+            cmbVigor.setEnabled(false);
+            btnGuardar.setEnabled(false);
+            btnModificar.setEnabled(false);
+            btnEliminar.setEnabled(false);
+        } else {
             cmbFormaVida.setEnabled(true);
             cmbFamilia.setEnabled(true);
             cmbGenero.setEnabled(true);
@@ -2435,9 +2452,9 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
             btnModificar.setEnabled(true);
             btnEliminar.setEnabled(true);
         }
-        
+
     }
-    
+
     private void cmbAgenteDanio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAgenteDanio2ActionPerformed
         CatEAgenteDanio agenteDanio = (CatEAgenteDanio) cmbAgenteDanio2.getSelectedItem();
         if (agenteDanio != null) {
@@ -2522,28 +2539,32 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
 
     private void btnColectaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColectaActionPerformed
         try {
-            int fila = grdRepobladoVM.getSelectedRow();
-            String consecutivo = grdRepobladoVM.getValueAt(fila, 2).toString();
-            FrmClaveColecta claveColecta = new FrmClaveColecta(Main.main, true);
-            claveColecta.setLocationRelativeTo(Main.main);
-            CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
-            CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
-            CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
-            CEColectaBotanica ceColecta = new CEColectaBotanica();
-            if(indexFamilia != null){
-                ceColecta.setFamiliaID(indexFamilia.getFamiliaID());
+            if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+            } else {
+                int fila = grdRepobladoVM.getSelectedRow();
+                String consecutivo = grdRepobladoVM.getValueAt(fila, 2).toString();
+                FrmClaveColecta claveColecta = new FrmClaveColecta(Main.main, true);
+                claveColecta.setLocationRelativeTo(Main.main);
+                CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
+                CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
+                CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
+                CEColectaBotanica ceColecta = new CEColectaBotanica();
+                if (indexFamilia != null) {
+                    ceColecta.setFamiliaID(indexFamilia.getFamiliaID());
+                }
+                if (indexGenero != null) {
+                    ceColecta.setGeneroID(indexGenero.getGeneroID());
+                }
+                if (indexEspecie != null) {
+                    ceColecta.setEspecieID(indexEspecie.getEspecieID());
+                }
+                ceColecta.setUPMID((Integer) cmbUPMID.getSelectedItem());
+                //ceColecta.setInfraespecie(txtInfraespecie.getText());
+                ceColecta.setNombreComun(txtNombreComun.getText());
+                claveColecta.setDatosIniciales(ceColecta, FORMATO_ID, "TAXONOMIA_RepobladoVM", "Consecutivo", this.sitioID, Integer.parseInt(consecutivo));
+                claveColecta.setVisible(true);
             }
-            if(indexGenero != null){
-                ceColecta.setGeneroID(indexGenero.getGeneroID());
-            }
-            if(indexEspecie != null){
-                ceColecta.setEspecieID(indexEspecie.getEspecieID());
-            }
-             ceColecta.setUPMID((Integer) cmbUPMID.getSelectedItem());
-            //ceColecta.setInfraespecie(txtInfraespecie.getText());
-            ceColecta.setNombreComun(txtNombreComun.getText());
-            claveColecta.setDatosIniciales(ceColecta, FORMATO_ID, "TAXONOMIA_RepobladoVM", "Consecutivo", this.sitioID, Integer.parseInt(consecutivo));
-            claveColecta.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un registro para asignar la clave de colecta"
                     + e.getClass().getName() + " : " + e.getMessage(), "Clave de colecta", JOptionPane.ERROR_MESSAGE);
@@ -2551,7 +2572,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnColectaActionPerformed
 
     private void cmbEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEspecieActionPerformed
-      CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
+        CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
         DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbInfraespecie.getModel();
         dcm.removeAllElements();
         if (indexEspecie != null) {
@@ -2560,7 +2581,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbEspecieActionPerformed
 
     private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
-Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        Integer upmID = (Integer) cmbUPMID.getSelectedItem();
         Integer sitio = (Integer) cmbSitios.getSelectedItem();
         if (cmbUPMID.getSelectedItem() != null) {
             this.upmID = (Integer) cmbUPMID.getSelectedItem();
@@ -2576,7 +2597,7 @@ Integer upmID = (Integer) cmbUPMID.getSelectedItem();
     }//GEN-LAST:event_cmbUPMIDActionPerformed
 
     private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
- try {
+        try {
             //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
             if (cmbSitios.getSelectedItem() == null) {
                 this.sitioID = 0;

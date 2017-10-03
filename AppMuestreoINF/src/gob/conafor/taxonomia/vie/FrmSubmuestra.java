@@ -56,7 +56,6 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
     private String version = ver.getVersion();
     private CDSitio cdSitio = new CDSitio();
     private FuncionesComunes combo = new FuncionesComunes();
-    
 
     public FrmSubmuestra() {
         initComponents();
@@ -73,7 +72,7 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
         ceSitio.setSitioID(this.sitioID);
         ceSitio.setSitio(this.sitio);
         ceSitio.setSecuencia(sitio.getSecuencia());
-        
+
         llenarTablaSubmuestra();
         funciones.manipularBotonesMenuPrincipal(true);
         modificar = 0;
@@ -81,7 +80,6 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
         funciones.reiniciarTabla(grdTrozas);
     }
 
-    
     public void llenarControles() {
         combo.reiniciarComboModel(this.cmbUPMID);
         fillUPMID();
@@ -108,8 +106,7 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    
+
     public void revisarSubmuestra(int sitioID) {
         /*revision = true;
         this.upmID = sitio.getUpmID();
@@ -119,7 +116,7 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
         ceSitio.setSitioID(this.sitioID);
         ceSitio.setSitio(this.sitio);
         ceSitio.setSecuencia(sitio.getSecuencia());*/
-        
+
         llenarTablaSubmuestra();
         funciones.manipularBotonesMenuPrincipal(true);
         modificar = 1;
@@ -582,7 +579,6 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
             }
         }
     }*/
-
     private void manipularControles(boolean habilitar) {
         if (habilitar == true) {
             txtDiametroBasal.setEnabled(true);
@@ -1099,6 +1095,7 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
             }
         });
 
+        cmbSitios.setEnabled(false);
         cmbSitios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSitiosActionPerformed(evt);
@@ -1297,31 +1294,39 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         asignarDatosSubmuestra();
-        if (validarCamposObligatorios() && validarValoresSubmuestra()) {
-            if (this.submuestraID == 0) {
-                JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un registro de la submuestra", "Submustra", JOptionPane.ERROR_MESSAGE);
-                grdSubmuestra.requestFocus();
-            } else {
-                crearSubmuestra(this.submuestraID);
-                grdSubmuestra.clearSelection();
-                limpiarControles();
-                manipularControles(false);
-                funciones.reiniciarTabla(grdTrozas);
-                llenarTablaSubmuestra();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarCamposObligatorios() && validarValoresSubmuestra()) {
+                if (this.submuestraID == 0) {
+                    JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un registro de la submuestra", "Submustra", JOptionPane.ERROR_MESSAGE);
+                    grdSubmuestra.requestFocus();
+                } else {
+                    crearSubmuestra(this.submuestraID);
+                    grdSubmuestra.clearSelection();
+                    limpiarControles();
+                    manipularControles(false);
+                    funciones.reiniciarTabla(grdTrozas);
+                    llenarTablaSubmuestra();
+                }
             }
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         asignarDatosSubmuestra();
-        if (validarCamposObligatorios() && validarValoresSubmuestra()) {
-            if (this.submuestraID == 0) {
-                JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un registro de la submuestra", "Submustra", JOptionPane.ERROR_MESSAGE);
-                grdSubmuestra.requestFocus();
-            } else {
-                crearSubmuestra(this.submuestraID);
-                limpiarControles();
-                llenarTablaSubmuestra();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarCamposObligatorios() && validarValoresSubmuestra()) {
+                if (this.submuestraID == 0) {
+                    JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un registro de la submuestra", "Submustra", JOptionPane.ERROR_MESSAGE);
+                    grdSubmuestra.requestFocus();
+                } else {
+                    crearSubmuestra(this.submuestraID);
+                    limpiarControles();
+                    llenarTablaSubmuestra();
+                }
             }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -1336,65 +1341,81 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_grdTrozasMouseClicked
 
     private void btnAgregarTrozaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarTrozaActionPerformed
-        if (this.submuestraID == 0) {
-            JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un registro de submuestra", "Submustra", JOptionPane.ERROR_MESSAGE);
-            cmbTipoTroza.requestFocus();
-        } else if (validarTroza()) {
-            crearTroza();
-            llenarTablaTroza();
-            cmbNumeroTroza.setSelectedItem(null);
-            cmbTipoTroza.setSelectedItem(null);
-            cmbNumeroTroza.requestFocus();
-            DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbNumeroTroza.getModel();
-            dcm.removeAllElements();
-            fillCmbNumeroTroza();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (this.submuestraID == 0) {
+                JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un registro de submuestra", "Submustra", JOptionPane.ERROR_MESSAGE);
+                cmbTipoTroza.requestFocus();
+            } else if (validarTroza()) {
+                crearTroza();
+                llenarTablaTroza();
+                cmbNumeroTroza.setSelectedItem(null);
+                cmbTipoTroza.setSelectedItem(null);
+                cmbNumeroTroza.requestFocus();
+                DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbNumeroTroza.getModel();
+                dcm.removeAllElements();
+                fillCmbNumeroTroza();
+            }
         }
     }//GEN-LAST:event_btnAgregarTrozaActionPerformed
 
     private void btnModificarTrozaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarTrozaActionPerformed
-        if (this.trozaID == 0) {
-            JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un registro de submuestra", "Submustra", JOptionPane.ERROR_MESSAGE);
-            cmbTipoTroza.requestFocus();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
         } else {
-            actualizarTroza();
-            llenarTablaTroza();
-            cmbNumeroTroza.setSelectedItem(null);
-            cmbTipoTroza.setSelectedItem(null);
-            cmbNumeroTroza.requestFocus();
-            DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbNumeroTroza.getModel();
-            dcm.removeAllElements();
-            fillCmbNumeroTroza();
+            if (this.trozaID == 0) {
+                JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un registro de submuestra", "Submustra", JOptionPane.ERROR_MESSAGE);
+                cmbTipoTroza.requestFocus();
+            } else {
+                actualizarTroza();
+                llenarTablaTroza();
+                cmbNumeroTroza.setSelectedItem(null);
+                cmbTipoTroza.setSelectedItem(null);
+                cmbNumeroTroza.requestFocus();
+                DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbNumeroTroza.getModel();
+                dcm.removeAllElements();
+                fillCmbNumeroTroza();
+            }
         }
     }//GEN-LAST:event_btnModificarTrozaActionPerformed
 
     private void btnElimnarTrozaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimnarTrozaActionPerformed
-        if (this.trozaID == 0) {
-            JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un registro de submuestra", "Submustra", JOptionPane.ERROR_MESSAGE);
-            cmbTipoTroza.requestFocus();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
         } else {
-            cdSubmuestra.deleteRegistroTroza(this.trozaID);
-            llenarTablaTroza();
-            cmbNumeroTroza.setSelectedItem(null);
-            cmbTipoTroza.setSelectedItem(null);
-            cmbNumeroTroza.requestFocus();
-            DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbNumeroTroza.getModel();
-            dcm.removeAllElements();
-            fillCmbNumeroTroza();
+            if (this.trozaID == 0) {
+                JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un registro de submuestra", "Submustra", JOptionPane.ERROR_MESSAGE);
+                cmbTipoTroza.requestFocus();
+            } else {
+                cdSubmuestra.deleteRegistroTroza(this.trozaID);
+                llenarTablaTroza();
+                cmbNumeroTroza.setSelectedItem(null);
+                cmbTipoTroza.setSelectedItem(null);
+                cmbNumeroTroza.requestFocus();
+                DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbNumeroTroza.getModel();
+                dcm.removeAllElements();
+                fillCmbNumeroTroza();
+            }
         }
     }//GEN-LAST:event_btnElimnarTrozaActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        if (modificar == 0) {
-            crearObservaciones();
-            //this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-            //this.hide();
-            //seleccionarSiguienteFormulario(this.ceSitio);
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
 
         } else {
-            crearObservaciones();
-            //actualizarObservaciones();
-            //this.hide();
-            //revisarSiguienteFormulario(this.ceSitio);
+            if (modificar == 0) {
+                crearObservaciones();
+                //this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
+                //this.hide();
+                //seleccionarSiguienteFormulario(this.ceSitio);
+
+            } else {
+                crearObservaciones();
+                //actualizarObservaciones();
+                //this.hide();
+                //revisarSiguienteFormulario(this.ceSitio);
+            }
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
@@ -1448,7 +1469,8 @@ public class FrmSubmuestra extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbUPMIDActionPerformed
 
     private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
-                try {
+        try {
+            
             //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
             if (cmbSitios.getSelectedItem() == null) {
                 this.sitioID = 0;

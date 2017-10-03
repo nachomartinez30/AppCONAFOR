@@ -125,6 +125,20 @@ public class FuncionesComunes {
         return vacio;
     }
     
+    public boolean isEnabledCmbSitios(JComboBox cmbSitios){
+        boolean cmbsitio=false;
+        
+        if(cmbSitios.getSelectedItem()==null){
+            JOptionPane.showMessageDialog(null, "Debe elegir un sitio para capturar informacion!");
+            cmbsitio=false;
+        }else{
+            cmbsitio=true;
+        }
+        
+        return cmbsitio;
+    }
+    
+    
     public Integer sitioCapturaSueloCarbono(int upm, int sitio) {
         Integer sitioLevantamiento = null;
         if (validarAccesibilidadSitio3(upm, sitio)) {

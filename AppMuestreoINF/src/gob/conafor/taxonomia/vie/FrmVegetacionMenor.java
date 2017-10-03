@@ -1309,6 +1309,7 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
             }
         });
 
+        cmbSitios.setEnabled(false);
         cmbSitios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSitiosActionPerformed(evt);
@@ -1550,31 +1551,43 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         asignarDatosVegetacionMenor();
-        if (validarVegetacionMenorObligatorios() && validarMediciones() && validarSeveridadDanio() && validarCondicionMuertoPie()) {
-            crearVegetacionMenor();
-            this.cdVegetacion.enumerarConsecutivo(this.sitioID);
-            llenarTabla();
-            limpiarControles();
-            cmbFamilia.requestFocus();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarVegetacionMenorObligatorios() && validarMediciones() && validarSeveridadDanio() && validarCondicionMuertoPie()) {
+                crearVegetacionMenor();
+                this.cdVegetacion.enumerarConsecutivo(this.sitioID);
+                llenarTabla();
+                limpiarControles();
+                cmbFamilia.requestFocus();
+            }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         asignarDatosVegetacionMenor();
-        if (validarVegetacionMenorObligatorios() && validarMediciones() && validarSeveridadDanio() && validarCondicionMuertoPie()) {
-            actualizarVegetacionMenor();
-            llenarTabla();
-            limpiarControles();
-            cmbFamilia.requestFocus();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarVegetacionMenorObligatorios() && validarMediciones() && validarSeveridadDanio() && validarCondicionMuertoPie()) {
+                actualizarVegetacionMenor();
+                llenarTabla();
+                limpiarControles();
+                cmbFamilia.requestFocus();
+            }
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        eliminarVegetacionMenor();
-        this.cdVegetacion.enumerarConsecutivo(this.sitioID);
-        llenarTabla();
-        limpiarControles();
-        cmbFamilia.requestFocus();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            eliminarVegetacionMenor();
+            this.cdVegetacion.enumerarConsecutivo(this.sitioID);
+            llenarTabla();
+            limpiarControles();
+            cmbFamilia.requestFocus();
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void cmbAgenteDanio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAgenteDanio2ActionPerformed
@@ -1764,28 +1777,32 @@ public class FrmVegetacionMenor extends javax.swing.JInternalFrame {
 
     private void btnColectaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColectaActionPerformed
         try {
-            int fila = grdVegetacionMenor.getSelectedRow();
-            String consecutivo = grdVegetacionMenor.getValueAt(fila, 2).toString();
-            FrmClaveColecta claveColecta = new FrmClaveColecta(Main.main, true);
-            claveColecta.setLocationRelativeTo(Main.main);
-            CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
-            CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
-            CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
-            CEColectaBotanica ceColecta = new CEColectaBotanica();
-            if (indexFamilia != null) {
-                ceColecta.setFamiliaID(indexFamilia.getFamiliaID());
+            if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+            } else {
+                int fila = grdVegetacionMenor.getSelectedRow();
+                String consecutivo = grdVegetacionMenor.getValueAt(fila, 2).toString();
+                FrmClaveColecta claveColecta = new FrmClaveColecta(Main.main, true);
+                claveColecta.setLocationRelativeTo(Main.main);
+                CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
+                CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
+                CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
+                CEColectaBotanica ceColecta = new CEColectaBotanica();
+                if (indexFamilia != null) {
+                    ceColecta.setFamiliaID(indexFamilia.getFamiliaID());
+                }
+                if (indexGenero != null) {
+                    ceColecta.setGeneroID(indexGenero.getGeneroID());
+                }
+                if (indexEspecie != null) {
+                    ceColecta.setEspecieID(indexEspecie.getEspecieID());
+                }
+                ceColecta.setUPMID((Integer) cmbUPMID.getSelectedItem());
+                //ceColecta.setInfraespecie(txtInfraespecie.getText());
+                ceColecta.setNombreComun(txtNombreComun.getText());
+                claveColecta.setDatosIniciales(ceColecta, FORMATO_ID, "TAXONOMIA_VegetacionMenor", "Consecutivo", this.sitioID, Integer.parseInt(consecutivo));
+                claveColecta.setVisible(true);
             }
-            if (indexGenero != null) {
-                ceColecta.setGeneroID(indexGenero.getGeneroID());
-            }
-            if (indexEspecie != null) {
-                ceColecta.setEspecieID(indexEspecie.getEspecieID());
-            }
-            ceColecta.setUPMID((Integer) cmbUPMID.getSelectedItem());
-            //ceColecta.setInfraespecie(txtInfraespecie.getText());
-            ceColecta.setNombreComun(txtNombreComun.getText());
-            claveColecta.setDatosIniciales(ceColecta, FORMATO_ID, "TAXONOMIA_VegetacionMenor", "Consecutivo", this.sitioID, Integer.parseInt(consecutivo));
-            claveColecta.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un registro para asignar la clave de colecta"
                     + e.getClass().getName() + " : " + e.getMessage(), "Clave de colecta", JOptionPane.ERROR_MESSAGE);

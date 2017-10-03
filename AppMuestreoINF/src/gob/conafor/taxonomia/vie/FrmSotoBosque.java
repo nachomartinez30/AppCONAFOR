@@ -53,7 +53,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
     private int hojarasca;
     private int gravaPiedra;
     private int otros;
-    private boolean sotobosqueHabilitado=true;//No esta Habilitado
+    private boolean sotobosqueHabilitado = true;//No esta Habilitado
     private CDEspecies especie = new CDEspecies();
     private CDCondicionTaxonomica condicion = new CDCondicionTaxonomica();
     private ValidacionesComunes validacion = new ValidacionesComunes();
@@ -77,10 +77,10 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
     private int actualizar;
     private FuncionesComunes funciones = new FuncionesComunes();
     private int secuenciaID;
-    private Version ver=new Version();
-    private String version=ver.getVersion();
-    FrmRevisionModulos revisionModulos=new FrmRevisionModulos();
-   
+    private Version ver = new Version();
+    private String version = ver.getVersion();
+    FrmRevisionModulos revisionModulos = new FrmRevisionModulos();
+
     public FrmSotoBosque() {
         initComponents();
         this.cubiertaSuelo = 7;
@@ -91,7 +91,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
         fillCmbVigor();
         fillCmbDanio();
     }
-    
+
     public void setDatosIniciales(CESitio sitio) {
         this.actualizar = 0;
         CatEAgenteDanio danio = (CatEAgenteDanio) cmbDanio.getSelectedItem();
@@ -99,7 +99,7 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
         this.upmID = sitio.getUpmID();
         this.sitioID = this.cdSotobosque.getSitioID(sitio.getUpmID(), sitio.getSitio());
         this.secuenciaID = sitio.getSecuencia();
-        
+
         limpiarControlesCubiertaSuelo();
         llenarTabla();
         if (danio.getAgenteDanioID() > 1) {
@@ -108,46 +108,45 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
         funciones.manipularBotonesMenuPrincipal(true);
     }
 
-    
-public void llenarControles() {
-	combo.reiniciarComboModel(this.cmbUPMID);
-	fillUPMID();
-}
-private void fillUPMID() {
-	List<Integer> listCapturado = new ArrayList<>();
-	listCapturado = this.cdSitio.getUPMSitios();
-	if (listCapturado != null) {
-		int size = listCapturado.size();
-		for (int i = 0; i < size; i++) {
-			cmbUPMID.addItem(listCapturado.get(i));
-		}
-	}
-}
+    public void llenarControles() {
+        combo.reiniciarComboModel(this.cmbUPMID);
+        fillUPMID();
+    }
 
-private void fillCmbSitio(int upmID) {
-	List<Integer> listSitios = new ArrayList<>();
-	listSitios = this.cdSitio.getSitiosDisponibles(upmID);
-	if (listSitios != null) {
-		int size = listSitios.size();
-		for (int i = 0; i < size; i++) {
-			cmbSitios.addItem(listSitios.get(i));
-		}
-	}
-}
-    
-    
+    private void fillUPMID() {
+        List<Integer> listCapturado = new ArrayList<>();
+        listCapturado = this.cdSitio.getUPMSitios();
+        if (listCapturado != null) {
+            int size = listCapturado.size();
+            for (int i = 0; i < size; i++) {
+                cmbUPMID.addItem(listCapturado.get(i));
+            }
+        }
+    }
+
+    private void fillCmbSitio(int upmID) {
+        List<Integer> listSitios = new ArrayList<>();
+        listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+        if (listSitios != null) {
+            int size = listSitios.size();
+            for (int i = 0; i < size; i++) {
+                cmbSitios.addItem(listSitios.get(i));
+            }
+        }
+    }
+
     public void revisarSotoBosque(int sitioID) {
-        revision=true;
-        
+        revision = true;
+
         CatEAgenteDanio danio = (CatEAgenteDanio) cmbDanio.getSelectedItem();
         CESitio sitioSotobosqueFuera;
-       /* this.actualizar = 1;
+        /* this.actualizar = 1;
         this.ceSitio = sitio;
         this.sitio = sitio.getSitio();
         this.sitioID = sitio.getSitioID();
         this.upmID = sitio.getUpmID();
         this.secuenciaID = sitio.getSecuencia();*/
-       
+
         llenarTabla();
         if (danio.getAgenteDanioID() > 1) {
             txtPorcentajeDanio.setEnabled(true);
@@ -177,22 +176,23 @@ private void fillCmbSitio(int upmID) {
         funciones.manipularBotonesMenuPrincipal(true);
         chkSotobosque.setSelected(funciones.habilitarCheckBox("TAXONOMIA_SotoBosque", sitioID));
     }
-    
-    public void desabilitarSotobosque(){
+
+    public void desabilitarSotobosque() {
         System.err.println("Sotobosque deshabilitado");
         chkSotobosque.setSelected(false);
         chkSotobosque.setVisible(false);
         chkSotoBosqueFuera.setSelected(false);
         pnlSotobosque.setVisible(false);
-        sotobosqueHabilitado=false;
+        sotobosqueHabilitado = false;
     }
-    
-    public void habilitarSotobosque(){
+
+    public void habilitarSotobosque() {
         chkSotobosque.setSelected(true);
         chkSotobosque.setVisible(true);
         chkSotoBosqueFuera.setSelected(true);
         pnlSotobosque.setVisible(true);
     }
+
     public boolean setDatosCobertura() {
         if (validarCamposVacios()) {
             this.gramineas = Integer.parseInt(txtGramineas.getText());
@@ -206,8 +206,9 @@ private void fillCmbSitio(int upmID) {
             this.gravaPiedra = Integer.parseInt(txtGravaPiedra.getText());
             this.otros = Integer.parseInt(txtOtros.getText());
             return true;
-        }else
+        } else {
             return false;
+        }
     }
 
     public void crearCoberturaSuelo() {
@@ -227,8 +228,8 @@ private void fillCmbSitio(int upmID) {
 
         cdCobertura.insertCoberturaSuelo(cobertura);
     }
-    
-    public void actualizarCoberturaSuelo(){
+
+    public void actualizarCoberturaSuelo() {
         CECoberturaSuelo ceCobertura = new CECoberturaSuelo();
         CDCoberturaSuelo cdCobertura = new CDCoberturaSuelo();
         ceCobertura.setSitioID(this.sitioID);
@@ -328,7 +329,7 @@ private void fillCmbSitio(int upmID) {
             return true;
         }
     }
-    
+
     public boolean validarSumaCubiertaSuelo() {
         int suma = this.rocas + this.sueloDesnudo + this.hojarasca + this.gravaPiedra + this.otros;
         if (suma != 100) {
@@ -361,8 +362,8 @@ private void fillCmbSitio(int upmID) {
             }
         }
     }
-    
-   /* public void fillCmbGeneroFiltrado(char filtro){
+
+    /* public void fillCmbGeneroFiltrado(char filtro){
          List<CatEGenero> listGenero = new ArrayList<>();
         CDEspecies sp = new CDEspecies();
         listGenero = sp.getGeneroFiltrado(filtro);
@@ -373,9 +374,8 @@ private void fillCmbSitio(int upmID) {
             }
         }
     }*/
-    
-     private void fillCmbGeneroSF(){
-         List<CatEGenero> listGenero = new ArrayList<>();
+    private void fillCmbGeneroSF() {
+        List<CatEGenero> listGenero = new ArrayList<>();
         CDEspecies sp = new CDEspecies();
         listGenero = sp.getGenerosSF();
         if (listGenero != null) {
@@ -397,14 +397,14 @@ private void fillCmbSitio(int upmID) {
             }
         }
     }
-    
-    private void fillCmbInfraespecie(int index){
+
+    private void fillCmbInfraespecie(int index) {
         List<CatEInfraespecie> listInfraespecie = new ArrayList<>();
         CDEspecies sp = new CDEspecies();
         listInfraespecie = sp.getInfraespecie(index);
-        if(listInfraespecie != null){
+        if (listInfraespecie != null) {
             int size = listInfraespecie.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbInfraespecie.addItem(listInfraespecie.get(i));
             }
         }
@@ -476,21 +476,20 @@ private void fillCmbSitio(int upmID) {
     }
 
     public boolean validarSotobosqueFuera() {
-        if(sotobosqueHabilitado==true){//Si hay sotobosque
-        if (chkSotoBosqueFuera.isSelected()==true && txtPorcentajeSotobosqueFuera.getText().isEmpty()==true) {
-            JOptionPane.showMessageDialog(null, "Si selecciona Sotobosque fuera, debe introducir un porcentaje", "Sotobosque fuera", JOptionPane.ERROR_MESSAGE);
-            txtPorcentajeSotobosqueFuera.requestFocus();
-            return false;
+        if (sotobosqueHabilitado == true) {//Si hay sotobosque
+            if (chkSotoBosqueFuera.isSelected() == true && txtPorcentajeSotobosqueFuera.getText().isEmpty() == true) {
+                JOptionPane.showMessageDialog(null, "Si selecciona Sotobosque fuera, debe introducir un porcentaje", "Sotobosque fuera", JOptionPane.ERROR_MESSAGE);
+                txtPorcentajeSotobosqueFuera.requestFocus();
+                return false;
+            } else {
+                return true;
+            }
         } else {
             return true;
         }
-        }else{
-            return true;
-        }
-        
-        
+
     }
-    
+
     public void asignarDatosSotobosque() {
         try {
             this.frecuencia025 = Integer.valueOf(txtFrecuencia025.getText());
@@ -529,21 +528,21 @@ private void fillCmbSitio(int upmID) {
             this.porcentajeDanio = null;
         }
     }
-    
-    private void asignarDatosSotobosqueFuera(){
-        if(chkSotoBosqueFuera.isSelected()){
+
+    private void asignarDatosSotobosqueFuera() {
+        if (chkSotoBosqueFuera.isSelected()) {
             this.sotobosqueFuera = 1;
         } else {
             this.sotobosqueFuera = 0;
         }
-        try{
-             this.porcentajeSotobosqueFuera = Integer.valueOf(txtPorcentajeSotobosqueFuera.getText());
-        } catch (NumberFormatException e){
-              this.porcentajeSotobosqueFuera = null;
+        try {
+            this.porcentajeSotobosqueFuera = Integer.valueOf(txtPorcentajeSotobosqueFuera.getText());
+        } catch (NumberFormatException e) {
+            this.porcentajeSotobosqueFuera = null;
         }
-       
+
     }
-            
+
     public boolean validarDatosSotoBosque() {
         if (this.frecuencia025 != null && this.frecuencia025 < 1) {
             JOptionPane.showMessageDialog(null, "Error! Debe de capturar un valos mayor a 0 en frecuencia 0.25-1.50", "Sotobosque", JOptionPane.ERROR_MESSAGE);
@@ -573,8 +572,8 @@ private void fillCmbSitio(int upmID) {
             return true;
         }
     }
-    
-     private boolean validarColectasObligatorias() {
+
+    private boolean validarColectasObligatorias() {
         CDColectaBotanica colecta = new CDColectaBotanica();
         if (colecta.validarCapturaGenero("TAXONOMIA_SotoBosque", this.sitioID)) {
             JOptionPane.showMessageDialog(null, "Error! Faltan por asignar claves de colecta", "Sotobosque", JOptionPane.INFORMATION_MESSAGE);
@@ -594,7 +593,7 @@ private void fillCmbSitio(int upmID) {
         CDSotoBosque sotobosque = new CDSotoBosque();
         CESotoBosque sb = new CESotoBosque();
         sb.setSitioID(this.sitioID);
-        if(indexFamilia != null){
+        if (indexFamilia != null) {
             sb.setFamiliaID(indexFamilia.getFamiliaID());
         }
         if (indexGenero != null) {
@@ -603,7 +602,7 @@ private void fillCmbSitio(int upmID) {
         if (indexEspecie != null) {
             sb.setEspecieID(indexEspecie.getEspecieID());
         }
-         if (indexInfraespecie != null) {
+        if (indexInfraespecie != null) {
             sb.setInfraespecieID(indexInfraespecie.getInfraespecieID());
         }
         sb.setNombreComun(txtNombreComun.getText());
@@ -619,8 +618,8 @@ private void fillCmbSitio(int upmID) {
 
         sotobosque.insertDatosSotoBosque(sb);
     }
-    
-    private void crearSotoBosqueFuera(){
+
+    private void crearSotoBosqueFuera() {
         CESitio ceSitio = new CESitio();
         CDSitio cdSitio = new CDSitio();
         ceSitio.setSitioID(this.sitioID);
@@ -650,7 +649,7 @@ private void fillCmbSitio(int upmID) {
         grdSotobosque.getColumnModel().getColumn(15).setPreferredWidth(120);//Clave danio
         grdSotobosque.getColumnModel().getColumn(16).setPreferredWidth(90);//Porcentaje danio
         grdSotobosque.getColumnModel().getColumn(17).setPreferredWidth(180);//Clave de colecta
-        
+
         Tablas tabla = new Tablas();
         int[] columna_0 = {0};
         int[] column_1 = {1};
@@ -658,7 +657,7 @@ private void fillCmbSitio(int upmID) {
         tabla.hideColumnTable(grdSotobosque, columna_0);
         tabla.hideColumnTable(grdSotobosque, column_1);
     }
-    
+
     private void actualizarSotoBosque() {
         try {
             int fila = grdSotobosque.getSelectedRow();
@@ -687,7 +686,7 @@ private void fillCmbSitio(int upmID) {
             } else {
                 sb.setEspecieID(null);
             }
-            if(indexInfraespecie != null){
+            if (indexInfraespecie != null) {
                 sb.setInfraespecieID(indexInfraespecie.getInfraespecieID());
             }
             sb.setNombreComun(txtNombreComun.getText());
@@ -726,7 +725,7 @@ private void fillCmbSitio(int upmID) {
                     + "", "Sotobosque", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
+
     public void limpiarControles() {
         cmbFamilia.setSelectedItem(null);
         cmbGenero.setSelectedItem(null);
@@ -746,6 +745,7 @@ private void fillCmbSitio(int upmID) {
         txtClaveColecta.setText("");
         cmbSitios.setSelectedIndex(0);
     }
+
     public void limpiarPorcentajes() {
         txtGramineas.setText("");
         txtGravaPiedra.setText("");
@@ -760,7 +760,7 @@ private void fillCmbSitio(int upmID) {
         txtRoca.setText("");
         txtSueloDesnudo.setText("");
     }
-    
+
     public void limpiarControlesCubiertaSuelo() {
         txtGramineas.setText("");
         txtGramineas.setValue(null);
@@ -786,16 +786,16 @@ private void fillCmbSitio(int upmID) {
         txtPorcentajeSotobosqueFuera.setValue(null);
         chkSotoBosqueFuera.setSelected(true);
     }
-    
-    private void seleccionarSiguienteFormulario(Integer secuenciaID){
-         if (secuenciaID != null) {
+
+    private void seleccionarSiguienteFormulario(Integer secuenciaID) {
+        if (secuenciaID != null) {
             switch (secuenciaID) {
                 case 1: //Módulo A
-                    UPMForms.repoblado.setDatosIniciales(this.ceSitio); 
+                    UPMForms.repoblado.setDatosIniciales(this.ceSitio);
                     UPMForms.repoblado.setVisible(true);
                     break;
                 case 2: //Módulos A y C
-                    UPMForms.repoblado.setDatosIniciales(this.ceSitio); 
+                    UPMForms.repoblado.setDatosIniciales(this.ceSitio);
                     UPMForms.repoblado.setVisible(true);
                     break;
                 case 3: //Modulos A, C, E y G
@@ -853,7 +853,7 @@ private void fillCmbSitio(int upmID) {
             }
         }
     }
-    
+
     /*private void revisarSiguienteFormulario(Integer secuenciaID) {
         if (secuenciaID != null) {
             switch (secuenciaID) {
@@ -920,7 +920,6 @@ private void fillCmbSitio(int upmID) {
             }
         }
     }*/
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1910,6 +1909,7 @@ private void fillCmbSitio(int upmID) {
             }
         });
 
+        cmbSitios.setEnabled(false);
         cmbSitios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSitiosActionPerformed(evt);
@@ -1994,150 +1994,154 @@ private void fillCmbSitio(int upmID) {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         asignarDatosSotobosqueFuera();
-        if (setDatosCobertura() && validarSumaCubiertaSuelo() && validarPorcentaje() && validarSotobosqueFuera()) {
-            if (funciones.validarSeccionCapturada("TAXONOMIA_SotoBosque", sitioID) && chkSotobosque.isSelected()) {
-                JOptionPane.showMessageDialog(null, "Si selecciona Sotobosque, se debe capturar", "Sotobosque", JOptionPane.INFORMATION_MESSAGE);
-                chkSotobosque.requestFocus();
-            } else if (funciones.validarSeccionCapturada("TAXONOMIA_SotoBosque", sitioID) == false && chkSotobosque.isSelected()) {
-                if (validarColectasObligatorias()) {
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (setDatosCobertura() && validarSumaCubiertaSuelo() && validarPorcentaje() && validarSotobosqueFuera()) {
+                if (funciones.validarSeccionCapturada("TAXONOMIA_SotoBosque", sitioID) && chkSotobosque.isSelected()) {
+                    JOptionPane.showMessageDialog(null, "Si selecciona Sotobosque, se debe capturar", "Sotobosque", JOptionPane.INFORMATION_MESSAGE);
+                    chkSotobosque.requestFocus();
+                } else if (funciones.validarSeccionCapturada("TAXONOMIA_SotoBosque", sitioID) == false && chkSotobosque.isSelected()) {
+                    if (validarColectasObligatorias()) {
+                        if (this.actualizar == 0) {
+                            crearCoberturaSuelo();
+                            //this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
+                            crearSotoBosqueFuera();
+                            //this.hide();
+                            //seleccionarSiguienteFormulario(this.ceSitio.getSecuencia());
+                        } else {
+                            actualizarCoberturaSuelo();
+                            crearSotoBosqueFuera();
+                            //this.hide();
+                            //revisarSiguienteFormulario(this.ceSitio.getSecuencia());
+                        }
+                        // funciones.manipularBotonesMenuPrincipal(false);
+                    }
+                } else if (funciones.validarSeccionCapturada("TAXONOMIA_SotoBosque", sitioID) == true && !chkSotobosque.isSelected()) {
                     if (this.actualizar == 0) {
                         crearCoberturaSuelo();
-                        //this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
                         crearSotoBosqueFuera();
                         //this.hide();
                         //seleccionarSiguienteFormulario(this.ceSitio.getSecuencia());
+                        //this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
                     } else {
                         actualizarCoberturaSuelo();
                         crearSotoBosqueFuera();
                         //this.hide();
                         //revisarSiguienteFormulario(this.ceSitio.getSecuencia());
                     }
-                   // funciones.manipularBotonesMenuPrincipal(false);
-                }
-            } else if (funciones.validarSeccionCapturada("TAXONOMIA_SotoBosque", sitioID) == true && !chkSotobosque.isSelected()) {
-                if (this.actualizar == 0) {
-                    crearCoberturaSuelo();
-                    crearSotoBosqueFuera();
-                    //this.hide();
-                    //seleccionarSiguienteFormulario(this.ceSitio.getSecuencia());
-                    //this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-                } else {
-                    actualizarCoberturaSuelo();
-                    crearSotoBosqueFuera();
-                    //this.hide();
-                    //revisarSiguienteFormulario(this.ceSitio.getSecuencia());
-                }
-              /*  this.hide();
+                    /*  this.hide();
                 UPMForms.repoblado.setDatosIniciales(this.ceSitio);
                 UPMForms.repoblado.setVisible(true);*/
-                
-                //funciones.manipularBotonesMenuPrincipal(false);
+
+                    //funciones.manipularBotonesMenuPrincipal(false);
+                }
             }
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void txtGramineasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGramineasFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
-                 txtGramineas.selectAll();
+            public void run() {
+                txtGramineas.selectAll();
             }
         });
-        
+
     }//GEN-LAST:event_txtGramineasFocusGained
 
     private void txtHelechosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtHelechosFocusGained
-       SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
-                 txtHelechos.selectAll();
+            public void run() {
+                txtHelechos.selectAll();
             }
         });
     }//GEN-LAST:event_txtHelechosFocusGained
 
     private void txtMusgosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMusgosFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
-                 txtMusgos.selectAll();
+            public void run() {
+                txtMusgos.selectAll();
             }
         });
     }//GEN-LAST:event_txtMusgosFocusGained
 
     private void txtLiquenesFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLiquenesFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
-                 txtLiquenes.selectAll();
+            public void run() {
+                txtLiquenes.selectAll();
             }
         });
     }//GEN-LAST:event_txtLiquenesFocusGained
 
     private void txtHierbasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtHierbasFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
-                 txtHierbas.selectAll();
+            public void run() {
+                txtHierbas.selectAll();
             }
         });
     }//GEN-LAST:event_txtHierbasFocusGained
 
     private void txtRocaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtRocaFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
-                 txtRoca.selectAll();
+            public void run() {
+                txtRoca.selectAll();
             }
         });
     }//GEN-LAST:event_txtRocaFocusGained
 
     private void txtSueloDesnudoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSueloDesnudoFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
-                 txtSueloDesnudo.selectAll();
+            public void run() {
+                txtSueloDesnudo.selectAll();
             }
         });
     }//GEN-LAST:event_txtSueloDesnudoFocusGained
 
     private void txtHojarascaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtHojarascaFocusGained
-       SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
-                 txtHojarasca.selectAll();
+            public void run() {
+                txtHojarasca.selectAll();
             }
         });
     }//GEN-LAST:event_txtHojarascaFocusGained
 
     private void txtGravaPiedraFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGravaPiedraFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
-                 txtGravaPiedra.selectAll();
+            public void run() {
+                txtGravaPiedra.selectAll();
             }
         });
     }//GEN-LAST:event_txtGravaPiedraFocusGained
 
     private void txtOtrosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtOtrosFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
-                 txtOtros.selectAll();
+            public void run() {
+                txtOtros.selectAll();
             }
         });
     }//GEN-LAST:event_txtOtrosFocusGained
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        
-        if(revision==false){//esta en modo de captura
+
+        if (revision == false) {//esta en modo de captura
             this.hide();
-             limpiarPorcentajes();
+            limpiarPorcentajes();
             funciones.manipularBotonesMenuPrincipal(false);
         }
-        if(revision==true){//entro a modo de revision
-           limpiarPorcentajes();
-           this.hide();
-           funciones.manipularBotonesMenuPrincipal(false);
+        if (revision == true) {//entro a modo de revision
+            limpiarPorcentajes();
+            this.hide();
+            funciones.manipularBotonesMenuPrincipal(false);
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
@@ -2154,7 +2158,7 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_txtMusgosKeyTyped
 
     private void txtLiquenesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLiquenesKeyTyped
-       numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtLiquenesKeyTyped
 
     private void txtHierbasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHierbasKeyTyped
@@ -2166,7 +2170,7 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_txtRocaKeyTyped
 
     private void txtSueloDesnudoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSueloDesnudoKeyTyped
-       numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtSueloDesnudoKeyTyped
 
     private void txtHojarascaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHojarascaKeyTyped
@@ -2182,63 +2186,63 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_txtOtrosKeyTyped
 
     private void txtGramineasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGramineasFocusLost
-        if(txtGramineas.getText().isEmpty()){
+        if (txtGramineas.getText().isEmpty()) {
             txtGramineas.setValue(null);
-        }     
+        }
     }//GEN-LAST:event_txtGramineasFocusLost
 
     private void txtHelechosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtHelechosFocusLost
-        if(txtHelechos.getText().isEmpty()){
+        if (txtHelechos.getText().isEmpty()) {
             txtHelechos.setValue(null);
-        }  
+        }
     }//GEN-LAST:event_txtHelechosFocusLost
 
     private void txtMusgosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMusgosFocusLost
-        if(txtMusgos.getText().isEmpty()){
+        if (txtMusgos.getText().isEmpty()) {
             txtMusgos.setValue(null);
-        }  
+        }
     }//GEN-LAST:event_txtMusgosFocusLost
 
     private void txtLiquenesFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLiquenesFocusLost
-        if(txtLiquenes.getText().isEmpty()){
+        if (txtLiquenes.getText().isEmpty()) {
             txtLiquenes.setValue(null);
-        }  
+        }
     }//GEN-LAST:event_txtLiquenesFocusLost
 
     private void txtHierbasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtHierbasFocusLost
-        if(txtHierbas.getText().isEmpty()){
+        if (txtHierbas.getText().isEmpty()) {
             txtHierbas.setValue(null);
-        }  
+        }
     }//GEN-LAST:event_txtHierbasFocusLost
 
     private void txtRocaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtRocaFocusLost
-        if(txtRoca.getText().isEmpty()){
+        if (txtRoca.getText().isEmpty()) {
             txtRoca.setValue(null);
-        }  
+        }
     }//GEN-LAST:event_txtRocaFocusLost
 
     private void txtSueloDesnudoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSueloDesnudoFocusLost
-        if(txtSueloDesnudo.getText().isEmpty()){
+        if (txtSueloDesnudo.getText().isEmpty()) {
             txtSueloDesnudo.setValue(null);
-        }  
+        }
     }//GEN-LAST:event_txtSueloDesnudoFocusLost
 
     private void txtHojarascaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtHojarascaFocusLost
-        if(txtHojarasca.getText().isEmpty()){
+        if (txtHojarasca.getText().isEmpty()) {
             txtHojarasca.setValue(null);
-        }  
+        }
     }//GEN-LAST:event_txtHojarascaFocusLost
 
     private void txtGravaPiedraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGravaPiedraFocusLost
-        if(txtGravaPiedra.getText().isEmpty()){
+        if (txtGravaPiedra.getText().isEmpty()) {
             txtGravaPiedra.setValue(null);
-        } 
+        }
     }//GEN-LAST:event_txtGravaPiedraFocusLost
 
     private void txtOtrosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtOtrosFocusLost
-        if(txtOtros.getText().isEmpty()){
+        if (txtOtros.getText().isEmpty()) {
             txtOtros.setValue(null);
-        } 
+        }
     }//GEN-LAST:event_txtOtrosFocusLost
 
     private void chkSotobosqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkSotobosqueActionPerformed
@@ -2332,9 +2336,9 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_cmbDanioActionPerformed
 
     private void txtFrecuencia025FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFrecuencia025FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtFrecuencia025.selectAll();
             }
         });
@@ -2351,9 +2355,9 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_txtFrecuencia025KeyTyped
 
     private void txtCobertura025FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCobertura025FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtCobertura025.selectAll();
             }
         });
@@ -2370,9 +2374,9 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_txtCobertura025KeyTyped
 
     private void txtFrecuencia151FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFrecuencia151FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtFrecuencia151.selectAll();
             }
         });
@@ -2389,9 +2393,9 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_txtFrecuencia151KeyTyped
 
     private void txtCobertura151FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCobertura151FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtCobertura151.selectAll();
             }
         });
@@ -2404,9 +2408,9 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_txtCobertura151FocusLost
 
     private void txtFrecuencia275FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFrecuencia275FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtFrecuencia275.selectAll();
             }
         });
@@ -2423,9 +2427,9 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_txtFrecuencia275KeyTyped
 
     private void txtCobertura275FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCobertura275FocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtCobertura275.selectAll();
             }
         });
@@ -2442,9 +2446,9 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_txtCobertura275KeyTyped
 
     private void txtPorcentajeDanioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPorcentajeDanioFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtPorcentajeDanio.selectAll();
             }
         });
@@ -2462,58 +2466,74 @@ private void fillCmbSitio(int upmID) {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         asignarDatosSotobosque();
-        if (validarSotoBosqueVacios() && validarDatosSotoBosque()) {
-            crearSotobosque();
-            this.cdSotobosque.enumerarConsecutivo(this.sitioID);
-            llenarTabla();
-            limpiarControles();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarSotoBosqueVacios() && validarDatosSotoBosque()) {
+                crearSotobosque();
+                this.cdSotobosque.enumerarConsecutivo(this.sitioID);
+                llenarTabla();
+                limpiarControles();
+            }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         asignarDatosSotobosque();
-        if (validarSotoBosqueVacios() && validarDatosSotoBosque()) {
-            actualizarSotoBosque();
-            llenarTabla();
-            limpiarControles();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarSotoBosqueVacios() && validarDatosSotoBosque()) {
+                actualizarSotoBosque();
+                llenarTabla();
+                limpiarControles();
+            }
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        eliminarSotoBosque();
-        this.cdSotobosque.enumerarConsecutivo(this.sitioID);
-        llenarTabla();
-        limpiarControles();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            eliminarSotoBosque();
+            this.cdSotobosque.enumerarConsecutivo(this.sitioID);
+            llenarTabla();
+            limpiarControles();
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnColectaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColectaActionPerformed
         String consecutivo = null;
         try {
-            int fila = grdSotobosque.getSelectedRow();
-            consecutivo = grdSotobosque.getValueAt(fila, 2).toString();
-            FrmClaveColecta claveColecta = new FrmClaveColecta(Main.main, true);
-            claveColecta.setLocationRelativeTo(Main.main);
-            CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
-            CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
-            CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
-            CEColectaBotanica ceColecta = new CEColectaBotanica();
-            ceColecta.setUPMID((Integer) cmbUPMID.getSelectedItem());
-            if (indexFamilia != null) {
-                ceColecta.setFamiliaID(indexFamilia.getFamiliaID());
+            if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+            } else {
+                int fila = grdSotobosque.getSelectedRow();
+                consecutivo = grdSotobosque.getValueAt(fila, 2).toString();
+                FrmClaveColecta claveColecta = new FrmClaveColecta(Main.main, true);
+                claveColecta.setLocationRelativeTo(Main.main);
+                CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
+                CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
+                CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
+                CEColectaBotanica ceColecta = new CEColectaBotanica();
+                ceColecta.setUPMID((Integer) cmbUPMID.getSelectedItem());
+                if (indexFamilia != null) {
+                    ceColecta.setFamiliaID(indexFamilia.getFamiliaID());
+                }
+                if (indexGenero != null) {
+                    ceColecta.setGeneroID(indexGenero.getGeneroID());
+                }
+                if (indexEspecie != null) {
+                    ceColecta.setEspecieID(indexEspecie.getEspecieID());
+                }
+                //ceColecta.setInfraespecie(txtInfraespecie.getText());
+                ceColecta.setNombreComun(txtNombreComun.getText());
+                claveColecta.setDatosIniciales(ceColecta, FORMATO_ID, "TAXONOMIA_SotoBosque", "Consecutivo", this.sitioID, Integer.parseInt(consecutivo));
+                claveColecta.setVisible(true);
             }
-            if (indexGenero != null) {
-                ceColecta.setGeneroID(indexGenero.getGeneroID());
-            }
-            if (indexEspecie != null) {
-                ceColecta.setEspecieID(indexEspecie.getEspecieID());
-            }
-            //ceColecta.setInfraespecie(txtInfraespecie.getText());
-            ceColecta.setNombreComun(txtNombreComun.getText());
-            claveColecta.setDatosIniciales(ceColecta, FORMATO_ID, "TAXONOMIA_SotoBosque", "Consecutivo", this.sitioID, Integer.parseInt(consecutivo));
-            claveColecta.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningún registro de la tabla de sotobosque"
-                + e.getClass().getName() + " : " + e.getMessage(), "Sotobosque", JOptionPane.INFORMATION_MESSAGE);
+                    + e.getClass().getName() + " : " + e.getMessage(), "Sotobosque", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnColectaActionPerformed
 
@@ -2539,7 +2559,6 @@ private void fillCmbSitio(int upmID) {
             cmbGenero.removeAllItems();
             fillCmbGenero(sb.getFamiliaID());
             cmbGenero.setSelectedItem(gen);*/
-
             CatEEspecie esp = new CatEEspecie();
             esp.setEspecieID(sb.getEspecieID());
             cmbEspecie.removeAllItems();
@@ -2555,27 +2574,27 @@ private void fillCmbSitio(int upmID) {
             txtNombreComun.setText(sb.getNombreComun());
 
             txtFrecuencia025.setText(String.valueOf(sb.getFrecuecia025150()));
-            if((txtFrecuencia025.getText()).equals("0")) {
+            if ((txtFrecuencia025.getText()).equals("0")) {
                 txtFrecuencia025.setText("");
             }
             txtCobertura025.setText(String.valueOf(sb.getCobertura025150()));
-            if(txtCobertura025.getText().equals("0")) {
+            if (txtCobertura025.getText().equals("0")) {
                 txtCobertura025.setText("");
             }
             txtFrecuencia151.setText(String.valueOf(sb.getFrecuencia151275()));
-            if(txtFrecuencia151.getText().equals("0")) {
+            if (txtFrecuencia151.getText().equals("0")) {
                 txtFrecuencia151.setText("");
             }
             txtCobertura151.setText(String.valueOf(sb.getCobertura151275()));
-            if(txtCobertura151.getText().equals("0")){
+            if (txtCobertura151.getText().equals("0")) {
                 txtCobertura151.setText("");
             }
             txtFrecuencia275.setText(String.valueOf(sb.getFrecuencia275()));
-            if(txtFrecuencia275.getText().equals("0")){
+            if (txtFrecuencia275.getText().equals("0")) {
                 txtFrecuencia275.setText("");
             }
             txtCobertura275.setText(String.valueOf(sb.getCobertura275()));
-            if(txtCobertura275.getText().equals("0")){
+            if (txtCobertura275.getText().equals("0")) {
                 txtCobertura275.setText("");
             }
             CatETipoVigor vig = new CatETipoVigor();
@@ -2587,7 +2606,7 @@ private void fillCmbSitio(int upmID) {
             cmbDanio.setSelectedItem(danio);
 
             txtPorcentajeDanio.setText(String.valueOf(sb.getPorcentajeDanio()));
-            if(txtPorcentajeDanio.getText().equals("0")){
+            if (txtPorcentajeDanio.getText().equals("0")) {
                 txtPorcentajeDanio.setText("");
             }
             txtClaveColecta.setText(sb.getClaveColecta());
@@ -2610,9 +2629,9 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_chkSotoBosqueFueraPropertyChange
 
     private void txtPorcentajeSotobosqueFueraFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPorcentajeSotobosqueFueraFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtPorcentajeSotobosqueFuera.selectAll();
             }
         });
@@ -2640,15 +2659,15 @@ private void fillCmbSitio(int upmID) {
     private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
         try {
             //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
-            if(cmbSitios.getSelectedItem() == null){
-                this.sitioID=0;
+            if (cmbSitios.getSelectedItem() == null) {
+                this.sitioID = 0;
                 limpiarControles();
                 limpiarPorcentajes();
-            }else{
-            String upm = cmbUPMID.getSelectedItem().toString();
-            String sitio = cmbSitios.getSelectedItem().toString();
-            this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
-           
+            } else {
+                String upm = cmbUPMID.getSelectedItem().toString();
+                String sitio = cmbSitios.getSelectedItem().toString();
+                this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
+
             }
             revisarSotoBosque(this.sitioID);
 

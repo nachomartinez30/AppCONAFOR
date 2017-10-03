@@ -678,7 +678,6 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
             }
         }
     }*/
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1210,6 +1209,7 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
             }
         });
 
+        cmbSitios.setEnabled(false);
         cmbSitios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSitiosActionPerformed(evt);
@@ -1431,28 +1431,40 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         asignarDatosRepoblado();
-        if (validarRepobladoVacios() && validarDatosRepoblado()) {
-            crearRepoblado();
-            this.datosRepoblado.enumerarConsecutivo(this.sitioID);
-            llenarTabla();
-            reiniciarRepoblado();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarRepobladoVacios() && validarDatosRepoblado()) {
+                crearRepoblado();
+                this.datosRepoblado.enumerarConsecutivo(this.sitioID);
+                llenarTabla();
+                reiniciarRepoblado();
+            }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         asignarDatosRepoblado();
-        if (validarRepobladoVacios() && validarDatosRepoblado()) {
-            actualizarRepoblado();
-            llenarTabla();
-            reiniciarRepoblado();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarRepobladoVacios() && validarDatosRepoblado()) {
+                actualizarRepoblado();
+                llenarTabla();
+                reiniciarRepoblado();
+            }
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        eliminarRepoblado();
-        this.datosRepoblado.enumerarConsecutivo(this.sitioID);
-        llenarTabla();
-        reiniciarRepoblado();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            eliminarRepoblado();
+            this.datosRepoblado.enumerarConsecutivo(this.sitioID);
+            llenarTabla();
+            reiniciarRepoblado();
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void grdRepobladoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdRepobladoMouseClicked
@@ -1557,31 +1569,35 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPorcentajeRepobladoFueraFocusGained
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        if (validarRepobladoFuera()) {
-            if (funciones.validarSeccionCapturada("TAXONOMIA_Repoblado", sitioID) && chkRepoblado.isSelected()) {
-                JOptionPane.showMessageDialog(null, "Si selecciona repoblado, se debe capturar", "Repoblado", JOptionPane.INFORMATION_MESSAGE);
-                chkRepoblado.requestFocus();
-            } else if (funciones.validarSeccionCapturada("TAXONOMIA_Repoblado", sitioID) == false && chkRepoblado.isSelected()) {
-                if (validarColectasObligatorias()) {
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            if (validarRepobladoFuera()) {
+                if (funciones.validarSeccionCapturada("TAXONOMIA_Repoblado", sitioID) && chkRepoblado.isSelected()) {
+                    JOptionPane.showMessageDialog(null, "Si selecciona repoblado, se debe capturar", "Repoblado", JOptionPane.INFORMATION_MESSAGE);
+                    chkRepoblado.requestFocus();
+                } else if (funciones.validarSeccionCapturada("TAXONOMIA_Repoblado", sitioID) == false && chkRepoblado.isSelected()) {
+                    if (validarColectasObligatorias()) {
+                        asignarDatosRepobladoFuera();
+                        crearRepobladoFuera();
+                        // this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
+                        //this.hide();
+                        if (this.actulizar == 0) {
+                            // seleccionarSiguienteFormulario(this.ceSitio);
+                        } else {
+                            // revisarSiguienteFormulario(this.ceSitio);
+                        }
+                    }
+                } else if (funciones.validarSeccionCapturada("TAXONOMIA_Repoblado", sitioID) == true && !chkRepoblado.isSelected()) {
                     asignarDatosRepobladoFuera();
                     crearRepobladoFuera();
-                    // this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-                    //this.hide();
+                    // this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, -1);
+                    // this.hide();
                     if (this.actulizar == 0) {
                         // seleccionarSiguienteFormulario(this.ceSitio);
                     } else {
                         // revisarSiguienteFormulario(this.ceSitio);
                     }
-                }
-            } else if (funciones.validarSeccionCapturada("TAXONOMIA_Repoblado", sitioID) == true && !chkRepoblado.isSelected()) {
-                asignarDatosRepobladoFuera();
-                crearRepobladoFuera();
-                // this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, -1);
-               // this.hide();
-                if (this.actulizar == 0) {
-                    // seleccionarSiguienteFormulario(this.ceSitio);
-                } else {
-                    // revisarSiguienteFormulario(this.ceSitio);
                 }
             }
         }
@@ -1717,28 +1733,32 @@ public class FrmRepoblado extends javax.swing.JInternalFrame {
 
     private void btnColectaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColectaActionPerformed
         try {
-            int fila = grdRepoblado.getSelectedRow();
-            String consecutivo = grdRepoblado.getValueAt(fila, 2).toString();
-            FrmClaveColecta claveColecta = new FrmClaveColecta(Main.main, true);
-            claveColecta.setLocationRelativeTo(Main.main);
-            CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
-            CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
-            CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
-            CEColectaBotanica ceColecta = new CEColectaBotanica();
-            if (indexFamilia != null) {
-                ceColecta.setFamiliaID(indexFamilia.getFamiliaID());
+            if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+            } else {
+                int fila = grdRepoblado.getSelectedRow();
+                String consecutivo = grdRepoblado.getValueAt(fila, 2).toString();
+                FrmClaveColecta claveColecta = new FrmClaveColecta(Main.main, true);
+                claveColecta.setLocationRelativeTo(Main.main);
+                CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
+                CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
+                CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
+                CEColectaBotanica ceColecta = new CEColectaBotanica();
+                if (indexFamilia != null) {
+                    ceColecta.setFamiliaID(indexFamilia.getFamiliaID());
+                }
+                if (indexGenero != null) {
+                    ceColecta.setGeneroID(indexGenero.getGeneroID());
+                }
+                if (indexEspecie != null) {
+                    ceColecta.setEspecieID(indexEspecie.getEspecieID());
+                }
+                ceColecta.setUPMID((Integer) cmbUPMID.getSelectedItem());
+                //ceColecta.setInfraespecie(txtInfraespecie.getText());
+                ceColecta.setNombreComun(txtNombreComun.getText());
+                claveColecta.setDatosIniciales(ceColecta, FORMATO_ID, "TAXONOMIA_Repoblado", "Consecutivo", this.sitioID, Integer.parseInt(consecutivo));
+                claveColecta.setVisible(true);
             }
-            if (indexGenero != null) {
-                ceColecta.setGeneroID(indexGenero.getGeneroID());
-            }
-            if (indexEspecie != null) {
-                ceColecta.setEspecieID(indexEspecie.getEspecieID());
-            }
-            ceColecta.setUPMID((Integer) cmbUPMID.getSelectedItem());
-            //ceColecta.setInfraespecie(txtInfraespecie.getText());
-            ceColecta.setNombreComun(txtNombreComun.getText());
-            claveColecta.setDatosIniciales(ceColecta, FORMATO_ID, "TAXONOMIA_Repoblado", "Consecutivo", this.sitioID, Integer.parseInt(consecutivo));
-            claveColecta.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un registro para asignar la clave de colecta"
                     + e.getClass().getName() + " : " + e.getMessage(), "Clave de colecta", JOptionPane.ERROR_MESSAGE);

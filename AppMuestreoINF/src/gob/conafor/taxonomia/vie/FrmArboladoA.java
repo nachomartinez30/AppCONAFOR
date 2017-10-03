@@ -45,6 +45,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmArboladoA extends javax.swing.JInternalFrame {
+
     private boolean revision;
     private final int arbolado;
     private final int submuestra;
@@ -84,9 +85,9 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private FuncionesComunes funciones = new FuncionesComunes();
     private int modificar;
-    private Version ver=new Version();
-    private String version=ver.getVersion();
-            
+    private Version ver = new Version();
+    private String version = ver.getVersion();
+
     public FrmArboladoA() {
         initComponents();
         this.arbolado = 10;
@@ -106,34 +107,34 @@ public class FrmArboladoA extends javax.swing.JInternalFrame {
         txtNumeroIndividuo.requestFocus();
         estadoArbolVivo();
     }
-    
-    
-    public void llenarControles() {
-	combo.reiniciarComboModel(this.cmbUPMID);
-	fillUPMID();
-}
-private void fillUPMID() {
-	List<Integer> listCapturado = new ArrayList<>();
-	listCapturado = this.cdSitio.getUPMArboladosSitios(/*A*/1,/*D*/0,/*G*/0); //Arbolado A
-	if (listCapturado != null) {
-		int size = listCapturado.size();
-		for (int i = 0; i < size; i++) {
-			cmbUPMID.addItem(listCapturado.get(i));
-		}
-	}
-}
 
-private void fillCmbSitio(int upmID) {
-	List<Integer> listSitios = new ArrayList<>();
-	listSitios = this.cdSitio.getSitiosDisponibles(upmID);
-	if (listSitios != null) {
-		int size = listSitios.size();
-		for (int i = 0; i < size; i++) {
-			cmbSitios.addItem(listSitios.get(i));
-		}
-	}
-}
-        
+    public void llenarControles() {
+        combo.reiniciarComboModel(this.cmbUPMID);
+        fillUPMID();
+    }
+
+    private void fillUPMID() {
+        List<Integer> listCapturado = new ArrayList<>();
+        listCapturado = this.cdSitio.getUPMArboladosSitios(/*A*/1,/*D*/ 0,/*G*/ 0); //Arbolado A
+        if (listCapturado != null) {
+            int size = listCapturado.size();
+            for (int i = 0; i < size; i++) {
+                cmbUPMID.addItem(listCapturado.get(i));
+            }
+        }
+    }
+
+    private void fillCmbSitio(int upmID) {
+        List<Integer> listSitios = new ArrayList<>();
+        listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+        if (listSitios != null) {
+            int size = listSitios.size();
+            for (int i = 0; i < size; i++) {
+                cmbSitios.addItem(listSitios.get(i));
+            }
+        }
+    }
+
     public void setDatosIniciales(CESitio sitio) {
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
@@ -142,7 +143,7 @@ private void fillCmbSitio(int upmID) {
         evitarCapturaPorTrazo(sitio);
         llenarTabla();
         txtNumeroIndividuo.requestFocus();
-      //  estadoArbolVivo();
+        //  estadoArbolVivo();
         this.funciones.reiniciarComboModel(cmbConsecutivo);
         fillCmbConsecutivo();
         funciones.manipularBotonesMenuPrincipal(true);
@@ -151,7 +152,7 @@ private void fillCmbSitio(int upmID) {
     }
 
     public void revisarArbolado(CESitio sitio) {
-        revision=true;
+        revision = true;
         limpiarControles();
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
@@ -167,13 +168,13 @@ private void fillCmbSitio(int upmID) {
         modificar = 1;
         this.chkArbolado.setSelected(funciones.habilitarCheckBox("TAXONOMIA_Arbolado", this.sitioID));
     }
-    
-    private void fillCmbConsecutivo(){
+
+    private void fillCmbConsecutivo() {
         List<Integer> listConsecutivo = new ArrayList<>();
         listConsecutivo = cdArbolado.getConsecutivo(this.sitioID);
-        if(listConsecutivo != null){
+        if (listConsecutivo != null) {
             int size = listConsecutivo.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbConsecutivo.addItem(listConsecutivo.get(i));
             }
         }
@@ -201,9 +202,9 @@ private void fillCmbSitio(int upmID) {
             }
         }
     }
-    
-    private void fillCmbGeneroSF(){
-         List<CatEGenero> listGenero = new ArrayList<>();
+
+    private void fillCmbGeneroSF() {
+        List<CatEGenero> listGenero = new ArrayList<>();
         CDEspecies sp = new CDEspecies();
         listGenero = sp.getGenerosSF();
         if (listGenero != null) {
@@ -225,31 +226,31 @@ private void fillCmbSitio(int upmID) {
             }
         }
     }
-    
-    private void fillCmbInfraespecie(int index){
+
+    private void fillCmbInfraespecie(int index) {
         List<CatEInfraespecie> listInfraespecie = new ArrayList<>();
         CDEspecies sp = new CDEspecies();
         listInfraespecie = sp.getInfraespecie(index);
-        if(listInfraespecie != null){
+        if (listInfraespecie != null) {
             int size = listInfraespecie.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbInfraespecie.addItem(listInfraespecie.get(i));
             }
         }
     }
 
-    private void fillCmbFormaVida(){
+    private void fillCmbFormaVida() {
         List<CatEFormaVida> listFormaVida = new ArrayList<>();
         CDCondicionTaxonomica ct = new CDCondicionTaxonomica();
         listFormaVida = ct.getFormaVida();
-        if(listFormaVida != null){
+        if (listFormaVida != null) {
             int size = listFormaVida.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbFormaVida.addItem(listFormaVida.get(i));
             }
         }
     }
-    
+
     private void fillCmbFormaFuste() {
         List<CatEFormaFuste> listFormaFuste = new ArrayList<>();
         listFormaFuste = condicion.getFormaFuste();
@@ -260,7 +261,7 @@ private void fillCmbSitio(int upmID) {
             }
         }
     }
-    
+
     private void fillCmbCondicionArbolado() {
         List<CatECondicionArbolado> listCondicion = new ArrayList<>();
         listCondicion = condicion.getCondicionArboladoArbol();
@@ -276,7 +277,7 @@ private void fillCmbSitio(int upmID) {
             }
         }
     }
-    
+
     private void fillCmbCondicionLianas() {
         List<CatECondicionArbolado> listCondicion = new ArrayList<>();
         listCondicion = condicion.getCondicionArboladoLianas();
@@ -287,7 +288,7 @@ private void fillCmbSitio(int upmID) {
             }
         }
     }
-    
+
     private void fillCmbCondicionMuertoPie() {
         List<CatECondicionMuertoPie> listMuertoPie = new ArrayList<>();
         listMuertoPie = condicion.getCondicionMuertoPie();
@@ -298,7 +299,7 @@ private void fillCmbSitio(int upmID) {
             }
         }
     }
-    
+
     private void fillCmbGradoPutrefaccion() {
         List<CatEGradoPutrefaccionArbolado> listGradoPutrefaccion = new ArrayList();
         listGradoPutrefaccion = condicion.getGradoPutrefaccion();
@@ -309,7 +310,7 @@ private void fillCmbSitio(int upmID) {
             }
         }
     }
-    
+
     private void fillCmbTipoTocon() {
         List<CatETipoTocon> listTipoTocon = new ArrayList<>();
         listTipoTocon = condicion.getTipoTocon();
@@ -331,7 +332,7 @@ private void fillCmbSitio(int upmID) {
             }
         }
     }
-    
+
     private void fillCmbDanio2() {
         List<CatEAgenteDanio> listAgenteDanio = new ArrayList<>();
         listAgenteDanio = condicion.getAgenteDanio();
@@ -342,7 +343,7 @@ private void fillCmbSitio(int upmID) {
             }
         }
     }
-    
+
     public void fillCmbSeveridad1(int agente) {
         List<CatEPorcentajeArbolado> listSeveridad = new ArrayList<>();
         if (agente == 21 || agente == 23 || agente == 24 || agente == 25 || agente == 33 || agente == 34) {
@@ -387,9 +388,9 @@ private void fillCmbSitio(int upmID) {
             }
         }
     }
-    
-     public void fillCmbNivelVigor(){
-         List<CatENivelVigor> listVigor = new ArrayList<>();
+
+    public void fillCmbNivelVigor() {
+        List<CatENivelVigor> listVigor = new ArrayList<>();
         listVigor = condicion.getNivelVigor();
         if (listVigor != null) {
             int size = listVigor.size();
@@ -398,11 +399,11 @@ private void fillCmbSitio(int upmID) {
             }
         }
     }
-    
+
     public void llenarTabla() {
-        
+
         grdArbolado.setModel(cdArbolado.getTablaArbolado(this.sitioID));
-        
+
         grdArbolado.getColumnModel().getColumn(2).setPreferredWidth(70);//Consecutivo
         grdArbolado.getColumnModel().getColumn(3).setPreferredWidth(60);//individuo
         grdArbolado.getColumnModel().getColumn(4).setPreferredWidth(40);//rama
@@ -434,7 +435,7 @@ private void fillCmbSitio(int upmID) {
         grdArbolado.getColumnModel().getColumn(30).setPreferredWidth(50);//Vigor
         grdArbolado.getColumnModel().getColumn(31).setPreferredWidth(100);//Nivel vigor
         grdArbolado.getColumnModel().getColumn(32).setPreferredWidth(180);//Clave colecta
-       
+
         Tablas tabla = new Tablas();
         int[] columna_0 = {0};//ArboladoID
         int[] columna_1 = {1};//SitioID
@@ -1266,6 +1267,7 @@ private void fillCmbSitio(int upmID) {
             }
         });
 
+        cmbSitios.setEnabled(false);
         cmbSitios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSitiosActionPerformed(evt);
@@ -1368,83 +1370,84 @@ private void fillCmbSitio(int upmID) {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void asignarDatosArbolado(){
-        try{
+    public void asignarDatosArbolado() {
+        try {
             this.consecutivo = Integer.valueOf(txtNumeroRamaTallo.getText());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             this.consecutivo = null;
         }
-        try{
+        try {
             this.noIndividuo = Integer.valueOf(txtNumeroIndividuo.getText());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             this.noIndividuo = null;
         }
-        
-        try{
+
+        try {
             this.noRama = Integer.valueOf(txtNumeroRamaTallo.getText());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             this.noRama = null;
         }
-        
-        try{
+
+        try {
             this.azimut = Integer.valueOf(txtAzimut.getText());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             e.printStackTrace();
             this.azimut = null;
         }
 
-        try{
+        try {
             this.distancia = Float.valueOf(txtDistancia.getText());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             this.distancia = null;
         }
-        
-        try{
+
+        try {
             this.diametroNormal = Float.valueOf(txtDiametroNormal.getText());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             this.diametroNormal = null;
         }
-        
-        try{
+
+        try {
             this.alturaTotal = Float.valueOf(txtAlturaTotal.getText());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             this.alturaTotal = null;
         }
-        try{
+        try {
             this.anguloInclinacion = Integer.valueOf(txtAnguloInclinacion.getText());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             this.anguloInclinacion = null;
         }
-        try{
+        try {
             this.alturaFusteLimpio = Float.valueOf(txtAlturaFusteLimpio.getText());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             this.alturaFusteLimpio = null;
         }
-        
-        try{
+
+        try {
             this.alturaComercial = Float.valueOf(txtAlturaComercial.getText());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             this.alturaComercial = null;
         }
-        try{
+        try {
             this.diametroCopaNS = Float.valueOf(txtDiametroCopaNS.getText());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             this.diametroCopaNS = null;
         }
-        
-        try{
+
+        try {
             this.diametroCopaEO = Float.valueOf(txtDiametroCopaEO.getText());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             this.diametroCopaEO = null;
         }
-        if(chkEsSubmuestra.isSelected()){
+        if (chkEsSubmuestra.isSelected()) {
             this.esSubmuestra = 1;
-        }else{
+        } else {
             this.esSubmuestra = 0;
         }
     }
-    
+
     private void crearArbolado() {
+
         CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
         CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
         CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
@@ -1457,9 +1460,9 @@ private void fillCmbSitio(int upmID) {
         CatETipoTocon indexTipoTocon = (CatETipoTocon) cmbTipoTocon.getSelectedItem();
         CatEVigorArbolado indexVigor = (CatEVigorArbolado) cmbVigor.getSelectedItem();
         CatENivelVigor indexNivelVigor = (CatENivelVigor) cmbNivelVigor.getSelectedItem();
-        
+
         CEArbolado arb = new CEArbolado();
-        
+
         arb.setSitioID(this.sitioID);
         if (indexFamilia != null) {
             arb.setFamiliaID(indexFamilia.getFamiliaID());
@@ -1470,7 +1473,7 @@ private void fillCmbSitio(int upmID) {
         if (indexEspecie != null) {
             arb.setEspecieID(indexEspecie.getEspecieID());
         }
-        if(indexInfraespecie != null){
+        if (indexInfraespecie != null) {
             arb.setInfraespecieID(indexInfraespecie.getInfraespecieID());
         }
         if (indexFormaV != null) {
@@ -1494,7 +1497,7 @@ private void fillCmbSitio(int upmID) {
         if (indexVigor != null) {
             arb.setVigorID(indexVigor.getVigorID());
         }
-        if(indexNivelVigor != null){
+        if (indexNivelVigor != null) {
             arb.setNivelVigorID(indexNivelVigor.getNivelVigorID());
         }
         arb.setConsecutivo(this.consecutivo);
@@ -1515,12 +1518,13 @@ private void fillCmbSitio(int upmID) {
         this.cdArbolado.insertArboladoA(arb);
         this.arboladoID = this.cdArbolado.getLastArboladoID();
         crearDanios(arboladoID);
-        
-        if(chkEsSubmuestra.isSelected()){
+
+        if (chkEsSubmuestra.isSelected()) {
             this.cdSubmuestra.insertSubmuestra(this.sitioID, this.arboladoID);
+
         }
     }
-    
+
     private void crearDanios(int arboladoID) {
         CEDanioSeveridad ceDanio1 = new CEDanioSeveridad();
         CEDanioSeveridad ceDanio2 = new CEDanioSeveridad();
@@ -1556,7 +1560,7 @@ private void fillCmbSitio(int upmID) {
         } catch (NullPointerException e) {
             severidad2 = null;
         }
-   
+
         ceDanio1.setSeccionID(arboladoID);
         ceDanio1.setNumeroDanio(1);
         ceDanio1.setAgenteDanioID(danio1);
@@ -1571,12 +1575,12 @@ private void fillCmbSitio(int upmID) {
 
         cdDanio.insertDanioArbolado(ceDanio2);
     }
-    
+
     private void actualizarArbolado() {
         try {
             int fila = grdArbolado.getSelectedRow();
             String registro = grdArbolado.getValueAt(fila, 0).toString();
-            
+
             CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
             CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
             CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
@@ -1598,7 +1602,7 @@ private void fillCmbSitio(int upmID) {
 
             arb.setSitioID(this.sitioID);
             arb.setArboladoID(this.arboladoID);
-            
+
             if (indexFamilia != null) {
                 arb.setFamiliaID(indexFamilia.getFamiliaID());
             } else {
@@ -1614,13 +1618,13 @@ private void fillCmbSitio(int upmID) {
             } else {
                 arb.setEspecieID(null);
             }
-            
-            if(indexInfraespecie != null){
+
+            if (indexInfraespecie != null) {
                 arb.setInfraespecieID(indexInfraespecie.getInfraespecieID());
             } else {
                 arb.setInfraespecieID(null);
             }
-            
+
             if (indexFormaV != null) {
                 arb.setFormaVidaID(indexFormaV.getFormaVidaID());
             }
@@ -1642,7 +1646,7 @@ private void fillCmbSitio(int upmID) {
             if (indexVigor != null) {
                 arb.setVigorID(indexVigor.getVigorID());
             }
-            if(indexNivelVigor != null){
+            if (indexNivelVigor != null) {
                 arb.setNivelVigorID(indexNivelVigor.getNivelVigorID());
             }
             arb.setConsecutivo(this.consecutivo);
@@ -1659,13 +1663,13 @@ private void fillCmbSitio(int upmID) {
             arb.setAlturaComercial(this.alturaComercial);
             arb.setDiametroCopaNS(this.diametroCopaNS);
             arb.setDiametroCopaEO(this.diametroCopaEO);
-           
-            if(chkEsSubmuestra.isSelected()){
+
+            if (chkEsSubmuestra.isSelected()) {
                 arb.setEsSubmuestra(1);
-            }else{
+            } else {
                 arb.setEsSubmuestra(0);
             }
-            
+
             CEDanioSeveridad danio1 = new CEDanioSeveridad();
             CEDanioSeveridad danio2 = new CEDanioSeveridad();
             CDDanioArbolado cdDanio = new CDDanioArbolado();
@@ -1676,20 +1680,20 @@ private void fillCmbSitio(int upmID) {
             if (indexSeveridad1 != null) {
                 danio1.setSeveridadID(indexSeveridad1.getPorcentajeArboladoID());
             }
-            
+
             cdDanio.updateDanioArbolado(danio1);
-            
+
             danio2.setSeccionID(this.arboladoID);
             danio2.setNumeroDanio(2);
             danio2.setAgenteDanioID(indexDanio2.getAgenteDanioID());
             if (indexSeveridad2 != null) {
                 danio2.setSeveridadID(indexSeveridad2.getPorcentajeArboladoID());
             }
-            
+
             cdDanio.updateDanioArbolado(danio2);
-            
+
             this.cdArbolado.updateArboladoA(arb);
-            
+
             limpiarControles();
 
         } catch (Exception e) {
@@ -1697,7 +1701,7 @@ private void fillCmbSitio(int upmID) {
                     + e.getClass().getName() + " : " + e.getMessage(), "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
+
     private void eliminarArbolado() {
         try {
             int fila = grdArbolado.getSelectedRow();
@@ -1718,7 +1722,7 @@ private void fillCmbSitio(int upmID) {
                     + "", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
+
     private void eliminarDanio(int arboladoID) {
         CEDanioSeveridad danio = new CEDanioSeveridad();
         CDDanioArbolado cdDanio = new CDDanioArbolado();
@@ -1766,7 +1770,7 @@ private void fillCmbSitio(int upmID) {
         txtNumeroIndividuo.requestFocus();
         chkEsSubmuestra.setSelected(false);
         txtClaveColecta.setText("");
-        
+
         txtNumeroRamaTallo.setEnabled(true);
         cmbConsecutivo.setEnabled(true);
         txtNumeroIndividuo.setEnabled(true);
@@ -1788,7 +1792,7 @@ private void fillCmbSitio(int upmID) {
         //cmbSeveridad1.setEnabled(true);
         //cmbSeveridad2.setEnabled(true);
     }
-    
+
     public void evitarCapturaPorTrazo(CESitio sitio) {
         CDTrazoSitio trazo = new CDTrazoSitio();
 
@@ -1860,10 +1864,10 @@ private void fillCmbSitio(int upmID) {
         cmbNivelVigor.setEnabled(true);
         cmbAgenteDanio1.setEnabled(true);
         //cmbSeveridad1.setEnabled(true);
-         cmbAgenteDanio2.setEnabled(true);
-       // cmbSeveridad2.setEnabled(true);
+        cmbAgenteDanio2.setEnabled(true);
+        // cmbSeveridad2.setEnabled(true);
     }
-    
+
     private boolean validarDistanciaCuadrante(Integer azimut, Float distancia) {
         CDTrazoSitio cdTrazoSitio = new CDTrazoSitio();
         CESitio trazo = cdTrazoSitio.getTrazoSitio(this.ceSitio);
@@ -1892,18 +1896,18 @@ private void fillCmbSitio(int upmID) {
         }
         return true;
     }
-    
+
     private boolean validarCamposObligatorio() {
         ValidacionesComunes validacion = new ValidacionesComunes();
         if (txtNumeroIndividuo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo número de individuo es obligatorio", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
             txtNumeroIndividuo.requestFocus();
             return false;
-        } else if(txtNumeroRamaTallo.getText().isEmpty()) {
+        } else if (txtNumeroRamaTallo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo de rama o tallo es obligatorio", "Arbolado", JOptionPane.ERROR_MESSAGE);
             txtNumeroRamaTallo.requestFocus();
             return false;
-        } else if(cdArbolado.validarNumeroRamatallo(this.sitioID, this.noRama)){
+        } else if (cdArbolado.validarNumeroRamatallo(this.sitioID, this.noRama)) {
             JOptionPane.showMessageDialog(null, "El número de rama o tallo no debe repetirse", "Arbolado", JOptionPane.ERROR_MESSAGE);
             txtNumeroRamaTallo.setValue(null);
             txtNumeroRamaTallo.setText("");
@@ -1930,17 +1934,17 @@ private void fillCmbSitio(int upmID) {
             cmbCondicion.requestFocus();
             return false;
         } else {
-             return true;
+            return true;
         }
     }
-    
+
     private boolean validarCamposObligatorioModificar() {
         ValidacionesComunes validacion = new ValidacionesComunes();
         if (txtNumeroIndividuo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo número de individuo es obligatorio", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
             txtNumeroIndividuo.requestFocus();
             return false;
-        } else if(txtNumeroRamaTallo.getText().isEmpty()) {
+        } else if (txtNumeroRamaTallo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo de rama o tallo es obligatorio", "Arbolado", JOptionPane.ERROR_MESSAGE);
             txtNumeroRamaTallo.requestFocus();
             return false;
@@ -1965,13 +1969,13 @@ private void fillCmbSitio(int upmID) {
             cmbCondicion.requestFocus();
             return false;
         } else {
-             return true;
+            return true;
         }
     }
-    
+
     private boolean validarMedicionesObligatorias() {
-       // System.out.println(this.azimut+"linea 1861");
-        
+        // System.out.println(this.azimut+"linea 1861");
+
         ValidacionesComunes validacionC = new ValidacionesComunes();
         ValidacionesArbolado validacionAR = new ValidacionesArbolado();
         if (validacionAR.esNumeracion(this.noIndividuo)) {
@@ -1993,10 +1997,10 @@ private void fillCmbSitio(int upmID) {
             return true;
         }
     }
-    
+
     private boolean validarMedicionesOpcionales() {
         ValidacionesArbolado validacionAR = new ValidacionesArbolado();
-       if (txtAnguloInclinacion.isEnabled() == true && txtAnguloInclinacion != null && validacionAR.esAnguloInclinacion(this.anguloInclinacion)) {
+        if (txtAnguloInclinacion.isEnabled() == true && txtAnguloInclinacion != null && validacionAR.esAnguloInclinacion(this.anguloInclinacion)) {
             txtAnguloInclinacion.requestFocus();
             return false;
         } else if (txtAlturaFusteLimpio.isEnabled() && validacionAR.esAlturaFusteLimpio(this.alturaFusteLimpio)) {
@@ -2015,7 +2019,7 @@ private void fillCmbSitio(int upmID) {
             return true;
         }
     }
-    
+
     private boolean validarAlturaComercial() {
         ValidacionesArbolado validacionAR = new ValidacionesArbolado();
         if (this.diametroNormal >= 10 && txtAlturaComercial.getText().isEmpty()) {
@@ -2023,17 +2027,17 @@ private void fillCmbSitio(int upmID) {
             txtAlturaComercial.requestFocus();
             return false;
         } else if (this.diametroNormal >= 10 && !txtAlturaComercial.getText().isEmpty()) {
-            if(validacionAR.esAlturaComercial(this.alturaComercial)){
+            if (validacionAR.esAlturaComercial(this.alturaComercial)) {
                 return false;
             } else {
-                 return true;
+                return true;
             }
-           
+
         } else {
             return true;
         }
     }
-    
+
     private boolean validarCamposOpcionales() {
         CatECondicionArbolado condicion = (CatECondicionArbolado) cmbCondicion.getSelectedItem();
         CatEFormaVida formaVida = (CatEFormaVida) cmbFormaVida.getSelectedItem();
@@ -2053,11 +2057,11 @@ private void fillCmbSitio(int upmID) {
             JOptionPane.showMessageDialog(null, "Error! Si selecciono condicion de tocon debe seleccionar un tipo", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
             cmbTipoTocon.requestFocus();
             return false;
-        } else if(cmbVigor.isEnabled() && cmbVigor.getSelectedItem() == null){
+        } else if (cmbVigor.isEnabled() && cmbVigor.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Error! se debe capturar vigor", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
             cmbVigor.requestFocus();
             return false;
-        } else if(cmbNivelVigor.isEnabled() && cmbNivelVigor.getSelectedItem() == null){
+        } else if (cmbNivelVigor.isEnabled() && cmbNivelVigor.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Error! se debe capturar nivel de vigor", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
             cmbNivelVigor.requestFocus();
             return false;
@@ -2065,7 +2069,7 @@ private void fillCmbSitio(int upmID) {
             JOptionPane.showMessageDialog(null, "Error! Debe capturar la altura total", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
             txtAlturaTotal.requestFocus();
             return false;
-        }  else if (txtAlturaFusteLimpio.isEnabled() && formaVida.getFormaVidaID() == 1 && this.alturaFusteLimpio == null) {
+        } else if (txtAlturaFusteLimpio.isEnabled() && formaVida.getFormaVidaID() == 1 && this.alturaFusteLimpio == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe capturar la altura fuste limpio", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
             txtAlturaFusteLimpio.requestFocus();
             return false;
@@ -2081,9 +2085,9 @@ private void fillCmbSitio(int upmID) {
             return true;
         }
     }
-    
-   private boolean validarDanioObligatorio() {
-        CatEAgenteDanio agenteDanio = (CatEAgenteDanio)cmbAgenteDanio1.getSelectedItem();
+
+    private boolean validarDanioObligatorio() {
+        CatEAgenteDanio agenteDanio = (CatEAgenteDanio) cmbAgenteDanio1.getSelectedItem();
         if (agenteDanio.getAgenteDanioID() == 1) {
             JOptionPane.showMessageDialog(null, "Error! Debe capturar al menos un daño", "Arbolado A", JOptionPane.ERROR_MESSAGE);
             cmbAgenteDanio1.requestFocus();
@@ -2092,7 +2096,7 @@ private void fillCmbSitio(int upmID) {
             return true;
         }
     }
-    
+
     private boolean validarCampoDanio() {
         if (cmbSeveridad1.isEnabled() && cmbSeveridad1.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe de seleccionar un nivel de severidad 1 ", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
@@ -2106,8 +2110,8 @@ private void fillCmbSitio(int upmID) {
             return true;
         }
     }
-    
-/*    private boolean validarRamaTallo() {
+
+    /*    private boolean validarRamaTallo() {
         int registros = cdArbolado.getRamaTallo(this.sitioID, this.noIndividuo, this.noRama);
         if (registros > 0) {
             JOptionPane.showMessageDialog(null, "Error! El numero de rama o tallo no puede repetirse en el mismo individuo", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
@@ -2117,7 +2121,6 @@ private void fillCmbSitio(int upmID) {
             return true;
         }
     }*/
-    
     private boolean validarColectasObligatorias() {
         CDColectaBotanica colecta = new CDColectaBotanica();
         if (colecta.validarCapturaEspecie("TAXONOMIA_Arbolado", this.sitioID)) {
@@ -2127,8 +2130,8 @@ private void fillCmbSitio(int upmID) {
             return true;
         }
     }
-    
-    private void estadoArbolVivo(){
+
+    private void estadoArbolVivo() {
         cmbCondicionMuertoPie.setEnabled(false);
         cmbCondicionMuertoPie.setSelectedItem(null);
         cmbTipoTocon.setEnabled(false);
@@ -2148,8 +2151,8 @@ private void fillCmbSitio(int upmID) {
         cmbVigor.setEnabled(true);
         cmbNivelVigor.setEnabled(true);
     }
-    
-    private void estadoMuertoPie(){
+
+    private void estadoMuertoPie() {
         cmbCondicionMuertoPie.setEnabled(true);
         //cmbFormaFuste.setEnabled(false);
         cmbFormaFuste.setSelectedItem(null);
@@ -2175,8 +2178,8 @@ private void fillCmbSitio(int upmID) {
         txtDiametroCopaEO.setText("");
         txtDiametroCopaEO.setValue(null);
     }
-    
-    private void estadoMuertoPieCD(int muertoPieID){
+
+    private void estadoMuertoPieCD(int muertoPieID) {
         //cmbGradoPutrefaccion.setEnabled(false);
         //cmbGradoPutrefaccion.setSelectedItem(null);
         cmbTipoTocon.setEnabled(false);
@@ -2200,15 +2203,15 @@ private void fillCmbSitio(int upmID) {
         txtDiametroCopaEO.setEnabled(false);
         txtDiametroCopaEO.setText("");
         txtDiametroCopaEO.setValue(null);
-        
-        if(muertoPieID == 4){
+
+        if (muertoPieID == 4) {
             cmbGradoPutrefaccion.setEnabled(true);
-        }else{
+        } else {
             cmbGradoPutrefaccion.setEnabled(false);
         }
     }
-    
-    private void estadoArbolTocon(){
+
+    private void estadoArbolTocon() {
         cmbCondicionMuertoPie.setEnabled(false);
         cmbCondicionMuertoPie.setSelectedItem(null);
         cmbFormaFuste.setEnabled(false);
@@ -2234,8 +2237,8 @@ private void fillCmbSitio(int upmID) {
         txtDiametroCopaEO.setText("");
         txtDiametroCopaEO.setValue(null);
     }
-    
-    private void estadoLianaCactaceasCaniasVivos(){
+
+    private void estadoLianaCactaceasCaniasVivos() {
         cmbFormaFuste.setEnabled(true);
         cmbFormaFuste.setSelectedItem(null);
         cmbTipoTocon.setEnabled(false);
@@ -2251,8 +2254,8 @@ private void fillCmbSitio(int upmID) {
         cmbGradoPutrefaccion.setEnabled(false);
         cmbGradoPutrefaccion.setSelectedItem(null);
     }
-   
-   /* private void estadoDanio1() {
+
+    /* private void estadoDanio1() {
         CatEAgenteDanio danio1 = (CatEAgenteDanio) cmbAgenteDanio1.getSelectedItem();
 
         if (danio1.getAgenteDanioID() == 1) {
@@ -2274,61 +2277,60 @@ private void fillCmbSitio(int upmID) {
            cmbSeveridad2.setEnabled(true);
         }
     }*/
-    
     private void fijarValoresPorCampo(int arbolID) {
         CEArbolado arbol;
         arbol = cdArbolado.getRegistroArboladoA(arbolID);
-        
+
         txtNumeroIndividuo.setText(String.valueOf(arbol.getNumeroIndividuo()));
         txtNumeroRamaTallo.setText(String.valueOf(arbol.getNumeroRama()));
         txtAzimut.setText(String.valueOf(arbol.getAzimut()));
         txtDistancia.setText(String.valueOf(arbol.getDistancia()));
-        
+
         CatEFamiliaEspecie fam = new CatEFamiliaEspecie();
         fam.setFamiliaID(arbol.getFamiliaID());
         cmbFamilia.setSelectedItem(fam);
-        
+
         CatEGenero gen = new CatEGenero();
         gen.setGeneroID(arbol.getGeneroID());
         cmbGenero.setSelectedItem(gen);
-       /* CatEGenero gen = new CatEGenero();
+        /* CatEGenero gen = new CatEGenero();
         gen.setGeneroID(arbol.getGeneroID());
         cmbGenero.removeAllItems();
         fillCmbGenero();
         cmbGenero.setSelectedItem(gen);*/
-        
+
         CatEEspecie esp = new CatEEspecie();
         esp.setEspecieID(arbol.getEspecieID());
         cmbEspecie.removeAllItems();
         fillCmbEspecie(arbol.getGeneroID());
         cmbEspecie.setSelectedItem(esp);
-        
+
         CatEInfraespecie inf = new CatEInfraespecie();
         inf.setInfraespecieID(arbol.getInfraespecieID());
         cmbInfraespecie.removeAllItems();
         fillCmbInfraespecie(arbol.getEspecieID());
         cmbInfraespecie.setSelectedItem(inf);
-        
+
         CatEFormaVida fv = new CatEFormaVida();
         fv.setFormaVidaID(arbol.getFormaVidaID());
         cmbFormaVida.setSelectedItem(fv);
-        
+
         CatEVigorArbolado tv = new CatEVigorArbolado();
         tv.setVigorID(arbol.getVigorID());
         cmbVigor.setSelectedItem(tv);
-        
+
         CatENivelVigor nv = new CatENivelVigor();
         nv.setNivelVigorID(arbol.getNivelVigorID());
         cmbNivelVigor.setSelectedItem(nv);
-     
+
         txtNombreComun.setText(arbol.getNombreComun());
-        
+
         CatECondicionArbolado ca = new CatECondicionArbolado();
         int condicionArbolado = arbol.getCondicionID();
         ca.setCondicionID(condicionArbolado);
         CatEGradoPutrefaccionArbolado gp = new CatEGradoPutrefaccionArbolado();
         gp.setGradoPutrefaccionID(arbol.getGradoPutrefaccionID());
-        
+
         if (arbol.getFormaVidaID() < 4 || arbol.getFormaVidaID() == 7) {   //si es arbol, arbusto, arborecente o no determinado
             cmbCondicion.removeAllItems(); // a lo seleccionado en formas de vida arborecentes
             fillCmbCondicionArbolado();
@@ -2337,22 +2339,21 @@ private void fillCmbSitio(int upmID) {
                 CatEFormaFuste ff = new CatEFormaFuste();
                 ff.setFormaFusteID(arbol.getFormaFusteID());
                 estadoArbolVivo();
-               cmbFormaFuste.setSelectedItem(ff);
+                cmbFormaFuste.setSelectedItem(ff);
             } else if (condicionArbolado == 2) { //arbol muerto
                 CatECondicionMuertoPie mp = new CatECondicionMuertoPie();
                 int muertoID = arbol.getMuertoPieID();
-                int gradoP = arbol.getGradoPutrefaccionID(); 
+                int gradoP = arbol.getGradoPutrefaccionID();
                 cmbFormaFuste.setSelectedIndex(arbol.getFormaFusteID());
                 gp.setGradoPutrefaccionID(gradoP);
                 estadoMuertoPieCD(muertoID);
                 mp.setMuertoPieID(muertoID);
                 cmbCondicionMuertoPie.setEnabled(true);
                 cmbCondicionMuertoPie.setSelectedItem(mp);
-               
-                
+
                 cmbGradoPutrefaccion.setSelectedItem(null);
                 cmbGradoPutrefaccion.setEnabled(false);
-                
+
                 if (arbol.getMuertoPieID() == 4) { //si es CMP=D
                     cmbGradoPutrefaccion.setEnabled(true);
                     cmbGradoPutrefaccion.setSelectedItem(gp);
@@ -2383,7 +2384,7 @@ private void fillCmbSitio(int upmID) {
                 }
             }
         }
-     
+
         txtDiametroNormal.setText(String.valueOf(arbol.getDiametroNormal()));
         txtAlturaTotal.setText(String.valueOf(arbol.getAlturaTotal()));
         if (arbol.getAnguloInclinacion() == null) {
@@ -2396,7 +2397,7 @@ private void fillCmbSitio(int upmID) {
         } else {
             txtAlturaFusteLimpio.setText(String.valueOf(arbol.getAlturaFusteLimpio()));
         }
-        if(arbol.getAlturaComercial() == null){
+        if (arbol.getAlturaComercial() == null) {
             txtAlturaComercial.setText("");
             txtAlturaComercial.setEnabled(false);
         } else {
@@ -2412,7 +2413,6 @@ private void fillCmbSitio(int upmID) {
         }
 
         //Fijando datos en campos de danios
-        
         CEDanioSeveridad severidad1 = new CEDanioSeveridad();
         CEDanioSeveridad severidad2 = new CEDanioSeveridad();
         CatEAgenteDanio agente1 = new CatEAgenteDanio();
@@ -2420,7 +2420,7 @@ private void fillCmbSitio(int upmID) {
         CDDanioArbolado cdDanio = new CDDanioArbolado();
         CatEPorcentajeArbolado porcentaje1 = new CatEPorcentajeArbolado();
         CatEPorcentajeArbolado porcentaje2 = new CatEPorcentajeArbolado();
-        
+
         List<CEDanioSeveridad> listDanio = new ArrayList<>();
         listDanio = cdDanio.getDanio(arbolID);
 
@@ -2439,47 +2439,47 @@ private void fillCmbSitio(int upmID) {
                 porcentaje2.setPorcentajeArboladoID(severidad2.getSeveridadID());
             }
         }
-        
+
         cmbAgenteDanio1.setSelectedItem(agente1);
         combo.reiniciarComboModel(cmbSeveridad1);
         fillCmbSeveridad1(agente1.getAgenteDanioID());
         cmbSeveridad1.setSelectedItem(porcentaje1);
-        
+
         cmbAgenteDanio2.setSelectedItem(agente2);
         combo.reiniciarComboModel(cmbSeveridad2);
         fillCmbSeveridad2(agente2.getAgenteDanioID());
         cmbSeveridad2.setSelectedItem(porcentaje2);
-        
-        if(!txtAnguloInclinacion.isEnabled()){
-                txtAnguloInclinacion.setText("");
-                txtAnguloInclinacion.setValue(null);
-            }
-            if(!txtAlturaFusteLimpio.isEnabled()){
-                txtAlturaFusteLimpio.setText("");
-                txtAlturaFusteLimpio.setValue(null);
-            }
-            if(!txtDiametroCopaNS.isEnabled()){
-                txtDiametroCopaNS.setText("");
-                txtDiametroCopaNS.setValue(null);
-            }
-            if(!txtDiametroCopaEO.isEnabled()){
-                txtDiametroCopaEO.setText("");
-                txtDiametroCopaEO.setValue(null);
-            }
-            if(!txtAlturaComercial.isEnabled()){
-                txtAlturaComercial.setText("");
-                txtAlturaComercial.setValue(null);
-            }
-        
+
+        if (!txtAnguloInclinacion.isEnabled()) {
+            txtAnguloInclinacion.setText("");
+            txtAnguloInclinacion.setValue(null);
+        }
+        if (!txtAlturaFusteLimpio.isEnabled()) {
+            txtAlturaFusteLimpio.setText("");
+            txtAlturaFusteLimpio.setValue(null);
+        }
+        if (!txtDiametroCopaNS.isEnabled()) {
+            txtDiametroCopaNS.setText("");
+            txtDiametroCopaNS.setValue(null);
+        }
+        if (!txtDiametroCopaEO.isEnabled()) {
+            txtDiametroCopaEO.setText("");
+            txtDiametroCopaEO.setValue(null);
+        }
+        if (!txtAlturaComercial.isEnabled()) {
+            txtAlturaComercial.setText("");
+            txtAlturaComercial.setValue(null);
+        }
+
         // txtNumeroIndividuo.requestFocus();
         cmbConsecutivo.requestFocus();
         txtClaveColecta.setText(arbol.getClaveColecta());
 
     }
-    
-    private boolean validarCreacionSubmuestra(){
+
+    private boolean validarCreacionSubmuestra() {
         boolean continuar = true;
-        if(cdArbolado.validarCrearSubmuestra(this.sitioID)){
+        if (cdArbolado.validarCrearSubmuestra(this.sitioID)) {
             Object[] opciones = {"Si", "No"};
             int respuesta = JOptionPane.showOptionDialog(null, "No se han marcado árboles submuestra, ¿Desea continuar?",
                     "Arbolado", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
@@ -2491,70 +2491,70 @@ private void fillCmbSitio(int upmID) {
         }
         return continuar;
     }
-    
-    
+
+
     private void txtNombreComunFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreComunFocusGained
         txtNombreComun.selectAll();
     }//GEN-LAST:event_txtNombreComunFocusGained
 
     private void txtDiametroNormalFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroNormalFocusGained
-         SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtDiametroNormal.selectAll();
             }
         });
     }//GEN-LAST:event_txtDiametroNormalFocusGained
 
     private void txtAlturaTotalFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaTotalFocusGained
-       SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtAlturaTotal.selectAll();
             }
         });
     }//GEN-LAST:event_txtAlturaTotalFocusGained
 
     private void txtAnguloInclinacionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAnguloInclinacionFocusGained
-       SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtAnguloInclinacion.selectAll();
             }
         });
     }//GEN-LAST:event_txtAnguloInclinacionFocusGained
 
     private void txtAlturaFusteLimpioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaFusteLimpioFocusGained
-       SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtAlturaFusteLimpio.selectAll();
             }
         });
     }//GEN-LAST:event_txtAlturaFusteLimpioFocusGained
 
     private void txtAlturaComercialFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaComercialFocusGained
-       SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtAlturaComercial.selectAll();
             }
         });
     }//GEN-LAST:event_txtAlturaComercialFocusGained
 
     private void txtDiametroCopaNSFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroCopaNSFocusGained
-       SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtDiametroCopaNS.selectAll();
             }
         });
     }//GEN-LAST:event_txtDiametroCopaNSFocusGained
 
     private void txtDiametroCopaEOFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroCopaEOFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtDiametroCopaEO.selectAll();
             }
         });
@@ -2562,123 +2562,123 @@ private void fillCmbSitio(int upmID) {
 
     private void txtDiametroNormalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroNormalFocusLost
         try {
-          if(txtDiametroNormal.getText().isEmpty()){
-          txtDiametroNormal.setValue(null);
-          txtAlturaComercial.setEnabled(false);
-      }
-      if(Float.parseFloat(txtDiametroNormal.getText())>=10 && cmbFormaVida.getSelectedIndex()<3){//si el diametro normal es mayor o igual a 10 y no es arborecente
-         
-          if(cmbCondicion.getSelectedIndex()==2){//si la condicion muerto, no hay altura comercial
-             txtAlturaComercial.setEnabled(false); 
-          }else{
-          txtAlturaComercial.setEnabled(true);
-          }
-      }
-      if(Integer.parseInt(txtDiametroNormal.getText())<10){
-          txtAlturaComercial.setEnabled(false);
-      }
-      if(cmbCondicion.getSelectedIndex()>2||cmbFormaVida.getSelectedIndex()>6)//es tocon o forma de vida no determinada
-      {
-          txtAlturaComercial.setEnabled(false);
-      }
-      //System.out.println(txtAlturaComercial.isEnabled());
+            if (txtDiametroNormal.getText().isEmpty()) {
+                txtDiametroNormal.setValue(null);
+                txtAlturaComercial.setEnabled(false);
+            }
+            if (Float.parseFloat(txtDiametroNormal.getText()) >= 10 && cmbFormaVida.getSelectedIndex() < 3) {//si el diametro normal es mayor o igual a 10 y no es arborecente
+
+                if (cmbCondicion.getSelectedIndex() == 2) {//si la condicion muerto, no hay altura comercial
+                    txtAlturaComercial.setEnabled(false);
+                } else {
+                    txtAlturaComercial.setEnabled(true);
+                }
+            }
+            if (Integer.parseInt(txtDiametroNormal.getText()) < 10) {
+                txtAlturaComercial.setEnabled(false);
+            }
+            if (cmbCondicion.getSelectedIndex() > 2 || cmbFormaVida.getSelectedIndex() > 6)//es tocon o forma de vida no determinada
+            {
+                txtAlturaComercial.setEnabled(false);
+            }
+            //System.out.println(txtAlturaComercial.isEnabled());
         } catch (Exception e) {
         }
-      
+
     }//GEN-LAST:event_txtDiametroNormalFocusLost
 
     private void txtAlturaTotalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaTotalFocusLost
-       if(txtAlturaTotal.getText().isEmpty()){
-           txtAlturaTotal.setValue(null);
-       }
+        if (txtAlturaTotal.getText().isEmpty()) {
+            txtAlturaTotal.setValue(null);
+        }
     }//GEN-LAST:event_txtAlturaTotalFocusLost
 
     private void txtAnguloInclinacionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAnguloInclinacionFocusLost
-       if(txtAnguloInclinacion.getText().isEmpty()){
-           txtAnguloInclinacion.setValue(null);
-       }
+        if (txtAnguloInclinacion.getText().isEmpty()) {
+            txtAnguloInclinacion.setValue(null);
+        }
     }//GEN-LAST:event_txtAnguloInclinacionFocusLost
 
     private void txtAlturaFusteLimpioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaFusteLimpioFocusLost
-        if(txtAlturaFusteLimpio.getText().isEmpty()){
+        if (txtAlturaFusteLimpio.getText().isEmpty()) {
             txtAlturaFusteLimpio.setValue(null);
         }
     }//GEN-LAST:event_txtAlturaFusteLimpioFocusLost
 
     private void txtAlturaComercialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaComercialFocusLost
-        if(txtAlturaComercial.getText().isEmpty()){
+        if (txtAlturaComercial.getText().isEmpty()) {
             txtAlturaComercial.setValue(null);
         }
     }//GEN-LAST:event_txtAlturaComercialFocusLost
 
     private void txtDiametroCopaNSFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroCopaNSFocusLost
-        if(txtDiametroCopaNS.getText().isEmpty()){
+        if (txtDiametroCopaNS.getText().isEmpty()) {
             txtDiametroCopaNS.setValue(null);
         }
     }//GEN-LAST:event_txtDiametroCopaNSFocusLost
 
     private void txtDiametroCopaEOFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroCopaEOFocusLost
-       if(txtDiametroCopaEO.getText().isEmpty()){
-           txtDiametroCopaEO.setValue(null);
-       }
+        if (txtDiametroCopaEO.getText().isEmpty()) {
+            txtDiametroCopaEO.setValue(null);
+        }
     }//GEN-LAST:event_txtDiametroCopaEOFocusLost
 
     private void txtNumeroIndividuoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroIndividuoFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtNumeroIndividuo.selectAll();
             }
         });
     }//GEN-LAST:event_txtNumeroIndividuoFocusGained
 
     private void txtNumeroRamaTalloFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroRamaTalloFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtNumeroRamaTallo.selectAll();
             }
         });
     }//GEN-LAST:event_txtNumeroRamaTalloFocusGained
 
     private void txtAzimutFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAzimutFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtAzimut.selectAll();
             }
         });
     }//GEN-LAST:event_txtAzimutFocusGained
 
     private void txtDistanciaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDistanciaFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtDistancia.selectAll();
             }
         });
     }//GEN-LAST:event_txtDistanciaFocusGained
 
     private void txtNumeroIndividuoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroIndividuoFocusLost
-        if(txtNumeroIndividuo.getText().isEmpty()){
+        if (txtNumeroIndividuo.getText().isEmpty()) {
             txtNumeroIndividuo.setValue(null);
         }
     }//GEN-LAST:event_txtNumeroIndividuoFocusLost
 
     private void txtNumeroRamaTalloFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroRamaTalloFocusLost
-        if(txtNumeroRamaTallo.getText().isEmpty()){
+        if (txtNumeroRamaTallo.getText().isEmpty()) {
             txtNumeroRamaTallo.setValue(null);
         }
     }//GEN-LAST:event_txtNumeroRamaTalloFocusLost
 
     private void txtAzimutFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAzimutFocusLost
-       if(txtAzimut.getText().isEmpty()){
-           txtAzimut.setValue(null);
-       }
+        if (txtAzimut.getText().isEmpty()) {
+            txtAzimut.setValue(null);
+        }
     }//GEN-LAST:event_txtAzimutFocusLost
 
     private void txtDistanciaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDistanciaFocusLost
-        if(txtDistancia.getText().isEmpty()){
+        if (txtDistancia.getText().isEmpty()) {
             txtDistancia.setValue(null);
         }
     }//GEN-LAST:event_txtDistanciaFocusLost
@@ -2692,7 +2692,7 @@ private void fillCmbSitio(int upmID) {
             fijarValoresPorCampo(this.arboladoID);
             chkEsSubmuestra.setEnabled(true);
             txtNumeroRamaTallo.setEnabled(false);
-            if(cmbFormaVida.getSelectedIndex()==3){
+            if (cmbFormaVida.getSelectedIndex() == 3) {
                 cmbNivelVigor.setEnabled(false);
                 cmbVigor.setEnabled(false);
             }
@@ -2700,38 +2700,50 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_grdArboladoMouseClicked
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        if(revision==false){//esta en modo de captura
+        if (revision == false) {//esta en modo de captura
             this.hide();
             funciones.manipularBotonesMenuPrincipal(false);
         }
-        if(revision==true){//entro a modo de revision
-             //System.err.println("Modo Revision");
+        if (revision == true) {//entro a modo de revision
+            //System.err.println("Modo Revision");
             this.hide();
-           // UPMForms.revisionModulos.iniciarRevision();
+            // UPMForms.revisionModulos.iniciarRevision();
             UPMForms.revisionModulos.setVisible(true);
             UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision=false;
+            revision = false;
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnTrazoSitioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrazoSitioActionPerformed
-       FrmTrazoSitio trazo = new FrmTrazoSitio(Main.main, true);
+        FrmTrazoSitio trazo = new FrmTrazoSitio(Main.main, true);
         trazo.setLocationRelativeTo(Main.main);
         CESitio sitio = new CESitio();
         sitio.setUpmID((int) cmbUPMID.getSelectedItem());
         sitio.setSitioID(this.sitioID);
         sitio.setSitio((int) cmbSitios.getSelectedItem());
         trazo.setDatosIniciales(sitio);
-        trazo.setVisible(true);     
+        trazo.setVisible(true);
     }//GEN-LAST:event_btnTrazoSitioActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         asignarDatosArbolado();
-        CatECondicionArbolado condicion = (CatECondicionArbolado) cmbCondicion.getSelectedItem();
-        if (validarCamposObligatorio()  && validarCamposOpcionales()&& validarMedicionesObligatorias() && validarMedicionesOpcionales()
-                && validarCampoDanio()) {
-            if (condicion.getCondicionID() > 1 && condicion.getCondicionID() <= 4) {
-                if (validarDanioObligatorio()) {
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            CatECondicionArbolado condicion = (CatECondicionArbolado) cmbCondicion.getSelectedItem();
+            if (validarCamposObligatorio() && validarCamposOpcionales() && validarMedicionesObligatorias() && validarMedicionesOpcionales()
+                    && validarCampoDanio()) {
+                if (condicion.getCondicionID() > 1 && condicion.getCondicionID() <= 4) {
+                    if (validarDanioObligatorio()) {
+                        crearArbolado();
+                        //this.cdArbolado.enumerarConsecutivo(this.sitioID);
+                        //this.cdArbolado.enumerarRama(this.sitioID);
+                        this.funciones.reiniciarComboModel(cmbConsecutivo);
+                        fillCmbConsecutivo();
+                        llenarTabla();
+                        limpiarControles();
+                    }
+                } else {
                     crearArbolado();
                     //this.cdArbolado.enumerarConsecutivo(this.sitioID);
                     //this.cdArbolado.enumerarRama(this.sitioID);
@@ -2740,46 +2752,49 @@ private void fillCmbSitio(int upmID) {
                     llenarTabla();
                     limpiarControles();
                 }
-            } else {
-                crearArbolado();
-                //this.cdArbolado.enumerarConsecutivo(this.sitioID);
-                //this.cdArbolado.enumerarRama(this.sitioID);
-                this.funciones.reiniciarComboModel(cmbConsecutivo);
-                fillCmbConsecutivo();
-                llenarTabla();
-                limpiarControles();
             }
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnElimnarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimnarActionPerformed
-        eliminarArbolado();
-        //this.cdArbolado.enumerarConsecutivo(this.sitioID);
-        //this.cdArbolado.enumerarRama(this.sitioID);
-        this.funciones.reiniciarComboModel(cmbConsecutivo);
-        fillCmbConsecutivo();
-        estadoArbolVivo();
-        llenarTabla();
+        if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+        } else {
+            eliminarArbolado();
+            //this.cdArbolado.enumerarConsecutivo(this.sitioID);
+            //this.cdArbolado.enumerarRama(this.sitioID);
+            this.funciones.reiniciarComboModel(cmbConsecutivo);
+            fillCmbConsecutivo();
+            estadoArbolVivo();
+            llenarTabla();
+        }
     }//GEN-LAST:event_btnElimnarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         try {
-        asignarDatosArbolado();
-        CatECondicionArbolado condicion = (CatECondicionArbolado) cmbCondicion.getSelectedItem();
-        if (validarCamposObligatorioModificar()&& validarCamposOpcionales() && validarMedicionesObligatorias() && validarMedicionesOpcionales()
-                && validarCampoDanio()) {
-            if (condicion.getCondicionID() > 1 && condicion.getCondicionID() <= 4) {
-                if (validarDanioObligatorio()) {
-                    actualizarArbolado();
-                    llenarTabla();
-                    //limpiarControles();
-                }
+            if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
             } else {
-                actualizarArbolado();
-                llenarTabla();
-                
+                asignarDatosArbolado();
+                if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+                } else {
+                    CatECondicionArbolado condicion = (CatECondicionArbolado) cmbCondicion.getSelectedItem();
+                    if (validarCamposObligatorioModificar() && validarCamposOpcionales() && validarMedicionesObligatorias() && validarMedicionesOpcionales()
+                            && validarCampoDanio()) {
+                        if (condicion.getCondicionID() > 1 && condicion.getCondicionID() <= 4) {
+                            if (validarDanioObligatorio()) {
+                                actualizarArbolado();
+                                llenarTabla();
+                            }
+                        } else {
+                            actualizarArbolado();
+                            llenarTabla();
+
+                        }
+                    }
+                }
             }
-        }
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -2806,11 +2821,11 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_cmbGeneroActionPerformed
 
     private void cmbFormaVidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFormaVidaActionPerformed
-       CatEFormaVida formaVida = (CatEFormaVida) cmbFormaVida.getSelectedItem();
+        CatEFormaVida formaVida = (CatEFormaVida) cmbFormaVida.getSelectedItem();
         DefaultComboBoxModel dcmCN = (DefaultComboBoxModel) cmbCondicion.getModel();
         dcmCN.removeAllElements();
         if (formaVida != null) {
-            if(cmbFormaVida.getSelectedIndex()>2){ //3-arborecente 4-lianas y bejucos 5-Cañas y bambu 6-cactaceas arborecentes
+            if (cmbFormaVida.getSelectedIndex() > 2) { //3-arborecente 4-lianas y bejucos 5-Cañas y bambu 6-cactaceas arborecentes
                 //txtAlturaFusteLimpio.setEnabled(false);
                 txtAlturaComercial.setEnabled(false);
                 cmbVigor.setEnabled(false);
@@ -2818,10 +2833,10 @@ private void fillCmbSitio(int upmID) {
                 cmbVigor.setSelectedItem(null);
                 cmbNivelVigor.setSelectedItem(null);
                 //System.out.println(cmbFormaVida.getSelectedIndex());
-                if(cmbFormaVida.getSelectedIndex()==6){//cactaceas arborecentes
+                if (cmbFormaVida.getSelectedIndex() == 6) {//cactaceas arborecentes
                     txtAlturaFusteLimpio.setEnabled(true);
                 }
-            }else{
+            } else {
                 txtAlturaFusteLimpio.setEnabled(!false);
                 txtAlturaComercial.setEnabled(!false);
                 cmbVigor.setEnabled(!false);
@@ -2831,14 +2846,15 @@ private void fillCmbSitio(int upmID) {
             }
             if (formaVida.getFormaVidaID() == 4 || formaVida.getFormaVidaID() == 5 || formaVida.getFormaVidaID() == 6) {
                 //fillCmbCondicionLianas();
-                 fillCmbCondicionArbolado();
+                fillCmbCondicionArbolado();
                 estadoLianaCactaceasCaniasVivos();
             } else if (formaVida.getFormaVidaID() == 1 || formaVida.getFormaVidaID() == 2 || formaVida.getFormaVidaID() == 3) {
                 fillCmbCondicionArbolado();
-            } if(formaVida.getFormaVidaID() == 7){
+            }
+            if (formaVida.getFormaVidaID() == 7) {
                 fillCmbCondicionArbolado();
             }
-            
+
         }
     }//GEN-LAST:event_cmbFormaVidaActionPerformed
 
@@ -2865,16 +2881,16 @@ private void fillCmbSitio(int upmID) {
             } else if ((formaVida.getFormaVidaID() >= 1 && formaVida.getFormaVidaID() <= 3) && (condicion.getCondicionID() >= 3 && condicion.getCondicionID() <= 4)) {
                 estadoArbolTocon();
             }
-            if(cmbCondicion.getSelectedIndex()==1){//solo para arboles Vivos
+            if (cmbCondicion.getSelectedIndex() == 1) {//solo para arboles Vivos
                 cmbVigor.setEnabled(true);
                 cmbNivelVigor.setEnabled(true);
-            }else{
+            } else {
                 cmbVigor.setEnabled(false);
                 cmbNivelVigor.setEnabled(false);
                 cmbVigor.setSelectedItem(null);
                 cmbNivelVigor.setSelectedItem(null);
             }
-            if(cmbCondicion.getSelectedIndex()==2){//es marbol muerto en pie
+            if (cmbCondicion.getSelectedIndex() == 2) {//es marbol muerto en pie
                 cmbCondicionMuertoPie.setEnabled(true);
                 cmbGradoPutrefaccion.setEnabled(false);
                 cmbTipoTocon.setEnabled(false);
@@ -2883,7 +2899,7 @@ private void fillCmbSitio(int upmID) {
                 txtDiametroCopaNS.setEnabled(false);
                 txtDiametroCopaEO.setEnabled(false);
             }
-             if(cmbCondicion.getSelectedIndex()==1&&cmbFormaVida.getSelectedIndex()>2){//es arborecente vivo
+            if (cmbCondicion.getSelectedIndex() == 1 && cmbFormaVida.getSelectedIndex() > 2) {//es arborecente vivo
                 txtAlturaFusteLimpio.setEnabled(true);
                 txtAlturaComercial.setEnabled(false);
                 txtDiametroCopaNS.setEnabled(true);
@@ -2891,7 +2907,7 @@ private void fillCmbSitio(int upmID) {
                 cmbVigor.setEnabled(false);
                 cmbNivelVigor.setEnabled(false);
             }
-             if(cmbCondicion.getSelectedIndex()==1&&cmbFormaVida.getSelectedIndex()==3){//es arborecente 
+            if (cmbCondicion.getSelectedIndex() == 1 && cmbFormaVida.getSelectedIndex() == 3) {//es arborecente 
                 //txtAlturaFusteLimpio.setEnabled(false);
                 txtAlturaComercial.setEnabled(false);
                 txtDiametroCopaNS.setEnabled(true);
@@ -2899,10 +2915,10 @@ private void fillCmbSitio(int upmID) {
                 cmbVigor.setEnabled(false);
                 cmbNivelVigor.setEnabled(false);
             }
-              if(cmbCondicion.getSelectedIndex()>=1&&cmbFormaVida.getSelectedIndex()==7){//es tocon no determinado
+            if (cmbCondicion.getSelectedIndex() >= 1 && cmbFormaVida.getSelectedIndex() == 7) {//es tocon no determinado
                 estadoArbolTocon();
             }
-             if(cmbCondicion.getSelectedIndex()>=3){//es tocon
+            if (cmbCondicion.getSelectedIndex() >= 3) {//es tocon
                 estadoArbolTocon();
             }
         }
@@ -2910,16 +2926,16 @@ private void fillCmbSitio(int upmID) {
 
     private void cmbCondicionMuertoPieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCondicionMuertoPieActionPerformed
         CatECondicionMuertoPie condicionMuerto = (CatECondicionMuertoPie) cmbCondicionMuertoPie.getSelectedItem();
-         //System.out.println("ACTION PERFORMED"+cmbCondicionMuertoPie.getSelectedIndex());
+        //System.out.println("ACTION PERFORMED"+cmbCondicionMuertoPie.getSelectedIndex());
+        txtAnguloInclinacion.setEnabled(true);
+        if (cmbCondicionMuertoPie.getSelectedIndex() == 4)//si la condicion es D
+        {
+
+            txtAnguloInclinacion.setEnabled(false);
+        } else {
             txtAnguloInclinacion.setEnabled(true);
-            if(cmbCondicionMuertoPie.getSelectedIndex()==4)//si la condicion es D
-            {
-               
-                txtAnguloInclinacion.setEnabled(false);
-            }else{
-                txtAnguloInclinacion.setEnabled(true);
-            }
-        
+        }
+
         if (condicionMuerto != null) {
             if (condicionMuerto.getMuertoPieID() == 4) {
                 estadoMuertoPieCD(condicionMuerto.getMuertoPieID());
@@ -2928,7 +2944,7 @@ private void fillCmbSitio(int upmID) {
                     cmbGradoPutrefaccion.setSelectedItem(null);
                 }
             }
-            if (condicionMuerto.getMuertoPieID()<4) {//si es CMP=D
+            if (condicionMuerto.getMuertoPieID() < 4) {//si es CMP=D
                 cmbGradoPutrefaccion.setEnabled(false);
                 //cmbFormaFuste.setSelectedItem(null);
                 cmbFormaFuste.setEnabled(true);
@@ -2941,7 +2957,7 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_cmbCondicionMuertoPieActionPerformed
 
     private void cmbAgenteDanio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAgenteDanio1ActionPerformed
-         CatEAgenteDanio agenteDanio = (CatEAgenteDanio) cmbAgenteDanio1.getSelectedItem();
+        CatEAgenteDanio agenteDanio = (CatEAgenteDanio) cmbAgenteDanio1.getSelectedItem();
         if (agenteDanio != null) {
             if (agenteDanio.getAgenteDanioID() == 21 || agenteDanio.getAgenteDanioID() == 22 || agenteDanio.getAgenteDanioID() == 23 || agenteDanio.getAgenteDanioID() == 24 || agenteDanio.getAgenteDanioID() == 25 || agenteDanio.getAgenteDanioID() == 33 || agenteDanio.getAgenteDanioID() == 34) {
                 cmbSeveridad1.setEnabled(true);
@@ -3026,7 +3042,7 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_txtDistanciaKeyTyped
 
     private void txtDiametroNormalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiametroNormalKeyTyped
-       numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtDiametroNormalKeyTyped
 
     private void txtAlturaTotalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAlturaTotalKeyTyped
@@ -3038,7 +3054,7 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_txtAnguloInclinacionKeyTyped
 
     private void txtAlturaFusteLimpioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAlturaFusteLimpioKeyTyped
-       numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtAlturaFusteLimpioKeyTyped
 
     private void txtAlturaComercialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAlturaComercialKeyTyped
@@ -3093,31 +3109,35 @@ private void fillCmbSitio(int upmID) {
 
     private void btnColectaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColectaActionPerformed
         try {
-            int fila = grdArbolado.getSelectedRow();
-            String noIndiviudo = grdArbolado.getValueAt(fila, 3).toString();
-            FrmClaveColecta claveColecta = new FrmClaveColecta(Main.main, true);
-            claveColecta.setLocationRelativeTo(Main.main);
-            CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
-            CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
-            CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
-            CatEInfraespecie indexInfraespecie = (CatEInfraespecie) cmbInfraespecie.getSelectedItem();
-            CEColectaBotanica ceColecta = new CEColectaBotanica();
-             ceColecta.setUPMID((Integer) cmbUPMID.getSelectedItem());
-            if(indexFamilia != null){
-                 ceColecta.setFamiliaID(indexFamilia.getFamiliaID());
-            }
-            if(indexGenero != null){
-                ceColecta.setGeneroID(indexGenero.getGeneroID());
-            }
-            if(indexEspecie != null){
-                ceColecta.setEspecieID(indexEspecie.getEspecieID());
-            }
-            /*if(indexInfraespecie != null){
+            if (combo.isEnabledCmbSitios(cmbSitios) == false) {
+
+            } else {
+                int fila = grdArbolado.getSelectedRow();
+                String noIndiviudo = grdArbolado.getValueAt(fila, 3).toString();
+                FrmClaveColecta claveColecta = new FrmClaveColecta(Main.main, true);
+                claveColecta.setLocationRelativeTo(Main.main);
+                CatEFamiliaEspecie indexFamilia = (CatEFamiliaEspecie) cmbFamilia.getSelectedItem();
+                CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
+                CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
+                CatEInfraespecie indexInfraespecie = (CatEInfraespecie) cmbInfraespecie.getSelectedItem();
+                CEColectaBotanica ceColecta = new CEColectaBotanica();
+                ceColecta.setUPMID((Integer) cmbUPMID.getSelectedItem());
+                if (indexFamilia != null) {
+                    ceColecta.setFamiliaID(indexFamilia.getFamiliaID());
+                }
+                if (indexGenero != null) {
+                    ceColecta.setGeneroID(indexGenero.getGeneroID());
+                }
+                if (indexEspecie != null) {
+                    ceColecta.setEspecieID(indexEspecie.getEspecieID());
+                }
+                /*if(indexInfraespecie != null){
                 ceColecta.setInfraespecieId(indexInfraespecie.getInfraespecieID());
             }*/
-            ceColecta.setNombreComun(txtNombreComun.getText());
-            claveColecta.setDatosIniciales(ceColecta, FORMATO_ID, "TAXONOMIA_Arbolado", "NoIndividuo", this.sitioID, Integer.parseInt(noIndiviudo));
-            claveColecta.setVisible(true);
+                ceColecta.setNombreComun(txtNombreComun.getText());
+                claveColecta.setDatosIniciales(ceColecta, FORMATO_ID, "TAXONOMIA_Arbolado", "NoIndividuo", this.sitioID, Integer.parseInt(noIndiviudo));
+                claveColecta.setVisible(true);
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un registro para asignar la clave de colecta"
                     + e.getClass().getName() + " : " + e.getMessage(), "Clave de colecta", JOptionPane.INFORMATION_MESSAGE);
@@ -3141,12 +3161,12 @@ private void fillCmbSitio(int upmID) {
 
     private void cmbFormaFusteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFormaFusteActionPerformed
         //System.out.println(cmbFormaFuste.getSelectedIndex());
-        if(cmbFormaFuste.getSelectedIndex()==-1){
-           txtAnguloInclinacion.setEnabled(false);
-       }else{
+        if (cmbFormaFuste.getSelectedIndex() == -1) {
+            txtAnguloInclinacion.setEnabled(false);
+        } else {
             txtAnguloInclinacion.setEnabled(true);
-       }
-        
+        }
+
     }//GEN-LAST:event_cmbFormaFusteActionPerformed
 
     private void txtDiametroNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiametroNormalActionPerformed
@@ -3181,7 +3201,7 @@ private void fillCmbSitio(int upmID) {
     }//GEN-LAST:event_cmbUPMIDActionPerformed
 
     private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
-         try {
+        try {
             String upm = cmbUPMID.getSelectedItem().toString();
             String sitio = cmbSitios.getSelectedItem().toString();
             this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);

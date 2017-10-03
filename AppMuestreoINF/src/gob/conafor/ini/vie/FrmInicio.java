@@ -846,15 +846,18 @@ public class FrmInicio extends javax.swing.JFrame {
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, H, Vegetación menor]":
-                    /*FORMULARIO A ABRIR*/
+                    UPMForms.vegetacionMenor.setVisible(true);
+                    UPMForms.vegetacionMenor.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, H, Vegetación mayor MCMI]":
-                    /*FORMULARIO A ABRIR*/
+                    UPMForms.vegetacionMayorI.setVisible(true);
+                    UPMForms.vegetacionMayorI.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, H, Vegetación mayor MCMG]":
-                    /*FORMULARIO A ABRIR*/
+                    UPMForms.vegetacionMayorG.setVisible(true);
+                    UPMForms.vegetacionMayorG.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
             }

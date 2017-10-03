@@ -518,7 +518,6 @@ private void fillCmbSitio(int upmID) {
         btnModificar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         grdArbolado = new javax.swing.JTable();
-        btnContinuar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         chkArbolado = new javax.swing.JCheckBox();
         chkEsSubmuestra = new javax.swing.JCheckBox();
@@ -1211,16 +1210,6 @@ private void fillCmbSitio(int upmID) {
         });
         jScrollPane1.setViewportView(grdArbolado);
 
-        btnContinuar.setMnemonic('c');
-        btnContinuar.setText("Continuar");
-        btnContinuar.setEnabled(false);
-        btnContinuar.setNextFocusableComponent(btnSalir);
-        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContinuarActionPerformed(evt);
-            }
-        });
-
         btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -1265,7 +1254,6 @@ private void fillCmbSitio(int upmID) {
         btnLimpiarControles.setMnemonic('l');
         btnLimpiarControles.setText("Limpiar controles");
         btnLimpiarControles.setToolTipText("");
-        btnLimpiarControles.setNextFocusableComponent(btnContinuar);
         btnLimpiarControles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarControlesActionPerformed(evt);
@@ -1326,8 +1314,6 @@ private void fillCmbSitio(int upmID) {
                 .addGap(90, 90, 90)
                 .addComponent(btnLimpiarControles)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(341, 341, 341))
         );
@@ -1363,7 +1349,6 @@ private void fillCmbSitio(int upmID) {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnContinuar)
                     .addComponent(btnSalir)
                     .addComponent(btnLimpiarControles))
                 .addGap(35, 35, 35))
@@ -3032,40 +3017,6 @@ private void fillCmbSitio(int upmID) {
         }
     }//GEN-LAST:event_chkEsSubmuestraActionPerformed
 
-    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        if (funciones.validarSeccionCapturada("TAXONOMIA_Arbolado", sitioID) == true && chkArbolado.isSelected()) {
-            JOptionPane.showMessageDialog(null, "Si selecciona Arbolado, se debe capturar o falta capturar trazo del sitio", "Arbolado A", JOptionPane.INFORMATION_MESSAGE);
-            chkArbolado.requestFocus();
-        } else if (funciones.validarSeccionCapturada("TAXONOMIA_Arbolado", sitioID) == false && chkArbolado.isSelected()) {
-            //System.out.println("Entro");
-            if (validarColectasObligatorias() && validarCreacionSubmuestra()) {
-                this.hide();
-                if (modificar == 0) {
-                    UPMForms.submuestra.setDatosIniciales(this.ceSitio);
-                    UPMForms.submuestra.setVisible(true);
-                    this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-                } else {
-                    UPMForms.submuestra.revisarSubmuestra(this.sitioID);
-                    UPMForms.submuestra.setVisible(true);
-                    this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-                }
-                //funciones.manipularBotonesMenuPrincipal(false);
-            }
-        } else if (funciones.validarSeccionCapturada("TAXONOMIA_Arbolado", sitioID) == true && !chkArbolado.isSelected()) {
-            if (modificar == 0) {
-                this.hide();
-                UPMForms.submuestra.setDatosIniciales(this.ceSitio);
-                UPMForms.submuestra.setVisible(true);
-                this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, -1);
-            } else {
-                UPMForms.submuestra.revisarSubmuestra(this.sitioID);
-                UPMForms.submuestra.setVisible(true);
-                this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, -1);
-            }
-            //funciones.manipularBotonesMenuPrincipal(false);
-        }
-    }//GEN-LAST:event_btnContinuarActionPerformed
-
     private void txtAzimutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAzimutKeyTyped
         numeros.keyTyped(evt);
     }//GEN-LAST:event_txtAzimutKeyTyped
@@ -3247,7 +3198,6 @@ private void fillCmbSitio(int upmID) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnColecta;
-    private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnElimnar;
     private javax.swing.JButton btnLimpiarControles;
     private javax.swing.JButton btnModificar;

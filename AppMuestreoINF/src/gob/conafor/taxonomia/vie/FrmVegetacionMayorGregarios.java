@@ -2,6 +2,7 @@ package gob.conafor.taxonomia.vie;
 
 import gob.conafor.conn.dat.LocalConnection;
 import gob.conafor.ini.vie.Main;
+import gob.conafor.sitio.mod.CDSitio;
 import gob.conafor.sitio.mod.CESitio;
 import gob.conafor.sys.mod.CDSecuencia;
 import gob.conafor.sys.mod.CDSeguimientoUPM;
@@ -41,6 +42,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
+
     private boolean revision;
     private int upmID;
     private int sitioID;
@@ -68,6 +70,8 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
     private CDEspecies cdEspecies = new CDEspecies();
     private CDSecuencia cdSecuencia = new CDSecuencia();
     private FuncionesComunes funciones = new FuncionesComunes();
+     private CDSitio cdSitio = new CDSitio();
+
 
     public FrmVegetacionMayorGregarios() {
         initComponents();
@@ -89,7 +93,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
-        
+
         this.ceSitio = sitio;
         llenarTabla();
         txtNumeroIndividuo.requestFocus();
@@ -99,13 +103,44 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         limpiarControles();
     }
 
-    public void revisarVegetacionMayorGregarios(CESitio sitio) {
-        revision=true;
+    
+     public void llenarControles() {
+        combo.reiniciarComboModel(this.cmbUPMID);
+        cmbSitios.setEnabled(true);
+        fillUPMID();
+    }
+
+    private void fillUPMID() {
+        List<Integer> listCapturado = new ArrayList<>();
+        listCapturado = this.cdSitio.getUPMSitios();
+        if (listCapturado != null) {
+            int size = listCapturado.size();
+            for (int i = 0; i < size; i++) {
+                cmbUPMID.addItem(listCapturado.get(i));
+            }
+        }
+    }
+
+    private void fillCmbSitio(int upmID) {
+
+        List<Integer> listSitios = new ArrayList<>();
+        listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+        if (listSitios != null) {
+            int size = listSitios.size();
+            for (int i = 0; i < size; i++) {
+                cmbSitios.addItem(listSitios.get(i));
+            }
+        }
+    }
+    
+    
+    public void revisarVegetacionMayorGregarios(int sitioid) {
+        /*revision = true;
         this.upmID = sitio.getUpmID();
         this.sitioID = sitio.getSitioID();
         this.sitio = sitio.getSitio();
-       
-        this.ceSitio = sitio;
+
+        this.ceSitio = sitio;*/
         llenarTabla();
         txtNumeroIndividuo.requestFocus();
         fillCmbConsecutivo();
@@ -125,8 +160,8 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-     private void fillCmbFormaVida() {
+
+    private void fillCmbFormaVida() {
         List<CatEFormaVidaZA> listFormaVida = new ArrayList<>();
         CDCondicionTaxonomica ct = new CDCondicionTaxonomica();
         listFormaVida = ct.getFormaVidaVM();
@@ -137,9 +172,9 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
             }
         }
     }
-     
-      private void fillCmbCondicionVegetacionMayor() {
-         List<CatECondicionVM> listCondicionVM = new ArrayList<>();
+
+    private void fillCmbCondicionVegetacionMayor() {
+        List<CatECondicionVM> listCondicionVM = new ArrayList<>();
         listCondicionVM = condicion.getCondicionVM();
         if (listCondicionVM != null) {
             int size = listCondicionVM.size();
@@ -171,9 +206,9 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
             }
         }
     }
-    
-    private void fillCmbGeneroSF(){
-         List<CatEGenero> listGenero = new ArrayList<>();
+
+    private void fillCmbGeneroSF() {
+        List<CatEGenero> listGenero = new ArrayList<>();
         CDEspecies sp = new CDEspecies();
         listGenero = sp.getGenerosSF();
         if (listGenero != null) {
@@ -192,18 +227,18 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
             int size = listEspecie.size();
             for (int i = 0; i < size; i++) {
                 cmbEspecie.addItem(listEspecie.get(i));
-               
+
             }
         }
     }
-    
-    private void fillCmbInfraespecie(int index){
+
+    private void fillCmbInfraespecie(int index) {
         List<CatEInfraespecie> listInfraespecie = new ArrayList<>();
         CDEspecies sp = new CDEspecies();
         listInfraespecie = sp.getInfraespecie(index);
-        if(listInfraespecie != null){
+        if (listInfraespecie != null) {
             int size = listInfraespecie.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbInfraespecie.addItem(listInfraespecie.get(i));
             }
         }
@@ -220,13 +255,13 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         }
     }
 
-    private void fillCmbDensidadColonial(){
+    private void fillCmbDensidadColonial() {
         List<CatEDensidadColonia> listDensidadColonial = new ArrayList<>();
         listDensidadColonial = condicion.getDensidadColonia();
-        
-        if(listDensidadColonial != null){
+
+        if (listDensidadColonial != null) {
             int size = listDensidadColonial.size();
-            for(int i = 0; i < size; i++){
+            for (int i = 0; i < size; i++) {
                 cmbDensidadColonia.addItem(listDensidadColonial.get(i));
             }
         }
@@ -257,30 +292,30 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
     }
 
     public void fillCmbSeveridad1() {
-       List<CatESeveridadZA> listSeveridad = new ArrayList<>();
-       listSeveridad = condicion.getSeveridadZA();
-       
-       if(listSeveridad != null){
-           int size = listSeveridad.size();
-           for(int i =0; i < size; i ++){
-               cmbSeveridad1.addItem(listSeveridad.get(i));
-           }
-       }
+        List<CatESeveridadZA> listSeveridad = new ArrayList<>();
+        listSeveridad = condicion.getSeveridadZA();
+
+        if (listSeveridad != null) {
+            int size = listSeveridad.size();
+            for (int i = 0; i < size; i++) {
+                cmbSeveridad1.addItem(listSeveridad.get(i));
+            }
+        }
     }
 
     public void fillCmbSeveridad2() {
-      List<CatESeveridadZA> listSeveridad = new ArrayList<>();
-       listSeveridad = condicion.getSeveridadZA();
-       
-       if(listSeveridad != null){
-           int size = listSeveridad.size();
-           for(int i =0; i < size; i ++){
-               cmbSeveridad2.addItem(listSeveridad.get(i));
-           }
-       }
+        List<CatESeveridadZA> listSeveridad = new ArrayList<>();
+        listSeveridad = condicion.getSeveridadZA();
+
+        if (listSeveridad != null) {
+            int size = listSeveridad.size();
+            for (int i = 0; i < size; i++) {
+                cmbSeveridad2.addItem(listSeveridad.get(i));
+            }
+        }
     }
-    
-   public void fillCmbVigor() {
+
+    public void fillCmbVigor() {
         List<CatEVigorArbolado> listVigor = new ArrayList<>();
         listVigor = condicion.getVigorArbolado();
         if (listVigor != null) {
@@ -383,7 +418,6 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         btnModificar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         grdVegetacionvMayor = new javax.swing.JTable();
-        btnContinuar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         btnColecta = new javax.swing.JButton();
         lblClaveColecta = new javax.swing.JLabel();
@@ -847,15 +881,6 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(grdVegetacionvMayor);
 
-        btnContinuar.setMnemonic('c');
-        btnContinuar.setText("Continuar");
-        btnContinuar.setNextFocusableComponent(btnSalir);
-        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContinuarActionPerformed(evt);
-            }
-        });
-
         btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
         btnSalir.setNextFocusableComponent(cmbConsecutivo);
@@ -889,10 +914,21 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
 
         btnLimpiar.setMnemonic('l');
         btnLimpiar.setText("Limpiar Controles");
-        btnLimpiar.setNextFocusableComponent(btnContinuar);
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
+            }
+        });
+
+        cmbUPMID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUPMIDActionPerformed(evt);
+            }
+        });
+
+        cmbSitios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSitiosActionPerformed(evt);
             }
         });
 
@@ -906,11 +942,9 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(btnLimpiar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(294, 294, 294)
                         .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(310, 310, 310))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
@@ -971,7 +1005,6 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnContinuar)
                     .addComponent(btnSalir)
                     .addComponent(btnLimpiar))
                 .addGap(22, 22, 22))
@@ -994,18 +1027,18 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void asignarDatosVegetacionMayor() {
-        try{
+        try {
             this.consecutivo = Integer.valueOf(txtNumeroIndividuo.getText());
             //System.out.println("Consecutivo="+this.consecutivo);
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             this.consecutivo = null;
         }
-        try{
+        try {
             this.noIndividuo = Integer.valueOf(txtNumeroIndividuo.getText());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             this.noIndividuo = null;
         }
-        
+
         try {
             this.alturaTotalMaxima = Float.valueOf(txtAlturaTotalMaxima.getText());
         } catch (NumberFormatException e) {
@@ -1049,7 +1082,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         vegetacionMayor.setSitioID(this.sitioID);
         vegetacionMayor.setFormaVidaID(indexFormaVida.getFormaVidaZAID());
         vegetacionMayor.setCondicionID(indexCondicion.getCondicionVMID());
-        if(indexFamilia != null){
+        if (indexFamilia != null) {
             vegetacionMayor.setFamiliaID(indexFamilia.getFamiliaID());
         }
         if (indexGenero != null) {
@@ -1058,7 +1091,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         if (indexEspecie != null) {
             vegetacionMayor.setEspecieID(indexEspecie.getEspecieID());
         }
-        if(indexInfraespecie != null){
+        if (indexInfraespecie != null) {
             vegetacionMayor.setInfraespecieID(indexInfraespecie.getInfraespecieID());
         }
         vegetacionMayor.setConsecutivo(this.consecutivo);
@@ -1168,7 +1201,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
             } else {
                 vegetacionMayor.setEspecieID(null);
             }
-            if(indexInfraespecie != null){
+            if (indexInfraespecie != null) {
                 vegetacionMayor.setInfraespecieID(indexInfraespecie.getInfraespecieID());
             } else {
                 vegetacionMayor.setInfraespecieID(null);
@@ -1205,7 +1238,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
             cdDanio.updateDanio(danio2);
             //System.out.println("Actualizar vegetacion "+this.consecutivo);
             //vegetacionMayor.setConsecutivo(this.consecutivo);
-        //System.out.println("Consecutivo="+this.consecutivo);
+            //System.out.println("Consecutivo="+this.consecutivo);
             vegetacionMayor.setNumeroIndividuo(this.consecutivo);
             this.cdVegetacionMayor.updateVegetacionMayor(vegetacionMayor);
             limpiarControles();
@@ -1312,10 +1345,9 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         cmbVigor.setEnabled(true);
     }
 
-
     private boolean validarCamposObligatorio() {
         ValidacionesComunes validacion = new ValidacionesComunes();
-       if (cmbFormaVida.getSelectedItem() == null) {
+        if (cmbFormaVida.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un tipo de forma de vida", "Vegetación mayor gregarios", JOptionPane.INFORMATION_MESSAGE);
             cmbFormaVida.requestFocus();
             return false;
@@ -1323,7 +1355,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un tipo de condicion", "Vegetación mayor gregarios", JOptionPane.INFORMATION_MESSAGE);
             cmbCondicion.requestFocus();
             return false;
-        }  else if (cmbFormaCrecimiento.getSelectedItem() == null) {
+        } else if (cmbFormaCrecimiento.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe seleccionar una forma de crecimiento ", "Vegetación mayor gregarios", JOptionPane.INFORMATION_MESSAGE);
             cmbFormaCrecimiento.requestFocus();
             return false;
@@ -1350,7 +1382,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         } else if (txtDiametroCoberturaMenor.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Error! Debe proporcionar el diámetro de cobertura menor", "Vegetación mayor gregarios", JOptionPane.INFORMATION_MESSAGE);
             txtDiametroCoberturaMenor.requestFocus();
-            return false;    
+            return false;
         } else if (cmbVigor.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Error! Debe seleccionar un tipo de vigor", "Vegetación mayor gregarios", JOptionPane.INFORMATION_MESSAGE);
             cmbVigor.requestFocus();
@@ -1361,23 +1393,23 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
     }
 
     private boolean validarMedicionesObligatorias() {
-        if(this.alturaTotalMaxima != null && this.alturaTotalMaxima < 0){
+        if (this.alturaTotalMaxima != null && this.alturaTotalMaxima < 0) {
             JOptionPane.showMessageDialog(null, "Error! La altura total máxima debe ser mayor a 0 ", "Vegetación mayor gregarios", JOptionPane.INFORMATION_MESSAGE);
             txtAlturaTotalMaxima.requestFocus();
             return false;
-        } else if(this.alturaTotalMedia != null && this.alturaTotalMedia < 0){
+        } else if (this.alturaTotalMedia != null && this.alturaTotalMedia < 0) {
             JOptionPane.showMessageDialog(null, "Error! La altura total media debe ser mayor a 0 ", "Vegetación mayor gregarios", JOptionPane.INFORMATION_MESSAGE);
             txtAlturaTotalMedia.requestFocus();
             return false;
-        } else if(this.alturaTotalMinima != null && this.alturaTotalMinima < 0){
+        } else if (this.alturaTotalMinima != null && this.alturaTotalMinima < 0) {
             JOptionPane.showMessageDialog(null, "Error! La altura total mínima debe ser mayor a 0 ", "Vegetación mayor gregarios", JOptionPane.INFORMATION_MESSAGE);
             txtAlturaTotalMinima.requestFocus();
             return false;
-        } else if(this.diametroCoberturaMayor != null && this.diametroCoberturaMayor < 0){
+        } else if (this.diametroCoberturaMayor != null && this.diametroCoberturaMayor < 0) {
             JOptionPane.showMessageDialog(null, "Error! El diámetro de cobertura mayor debe ser mayor a 0 ", "Vegetación mayor gregarios", JOptionPane.INFORMATION_MESSAGE);
             txtDiametroCoberturaMayor.requestFocus();
             return false;
-        } else if(this.diametroCoberturaMenor != null && this.diametroCoberturaMenor < 0){
+        } else if (this.diametroCoberturaMenor != null && this.diametroCoberturaMenor < 0) {
             JOptionPane.showMessageDialog(null, "Error! El diámetro de cobertura menor debe ser mayor a 0 ", "Vegetación mayor gregarios", JOptionPane.INFORMATION_MESSAGE);
             txtDiametroCoberturaMenor.requestFocus();
             return false;
@@ -1398,21 +1430,20 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         }
     }
 
-
     private void fijarValoresPorCampo(int vegetacionMayorID) {
         CEVegetacionMayorGregarios ceVegetacionMayor;
         ceVegetacionMayor = this.cdVegetacionMayor.getRegistroVM(vegetacionMayorID);
-        
+
         txtNumeroIndividuo.setText(String.valueOf(ceVegetacionMayor.getNumeroIndividuo()));
-        
+
         CatEFormaVidaZA formaVida = new CatEFormaVidaZA();
         formaVida.setFormaVidaZAID(ceVegetacionMayor.getFormaVidaID());
         cmbFormaVida.setSelectedItem(formaVida);
-        
+
         CatECondicionVM condicion = new CatECondicionVM();
         condicion.setCondicionVMID(ceVegetacionMayor.getCondicionID());
         cmbCondicion.setSelectedItem(condicion);
-        
+
         CatEFamiliaEspecie fam = new CatEFamiliaEspecie();
         fam.setFamiliaID(ceVegetacionMayor.getFamiliaID());
         cmbFamilia.setSelectedItem(fam);
@@ -1420,35 +1451,34 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         CatEGenero gen = new CatEGenero();
         gen.setGeneroID(ceVegetacionMayor.getGeneroID());
         cmbGenero.setSelectedItem(gen);
-        
-       /* CatEGenero gen = new CatEGenero();
+
+        /* CatEGenero gen = new CatEGenero();
         gen.setGeneroID(ceVegetacionMayor.getGeneroID());
         cmbGenero.removeAllItems();
         fillCmbGenero(ceVegetacionMayor.getFamiliaID());
         cmbGenero.setSelectedItem(gen);*/
-
         CatEEspecie esp = new CatEEspecie();
         esp.setEspecieID(ceVegetacionMayor.getEspecieID());
         cmbEspecie.removeAllItems();
         fillCmbEspecie(ceVegetacionMayor.getGeneroID());
         cmbEspecie.setSelectedItem(esp);
-        
+
         CatEInfraespecie inf = new CatEInfraespecie();
         inf.setInfraespecieID(ceVegetacionMayor.getInfraespecieID());
         cmbInfraespecie.removeAllItems();
         fillCmbInfraespecie(ceVegetacionMayor.getEspecieID());
         cmbInfraespecie.setSelectedItem(inf);
-        
+
         txtNombreComun.setText(ceVegetacionMayor.getNombreComun());
-        
+
         CatEFormaCrecimiento formaCrecimiento = new CatEFormaCrecimiento();
         formaCrecimiento.setFormaCrecimientoID(ceVegetacionMayor.getFormaCrecimientoID());
         cmbFormaCrecimiento.setSelectedItem(formaCrecimiento);
-        
+
         CatEDensidadColonia densidadColonia = new CatEDensidadColonia();
         densidadColonia.setDensidadColoniaID(ceVegetacionMayor.getDensidadColoniaID());
         cmbDensidadColonia.setSelectedItem(densidadColonia);
-        
+
         txtAlturaTotalMaxima.setText(String.valueOf(ceVegetacionMayor.getAlturaTotalMaxima()));
         txtAlturaTotalMedia.setText(String.valueOf(ceVegetacionMayor.getAlturaTotalMedia()));
         txtAlturaTotalMinima.setText(String.valueOf(ceVegetacionMayor.getAlturaTotalMinima()));
@@ -1457,15 +1487,14 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         CatEVigorArbolado tv = new CatEVigorArbolado();
         tv.setVigorID(ceVegetacionMayor.getVigorID());
         cmbVigor.setSelectedItem(tv);
- 
-         //Fijando datos en campos de danios
+
+        //Fijando datos en campos de danios
         CatEAgenteDanio agente1 = new CatEAgenteDanio();
         CatEAgenteDanio agente2 = new CatEAgenteDanio();
         CatESeveridadZA severidad1 = new CatESeveridadZA();
         CatESeveridadZA severidad2 = new CatESeveridadZA();
         CDDanioVegetacionMayorG cdDanio = new CDDanioVegetacionMayorG();
-        
-        
+
         List<CEDanioSeveridad> listDanio = new ArrayList<>();
         listDanio = cdDanio.getDanio(vegetacionMayorID);
 
@@ -1475,7 +1504,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
             if (i == 0) {
                 agente1.setAgenteDanioID(listDanio.get(i).getAgenteDanioID());
                 severidad1.setSeveridadID(listDanio.get(i).getSeveridadID());
-               
+
             } else {
                 agente2.setAgenteDanioID(listDanio.get(i).getAgenteDanioID());
                 severidad2.setSeveridadID(listDanio.get(i).getSeveridadID());
@@ -1483,7 +1512,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         }
         cmbAgenteDanio1.setSelectedItem(agente1);
         cmbSeveridad1.setSelectedItem(severidad1);
-      
+
         cmbAgenteDanio2.setSelectedItem(agente2);
         cmbSeveridad2.setSelectedItem(severidad2);
         txtClaveColecta.setText(ceVegetacionMayor.getColectaBotanica());
@@ -1502,7 +1531,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private boolean validarColectasObligatorias() {
         CDColectaBotanica colecta = new CDColectaBotanica();
         if (colecta.validarCapturaEspecie("TAXONOMIA_VegetacionMayorGregarios", this.sitioID)) {
@@ -1512,67 +1541,67 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
             return true;
         }
     }
-    
+
     private void txtNombreComunFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreComunFocusGained
         txtNombreComun.selectAll();
     }//GEN-LAST:event_txtNombreComunFocusGained
 
     private void txtAlturaTotalMinimaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaTotalMinimaFocusGained
-         SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtAlturaTotalMinima.selectAll();
             }
         });
     }//GEN-LAST:event_txtAlturaTotalMinimaFocusGained
 
     private void txtAlturaTotalMediaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaTotalMediaFocusGained
-       SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtAlturaTotalMedia.selectAll();
             }
         });
     }//GEN-LAST:event_txtAlturaTotalMediaFocusGained
 
     private void txtDiametroCoberturaMayorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroCoberturaMayorFocusGained
-       SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtDiametroCoberturaMayor.selectAll();
             }
         });
     }//GEN-LAST:event_txtDiametroCoberturaMayorFocusGained
 
     private void txtAlturaTotalMinimaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaTotalMinimaFocusLost
-      if(txtAlturaTotalMinima.getText().isEmpty()){
-          txtAlturaTotalMinima.setValue(null);
-      }    
+        if (txtAlturaTotalMinima.getText().isEmpty()) {
+            txtAlturaTotalMinima.setValue(null);
+        }
     }//GEN-LAST:event_txtAlturaTotalMinimaFocusLost
 
     private void txtAlturaTotalMediaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaTotalMediaFocusLost
-       if(txtAlturaTotalMedia.getText().isEmpty()){
-           txtAlturaTotalMedia.setValue(null);
-       }
+        if (txtAlturaTotalMedia.getText().isEmpty()) {
+            txtAlturaTotalMedia.setValue(null);
+        }
     }//GEN-LAST:event_txtAlturaTotalMediaFocusLost
 
     private void txtDiametroCoberturaMayorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroCoberturaMayorFocusLost
-       if(txtDiametroCoberturaMayor.getText().isEmpty()){
-           txtDiametroCoberturaMayor.setValue(null);
-       }
+        if (txtDiametroCoberturaMayor.getText().isEmpty()) {
+            txtDiametroCoberturaMayor.setValue(null);
+        }
     }//GEN-LAST:event_txtDiametroCoberturaMayorFocusLost
 
     private void txtNumeroIndividuoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroIndividuoFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtNumeroIndividuo.selectAll();
             }
         });
     }//GEN-LAST:event_txtNumeroIndividuoFocusGained
 
     private void txtNumeroIndividuoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNumeroIndividuoFocusLost
-        if(txtNumeroIndividuo.getText().isEmpty()){
+        if (txtNumeroIndividuo.getText().isEmpty()) {
             txtNumeroIndividuo.setValue(null);
         }
     }//GEN-LAST:event_txtNumeroIndividuoFocusLost
@@ -1581,29 +1610,19 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         if (evt.getButton() == 1) {
             int fila = grdVegetacionvMayor.getSelectedRow();
             String strArbID = grdVegetacionvMayor.getValueAt(fila, 0).toString();
-            this.vegetacionMayorID= Integer.parseInt(strArbID);
+            this.vegetacionMayorID = Integer.parseInt(strArbID);
             fijarValoresPorCampo(this.vegetacionMayorID);
             txtNumeroIndividuo.setEnabled(false);
         }
     }//GEN-LAST:event_grdVegetacionvMayorMouseClicked
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        if(revision==false){//esta en modo de captura
-            this.hide();
-            funciones.manipularBotonesMenuPrincipal(false);
-        }
-        if(revision==true){//entro a modo de revision
-             //System.err.println("Modo Revision");
-            this.hide();
-            //UPMForms.revisionModulos.iniciarRevision();
-            UPMForms.revisionModulos.setVisible(true);
-            UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision=false;
-        }
+        this.hide();
+        funciones.manipularBotonesMenuPrincipal(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-       asignarDatosVegetacionMayor();
+        asignarDatosVegetacionMayor();
         if (cmbAgenteDanio1.getSelectedIndex() == 0 && cmbSeveridad1.getSelectedIndex() > 0) {
             JOptionPane.showMessageDialog(null, "Si no hay Agente de daño, la Severidad es 0", "Vegetacion mayor individuales", JOptionPane.INFORMATION_MESSAGE);
             cmbAgenteDanio1.requestFocus();
@@ -1666,7 +1685,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbConsecutivoPropertyChange
 
     private void cmbGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGeneroActionPerformed
-       CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
+        CatEGenero indexGenero = (CatEGenero) cmbGenero.getSelectedItem();
         DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbEspecie.getModel();
         dcm.removeAllElements();
         if (indexGenero != null) {
@@ -1674,39 +1693,17 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cmbGeneroActionPerformed
 
-    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        if (validarColectasObligatorias()) {
-            if (funciones.validarSeccionCapturada("TAXONOMIA_VegetacionMayorGregarios",sitioID) && chkVegetacionMayorMCG.isSelected()) {
-                JOptionPane.showMessageDialog(null, "Si sel eccionó vegetación mayor gregarios, se debe capturar ", "Vegetacion mayor gregarios", JOptionPane.INFORMATION_MESSAGE);
-                chkVegetacionMayorMCG.requestFocus();
-            } else if (funciones.validarSeccionCapturada("TAXONOMIA_VegetacionMayorGregarios",sitioID) == false && chkVegetacionMayorMCG.isSelected()) {
-                this.hide();
-                this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-                funciones.manipularBotonesMenuPrincipal(false);
-                if(revision==false){
-                    this.cdSecuencia.insertSecuenciaTerminada(this.ceSitio);
-                }
-                
-            } else if (funciones.validarSeccionCapturada("TAXONOMIA_VegetacionMayorGregarios",sitioID) == true && !chkVegetacionMayorMCG.isSelected()) {
-                this.hide();
-                this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, -1);
-                funciones.manipularBotonesMenuPrincipal(false);
-                this.cdSecuencia.insertSecuenciaTerminada(this.ceSitio);
-            }
-        }
-    }//GEN-LAST:event_btnContinuarActionPerformed
-
     private void txtAlturaTotalMaximaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaTotalMaximaFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtAlturaTotalMaxima.selectAll();
             }
         });
     }//GEN-LAST:event_txtAlturaTotalMaximaFocusGained
 
     private void txtAlturaTotalMaximaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlturaTotalMaximaFocusLost
-        if(txtAlturaTotalMaxima.getText().isEmpty()){
+        if (txtAlturaTotalMaxima.getText().isEmpty()) {
             txtAlturaTotalMaxima.setValue(null);
         }
     }//GEN-LAST:event_txtAlturaTotalMaximaFocusLost
@@ -1716,11 +1713,11 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtAlturaTotalMaximaKeyTyped
 
     private void txtAlturaTotalMediaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAlturaTotalMediaKeyTyped
-       numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtAlturaTotalMediaKeyTyped
 
     private void txtAlturaTotalMinimaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAlturaTotalMinimaKeyTyped
-       numeros.keyTyped(evt);
+        numeros.keyTyped(evt);
     }//GEN-LAST:event_txtAlturaTotalMinimaKeyTyped
 
     private void txtDiametroCoberturaMayorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiametroCoberturaMayorKeyTyped
@@ -1728,16 +1725,16 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDiametroCoberturaMayorKeyTyped
 
     private void txtDiametroCoberturaMenorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroCoberturaMenorFocusGained
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 txtDiametroCoberturaMenor.selectAll();
             }
         });
     }//GEN-LAST:event_txtDiametroCoberturaMenorFocusGained
 
     private void txtDiametroCoberturaMenorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiametroCoberturaMenorFocusLost
-         if(txtDiametroCoberturaMenor.getText().isEmpty()){
+        if (txtDiametroCoberturaMenor.getText().isEmpty()) {
             txtDiametroCoberturaMenor.setValue(null);
         }
     }//GEN-LAST:event_txtDiametroCoberturaMenorFocusLost
@@ -1776,16 +1773,16 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnColectaActionPerformed
 
-    private int consultarSitioID(int vegetacionMayorID){
-        int sitioID=0;
-        String query= "SELECT SitioID FROM TAXONOMIA_VegetacionMayorGregarios WHERE VegetacionMayorID="+vegetacionMayorID;
+    private int consultarSitioID(int vegetacionMayorID) {
+        int sitioID = 0;
+        String query = "SELECT SitioID FROM TAXONOMIA_VegetacionMayorGregarios WHERE VegetacionMayorID=" + vegetacionMayorID;
         //System.out.println("Consultar sitioID="+query);
         Connection conn = LocalConnection.getConnection();
-       try {
+        try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
-                sitioID= rs.getInt("SitioID");
+                sitioID = rs.getInt("SitioID");
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,
@@ -1799,10 +1796,10 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en lista de Arbolado id", "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
-        
+
         return sitioID;
     }
-    
+
     private void chkVegetacionMayorMCGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkVegetacionMayorMCGActionPerformed
         if (!chkVegetacionMayorMCG.isSelected()) {
             Object[] opciones = {"Si", "No"};
@@ -1812,9 +1809,9 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
                 String registro = grdVegetacionvMayor.getValueAt(0, 0).toString();
                 this.vegetacionMayorID = Integer.parseInt(registro);
                 this.cdVegetacionMayor.deleteAllVegetacionMayor(consultarSitioID(this.vegetacionMayorID));
-                 llenarTabla();
-                 funciones.reiniciarTabla(this.grdVegetacionvMayor);
-                 limpiarControles();
+                llenarTabla();
+                funciones.reiniciarTabla(this.grdVegetacionvMayor);
+                limpiarControles();
                 cmbConsecutivo.setEnabled(false);
                 //txtNumeroIndividuo.setEnabled(false);
                 cmbFormaVida.setEnabled(false);
@@ -1836,34 +1833,34 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
                 cmbAgenteDanio2.setEnabled(false);
                 cmbSeveridad2.setEnabled(false);
                 cmbVigor.setEnabled(false);
-            } 
-        }else {
-                cmbConsecutivo.setEnabled(true);
-                //txtNumeroIndividuo.setEnabled(true);
-                cmbFormaVida.setEnabled(true);
-                cmbCondicion.setEnabled(true);
-                cmbFamilia.setEnabled(true);
-                cmbGenero.setEnabled(true);
-                cmbEspecie.setEnabled(true);
-                cmbInfraespecie.setEnabled(true);
-                txtNombreComun.setEnabled(true);
-                cmbFormaCrecimiento.setEnabled(true);
-                cmbDensidadColonia.setEnabled(true);
-                txtAlturaTotalMaxima.setEnabled(true);
-                txtAlturaTotalMedia.setEnabled(true);
-                txtAlturaTotalMinima.setEnabled(true);
-                txtDiametroCoberturaMayor.setEnabled(true);
-                txtDiametroCoberturaMenor.setEnabled(true);
-                cmbAgenteDanio1.setEnabled(true);
-                cmbSeveridad1.setEnabled(true);
-                cmbAgenteDanio2.setEnabled(true);
-                cmbSeveridad2.setEnabled(true);
-                cmbVigor.setEnabled(true);
             }
+        } else {
+            cmbConsecutivo.setEnabled(true);
+            //txtNumeroIndividuo.setEnabled(true);
+            cmbFormaVida.setEnabled(true);
+            cmbCondicion.setEnabled(true);
+            cmbFamilia.setEnabled(true);
+            cmbGenero.setEnabled(true);
+            cmbEspecie.setEnabled(true);
+            cmbInfraespecie.setEnabled(true);
+            txtNombreComun.setEnabled(true);
+            cmbFormaCrecimiento.setEnabled(true);
+            cmbDensidadColonia.setEnabled(true);
+            txtAlturaTotalMaxima.setEnabled(true);
+            txtAlturaTotalMedia.setEnabled(true);
+            txtAlturaTotalMinima.setEnabled(true);
+            txtDiametroCoberturaMayor.setEnabled(true);
+            txtDiametroCoberturaMenor.setEnabled(true);
+            cmbAgenteDanio1.setEnabled(true);
+            cmbSeveridad1.setEnabled(true);
+            cmbAgenteDanio2.setEnabled(true);
+            cmbSeveridad2.setEnabled(true);
+            cmbVigor.setEnabled(true);
+        }
     }//GEN-LAST:event_chkVegetacionMayorMCGActionPerformed
 
     private void cmbEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEspecieActionPerformed
-       CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
+        CatEEspecie indexEspecie = (CatEEspecie) cmbEspecie.getSelectedItem();
         DefaultComboBoxModel dcm = (DefaultComboBoxModel) cmbInfraespecie.getModel();
         dcm.removeAllElements();
         if (indexEspecie != null) {
@@ -1876,8 +1873,45 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbAgenteDanio1ActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-       limpiarControles();
+        limpiarControles();
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
+      Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        Integer sitio = (Integer) cmbSitios.getSelectedItem();
+        if (cmbUPMID.getSelectedItem() != null) {
+            this.upmID = (Integer) cmbUPMID.getSelectedItem();
+            combo.reiniciarComboModel(cmbSitios);
+            fillCmbSitio(upmID);
+            cmbSitios.setEnabled(true);
+        } else {
+            combo.reiniciarComboModel(cmbSitios);
+            cmbSitios.setSelectedItem(null);
+            cmbSitios.setEnabled(false);
+        }
+    }//GEN-LAST:event_cmbUPMIDActionPerformed
+
+    private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
+try {
+            //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
+            if (cmbSitios.getSelectedItem() == null) {
+                this.sitioID = 0;
+                /*limpiarControles();
+                limpiarPorcentajes();*/
+            } else {
+                String upm = cmbUPMID.getSelectedItem().toString();
+                String sitio = cmbSitios.getSelectedItem().toString();
+                this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
+
+            }
+            revisarVegetacionMayorGregarios(this.sitioID);
+
+//llenarTabla();
+        } catch (Exception e) {
+            e.getCause();
+        }
+
+    }//GEN-LAST:event_cmbSitiosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1886,7 +1920,6 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnColecta;
-    private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnElimnar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;

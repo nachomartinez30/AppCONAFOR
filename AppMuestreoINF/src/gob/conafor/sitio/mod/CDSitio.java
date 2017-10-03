@@ -1017,6 +1017,7 @@ public class CDSitio {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
             conn.commit();
+            JOptionPane.showMessageDialog(null, "Observacion actualizada");
             st.close();
         } catch (SQLException e) {
             e.printStackTrace();

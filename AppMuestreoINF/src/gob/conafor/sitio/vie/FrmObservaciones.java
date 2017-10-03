@@ -7,6 +7,8 @@ import gob.conafor.upm.vie.UPMForms;
 import gob.conafor.utils.FuncionesComunes;
 import gob.conafor.utils.Version;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FrmObservaciones extends javax.swing.JInternalFrame {
     private boolean revision;
@@ -23,6 +25,8 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
     private int modificar;
     private Version ver=new Version();
     private String version=ver.getVersion();
+    private FuncionesComunes combo = new FuncionesComunes();
+
 
     public FrmObservaciones() {
         initComponents();
@@ -33,8 +37,7 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
-        this.txtUPM.setText(String.valueOf(this.upmID));
-        this.txtSitio.setText(String.valueOf(this.sitio));
+        
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -43,18 +46,48 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
         funciones.manipularBotonesMenuPrincipal(true);
         txtObservacionesSitio.setText("");
     }
+     
+     
+      public void llenarControles() {
+        combo.reiniciarComboModel(this.cmbUPMID);
+        cmbSitios.setEnabled(true);
+        fillUPMID();
+    }
 
-    public void revisarObservaciones(CESitio ceSitio) {
-        revision=true;
+    private void fillUPMID() {
+        List<Integer> listCapturado = new ArrayList<>();
+        listCapturado = this.cdSitio.getUPMSitios();
+        if (listCapturado != null) {
+            int size = listCapturado.size();
+            for (int i = 0; i < size; i++) {
+                cmbUPMID.addItem(listCapturado.get(i));
+            }
+        }
+    }
+
+    private void fillCmbSitio(int upmID) {
+
+        List<Integer> listSitios = new ArrayList<>();
+        listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+        if (listSitios != null) {
+            int size = listSitios.size();
+            for (int i = 0; i < size; i++) {
+                cmbSitios.addItem(listSitios.get(i));
+            }
+        }
+    }
+     
+
+    public void revisarObservaciones(int sitioID) {
+        /*revision=true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
-        this.sitio = ceSitio.getSitio();
-        this.txtUPM.setText(String.valueOf(this.upmID));
-        this.txtSitio.setText(String.valueOf(this.sitio));
+        this.sitio = ceSitio.getSitio();*/
+        
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
-        this.ceSitio.setSecuencia(ceSitio.getSecuencia());
+        //this.ceSitio.setSecuencia(ceSitio.getSecuencia());
         CESitio ceObservaciones;
         ceObservaciones = this.cdSitio.getObservaciones(this.sitioID);
         txtObservacionesSitio.setText(ceObservaciones.getObservaciones());
@@ -269,14 +302,14 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lblUPM = new javax.swing.JLabel();
-        txtUPM = new javax.swing.JTextField();
         lblSuelo1 = new javax.swing.JLabel();
         lblSitio = new javax.swing.JLabel();
-        txtSitio = new javax.swing.JTextField();
         btnContinuar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtObservacionesSitio = new javax.swing.JTextArea();
+        cmbUPMID = new javax.swing.JComboBox<>();
+        cmbSitios = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximizable(true);
@@ -288,9 +321,6 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
         lblUPM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUPM.setText("UPMID:");
 
-        txtUPM.setEditable(false);
-        txtUPM.setEnabled(false);
-
         lblSuelo1.setBackground(new java.awt.Color(153, 153, 153));
         lblSuelo1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSuelo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -299,9 +329,6 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
 
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-
-        txtSitio.setEditable(false);
-        txtSitio.setEnabled(false);
 
         btnContinuar.setMnemonic('c');
         btnContinuar.setText("Continuar");
@@ -328,6 +355,18 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(txtObservacionesSitio);
 
+        cmbUPMID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUPMIDActionPerformed(evt);
+            }
+        });
+
+        cmbSitios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSitiosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -338,12 +377,12 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(lblUPM)
-                            .addGap(4, 4, 4)
-                            .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblSitio)
-                            .addGap(4, 4, 4)
-                            .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblSuelo1, javax.swing.GroupLayout.PREFERRED_SIZE, 890, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 890, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -356,15 +395,14 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
+                .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblUPM)
-                            .addComponent(lblSitio))))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblUPM)
+                        .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblSitio)
+                        .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblSuelo1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -373,7 +411,7 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnContinuar)
                     .addComponent(btnSalir))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -392,20 +430,8 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         fijarDatosObservaciones();
-        //if (validarObservaciones()) {
-            if (this.modificar == 0) {
-                this.cdSitio.setObservacionesSitio(this.ceSitio);
-                seleccionarSiguienteFormulario(this.ceSitio);
-                this.hide();
-                this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-            } else {
-                //System.out.println("Sitio"+this.ceSitio.getSitio()+" UPID="+this.ceSitio.getUpmID()+" Secuencia="+this.ceSitio.getSecuencia());
-                this.cdSitio.setObservacionesSitio(this.ceSitio);
-                //System.out.println("es Revision "+this.ceSitio.getSecuencia());
-                //revisarSiguienteFormulario(this.ceSitio);
-                this.hide();
-            }
-        //}
+        this.cdSitio.setObservacionesSitio(this.ceSitio);
+              
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -429,20 +455,57 @@ public class FrmObservaciones extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtObservacionesSitioKeyPressed
 
+    private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
+Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        Integer sitio = (Integer) cmbSitios.getSelectedItem();
+        if (cmbUPMID.getSelectedItem() != null) {
+            this.upmID = (Integer) cmbUPMID.getSelectedItem();
+            combo.reiniciarComboModel(cmbSitios);
+            fillCmbSitio(upmID);
+            cmbSitios.setEnabled(true);
+        } else {
+            combo.reiniciarComboModel(cmbSitios);
+            cmbSitios.setSelectedItem(null);
+            cmbSitios.setEnabled(false);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbUPMIDActionPerformed
+
+    private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
+try {
+            //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
+            if (cmbSitios.getSelectedItem() == null) {
+                this.sitioID = 0;
+                /*limpiarControles();
+                limpiarPorcentajes();*/
+            } else {
+                String upm = cmbUPMID.getSelectedItem().toString();
+                String sitio = cmbSitios.getSelectedItem().toString();
+                this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
+
+            }
+            revisarObservaciones(this.sitioID);
+
+//llenarTabla();
+        } catch (Exception e) {
+            e.getCause();
+        }
+        
+    }//GEN-LAST:event_cmbSitiosActionPerformed
+
     /**
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<Integer> cmbSitios;
+    private javax.swing.JComboBox<Integer> cmbUPMID;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblSitio;
     private javax.swing.JLabel lblSuelo1;
     private javax.swing.JLabel lblUPM;
     private javax.swing.JTextArea txtObservacionesSitio;
-    private javax.swing.JTextField txtSitio;
-    private javax.swing.JTextField txtUPM;
     // End of variables declaration//GEN-END:variables
   
 }

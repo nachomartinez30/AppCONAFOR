@@ -1,5 +1,6 @@
 package gob.conafor.suelo.vie;
 
+import gob.conafor.sitio.mod.CDSitio;
 import gob.conafor.sitio.mod.CESitio;
 import gob.conafor.suelo.mod.CDDensidadAparente;
 import gob.conafor.suelo.mod.CDHojarasca;
@@ -75,6 +76,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     private int modificar;
     private Version ver = new Version();
     private String version = ver.getVersion();
+    private CDSitio cdSitio = new CDSitio();
 
     public FrmHojarascaProfundidad() {
         initComponents();
@@ -88,8 +90,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
-        this.txtUPM.setText(String.valueOf(this.upmID));
-        this.txtSitio.setText(String.valueOf(this.sitio));
+
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -102,13 +103,41 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         limpiarControlesProfundidades();
     }
 
-    public void revisarHojarascaProfundidad(CESitio ceSitio) {
-        revision = true;
+    public void llenarControles() {
+        combo.reiniciarComboModel(this.cmbUPMID);
+        cmbSitios.setEnabled(true);
+        fillUPMID();
+    }
+
+    private void fillUPMID() {
+        List<Integer> listCapturado = new ArrayList<>();
+        listCapturado = this.cdSitio.getUPMSitios();
+        if (listCapturado != null) {
+            int size = listCapturado.size();
+            for (int i = 0; i < size; i++) {
+                cmbUPMID.addItem(listCapturado.get(i));
+            }
+        }
+    }
+
+    private void fillCmbSitio(int upmID) {
+
+        List<Integer> listSitios = new ArrayList<>();
+        listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+        if (listSitios != null) {
+            int size = listSitios.size();
+            for (int i = 0; i < size; i++) {
+                cmbSitios.addItem(listSitios.get(i));
+            }
+        }
+    }
+
+    public void revisarHojarascaProfundidad(int sitioID) {
+        /*revision = true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
-        this.sitio = ceSitio.getSitio();
-        this.txtUPM.setText(String.valueOf(this.upmID));
-        this.txtSitio.setText(String.valueOf(this.sitio));
+        this.sitio = ceSitio.getSitio();*/
+
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -293,8 +322,8 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     }
 
     private void crearProfundidad() {
-        this.clave030="";
-        this.clave3060="";
+        this.clave030 = "";
+        this.clave3060 = "";
         Integer indexPunto = (Integer) cmbPuntoProfundidad.getSelectedItem();
         this.ceProfundidad.setSitioID(this.sitioID);
         this.ceProfundidad.setPunto(indexPunto);
@@ -307,7 +336,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         this.ceProfundidad.setObservaciones(this.observacionesProfundidad);
         if (!txtProfundidad030.getText().isEmpty()) {
             //System.err.println("Profundidad 0-30");
-            this.clave030 = crearClave(this.upmID, this.sitio, indexPunto, "S1");            
+            this.clave030 = crearClave(this.upmID, this.sitio, indexPunto, "S1");
         }
         if (!txtProfundidad3060.getText().isEmpty()) {
             // System.err.println("Profundidad 30-60");
@@ -449,17 +478,17 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     private boolean validarCapturaHojarasca() {
         if (cmbPuntoHojarasca.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un punto de hojarasca ",
-                     "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
+                    "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             cmbPuntoHojarasca.requestFocus();
             return false;
         } else if (cmbTipoHojarasca.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de hojarasca ",
-                     "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
+                    "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             cmbTipoHojarasca.requestFocus();
             return false;
         } else if (!txtEspesorHO.getText().isEmpty() && txtPesoTotalHO.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Si capturó espesor de hojarasca debe capturar peso total de hojarasca",
-                     "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
+                    "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             txtPesoTotalHO.requestFocus();
             return false;
         } else if (!txtEspesorHO.getText().isEmpty() && txtPesoMuestraHO.getText().isEmpty()) {
@@ -495,12 +524,12 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
             return false;
         } else*/ if (cmbTipoHojarasca.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de hojarasca ",
-                     "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
+                    "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             cmbTipoHojarasca.requestFocus();
             return false;
         } else if (!txtEspesorF.getText().isEmpty() && txtPesoTotalF.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Si capturó espesor de fermentación debe capturar peso total de fermentación",
-                     "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
+                    "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             txtPesoTotalF.requestFocus();
             return false;
         } else if (!txtEspesorF.getText().isEmpty() && txtPesoMuestraF.getText().isEmpty()) {
@@ -531,12 +560,12 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     private boolean validarDatosHojarasca() {
         if (this.espesorHO < 0.0) {
             JOptionPane.showMessageDialog(null, "Debe proporcionar un valor mayor o igual a cero para espesor HO ",
-                     "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
+                    "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             txtEspesorHO.requestFocus();
             return false;
         } else if (this.espesorF < 0.0) {
             JOptionPane.showMessageDialog(null, "Debe proporcionar un valor mayor o igual a cero para espesor F ",
-                     "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
+                    "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             txtEspesorF.requestFocus();
             return false;
         } else if (this.pesoTotalHO < 0.0) {
@@ -546,17 +575,17 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
             return false;
         } else if (this.pesoTotalF < 0.0) {
             JOptionPane.showMessageDialog(null, "Debe proporcionar un valor mayor o igual cero para peso total F ",
-                     "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
+                    "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             txtPesoTotalF.requestFocus();
             return false;
         } else if (this.pesoMuestraHO < 0.0) {
             JOptionPane.showMessageDialog(null, "Debe proporcionar un valor mayor o igual a cero para peso muestra HO ",
-                     "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
+                    "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             txtPesoMuestraHO.requestFocus();
             return false;
         } else if (this.pesoMuestraF < 0.0) {
             JOptionPane.showMessageDialog(null, "Debe proporcionar un valor mayor o igual a cero para peso muestra F ",
-                     "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
+                    "Hojarasca", JOptionPane.INFORMATION_MESSAGE);
             txtPesoMuestraF.requestFocus();
             return false;
         } else {
@@ -961,10 +990,8 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lblUPM = new javax.swing.JLabel();
-        txtUPM = new javax.swing.JTextField();
         lblHojarascaFermentacion = new javax.swing.JLabel();
         lblSitio = new javax.swing.JLabel();
-        txtSitio = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         cmbTipoHojarasca = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
@@ -1030,11 +1057,12 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         btnModificarProfundidad = new javax.swing.JButton();
         btnEliminarProfundidad = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
-        btnContinuar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         btnAgregarHojarasca = new javax.swing.JButton();
         btnModificarHojarsca = new javax.swing.JButton();
         btnEliminarHojarasca = new javax.swing.JButton();
+        cmbUPMID = new javax.swing.JComboBox<>();
+        cmbSitios = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximizable(true);
@@ -1050,9 +1078,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         lblUPM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUPM.setText("UPMID:");
 
-        txtUPM.setEditable(false);
-        txtUPM.setEnabled(false);
-
         lblHojarascaFermentacion.setBackground(new java.awt.Color(153, 153, 153));
         lblHojarascaFermentacion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblHojarascaFermentacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1061,9 +1086,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
 
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-
-        txtSitio.setEditable(false);
-        txtSitio.setEnabled(false);
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1673,7 +1695,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         });
 
         btnEliminarProfundidad.setText("Eliminar");
-        btnEliminarProfundidad.setNextFocusableComponent(btnContinuar);
         btnEliminarProfundidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarProfundidadActionPerformed(evt);
@@ -1682,15 +1703,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
 
         jPanel7.setBackground(new java.awt.Color(204, 204, 204));
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        btnContinuar.setMnemonic('c');
-        btnContinuar.setText("Continuar");
-        btnContinuar.setNextFocusableComponent(btnSalir);
-        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContinuarActionPerformed(evt);
-            }
-        });
 
         btnSalir.setMnemonic('s');
         btnSalir.setText("Salir");
@@ -1705,20 +1717,16 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap(347, Short.MAX_VALUE)
-                .addComponent(btnContinuar)
-                .addGap(21, 21, 21)
+                .addGap(404, 404, 404)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(365, Short.MAX_VALUE))
+                .addContainerGap(409, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnContinuar)
-                    .addComponent(btnSalir))
-                .addGap(8, 8, 8))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(8, Short.MAX_VALUE)
+                .addComponent(btnSalir)
+                .addContainerGap())
         );
 
         btnAgregarHojarasca.setText("Agregar");
@@ -1740,6 +1748,19 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         btnEliminarHojarasca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarHojarascaActionPerformed(evt);
+            }
+        });
+
+        cmbUPMID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUPMIDActionPerformed(evt);
+            }
+        });
+
+        cmbSitios.setEnabled(false);
+        cmbSitios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSitiosActionPerformed(evt);
             }
         });
 
@@ -1766,12 +1787,12 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblUPM)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblSitio)
-                                .addGap(8, 8, 8)
-                                .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1789,26 +1810,27 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                         .addGap(10, 10, 10))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAgregarProfundidad, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
-                        .addComponent(btnModificarProfundidad)
-                        .addGap(7, 7, 7)
-                        .addComponent(btnEliminarProfundidad, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAgregarProfundidad, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(btnModificarProfundidad)
+                .addGap(7, 7, 7)
+                .addComponent(btnEliminarProfundidad, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSitio)
-                    .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblUPM)
-                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addComponent(lblHojarascaFermentacion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1816,7 +1838,7 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1830,13 +1852,13 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
                 .addGap(6, 6, 6)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAgregarProfundidad)
                     .addComponent(btnModificarProfundidad)
                     .addComponent(btnEliminarProfundidad))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 14, Short.MAX_VALUE)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
@@ -1962,8 +1984,8 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     private void txtEspesorFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEspesorFFocusLost
         if (txtEspesorF.getText().isEmpty()) {
             txtEspesorF.setValue(null);
-        }else{
-            if(txtEspesorF.getText().equals("0")){
+        } else {
+            if (txtEspesorF.getText().equals("0")) {
                 txtPesoTotalF.setText("0.0");
                 txtPesoMuestraF.setText("0.0");
             }
@@ -2108,29 +2130,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnEliminarProfundidadActionPerformed
 
-    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        if (chkHojarasca.isSelected() && this.cdHojarasca.validarTablaHojarasca(this.sitioID)) {
-            JOptionPane.showMessageDialog(null, "Si selecciona hojarasca y fermentación, se deben capturar"
-                    + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
-            chkHojarasca.requestFocus();
-        } else if (chkSueloProfundidades.isSelected() && this.cdProfundidad.validarTablaProfundidad(this.sitioID)) {
-            JOptionPane.showMessageDialog(null, "Si selecciona profundidades 0-30 y 30-60, se deben capturar"
-                    + "", "Suelo", JOptionPane.INFORMATION_MESSAGE);
-            chkSueloProfundidades.requestFocus();
-        } else if (this.modificar == 0) {
-            this.hide();
-            UPMForms.muestrasPerfil.setDatosiniciales(this.ceSitio);
-            UPMForms.muestrasPerfil.setVisible(true);
-            this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-        } else if (this.modificar == 1) {
-            this.hide();
-            UPMForms.muestrasPerfil.revisarMuestrasPerfil(this.ceSitio);
-            UPMForms.muestrasPerfil.setVisible(true);
-        }
-        limpiarControlesHojarasca();
-        limpiarControlesProfundidades();
-    }//GEN-LAST:event_btnContinuarActionPerformed
-
     private void grdHojarascaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_grdHojarascaMouseClicked
         if (evt.getButton() == 1) {
             int fila = grdHojarasca.getSelectedRow();
@@ -2219,18 +2218,8 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPesoTotal3060KeyTyped
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        if (revision == false) {//esta en modo de captura
-            this.hide();
-            funciones.manipularBotonesMenuPrincipal(false);
-        }
-        if (revision == true) {//entro a modo de revision
-            //System.err.println("Modo Revision");
-            this.hide();
-            //UPMForms.revisionModulos.iniciarRevision();
-            UPMForms.revisionModulos.setVisible(true);
-            UPMForms.revisionModulos.manipularBonesMenuprincipal();
-            revision = false;
-        }
+        this.hide();
+        funciones.manipularBotonesMenuPrincipal(false);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void chkHojarascaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkHojarascaActionPerformed
@@ -2286,23 +2275,59 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtEspesorFActionPerformed
 
     private void cmbTipoHojarascaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoHojarascaActionPerformed
-       if(cmbTipoHojarasca.getSelectedIndex()==9){
-           txtPesoTotalHO.setText("0.0");
-           txtPesoTotalF.setText("0.0");
-           txtEspesorF.setText("0.0");
-           txtEspesorHO.setText("0.0");
-           txtPesoMuestraF.setText("0.0");
-           txtPesoMuestraHO.setText("0.0");
-       }
+        if (cmbTipoHojarasca.getSelectedIndex() == 9) {
+            txtPesoTotalHO.setText("0.0");
+            txtPesoTotalF.setText("0.0");
+            txtEspesorF.setText("0.0");
+            txtEspesorHO.setText("0.0");
+            txtPesoMuestraF.setText("0.0");
+            txtPesoMuestraHO.setText("0.0");
+        }
     }//GEN-LAST:event_cmbTipoHojarascaActionPerformed
 
+    private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
+        Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        Integer sitio = (Integer) cmbSitios.getSelectedItem();
+        if (cmbUPMID.getSelectedItem() != null) {
+            this.upmID = (Integer) cmbUPMID.getSelectedItem();
+            combo.reiniciarComboModel(cmbSitios);
+            fillCmbSitio(upmID);
+            cmbSitios.setEnabled(true);
+        } else {
+            combo.reiniciarComboModel(cmbSitios);
+            cmbSitios.setSelectedItem(null);
+            cmbSitios.setEnabled(false);
+        }
+
+    }//GEN-LAST:event_cmbUPMIDActionPerformed
+
+    private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
+        try {
+            //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
+            if (cmbSitios.getSelectedItem() == null) {
+                this.sitioID = 0;
+                /*limpiarControles();
+                limpiarPorcentajes();*/
+            } else {
+                String upm = cmbUPMID.getSelectedItem().toString();
+                String sitio = cmbSitios.getSelectedItem().toString();
+                this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
+
+            }
+            revisarHojarascaProfundidad(this.sitioID);
+
+//llenarTabla();
+        } catch (Exception e) {
+            e.getCause();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbSitiosActionPerformed
+
     /**
-         * @param args the command line arguments
-         */
+     * @param args the command line arguments
+     */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarHojarasca;
     private javax.swing.JButton btnAgregarProfundidad;
-    private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnEliminarHojarasca;
     private javax.swing.JButton btnEliminarProfundidad;
     private javax.swing.JButton btnModificarHojarsca;
@@ -2312,7 +2337,9 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox chkSueloProfundidades;
     private javax.swing.JComboBox cmbPuntoHojarasca;
     private javax.swing.JComboBox cmbPuntoProfundidad;
+    private javax.swing.JComboBox<Integer> cmbSitios;
     private javax.swing.JComboBox cmbTipoHojarasca;
+    private javax.swing.JComboBox<Integer> cmbUPMID;
     private javax.swing.JTable grdHojarasca;
     private javax.swing.JTable grdProfundidad;
     private javax.swing.JLabel jLabel1;
@@ -2374,8 +2401,6 @@ public class FrmHojarascaProfundidad extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txtPesoTotalHO;
     private javax.swing.JFormattedTextField txtProfundidad030;
     private javax.swing.JFormattedTextField txtProfundidad3060;
-    private javax.swing.JTextField txtSitio;
-    private javax.swing.JTextField txtUPM;
     // End of variables declaration//GEN-END:variables
 
 }

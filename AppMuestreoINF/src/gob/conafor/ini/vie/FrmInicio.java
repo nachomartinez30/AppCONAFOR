@@ -803,7 +803,7 @@ public class FrmInicio extends javax.swing.JFrame {
                     UPMForms.carbono.setVisible(true);
                     UPMForms.carbono.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
-                    
+
                     break;
                 case "[Modulos, C, Longitud interceptada]":
                     UPMForms.longitud.setVisible(true);
@@ -811,16 +811,18 @@ public class FrmInicio extends javax.swing.JFrame {
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, D, Arbolado]":
-                     UPMForms.arboladoD.setVisible(true);
+                    UPMForms.arboladoD.setVisible(true);
                     UPMForms.arboladoD.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, E, Hojarasca profundidad suelo]":
-                    /*FORMULARIO A ABRIR*/
+                    UPMForms.hojarascaProfundidad.setVisible(true);
+                    UPMForms.hojarascaProfundidad.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, E, Muestras del perfil]":
-                    /*FORMULARIO A ABRIR*/
+                    UPMForms.muestrasPerfil.setVisible(true);
+                    UPMForms.muestrasPerfil.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, F, Fotografía hemisferica]":

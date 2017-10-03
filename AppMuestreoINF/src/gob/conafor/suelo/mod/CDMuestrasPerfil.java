@@ -174,7 +174,7 @@ public class CDMuestrasPerfil {
     }
     
     public void insertMuestrasPerfil(CEMuestrasPerfil perfil) {
-        this.query = "INSERT INTO SUELO_MuestrasPerfil(SitioID, GradosLatitud, MinutosLatitud, SegundosLatitud, "
+        this.query = "INSERT OR REPLACE INTO SUELO_MuestrasPerfil(SitioID, GradosLatitud, MinutosLatitud, SegundosLatitud, "
                 + "GradosLongitud, MinutosLongitud, SegundosLongitud, Elevacion, DiametroInterno, "
                 + "DiametroExterno, Altura, Observaciones)VALUES(" + perfil.getSitioID() + ", " + perfil.getGradosLatitud()
                 + ", " + perfil.getMinutosLatitud() + ", " + perfil.getSegundosLatitud() + ","
@@ -186,6 +186,7 @@ public class CDMuestrasPerfil {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
             conn.commit();
+            JOptionPane.showMessageDialog(null, "Datos de perfil insertados");
             st.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! no se pudo guardar la informacion de muestras perfil ", "Conexion BD", JOptionPane.ERROR_MESSAGE);

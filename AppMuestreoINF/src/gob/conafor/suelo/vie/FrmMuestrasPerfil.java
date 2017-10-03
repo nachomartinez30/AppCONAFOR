@@ -1,5 +1,6 @@
 package gob.conafor.suelo.vie;
 
+import gob.conafor.sitio.mod.CDSitio;
 import gob.conafor.sitio.mod.CESitio;
 import gob.conafor.suelo.mod.CDMuestrasPerfil;
 import gob.conafor.suelo.mod.CEMuestras;
@@ -56,6 +57,8 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
     private CEMuestras ceMuestras = new CEMuestras();
     private Version ver = new Version();
     private String version = ver.getVersion();
+    private CDSitio cdSitio = new CDSitio();
+    private FuncionesComunes combo = new FuncionesComunes();
 
     public FrmMuestrasPerfil() {
         initComponents();
@@ -65,8 +68,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
         this.sitio = ceSitio.getSitio();
-        this.txtUPM.setText(String.valueOf(this.upmID));
-        this.txtSitio.setText(String.valueOf(this.sitio));
+        
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -83,14 +85,43 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         limpiarMuestrasPerfil();
     }
 
-    public void revisarMuestrasPerfil(CESitio ceSitio) {
-        revision = true;
+    
+    public void llenarControles() {
+        combo.reiniciarComboModel(this.cmbUPMID);
+        cmbSitios.setEnabled(true);
+        fillUPMID();
+    }
+
+    private void fillUPMID() {
+        List<Integer> listCapturado = new ArrayList<>();
+        listCapturado = this.cdSitio.getUPMSitios();
+        if (listCapturado != null) {
+            int size = listCapturado.size();
+            for (int i = 0; i < size; i++) {
+                cmbUPMID.addItem(listCapturado.get(i));
+            }
+        }
+    }
+
+    private void fillCmbSitio(int upmID) {
+
+        List<Integer> listSitios = new ArrayList<>();
+        listSitios = this.cdSitio.getSitiosDisponibles(upmID);
+        if (listSitios != null) {
+            int size = listSitios.size();
+            for (int i = 0; i < size; i++) {
+                cmbSitios.addItem(listSitios.get(i));
+            }
+        }
+    }
+    
+    public void revisarMuestrasPerfil(int sitioID) {
+        /*revision = true;
         this.upmID = ceSitio.getUpmID();
         this.sitioID = ceSitio.getSitioID();
 
-        this.sitio = ceSitio.getSitio();
-        this.txtUPM.setText(String.valueOf(this.upmID));
-        this.txtSitio.setText(String.valueOf(this.sitio));
+        this.sitio = ceSitio.getSitio();*/
+       
         this.ceSitio.setSitioID(this.sitioID);
         this.ceSitio.setUpmID(this.upmID);
         this.ceSitio.setSitio(this.sitio);
@@ -802,10 +833,8 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         lblUPM = new javax.swing.JLabel();
-        txtUPM = new javax.swing.JTextField();
         lblMuestrasPerfil = new javax.swing.JLabel();
         lblSitio = new javax.swing.JLabel();
-        txtSitio = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         lblObservaciones = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -869,6 +898,8 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         btnModificarMuestra = new javax.swing.JButton();
         btnEliminarMuestra = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        cmbUPMID = new javax.swing.JComboBox<>();
+        cmbSitios = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximizable(true);
@@ -881,9 +912,6 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         lblUPM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblUPM.setText("UPMID:");
 
-        txtUPM.setEditable(false);
-        txtUPM.setEnabled(false);
-
         lblMuestrasPerfil.setBackground(new java.awt.Color(153, 153, 153));
         lblMuestrasPerfil.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblMuestrasPerfil.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -892,9 +920,6 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
 
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-
-        txtSitio.setEditable(false);
-        txtSitio.setEnabled(false);
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -944,7 +969,7 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnContinuar.setMnemonic('c');
-        btnContinuar.setText("Continuar");
+        btnContinuar.setText("Capturar");
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnContinuarActionPerformed(evt);
@@ -1742,6 +1767,19 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        cmbUPMID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbUPMIDActionPerformed(evt);
+            }
+        });
+
+        cmbSitios.setEnabled(false);
+        cmbSitios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbSitiosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1752,12 +1790,12 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblUPM)
-                        .addGap(4, 4, 4)
-                        .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblSitio)
-                        .addGap(8, 8, 8)
-                        .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addComponent(PnlCoordenadasInterior, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1770,15 +1808,16 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(lblUPM))
+                        .addGap(9, 9, 9)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblUPM)
+                            .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(7, 7, 7)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblSitio)
-                            .addComponent(txtSitio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUPM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(2, 2, 2)
+                            .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(4, 4, 4)
                 .addComponent(lblMuestrasPerfil)
                 .addGap(6, 6, 6)
                 .addComponent(PnlCoordenadasInterior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1810,21 +1849,10 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         fijarDatosMuestraPerfil();
-        if (this.modificar == 0) {
             if (validarDatosobligatoriosMuestrasPerfil() && validarDatosMuestrasPerfil()) {
                 crearMuestrasPerfil();
-                this.hide();
-                this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
-                seleccionarSiguienteFormulario(this.ceSitio);
+                
             }
-        } else if (this.modificar == 1) {
-            if (validarDatosobligatoriosMuestrasPerfil() && validarDatosMuestrasPerfil()) {
-                actualizarMuestraPerfil();
-                this.hide();
-                revisarSiguienteFormulario(this.ceSitio);
-
-            }
-        }
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void txtObservacionesFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtObservacionesFocusGained
@@ -2345,6 +2373,43 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
         reiniciarControlesMuestras();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
+Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+        Integer sitio = (Integer) cmbSitios.getSelectedItem();
+        if (cmbUPMID.getSelectedItem() != null) {
+            this.upmID = (Integer) cmbUPMID.getSelectedItem();
+            combo.reiniciarComboModel(cmbSitios);
+            fillCmbSitio(upmID);
+            cmbSitios.setEnabled(true);
+        } else {
+            combo.reiniciarComboModel(cmbSitios);
+            cmbSitios.setSelectedItem(null);
+            cmbSitios.setEnabled(false);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbUPMIDActionPerformed
+
+    private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed
+try {
+            //System.out.println("item selected=\t"+cmbSitios.getSelectedItem());
+            if (cmbSitios.getSelectedItem() == null) {
+                this.sitioID = 0;
+                /*limpiarControles();
+                limpiarPorcentajes();*/
+            } else {
+                String upm = cmbUPMID.getSelectedItem().toString();
+                String sitio = cmbSitios.getSelectedItem().toString();
+                this.sitioID = cdSitio.getSitioIDNuevo(upm, sitio);
+
+            }
+            revisarMuestrasPerfil(this.sitioID);
+
+//llenarTabla();
+        } catch (Exception e) {
+            e.getCause();
+        }
+    }//GEN-LAST:event_cmbSitiosActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LblGradosLatitud;
     private javax.swing.JLabel LblGradosLongitud;
@@ -2361,6 +2426,8 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnModificarMuestra;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox cmbProfundidad;
+    private javax.swing.JComboBox<Integer> cmbSitios;
+    private javax.swing.JComboBox<Integer> cmbUPMID;
     private javax.swing.JTable grdMuestras;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
@@ -2413,8 +2480,6 @@ public class FrmMuestrasPerfil extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField txtPromedio;
     private javax.swing.JFormattedTextField txtSegundosLatitud;
     private javax.swing.JFormattedTextField txtSegundosLongitud;
-    private javax.swing.JTextField txtSitio;
-    private javax.swing.JTextField txtUPM;
     // End of variables declaration//GEN-END:variables
 
 }

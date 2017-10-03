@@ -926,6 +926,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
             }
         });
 
+        cmbSitios.setEnabled(false);
         cmbSitios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbSitiosActionPerformed(evt);
@@ -1623,6 +1624,9 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         asignarDatosVegetacionMayor();
+        if(combo.isEnabledCmbSitios(cmbSitios)==false){
+    
+}else{
         if (cmbAgenteDanio1.getSelectedIndex() == 0 && cmbSeveridad1.getSelectedIndex() > 0) {
             JOptionPane.showMessageDialog(null, "Si no hay Agente de daño, la Severidad es 0", "Vegetacion mayor individuales", JOptionPane.INFORMATION_MESSAGE);
             cmbAgenteDanio1.requestFocus();
@@ -1640,19 +1644,27 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
                 limpiarControles();
             }
         }
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnElimnarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimnarActionPerformed
-        eliminarVegetacionMayor();
+        if(combo.isEnabledCmbSitios(cmbSitios)==false){
+    
+}else{
+            eliminarVegetacionMayor();
         //this.cdVegetacionMayor.enumerarConsecutivo(this.sitioID);
         //this.cdVegetacionMayor.enumerarIndividuo(this.sitioID);
         combo.reiniciarComboModel(cmbConsecutivo);
         fillCmbConsecutivo();
         llenarTabla();
+        }
     }//GEN-LAST:event_btnElimnarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         asignarDatosVegetacionMayor();
+        if(combo.isEnabledCmbSitios(cmbSitios)==false){
+    
+}else{
         if (cmbAgenteDanio1.getSelectedIndex() == 0 && cmbSeveridad1.getSelectedIndex() > 0) {
             JOptionPane.showMessageDialog(null, "Si no hay Agente de daño, la Severidad es 0", "Vegetacion mayor individuales", JOptionPane.INFORMATION_MESSAGE);
             cmbAgenteDanio1.requestFocus();
@@ -1669,6 +1681,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
                 llenarTabla();
                 limpiarControles();
             }
+        }
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
@@ -1745,6 +1758,9 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
 
     private void btnColectaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColectaActionPerformed
         try {
+            if(combo.isEnabledCmbSitios(cmbSitios)==false){
+    
+}else{
             int fila = grdVegetacionvMayor.getSelectedRow();
             String consecutivo = grdVegetacionvMayor.getValueAt(fila, 3).toString();
             FrmClaveColecta claveColecta = new FrmClaveColecta(Main.main, true);
@@ -1767,6 +1783,7 @@ public class FrmVegetacionMayorGregarios extends javax.swing.JInternalFrame {
             ceColecta.setNombreComun(txtNombreComun.getText());
             claveColecta.setDatosIniciales(ceColecta, FORMATO_ID, "TAXONOMIA_VegetacionMayorGregarios", "NoIndividuo", this.sitioID, Integer.parseInt(consecutivo));
             claveColecta.setVisible(true);
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar u registro para asignar la clave de colecta"
                     + e.getClass().getName() + " : " + e.getMessage(), "Clave de colecta", JOptionPane.ERROR_MESSAGE);

@@ -2651,18 +2651,25 @@ public class FrmSotoBosque extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCobertura151KeyTyped
 
     private void cmbUPMIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbUPMIDActionPerformed
-        Integer upmID = (Integer) cmbUPMID.getSelectedItem();
-        Integer sitio = (Integer) cmbSitios.getSelectedItem();
-        if (cmbUPMID.getSelectedItem() != null) {
-            combo.reiniciarComboModel(cmbSitios);
-            fillCmbSitio(upmID);
-            cmbSitios.setEnabled(true);
-        } else {
-            combo.reiniciarComboModel(cmbSitios);
-            cmbSitios.setSelectedItem(null);
-            cmbSitios.setEnabled(false);
-            limpiarControles();
+        try {
+            Integer upmID = (Integer) cmbUPMID.getSelectedItem();
+            System.out.println("upmID \t" + upmID);
+            Integer sitio = (Integer) cmbSitios.getSelectedItem();
+            if (cmbUPMID.getSelectedItem() != null) {
+                cmbSitios.setEnabled(true);
+                combo.reiniciarComboModel(cmbSitios);
+                fillCmbSitio(upmID);
+
+            } else {
+                combo.reiniciarComboModel(cmbSitios);
+                cmbSitios.setSelectedItem(null);
+                cmbSitios.setEnabled(false);
+                limpiarControles();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }//GEN-LAST:event_cmbUPMIDActionPerformed
 
     private void cmbSitiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSitiosActionPerformed

@@ -56,7 +56,7 @@ public class CDBrigada {
 
     public List<CEBrigadista> getBrigadistas() {
         List<CEBrigadista> listBrigadistas = new ArrayList();
-        /*PRODUCCION*/ this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno,EmpresaID FROM BRIGADA_Brigadistas WHERE PuestoID= 0 AND Activo= 1 ORDER BY ApellidoPaterno ASC";
+        /*PRODUCCION*/ this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno,EmpresaID FROM BRIGADA_Brigadistas WHERE /*PuestoID= 0  AND*/ Activo= 1 ORDER BY ApellidoPaterno ASC";
          ///*DIAAPROY*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno, EmpresaID  FROM BRIGADA_Brigadistas WHERE PuestoID= 0 AND Activo= 1 AND EmpresaID= 1 ORDER BY ApellidoPaterno ASC";
         ///*INYDES*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno , EmpresaID FROM BRIGADA_Brigadistas WHERE PuestoID= 0 AND Activo= 1 AND EmpresaID= 2 ORDER BY ApellidoPaterno ASC";
         ///*AMAREF*/this.query = "SELECT BrigadistaID, Nombre, ApellidoPaterno, ApellidoMaterno, EmpresaID FROM BRIGADA_Brigadistas WHERE PuestoID= 0 AND Activo= 1 AND EmpresaID= 3 ORDER BY ApellidoPaterno ASC";

@@ -31,12 +31,12 @@ public class FrmInicio extends javax.swing.JFrame {
         Dimension ventana = this.getSize();
         this.setLocation((pantalla.width - ventana.width) / 2, (pantalla.height - ventana.height) / 2);
         btnCrearSitio.setEnabled(navegacion.habilitarCapturaSitio());
-        btnCapturarModulos.setEnabled(navegacion.habilitarCapturaModulos());
+        //btnCapturarModulos.setEnabled(navegacion.habilitarCapturaModulos());
         btnContinuarModulos.setEnabled(navegacion.habilitarContinuarModulos());
         btnColectaBotanica.setEnabled(navegacion.habilitarColectaBotanica());
         btnRevisarUPM.setEnabled(navegacion.habilitarRevisarUPM());
         btnRevisionSitios.setEnabled(navegacion.habilitarCapturaModulos());
-        btnRevisarModulos.setEnabled(navegacion.habilitarContinuarModulos());
+        //btnRevisarModulos.setEnabled(navegacion.habilitarContinuarModulos());
         btnVerReportes.setEnabled(navegacion.habilitarCapturaModulos());
         dpPrincipal.add(UPMForms.informacionGeneralUPM);
         dpPrincipal.add(UPMForms.puntoControlUPM);
@@ -109,12 +109,10 @@ public class FrmInicio extends javax.swing.JFrame {
         btnOcultarPanel = new javax.swing.JButton();
         dpMenuLateral = new javax.swing.JDesktopPane();
         btnCrearUPM = new javax.swing.JButton();
-        btnCapturarModulos = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         btnCrearSitio = new javax.swing.JButton();
         btnRevisarUPM = new javax.swing.JButton();
         btnRevisionSitios = new javax.swing.JButton();
-        btnRevisarModulos = new javax.swing.JButton();
         btnColectaBotanica = new javax.swing.JButton();
         btnVerReportes = new javax.swing.JButton();
         btnContinuarModulos = new javax.swing.JButton();
@@ -278,17 +276,6 @@ public class FrmInicio extends javax.swing.JFrame {
             }
         });
 
-        btnCapturarModulos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnCapturarModulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/ModulosIcon.png"))); // NOI18N
-        btnCapturarModulos.setText("Capturar Módulos");
-        btnCapturarModulos.setEnabled(false);
-        btnCapturarModulos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnCapturarModulos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCapturarModulosActionPerformed(evt);
-            }
-        });
-
         btnSalir.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/log-out.png"))); // NOI18N
         btnSalir.setText("Salir");
@@ -333,17 +320,6 @@ public class FrmInicio extends javax.swing.JFrame {
             }
         });
 
-        btnRevisarModulos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnRevisarModulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/RevisarModulosIcon.png"))); // NOI18N
-        btnRevisarModulos.setText("Revisar Módulos");
-        btnRevisarModulos.setEnabled(false);
-        btnRevisarModulos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnRevisarModulos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRevisarModulosActionPerformed(evt);
-            }
-        });
-
         btnColectaBotanica.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnColectaBotanica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/tree-leaf.png"))); // NOI18N
         btnColectaBotanica.setText("Colecta Botánica");
@@ -367,7 +343,8 @@ public class FrmInicio extends javax.swing.JFrame {
 
         btnContinuarModulos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnContinuarModulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/ContinuarModulosIcon.png"))); // NOI18N
-        btnContinuarModulos.setText("Continuar Módulos");
+        btnContinuarModulos.setMnemonic('m');
+        btnContinuarModulos.setText("Capturar Modulos");
         btnContinuarModulos.setEnabled(false);
         btnContinuarModulos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnContinuarModulos.addActionListener(new java.awt.event.ActionListener() {
@@ -377,12 +354,10 @@ public class FrmInicio extends javax.swing.JFrame {
         });
 
         dpMenuLateral.setLayer(btnCrearUPM, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        dpMenuLateral.setLayer(btnCapturarModulos, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dpMenuLateral.setLayer(btnSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dpMenuLateral.setLayer(btnCrearSitio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dpMenuLateral.setLayer(btnRevisarUPM, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dpMenuLateral.setLayer(btnRevisionSitios, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        dpMenuLateral.setLayer(btnRevisarModulos, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dpMenuLateral.setLayer(btnColectaBotanica, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dpMenuLateral.setLayer(btnVerReportes, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dpMenuLateral.setLayer(btnContinuarModulos, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -393,18 +368,16 @@ public class FrmInicio extends javax.swing.JFrame {
             dpMenuLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dpMenuLateralLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(dpMenuLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCrearUPM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCapturarModulos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCrearSitio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRevisarUPM, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRevisionSitios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRevisarModulos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnColectaBotanica, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVerReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnContinuarModulos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(dpMenuLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnColectaBotanica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCrearUPM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCrearSitio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRevisarUPM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRevisionSitios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVerReportes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnContinuarModulos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         dpMenuLateralLayout.setVerticalGroup(
             dpMenuLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -413,19 +386,15 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addComponent(btnCrearUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCrearSitio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCapturarModulos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(84, 84, 84)
                 .addComponent(btnContinuarModulos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addGap(75, 75, 75)
                 .addComponent(btnColectaBotanica, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
                 .addComponent(btnRevisarUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRevisionSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnRevisarModulos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(160, 160, 160)
                 .addComponent(btnVerReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -614,7 +583,7 @@ public class FrmInicio extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(dpMenuLateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
+                .addComponent(dpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrpanelModulos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -663,12 +632,6 @@ public class FrmInicio extends javax.swing.JFrame {
         UPMForms.revisionSitio.manipularBotonesMenu();
     }//GEN-LAST:event_btnRevisionSitiosActionPerformed
 
-    private void btnRevisarModulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevisarModulosActionPerformed
-        UPMForms.revisionModulos.iniciarRevision();
-        UPMForms.revisionModulos.setVisible(true);
-        UPMForms.revisionModulos.manipularBonesMenuprincipal();
-    }//GEN-LAST:event_btnRevisarModulosActionPerformed
-
     private void btnColectaBotanicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColectaBotanicaActionPerformed
         UPMForms.colectaBotanica.setVisible(true);
         UPMForms.colectaBotanica.procesarColecta();
@@ -678,14 +641,6 @@ public class FrmInicio extends javax.swing.JFrame {
         UPMForms.reportes.setVisible(true);
         UPMForms.reportes.setDatosIniciales();
     }//GEN-LAST:event_btnVerReportesActionPerformed
-
-    private void btnContinuarModulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarModulosActionPerformed
-        UPMForms.continuarModulos.continuarModulos();
-        UPMForms.continuarModulos.setVisible(true);
-        //UPMForms.continuarModulos.manipularBonesMenuprincipal();
-        scrpanelModulos.setVisible(true);
-        UPMForms.continuarModulos.setVisible(false);
-    }//GEN-LAST:event_btnContinuarModulosActionPerformed
 
     private void miImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miImportarActionPerformed
         UPMForms.importarBD.iniciar();
@@ -736,13 +691,6 @@ public class FrmInicio extends javax.swing.JFrame {
         concentrador.setVisible(true);
     }//GEN-LAST:event_miConcentrarActionPerformed
 
-    private void btnCapturarModulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarModulosActionPerformed
-        /*UPMForms.capturarModulos.llenarControles();
-        UPMForms.capturarModulos.setVisible(true);
-        UPMForms.capturarModulos.manipularBonesMenuprincipal();*/
-        scrpanelModulos.setVisible(true);
-    }//GEN-LAST:event_btnCapturarModulosActionPerformed
-
     private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
         String path = "";
         if (evt.getClickCount() == 2) {
@@ -756,6 +704,14 @@ public class FrmInicio extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jTree1MouseClicked
+
+    private void btnContinuarModulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarModulosActionPerformed
+        UPMForms.continuarModulos.continuarModulos();
+        UPMForms.continuarModulos.setVisible(true);
+        //UPMForms.continuarModulos.manipularBonesMenuprincipal();
+        scrpanelModulos.setVisible(true);
+        UPMForms.continuarModulos.setVisible(false);
+    }//GEN-LAST:event_btnContinuarModulosActionPerformed
     public void openForm(String path) throws PropertyVetoException {
         System.out.println("Pathe OPEN_FORM"+path);
 
@@ -955,13 +911,11 @@ public class FrmInicio extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnCapturarModulos;
     public javax.swing.JButton btnColectaBotanica;
-    public javax.swing.JButton btnContinuarModulos;
+    private javax.swing.JButton btnContinuarModulos;
     public javax.swing.JButton btnCrearSitio;
     public javax.swing.JButton btnCrearUPM;
     private javax.swing.JButton btnOcultarPanel;
-    public javax.swing.JButton btnRevisarModulos;
     public javax.swing.JButton btnRevisarUPM;
     public javax.swing.JButton btnRevisionSitios;
     private javax.swing.JButton btnSalir;

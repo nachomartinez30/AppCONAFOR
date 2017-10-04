@@ -158,12 +158,12 @@ public class FuncionesComunes {
             Main.main.menGuardarArchivo.setEnabled(false);
             Main.main.btnCrearUPM.setEnabled(false);
             Main.main.btnCrearSitio.setEnabled(false);
-            Main.main.btnCapturarModulos.setEnabled(false);
-            Main.main.btnContinuarModulos.setEnabled(false);
+            //Main.main.btnCapturarModulos.setEnabled(false);
+            //Main.main.btnContinuarModulos.setEnabled(false);
             Main.main.btnColectaBotanica.setEnabled(false);
             Main.main.btnRevisarUPM.setEnabled(false);
             Main.main.btnRevisionSitios.setEnabled(false);
-            Main.main.btnRevisarModulos.setEnabled(false);
+            //Main.main.btnRevisarModulos.setEnabled(false);
             Main.main.btnVerReportes.setEnabled(false);
             Main.main.btnVerReportes.setEnabled(false);
             Main.main.scrpanelModulos.setVisible(false);
@@ -171,12 +171,12 @@ public class FuncionesComunes {
             Main.main.btnCrearUPM.setEnabled(true);
             Main.main.menGuardarArchivo.setEnabled(true);
             Main.main.btnCrearSitio.setEnabled(navegacion.habilitarCapturaSitio());
-            Main.main.btnCapturarModulos.setEnabled(navegacion.habilitarCapturaModulos());
-            Main.main.btnContinuarModulos.setEnabled(navegacion.habilitarContinuarModulos());
+           // Main.main.btnCapturarModulos.setEnabled(navegacion.habilitarCapturaModulos());
+            //Main.main.btnContinuarModulos.setEnabled(navegacion.habilitarContinuarModulos());
             Main.main.btnColectaBotanica.setEnabled(navegacion.habilitarColectaBotanica());
             Main.main.btnRevisarUPM.setEnabled(navegacion.habilitarRevisarUPM());
             Main.main.btnRevisionSitios.setEnabled(navegacion.habilitarRevisarSitios());
-            Main.main.btnRevisarModulos.setEnabled(navegacion.habilitarContinuarModulos());
+            //Main.main.btnRevisarModulos.setEnabled(navegacion.habilitarContinuarModulos());
             Main.main.btnVerReportes.setEnabled(true);
             Main.main.scrpanelModulos.setVisible(true);
         }

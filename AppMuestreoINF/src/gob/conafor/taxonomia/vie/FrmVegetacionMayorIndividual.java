@@ -425,6 +425,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
         btnLimpiar = new javax.swing.JButton();
         cmbUPMID = new javax.swing.JComboBox<>();
         cmbSitios = new javax.swing.JComboBox<>();
+        lblModulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximizable(true);
@@ -934,6 +935,11 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
             }
         });
 
+        lblModulo.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        lblModulo.setForeground(new java.awt.Color(255, 0, 0));
+        lblModulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblModulo.setText("H");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -973,6 +979,8 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblModulo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblSitio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -986,7 +994,8 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
                     .addComponent(lblSitio)
                     .addComponent(lblUPM)
                     .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblModulo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblArbolado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1005,7 +1014,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
                         .addComponent(btnModificar)
                         .addComponent(chkVegetacionMayorMCI)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir)
@@ -1953,6 +1962,7 @@ public class FrmVegetacionMayorIndividual extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblFormaVida;
     private javax.swing.JLabel lblGenero;
     private javax.swing.JLabel lblInfraespecie;
+    private javax.swing.JLabel lblModulo;
     private javax.swing.JLabel lblNombreComun;
     private javax.swing.JLabel lblNumeroIndividuo;
     private javax.swing.JLabel lblSeveridad1;

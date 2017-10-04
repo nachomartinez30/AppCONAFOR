@@ -70,6 +70,8 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="cmbUPMID" min="-2" pref="106" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
+                              <Component id="lblModulo" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="lblSitio" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="cmbSitios" min="-2" pref="100" max="-2" attributes="0"/>
@@ -89,6 +91,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblUPM" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cmbUPMID" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblModulo" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -1640,6 +1643,18 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Integer&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblModulo">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="48" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="ff" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="A"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

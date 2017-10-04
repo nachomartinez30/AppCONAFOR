@@ -9,6 +9,7 @@ import gob.conafor.utils.Version;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.beans.PropertyVetoException;
 
 public class FrmInicio extends javax.swing.JFrame {
 
@@ -228,13 +229,13 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(dpPrincipalLayout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dpPrincipalLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dpPrincipalLayout.createSequentialGroup()
+                .addContainerGap(320, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addContainerGap(302, Short.MAX_VALUE))
         );
         dpPrincipalLayout.setVerticalGroup(
             dpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,7 +254,7 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
                 .addGap(14, 14, 14)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -498,9 +499,9 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addComponent(btnRevisarModulos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnVerReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         mbMenuSuperiror.setBorder(null);
@@ -596,10 +597,12 @@ public class FrmInicio extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(dpMenuLateral)
-            .addComponent(dpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(scrpanelModulos)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(dpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 801, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -729,12 +732,13 @@ public class FrmInicio extends javax.swing.JFrame {
         UPMForms.capturarModulos.manipularBonesMenuprincipal();*/
         scrpanelModulos.setVisible(true);
     }//GEN-LAST:event_btnCapturarModulosActionPerformed
-    public void openForm(String path) {
+    public void openForm(String path) throws PropertyVetoException {
         System.out.println("Pathe OPEN_FORM"+path);
 
             switch (path) {
                 case "[Modulos, A, Sotobosque]":
                     UPMForms.sotoBosque.setVisible(true);
+                    UPMForms.sotoBosque.setMaximum(true);
                     UPMForms.sotoBosque.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
@@ -766,11 +770,13 @@ public class FrmInicio extends javax.swing.JFrame {
                 case "[Modulos, A, Carbono e incendios]":
                     UPMForms.carbono.setVisible(true);
                     UPMForms.carbono.llenarControles();
+                    UPMForms.carbono.lblModulo.setText("A");
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Longitud interceptada]":
                     UPMForms.longitud.setVisible(true);
                     UPMForms.longitud.llenarControles();
+                    UPMForms.carbono.lblModulo.setText("A");
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Suelos]":
@@ -802,12 +808,14 @@ public class FrmInicio extends javax.swing.JFrame {
                 case "[Modulos, C, Carbono e incendios]":
                     UPMForms.carbono.setVisible(true);
                     UPMForms.carbono.llenarControles();
+                    UPMForms.carbono.lblModulo.setText("C");
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
 
                     break;
                 case "[Modulos, C, Longitud interceptada]":
                     UPMForms.longitud.setVisible(true);
                     UPMForms.longitud.llenarControles();
+                    UPMForms.carbono.lblModulo.setText("C");
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, D, Arbolado]":

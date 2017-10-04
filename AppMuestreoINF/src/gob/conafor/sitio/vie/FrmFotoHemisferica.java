@@ -291,6 +291,7 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
         txtDeclinacionMagnetica = new javax.swing.JFormattedTextField();
         cmbSitios = new javax.swing.JComboBox<>();
         cmbUPMID = new javax.swing.JComboBox<>();
+        lblModulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximizable(true);
@@ -311,11 +312,11 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
         lblTomaFotografiaHemisferica.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTomaFotografiaHemisferica.setText("Toma de fotografías hemisféricas  ");
         lblTomaFotografiaHemisferica.setOpaque(true);
-        jPanel1.add(lblTomaFotografiaHemisferica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 39, 900, -1));
+        jPanel1.add(lblTomaFotografiaHemisferica, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 900, -1));
 
         lblSitio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblSitio.setText("Sitio:");
-        jPanel1.add(lblSitio, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, -1, -1));
+        jPanel1.add(lblSitio, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 30, -1, -1));
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -503,7 +504,7 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
                 cmbSitiosActionPerformed(evt);
             }
         });
-        jPanel1.add(cmbSitios, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, 120, -1));
+        jPanel1.add(cmbSitios, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 30, 120, -1));
 
         cmbUPMID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -511,6 +512,12 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(cmbUPMID, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 120, -1));
+
+        lblModulo.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        lblModulo.setForeground(new java.awt.Color(255, 0, 0));
+        lblModulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblModulo.setText("F");
+        jPanel1.add(lblModulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -635,6 +642,7 @@ public class FrmFotoHemisferica extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblCoberturaArborea;
     private javax.swing.JLabel lblDeclinacionMagnetica;
     private javax.swing.JLabel lblHora;
+    private javax.swing.JLabel lblModulo;
     private javax.swing.JLabel lblSitio;
     private javax.swing.JLabel lblTomaFotografia;
     private javax.swing.JLabel lblTomaFotografiaHemisferica;

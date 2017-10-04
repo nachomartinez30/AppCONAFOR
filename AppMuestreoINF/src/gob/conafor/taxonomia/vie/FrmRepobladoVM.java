@@ -974,6 +974,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
         cmbInfraespecie = new javax.swing.JComboBox();
         cmbUPMID = new javax.swing.JComboBox<>();
         cmbSitios = new javax.swing.JComboBox<>();
+        lblModulo = new javax.swing.JLabel();
 
         setMaximizable(true);
         setTitle("Registro de repoblado y vegetación menor módulo G "+version);
@@ -1829,6 +1830,11 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
             }
         });
 
+        lblModulo.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        lblModulo.setForeground(new java.awt.Color(255, 0, 0));
+        lblModulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblModulo.setText("G");
+
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
         pnlPrincipal.setLayout(pnlPrincipalLayout);
         pnlPrincipalLayout.setHorizontalGroup(
@@ -1841,14 +1847,16 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PnlCoordenadas4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 931, Short.MAX_VALUE)
+                    .addComponent(PnlCoordenadas4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 971, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(lblUPM)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(588, 588, 588)
+                        .addGap(535, 535, 535)
+                        .addComponent(lblModulo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblSitio)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cmbSitios, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1889,7 +1897,8 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                             .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblSitio)
-                        .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblModulo)))
                 .addGap(3, 3, 3)
                 .addComponent(lblVegetacionMenorCobertura)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1912,7 +1921,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
                     .addComponent(chkRepobladoFuera)
                     .addComponent(jLabel1)
                     .addComponent(txtPorcentajeRepobladoFuera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnContinuar)
                     .addComponent(btnSalir))
@@ -2670,6 +2679,7 @@ public class FrmRepobladoVM extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblHojasrasca;
     private javax.swing.JLabel lblInfraespecie;
     private javax.swing.JLabel lblLiquenes;
+    private javax.swing.JLabel lblModulo;
     private javax.swing.JLabel lblMusgos;
     private javax.swing.JLabel lblNombreComun;
     private javax.swing.JLabel lblOtros;

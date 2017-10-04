@@ -582,6 +582,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
         btnSalir = new javax.swing.JButton();
         cmbUPMID = new javax.swing.JComboBox<>();
         cmbSitios = new javax.swing.JComboBox<>();
+        lblModulo = new javax.swing.JLabel();
 
         setMaximizable(true);
         setTitle("Clave de vegetacion "+version);
@@ -749,7 +750,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
                 .addComponent(chkArbolFueraBosque)
                 .addGap(18, 18, 18)
                 .addComponent(chkEcotono)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         lblEcotono.setText("En caso de presentarse describa brevemente la condición del ecotono:");
@@ -806,6 +807,12 @@ public class FrmClaveVegetacion extends JInternalFrame {
             }
         });
 
+        lblModulo.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        lblModulo.setForeground(new java.awt.Color(255, 0, 0));
+        lblModulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblModulo.setText("A");
+        lblModulo.setToolTipText("");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -819,7 +826,9 @@ public class FrmClaveVegetacion extends JInternalFrame {
                                 .addComponent(lblUPM)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cmbUPMID, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(570, 570, 570)
+                                .addGap(523, 523, 523)
+                                .addComponent(lblModulo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblSitio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -856,7 +865,8 @@ public class FrmClaveVegetacion extends JInternalFrame {
                         .addGap(4, 4, 4)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblSitio)
-                            .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cmbSitios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblModulo))))
                 .addGap(2, 2, 2)
                 .addComponent(lblClaveVegetacion)
                 .addGap(6, 6, 6)
@@ -868,11 +878,11 @@ public class FrmClaveVegetacion extends JInternalFrame {
                         .addGap(1, 1, 1)
                         .addComponent(lblCondicionPresente2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblEcotono)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnContinuar)
@@ -1089,6 +1099,7 @@ public class FrmClaveVegetacion extends JInternalFrame {
     private javax.swing.JLabel lblEcosistema;
     private javax.swing.JLabel lblEcotono;
     private javax.swing.JLabel lblFaseSucecional;
+    private javax.swing.JLabel lblModulo;
     private javax.swing.JLabel lblSitio;
     private javax.swing.JLabel lblUPM;
     private javax.swing.JRadioButton rbtPrimario;

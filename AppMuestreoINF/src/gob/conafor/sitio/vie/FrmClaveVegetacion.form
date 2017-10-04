@@ -64,7 +64,9 @@
                                   <Component id="lblUPM" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="cmbUPMID" min="-2" pref="113" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="570" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="523" max="-2" attributes="0"/>
+                                  <Component id="lblModulo" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="lblSitio" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="cmbSitios" min="-2" pref="116" max="-2" attributes="0"/>
@@ -114,6 +116,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lblSitio" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cmbSitios" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblModulo" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -128,11 +131,11 @@
                           <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                           <Component id="lblCondicionPresente2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" pref="226" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" pref="209" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                           <Component id="lblEcotono" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" pref="194" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="178" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
@@ -249,7 +252,7 @@
                       <Component id="chkArbolFueraBosque" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="chkEcotono" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="136" max="32767" attributes="0"/>
+                      <EmptySpace pref="103" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -508,6 +511,19 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Integer&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblModulo">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="48" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="ff" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="A"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

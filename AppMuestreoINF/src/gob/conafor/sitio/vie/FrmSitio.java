@@ -1854,14 +1854,14 @@ public class FrmSitio extends javax.swing.JInternalFrame {
         if (cmbUPM.getSelectedItem() == null) {
             cmbSitio.setEnabled(false);
             combo.reiniciarComboModel(this.cmbSitio);
-        } else if (cdSitio.son4Sitios(upmID)) {
+        } /*else if (cdSitio.son4Sitios(upmID)) {
             JOptionPane.showMessageDialog(null, "ya se han capturado los 4 sitios para ese UPM, seleccione otro", "Datos de ubicación del sitio", JOptionPane.INFORMATION_MESSAGE);
             cmbSitio.setEnabled(false);
             cmbSitio.setSelectedItem(null);
             cmbUPM.setSelectedItem(null);
             cmbUPM.requestFocus();
             btnGuardar.setEnabled(false);
-        } else {
+        } */else {
             cmbSitio.setEnabled(true);
             btnGuardar.setEnabled(true);
             combo.reiniciarComboModel(this.cmbSitio);

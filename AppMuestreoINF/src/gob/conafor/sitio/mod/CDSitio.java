@@ -101,7 +101,7 @@ public class CDSitio {
     public List<Integer> getUPMArboladosSitios(int A,int D, int G) {
         List<Integer> listUPM = new ArrayList();
         query = "SELECT DISTINCT  sit.UPMID  FROM SITIOS_Sitio sit  join UPM_MallaPuntos malla ON malla.UPMID = sit.UPMID WHERE (SELECT COUNT(sit1.UPMID) FROM SITIOS_Sitio sit1 WHERE sit.UPMID = sit1.UPMID) = 4  and malla.A = "+A+" and malla.D = "+D+" and malla.G = "+G+" ORDER BY sit.UPMID ASC ";
-        System.out.println(query);
+        // System.out.println(query);
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -190,7 +190,7 @@ public class CDSitio {
         if (upmID == 0) {
 
         } else {
-            System.out.println(query);
+            // System.out.println(query);
             try {
                 Statement st = conn.createStatement();
                 ResultSet rs = st.executeQuery(query);
@@ -371,6 +371,7 @@ public class CDSitio {
                 + "GradosLongitud, MinutosLongitud, SegundosLongitud, ErrorPresicion, EvidenciaMuestreo , Datum, SitioAccesible, "
                 + "Azimut, Distancia, TipoInaccesibilidad, ExplicacionInaccesibilidad "
                 + "FROM SITIOS_Sitio WHERE SitioID= " + sitioID;
+        System.out.println(query);
         Connection conn = LocalConnection.getConnection();
         CESitio ceSitio = new CESitio();
         try {
@@ -566,7 +567,7 @@ public class CDSitio {
                 + sitio.getSitio() + ", " + sitio.getSenialGPS() + ", " + sitio.getGradosLatitud() + ", " + sitio.getMinutosLatitud() + ", "
                 + sitio.getSegundosLatitud() + ", " + sitio.getGradosLongitud() + ", " + sitio.getMinutosLongitud() + ", " + sitio.getSegundosLongitud() + ", "
                 + sitio.getErrorPrecision() + ", " + sitio.getEvidenciaMuestreo() + ", '" + sitio.getDatum() + "' ," + sitio.getSitioAccesible() + ")";
-        System.out.println(query);
+        // System.out.println(query);
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -588,7 +589,7 @@ public class CDSitio {
     public void insertSitioInaccesible(CESitio sitio) {
         query = "INSERT INTO SITIOS_Sitio (UPMID, Sitio, SitioAccesible, TipoInaccesibilidad, ExplicacionInaccesibilidad) VALUES(" + sitio.getUpmID() + ", "
                 + sitio.getSitio() + ", " + sitio.getSitioAccesible() + ", " + sitio.getTipoInaccesibilidadID() + ", '" + sitio.getExplicacionInaccesibilidad() + "')";
-        System.out.println(query);
+        // System.out.println(query);
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
@@ -632,7 +633,8 @@ public class CDSitio {
 
     public int getSitioID(int UPM,int numeroSitio){
         int sitioID=0;
-        query = "SELECT SitioIDFROM SITIOS_Sitio WHERE UPMID= " + UPM+" AND Sitio="+numeroSitio;
+        query = "SELECT SitioID FROM SITIOS_Sitio WHERE UPMID= " + UPM+" AND Sitio="+numeroSitio;
+        System.out.println("getSitioID\t"+query);
         Connection conn = LocalConnection.getConnection();
        
         try {
@@ -745,7 +747,7 @@ public class CDSitio {
                 + sitio.getTipoInaccesibilidadID() + ", ExplicacionInaccesibilidad= '" + sitio.getExplicacionInaccesibilidad()
                 + "' WHERE SitioID= " + sitio.getSitioID();
         Connection conn = LocalConnection.getConnection();
-        //System.out.println(query);
+        System.out.println(query);
         try {
             Statement st = conn.createStatement();
             st.executeUpdate(query);
@@ -989,7 +991,7 @@ public class CDSitio {
         query = "UPDATE SITIOS_Sitio SET ClaveSerieV= " + sitio.getClaveSerieVID() + ", Condicion= " + sitio.getCondicion()+ ", FaseSucecional= " + sitio.getFaseSucecionalID()
                 + ", ArbolFuera= " + sitio.getArbolFuera() + ", Ecotono= " + sitio.getEcotono() + ", CondicionPresenteCampo= '" + sitio.getCondicionPresenteCampo()
                 + "', CondicionEcotono= '" + sitio.getCondicionEcotono() + "', CoberturaForestal="+sitio.getCoberturaForestal()+" WHERE SitioID= " + sitio.getSitioID() + " AND Sitio= " + sitio.getSitio();
-        System.out.println("clave vegetacion = \t"+query);
+        // System.out.println("clave vegetacion = \t"+query);
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();

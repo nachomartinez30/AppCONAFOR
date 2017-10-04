@@ -188,13 +188,10 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="dpMenuLateral" alignment="0" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
-              <Component id="dpPrincipal" min="-2" pref="801" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
               <Component id="scrpanelModulos" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
+          <Component id="dpPrincipal" alignment="0" pref="801" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -231,13 +228,7 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel3" alignment="1" max="32767" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel7" min="-2" pref="97" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="jLabel3" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -248,7 +239,13 @@
               </Group>
               <Group type="102" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jLabel4" min="-2" pref="708" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="50" pref="50" max="-2" attributes="0"/>
+                          <Component id="jLabel7" min="-2" pref="262" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jLabel4" min="-2" pref="708" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
@@ -278,12 +275,12 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" min="-2" pref="154" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel5" pref="416" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                  <Component id="jLabel5" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel6" min="-2" pref="8" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                  <Component id="jLabel6" min="-2" pref="8" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -435,9 +432,9 @@
                   <Component id="btnRevisionSitios" min="-2" pref="31" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
                   <Component id="btnVerReportes" min="-2" pref="31" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="64" max="32767" attributes="0"/>
                   <Component id="btnSalir" min="-2" pref="31" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="64" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -578,11 +575,10 @@
               <Font name="Tahoma" size="12" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gob/conafor/utils/ContinuarModulosIcon.png"/>
+              <Image iconType="3" name="/gob/conafor/utils/ModulosIcon.png"/>
             </Property>
             <Property name="mnemonic" type="int" value="109"/>
-            <Property name="text" type="java.lang.String" value="Capturar Modulos"/>
-            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="text" type="java.lang.String" value="Modulos"/>
             <Property name="horizontalAlignment" type="int" value="2"/>
           </Properties>
           <Events>
@@ -612,10 +608,11 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel8" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="710" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

@@ -1737,6 +1737,7 @@ public class FrmSitioRevision extends javax.swing.JInternalFrame {
             Integer upm = (Integer) cmbUPM.getSelectedItem();
             Integer sitio = (Integer) cmbSitio.getSelectedItem();
             this.sitioID = this.cdSitio.getSitioID(upm, sitio);
+            System.out.println("sitioID\t"+sitioID);
             this.ceSitio = this.cdSitio.getSitioRevision(this.sitioID);
             llenarControlesSitio(this.ceSitio);
             if (sitio != 1) {

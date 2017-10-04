@@ -177,6 +177,7 @@ public class CDSecuencia {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
+                System.out.println("Registros \t"+hayRegistros);
                 hayRegistros = true;
             }
         } catch (SQLException e) {

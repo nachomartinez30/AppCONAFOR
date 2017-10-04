@@ -32,7 +32,7 @@ public class FrmInicio extends javax.swing.JFrame {
         this.setLocation((pantalla.width - ventana.width) / 2, (pantalla.height - ventana.height) / 2);
         btnCrearSitio.setEnabled(navegacion.habilitarCapturaSitio());
         //btnCapturarModulos.setEnabled(navegacion.habilitarCapturaModulos());
-        btnContinuarModulos.setEnabled(navegacion.habilitarContinuarModulos());
+        //btnContinuarModulos.setEnabled(navegacion.habilitarContinuarModulos());
         btnColectaBotanica.setEnabled(navegacion.habilitarColectaBotanica());
         btnRevisarUPM.setEnabled(navegacion.habilitarRevisarUPM());
         btnRevisionSitios.setEnabled(navegacion.habilitarCapturaModulos());
@@ -219,18 +219,18 @@ public class FrmInicio extends javax.swing.JFrame {
                         .addGap(70, 70, 70))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dpPrincipalLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(dpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dpPrincipalLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(dpPrincipalLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(dpPrincipalLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(dpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dpPrincipalLayout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dpPrincipalLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -254,12 +254,12 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
-                .addGap(14, 14, 14)
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(8, 8, 8)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         dpMenuLateral.setBackground(new java.awt.Color(204, 204, 204));
@@ -342,10 +342,9 @@ public class FrmInicio extends javax.swing.JFrame {
         });
 
         btnContinuarModulos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnContinuarModulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/ContinuarModulosIcon.png"))); // NOI18N
+        btnContinuarModulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/ModulosIcon.png"))); // NOI18N
         btnContinuarModulos.setMnemonic('m');
-        btnContinuarModulos.setText("Capturar Modulos");
-        btnContinuarModulos.setEnabled(false);
+        btnContinuarModulos.setText("Modulos");
         btnContinuarModulos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnContinuarModulos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -396,9 +395,9 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addComponent(btnRevisionSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(160, 160, 160)
                 .addComponent(btnVerReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         jTree1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -495,7 +494,8 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
 
         mbMenuSuperiror.setBorder(null);
@@ -592,11 +592,9 @@ public class FrmInicio extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(dpMenuLateral)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(dpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 801, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addComponent(scrpanelModulos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(dpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
         );
 
         pack();
@@ -672,20 +670,6 @@ public class FrmInicio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuChkBoxPanelLateralActionPerformed
 
-    private void btnOcultarPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOcultarPanelActionPerformed
-        panelOculto = !panelOculto;
-        if (panelOculto == true) {
-            menuChkBoxPanelLateral.setState(true);
-            dpMenuLateral.setVisible(false);
-            this.btnOcultarPanel.setText(">");
-        }
-        if (panelOculto == false) {
-            dpMenuLateral.setVisible(true);
-            menuChkBoxPanelLateral.setState(false);
-            this.btnOcultarPanel.setText("<");
-        }
-    }//GEN-LAST:event_btnOcultarPanelActionPerformed
-
     private void miConcentrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miConcentrarActionPerformed
         ConcentradorAbies concentrador = new ConcentradorAbies();
         concentrador.setVisible(true);
@@ -712,6 +696,20 @@ public class FrmInicio extends javax.swing.JFrame {
         scrpanelModulos.setVisible(true);
         UPMForms.continuarModulos.setVisible(false);
     }//GEN-LAST:event_btnContinuarModulosActionPerformed
+
+    private void btnOcultarPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOcultarPanelActionPerformed
+        panelOculto = !panelOculto;
+        if (panelOculto == true) {
+            menuChkBoxPanelLateral.setState(true);
+            dpMenuLateral.setVisible(false);
+            this.btnOcultarPanel.setText(">");
+        }
+        if (panelOculto == false) {
+            dpMenuLateral.setVisible(true);
+            menuChkBoxPanelLateral.setState(false);
+            this.btnOcultarPanel.setText("<");
+        }
+    }//GEN-LAST:event_btnOcultarPanelActionPerformed
     public void openForm(String path) throws PropertyVetoException {
         System.out.println("Pathe OPEN_FORM"+path);
 
@@ -724,69 +722,82 @@ public class FrmInicio extends javax.swing.JFrame {
                     break;
                 case "[Modulos, A, Repoblado]":
                     UPMForms.repoblado.setVisible(true);
+                    UPMForms.repoblado.setMaximum(true);
                     UPMForms.repoblado.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Arbolado]":
                     UPMForms.arbolado.setVisible(true);
+                    UPMForms.arbolado.setMaximum(true);
                     UPMForms.arbolado.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Submuestra]":
                     UPMForms.submuestra.setVisible(true);
+                    UPMForms.submuestra.setMaximum(true);
                     UPMForms.submuestra.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Clave de vegetación]":
                     UPMForms.claveVegetacion.setVisible(true);
+                    UPMForms.claveVegetacion.setMaximum(true);
                     UPMForms.claveVegetacion.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Características del conglomerado]":
                     UPMForms.caracteristicasUPM.setVisible(true);
+                    UPMForms.caracteristicasUPM.setMaximum(true);
                     UPMForms.caracteristicasUPM.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Carbono e incendios]":
                     UPMForms.carbono.setVisible(true);
+                    UPMForms.carbono.setMaximum(true);
                     UPMForms.carbono.llenarControles();
                     UPMForms.carbono.lblModulo.setText("A");
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Longitud interceptada]":
                     UPMForms.longitud.setVisible(true);
+                    UPMForms.longitud.setMaximum(true);
                     UPMForms.longitud.llenarControles();
                     UPMForms.carbono.lblModulo.setText("A");
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Suelos]":
                     UPMForms.suelo.setVisible(true);
+                    UPMForms.suelo.setMaximum(true);
                     UPMForms.suelo.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Degradación del suelo]":
                     UPMForms.condicionDegradacion.setVisible(true);
+                    UPMForms.condicionDegradacion.setMaximum(true);
                     UPMForms.condicionDegradacion.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Erosión hídrica]":
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     UPMForms.erosionHidrica.setVisible(true);
+                    UPMForms.erosionHidrica.setMaximum(true);
                     UPMForms.erosionHidrica.llenarControles();
                     
                     break;
                 case "[Modulos, A, Deformación del terreno]":
                     UPMForms.deformacionTerreno.setVisible(true);
+                    UPMForms.deformacionTerreno.setMaximum(true);
                     UPMForms.deformacionTerreno.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, A, Observaciones]":
                     UPMForms.observaciones.setVisible(true);
+                    UPMForms.observaciones.setMaximum(true);
                     UPMForms.observaciones.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, C, Carbono e incendios]":
                     UPMForms.carbono.setVisible(true);
+                    UPMForms.carbono.setMaximum(true);
                     UPMForms.carbono.llenarControles();
                     UPMForms.carbono.lblModulo.setText("C");
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
@@ -794,57 +805,68 @@ public class FrmInicio extends javax.swing.JFrame {
                     break;
                 case "[Modulos, C, Longitud interceptada]":
                     UPMForms.longitud.setVisible(true);
+                    UPMForms.longitud.setMaximum(true);
                     UPMForms.longitud.llenarControles();
                     UPMForms.carbono.lblModulo.setText("C");
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, D, Arbolado]":
                     UPMForms.arboladoD.setVisible(true);
+                    UPMForms.arboladoD.setMaximum(true);
                     UPMForms.arboladoD.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, E, Hojarasca profundidad suelo]":
                     UPMForms.hojarascaProfundidad.setVisible(true);
+                    UPMForms.hojarascaProfundidad.setMaximum(true);
                     UPMForms.hojarascaProfundidad.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, E, Muestras del perfil]":
                     UPMForms.muestrasPerfil.setVisible(true);
+                    UPMForms.muestrasPerfil.setMaximum(true);
                     UPMForms.muestrasPerfil.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, F, Fotografía hemisferica]":
                     UPMForms.fotoHemisferica.setVisible(true);
+                    UPMForms.fotoHemisferica.setMaximum(true);
                     UPMForms.fotoHemisferica.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, G, Parámetros físico químicos]":
                     UPMForms.parametrosFQ.setVisible(true);
+                    UPMForms.parametrosFQ.setMaximum(true);
                     UPMForms.parametrosFQ.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, G, Repoblado vegetación menor]":
                     UPMForms.repobladoVM.setVisible(true);
+                    UPMForms.repobladoVM.setMaximum(true);
                     UPMForms.repobladoVM.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, G, Arbolado]":
                     UPMForms.arboladoG.setVisible(true);
+                    UPMForms.arboladoG.setMaximum(true);
                     UPMForms.arboladoG.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, H, Vegetación menor]":
                     UPMForms.vegetacionMenor.setVisible(true);
+                    UPMForms.vegetacionMenor.setMaximum(true);
                     UPMForms.vegetacionMenor.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, H, Vegetación mayor MCMI]":
                     UPMForms.vegetacionMayorI.setVisible(true);
+                    UPMForms.vegetacionMayorI.setMaximum(true);
                     UPMForms.vegetacionMayorI.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
                 case "[Modulos, H, Vegetación mayor MCMG]":
                     UPMForms.vegetacionMayorG.setVisible(true);
+                    UPMForms.vegetacionMayorG.setMaximum(true);
                     UPMForms.vegetacionMayorG.llenarControles();
                     funcionesComunes.manipularBotonesMenuPrincipal(true);
                     break;
@@ -912,7 +934,7 @@ public class FrmInicio extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnColectaBotanica;
-    private javax.swing.JButton btnContinuarModulos;
+    public javax.swing.JButton btnContinuarModulos;
     public javax.swing.JButton btnCrearSitio;
     public javax.swing.JButton btnCrearUPM;
     private javax.swing.JButton btnOcultarPanel;

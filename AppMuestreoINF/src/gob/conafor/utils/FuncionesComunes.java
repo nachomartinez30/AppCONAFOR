@@ -23,8 +23,8 @@ public class FuncionesComunes {
         DefaultComboBoxModel model = (DefaultComboBoxModel) nombre.getModel();
         model.removeAllElements();
     }
-    
-    public void reiniciarTabla(JTable nombre){
+
+    public void reiniciarTabla(JTable nombre) {
         DefaultTableModel model = (DefaultTableModel) nombre.getModel();
         model.setRowCount(0);
     }
@@ -76,7 +76,7 @@ public class FuncionesComunes {
         }
         return vacio;
     }
-    
+
     public boolean validarAccesibilidadSitio4(int upmID, int sitio) {
         this.query = "SELECT UPMID, Sitio, SitioAccesible FROM SITIOS_Sitio WHERE UPMID= " + upmID + " AND Sitio= 4" + " AND SitioAccesible= 1";
         boolean vacio = false;
@@ -100,7 +100,7 @@ public class FuncionesComunes {
         }
         return vacio;
     }
-    
+
     public boolean validarAccesibilidadSitio2(int upmID, int sitio) {
         this.query = "SELECT UPMID, Sitio, SitioAccesible FROM SITIOS_Sitio WHERE UPMID= " + upmID + " AND Sitio= 2" + " AND SitioAccesible= 1";
         boolean vacio = false;
@@ -124,7 +124,7 @@ public class FuncionesComunes {
         }
         return vacio;
     }
-    
+
     public Integer sitioCapturaSueloCarbono(int upm, int sitio) {
         Integer sitioLevantamiento = null;
         if (validarAccesibilidadSitio3(upm, sitio)) {
@@ -136,9 +136,10 @@ public class FuncionesComunes {
         } else {
             sitioLevantamiento = 1;
         }
+        System.out.println("sitioLevantamiento\t"+sitioLevantamiento);
         return sitioLevantamiento;
     }
-    
+
     public void manipularBotonesMenuPrincipal(boolean enCaptura) {
         if (enCaptura == true) {
             Main.main.menGuardarArchivo.setEnabled(false);
@@ -165,8 +166,8 @@ public class FuncionesComunes {
             Main.main.btnVerReportes.setEnabled(true);
         }
     }
-    
-    public boolean habilitarCheckBox(String tabla, Integer sitioID){
+
+    public boolean habilitarCheckBox(String tabla, Integer sitioID) {
         this.query = "SELECT SitioID FROM " + tabla + " WHERE SitioID= " + sitioID;
         boolean vacio = false;
         //System.out.println("FuncionesComunes Linea 172="+this.query);
@@ -192,21 +193,21 @@ public class FuncionesComunes {
         }
         return vacio;
     }
-    
-  /*  public static void main(String []args ){
+
+    /*  public static void main(String []args ){
         FuncionesComunes f = new FuncionesComunes();
         
         System.out.println(f.sitioCapturaSueloCarbono(384, 3));
     }*/
-    public int buscarSecuencia(int UPMID){
+    public int buscarSecuencia(int UPMID) {
         this.query = "SELECT SecuenciaID FROM UPM_MallaPuntos WHERE UPMID=" + UPMID;
-        int secuenciaID=0;
+        int secuenciaID = 0;
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
-                secuenciaID=rs.getInt("SecuenciaID");
+                secuenciaID = rs.getInt("SecuenciaID");
             }
             st.close();
             rs.close();

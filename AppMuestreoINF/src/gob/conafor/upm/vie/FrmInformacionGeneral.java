@@ -50,7 +50,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
     private Version ver = new Version();
     private String version = ver.getVersion();
     private boolean existeContacto = false;
-    private  CDContacto cdContacto=new CDContacto();
+    private CDContacto cdContacto = new CDContacto();
 
     public FrmInformacionGeneral() {
         initComponents();
@@ -450,16 +450,16 @@ public class FrmInformacionGeneral extends JInternalFrame {
         this.cdBrigada.insertBrigada(this.ceBrigada);
     }
 
-    public int getEmpresaID(int brigadistaID){
-        int idEmpresa=0;
+    public int getEmpresaID(int brigadistaID) {
+        int idEmpresa = 0;
         String query = "SELECT EmpresaID FROM BRIGADA_Brigadistas WHERE BrigadistaID =" + brigadistaID;
-        
+
         Connection conn = LocalConnection.getConnection();
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
-                idEmpresa=rs.getInt("EmpresaID");
+                idEmpresa = rs.getInt("EmpresaID");
             }
             st.close();
             rs.close();
@@ -477,7 +477,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
         }
         return idEmpresa;
     }
-    
+
     private void modificarBrigada() {
         CEBrigadista jefeBrigada = (CEBrigadista) cmbJefeBrigada.getSelectedItem();
         CEBrigadista auxiliar1 = (CEBrigadista) cmbAuxiliar1.getSelectedItem();
@@ -637,7 +637,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
         String fecIni = null;
         String fecFin = null;
         String anio = "2016";//Checar ciclo
-        String anio2= "2017";
+        String anio2 = "2017";
         if (dpFechaInicio.getDate() != null) {
             fecIni = sdf.format(dpFechaInicio.getDate());
         }
@@ -656,11 +656,11 @@ public class FrmInformacionGeneral extends JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error! La fecha de inicio no puede ser mayor a la fecha de final de muestreo", "Información UPM", JOptionPane.INFORMATION_MESSAGE);
             dpFechaFin.requestFocus();
             return false;
-        } else if (!fecIni.equals(anio)&&!fecIni.equals(anio2)) {
+        } else if (!fecIni.equals(anio) && !fecIni.equals(anio2)) {
             JOptionPane.showMessageDialog(null, "Error! La fecha de inicio debe estar dentro del periodo de " + anio, "Información UPM", JOptionPane.INFORMATION_MESSAGE);
             dpFechaInicio.requestFocus();
             return false;
-        } else if (!fecFin.equals(anio)&&!fecFin.equals(anio2)) {
+        } else if (!fecFin.equals(anio) && !fecFin.equals(anio2)) {
             JOptionPane.showMessageDialog(null, "Error! La fecha de fin debe estar dentro del periodo de " + anio2, "Información UPM", JOptionPane.INFORMATION_MESSAGE);
             dpFechaFin.requestFocus();
             return false;
@@ -836,30 +836,31 @@ public class FrmInformacionGeneral extends JInternalFrame {
             txtFrecuencia.setEnabled(false);
         }
     }
-public void limpiarControles(){
-       txtPredio.setText("");
-       txtParaje.setText("");
-       cmbTenencia.setSelectedIndex(0);
-       /*----------------------------------------*/
-       rbtRemoto.setSelected(false);
-       rbtPresencial.setSelected(false);
-       rbtTelefonoFijo.setSelected(false);
-       rbtTelefonoMovil.setSelected(false);
 
-       txtNombreContacto.setText("");
-       txtDireccionContacto.setText("");
-       txtNumeroTelefonico.setText("");
-       txtCorreoElectronico.setText("");
-       txtObservaciones.setText("");
-       
-       chkRadio.setSelected(false);
-       chkCorreoElectronico.setSelected(false);
+    public void limpiarControles() {
+        txtPredio.setText("");
+        txtParaje.setText("");
+        cmbTenencia.setSelectedIndex(0);
+        /*----------------------------------------*/
+        rbtRemoto.setSelected(false);
+        rbtPresencial.setSelected(false);
+        rbtTelefonoFijo.setSelected(false);
+        rbtTelefonoMovil.setSelected(false);
 
-       cmbJefeBrigada.setSelectedIndex(0);
-       cmbAuxiliar1.setSelectedIndex(0);
-       cmbAuxiliar2.setSelectedIndex(0);
+        txtNombreContacto.setText("");
+        txtDireccionContacto.setText("");
+        txtNumeroTelefonico.setText("");
+        txtCorreoElectronico.setText("");
+        txtObservaciones.setText("");
 
-      }                                            
+        chkRadio.setSelected(false);
+        chkCorreoElectronico.setSelected(false);
+
+        cmbJefeBrigada.setSelectedIndex(0);
+        cmbAuxiliar1.setSelectedIndex(0);
+        cmbAuxiliar2.setSelectedIndex(0);
+
+    }
 
     private void reetablecerControles() {
         txtProyecto.setText("");
@@ -1928,7 +1929,7 @@ public void limpiarControles(){
     }//GEN-LAST:event_chkCorreoElectronicoPropertyChange
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-       // CDContacto cdContacto = new CDContacto();
+        // CDContacto cdContacto = new CDContacto();
         CatETipoUPM tipoUpmID = (CatETipoUPM) cmbTipoUPM.getSelectedItem();
         if (validarUPM() && validarFecha()) {
             if (validarContacto() && validarBrigadaObligatoria() && validarBrigadistaDiferente()) {
@@ -1938,12 +1939,20 @@ public void limpiarControles(){
                     if (chkInformacionContacto.isSelected()) {
                         crearContacto();
                     }
+                    if (cmbTipoUPM.getSelectedIndex() == 5) {
+                        UPMForms.inaccesibleUPM.revisarUPMInaccesible(this.ceUpm);
+                        UPMForms.inaccesibleUPM.setVisible(true);
+                    } else {
+                        UPMForms.puntoControlUPM.setDatosIniciales(this.ceUpm);
+                        UPMForms.puntoControlUPM.setVisible(true);
+                    }
                     limpiarControles();
                     this.hide();
+
                     this.cmbUPM.setSelectedItem(null);
                     this.cmbUPM.setEnabled(true);
-                    UPMForms.puntoControlUPM.setDatosIniciales(this.ceUpm);
-                    UPMForms.puntoControlUPM.setVisible(true);
+                    System.out.println(cmbTipoUPM.getSelectedIndex());
+
                 } else if (validarModificarTipoUPM(tipoUpmID.getTipoUPMID())) {
                     if (validarBrigadaObligatoria() && validarBrigadistaDiferente()) {
                         modificarUPM();
@@ -1970,11 +1979,17 @@ public void limpiarControles(){
                     gbMedioComunicacion.clearSelection();
                     chkCorreoElectronico.setSelected(false);
                     chkRadio.setSelected(false);
+
+                    if (cmbTipoUPM.getSelectedIndex() == 5) {
+                        UPMForms.inaccesibleUPM.revisarUPMInaccesible(this.ceUpm);
+                        UPMForms.inaccesibleUPM.setVisible(true);
+                    } else {
+                        UPMForms.puntoControlUPM.setDatosIniciales(this.ceUpm);
+                        UPMForms.puntoControlUPM.setVisible(true);
+                    }
                     limpiarControles();
                     this.hide();
 
-                    UPMForms.puntoControlUPM.revisarPuntoControl(this.ceUpm);
-                    UPMForms.puntoControlUPM.setVisible(true);
                 }
             }
         }
@@ -2148,7 +2163,7 @@ public void limpiarControles(){
             txtCanal.setEnabled(false);
             txtFrecuencia.setEnabled(false);
             txtObservaciones.setEnabled(false);
-           cdContacto.deleteContacto(this.upm);
+            cdContacto.deleteContacto(this.upm);
         }
     }//GEN-LAST:event_chkInformacionContactoActionPerformed
 

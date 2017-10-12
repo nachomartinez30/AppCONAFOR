@@ -1465,10 +1465,10 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                     this.hide();
                     funciones.manipularBotonesMenuPrincipal(true);
                     if (this.modificar == 0) {//Esta en modo de captura
-                        System.out.println("ModoCaptura");
+                        //System.out.println("ModoCaptura");
                         seleccionarSiguienteFormulario(this.ceSitio);
                     } else {
-                        System.out.println("ModoRevision    " + this.ceSitio.getSitioID());
+                        //System.out.println("ModoRevision    " + this.ceSitio.getSitioID());
                         revisarSiguienteFormulario(this.ceSitio);
                     }
                     this.cdSecuencia.updateSecuencia(this.ceSitio, FORMATO_ID, 1);
@@ -2820,7 +2820,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                     break;
                 case 13://Modulos A, C, E y H
                     //funciones.manipularBotonesMenuPrincipal(true);
-                    if (sitio == ceSitio.getSitio()) {
+                    if (sitio == ceSitio.getSitio()) {//revisa el sitio accesible para suelo
                         UPMForms.hojarascaProfundidad.setDatosiniciales(ceSitio);
                         UPMForms.hojarascaProfundidad.setVisible(true);
                     } else {
@@ -2903,8 +2903,9 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
 
     private void revisarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
+        Integer sitio = this.funciones.sitioCapturaSueloCarbono(this.upmID, 3);
         if (secuenciaID != null) {
-            System.out.println("Secuencia 2967=" + secuenciaID);
+            //System.out.println("Secuencia " + secuenciaID);
             switch (secuenciaID) {
                 case 1: //Módulo A
                     UPMForms.suelo.revisarSuelo(ceSitio);
@@ -2957,8 +2958,13 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                     UPMForms.suelo.setVisible(true);
                     break;
                 case 13://Modulos A, C, E y H
-                    UPMForms.hojarascaProfundidad.revisarHojarascaProfundidad(ceSitio);
-                    UPMForms.hojarascaProfundidad.setVisible(true);
+                   if (sitio == ceSitio.getSitio()) {//revisa el sitio accesible para suelo
+                        UPMForms.hojarascaProfundidad.setDatosiniciales(ceSitio);
+                        UPMForms.hojarascaProfundidad.setVisible(true);
+                    } else {
+                        UPMForms.vegetacionMenor.setDatosIniciales(ceSitio);
+                        UPMForms.vegetacionMenor.setVisible(true);
+                    }
                     break;
                 case 14://Modulos A, E y G
                     UPMForms.suelo.revisarSuelo(ceSitio);

@@ -109,6 +109,7 @@ public class CDVegetacionMenor {
                 + ", Numero5175= " + ceVegetacionMenor.getNumero5175() + ", Numero76100= " + ceVegetacionMenor.getNumero76100() + ", Numero101125= " + ceVegetacionMenor.getNumero101125()
                 + ", Numero126150= " + ceVegetacionMenor.getNumero126150() + ", Numero150= " + ceVegetacionMenor.getNumero150() + ", PorcentajeCobertura= " + ceVegetacionMenor.getPorcentajeCobertura()
                 + ", VigorID= " + ceVegetacionMenor.getVigorID() + " WHERE VegetacionMenorID= " + ceVegetacionMenor.getVegetacionMenorID();
+        
         Connection conn = LocalConnection.getConnection();
 
         try {
@@ -159,7 +160,7 @@ public class CDVegetacionMenor {
         String[] encabezados = {"VegetacionMenorID", "SitioID", "Consecutivo", "Familia", "Genero", "Especie", "Infraespecie", "Nombre comun",
             "Forma de vida", "Condicion", "01-10", "11-25", "26-50", "51-75", "76-100", "101-125", "126-150", ">150", "Cobertura %", "Agente daño 1",
             "Severidad 1", "Agente daño 2", "Severidad 2", "Vigor", "Clave de colecta"};
-         //System.out.println(query);
+         System.out.println(query);
         DefaultTableModel vegetacionMenorModel = new DefaultTableModel(null, encabezados);
         Object[] datosVegetacionMenor = new Object[25];
         Connection conn = LocalConnection.getConnection();

@@ -2904,6 +2904,7 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
 
     private void revisarSiguienteFormulario(CESitio ceSitio) {
         Integer secuenciaID = ceSitio.getSecuencia();
+        Integer sitio = this.funciones.sitioCapturaSueloCarbono(this.upmID, 3);
         if (secuenciaID != null) {
             System.out.println("Secuencia 2967=" + secuenciaID);
             switch (secuenciaID) {
@@ -2958,8 +2959,13 @@ public class FrmLongitudInterceptada extends javax.swing.JInternalFrame {
                     UPMForms.suelo.setVisible(true);
                     break;
                 case 13://Modulos A, C, E y H
-                    UPMForms.hojarascaProfundidad.revisarHojarascaProfundidad(ceSitio);
-                    UPMForms.hojarascaProfundidad.setVisible(true);
+                    if (sitio == ceSitio.getSitio()) {
+                        UPMForms.hojarascaProfundidad.setDatosiniciales(ceSitio);
+                        UPMForms.hojarascaProfundidad.setVisible(true);
+                    } else {
+                        UPMForms.vegetacionMenor.setDatosIniciales(ceSitio);
+                        UPMForms.vegetacionMenor.setVisible(true);
+                    }
                     break;
                 case 14://Modulos A, E y G
                     UPMForms.suelo.revisarSuelo(ceSitio);

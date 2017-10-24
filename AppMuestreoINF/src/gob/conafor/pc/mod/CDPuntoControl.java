@@ -15,6 +15,7 @@ public class CDPuntoControl {
         query = "SELECT UPMID, Descripcion, Paraje, GradosLatitud, MinutosLatitud, SegundosLatitud, "
                 + "GradosLongitud, MinutosLongitud, SegundosLongitud, ErrorPresicion, "
                 + "Datum, Azimut, Distancia FROM PC_PuntoControl WHERE UPMID= " + upmID;
+        System.out.println(query);
         Connection conn = LocalConnection.getConnection();
         CEPuntoControl cePuntoControl = new CEPuntoControl();
         try {

@@ -161,6 +161,7 @@ public class CDImportacionBD {
                         + ", '" + predio + "', '" + paraje + "', " + tipoTenenciaID + ", " + accesible + ", " + gradosLatitud + ", " + minutosLatitud + ", " + segundosLatitud + ", " + gradosLongitud + ", " + minutosLongitud + ", " + segundosLongitud + " , '"
                         + datum + "', " + errorPresicion + ", " + azimut + ", " + distancia + ", " + tipoInaccesibilidadID + ", '" + otroTipoInaccesibilidad + "', '" + explicacionInaccesibilidad + "', " + informacionContacto + ")");
                 this.baseDatosLocal.commit();
+                tipoInaccesibilidadID = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -337,6 +338,9 @@ public class CDImportacionBD {
                         + ", '" + observaciones + "', " + hipsometroBrujula + ", " + cintaClinometroBrujula + ", " + cuadrante1 + ", " + cuadrante2 + ", " + cuadrante3 + ", " + cuadrante4 + ", " + distancia1
                         + ", " + distancia2 + ", " + distancia3 + ", " + distancia4 + ")");
                 this.baseDatosLocal.commit();
+                evidenciaMuestreo = null;
+condicion = null;
+faseSucecional = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -409,22 +413,22 @@ public class CDImportacionBD {
             Statement ps = this.baseDatosLocal.createStatement();
             ResultSet rs = sqlExterno.executeQuery(this.querySelect);
 
-                while (rs.next()) {
-                    Integer fotografiaHemisfericaID = rs.getInt("FotografiaHemisfericaID");
-                    Integer sitioID = rs.getInt("SitioID");
-                    Integer coberturaArborea = rs.getInt("CoberturaArborea");
-                    Integer tomaFotografia = rs.getInt("TomaFotografia");
-                    String hora = rs.getString("Hora");
-                    Integer declinacionMagnetica = rs.getInt("DeclinacionMagnetica");
-                    ps.executeUpdate("INSERT INTO SITIOS_FotografiaHemisferica(FotografiaHemisfericaID, SitioID, CoberturaArborea, TomaFotografia, Hora, DeclinacionMagnetica)"
-                            + "VALUES(" + fotografiaHemisfericaID + ", " + sitioID + ", " + coberturaArborea + ", " + tomaFotografia + ", '" + hora + "', " + declinacionMagnetica + ")");
-                    this.baseDatosLocal.commit();
-                    ps.close();
-                }
-                
-                this.sqlExterno.close();
-                rs.close();
-            
+            while (rs.next()) {
+                Integer fotografiaHemisfericaID = rs.getInt("FotografiaHemisfericaID");
+                Integer sitioID = rs.getInt("SitioID");
+                Integer coberturaArborea = rs.getInt("CoberturaArborea");
+                Integer tomaFotografia = rs.getInt("TomaFotografia");
+                String hora = rs.getString("Hora");
+                Integer declinacionMagnetica = rs.getInt("DeclinacionMagnetica");
+                ps.executeUpdate("INSERT INTO SITIOS_FotografiaHemisferica(FotografiaHemisfericaID, SitioID, CoberturaArborea, TomaFotografia, Hora, DeclinacionMagnetica)"
+                        + "VALUES(" + fotografiaHemisfericaID + ", " + sitioID + ", " + coberturaArborea + ", " + tomaFotografia + ", '" + hora + "', " + declinacionMagnetica + ")");
+                this.baseDatosLocal.commit();
+                ps.close();
+            }
+
+            this.sqlExterno.close();
+            rs.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error! no se pudo importar la información de la tabla SITIOS_FotografiaHemisferica", "Conexion BD", JOptionPane.ERROR_MESSAGE);
@@ -875,6 +879,9 @@ public class CDImportacionBD {
                 ps.executeUpdate("INSERT INTO SUELO_Hojarasca(HojarascaID, SitioID, Punto, TipoHojarascaID, EspesorHO, EspesorF, PesoTotalHO, PesoTotalF, PesoMuestraHO, PesoMuestraF, "
                         + "Observaciones)VALUES(" + hojarascaID + ", " + sitioID + ", " + punto + ", " + tipoHojarascaID + ", " + espesorHO + ", " + espesorF + ", " + pesoTotalHO + ", " + pesoTotalF + ", " + pesoMuestraHO + ", " + pesoMuestraF + ", '" + observaciones + "')");
                 this.baseDatosLocal.commit();
+                   espesorF = null;
+         pesoTotalF = null;
+         pesoMuestraF = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -1148,6 +1155,10 @@ public class CDImportacionBD {
                         + "Promedio, ClaveColecta)VALUES(" + muestrasID + ", " + sitioID + ", " + profundidadID + ", " + pesoMuestra + ", " + lectura1
                         + ", " + lectura2 + ", " + lectura3 + ", " + lectura4 + ", " + promedio + ", '" + claveColecta + "')");
                 this.baseDatosLocal.commit();
+                  lectura1 = null;
+         lectura2 = null;
+         lectura3 = null;
+         lectura4 = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -1311,6 +1322,8 @@ public class CDImportacionBD {
                 ps.executeUpdate("INSERT INTO SUELO_Profundidad(ProfundidadSueloID, SitioID, Punto, Profundidad030, Profundidad3060, PesoTotal030, PesoTotal3060, Equipo030, Equipo3060, "
                         + "Observaciones)VALUES(" + profundidadSueloID + ", " + sitioID + ", " + punto + ", " + profundidad030 + ", " + profundidad3060 + ", " + pesoTotal030 + ", " + pesoTotal3060 + ", '" + equipo030 + "', '" + equipo3060 + "', '" + observaciones + "')");
                 this.baseDatosLocal.commit();
+                profundidad3060 = null;
+pesoTotal3060 = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -1416,6 +1429,21 @@ public class CDImportacionBD {
                         + ", " + anchoPromedioCarcavas + ", " + longitudPromedioCarcavas + ", " + volumenCarcavas + ", " + numeroMonticulos + ", " + alturaPromedioMonticulos + ", " + anchoPromedioMoticulos
                         + ", " + longitudPromedioMonticulos + ", " + volumenMonticulos + ")");
                 this.baseDatosLocal.commit();
+                numeroCanalillos = null;
+profundidadPromedioCanalillos = null;
+anchoPromedioCanalillos = null;
+longitudCanalillos = null;
+volumenCanalillos = null;
+numeroCarcavas = null;
+profundidadPromedioCarcavas = null;
+anchoPromedioCarcavas = null;
+longitudPromedioCarcavas = null;
+volumenCarcavas = null;
+numeroMonticulos = null;
+alturaPromedioMonticulos = null;
+anchoPromedioMoticulos = null;
+longitudPromedioMonticulos = null;
+volumenMonticulos = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -1622,6 +1650,16 @@ public class CDImportacionBD {
                         + ", " + especieID + ", " + infraespecieID + ", '" + nombreComun + "', " + segmento1 + ", " + segmento2 + ", " + segmento3 + ", " + segmento4 + ", " + segmento5 + ", " + segmento6 + ", " + segmento7 + ", " + segmento8
                         + ", " + segmento9 + ", " + segmento10 + ", " + total + ", '" + claveColecta + "')");
                 this.baseDatosLocal.commit();
+                 segmento1 = null;
+         segmento2 = null;
+         segmento3 = null;
+         segmento4 = null;
+         segmento5 = null;
+         segmento6 = null;
+         segmento7 = null;
+         segmento8 = null;
+         segmento9 = null;
+         segmento10 = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -1716,10 +1754,7 @@ public class CDImportacionBD {
 
 //36
     public void importarTaxonomiaArbolado(String ruta) {
-        this.querySelect = "SELECT ArboladoID, SitioID, Consecutivo, NoIndividuo, NoRama, Azimut, Distancia, FamiliaID, GeneroID, EspecieID, InfraespecieID, "
-                + "NombreComun, EsSubmuestra, FormaVidaID, FormaFusteID, CondicionID, MuertoPieID, GradoPutrefaccionID, TipoToconID, DiametroNormal, "
-                + "DiametroBasal, AlturaTotal, AnguloInclinacion, AlturaFusteLimpio, AlturaComercial, DiametroCopaNS, DiametroCopaEO, ProporcionCopaVivaID, ExposicionCopaID, "
-                + "PosicionCopaID, DensidadCopaID, MuerteRegresivaID, TransparenciaFollajeID, VigorID, ClaveColecta FROM TAXONOMIA_Arbolado";
+        this.querySelect = "SELECT SitioID ,ArboladoID ,Consecutivo ,NoIndividuo ,NoRama ,Azimut ,Distancia ,FamiliaID ,GeneroID ,EspecieID ,InfraespecieID ,NombreComun ,EsColecta ,EsSubmuestra ,FormaVidaID ,FormaFusteID ,CondicionID ,MuertoPieID ,GradoPutrefaccionID ,TipoToconID ,DiametroNormal ,DiametroBasal ,AlturaTotal ,AnguloInclinacion ,AlturaFusteLimpio ,AlturaComercial ,DiametroCopaNS ,DiametroCopaEO ,ProporcionCopaVivaID ,ExposicionCopaID ,PosicionCopaID ,DensidadCopaID ,MuerteRegresivaID ,TransparenciaFollajeID ,VigorID ,NivelVigorID ,ClaveColecta FROM TAXONOMIA_Arbolado ";
         Float diametroNormal = null;
         Integer diametroBasal = null;
         Float alturaTotal = null;
@@ -1785,17 +1820,27 @@ public class CDImportacionBD {
                 Integer muerteRegresivaID = rs.getInt("MuerteRegresivaID");
                 Integer transparenciaFollajeID = rs.getInt("TransparenciaFollajeID");
                 Integer vigorID = rs.getInt("VigorID");
+                Integer nivelVigor= rs.getInt("NivelVigorID");
                 String claveColecta = rs.getString("ClaveColecta");
                 ps.executeUpdate("INSERT INTO TAXONOMIA_Arbolado(ArboladoID, SitioID, Consecutivo, NoIndividuo, NoRama, Azimut, Distancia, FamiliaID, GeneroID, EspecieID, InfraespecieID, "
                         + "NombreComun, EsSubmuestra, FormaVidaID, FormaFusteID, CondicionID, MuertoPieID, GradoPutrefaccionID, TipoToconID, DiametroNormal, "
                         + "DiametroBasal, AlturaTotal, AnguloInclinacion, AlturaFusteLimpio, AlturaComercial, DiametroCopaNS, DiametroCopaEO, ProporcionCopaVivaID, ExposicionCopaID, "
-                        + "PosicionCopaID, DensidadCopaID, MuerteRegresivaID, TransparenciaFollajeID, VigorID, ClaveColecta)VALUES(" + arboladoID + ", " + sitioID + ", " + consecutivo + ", " + noIndividuo
+                        + "PosicionCopaID, DensidadCopaID, MuerteRegresivaID, TransparenciaFollajeID, VigorID,NivelVigorID , ClaveColecta)VALUES(" + arboladoID + ", " + sitioID + ", " + consecutivo + ", " + noIndividuo
                         + ", " + noRama + ", " + azimut + ", " + distancia + ", " + familiaID + ", " + generoID + ", " + especieID + ", " + infraespecieID + ", '" + nombreComun + "'"
                         + ", " + esSubmuestra + ", " + formaVidaID + ", " + formaFusteID + ", " + condicionID + ", " + muertoPieID + ", " + gradoPutrefaccionID + ", " + tipoToconID
                         + ", " + diametroNormal + ", " + diametroBasal + ", " + alturaTotal + ", " + anguloInclinacion + ", " + alturaFusteLimpio + ", " + alturaComercial + ", " + diametroCopaNS
                         + ", " + diametroCopaEO + ", " + proporcionCopaVivaID + ", " + exposicionCopaID + ", " + posicionCopaID + ", " + densidadCopaID + ", " + muerteRegresivaID + ", " + transparenciaFollajeID
-                        + ", " + vigorID + ", '" + claveColecta + "')");
+                        + ", " + vigorID +", "+nivelVigor+", '" + claveColecta + "')");
+               
                 this.baseDatosLocal.commit();
+                diametroNormal = null;
+                diametroBasal = null;
+                alturaTotal = null;
+                anguloInclinacion = null;
+                alturaFusteLimpio = null;
+                alturaComercial = null;
+                diametroCopaNS = null;
+                diametroCopaEO = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -2076,6 +2121,13 @@ public class CDImportacionBD {
                         + ", '" + nombreComun + "', " + frecuencia025150 + ", " + edad025150 + ", " + frecuencia151275 + ", " + edad151275 + ", " + frecuencia275 + ", " + edad275 + ", " + vigorID + ", " + danioID
                         + ", " + porcentajeDanio + ", '" + claveColecta + "')");
                 this.baseDatosLocal.commit();
+                frecuencia025150 = null;
+edad025150 = null;
+frecuencia151275 = null;
+edad151275 = null;
+frecuencia275 = null;
+edad275 = null;
+porcentajeDanio = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -2144,6 +2196,12 @@ public class CDImportacionBD {
                         + "Frecuencia200, PorcentajeCobertura200, VigorID, ClaveColecta)VALUES(" + repobladoVMID + ", " + sitioID + ", " + consecutivo + ", " + formaVidaID + ", " + familiaID + ", " + generoID + ", " + especieID + ", " + infraespecieID + ", '" + nombreComun + "'"
                         + ", " + frecuencia50 + ", " + porcentajeCobertura50 + ", " + frecuencia51200 + ", " + porcentajeCobertura51200 + ", " + frecuencia200 + ", " + porcentajeCobertura200 + ", " + vigorID + ", '" + claveColecta + "')");
                 this.baseDatosLocal.commit();
+                frecuencia50 = null;
+porcentajeCobertura50 = null;
+frecuencia51200 = null;
+porcentajeCobertura51200 = null;
+frecuencia200 = null;
+porcentajeCobertura200 = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -2216,6 +2274,13 @@ public class CDImportacionBD {
                         + "PorcentajeDanio, ClaveColecta)VALUES(" + sotoBosqueID + ", " + sitioID + ", " + consecutivo + ", " + familiaID + ", " + generoID + ", " + especieID + ", " + infraespecieID + ", '" + nombreComun + "', " + frecuencia025150 + ", " + cobertura025150 + ", " + frecuencia151275
                         + ", " + cobertura151275 + ", " + frecuencia275 + ", " + cobertura275 + ", " + vigorID + ", " + danioID + ", " + porcentajeDanio + ", '" + claveColecta + "')");
                 this.baseDatosLocal.commit();
+                frecuencia025150 = null;
+cobertura025150 = null;
+frecuencia151275 = null;
+cobertura151275 = null;
+frecuencia275 = null;
+cobertura275 = null;
+porcentajeDanio = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -2284,6 +2349,11 @@ public class CDImportacionBD {
                         + "DiametroCoberturaMenor, VigorID, ClaveColecta)VALUES(" + vegetacionMayorID + ", " + sitioID + ", " + consecutivo + ", " + noIndividuo + ", " + formaVidaID + ", " + condicionID + ", " + familiaID + ", " + generoID + ", " + especieID + ", " + infraespecieID + ", '" + nombreComun + "', " + formaCrecimientoID + ", " + densidadColoniaID
                         + ", " + alturaTotalMaxima + ", " + alturaTotalMedia + ", " + alturaTotalMinima + ", " + diametroCoberturaMayor + ", " + diametroCoberturaMenor + ", " + vigorID + ", '" + claveColecta + "')");
                 this.baseDatosLocal.commit();
+                alturaTotalMaxima = null;
+alturaTotalMedia = null;
+alturaTotalMinima = null;
+diametroCoberturaMayor = null;
+diametroCoberturaMenor = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -2384,6 +2454,10 @@ public class CDImportacionBD {
                         + "VALUES(" + vegetacionMayorID + ", " + sitioID + ", " + consecutivo + ", " + noIndividuo + ", " + formaVidaID + ", " + condicionID + ", " + familiaID + ", " + generoID + ", " + especieID + ", " + infraespecieID + ", '" + nombreComun + "', " + formaGeometricaID + ", " + densidadFollajeID + ", " + diametroBase + ",  " + alturaTotal
                         + ", " + diametroCoberturaMayor + ", " + diametroCoberturaMenor + ", " + vigorID + ", '" + claveColecta + "')");
                 this.baseDatosLocal.commit();
+                diametroBase = null;
+alturaTotal = null;
+diametroCoberturaMayor = null;
+diametroCoberturaMenor = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -2497,6 +2571,14 @@ public class CDImportacionBD {
                         + ", " + sitioID + ", " + consecutivo + ", " + familiaID + ", " + generoID + ", " + especieID + ", " + infraespecieID + ", '" + nombreComun + "', " + formaVidaID + ", " + condicionID + ", " + numero0110 + ", " + numero1125 + ", " + numero5175 + ", " + numero76100 + ", " + numero101125
                         + ", " + numero126150 + ", " + numero150 + ", " + porcentajeCobertura + ", " + vigorID + ", '" + claveColecta + "')");
                 this.baseDatosLocal.commit();
+                numero0110 = null;
+                numero1125 = null;
+                numero5175 = null;
+                numero76100 = null;
+                numero101125 = null;
+                numero126150 = null;
+                numero150 = null;
+                porcentajeCobertura = null;
                 ps.close();
             }
             this.sqlExterno.close();

@@ -83,6 +83,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
     }
 
     public void revisarUPM(int upmID) {
+        System.out.println("Revision UPM");
         //CDContacto cdContacto = new CDContacto();
         this.modificar = 1;
         setInformacionGeneral(upmID);
@@ -1930,6 +1931,7 @@ public class FrmInformacionGeneral extends JInternalFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         // CDContacto cdContacto = new CDContacto();
+        System.out.println("Modificar="+this.modificar);
         CatETipoUPM tipoUpmID = (CatETipoUPM) cmbTipoUPM.getSelectedItem();
         if (validarUPM() && validarFecha()) {
             if (validarContacto() && validarBrigadaObligatoria() && validarBrigadistaDiferente()) {
@@ -1980,11 +1982,11 @@ public class FrmInformacionGeneral extends JInternalFrame {
                     chkCorreoElectronico.setSelected(false);
                     chkRadio.setSelected(false);
 
-                    if (cmbTipoUPM.getSelectedIndex() == 5) {
+                    if (cmbTipoUPM.getSelectedIndex() == 5) {//inaccesible
                         UPMForms.inaccesibleUPM.revisarUPMInaccesible(this.ceUpm);
                         UPMForms.inaccesibleUPM.setVisible(true);
                     } else {
-                        UPMForms.puntoControlUPM.setDatosIniciales(this.ceUpm);
+                        UPMForms.puntoControlUPM.revisarPuntoControl(this.ceUpm);
                         UPMForms.puntoControlUPM.setVisible(true);
                     }
                     limpiarControles();

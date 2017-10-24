@@ -243,7 +243,11 @@ public class HiloImportacion extends SwingWorker<Integer, String> {
 		lblEstatus.setText("Importando Repoblado vegetación menor...");
 		bdImportar.importarTaxonomiaRepobladoVM(pathUbicacion); // 44
 		txtaMonitoreo.setText(txtaMonitoreo.getText() + "\n" + bdImportar.getState());
-
+                
+                lblEstatus.setText("Importando Repoblado vegetación menor...");
+                bdImportar.importarRepobladoDanioSeveridad(pathUbicacion);//44.1
+                txtaMonitoreo.setText(txtaMonitoreo.getText() + "\n" + bdImportar.getState());
+                
 		lblEstatus.setText("Importando Sotobosque...");
 		bdImportar.importarTaxonomiaSotoBosque(pathUbicacion); // 45
 		txtaMonitoreo.setText(txtaMonitoreo.getText() + "\n" + bdImportar.getState());
@@ -273,12 +277,19 @@ public class HiloImportacion extends SwingWorker<Integer, String> {
 		lblEstatus.setText("Importando datos de Brigada");
 		bdImportar.importarBrigadas(pathUbicacion); // 53
 		txtaMonitoreo.setText(txtaMonitoreo.getText() + "\n" + bdImportar.getState());
+                
+                lblEstatus.setText("Importando Observacion de sitios");
+		bdImportar.importarObservacionesSitio(pathUbicacion); // 54
+		txtaMonitoreo.setText(txtaMonitoreo.getText() + "\n" + bdImportar.getState());
+                
 
 		lblEstatus.setText("Finalizando importacion...");
 		// bdImportar.importarSecuencias(pathUbicacion); //54
 		txtaMonitoreo.setText(txtaMonitoreo.getText() + "\n" + bdImportar.getState());
 		// bdImportar.importarUPMRevision(pathUbicacion);
 		txtaMonitoreo.setText(txtaMonitoreo.getText() + "\n" + bdImportar.getState());
+                
+                JOptionPane.showMessageDialog(null,"Concentrado finalizado");
 
 	}
 }

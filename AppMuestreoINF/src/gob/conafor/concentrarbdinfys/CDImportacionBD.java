@@ -1255,7 +1255,7 @@ public class CDImportacionBD {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				JOptionPane.showMessageDialog(null,
-						"Error! al cerrar la base de datos en la importación de la tabla SSUELO_MedicionCanalillos",
+						"Error! al cerrar la base de datos en la importación de la tabla SUELO_MedicionCanalillos",
 						"Conexion BD", JOptionPane.ERROR_MESSAGE);
 			}
 		}
@@ -1326,7 +1326,7 @@ public class CDImportacionBD {
 				Float longitud = rs.getFloat("Longitud");
 				Float volumen = rs.getFloat("Volumen");
 				ps.executeUpdate(
-						"INSERT INTO SUELO_MedicionCanalillos(SitioID,UPMID,MedicionDunas, NumeroCarcavas, ProfundidadPromedio, AnchoPromedio, Longitud, Volumen)"
+						"INSERT INTO SUELO_MedicionDunas(SitioID,UPMID,MedicionDunas, NumeroCarcavas, ProfundidadPromedio, AnchoPromedio, Longitud, Volumen)"
 								+ "VALUES(" + sitioID + ", " + upmid + ", " + medicionDunas + ", " + numeroDunas + ", "
 								+ alturaPromedio + ", " + anchoPromedio + ", " + longitud + ", " + volumen + ")");
 				this.baseDatosLocal.commit();
@@ -1344,7 +1344,7 @@ public class CDImportacionBD {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				JOptionPane.showMessageDialog(null,
-						"Error! al cerrar la base de datos en la importación de la tabla SSUELO_MedicionCarcavas ",
+						"Error! al cerrar la base de datos en la importación de la tabla SUELO_MedicionDunas ",
 						"Conexion BD", JOptionPane.ERROR_MESSAGE);
 			}
 		}
@@ -3561,6 +3561,45 @@ public class CDImportacionBD {
 				JOptionPane.showMessageDialog(null,
 						"Error! al cerrar la base de datos en la importación de la tabla UPM_Brigada", "Conexion BD",
 						JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
+        
+        public void importarObservacionesSitio(String ruta) {
+		state=" importarSubmuestra";
+		this.querySelect = "SELECT ObservacionesID ,SitioID ,FormatoID FROM  SITIOS_Observaciones ";
+		this.baseDatosLocal = LocalConnectionCons.getConnection();
+		this.baseDatosExterna = ExternalConnectionCons.getConnection(ruta);
+		try {
+			this.sqlExterno = this.baseDatosExterna.createStatement();
+			Statement ps = this.baseDatosLocal.createStatement();
+			ResultSet rs = sqlExterno.executeQuery(this.querySelect);
+			while (rs.next()) {
+				Integer observacionesID = rs.getInt("ObservacionesID");
+				Integer sitioID = rs.getInt("SitioID");
+				Integer upmid = extraerUPM(sitioID, ruta);
+				Integer formatoID = rs.getInt("FormatoID");
+				ps.executeUpdate(
+						"INSERT INTO SITIOS_Observaciones(SitioID,UPMID,ObservacionesID,FormatoID,Observaciones)VALUES("
+								+ sitioID + ", " + upmid + ", " + observacionesID + ", " + formatoID + ")");
+				this.baseDatosLocal.commit();
+				ps.close();
+			}
+			this.sqlExterno.close();
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				baseDatosLocal.close();
+				baseDatosExterna.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				JOptionPane.showMessageDialog(null,
+						"Error! al cerrar la base de datos en la importación de la tabla ARBOLADO_Submuestra"
+								+ e.getClass().getName() + " : " + e.getMessage(),
+						"Conexion BD", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}

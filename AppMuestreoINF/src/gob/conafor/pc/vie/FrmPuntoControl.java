@@ -72,6 +72,7 @@ public class FrmPuntoControl extends javax.swing.JInternalFrame {
     }
 
     public void revisarPuntoControl(CEUPM upm) {
+        System.out.println("entró en revision PC");
         this.ceUpm = upm;
         this.upm = upm.getUpmID();
         this.tipoUpm = upm.getTipoUpmID();

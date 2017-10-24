@@ -177,12 +177,12 @@ public class FrmImportarBD extends javax.swing.JInternalFrame {
                 btnEjecutar.setEnabled(true);
             }
         } catch (Exception e) {
-            //JOptionPane.showMessageDialog(null, "El archivo que intenta importar no es una base de datos balida" + e);
+            //JOptionPane.showMessageDialog(null, "El archivo que intenta importar no es una base de datos valida" + e);
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarActionPerformed
-        System.out.println(this.ruta);
+       // System.out.println(this.ruta);
         HiloImportacion hiloImportacion = new HiloImportacion(this.lblEstatus, this.pbExportacion, this.btnEjecutar, this.btnSalir, this.ruta);
         hiloImportacion.addPropertyChangeListener(new PropertyChangeListener() {
             @Override

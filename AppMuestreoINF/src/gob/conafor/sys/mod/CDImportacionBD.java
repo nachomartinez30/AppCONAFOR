@@ -118,6 +118,31 @@ public class CDImportacionBD {
                 + "Azimut, Distancia, TipoInaccesibilidadID, OtroTipoInaccesibilidad, ExplicacionInaccesibilidad, "
                 + "InformacionContacto FROM UPM_UPM";
         Integer tipoInaccesibilidadID = null;
+        Integer UPMID = null;
+        String fechaInicio = null;
+        String fechaFin = null;
+        Integer tipoUpmID = null;
+        Float altitud = null;
+        Integer pendiente = null;
+        Integer fisiografiaID = null;
+        Integer exposicionID = null;
+        String predio = null;
+        String paraje = null;
+        Integer tipoTenenciaID = null;
+        Integer accesible = null;
+        Integer gradosLatitud = null;
+        Integer minutosLatitud = null;
+        Float segundosLatitud = null;
+        Integer gradosLongitud = null;
+        Integer minutosLongitud = null;
+        Float segundosLongitud = null;
+        String datum = null;
+        Integer errorPresicion = null;
+        Integer azimut = null;
+        Float distancia = null;
+        String otroTipoInaccesibilidad = null;
+        String explicacionInaccesibilidad = null;
+        Integer informacionContacto = null;
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
@@ -125,34 +150,85 @@ public class CDImportacionBD {
             Statement ps = this.baseDatosLocal.createStatement();
             ResultSet rs = sqlExterno.executeQuery(this.querySelect);
             while (rs.next()) {
-                Integer UPMID = rs.getInt("UPMID");
-                String fechaInicio = rs.getString("FechaInicio");
-                String fechaFin = rs.getString("FechaFin");
-                Integer tipoUpmID = rs.getInt("TipoUPMID");
-                Float altitud = rs.getFloat("Altitud");
-                Integer pendiente = rs.getInt("PendienteRepresentativa");
-                Integer fisiografiaID = rs.getInt("FisiografiaID");
-                Integer exposicionID = rs.getInt("ExposicionID");
-                String predio = rs.getString("Predio");
-                String paraje = rs.getString("Paraje");
-                Integer tipoTenenciaID = rs.getInt("TipoTenenciaID");
-                Integer accesible = rs.getInt("Accesible");
-                Integer gradosLatitud = rs.getInt("GradosLatitud");
-                Integer minutosLatitud = rs.getInt("MinutosLatitud");
-                Float segundosLatitud = rs.getFloat("SegundosLatitud");
-                Integer gradosLongitud = rs.getInt("GradosLongitud");
-                Integer minutosLongitud = rs.getInt("MinutosLongitud");
-                Float segundosLongitud = rs.getFloat("SegundosLongitud");
-                String datum = rs.getString("Datum");
-                Integer errorPresicion = rs.getInt("ErrorPresicion");
-                Integer azimut = rs.getInt("Azimut");
-                Float distancia = rs.getFloat("Distancia");
+                if (rs.getObject("UPMID") != null) {
+                    UPMID = rs.getInt("UPMID");
+                }
+                if (rs.getObject("FechaInicio") != null) {
+                    fechaInicio = rs.getString("FechaInicio");
+                }
+                if (rs.getObject("FechaFin") != null) {
+                    fechaFin = rs.getString("FechaFin");
+                }
+                if (rs.getObject("TipoUPMID") != null) {
+                    tipoUpmID = rs.getInt("TipoUPMID");
+                }
+                if (rs.getObject("Altitud") != null) {
+                    altitud = rs.getFloat("Altitud");
+                }
+                if (rs.getObject("PendienteRepresentativa") != null) {
+                    pendiente = rs.getInt("PendienteRepresentativa");
+                }
+                if (rs.getObject("FisiografiaID") != null) {
+                    fisiografiaID = rs.getInt("FisiografiaID");
+                }
+                if (rs.getObject("ExposicionID") != null) {
+                    exposicionID = rs.getInt("ExposicionID");
+                }
+                if (rs.getObject("Predio") != null) {
+                    predio = rs.getString("Predio");
+                }
+                if (rs.getObject("Paraje") != null) {
+                    paraje = rs.getString("Paraje");
+                }
+                if (rs.getObject("TipoTenenciaID") != null) {
+                    tipoTenenciaID = rs.getInt("TipoTenenciaID");
+                }
+                if (rs.getObject("Accesible") != null) {
+                    accesible = rs.getInt("Accesible");
+                }
+                if (rs.getObject("GradosLatitud") != null) {
+                    gradosLatitud = rs.getInt("GradosLatitud");
+                }
+                if (rs.getObject("MinutosLatitud") != null) {
+                    minutosLatitud = rs.getInt("MinutosLatitud");
+                }
+                if (rs.getObject("SegundosLatitud") != null) {
+                    segundosLatitud = rs.getFloat("SegundosLatitud");
+                }
+                if (rs.getObject("GradosLongitud") != null) {
+                    gradosLongitud = rs.getInt("GradosLongitud");
+                }
+                if (rs.getObject("MinutosLongitud") != null) {
+                    minutosLongitud = rs.getInt("MinutosLongitud");
+                }
+                if (rs.getObject("SegundosLongitud") != null) {
+                    segundosLongitud = rs.getFloat("SegundosLongitud");
+                }
+                if (rs.getObject("Datum") != null) {
+                    datum = rs.getString("Datum");
+                }
+                if (rs.getObject("ErrorPresicion") != null) {
+                    errorPresicion = rs.getInt("ErrorPresicion");
+                }
+                if (rs.getObject("Azimut") != null) {
+                    azimut = rs.getInt("Azimut");
+                }
+                if (rs.getObject("Distancia") != null) {
+                    distancia = rs.getFloat("Distancia");
+                }
+                if (rs.getObject("OtroTipoInaccesibilidad") != null) {
+                    otroTipoInaccesibilidad = rs.getString("OtroTipoInaccesibilidad");
+                }
+                if (rs.getObject("ExplicacionInaccesibilidad") != null) {
+                    explicacionInaccesibilidad = rs.getString("ExplicacionInaccesibilidad");
+                }
+                if (rs.getObject("InformacionContacto") != null) {
+                    informacionContacto = rs.getInt("InformacionContacto");
+                }
                 if (rs.getObject("TipoInaccesibilidadID") != null) {
                     tipoInaccesibilidadID = rs.getInt("TipoInaccesibilidadID");
                 }
-                String otroTipoInaccesibilidad = rs.getString("OtroTipoInaccesibilidad");
-                String explicacionInaccesibilidad = rs.getString("ExplicacionInaccesibilidad");
-                Integer informacionContacto = rs.getInt("InformacionContacto");
+
                 ps.executeUpdate("INSERT INTO UPM_UPM(UPMID, FechaInicio, FechaFin, TipoUPMID, Altitud, PendienteRepresentativa, "
                         + "FisiografiaID, ExposicionID, 'Predio', 'Paraje', TipoTenenciaID, Accesible, GradosLatitud, MinutosLatitud, "
                         + "SegundosLatitud, GradosLongitud, MinutosLongitud, SegundosLongitud, Datum, ErrorPresicion, "
@@ -162,6 +238,31 @@ public class CDImportacionBD {
                         + datum + "', " + errorPresicion + ", " + azimut + ", " + distancia + ", " + tipoInaccesibilidadID + ", '" + otroTipoInaccesibilidad + "', '" + explicacionInaccesibilidad + "', " + informacionContacto + ")");
                 this.baseDatosLocal.commit();
                 tipoInaccesibilidadID = null;
+                UPMID = null;
+                fechaInicio = null;
+                fechaFin = null;
+                tipoUpmID = null;
+                altitud = null;
+                pendiente = null;
+                fisiografiaID = null;
+                exposicionID = null;
+                predio = null;
+                paraje = null;
+                tipoTenenciaID = null;
+                accesible = null;
+                gradosLatitud = null;
+                minutosLatitud = null;
+                segundosLatitud = null;
+                gradosLongitud = null;
+                minutosLongitud = null;
+                segundosLongitud = null;
+                datum = null;
+                errorPresicion = null;
+                azimut = null;
+                distancia = null;
+                otroTipoInaccesibilidad = null;
+                explicacionInaccesibilidad = null;
+                informacionContacto = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -273,6 +374,13 @@ public class CDImportacionBD {
         Integer evidenciaMuestreo = null;
         Integer condicion = null;
         Integer faseSucecional = null;
+        Integer azimut = null;
+        Float distancia = null;
+        Integer tipoInaccesibilidad = null;
+        String explicacionInaccesibilidad = null;
+        Integer porcentajeRepoblado = null;
+        Integer porcentajeSotoBosque = null;
+
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
@@ -295,11 +403,9 @@ public class CDImportacionBD {
                     evidenciaMuestreo = rs.getInt("EvidenciaMuestreo");
                 }
                 String datum = rs.getString("Datum");
-                Integer azimut = rs.getInt("Azimut");
-                Float distancia = rs.getFloat("Distancia");
+
                 Integer sitioAccesible = rs.getInt("SitioAccesible");
-                Integer tipoInaccesibilidad = rs.getInt("TipoInaccesibilidad");
-                String explicacionInaccesibilidad = rs.getString("ExplicacionInaccesibilidad");
+
                 Integer coberturaForestal = rs.getInt("CoberturaForestal");
                 if (rs.getObject("Condicion") != null) {
                     condicion = rs.getInt("Condicion");
@@ -308,14 +414,31 @@ public class CDImportacionBD {
                 if (rs.getObject("FaseSucecional") != null) {
                     faseSucecional = rs.getInt("FaseSucecional");
                 }
+                if (rs.getObject("Azimut") != null) {
+                    azimut = rs.getInt("Azimut");
+                }
+                if (rs.getObject("Distancia") != null) {
+                    distancia = rs.getFloat("Distancia");
+                }
+                if (rs.getObject("TipoInaccesibilidad") != null) {
+                    tipoInaccesibilidad = rs.getInt("TipoInaccesibilidad");
+                }
+                //System.out.println(rs.getObject("ExplicacionInaccesibilidad"));
+                if (rs.getObject("ExplicacionInaccesibilidad")!= null) {
+                    explicacionInaccesibilidad = rs.getString("ExplicacionInaccesibilidad");
+                }
+                if (rs.getObject("PorcentajeRepoblado") != null) {
+                    porcentajeRepoblado = rs.getInt("PorcentajeRepoblado");
+                }
+                if (rs.getObject("PorcentajeSotoBosqueFuera") != null) {
+                    porcentajeSotoBosque = rs.getInt("PorcentajeSotoBosqueFuera");
+                }
                 Integer arbolFuera = rs.getInt("ArbolFuera");
                 Integer ecotono = rs.getInt("Ecotono");
                 String condicionPresente = rs.getString("CondicionPresenteCampo");
                 String condicionEcotono = rs.getString("CondicionEcotono");
                 Integer repobladoFuera = rs.getInt("RepobladoFuera");
-                Integer porcentajeRepoblado = rs.getInt("PorcentajeRepoblado");
                 Integer sotoBosqueFuera = rs.getInt("SotoBosqueFuera");
-                Integer porcentajeSotoBosque = rs.getInt("PorcentajeSotoBosqueFuera");
                 String observaciones = rs.getString("Observaciones");
                 Integer hipsometroBrujula = rs.getInt("HipsometroBrujula");
                 Integer cintaClinometroBrujula = rs.getInt("CintaClinometroBrujula");
@@ -339,8 +462,14 @@ public class CDImportacionBD {
                         + ", " + distancia2 + ", " + distancia3 + ", " + distancia4 + ")");
                 this.baseDatosLocal.commit();
                 evidenciaMuestreo = null;
-condicion = null;
-faseSucecional = null;
+                condicion = null;
+                faseSucecional = null;
+                azimut = null;
+                distancia = null;
+                tipoInaccesibilidad = null;
+                explicacionInaccesibilidad = null;
+                porcentajeRepoblado = null;
+                porcentajeSotoBosque = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -879,9 +1008,9 @@ faseSucecional = null;
                 ps.executeUpdate("INSERT INTO SUELO_Hojarasca(HojarascaID, SitioID, Punto, TipoHojarascaID, EspesorHO, EspesorF, PesoTotalHO, PesoTotalF, PesoMuestraHO, PesoMuestraF, "
                         + "Observaciones)VALUES(" + hojarascaID + ", " + sitioID + ", " + punto + ", " + tipoHojarascaID + ", " + espesorHO + ", " + espesorF + ", " + pesoTotalHO + ", " + pesoTotalF + ", " + pesoMuestraHO + ", " + pesoMuestraF + ", '" + observaciones + "')");
                 this.baseDatosLocal.commit();
-                   espesorF = null;
-         pesoTotalF = null;
-         pesoMuestraF = null;
+                espesorF = null;
+                pesoTotalF = null;
+                pesoMuestraF = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -1120,7 +1249,7 @@ faseSucecional = null;
 
     //24
     public void importarSueloMuestras(String ruta) {
-        this.querySelect = "SELECT MuestrasID, SitioID, ProfundidadID, PesoMuestra, Lectura1, Lectura2, Lectura3, Lectura4, "
+        this.querySelect = "SELECT MuestrasID, SitioID, ProfundidadID,Muestras, PesoMuestra, Lectura1, Lectura2, Lectura3, Lectura4, "
                 + "Promedio, ClaveColecta FROM SUELO_Muestras";
         Float lectura1 = null;
         Float lectura2 = null;
@@ -1136,6 +1265,7 @@ faseSucecional = null;
                 Integer muestrasID = rs.getInt("MuestrasID");
                 Integer sitioID = rs.getInt("SitioID");
                 Integer profundidadID = rs.getInt("ProfundidadID");
+                Integer muestras = rs.getInt("Muestras");
                 Float pesoMuestra = rs.getFloat("PesoMuestra");
                 if (rs.getObject("Lectura1") != null) {
                     lectura1 = rs.getFloat("Lectura1");
@@ -1151,14 +1281,14 @@ faseSucecional = null;
                 }
                 Float promedio = rs.getFloat("Promedio");
                 String claveColecta = rs.getString("ClaveColecta");
-                ps.executeUpdate("INSERT INTO SUELO_Muestras(MuestrasID, SitioID, ProfundidadID, PesoMuestra, Lectura1, Lectura2, Lectura3, Lectura4, "
-                        + "Promedio, ClaveColecta)VALUES(" + muestrasID + ", " + sitioID + ", " + profundidadID + ", " + pesoMuestra + ", " + lectura1
+                ps.executeUpdate("INSERT INTO SUELO_Muestras(MuestrasID, SitioID, ProfundidadID, Muestras, PesoMuestra, Lectura1, Lectura2, Lectura3, Lectura4, "
+                        + "Promedio, ClaveColecta)VALUES(" + muestrasID + ", " + sitioID + ", " + profundidadID+ ", " +  muestras + ", " + pesoMuestra + ", " + lectura1
                         + ", " + lectura2 + ", " + lectura3 + ", " + lectura4 + ", " + promedio + ", '" + claveColecta + "')");
                 this.baseDatosLocal.commit();
-                  lectura1 = null;
-         lectura2 = null;
-         lectura3 = null;
-         lectura4 = null;
+                lectura1 = null;
+                lectura2 = null;
+                lectura3 = null;
+                lectura4 = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -1294,7 +1424,7 @@ faseSucecional = null;
 
     //28
     public void importarSueloProfundidad(String ruta) {
-        this.querySelect = "SELECT ProfundidadSueloID, SitioID, Punto, Profundidad030, Profundidad3060, PesoTotal030, PesoTotal3060, Equipo030, Equipo3060, "
+        this.querySelect = "SELECT ProfundidadSueloID, SitioID, Punto, Profundidad030, Profundidad3060, PesoTotal030, PesoTotal3060, Equipo030, Equipo3060, Clave030 ,Clave3060,"
                 + "Observaciones FROM SUELO_Profundidad";
         Float profundidad3060 = null;
         Float pesoTotal3060 = null;
@@ -1318,12 +1448,14 @@ faseSucecional = null;
                 }
                 Float equipo030 = rs.getFloat("Equipo030");
                 Float equipo3060 = rs.getFloat("Equipo3060");
+                String clave030 = rs.getString("Clave030");
+                String clave3060 = rs.getString("Clave3060");
                 String observaciones = rs.getString("Observaciones");
-                ps.executeUpdate("INSERT INTO SUELO_Profundidad(ProfundidadSueloID, SitioID, Punto, Profundidad030, Profundidad3060, PesoTotal030, PesoTotal3060, Equipo030, Equipo3060, "
-                        + "Observaciones)VALUES(" + profundidadSueloID + ", " + sitioID + ", " + punto + ", " + profundidad030 + ", " + profundidad3060 + ", " + pesoTotal030 + ", " + pesoTotal3060 + ", '" + equipo030 + "', '" + equipo3060 + "', '" + observaciones + "')");
+                ps.executeUpdate("INSERT INTO SUELO_Profundidad(ProfundidadSueloID, SitioID, Punto, Profundidad030, Profundidad3060, PesoTotal030, PesoTotal3060, Equipo030, Equipo3060,Clave030,Clave3060, "
+                        + "Observaciones)VALUES(" + profundidadSueloID + ", " + sitioID + ", " + punto + ", " + profundidad030 + ", " + profundidad3060 + ", " + pesoTotal030 + ", " + pesoTotal3060 + ", '" + equipo030 + "', '" + equipo3060 + "', '" + clave030 + "', '" + clave3060 + "', '" + observaciones + "')");
                 this.baseDatosLocal.commit();
                 profundidad3060 = null;
-pesoTotal3060 = null;
+                pesoTotal3060 = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -1430,20 +1562,20 @@ pesoTotal3060 = null;
                         + ", " + longitudPromedioMonticulos + ", " + volumenMonticulos + ")");
                 this.baseDatosLocal.commit();
                 numeroCanalillos = null;
-profundidadPromedioCanalillos = null;
-anchoPromedioCanalillos = null;
-longitudCanalillos = null;
-volumenCanalillos = null;
-numeroCarcavas = null;
-profundidadPromedioCarcavas = null;
-anchoPromedioCarcavas = null;
-longitudPromedioCarcavas = null;
-volumenCarcavas = null;
-numeroMonticulos = null;
-alturaPromedioMonticulos = null;
-anchoPromedioMoticulos = null;
-longitudPromedioMonticulos = null;
-volumenMonticulos = null;
+                profundidadPromedioCanalillos = null;
+                anchoPromedioCanalillos = null;
+                longitudCanalillos = null;
+                volumenCanalillos = null;
+                numeroCarcavas = null;
+                profundidadPromedioCarcavas = null;
+                anchoPromedioCarcavas = null;
+                longitudPromedioCarcavas = null;
+                volumenCarcavas = null;
+                numeroMonticulos = null;
+                alturaPromedioMonticulos = null;
+                anchoPromedioMoticulos = null;
+                longitudPromedioMonticulos = null;
+                volumenMonticulos = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -1467,6 +1599,8 @@ volumenMonticulos = null;
         this.querySelect = "SELECT VarillaID, SitioID, NoVarilla, Azimut, Distancia, Profundidad FROM SUELO_VarillaErosion";
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
+        Integer azimut = null;
+        Float distancia = null;
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
             Statement ps = this.baseDatosLocal.createStatement();
@@ -1475,12 +1609,18 @@ volumenMonticulos = null;
                 Integer varillaID = rs.getInt("VarillaID");
                 Integer sitioID = rs.getInt("SitioID");
                 Integer noVarilla = rs.getInt("NoVarilla");
-                Integer azimut = rs.getInt("Azimut");
-                Float distancia = rs.getFloat("Distancia");
+                if (rs.getObject("Azimut") != null) {
+                    azimut = rs.getInt("Azimut");
+                }
+                if (rs.getObject("Distancia") != null) {
+                    distancia = rs.getFloat("Distancia");
+                }
                 Float profundidad = rs.getFloat("Profundidad");
                 ps.executeUpdate("INSERT INTO SUELO_VarillaErosion(VarillaID, SitioID, NoVarilla, Azimut, Distancia, Profundidad)"
                         + "VALUES(" + varillaID + ", " + sitioID + ", " + noVarilla + ", " + azimut + ", " + distancia + ", " + profundidad + ")");
                 this.baseDatosLocal.commit();
+                azimut = null;
+                distancia = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -1596,6 +1736,10 @@ volumenMonticulos = null;
         Integer segmento8 = null;
         Integer segmento9 = null;
         Integer segmento10 = null;
+        Integer familiaID = null;
+        Integer generoID = null;
+        Integer especieID = null;
+        Integer infraespecieID = null;
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
@@ -1608,10 +1752,18 @@ volumenMonticulos = null;
                 Integer consecutivo = rs.getInt("Consecutivo");
                 Integer transecto = rs.getInt("Transecto");
                 Integer componenteID = rs.getInt("ComponenteID");
-                Integer familiaID = rs.getInt("FamiliaID");
-                Integer generoID = rs.getInt("GeneroID");
-                Integer especieID = rs.getInt("EspecieID");
-                Integer infraespecieID = rs.getInt("InfraespecieID");
+                if (rs.getObject("FamiliaID") != null) {
+familiaID = rs.getInt("FamiliaID");
+}
+if (rs.getObject("GeneroID") != null) {
+generoID= generoID = rs.getInt("GeneroID");
+}
+if (rs.getObject("EspecieID") != null) {
+especieID =especieID = rs.getInt("EspecieID");
+}
+if (rs.getObject("InfraespecieID") != null) {
+infraespecieID = infraespecieID = rs.getInt("InfraespecieID");
+}
                 String nombreComun = rs.getString("NombreComun");
                 if (rs.getObject("Segmento1") != null) {
                     segmento1 = rs.getInt("Segmento1");
@@ -1650,16 +1802,20 @@ volumenMonticulos = null;
                         + ", " + especieID + ", " + infraespecieID + ", '" + nombreComun + "', " + segmento1 + ", " + segmento2 + ", " + segmento3 + ", " + segmento4 + ", " + segmento5 + ", " + segmento6 + ", " + segmento7 + ", " + segmento8
                         + ", " + segmento9 + ", " + segmento10 + ", " + total + ", '" + claveColecta + "')");
                 this.baseDatosLocal.commit();
-                 segmento1 = null;
-         segmento2 = null;
-         segmento3 = null;
-         segmento4 = null;
-         segmento5 = null;
-         segmento6 = null;
-         segmento7 = null;
-         segmento8 = null;
-         segmento9 = null;
-         segmento10 = null;
+                segmento1 = null;
+                segmento2 = null;
+                segmento3 = null;
+                segmento4 = null;
+                segmento5 = null;
+                segmento6 = null;
+                segmento7 = null;
+                segmento8 = null;
+                segmento9 = null;
+                segmento10 = null;
+                familiaID = null;
+generoID = null;
+especieID = null;
+infraespecieID = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -1763,6 +1919,22 @@ volumenMonticulos = null;
         Float alturaComercial = null;
         Float diametroCopaNS = null;
         Float diametroCopaEO = null;
+        Integer familiaID = null;
+        Integer generoID = null;
+        Integer especieID = null;
+        Integer infraespecieID = null;
+        Integer muertoPieID = null;
+        Integer gradoPutrefaccionID = null;
+        Integer tipoToconID = null;
+        Integer proporcionCopaVivaID = null;
+        Integer exposicionCopaID = null;
+        Integer posicionCopaID = null;
+        Integer densidadCopaID = null;
+        Integer muerteRegresivaID = null;
+        Integer transparenciaFollajeID = null;
+        Integer vigorID = null;
+        Integer nivelVigor = null;
+        String claveColecta = null;
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
@@ -1777,18 +1949,12 @@ volumenMonticulos = null;
                 Integer noRama = rs.getInt("NoRama");
                 Integer azimut = rs.getInt("Azimut");
                 Float distancia = rs.getFloat("Distancia");
-                Integer familiaID = rs.getInt("FamiliaID");
-                Integer generoID = rs.getInt("GeneroID");
-                Integer especieID = rs.getInt("EspecieID");
-                Integer infraespecieID = rs.getInt("InfraespecieID");
                 String nombreComun = rs.getString("NombreComun");
                 Integer esSubmuestra = rs.getInt("EsSubmuestra");
                 Integer formaVidaID = rs.getInt("FormaVidaID");
                 Integer formaFusteID = rs.getInt("FormaFusteID");
                 Integer condicionID = rs.getInt("CondicionID");
-                Integer muertoPieID = rs.getInt("MuertoPieID");
-                Integer gradoPutrefaccionID = rs.getInt("GradoPutrefaccionID");
-                Integer tipoToconID = rs.getInt("TipoToconID");
+
                 if (rs.getObject("DiametroNormal") != null) {
                     diametroNormal = rs.getFloat("DiametroNormal");
                 }
@@ -1813,15 +1979,54 @@ volumenMonticulos = null;
                 if (rs.getObject("DiametroCopaEO") != null) {
                     diametroCopaEO = rs.getFloat("DiametroCopaEO");
                 }
-                Integer proporcionCopaVivaID = rs.getInt("ProporcionCopaVivaID");
-                Integer exposicionCopaID = rs.getInt("ExposicionCopaID");
-                Integer posicionCopaID = rs.getInt("PosicionCopaID");
-                Integer densidadCopaID = rs.getInt("DensidadCopaID");
-                Integer muerteRegresivaID = rs.getInt("MuerteRegresivaID");
-                Integer transparenciaFollajeID = rs.getInt("TransparenciaFollajeID");
-                Integer vigorID = rs.getInt("VigorID");
-                Integer nivelVigor= rs.getInt("NivelVigorID");
-                String claveColecta = rs.getString("ClaveColecta");
+                if (rs.getObject("FamiliaID") != null) {
+                    familiaID = rs.getInt("FamiliaID");
+                }
+                if (rs.getObject("GeneroID") != null) {
+                    generoID= generoID = rs.getInt("GeneroID");
+                }
+                if (rs.getObject("EspecieID") != null) {
+                    especieID =especieID = rs.getInt("EspecieID");
+                }
+                if (rs.getObject("InfraespecieID") != null) {
+                    infraespecieID = infraespecieID = rs.getInt("InfraespecieID");
+                }
+                if (rs.getObject("MuertoPieID") != null) {
+                    muertoPieID = rs.getInt("MuertoPieID");
+                }
+                if (rs.getObject("GradoPutrefaccionID") != null) {
+                    gradoPutrefaccionID = rs.getInt("GradoPutrefaccionID");
+                }
+                if (rs.getObject("TipoToconID") != null) {
+                    tipoToconID = rs.getInt("TipoToconID");
+                }
+                if (rs.getObject("ProporcionCopaVivaID") != null) {
+                    proporcionCopaVivaID = rs.getInt("ProporcionCopaVivaID");
+                }
+                if (rs.getObject("ExposicionCopaID") != null) {
+                    exposicionCopaID = rs.getInt("ExposicionCopaID");
+                }
+                if (rs.getObject("PosicionCopaID") != null) {
+                    posicionCopaID = rs.getInt("PosicionCopaID");
+                }
+                if (rs.getObject("DensidadCopaID") != null) {
+                    densidadCopaID = rs.getInt("DensidadCopaID");
+                }
+                if (rs.getObject("MuerteRegresivaID") != null) {
+                    muerteRegresivaID = rs.getInt("MuerteRegresivaID");
+                }
+                if (rs.getObject("TransparenciaFollajeID") != null) {
+                    transparenciaFollajeID = rs.getInt("TransparenciaFollajeID");
+                }
+                if (rs.getObject("VigorID") != null) {
+                    vigorID = rs.getInt("VigorID");
+                }
+                if (rs.getObject("NivelVigorID") != null) {
+                    nivelVigor = rs.getInt("NivelVigorID");
+                }
+                if (rs.getObject("ClaveColecta") != null) {
+                    claveColecta = rs.getString("ClaveColecta");
+                }
                 ps.executeUpdate("INSERT INTO TAXONOMIA_Arbolado(ArboladoID, SitioID, Consecutivo, NoIndividuo, NoRama, Azimut, Distancia, FamiliaID, GeneroID, EspecieID, InfraespecieID, "
                         + "NombreComun, EsSubmuestra, FormaVidaID, FormaFusteID, CondicionID, MuertoPieID, GradoPutrefaccionID, TipoToconID, DiametroNormal, "
                         + "DiametroBasal, AlturaTotal, AnguloInclinacion, AlturaFusteLimpio, AlturaComercial, DiametroCopaNS, DiametroCopaEO, ProporcionCopaVivaID, ExposicionCopaID, "
@@ -1830,8 +2035,8 @@ volumenMonticulos = null;
                         + ", " + esSubmuestra + ", " + formaVidaID + ", " + formaFusteID + ", " + condicionID + ", " + muertoPieID + ", " + gradoPutrefaccionID + ", " + tipoToconID
                         + ", " + diametroNormal + ", " + diametroBasal + ", " + alturaTotal + ", " + anguloInclinacion + ", " + alturaFusteLimpio + ", " + alturaComercial + ", " + diametroCopaNS
                         + ", " + diametroCopaEO + ", " + proporcionCopaVivaID + ", " + exposicionCopaID + ", " + posicionCopaID + ", " + densidadCopaID + ", " + muerteRegresivaID + ", " + transparenciaFollajeID
-                        + ", " + vigorID +", "+nivelVigor+", '" + claveColecta + "')");
-               
+                        + ", " + vigorID + ", " + nivelVigor + ", '" + claveColecta + "')");
+
                 this.baseDatosLocal.commit();
                 diametroNormal = null;
                 diametroBasal = null;
@@ -1841,6 +2046,286 @@ volumenMonticulos = null;
                 alturaComercial = null;
                 diametroCopaNS = null;
                 diametroCopaEO = null;
+                familiaID = null;
+                generoID = null;
+                especieID = null;
+                infraespecieID = null;
+                muertoPieID = null;
+                gradoPutrefaccionID = null;
+                tipoToconID = null;
+                proporcionCopaVivaID = null;
+                exposicionCopaID = null;
+                posicionCopaID = null;
+                densidadCopaID = null;
+                muerteRegresivaID = null;
+                transparenciaFollajeID = null;
+                vigorID = null;
+                nivelVigor = null;
+                claveColecta = null;
+                diametroNormal = null;
+                diametroBasal = null;
+                alturaTotal = null;
+                anguloInclinacion = null;
+                alturaFusteLimpio = null;
+                alturaComercial = null;
+                diametroCopaNS = null;
+                diametroCopaEO = null;
+                familiaID = null;
+                generoID = null;
+                especieID = null;
+                infraespecieID = null;
+                muertoPieID = null;
+                gradoPutrefaccionID = null;
+                tipoToconID = null;
+                proporcionCopaVivaID = null;
+                exposicionCopaID = null;
+                posicionCopaID = null;
+                densidadCopaID = null;
+                muerteRegresivaID = null;
+                transparenciaFollajeID = null;
+                vigorID = null;
+                nivelVigor = null;
+                claveColecta = null;
+                diametroNormal = null;
+                diametroBasal = null;
+                alturaTotal = null;
+                anguloInclinacion = null;
+                alturaFusteLimpio = null;
+                alturaComercial = null;
+                diametroCopaNS = null;
+                diametroCopaEO = null;
+                familiaID = null;
+                generoID = null;
+                especieID = null;
+                infraespecieID = null;
+                muertoPieID = null;
+                gradoPutrefaccionID = null;
+                tipoToconID = null;
+                proporcionCopaVivaID = null;
+                exposicionCopaID = null;
+                posicionCopaID = null;
+                densidadCopaID = null;
+                muerteRegresivaID = null;
+                transparenciaFollajeID = null;
+                vigorID = null;
+                nivelVigor = null;
+                claveColecta = null;
+                diametroNormal = null;
+                diametroBasal = null;
+                alturaTotal = null;
+                anguloInclinacion = null;
+                alturaFusteLimpio = null;
+                alturaComercial = null;
+                diametroCopaNS = null;
+                diametroCopaEO = null;
+                familiaID = null;
+                generoID = null;
+                especieID = null;
+                infraespecieID = null;
+                muertoPieID = null;
+                gradoPutrefaccionID = null;
+                tipoToconID = null;
+                proporcionCopaVivaID = null;
+                exposicionCopaID = null;
+                posicionCopaID = null;
+                densidadCopaID = null;
+                muerteRegresivaID = null;
+                transparenciaFollajeID = null;
+                vigorID = null;
+                nivelVigor = null;
+                claveColecta = null;
+                diametroNormal = null;
+                diametroBasal = null;
+                alturaTotal = null;
+                anguloInclinacion = null;
+                alturaFusteLimpio = null;
+                alturaComercial = null;
+                diametroCopaNS = null;
+                diametroCopaEO = null;
+                familiaID = null;
+                generoID = null;
+                especieID = null;
+                infraespecieID = null;
+                muertoPieID = null;
+                gradoPutrefaccionID = null;
+                tipoToconID = null;
+                proporcionCopaVivaID = null;
+                exposicionCopaID = null;
+                posicionCopaID = null;
+                densidadCopaID = null;
+                muerteRegresivaID = null;
+                transparenciaFollajeID = null;
+                vigorID = null;
+                nivelVigor = null;
+                claveColecta = null;
+                diametroNormal = null;
+                diametroBasal = null;
+                alturaTotal = null;
+                anguloInclinacion = null;
+                alturaFusteLimpio = null;
+                alturaComercial = null;
+                diametroCopaNS = null;
+                diametroCopaEO = null;
+                familiaID = null;
+                generoID = null;
+                especieID = null;
+                infraespecieID = null;
+                muertoPieID = null;
+                gradoPutrefaccionID = null;
+                tipoToconID = null;
+                proporcionCopaVivaID = null;
+                exposicionCopaID = null;
+                posicionCopaID = null;
+                densidadCopaID = null;
+                muerteRegresivaID = null;
+                transparenciaFollajeID = null;
+                vigorID = null;
+                nivelVigor = null;
+                claveColecta = null;
+                diametroNormal = null;
+                diametroBasal = null;
+                alturaTotal = null;
+                anguloInclinacion = null;
+                alturaFusteLimpio = null;
+                alturaComercial = null;
+                diametroCopaNS = null;
+                diametroCopaEO = null;
+                familiaID = null;
+                generoID = null;
+                especieID = null;
+                infraespecieID = null;
+                muertoPieID = null;
+                gradoPutrefaccionID = null;
+                tipoToconID = null;
+                proporcionCopaVivaID = null;
+                exposicionCopaID = null;
+                posicionCopaID = null;
+                densidadCopaID = null;
+                muerteRegresivaID = null;
+                transparenciaFollajeID = null;
+                vigorID = null;
+                nivelVigor = null;
+                claveColecta = null;
+                diametroNormal = null;
+                diametroBasal = null;
+                alturaTotal = null;
+                anguloInclinacion = null;
+                alturaFusteLimpio = null;
+                alturaComercial = null;
+                diametroCopaNS = null;
+                diametroCopaEO = null;
+                familiaID = null;
+                generoID = null;
+                especieID = null;
+                infraespecieID = null;
+                muertoPieID = null;
+                gradoPutrefaccionID = null;
+                tipoToconID = null;
+                proporcionCopaVivaID = null;
+                exposicionCopaID = null;
+                posicionCopaID = null;
+                densidadCopaID = null;
+                muerteRegresivaID = null;
+                transparenciaFollajeID = null;
+                vigorID = null;
+                nivelVigor = null;
+                claveColecta = null;
+                diametroNormal = null;
+                diametroBasal = null;
+                alturaTotal = null;
+                anguloInclinacion = null;
+                alturaFusteLimpio = null;
+                alturaComercial = null;
+                diametroCopaNS = null;
+                diametroCopaEO = null;
+                familiaID = null;
+                generoID = null;
+                especieID = null;
+                infraespecieID = null;
+                muertoPieID = null;
+                gradoPutrefaccionID = null;
+                tipoToconID = null;
+                proporcionCopaVivaID = null;
+                exposicionCopaID = null;
+                posicionCopaID = null;
+                densidadCopaID = null;
+                muerteRegresivaID = null;
+                transparenciaFollajeID = null;
+                vigorID = null;
+                nivelVigor = null;
+                claveColecta = null;
+                diametroNormal = null;
+                diametroBasal = null;
+                alturaTotal = null;
+                anguloInclinacion = null;
+                alturaFusteLimpio = null;
+                alturaComercial = null;
+                diametroCopaNS = null;
+                diametroCopaEO = null;
+                familiaID = null;
+                generoID = null;
+                especieID = null;
+                infraespecieID = null;
+                muertoPieID = null;
+                gradoPutrefaccionID = null;
+                tipoToconID = null;
+                proporcionCopaVivaID = null;
+                exposicionCopaID = null;
+                posicionCopaID = null;
+                densidadCopaID = null;
+                muerteRegresivaID = null;
+                transparenciaFollajeID = null;
+                vigorID = null;
+                nivelVigor = null;
+                claveColecta = null;
+                diametroNormal = null;
+                diametroBasal = null;
+                alturaTotal = null;
+                anguloInclinacion = null;
+                alturaFusteLimpio = null;
+                alturaComercial = null;
+                diametroCopaNS = null;
+                diametroCopaEO = null;
+                familiaID = null;
+                generoID = null;
+                especieID = null;
+                infraespecieID = null;
+                muertoPieID = null;
+                gradoPutrefaccionID = null;
+                tipoToconID = null;
+                proporcionCopaVivaID = null;
+                exposicionCopaID = null;
+                posicionCopaID = null;
+                densidadCopaID = null;
+                muerteRegresivaID = null;
+                transparenciaFollajeID = null;
+                vigorID = null;
+                nivelVigor = null;
+                claveColecta = null;
+                diametroNormal = null;
+                diametroBasal = null;
+                alturaTotal = null;
+                anguloInclinacion = null;
+                alturaFusteLimpio = null;
+                alturaComercial = null;
+                diametroCopaNS = null;
+                diametroCopaEO = null;
+                familiaID = null;
+                generoID = null;
+                especieID = null;
+                infraespecieID = null;
+                muertoPieID = null;
+                gradoPutrefaccionID = null;
+                tipoToconID = null;
+                proporcionCopaVivaID = null;
+                exposicionCopaID = null;
+                posicionCopaID = null;
+                densidadCopaID = null;
+                muerteRegresivaID = null;
+                transparenciaFollajeID = null;
+                vigorID = null;
+                nivelVigor = null;
+                claveColecta = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -1970,6 +2455,7 @@ volumenMonticulos = null;
         this.querySelect = "SELECT DanioSeveridadID, ArboladoID, NumeroDanio, AgenteDanioID, SeveridadID FROM ARBOLADO_DanioSeveridad";
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
+
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
             Statement ps = this.baseDatosLocal.createStatement();
@@ -1979,7 +2465,12 @@ volumenMonticulos = null;
                 Integer arbolID = rs.getInt("ArboladoID");
                 Integer noDanio = rs.getInt("NumeroDanio");
                 Integer agenteDanioID = rs.getInt("AgenteDanioID");
-                Integer severidadID = rs.getInt("SeveridadID");
+                Integer severidadID = null;
+                if (rs.getObject("SeveridadID") == null) {
+                    severidadID = null;
+                } else {
+                    severidadID = rs.getInt("SeveridadID");
+                }
                 ps.executeUpdate("INSERT INTO ARBOLADO_DanioSeveridad(DanioSeveridadID, ArboladoID, NumeroDanio, AgenteDanioID, SeveridadID)VALUES(" + danioSeveridadID + ", " + arbolID + ", "
                         + noDanio + ", " + agenteDanioID + ", " + severidadID + ")");
                 this.baseDatosLocal.commit();
@@ -2007,6 +2498,36 @@ volumenMonticulos = null;
                 + "CortezaIncluida, MaderaIncluida, Observaciones FROM TAXONOMIA_ColectaBotanica";
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
+        Integer familiaID = null;
+        Integer generoID = null;
+        Integer especieID = null;
+        String infraespecieID = null;
+        String nombreComun = null;
+        Integer sitio = null;
+        Integer seccionID = null;
+        Integer consecutivo = null;
+        String claveColecta = null;
+        Integer contraFuertes = null;
+        Integer exudado = null;
+        String indicarExudado = null;
+        Integer color = null;
+        String indicarColor = null;
+        Integer cambioColor = null;
+        Integer aceitesVolatiles = null;
+        Integer colorFlor = null;
+        String indicarColorFlor = null;
+        Integer hojasTejidoVivo = null;
+        Integer fotoFlor = null;
+        Integer fotoFruto = null;
+        Integer fotoHojasArriba = null;
+        Integer fotoHojasAbajo = null;
+        Integer fotoArbolCompleto = null;
+        Integer fotoCorteza = null;
+        Integer virutaIncluida = null;
+        Integer cortezaIncluida = null;
+        Integer maderaIncluida = null;
+        String observaciones = null;
+
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
             Statement ps = this.baseDatosLocal.createStatement();
@@ -2014,40 +2535,127 @@ volumenMonticulos = null;
             while (rs.next()) {
                 Integer colectaBotanicaID = rs.getInt("ColectaBotanicaID");
                 Integer UPMID = rs.getInt("UPMID");
-                Integer familiaID = rs.getInt("FamiliaID");
-                Integer generoID = rs.getInt("GeneroID");
-                Integer especieID = rs.getInt("EspecieID");
-                String infraespecieID = rs.getString("InfraespecieID");
-                String nombreComun = rs.getString("NombreComun");
-                Integer sitio = rs.getInt("Sitio");
-                Integer seccionID = rs.getInt("SeccionID");
-                Integer consecutivo = rs.getInt("Consecutivo");
-                String claveColecta = rs.getString("ClaveColecta");
-                Integer contraFuertes = rs.getInt("ContraFuertes");
-                Integer exudado = rs.getInt("Exudado");
-                String indicarExudado = rs.getString("IndicarExudado");
-                Integer color = rs.getInt("Color");
-                String indicarColor = rs.getString("IndicarColor");
-                Integer cambioColor = rs.getInt("CambioColor");
-                Integer aceitesVolatiles = rs.getInt("AceitesVolatiles");
-                Integer colorFlor = rs.getInt("ColorFlor");
-                String indicarColorFlor = rs.getString("IndicarColorFlor");
-                Integer hojasTejidoVivo = rs.getInt("HojasTejidoVivo");
-                Integer fotoFlor = rs.getInt("FotoFlor");
-                Integer fotoFruto = rs.getInt("FotoFruto");
-                Integer fotoHojasArriba = rs.getInt("FotoHojasArriba");
-                Integer fotoHojasAbajo = rs.getInt("FotoHojasAbajo");
-                Integer fotoArbolCompleto = rs.getInt("FotoArbolCompleto");
-                Integer fotoCorteza = rs.getInt("FotoCorteza");
-                Integer virutaIncluida = rs.getInt("VirutaIncluida");
-                Integer cortezaIncluida = rs.getInt("CortezaIncluida");
-                Integer maderaIncluida = rs.getInt("MaderaIncluida");
-                String observaciones = rs.getString("Observaciones");
+                if (rs.getObject("FamiliaID") != null) {
+                    familiaID = rs.getInt("FamiliaID");
+                }
+                if (rs.getObject("GeneroID") != null) {
+                    generoID= generoID = rs.getInt("GeneroID");
+                }
+                if (rs.getObject("EspecieID") != null) {
+                    especieID =especieID = rs.getInt("EspecieID");
+                }
+                if (rs.getObject("InfraespecieID") != null) {
+                    infraespecieID = infraespecieID = rs.getString("InfraespecieID");
+                }
+                if (rs.getObject("NombreComun") != null) {
+                    nombreComun = rs.getString("NombreComun");
+                }
+                if (rs.getObject("Sitio") != null) {
+                    sitio = rs.getInt("Sitio");
+                }
+                if (rs.getObject("SeccionID") != null) {
+                    seccionID = rs.getInt("SeccionID");
+                }
+                if (rs.getObject("Consecutivo") != null) {
+                    consecutivo = rs.getInt("Consecutivo");
+                }
+                if (rs.getObject("ClaveColecta") != null) {
+                    claveColecta = rs.getString("ClaveColecta");
+                }
+                if (rs.getObject("ContraFuertes") != null) {
+                    contraFuertes = rs.getInt("ContraFuertes");
+                }
+                if (rs.getObject("Exudado") != null) {
+                    exudado = rs.getInt("Exudado");
+                }
+                if (rs.getObject("IndicarExudado") != null) {
+                    indicarExudado = rs.getString("IndicarExudado");
+                }
+                if (rs.getObject("Color") != null) {
+                    color = rs.getInt("Color");
+                }
+                if (rs.getObject("IndicarColor") != null) {
+                    indicarColor = rs.getString("IndicarColor");
+                }
+                if (rs.getObject("CambioColor") != null) {
+                    cambioColor = rs.getInt("CambioColor");
+                }
+                if (rs.getObject("AceitesVolatiles") != null) {
+                    aceitesVolatiles = rs.getInt("AceitesVolatiles");
+                }
+                if (rs.getObject("ColorFlor") != null) {
+                    colorFlor = rs.getInt("ColorFlor");
+                }
+                if (rs.getObject("IndicarColorFlor") != null) {
+                    indicarColorFlor = rs.getString("IndicarColorFlor");
+                }
+                if (rs.getObject("HojasTejidoVivo") != null) {
+                    hojasTejidoVivo = rs.getInt("HojasTejidoVivo");
+                }
+                if (rs.getObject("FotoFlor") != null) {
+                    fotoFlor = rs.getInt("FotoFlor");
+                }
+                if (rs.getObject("FotoFruto") != null) {
+                    fotoFruto = rs.getInt("FotoFruto");
+                }
+                if (rs.getObject("FotoHojasArriba") != null) {
+                    fotoHojasArriba = rs.getInt("FotoHojasArriba");
+                }
+                if (rs.getObject("FotoHojasAbajo") != null) {
+                    fotoHojasAbajo = rs.getInt("FotoHojasAbajo");
+                }
+                if (rs.getObject("FotoArbolCompleto") != null) {
+                    fotoArbolCompleto = rs.getInt("FotoArbolCompleto");
+                }
+                if (rs.getObject("FotoCorteza") != null) {
+                    fotoCorteza = rs.getInt("FotoCorteza");
+                }
+                if (rs.getObject("VirutaIncluida") != null) {
+                    virutaIncluida = rs.getInt("VirutaIncluida");
+                }
+                if (rs.getObject("CortezaIncluida") != null) {
+                    cortezaIncluida = rs.getInt("CortezaIncluida");
+                }
+                if (rs.getObject("MaderaIncluida") != null) {
+                    maderaIncluida = rs.getInt("MaderaIncluida");
+                }
+                if (rs.getObject("Observaciones") != null) {
+                    observaciones = rs.getString("Observaciones");
+                }
                 ps.executeUpdate("INSERT INTO TAXONOMIA_ColectaBotanica(ColectaBotanicaID, UPMID, FamiliaID, GeneroID, EspecieID, InfraespecieID, NombreComun, Sitio, SeccionID, Consecutivo, ClaveColecta, ContraFuertes, Exudado, IndicarExudado, Color, IndicarColor, CambioColor, AceitesVolatiles, ColorFlor, IndicarColorFlor, HojasTejidoVivo, FotoFlor, FotoFruto, FotoHojasArriba, FotoHojasAbajo, FotoArbolCompleto, FotoCorteza, "
                         + "VirutaIncluida, CortezaIncluida, MaderaIncluida, Observaciones)VALUES(" + colectaBotanicaID + ", " + UPMID + ", " + familiaID + ", " + generoID + ", " + especieID + ", " + infraespecieID + ", '" + nombreComun + "'," + sitio + ", " + seccionID + ", " + consecutivo + ", '" + claveColecta + "', " + contraFuertes + ", " + exudado + ", '" + indicarExudado + "', " + color + ", '" + indicarColor + "'"
                         + ", " + cambioColor + ", " + aceitesVolatiles + ", " + colorFlor + ", '" + indicarColorFlor + "', " + hojasTejidoVivo + ", " + fotoFlor + ", " + fotoFruto + ", " + fotoHojasArriba + ", " + fotoHojasAbajo + ", " + fotoArbolCompleto + ", " + fotoCorteza + ", " + virutaIncluida + ", " + cortezaIncluida + ", " + maderaIncluida
                         + ", '" + observaciones + "')");
                 this.baseDatosLocal.commit();
+                familiaID = null;
+                generoID = null;
+                especieID = null;
+                infraespecieID = null;
+                nombreComun = null;
+                sitio = null;
+                seccionID = null;
+                consecutivo = null;
+                claveColecta = null;
+                contraFuertes = null;
+                exudado = null;
+                indicarExudado = null;
+                color = null;
+                indicarColor = null;
+                cambioColor = null;
+                aceitesVolatiles = null;
+                colorFlor = null;
+                indicarColorFlor = null;
+                hojasTejidoVivo = null;
+                fotoFlor = null;
+                fotoFruto = null;
+                fotoHojasArriba = null;
+                fotoHojasAbajo = null;
+                fotoArbolCompleto = null;
+                fotoCorteza = null;
+                virutaIncluida = null;
+                cortezaIncluida = null;
+                maderaIncluida = null;
+                observaciones = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -2077,6 +2685,11 @@ volumenMonticulos = null;
         Integer frecuencia275 = null;
         Integer edad275 = null;
         Integer porcentajeDanio = null;
+        Integer familiaID = null;
+        Integer generoID = null;
+        Integer especieID = null;
+        Integer infraespecieID = null;
+        String claveColecta = null;
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
@@ -2087,10 +2700,22 @@ volumenMonticulos = null;
                 Integer repobladoID = rs.getInt("RepobladoID");
                 Integer sitioID = rs.getInt("SitioID");
                 Integer consecutivo = rs.getInt("Consecutivo");
-                Integer familiaID = rs.getInt("FamiliaID");
-                Integer generoID = rs.getInt("GeneroID");
-                Integer especieID = rs.getInt("EspecieID");
-                Integer infraespecieID = rs.getInt("InfraespecieID");
+                if (rs.getObject("FamiliaID") != null) {
+                   familiaID = rs.getInt("FamiliaID");
+                }
+
+                if (rs.getObject("GeneroID") != null) {
+                   generoID= rs.getInt("GeneroID");
+                }
+
+                if (rs.getObject("EspecieID") != null) {
+                    especieID =rs.getInt("EspecieID");
+                }
+
+                if (rs.getObject("InfraespecieID") != null) {
+                   infraespecieID = rs.getInt("InfraespecieID");
+                }
+
                 String nombreComun = rs.getString("NombreComun");
                 if (rs.getObject("Frecuencia025150") != null) {
                     frecuencia025150 = rs.getInt("Frecuencia025150");
@@ -2115,19 +2740,26 @@ volumenMonticulos = null;
                 if (rs.getObject("PorcentajeDanio") != null) {
                     porcentajeDanio = rs.getInt("PorcentajeDanio");
                 }
-                String claveColecta = rs.getString("ClaveColecta");
+                if (rs.getObject("ClaveColecta") != null) {
+                    claveColecta = rs.getString("ClaveColecta");
+                }
                 ps.executeUpdate("INSERT INTO TAXONOMIA_Repoblado(RepobladoID, SitioID, Consecutivo, FamiliaID, GeneroID, EspecieID, InfraespecieID, NombreComun, Frecuencia025150, Edad025150, Frecuencia151275, Edad151275, "
                         + "Frecuencia275, Edad275, VigorID, DanioID, PorcentajeDanio, ClaveColecta)VALUES(" + repobladoID + ", " + sitioID + ", " + consecutivo + ", " + familiaID + ", " + generoID + ", " + especieID + ", " + infraespecieID + ""
                         + ", '" + nombreComun + "', " + frecuencia025150 + ", " + edad025150 + ", " + frecuencia151275 + ", " + edad151275 + ", " + frecuencia275 + ", " + edad275 + ", " + vigorID + ", " + danioID
                         + ", " + porcentajeDanio + ", '" + claveColecta + "')");
                 this.baseDatosLocal.commit();
                 frecuencia025150 = null;
-edad025150 = null;
-frecuencia151275 = null;
-edad151275 = null;
-frecuencia275 = null;
-edad275 = null;
-porcentajeDanio = null;
+                edad025150 = null;
+                frecuencia151275 = null;
+                edad151275 = null;
+                frecuencia275 = null;
+                edad275 = null;
+                porcentajeDanio = null;
+                familiaID = null;
+                generoID = null;
+                especieID = null;
+                infraespecieID = null;
+                claveColecta = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -2156,6 +2788,11 @@ porcentajeDanio = null;
         Integer porcentajeCobertura51200 = null;
         Integer frecuencia200 = null;
         Integer porcentajeCobertura200 = null;
+        Integer familiaID = null;
+        Integer generoID = null;
+        Integer especieID = null;
+        Integer infraespecieID = null;
+        String claveColecta = null;
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
@@ -2167,10 +2804,21 @@ porcentajeDanio = null;
                 Integer sitioID = rs.getInt("SitioID");
                 Integer consecutivo = rs.getInt("Consecutivo");
                 Integer formaVidaID = rs.getInt("FormaVidaID");
-                Integer familiaID = rs.getInt("FamiliaID");
-                Integer generoID = rs.getInt("GeneroID");
-                Integer especieID = rs.getInt("EspecieID");
-                Integer infraespecieID = rs.getInt("InfraespecieID");
+                if (rs.getObject("FamiliaID") != null) {
+                   familiaID= rs.getInt("FamiliaID");
+                }
+
+                if (rs.getObject("GeneroID") != null) {
+                    generoID= rs.getInt("GeneroID");
+                }
+
+                if (rs.getObject("EspecieID") != null) {
+                    especieID =rs.getInt("EspecieID");
+                }
+
+                if (rs.getObject("InfraespecieID") != null) {
+                    infraespecieID = rs.getInt("InfraespecieID");
+                }
                 String nombreComun = rs.getString("NombreComun");
                 if (rs.getObject("Frecuencia50") != null) {
                     frecuencia50 = rs.getInt("Frecuencia50");
@@ -2191,17 +2839,24 @@ porcentajeDanio = null;
                     porcentajeCobertura200 = rs.getInt("PorcentajeCobertura200");
                 }
                 Integer vigorID = rs.getInt("VigorID");
-                String claveColecta = rs.getString("ClaveColecta");
+                if (rs.getObject("ClaveColecta") != null) {
+                    claveColecta = rs.getString("ClaveColecta");
+                }
                 ps.executeUpdate("INSERT INTO TAXONOMIA_RepobladoVM(RepobladoVMID, SitioID, Consecutivo, FormaVidaID, FamiliaID, GeneroID, EspecieID, InfraespecieID, NombreComun, Frecuencia50, PorcentajeCobertura50, Frecuencia51200, PorcentajeCobertura51200, "
                         + "Frecuencia200, PorcentajeCobertura200, VigorID, ClaveColecta)VALUES(" + repobladoVMID + ", " + sitioID + ", " + consecutivo + ", " + formaVidaID + ", " + familiaID + ", " + generoID + ", " + especieID + ", " + infraespecieID + ", '" + nombreComun + "'"
                         + ", " + frecuencia50 + ", " + porcentajeCobertura50 + ", " + frecuencia51200 + ", " + porcentajeCobertura51200 + ", " + frecuencia200 + ", " + porcentajeCobertura200 + ", " + vigorID + ", '" + claveColecta + "')");
                 this.baseDatosLocal.commit();
                 frecuencia50 = null;
-porcentajeCobertura50 = null;
-frecuencia51200 = null;
-porcentajeCobertura51200 = null;
-frecuencia200 = null;
-porcentajeCobertura200 = null;
+                porcentajeCobertura50 = null;
+                frecuencia51200 = null;
+                porcentajeCobertura51200 = null;
+                frecuencia200 = null;
+                porcentajeCobertura200 = null;
+                familiaID = null;
+                generoID = null;
+                especieID = null;
+                infraespecieID = null;
+                claveColecta = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -2231,6 +2886,11 @@ porcentajeCobertura200 = null;
         Integer frecuencia275 = null;
         Integer cobertura275 = null;
         Integer porcentajeDanio = null;
+        Integer familiaID = null;
+        Integer generoID = null;
+        Integer especieID = null;
+        Integer infraespecieID = null;
+        String claveColecta = null;
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
@@ -2241,10 +2901,21 @@ porcentajeCobertura200 = null;
                 Integer sotoBosqueID = rs.getInt("SotoBosqueID");
                 Integer sitioID = rs.getInt("SitioID");
                 Integer consecutivo = rs.getInt("Consecutivo");
-                Integer familiaID = rs.getInt("FamiliaID");
-                Integer generoID = rs.getInt("GeneroID");
-                Integer especieID = rs.getInt("EspecieID");
-                Integer infraespecieID = rs.getInt("InfraespecieID");
+                if (rs.getObject("FamiliaID") != null) {
+                   familiaID= rs.getInt("FamiliaID");
+                }
+
+                if (rs.getObject("GeneroID") != null) {
+                    generoID= rs.getInt("GeneroID");
+                }
+
+                if (rs.getObject("EspecieID") != null) {
+                    especieID =rs.getInt("EspecieID");
+                }
+
+                if (rs.getObject("InfraespecieID") != null) {
+                    infraespecieID = rs.getInt("InfraespecieID");
+                }
                 String nombreComun = rs.getString("NombreComun");
                 if (rs.getObject("Frecuencia025150") != null) {
                     frecuencia025150 = rs.getInt("Frecuencia025150");
@@ -2269,18 +2940,25 @@ porcentajeCobertura200 = null;
                 if (rs.getObject("PorcentajeDanio") != null) {
                     porcentajeDanio = rs.getInt("PorcentajeDanio");
                 }
-                String claveColecta = rs.getString("ClaveColecta");
+                if (rs.getObject("ClaveColecta") != null) {
+                    claveColecta = rs.getString("ClaveColecta");
+                }
                 ps.executeUpdate("INSERT INTO TAXONOMIA_SotoBosque(SotoBosqueID, SitioID, Consecutivo, FamiliaID, GeneroID, EspecieID, InfraespecieID, NombreComun, Frecuencia025150, Cobertura025150, Frecuencia151275, Cobertura151275, Frecuencia275, Cobertura275, VigorID, DanioID, "
                         + "PorcentajeDanio, ClaveColecta)VALUES(" + sotoBosqueID + ", " + sitioID + ", " + consecutivo + ", " + familiaID + ", " + generoID + ", " + especieID + ", " + infraespecieID + ", '" + nombreComun + "', " + frecuencia025150 + ", " + cobertura025150 + ", " + frecuencia151275
                         + ", " + cobertura151275 + ", " + frecuencia275 + ", " + cobertura275 + ", " + vigorID + ", " + danioID + ", " + porcentajeDanio + ", '" + claveColecta + "')");
                 this.baseDatosLocal.commit();
                 frecuencia025150 = null;
-cobertura025150 = null;
-frecuencia151275 = null;
-cobertura151275 = null;
-frecuencia275 = null;
-cobertura275 = null;
-porcentajeDanio = null;
+                cobertura025150 = null;
+                frecuencia151275 = null;
+                cobertura151275 = null;
+                frecuencia275 = null;
+                cobertura275 = null;
+                porcentajeDanio = null;
+                familiaID = null;
+                generoID = null;
+                especieID = null;
+                infraespecieID = null;
+                claveColecta = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -2308,6 +2986,11 @@ porcentajeDanio = null;
         Float alturaTotalMinima = null;
         Float diametroCoberturaMayor = null;
         Float diametroCoberturaMenor = null;
+        Integer familiaID = null;
+        Integer generoID = null;
+        Integer especieID = null;
+        Integer infraespecieID = null;
+        String claveColecta = null;
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
@@ -2321,10 +3004,21 @@ porcentajeDanio = null;
                 Integer noIndividuo = rs.getInt("NoIndividuo");
                 Integer formaVidaID = rs.getInt("FormaVidaID");
                 Integer condicionID = rs.getInt("CondicionID");
-                Integer familiaID = rs.getInt("FamiliaID");
-                Integer generoID = rs.getInt("GeneroID");
-                Integer especieID = rs.getInt("EspecieID");
-                Integer infraespecieID = rs.getInt("InfraespecieID");
+                if (rs.getObject("FamiliaID") != null) {
+                   familiaID= rs.getInt("FamiliaID");
+                }
+
+                if (rs.getObject("GeneroID") != null) {
+                    generoID= rs.getInt("GeneroID");
+                }
+
+                if (rs.getObject("EspecieID") != null) {
+                    especieID =rs.getInt("EspecieID");
+                }
+
+                if (rs.getObject("InfraespecieID") != null) {
+                    infraespecieID = rs.getInt("InfraespecieID");
+                }
                 String nombreComun = rs.getString("NombreComun");
                 Integer formaCrecimientoID = rs.getInt("FormaCrecimientoID");
                 Integer densidadColoniaID = rs.getInt("DensidadColoniaID");
@@ -2344,16 +3038,23 @@ porcentajeDanio = null;
                     diametroCoberturaMenor = rs.getFloat("DiametroCoberturaMenor");
                 }
                 Integer vigorID = rs.getInt("VigorID");
-                String claveColecta = rs.getString("ClaveColecta");
+                if (rs.getObject("ClaveColecta") != null) {
+                    claveColecta = rs.getString("ClaveColecta");
+                }
                 ps.executeUpdate("INSERT INTO TAXONOMIA_VegetacionMayorGregarios(VegetacionMayorID, SitioID, Consecutivo, NoIndividuo, FormaVidaID, CondicionID, FamiliaID, GeneroID, EspecieID, InfraespecieID, NombreComun, FormaCrecimientoID, DensidadColoniaID, AlturaTotalMaxima, AlturaTotalMedia, AlturaTotalMinima, DiametroCoberturaMayor, "
                         + "DiametroCoberturaMenor, VigorID, ClaveColecta)VALUES(" + vegetacionMayorID + ", " + sitioID + ", " + consecutivo + ", " + noIndividuo + ", " + formaVidaID + ", " + condicionID + ", " + familiaID + ", " + generoID + ", " + especieID + ", " + infraespecieID + ", '" + nombreComun + "', " + formaCrecimientoID + ", " + densidadColoniaID
                         + ", " + alturaTotalMaxima + ", " + alturaTotalMedia + ", " + alturaTotalMinima + ", " + diametroCoberturaMayor + ", " + diametroCoberturaMenor + ", " + vigorID + ", '" + claveColecta + "')");
                 this.baseDatosLocal.commit();
                 alturaTotalMaxima = null;
-alturaTotalMedia = null;
-alturaTotalMinima = null;
-diametroCoberturaMayor = null;
-diametroCoberturaMenor = null;
+                alturaTotalMedia = null;
+                alturaTotalMinima = null;
+                diametroCoberturaMayor = null;
+                diametroCoberturaMenor = null;
+                familiaID = null;
+                generoID = null;
+                especieID = null;
+                infraespecieID = null;
+                claveColecta = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -2377,6 +3078,7 @@ diametroCoberturaMenor = null;
         this.querySelect = "SELECT DanioSeveridadID, VegetacionMayorID, NumeroDanio, AgenteDanioID, SeveridadID FROM VEGETACIONMAYORG_DanioSeveridad";
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
+        Integer severidadID = null;
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
             Statement ps = this.baseDatosLocal.createStatement();
@@ -2386,10 +3088,13 @@ diametroCoberturaMenor = null;
                 Integer vegetacionMayorID = rs.getInt("VegetacionMayorID");
                 Integer numeroDanio = rs.getInt("NumeroDanio");
                 Integer agenteDanioID = rs.getInt("AgenteDanioID");
-                Integer severidadID = rs.getInt("SeveridadID");
+                if (rs.getObject("SeveridadID") != null) {
+                    severidadID = rs.getInt("SeveridadID");
+                }
                 ps.executeUpdate("INSERT INTO VEGETACIONMAYORG_DanioSeveridad(DanioSeveridadID, VegetacionMayorID, NumeroDanio, AgenteDanioID, SeveridadID)VALUES(" + danioSeveridadID + ", "
                         + vegetacionMayorID + ", " + numeroDanio + ", " + agenteDanioID + ", " + severidadID + ")");
                 this.baseDatosLocal.commit();
+                severidadID = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -2416,6 +3121,10 @@ diametroCoberturaMenor = null;
         Float alturaTotal = null;
         Float diametroCoberturaMayor = null;
         Float diametroCoberturaMenor = null;
+        Integer familiaID = null;
+Integer generoID = null;
+Integer especieID = null;
+Integer infraespecieID = null;
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
@@ -2429,10 +3138,18 @@ diametroCoberturaMenor = null;
                 Integer noIndividuo = rs.getInt("NoIndividuo");
                 Integer formaVidaID = rs.getInt("FormaVidaID");
                 Integer condicionID = rs.getInt("CondicionID");
-                Integer familiaID = rs.getInt("FamiliaID");
-                Integer generoID = rs.getInt("GeneroID");
-                Integer especieID = rs.getInt("EspecieID");
-                String infraespecieID = rs.getString("InfraespecieID");
+                if (rs.getObject("FamiliaID") != null) {
+familiaID = rs.getInt("FamiliaID");
+}
+if (rs.getObject("GeneroID") != null) {
+generoID= generoID = rs.getInt("GeneroID");
+}
+if (rs.getObject("EspecieID") != null) {
+especieID =especieID = rs.getInt("EspecieID");
+}
+if (rs.getObject("InfraespecieID") != null) {
+infraespecieID = infraespecieID = rs.getInt("InfraespecieID");
+}
                 String nombreComun = rs.getString("NombreComun");
                 Integer formaGeometricaID = rs.getInt("FormaGeometricaID");
                 Integer densidadFollajeID = rs.getInt("DensidadFollajeID");
@@ -2455,9 +3172,13 @@ diametroCoberturaMenor = null;
                         + ", " + diametroCoberturaMayor + ", " + diametroCoberturaMenor + ", " + vigorID + ", '" + claveColecta + "')");
                 this.baseDatosLocal.commit();
                 diametroBase = null;
-alturaTotal = null;
-diametroCoberturaMayor = null;
-diametroCoberturaMenor = null;
+                alturaTotal = null;
+                diametroCoberturaMayor = null;
+                diametroCoberturaMenor = null;
+                familiaID = null;
+generoID = null;
+especieID = null;
+infraespecieID = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -2482,6 +3203,7 @@ diametroCoberturaMenor = null;
         this.querySelect = "SELECT DanioSeveridadID, VegetacionMayorID, NumeroDanio, AgenteDanioID, SeveridadID FROM VEGETACIONMAYORI_DanioSeveridad";
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
+        Integer severidadID = null;
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
             Statement ps = this.baseDatosLocal.createStatement();
@@ -2491,10 +3213,13 @@ diametroCoberturaMenor = null;
                 Integer vegetacionMayorID = rs.getInt("VegetacionMayorID");
                 Integer numeroDanio = rs.getInt("NumeroDanio");
                 Integer agenteDanio = rs.getInt("AgenteDanioID");
-                Integer severidadID = rs.getInt("SeveridadID");
+                if (rs.getObject("SeveridadID") != null) {
+                    severidadID = rs.getInt("SeveridadID");
+                }
                 ps.executeUpdate("INSERT INTO VEGETACIONMAYORI_DanioSeveridad(DanioSeveridadID, VegetacionMayorID, NumeroDanio, AgenteDanioID, SeveridadID)VALUES(" + danioSeveridadID + ", "
                         + vegetacionMayorID + ", " + numeroDanio + ", " + agenteDanio + ", " + severidadID + ")");
                 this.baseDatosLocal.commit();
+                severidadID = null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -2524,6 +3249,11 @@ diametroCoberturaMenor = null;
         Integer numero126150 = null;
         Integer numero150 = null;
         Integer porcentajeCobertura = null;
+        Integer familiaID = null;
+        Integer generoID = null;
+        Integer especieID = null;
+        Integer infraespecieID = null;
+        String claveColecta = null;
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
@@ -2534,10 +3264,24 @@ diametroCoberturaMenor = null;
                 Integer vegetacionMenorID = rs.getInt("VegetacionMenorID");
                 Integer sitioID = rs.getInt("SitioID");
                 Integer consecutivo = rs.getInt("Consecutivo");
-                Integer familiaID = rs.getInt("FamiliaID");
-                Integer generoID = rs.getInt("GeneroID");
-                Integer especieID = rs.getInt("EspecieID");
-                Integer infraespecieID = rs.getInt("InfraespecieID");
+                if (rs.getObject("FamiliaID") != null) {
+                   familiaID= rs.getInt("FamiliaID");
+                }
+
+                if (rs.getObject("GeneroID") != null) {
+                    generoID= rs.getInt("GeneroID");
+                }
+
+                if (rs.getObject("EspecieID") != null) {
+                    especieID =rs.getInt("EspecieID");
+                }
+
+                if (rs.getObject("InfraespecieID") != null) {
+                    infraespecieID = rs.getInt("InfraespecieID");
+                }
+                if (rs.getObject("ClaveColecta") != null) {
+                    claveColecta = rs.getString("ClaveColecta");
+                }
                 String nombreComun = rs.getString("NombreComun");
                 Integer formaVidaID = rs.getInt("FormaVidaID");
                 Integer condicionID = rs.getInt("CondicionID");
@@ -2566,7 +3310,7 @@ diametroCoberturaMenor = null;
                     porcentajeCobertura = rs.getInt("PorcentajeCobertura");
                 }
                 Integer vigorID = rs.getInt("VigorID");
-                String claveColecta = rs.getString("ClaveColecta");
+
                 ps.executeUpdate("INSERT INTO TAXONOMIA_VegetacionMenor(VegetacionMenorID, SitioID, Consecutivo, FamiliaID, GeneroID, EspecieID, InfraespecieID, NombreComun, FormaVidaID, CondicionID, Numero0110, Numero1125, Numero5175, Numero76100, Numero101125, Numero126150, Numero150, PorcentajeCobertura, VigorID, ClaveColecta)VALUES(" + vegetacionMenorID
                         + ", " + sitioID + ", " + consecutivo + ", " + familiaID + ", " + generoID + ", " + especieID + ", " + infraespecieID + ", '" + nombreComun + "', " + formaVidaID + ", " + condicionID + ", " + numero0110 + ", " + numero1125 + ", " + numero5175 + ", " + numero76100 + ", " + numero101125
                         + ", " + numero126150 + ", " + numero150 + ", " + porcentajeCobertura + ", " + vigorID + ", '" + claveColecta + "')");
@@ -2578,6 +3322,11 @@ diametroCoberturaMenor = null;
                 numero101125 = null;
                 numero126150 = null;
                 numero150 = null;
+                familiaID = null;
+                generoID = null;
+                especieID = null;
+                infraespecieID = null;
+                claveColecta = null;
                 porcentajeCobertura = null;
                 ps.close();
             }
@@ -2602,6 +3351,7 @@ diametroCoberturaMenor = null;
         this.querySelect = "SELECT DanioSeveridadVMID, VegetacionMenorID, NumeroDanio, AgenteDanioID, SeveridadID FROM VEGETACIONMENOR_DanioSeveridad";
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
+        Integer severidadID = null;
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
             Statement ps = this.baseDatosLocal.createStatement();
@@ -2611,13 +3361,17 @@ diametroCoberturaMenor = null;
                 Integer vegetacionMenorID = rs.getInt("VegetacionMenorID");
                 Integer numeroDanio = rs.getInt("NumeroDanio");
                 Integer agenteDanioID = rs.getInt("AgenteDanioID");
-                Integer severidadID = rs.getInt("SeveridadID");
+
+                if (rs.getObject("SeveridadID") != null) {
+                    severidadID = rs.getInt("SeveridadID");
+                }
                 ps.executeUpdate("INSERT INTO VEGETACIONMENOR_DanioSeveridad(DanioSeveridadVMID, VegetacionMenorID, NumeroDanio, AgenteDanioID, SeveridadID)"
                         + "VALUES(" + danioSeveridadVMID + ", " + vegetacionMenorID + ", " + numeroDanio + ", " + agenteDanioID + ", " + severidadID + ")");
                 this.baseDatosLocal.commit();
                 ps.close();
             }
             this.sqlExterno.close();
+            severidadID = null;
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -2637,6 +3391,7 @@ diametroCoberturaMenor = null;
         this.querySelect = "SELECT RepobladoDanioID, RepobladoVMID, NumeroDanio, AgenteDanioID, SeveridadID FROM REPOBLADO_AgenteDanio";
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
+        Integer severidadID= null;
         try {
             this.sqlExterno = this.baseDatosExterna.createStatement();
             Statement ps = this.baseDatosLocal.createStatement();
@@ -2646,10 +3401,14 @@ diametroCoberturaMenor = null;
                 Integer repobladoVMID = rs.getInt("RepobladoVMID");
                 Integer numeroDanio = rs.getInt("NumeroDanio");
                 Integer agenteDanioID = rs.getInt("AgenteDanioID");
-                Integer severidadID = rs.getInt("SeveridadID");
+                if(rs.getObject("SeveridadID") != null){
+                    severidadID = rs.getInt("SeveridadID");
+                }
+                
                 ps.executeUpdate("INSERT INTO REPOBLADO_AgenteDanio(RepobladoDanioID, RepobladoVMID, NumeroDanio, AgenteDanioID, SeveridadID)"
                         + "VALUES(" + repobladoDanioID + ", " + repobladoVMID + ", " + numeroDanio + ", " + agenteDanioID + ", " + severidadID + ")");
                 this.baseDatosLocal.commit();
+                severidadID= null;
                 ps.close();
             }
             this.sqlExterno.close();
@@ -2671,7 +3430,7 @@ diametroCoberturaMenor = null;
     //50
     public void importarUPMContacto(String ruta) {
         this.querySelect = "SELECT ContactoID, UPMID, TipoContacto, Nombre, Direccion, TipoTelefono, NumeroTelefono, TieneCorreo, DireccionCorreo, "
-                + "TieneRadio, Canal, Frecuencia FROM UPM_Contacto";
+                + "TieneRadio, Canal, Frecuencia ,Observaciones FROM UPM_Contacto";
         this.baseDatosLocal = LocalConnection.getConnection();
         this.baseDatosExterna = ExternalConnection.getConnection(ruta);
         try {
@@ -2691,10 +3450,10 @@ diametroCoberturaMenor = null;
                 Integer tieneRadio = rs.getInt("TieneRadio");
                 String canal = rs.getString("Canal");
                 String frecuencia = rs.getString("Frecuencia");
-
+String observaciones = rs.getString("Observaciones");
                 ps.executeUpdate("INSERT INTO UPM_Contacto(ContactoID, UPMID, TipoContacto, Nombre, Direccion, TipoTelefono, NumeroTelefono, TieneCorreo, DireccionCorreo, "
-                        + "TieneRadio, Canal, Frecuencia)VALUES(" + contactoID + ", " + upmID + ", " + tipoContacto + " , '" + nombre + "', '" + direccion + "', " + tipoTelefono
-                        + ", '" + numeroTelefono + "', " + tieneCorreo + ", '" + direccionCorreo + "' , " + tieneRadio + ", '" + canal + "', '" + frecuencia + "')");
+                        + "TieneRadio, Canal, Frecuencia, Observaciones)VALUES(" + contactoID + ", " + upmID + ", " + tipoContacto + " , '" + nombre + "', '" + direccion + "', " + tipoTelefono
+                        + ", '" + numeroTelefono + "', " + tieneCorreo + ", '" + direccionCorreo + "' , " + tieneRadio + ", '" + canal + "', '" + frecuencia + "', '" + observaciones + "')");
                 this.baseDatosLocal.commit();
                 ps.close();
             }
@@ -2781,6 +3540,45 @@ diametroCoberturaMenor = null;
             } catch (SQLException e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error! al cerrar la base de datos en la importación de la tabla SYS_SecuenciaCaptura", "Conexion BD", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    public void importarObservacionesSitio(String ruta) {
+        //state=" importarObservaciones Sitio";
+        this.querySelect = "SELECT ObservacionesID ,SitioID ,FormatoID, Observaciones FROM  SITIOS_Observaciones ";
+        this.baseDatosLocal = LocalConnection.getConnection();
+        this.baseDatosExterna = ExternalConnection.getConnection(ruta);
+        try {
+            this.sqlExterno = this.baseDatosExterna.createStatement();
+            Statement ps = this.baseDatosLocal.createStatement();
+            ResultSet rs = sqlExterno.executeQuery(this.querySelect);
+            while (rs.next()) {
+                Integer observacionesID = rs.getInt("ObservacionesID");
+                Integer sitioID = rs.getInt("SitioID");
+                Integer formatoID = rs.getInt("FormatoID");
+                String observaciones = rs.getString("Observaciones");
+                ps.executeUpdate(
+                        "INSERT INTO SITIOS_Observaciones(ObservacionesID,SitioID,FormatoID,Observaciones)VALUES("
+                        + observacionesID + ", " + sitioID + ", " + formatoID +",'"+observaciones+ "')");
+                this.baseDatosLocal.commit();
+                ps.close();
+            }
+            this.sqlExterno.close();
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            try {
+                baseDatosLocal.close();
+                baseDatosExterna.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null,
+                        "Error! al cerrar la base de datos en la importación de la tabla ARBOLADO_Submuestra"
+                        + e.getClass().getName() + " : " + e.getMessage(),
+                        "Conexion BD", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

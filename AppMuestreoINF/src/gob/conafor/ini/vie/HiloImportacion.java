@@ -191,6 +191,12 @@ public class HiloImportacion extends SwingWorker<Integer, String> {
         getBarraProgreso().setValue(85);
         getBarraProgreso().repaint();
         
+        getEtiqueta().setText("Importando repoblado dañio severidad..."); 
+        bdImportar.importarRepobladoDanioSeveridad(this.ruta); 
+        getBarraProgreso().setValue(88);
+        getBarraProgreso().repaint();
+        
+        
         getEtiqueta().setText("Importando Vegetación menor...");
         bdImportar.importarTaxonomiaVegetacionMenor(this.ruta); //50
         bdImportar.importarVegetacionMenorDanioSeveridad(this.ruta); //51
@@ -202,9 +208,15 @@ public class HiloImportacion extends SwingWorker<Integer, String> {
         getBarraProgreso().setValue(95);
         getBarraProgreso().repaint();
         
+        getEtiqueta().setText("Importando Observaciones de sitio...");
+        bdImportar.importarObservacionesSitio(this.ruta); //52.1
+        getBarraProgreso().setValue(98);
+        getBarraProgreso().repaint();
+        
+        
         getEtiqueta().setText("Importando datos de Brigada");
         bdImportar.importarBrigadas(this.ruta); //53
-        getBarraProgreso().setValue(97);
+        getBarraProgreso().setValue(99);
         getBarraProgreso().repaint();
         
         getEtiqueta().setText("Finalizando importacion...");

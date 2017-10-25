@@ -37,7 +37,7 @@ public class FrmInicio extends javax.swing.JFrame {
         btnRevisarUPM.setEnabled(navegacion.habilitarRevisarUPM());
         btnRevisionSitios.setEnabled(navegacion.habilitarCapturaModulos());
         //btnRevisarModulos.setEnabled(navegacion.habilitarContinuarModulos());
-        btnVerReportes.setEnabled(navegacion.habilitarCapturaModulos());
+        //btnVerReportes.setEnabled(navegacion.habilitarCapturaModulos());
         dpPrincipal.add(UPMForms.informacionGeneralUPM);
         dpPrincipal.add(UPMForms.puntoControlUPM);
         dpPrincipal.add(UPMForms.inaccesibleUPM);
@@ -114,7 +114,6 @@ public class FrmInicio extends javax.swing.JFrame {
         btnRevisarUPM = new javax.swing.JButton();
         btnRevisionSitios = new javax.swing.JButton();
         btnColectaBotanica = new javax.swing.JButton();
-        btnVerReportes = new javax.swing.JButton();
         btnContinuarModulos = new javax.swing.JButton();
         scrpanelModulos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -227,12 +226,10 @@ public class FrmInicio extends javax.swing.JFrame {
             .addGroup(dpPrincipalLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(dpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dpPrincipalLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dpPrincipalLayout.createSequentialGroup()
+            .addGroup(dpPrincipalLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -253,13 +250,13 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7)
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
                 .addGap(8, 8, 8)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         dpMenuLateral.setBackground(new java.awt.Color(204, 204, 204));
@@ -331,16 +328,6 @@ public class FrmInicio extends javax.swing.JFrame {
             }
         });
 
-        btnVerReportes.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnVerReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/check.png"))); // NOI18N
-        btnVerReportes.setText("Ver Reportes");
-        btnVerReportes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnVerReportes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerReportesActionPerformed(evt);
-            }
-        });
-
         btnContinuarModulos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnContinuarModulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gob/conafor/utils/ModulosIcon.png"))); // NOI18N
         btnContinuarModulos.setMnemonic('m');
@@ -358,7 +345,6 @@ public class FrmInicio extends javax.swing.JFrame {
         dpMenuLateral.setLayer(btnRevisarUPM, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dpMenuLateral.setLayer(btnRevisionSitios, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dpMenuLateral.setLayer(btnColectaBotanica, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        dpMenuLateral.setLayer(btnVerReportes, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dpMenuLateral.setLayer(btnContinuarModulos, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout dpMenuLateralLayout = new javax.swing.GroupLayout(dpMenuLateral);
@@ -374,7 +360,6 @@ public class FrmInicio extends javax.swing.JFrame {
                     .addComponent(btnCrearSitio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRevisarUPM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRevisionSitios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVerReportes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnContinuarModulos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -393,11 +378,9 @@ public class FrmInicio extends javax.swing.JFrame {
                 .addComponent(btnRevisarUPM, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRevisionSitios, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(160, 160, 160)
-                .addComponent(btnVerReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTree1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -594,7 +577,7 @@ public class FrmInicio extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(scrpanelModulos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(dpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+            .addComponent(dpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
         );
 
         pack();
@@ -634,11 +617,6 @@ public class FrmInicio extends javax.swing.JFrame {
         UPMForms.colectaBotanica.setVisible(true);
         UPMForms.colectaBotanica.procesarColecta();
     }//GEN-LAST:event_btnColectaBotanicaActionPerformed
-
-    private void btnVerReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerReportesActionPerformed
-        UPMForms.reportes.setVisible(true);
-        UPMForms.reportes.setDatosIniciales();
-    }//GEN-LAST:event_btnVerReportesActionPerformed
 
     private void miImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miImportarActionPerformed
         UPMForms.importarBD.iniciar();
@@ -941,7 +919,6 @@ public class FrmInicio extends javax.swing.JFrame {
     public javax.swing.JButton btnRevisarUPM;
     public javax.swing.JButton btnRevisionSitios;
     private javax.swing.JButton btnSalir;
-    public javax.swing.JButton btnVerReportes;
     private javax.swing.JDesktopPane dpMenuLateral;
     public javax.swing.JDesktopPane dpPrincipal;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;

@@ -15,8 +15,8 @@ public class ConfigUserConnection {
 	public static Connection getConnection(String ruta) {
 		try {
 			Class.forName(driver);
-			connect = DriverManager.getConnection(getURL(ruta));
-			connect.setAutoCommit(false);
+			//connect = DriverManager.getConnection(getURL(ruta));
+			//connect.setAutoCommit(false);
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Error, El archivo que intenta conectar, no es una base de datos valida"

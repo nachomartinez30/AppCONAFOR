@@ -68,8 +68,9 @@ public class CDCanalillo {
         }
     }
     
+    
+    
     public CECanalillo getCanalilloPorNumero(CECanalillo ceCanalillo) {
-        
         query = "SELECT CanalilloID, SitioID, Numero, Ancho, Profundidad FROM SUELO_Canalillo WHERE SitioID= " + ceCanalillo.getSitioID() + 
                 " AND Numero= " + ceCanalillo.getNumero();
         Connection conn = LocalConnection.getConnection();
@@ -288,3 +289,5 @@ public class CDCanalillo {
         return vacio;
     }
 }
+
+

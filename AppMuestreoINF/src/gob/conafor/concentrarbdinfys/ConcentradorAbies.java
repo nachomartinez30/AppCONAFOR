@@ -10,6 +10,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import gob.conafor.concentrarbdinfys.ConfigUserConnection;
 import gob.conafor.concentrarbdinfys.ExternalConnectionCons;
+import gob.conafor.sys.mod.CDImportacionBD;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -41,6 +42,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import javax.swing.JCheckBox;
 
 public class ConcentradorAbies extends JFrame {
 
@@ -61,11 +63,13 @@ public class ConcentradorAbies extends JFrame {
 	public JLabel lblEstatus;
 	public File[] baseDatos;
 	private JTextArea txtaMonitoreo;
+	private JCheckBox chckbxContinuarSinRepetidos;
 
 	/**
 	 * Create the frame.
 	 */
 	public ConcentradorAbies() {
+
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 796, 557);
@@ -146,7 +150,7 @@ public class ConcentradorAbies extends JFrame {
 		btnEjecutar = new JButton("Ejecutar");
 		btnEjecutar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				HiloImportacion importacion =new HiloImportacion(lblEstatus, pbExportacion, btnEjecutar, baseDatos, btnBuscar, txtUbicacion,txtaMonitoreo);
+				HiloImportacion importacion =new HiloImportacion(lblEstatus, pbExportacion, btnEjecutar, baseDatos, btnBuscar, txtUbicacion,txtaMonitoreo,chckbxContinuarSinRepetidos);
 				importacion.execute();
 			}
 		});
@@ -160,6 +164,17 @@ public class ConcentradorAbies extends JFrame {
 		
 		txtaMonitoreo = new JTextArea();
 		scrollPane.setViewportView(txtaMonitoreo);
+		
+		chckbxContinuarSinRepetidos = new JCheckBox("Continuar sin repetidos");
+		chckbxContinuarSinRepetidos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(chckbxContinuarSinRepetidos.isSelected()==true) {
+					JOptionPane.showMessageDialog(null, "Si elije esta opcion, se omitirán todos los UPMs repetidos");
+				}
+			}
+		});
+		chckbxContinuarSinRepetidos.setBounds(564, 293, 166, 24);
+		panel.add(chckbxContinuarSinRepetidos);
 	}
 
 	public void setPathConcentrador(String ruta) {
@@ -393,7 +408,7 @@ public class ConcentradorAbies extends JFrame {
 				Path currentPath = Paths.get("");
 				String path = currentPath.toAbsolutePath().toString();
 				txtRutaSalida.setText(path + "/MuestreoINF_2015.cons");
-				setPathConcentrador(ruta);
+				//setPathConcentrador(ruta);
 				btnEjecutar.setEnabled(true);
 
 			}

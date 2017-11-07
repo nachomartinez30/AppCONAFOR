@@ -323,7 +323,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         txtProfundidadPromedioCanalillos.setText(String.valueOf(this.cdErosion.getPromedioCampo("SUELO_ErosionHidricaCanalillo", "Profundidad", this.sitioID)));
         txtAnchoPromedioCanalillos.setText(String.valueOf(this.cdErosion.getPromedioCampo("SUELO_ErosionHidricaCanalillo", "Ancho", this.sitioID)));
         txtPromedioLongitudCanalillos.setText(String.valueOf(this.cdErosion.getPromedioCampo("SUELO_LongitudCanalillo", "Longitud", this.sitioID)));
-        Float volumen = (Float.parseFloat(txtProfundidadPromedioCanalillos.getText()) * Float.parseFloat(txtAnchoPromedioCanalillos.getText())/2)
+        Float volumen = (Float.parseFloat(txtProfundidadPromedioCanalillos.getText()) * Float.parseFloat(txtAnchoPromedioCanalillos.getText()))
                          * Float.parseFloat(txtPromedioLongitudCanalillos.getText());
         txtVolumenCanalillos.setText(String.valueOf(volumen));
     }
@@ -333,7 +333,7 @@ public class FrmErosionHidrica extends javax.swing.JInternalFrame {
         txtProfundidadPromedioCarcavas.setText(String.valueOf(this.cdErosion.getPromedioCampo("SUELO_ErosionHidricaCarcava", "Profundidad", this.sitioID)));
         txtAnchoPromedioCarcavas.setText(String.valueOf(this.cdErosion.getPromedioCampo("SUELO_ErosionHidricaCarcava", "Ancho", this.sitioID)));
         txtPromedioLongitudCarcavas.setText(String.valueOf(this.cdErosion.getPromedioCampo("SUELO_LongitudCarcava", "Longitud", this.sitioID)));
-        Float volumen = (Float.parseFloat(txtProfundidadPromedioCarcavas.getText()) * Float.parseFloat(txtAnchoPromedioCarcavas.getText())/2)
+        Float volumen = (Float.parseFloat(txtProfundidadPromedioCarcavas.getText()) * Float.parseFloat(txtAnchoPromedioCarcavas.getText()))
                          * Float.parseFloat(txtPromedioLongitudCarcavas.getText());
         txtVolumenCarcavas.setText(String.valueOf(volumen));
     }
